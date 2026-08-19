@@ -1,2 +1,1 @@
-# jg
-JG–Find Skills.Find Work.
+< index.html>
