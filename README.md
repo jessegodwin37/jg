@@ -33,5 +33,7 @@
     <h2>Find Skills. Find Work.</h2>
 
     <p>Connect with talented people and find the skills you need.</p>
+<button>Find a Skill</button>
+<button>Find Work</button>
 
 </body>
