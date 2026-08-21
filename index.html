@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JG - Find Skills. Find Work.</title>
+
+<title>JG | Find Skills. Find Work.</title>
 
 <style>
 * {
@@ -11,225 +12,350 @@
 }
 
 body {
-  background: #f5f7fa;
   margin: 0;
-  font-family: Arial, sans-serif;
-  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-/* Navigation */
+/* NAVIGATION */
+
 nav {
+  height: 74px;
+  background: #0b1220;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 7%;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
+  justify-content: space-between;
+  padding: 0 7%;
 }
 
 .logo {
-  font-size: 32px;
-  font-weight: bold;
-}
-
-nav a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
   text-decoration: none;
-  color: #111827;
-  margin-left: 20px;
-  font-weight: bold;
-}
-
-/* Hero Section */
-.hero {
-  text-align: center;
-  padding: 80px 20px 60px;
-}
-
-.hero h1 {
-  font-size: 72px;
-  margin: 0;
+  font-size: 25px;
   font-weight: 800;
 }
 
+.logo-mark {
+  width: 40px;
+  height: 40px;
+  background: #2563eb;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.nav-links {
+  display: flex;
+  gap: 28px;
+}
+
+.nav-links a {
+  color: #cbd5e1;
+  text-decoration: none;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.nav-links a:hover {
+  color: white;
+}
+
+/* HERO */
+
+.hero {
+  text-align: center;
+  padding: 90px 20px 80px;
+  background: linear-gradient(135deg, #eef4ff, #ffffff);
+}
+
+.badge {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2563eb;
+  padding: 8px 14px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 800;
+  margin-bottom: 20px;
+}
+
+.hero h1 {
+  margin: 0;
+  font-size: 68px;
+  letter-spacing: -4px;
+}
+
 .hero h2 {
-  font-size: 32px;
+  font-size: 30px;
   margin: 15px 0;
 }
 
 .hero p {
+  max-width: 650px;
+  margin: 0 auto 35px;
+  color: #64748b;
   font-size: 18px;
-  color: #555;
-  margin-bottom: 35px;
+  line-height: 1.7;
 }
 
-/* Search */
+/* SEARCH */
+
 .search-box {
+  max-width: 650px;
+  margin: auto;
   display: flex;
-  justify-content: center;
-  max-width: 600px;
-  margin: 0 auto 35px;
+  background: white;
+  padding: 6px;
+  border: 1px solid #dbe2ea;
+  border-radius: 14px;
+  box-shadow: 0 15px 40px rgba(15,23,42,0.08);
 }
 
 .search-box input {
-  width: 70%;
-  padding: 16px;
-  border: 2px solid #111827;
-  border-radius: 10px 0 0 10px;
-  font-size: 16px;
+  flex: 1;
+  border: none;
   outline: none;
+  padding: 16px;
+  font-size: 16px;
 }
 
 .search-box button {
-  width: 30%;
-  background: #111827;
-  color: white;
   border: none;
-  border-radius: 0 10px 10px 0;
-  font-size: 16px;
+  background: #2563eb;
+  color: white;
+  padding: 0 25px;
+  border-radius: 10px;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .search-box button:hover {
-  background: #333;
+  background: #1d4ed8;
 }
 
-/* Main Buttons */
+/* BUTTONS */
+
 .buttons {
-  margin-top: 20px;
+  margin-top: 28px;
 }
 
-.nav-btn {
+.main-btn {
   display: inline-block;
-  background: #111827;
-  color: white;
+  padding: 14px 25px;
+  margin: 6px;
+  border-radius: 9px;
   text-decoration: none;
-  padding: 15px 28px;
-  margin: 8px;
-  border-radius: 8px;
-  font-size: 16px;
-  font-weight: bold;
+  font-weight: 700;
 }
 
-.nav-btn:hover {
-  background: #333;
+.primary-btn {
+  background: #0b1220;
+  color: white;
 }
 
-/* Categories */
-.categories {
+.primary-btn:hover {
+  background: #2563eb;
+}
+
+.secondary-btn {
   background: white;
-  padding: 55px 20px;
-  text-align: center;
+  color: #0b1220;
+  border: 1px solid #cbd5e1;
 }
 
-.categories h2 {
-  font-size: 30px;
-  margin-bottom: 30px;
+.secondary-btn:hover {
+  border-color: #2563eb;
+  color: #2563eb;
 }
 
-.category-container {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 15px;
-  max-width: 900px;
+/* SECTIONS */
+
+.section {
+  max-width: 1100px;
   margin: auto;
+  padding: 70px 20px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h2 {
+  font-size: 32px;
+  margin: 0 0 10px;
+}
+
+.section-title p {
+  color: #64748b;
+}
+
+/* CATEGORIES */
+
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
 }
 
 .category {
-  background: #f5f7fa;
-  border: 1px solid #ddd;
-  padding: 18px 25px;
-  border-radius: 10px;
-  font-weight: bold;
-}
-
-/* How it works */
-.how-it-works {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.how-it-works h2 {
-  font-size: 30px;
-}
-
-.steps {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 25px;
-  margin-top: 35px;
-}
-
-.step {
   background: white;
-  padding: 30px;
-  width: 250px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+  border: 1px solid #e2e8f0;
+  padding: 25px;
+  border-radius: 15px;
+  transition: 0.2s;
 }
 
-.step h3 {
-  font-size: 20px;
+.category:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(15,23,42,0.08);
 }
 
-.step p {
-  color: #555;
+.category-icon {
+  font-size: 28px;
+  margin-bottom: 15px;
+}
+
+.category h3 {
+  margin: 0 0 8px;
+}
+
+.category p {
+  color: #64748b;
   line-height: 1.5;
 }
 
-/* Footer */
+/* HOW IT WORKS */
+
+.how {
+  background: white;
+  max-width: none;
+}
+
+.how-inner {
+  max-width: 1100px;
+  margin: auto;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 25px;
+}
+
+.step {
+  text-align: center;
+  padding: 25px;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  margin: auto auto 18px;
+  background: #2563eb;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+}
+
+.step h3 {
+  margin-bottom: 10px;
+}
+
+.step p {
+  color: #64748b;
+  line-height: 1.6;
+}
+
+/* CONTACT */
+
+.contact-section {
+  text-align: center;
+  background: #0b1220;
+  color: white;
+  padding: 70px 20px;
+}
+
+.contact-section p {
+  color: #94a3b8;
+  max-width: 550px;
+  margin: 15px auto 25px;
+  line-height: 1.6;
+}
+
+.contact-btn {
+  display: inline-block;
+  background: #2563eb;
+  color: white;
+  padding: 15px 28px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.contact-btn:hover {
+  background: #1d4ed8;
+}
+
+/* FOOTER */
+
 footer {
-  background: #111827;
+  background: #070d18;
   color: white;
   text-align: center;
-  padding: 30px 20px;
+  padding: 35px 20px;
 }
 
 footer p {
-  margin: 5px;
-  color: #ddd;
+  color: #94a3b8;
+  margin: 7px;
 }
 
-/* Mobile */
-@media (max-width: 600px) {
+/* MOBILE */
+
+@media (max-width: 750px) {
 
   nav {
-    padding: 18px 20px;
+    padding: 0 20px;
   }
 
-  nav a {
-    margin-left: 10px;
-    font-size: 14px;
+  .nav-links {
+    gap: 12px;
+  }
+
+  .nav-links a {
+    font-size: 13px;
   }
 
   .hero {
-    padding: 60px 20px;
+    padding: 70px 20px;
   }
 
   .hero h1 {
-    font-size: 60px;
+    font-size: 52px;
   }
 
   .hero h2 {
-    font-size: 25px;
+    font-size: 24px;
+  }
+
+  .category-grid,
+  .steps {
+    grid-template-columns: 1fr;
   }
 
   .search-box {
     width: 100%;
-  }
-
-  .search-box input {
-    width: 68%;
-  }
-
-  .search-box button {
-    width: 32%;
-  }
-
-  .step {
-    width: 100%;
-    max-width: 320px;
   }
 }
 </style>
@@ -237,48 +363,57 @@ footer p {
 
 <body>
 
-<!-- Navigation -->
 <nav>
-  <div class="logo">JG</div>
 
-  <div>
+  <a href="index.html" class="logo">
+    <div class="logo-mark">JG</div>
+    JG
+  </a>
+
+  <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="skills.html">Skills</a>
     <a href="work.html">Work</a>
   </div>
+
 </nav>
 
-
-<!-- Hero Section -->
 <section class="hero">
+
+  <div class="badge">
+    JG PROFESSIONAL MARKETPLACE
+  </div>
 
   <h1>JG</h1>
 
   <h2>Find Skills. Find Work.</h2>
 
   <p>
-    Connect with talented people, discover skills and find opportunities.
+    Connect with talented people, discover useful skills,
+    find opportunities and turn your abilities into real work.
   </p>
 
-  <!-- Search -->
   <div class="search-box">
+
     <input
+      id="homeSearch"
       type="text"
-      id="searchInput"
       placeholder="Search for a skill or job..."
     >
 
-    <button onclick="searchSite()">Search</button>
+    <button onclick="searchJG()">
+      Search
+    </button>
+
   </div>
 
-  <!-- Main Buttons -->
   <div class="buttons">
 
-    <a href="skills.html" class="nav-btn">
+    <a href="skills.html" class="main-btn primary-btn">
       Find a Skill
     </a>
 
-    <a href="work.html" class="nav-btn">
+    <a href="work.html" class="main-btn secondary-btn">
       Find Work
     </a>
 
@@ -286,65 +421,126 @@ footer p {
 
 </section>
 
+<section class="section">
 
-<!-- Popular Skills -->
-<section class="categories">
+  <div class="section-title">
 
-  <h2>Popular Skills</h2>
+    <h2>Explore Skills</h2>
 
-  <div class="category-container">
+    <p>
+      Find professionals with skills that can help bring your ideas to life.
+    </p>
 
-    <div class="category">Graphic Design</div>
+  </div>
 
-    <div class="category">Web Development</div>
+  <div class="category-grid">
 
-    <div class="category">Photography</div>
+    <div class="category">
+      <div class="category-icon">🎨</div>
+      <h3>Graphic Design</h3>
+      <p>Logos, branding, flyers and social media designs.</p>
+    </div>
 
-    <div class="category">Video Editing</div>
+    <div class="category">
+      <div class="category-icon">💻</div>
+      <h3>Web Development</h3>
+      <p>Websites, landing pages and web applications.</p>
+    </div>
 
-    <div class="category">Writing</div>
+    <div class="category">
+      <div class="category-icon">🎬</div>
+      <h3>Video Editing</h3>
+      <p>Professional video editing for digital content.</p>
+    </div>
 
-    <div class="category">Social Media</div>
+    <div class="category">
+      <div class="category-icon">📱</div>
+      <h3>Social Media</h3>
+      <p>Content creation and social media management.</p>
+    </div>
+
+    <div class="category">
+      <div class="category-icon">✍️</div>
+      <h3>Writing</h3>
+      <p>Articles, scripts, captions and marketing content.</p>
+    </div>
+
+    <div class="category">
+      <div class="category-icon">📸</div>
+      <h3>Photography</h3>
+      <p>Events, portraits, products and professional photography.</p>
+    </div>
 
   </div>
 
 </section>
 
+<section class="how">
 
-<!-- How It Works -->
-<section class="how-it-works">
+  <div class="section">
 
-  <h2>How JG Works</h2>
+    <div class="section-title">
 
-  <div class="steps">
+      <h2>How JG Works</h2>
 
-    <div class="step">
-      <h3>1. Find a Skill</h3>
       <p>
-        Discover talented people with the skills you need.
+        A simple way to connect skills with opportunities.
       </p>
+
     </div>
 
-    <div class="step">
-      <h3>2. Find Work</h3>
-      <p>
-        Find opportunities and connect with people who need your skills.
-      </p>
-    </div>
+    <div class="steps">
 
-    <div class="step">
-      <h3>3. Connect</h3>
-      <p>
-        Connect with people and turn skills into real opportunities.
-      </p>
+      <div class="step">
+        <div class="step-number">1</div>
+        <h3>Find a Skill</h3>
+        <p>
+          Search for professionals who have the skills you need.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <h3>Find Work</h3>
+        <p>
+          Discover projects and opportunities that match your abilities.
+        </p>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <h3>Connect</h3>
+        <p>
+          Contact people directly and turn opportunities into real work.
+        </p>
+      </div>
+
     </div>
 
   </div>
 
 </section>
 
+<section class="contact-section">
 
-<!-- Footer -->
+  <h2>Need help or want to work with JG?</h2>
+
+  <p>
+    Contact JG directly for questions, partnerships,
+    opportunities or support.
+  </p>
+
+  <a
+    class="contact-btn"
+    href="https://wa.me/2349070707689?text=Hello%20JG%2C%20I%20would%20like%20to%20make%20an%20inquiry."
+    target="_blank">
+
+    Contact JG on WhatsApp
+
+  </a>
+
+</section>
+
 <footer>
 
   <p><strong>JG</strong></p>
@@ -355,25 +551,21 @@ footer p {
 
 </footer>
 
-
-<!-- Search Function -->
 <script>
 
-function searchSite() {
+function searchJG() {
 
-  let search = document.getElementById("searchInput").value.trim();
+  const search =
+    document.getElementById("homeSearch").value.trim();
 
   if (search === "") {
-
-    alert("Please enter a skill or job to search.");
-
-  } else {
-
-    window.location.href =
-      "skills.html?search=" + encodeURIComponent(search);
-
+    alert("Please enter a skill or job.");
+    return;
   }
 
+  window.location.href =
+    "skills.html?search=" +
+    encodeURIComponent(search);
 }
 
 </script>
