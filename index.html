@@ -2,29 +2,381 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>JG - Find Skills. Find Work.</title>
+
 <style>
-body { background-color: #f5f7fa; text-align: center; padding: 50px 20px; font-family: Arial; margin:0; }
-h1 { font-size: 70px; color:#111827; margin:0; }
-h2 { color:#333; }
-.search-box { margin:30px auto; max-width:500px; }
-input { padding:14px; width:70%; border:2px solid #111827; border-radius:8px 0 0 8px; font-size:16px; }
-button { background-color: #111827; color: white; border: none; border-radius:0 8px 8px 0; padding: 14px 20px; font-size: 16px; cursor: pointer; }
-button:hover { background-color: #333; }
-.nav-btn { border-radius:8px; padding:14px 25px; margin:10px; }
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: #f5f7fa;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #111827;
+}
+
+/* Navigation */
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7%;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  color: #111827;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+/* Hero Section */
+.hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+}
+
+.hero h1 {
+  font-size: 72px;
+  margin: 0;
+  font-weight: 800;
+}
+
+.hero h2 {
+  font-size: 32px;
+  margin: 15px 0;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 35px;
+}
+
+/* Search */
+.search-box {
+  display: flex;
+  justify-content: center;
+  max-width: 600px;
+  margin: 0 auto 35px;
+}
+
+.search-box input {
+  width: 70%;
+  padding: 16px;
+  border: 2px solid #111827;
+  border-radius: 10px 0 0 10px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-box button {
+  width: 30%;
+  background: #111827;
+  color: white;
+  border: none;
+  border-radius: 0 10px 10px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #333;
+}
+
+/* Main Buttons */
+.buttons {
+  margin-top: 20px;
+}
+
+.nav-btn {
+  display: inline-block;
+  background: #111827;
+  color: white;
+  text-decoration: none;
+  padding: 15px 28px;
+  margin: 8px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.nav-btn:hover {
+  background: #333;
+}
+
+/* Categories */
+.categories {
+  background: white;
+  padding: 55px 20px;
+  text-align: center;
+}
+
+.categories h2 {
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+
+.category-container {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.category {
+  background: #f5f7fa;
+  border: 1px solid #ddd;
+  padding: 18px 25px;
+  border-radius: 10px;
+  font-weight: bold;
+}
+
+/* How it works */
+.how-it-works {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.how-it-works h2 {
+  font-size: 30px;
+}
+
+.steps {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 25px;
+  margin-top: 35px;
+}
+
+.step {
+  background: white;
+  padding: 30px;
+  width: 250px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+}
+
+.step h3 {
+  font-size: 20px;
+}
+
+.step p {
+  color: #555;
+  line-height: 1.5;
+}
+
+/* Footer */
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+}
+
+footer p {
+  margin: 5px;
+  color: #ddd;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+
+  nav {
+    padding: 18px 20px;
+  }
+
+  nav a {
+    margin-left: 10px;
+    font-size: 14px;
+  }
+
+  .hero {
+    padding: 60px 20px;
+  }
+
+  .hero h1 {
+    font-size: 60px;
+  }
+
+  .hero h2 {
+    font-size: 25px;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 68%;
+  }
+
+  .search-box button {
+    width: 32%;
+  }
+
+  .step {
+    width: 100%;
+    max-width: 320px;
+  }
+}
 </style>
 </head>
+
 <body>
-<h1>JG</h1>
-<h2>Find Skills. Find Work.</h2>
-<p>Connect with talented people and find work</p>
 
-<div class="search-box">
-  <input type="text" placeholder="Search for skill or job...">
-  <button>Search</button>
-</div>
+<!-- Navigation -->
+<nav>
+  <div class="logo">JG</div>
 
-<button class="nav-btn" onclick="window.location.href='skills.html'">Find a Skill</button>
-<button class="nav-btn" onclick="window.location.href='work.html'">Find Work</button>
+  <div>
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="work.html">Work</a>
+  </div>
+</nav>
+
+
+<!-- Hero Section -->
+<section class="hero">
+
+  <h1>JG</h1>
+
+  <h2>Find Skills. Find Work.</h2>
+
+  <p>
+    Connect with talented people, discover skills and find opportunities.
+  </p>
+
+  <!-- Search -->
+  <div class="search-box">
+    <input
+      type="text"
+      id="searchInput"
+      placeholder="Search for a skill or job..."
+    >
+
+    <button onclick="searchSite()">Search</button>
+  </div>
+
+  <!-- Main Buttons -->
+  <div class="buttons">
+
+    <a href="skills.html" class="nav-btn">
+      Find a Skill
+    </a>
+
+    <a href="work.html" class="nav-btn">
+      Find Work
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- Popular Skills -->
+<section class="categories">
+
+  <h2>Popular Skills</h2>
+
+  <div class="category-container">
+
+    <div class="category">Graphic Design</div>
+
+    <div class="category">Web Development</div>
+
+    <div class="category">Photography</div>
+
+    <div class="category">Video Editing</div>
+
+    <div class="category">Writing</div>
+
+    <div class="category">Social Media</div>
+
+  </div>
+
+</section>
+
+
+<!-- How It Works -->
+<section class="how-it-works">
+
+  <h2>How JG Works</h2>
+
+  <div class="steps">
+
+    <div class="step">
+      <h3>1. Find a Skill</h3>
+      <p>
+        Discover talented people with the skills you need.
+      </p>
+    </div>
+
+    <div class="step">
+      <h3>2. Find Work</h3>
+      <p>
+        Find opportunities and connect with people who need your skills.
+      </p>
+    </div>
+
+    <div class="step">
+      <h3>3. Connect</h3>
+      <p>
+        Connect with people and turn skills into real opportunities.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- Footer -->
+<footer>
+
+  <p><strong>JG</strong></p>
+
+  <p>Find Skills. Find Work.</p>
+
+  <p>© 2026 JG. All rights reserved.</p>
+
+</footer>
+
+
+<!-- Search Function -->
+<script>
+
+function searchSite() {
+
+  let search = document.getElementById("searchInput").value.trim();
+
+  if (search === "") {
+
+    alert("Please enter a skill or job to search.");
+
+  } else {
+
+    window.location.href =
+      "skills.html?search=" + encodeURIComponent(search);
+
+  }
+
+}
+
+</script>
+
 </body>
 </html>
