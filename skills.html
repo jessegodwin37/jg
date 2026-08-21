@@ -1,11 +1,463 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Find a Skill - JG</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JG - Find a Skill</title>
+
+<style>
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f7fa;
+  color: #111827;
+}
+
+/* Navigation */
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 7%;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo {
+  font-size: 32px;
+  font-weight: bold;
+}
+
+nav a {
+  text-decoration: none;
+  color: #111827;
+  margin-left: 20px;
+  font-weight: bold;
+}
+
+/* Header */
+
+.header {
+  text-align: center;
+  padding: 60px 20px 30px;
+}
+
+.header h1 {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.header p {
+  color: #555;
+  font-size: 18px;
+}
+
+/* Search */
+
+.search-box {
+  display: flex;
+  max-width: 600px;
+  margin: 25px auto 40px;
+}
+
+.search-box input {
+  width: 75%;
+  padding: 15px;
+  border: 2px solid #111827;
+  border-radius: 8px 0 0 8px;
+  font-size: 16px;
+  outline: none;
+}
+
+.search-box button {
+  width: 25%;
+  border: none;
+  background: #111827;
+  color: white;
+  border-radius: 0 8px 8px 0;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.search-box button:hover {
+  background: #333;
+}
+
+/* Skills */
+
+.skills-container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+/* Skill Card */
+
+.skill-card {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.skill-card h2 {
+  margin-top: 0;
+  font-size: 22px;
+}
+
+.skill-card p {
+  color: #555;
+  line-height: 1.5;
+}
+
+.price {
+  font-weight: bold;
+  margin: 15px 0;
+}
+
+/* Button */
+
+.contact-btn {
+  display: inline-block;
+  background: #111827;
+  color: white;
+  text-decoration: none;
+  padding: 12px 20px;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.contact-btn:hover {
+  background: #333;
+}
+
+/* Back Home */
+
+.back-home {
+  text-align: center;
+  margin: 45px 0;
+}
+
+.back-home a {
+  color: #111827;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Footer */
+
+footer {
+  background: #111827;
+  color: white;
+  text-align: center;
+  padding: 30px 20px;
+  margin-top: 50px;
+}
+
+footer p {
+  color: #ddd;
+  margin: 6px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+  nav {
+    padding: 18px 20px;
+  }
+
+  nav a {
+    margin-left: 8px;
+    font-size: 14px;
+  }
+
+  .header h1 {
+    font-size: 34px;
+  }
+
+  .skills-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .search-box {
+    width: 95%;
+  }
+
+}
+
+</style>
 </head>
-<body style="text-align:center; padding:50px; font-family:Arial; background:#f5f7fa;">
-<h1>Find a Skill</h1>
-<p>Coming soon... We go connect you to talented people here</p>
-<a href="index.html">← Back Home</a>
+
+<body>
+
+<!-- Navigation -->
+
+<nav>
+
+  <div class="logo">JG</div>
+
+  <div>
+    <a href="index.html">Home</a>
+    <a href="skills.html">Skills</a>
+    <a href="work.html">Work</a>
+  </div>
+
+</nav>
+
+
+<!-- Header -->
+
+<section class="header">
+
+  <h1>Find a Skill</h1>
+
+  <p>
+    Find talented people who can help you get the job done.
+  </p>
+
+</section>
+
+
+<!-- Search -->
+
+<div class="search-box">
+
+  <input
+    type="text"
+    id="skillSearch"
+    placeholder="Search for a skill..."
+  >
+
+  <button onclick="searchSkills()">
+    Search
+  </button>
+
+</div>
+
+
+<!-- Skills -->
+
+<section class="skills-container">
+
+  <div class="skills-grid" id="skillsGrid">
+
+
+    <!-- Graphic Design -->
+
+    <div class="skill-card">
+
+      <h2>🎨 Graphic Design</h2>
+
+      <p>
+        Find designers for logos, flyers, posters,
+        social media designs and more.
+      </p>
+
+      <div class="price">
+        Starting from ₦5,000
+      </div>
+
+      <a href="#" class="contact-btn">
+        Contact
+      </a>
+
+    </div>
+
+
+    <!-- Web Development -->
+
+    <div class="skill-card">
+
+      <h2>💻 Web Development</h2>
+
+      <p>
+        Find developers who can build websites,
+        landing pages and web applications.
+      </p>
+
+      <div class="price">
+        Starting from ₦20,000
+      </div>
+
+      <a href="#" class="contact-btn">
+        Contact
+      </a>
+
+    </div>
+
+
+    <!-- Photography -->
+
+    <div class="skill-card">
+
+      <h2>📸 Photography</h2>
+
+      <p>
+        Find photographers for events, portraits,
+        products and special occasions.
+      </p>
+
+      <div class="price">
+        Starting from ₦10,000
+      </div>
+
+      <a href="#" class="contact-btn">
+        Contact
+      </a>
+
+    </div>
+
+
+    <!-- Video Editing -->
+
+    <div class="skill-card">
+
+      <h2>🎬 Video Editing</h2>
+
+      <p>
+        Find editors for YouTube videos,
+        TikTok videos, adverts and social media content.
+      </p>
+
+      <div class="price">
+        Starting from ₦7,000
+      </div>
+
+      <a href="#" class="contact-btn">
+        Contact
+      </a>
+
+    </div>
+
+
+    <!-- Writing -->
+
+    <div class="skill-card">
+
+      <h2>✍️ Writing</h2>
+
+      <p>
+        Find writers for articles, captions,
+        blogs, scripts and other content.
+      </p>
+
+      <div class="price">
+        Starting from ₦5,000
+      </div>
+
+      <a href="#" class="contact-btn">
+        Contact
+      </a>
+
+    </div>
+
+
+    <!-- Social Media -->
+
+    <div class="skill-card">
+
+      <h2>📱 Social Media Management</h2>
+
+      <p>
+        Find people who can manage social media
+        pages and create engaging content.
+      </p>
+
+      <div class="price">
+        Starting from ₦15,000
+      </div>
+
+      <a href="#" class="contact-btn">
+        Contact
+      </a>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- Back Home -->
+
+<div class="back-home">
+
+  <a href="index.html">
+    ← Back Home
+  </a>
+
+</div>
+
+
+<!-- Footer -->
+
+<footer>
+
+  <p><strong>JG</strong></p>
+
+  <p>Find Skills. Find Work.</p>
+
+  <p>© 2026 JG. All rights reserved.</p>
+
+</footer>
+
+
+<!-- Search Function -->
+
+<script>
+
+function searchSkills() {
+
+  let search =
+    document.getElementById("skillSearch").value.toLowerCase().trim();
+
+  let cards =
+    document.querySelectorAll(".skill-card");
+
+  if (search === "") {
+
+    cards.forEach(function(card) {
+      card.style.display = "block";
+    });
+
+    return;
+  }
+
+  cards.forEach(function(card) {
+
+    let text =
+      card.innerText.toLowerCase();
+
+    if (text.includes(search)) {
+
+      card.style.display = "block";
+
+    } else {
+
+      card.style.display = "none";
+
+    }
+
+  });
+
+}
+
+</script>
+
 </body>
 </html>
