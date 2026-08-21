@@ -4,190 +4,305 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>JG - Find a Skill</title>
+<title>JG | Find Skills</title>
 
 <style>
-
 * {
   box-sizing: border-box;
 }
 
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
-  background: #f5f7fa;
-  color: #111827;
+  font-family: Arial, Helvetica, sans-serif;
+  background: #f8fafc;
+  color: #0f172a;
 }
 
-/* Navigation */
-
+/* NAVIGATION */
 nav {
+  height: 72px;
+  background: #0b1220;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  padding: 20px 7%;
-  background: white;
-  border-bottom: 1px solid #e5e7eb;
+  justify-content: space-between;
+  padding: 0 7%;
+  color: white;
 }
 
 .logo {
-  font-size: 32px;
-  font-weight: bold;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 25px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo-mark {
+  width: 38px;
+  height: 38px;
+  background: #2563eb;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 900;
 }
 
 nav a {
+  color: #cbd5e1;
   text-decoration: none;
-  color: #111827;
-  margin-left: 20px;
-  font-weight: bold;
+  margin-left: 25px;
+  font-size: 15px;
+  font-weight: 600;
 }
 
-/* Header */
+nav a:hover {
+  color: white;
+}
 
-.header {
+/* HEADER */
+.hero {
   text-align: center;
-  padding: 60px 20px 30px;
+  padding: 70px 20px 45px;
+  background: linear-gradient(135deg, #eef4ff, #ffffff);
 }
 
-.header h1 {
-  font-size: 42px;
-  margin-bottom: 10px;
+.hero h1 {
+  margin: 0;
+  font-size: 48px;
+  letter-spacing: -2px;
 }
 
-.header p {
-  color: #555;
+.hero p {
+  color: #64748b;
   font-size: 18px;
+  margin: 15px auto 30px;
+  max-width: 600px;
 }
 
-/* Search */
-
+/* SEARCH */
 .search-box {
+  max-width: 650px;
+  margin: auto;
   display: flex;
-  max-width: 600px;
-  margin: 25px auto 40px;
+  background: white;
+  border: 1px solid #dbe2ea;
+  border-radius: 12px;
+  padding: 5px;
+  box-shadow: 0 10px 30px rgba(15,23,42,0.08);
 }
 
 .search-box input {
-  width: 75%;
-  padding: 15px;
-  border: 2px solid #111827;
-  border-radius: 8px 0 0 8px;
-  font-size: 16px;
+  flex: 1;
+  border: none;
   outline: none;
+  padding: 15px;
+  font-size: 16px;
+  background: transparent;
 }
 
 .search-box button {
-  width: 25%;
   border: none;
-  background: #111827;
+  background: #2563eb;
   color: white;
-  border-radius: 0 8px 8px 0;
-  font-size: 16px;
+  padding: 0 25px;
+  border-radius: 9px;
+  font-weight: 700;
   cursor: pointer;
 }
 
 .search-box button:hover {
-  background: #333;
+  background: #1d4ed8;
 }
 
-/* Skills */
-
-.skills-container {
-  max-width: 1000px;
-  margin: auto;
-  padding: 20px;
+/* CONTENT */
+.container {
+  max-width: 1100px;
+  margin: 45px auto;
+  padding: 0 20px;
 }
 
+.section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.section-title h2 {
+  margin: 0;
+  font-size: 25px;
+}
+
+/* CARDS */
 .skills-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+  gap: 22px;
 }
-
-/* Skill Card */
 
 .skill-card {
   background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
   padding: 25px;
-  border-radius: 12px;
-  border: 1px solid #e5e7eb;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  transition: 0.2s;
 }
 
-.skill-card h2 {
-  margin-top: 0;
-  font-size: 22px;
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(15,23,42,0.10);
+}
+
+.icon {
+  width: 48px;
+  height: 48px;
+  background: #eff6ff;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 23px;
+  margin-bottom: 18px;
+}
+
+.skill-card h3 {
+  margin: 0 0 10px;
+  font-size: 20px;
 }
 
 .skill-card p {
-  color: #555;
-  line-height: 1.5;
+  color: #64748b;
+  line-height: 1.6;
+  font-size: 15px;
+  min-height: 72px;
 }
 
 .price {
-  font-weight: bold;
-  margin: 15px 0;
+  font-weight: 800;
+  margin: 18px 0;
+  color: #0f172a;
 }
 
-/* Button */
-
 .contact-btn {
-  display: inline-block;
-  background: #111827;
+  width: 100%;
+  border: none;
+  background: #0b1220;
   color: white;
-  text-decoration: none;
-  padding: 12px 20px;
-  border-radius: 8px;
-  font-weight: bold;
+  padding: 13px;
+  border-radius: 9px;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 .contact-btn:hover {
-  background: #333;
+  background: #2563eb;
 }
 
-/* Back Home */
-
-.back-home {
+/* BACK */
+.back {
   text-align: center;
-  margin: 45px 0;
+  margin: 50px 0;
 }
 
-.back-home a {
-  color: #111827;
-  font-weight: bold;
+.back a {
+  color: #2563eb;
   text-decoration: none;
+  font-weight: 700;
 }
 
-/* Footer */
-
+/* FOOTER */
 footer {
-  background: #111827;
+  background: #0b1220;
   color: white;
   text-align: center;
-  padding: 30px 20px;
-  margin-top: 50px;
+  padding: 35px 20px;
 }
 
 footer p {
-  color: #ddd;
-  margin: 6px;
+  color: #94a3b8;
+  margin: 7px;
 }
 
-/* Mobile */
+/* MODAL */
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(2,6,23,0.65);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10;
+}
 
-@media (max-width: 700px) {
+.modal-box {
+  background: white;
+  width: 100%;
+  max-width: 450px;
+  border-radius: 18px;
+  padding: 30px;
+  position: relative;
+}
+
+.modal-box h2 {
+  margin-top: 0;
+}
+
+.modal-box p {
+  color: #64748b;
+}
+
+.modal-box input,
+.modal-box textarea {
+  width: 100%;
+  padding: 13px;
+  margin: 8px 0;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-family: inherit;
+}
+
+.modal-box textarea {
+  height: 110px;
+  resize: none;
+}
+
+.send-btn {
+  width: 100%;
+  padding: 13px;
+  border: none;
+  border-radius: 8px;
+  background: #2563eb;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.close {
+  position: absolute;
+  right: 20px;
+  top: 15px;
+  font-size: 25px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 750px) {
 
   nav {
-    padding: 18px 20px;
+    padding: 0 20px;
   }
 
   nav a {
-    margin-left: 8px;
-    font-size: 14px;
+    margin-left: 10px;
+    font-size: 13px;
   }
 
-  .header h1 {
-    font-size: 34px;
+  .hero h1 {
+    font-size: 38px;
   }
 
   .skills-grid {
@@ -195,21 +310,24 @@ footer p {
   }
 
   .search-box {
-    width: 95%;
+    width: 100%;
   }
 
+  .search-box button {
+    padding: 0 18px;
+  }
 }
-
 </style>
 </head>
 
 <body>
 
-<!-- Navigation -->
-
 <nav>
 
-  <div class="logo">JG</div>
+  <div class="logo">
+    <div class="logo-mark">JG</div>
+    JG
+  </div>
 
   <div>
     <a href="index.html">Home</a>
@@ -219,207 +337,206 @@ footer p {
 
 </nav>
 
+<section class="hero">
 
-<!-- Header -->
-
-<section class="header">
-
-  <h1>Find a Skill</h1>
+  <h1>Find the right skill.</h1>
 
   <p>
-    Find talented people who can help you get the job done.
+    Connect with talented people ready to help you bring your ideas to life.
   </p>
 
-</section>
+  <div class="search-box">
 
+    <input
+      id="skillSearch"
+      type="text"
+      placeholder="Search graphic design, coding, writing..."
+    >
 
-<!-- Search -->
-
-<div class="search-box">
-
-  <input
-    type="text"
-    id="skillSearch"
-    placeholder="Search for a skill..."
-  >
-
-  <button onclick="searchSkills()">
-    Search
-  </button>
-
-</div>
-
-
-<!-- Skills -->
-
-<section class="skills-container">
-
-  <div class="skills-grid" id="skillsGrid">
-
-
-    <!-- Graphic Design -->
-
-    <div class="skill-card">
-
-      <h2>🎨 Graphic Design</h2>
-
-      <p>
-        Find designers for logos, flyers, posters,
-        social media designs and more.
-      </p>
-
-      <div class="price">
-        Starting from ₦5,000
-      </div>
-
-      <a href="#" class="contact-btn">
-        Contact
-      </a>
-
-    </div>
-
-
-    <!-- Web Development -->
-
-    <div class="skill-card">
-
-      <h2>💻 Web Development</h2>
-
-      <p>
-        Find developers who can build websites,
-        landing pages and web applications.
-      </p>
-
-      <div class="price">
-        Starting from ₦20,000
-      </div>
-
-      <a href="#" class="contact-btn">
-        Contact
-      </a>
-
-    </div>
-
-
-    <!-- Photography -->
-
-    <div class="skill-card">
-
-      <h2>📸 Photography</h2>
-
-      <p>
-        Find photographers for events, portraits,
-        products and special occasions.
-      </p>
-
-      <div class="price">
-        Starting from ₦10,000
-      </div>
-
-      <a href="#" class="contact-btn">
-        Contact
-      </a>
-
-    </div>
-
-
-    <!-- Video Editing -->
-
-    <div class="skill-card">
-
-      <h2>🎬 Video Editing</h2>
-
-      <p>
-        Find editors for YouTube videos,
-        TikTok videos, adverts and social media content.
-      </p>
-
-      <div class="price">
-        Starting from ₦7,000
-      </div>
-
-      <a href="#" class="contact-btn">
-        Contact
-      </a>
-
-    </div>
-
-
-    <!-- Writing -->
-
-    <div class="skill-card">
-
-      <h2>✍️ Writing</h2>
-
-      <p>
-        Find writers for articles, captions,
-        blogs, scripts and other content.
-      </p>
-
-      <div class="price">
-        Starting from ₦5,000
-      </div>
-
-      <a href="#" class="contact-btn">
-        Contact
-      </a>
-
-    </div>
-
-
-    <!-- Social Media -->
-
-    <div class="skill-card">
-
-      <h2>📱 Social Media Management</h2>
-
-      <p>
-        Find people who can manage social media
-        pages and create engaging content.
-      </p>
-
-      <div class="price">
-        Starting from ₦15,000
-      </div>
-
-      <a href="#" class="contact-btn">
-        Contact
-      </a>
-
-    </div>
+    <button onclick="searchSkills()">
+      Search
+    </button>
 
   </div>
 
 </section>
 
+<main class="container">
 
-<!-- Back Home -->
+  <div class="section-title">
+    <h2>Popular Skills</h2>
+  </div>
 
-<div class="back-home">
+  <div class="skills-grid">
 
-  <a href="index.html">
-    ← Back Home
-  </a>
+    <div class="skill-card">
+      <div class="icon">🎨</div>
+      <h3>Graphic Design</h3>
+      <p>
+        Logos, flyers, branding, social media designs and visual content.
+      </p>
+      <div class="price">From ₦5,000</div>
+      <button class="contact-btn" onclick="openContact('Graphic Design')">
+        Contact Designer
+      </button>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">💻</div>
+      <h3>Web Development</h3>
+      <p>
+        Websites, landing pages and modern web applications.
+      </p>
+      <div class="price">From ₦20,000</div>
+      <button class="contact-btn" onclick="openContact('Web Development')">
+        Contact Developer
+      </button>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">🎬</div>
+      <h3>Video Editing</h3>
+      <p>
+        Professional editing for YouTube, TikTok, Instagram and adverts.
+      </p>
+      <div class="price">From ₦7,000</div>
+      <button class="contact-btn" onclick="openContact('Video Editing')">
+        Contact Editor
+      </button>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">📱</div>
+      <h3>Social Media</h3>
+      <p>
+        Content creation, page management and social media growth.
+      </p>
+      <div class="price">From ₦15,000</div>
+      <button class="contact-btn" onclick="openContact('Social Media')">
+        Contact Manager
+      </button>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">✍️</div>
+      <h3>Writing</h3>
+      <p>
+        Articles, scripts, captions, blogs and professional content.
+      </p>
+      <div class="price">From ₦5,000</div>
+      <button class="contact-btn" onclick="openContact('Writing')">
+        Contact Writer
+      </button>
+    </div>
+
+    <div class="skill-card">
+      <div class="icon">📸</div>
+      <h3>Photography</h3>
+      <p>
+        Portraits, events, products and professional photography.
+      </p>
+      <div class="price">From ₦10,000</div>
+      <button class="contact-btn" onclick="openContact('Photography')">
+        Contact Photographer
+      </button>
+    </div>
+
+  </div>
+
+</main>
+
+<div class="back">
+  <a href="index.html">← Back to JG</a>
+</div>
+
+<footer>
+  <p><strong>JG</strong></p>
+  <p>Find Skills. Find Work.</p>
+  <p>© 2026 JG. All rights reserved.</p>
+</footer>
+
+
+<!-- CONTACT MODAL -->
+
+<div class="modal" id="contactModal">
+
+  <div class="modal-box">
+
+    <span class="close" onclick="closeContact()">×</span>
+
+    <h2>Contact a Professional</h2>
+
+    <p id="selectedSkill">
+      Send a message about this service.
+    </p>
+
+    <input
+      id="name"
+      type="text"
+      placeholder="Your name"
+    >
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Your email"
+    >
+
+    <textarea
+      id="message"
+      placeholder="Tell the professional what you need..."
+    ></textarea>
+
+    <button class="send-btn" onclick="sendMessage()">
+      Send Message
+    </button>
+
+  </div>
 
 </div>
 
 
-<!-- Footer -->
-
-<footer>
-
-  <p><strong>JG</strong></p>
-
-  <p>Find Skills. Find Work.</p>
-
-  <p>© 2026 JG. All rights reserved.</p>
-
-</footer>
-
-
-<!-- Search Function -->
-
 <script>
+
+let selectedSkill = "";
+
+function openContact(skill) {
+
+  selectedSkill = skill;
+
+  document.getElementById("selectedSkill").innerText =
+    "You're contacting a professional for " + skill + ".";
+
+  document.getElementById("contactModal").style.display = "flex";
+}
+
+function closeContact() {
+
+  document.getElementById("contactModal").style.display = "none";
+
+}
+
+function sendMessage() {
+
+  let name = document.getElementById("name").value.trim();
+  let email = document.getElementById("email").value.trim();
+  let message = document.getElementById("message").value.trim();
+
+  if (!name || !email || !message) {
+
+    alert("Please complete all fields.");
+
+    return;
+  }
+
+  alert(
+    "Your message has been prepared. JG will connect you with a " +
+    selectedSkill + " professional."
+  );
+
+  closeContact();
+
+}
 
 function searchSkills() {
 
@@ -429,28 +546,14 @@ function searchSkills() {
   let cards =
     document.querySelectorAll(".skill-card");
 
-  if (search === "") {
-
-    cards.forEach(function(card) {
-      card.style.display = "block";
-    });
-
-    return;
-  }
-
   cards.forEach(function(card) {
 
-    let text =
-      card.innerText.toLowerCase();
+    let text = card.innerText.toLowerCase();
 
     if (text.includes(search)) {
-
-      card.style.display = "block";
-
+      card.style.display = "";
     } else {
-
       card.style.display = "none";
-
     }
 
   });
