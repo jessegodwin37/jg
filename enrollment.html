@@ -1,0 +1,1386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>JG | Enrollment & Payment</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:Arial, sans-serif;
+    background:#f5f7fb;
+    color:#111827;
+    line-height:1.6;
+}
+
+nav{
+    background:#07111f;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#2563eb;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+}
+
+.container{
+    max-width:850px;
+    margin:60px auto;
+    padding:0 20px;
+}
+
+.enrollment-card{
+    background:white;
+    border-radius:18px;
+    padding:35px;
+    box-shadow:0 15px 45px rgba(0,0,0,.08);
+}
+
+.header{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.header h1{
+    font-size:38px;
+    margin-bottom:10px;
+}
+
+.header p{
+    color:#64748b;
+}
+
+.course-box{
+    background:#eff6ff;
+    border:1px solid #bfdbfe;
+    padding:20px;
+    border-radius:12px;
+    margin-bottom:25px;
+}
+
+.course-box label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+select,
+input{
+    width:100%;
+    padding:14px;
+    border:1px solid #d1d5db;
+    border-radius:8px;
+    outline:none;
+    font-size:15px;
+}
+
+select:focus,
+input:focus{
+    border-color:#2563eb;
+}
+
+.price{
+    margin-top:15px;
+    font-size:30px;
+    font-weight:900;
+    color:#2563eb;
+}
+
+.form-group{
+    margin-bottom:18px;
+}
+
+.form-group label{
+    display:block;
+    font-weight:bold;
+    margin-bottom:7px;
+}
+
+.payment-title{
+    margin-top:30px;
+    margin-bottom:15px;
+}
+
+.payment-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:15px;
+}
+
+.payment-option{
+    border:2px solid #e5e7eb;
+    padding:20px;
+    border-radius:12px;
+    text-align:center;
+    cursor:pointer;
+    transition:.2s;
+}
+
+.payment-option:hover{
+    border-color:#2563eb;
+}
+
+.payment-option.active{
+    border-color:#2563eb;
+    background:#eff6ff;
+}
+
+.payment-option input{
+    display:none;
+}
+
+.payment-option .icon{
+    font-size:30px;
+    margin-bottom:8px;
+}
+
+.payment-option strong{
+    display:block;
+}
+
+.payment-option small{
+    color:#64748b;
+}
+
+.payment-details{
+    display:none;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    border-radius:12px;
+    padding:22px;
+    margin-top:20px;
+}
+
+.payment-details.active{
+    display:block;
+}
+
+.account-box{
+    background:white;
+    border:1px solid #dbeafe;
+    border-radius:10px;
+    padding:18px;
+    margin-top:15px;
+}
+
+.account-row{
+    padding:12px 0;
+    border-bottom:1px solid #e5e7eb;
+}
+
+.account-row:last-child{
+    border-bottom:none;
+}
+
+.account-label{
+    display:block;
+    color:#64748b;
+    font-size:13px;
+    margin-bottom:3px;
+}
+
+.account-value{
+    font-weight:bold;
+    word-break:break-word;
+}
+
+.copy-btn{
+    background:#2563eb;
+    color:white;
+    border:none;
+    padding:7px 10px;
+    border-radius:6px;
+    cursor:pointer;
+    margin-left:5px;
+}
+
+.copy-btn:hover{
+    background:#1d4ed8;
+}
+
+.notice{
+    background:#fff7ed;
+    border:1px solid #fed7aa;
+    color:#9a3412;
+    padding:14px;
+    border-radius:8px;
+    margin-top:15px;
+    font-size:13px;
+}
+
+.confirm-box{
+    margin-top:25px;
+    background:#f8fafc;
+    padding:18px;
+    border-radius:10px;
+}
+
+.checkbox-row{
+    display:flex;
+    gap:10px;
+    align-items:flex-start;
+    font-size:14px;
+}
+
+.checkbox-row input{
+    width:auto;
+    margin-top:5px;
+}
+
+.submit-btn{
+    width:100%;
+    margin-top:25px;
+    padding:16px;
+    border:none;
+    border-radius:9px;
+    background:#2563eb;
+    color:white;
+    font-size:16px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.submit-btn:hover{
+    background:#1d4ed8;
+}
+
+.success{
+    display:none;
+    margin-top:20px;
+    padding:20px;
+    border-radius:10px;
+    background:#f0fdf4;
+    border:1px solid #bbf7d0;
+    color:#166534;
+}
+
+footer{
+    background:#07111f;
+    color:#94a3b8;
+    text-align:center;
+    padding:30px;
+    margin-top:50px;
+}
+
+#chatButton{
+    position:fixed;
+    right:20px;
+    bottom:20px;
+    width:60px;
+    height:60px;
+    border:none;
+    border-radius:50%;
+    background:#2563eb;
+    color:white;
+    font-size:26px;
+    cursor:pointer;
+    box-shadow:0 10px 30px rgba(0,0,0,.25);
+    z-index:9999;
+}
+
+#chatBox{
+    display:none;
+    position:fixed;
+    right:20px;
+    bottom:90px;
+    width:360px;
+    max-width:calc(100vw - 30px);
+    height:480px;
+    background:white;
+    border-radius:18px;
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
+    overflow:hidden;
+    z-index:9998;
+    flex-direction:column;
+}
+
+.chat-header{
+    background:#07111f;
+    color:white;
+    padding:17px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.chat-header small{
+    display:block;
+    color:#93c5fd;
+    font-size:11px;
+}
+
+.close-chat{
+    border:none;
+    background:none;
+    color:white;
+    font-size:27px;
+    cursor:pointer;
+}
+
+#messages{
+    flex:1;
+    overflow-y:auto;
+    padding:15px;
+    background:#f8fafc;
+}
+
+.message{
+    max-width:88%;
+    padding:12px;
+    border-radius:12px;
+    margin-bottom:12px;
+    font-size:13px;
+}
+
+.bot{
+    background:white;
+    border:1px solid #e5e7eb;
+}
+
+.user{
+    background:#2563eb;
+    color:white;
+    margin-left:auto;
+}
+
+.chat-input{
+    display:flex;
+    gap:8px;
+    padding:10px;
+    border-top:1px solid #e5e7eb;
+}
+
+.chat-input input{
+    flex:1;
+}
+
+.chat-input button{
+    width:45px;
+    border:none;
+    border-radius:8px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+}
+
+@media(max-width:650px){
+
+    .enrollment-card{
+        padding:22px;
+    }
+
+    .header h1{
+        font-size:30px;
+    }
+
+    .payment-options{
+        grid-template-columns:1fr;
+    }
+
+    #chatBox{
+        right:12px;
+        width:calc(100vw - 24px);
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+<div class="logo">
+JG<span>.</span>
+</div>
+
+<div>
+
+<a href="index.html">
+Home
+</a>
+
+<a href="learn.html">
+Learn
+</a>
+
+</div>
+
+</nav>
+
+
+<div class="container">
+
+<div class="enrollment-card">
+
+<div class="header">
+
+<h1>
+Enroll at JG
+</h1>
+
+<p>
+Choose your course, complete your details
+and make your payment.
+</p>
+
+</div>
+
+
+<!-- COURSE -->
+
+<div class="course-box">
+
+<label>
+Select Your Course
+</label>
+
+<select id="course"
+onchange="updateCourse()">
+
+<option value="">
+-- Select a course --
+</option>
+
+<option value="Web Development|25000">
+Web Development — ₦25,000
+</option>
+
+<option value="Graphic Design|15000">
+Graphic Design — ₦15,000
+</option>
+
+<option value="Video Editing|15000">
+Video Editing — ₦15,000
+</option>
+
+<option value="Python Programming|25000">
+Python Programming — ₦25,000
+</option>
+
+<option value="Digital Marketing|20000">
+Digital Marketing — ₦20,000
+</option>
+
+<option value="Career Skills|10000">
+Career Skills — ₦10,000
+</option>
+
+</select>
+
+
+<div class="price"
+id="price">
+
+₦0
+
+</div>
+
+</div>
+
+
+<!-- PERSONAL INFORMATION -->
+
+<div class="form-group">
+
+<label>
+Full Name
+</label>
+
+<input
+type="text"
+id="name"
+placeholder="Enter your full name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+<input
+type="email"
+id="email"
+placeholder="Enter your email address">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Phone Number
+</label>
+
+<input
+type="tel"
+id="phone"
+placeholder="08012345678">
+
+</div>
+
+
+<!-- PAYMENT -->
+
+<h3 class="payment-title">
+Select Payment Method
+</h3>
+
+
+<div class="payment-options">
+
+
+<label
+class="payment-option"
+id="opayOption"
+onclick="selectPayment('opay')">
+
+<input
+type="radio"
+name="payment">
+
+<div class="icon">
+📱
+</div>
+
+<strong>
+OPay
+</strong>
+
+<small>
+Pay using OPay
+</small>
+
+</label>
+
+
+<label
+class="payment-option"
+id="bankOption"
+onclick="selectPayment('bank')">
+
+<input
+type="radio"
+name="payment">
+
+<div class="icon">
+🏦
+</div>
+
+<strong>
+Bank Transfer
+</strong>
+
+<small>
+Transfer directly
+</small>
+
+</label>
+
+</div>
+
+
+<!-- OPAY DETAILS -->
+
+<div
+class="payment-details"
+id="opayDetails">
+
+<h3>
+OPay Payment
+</h3>
+
+<p>
+Send the exact course amount to:
+</p>
+
+
+<div class="account-box">
+
+
+<div class="account-row">
+
+<span class="account-label">
+Bank
+</span>
+
+<span class="account-value">
+OPay
+</span>
+
+</div>
+
+
+<div class="account-row">
+
+<span class="account-label">
+Account Name
+</span>
+
+<span class="account-value">
+JESSE EYITEMI ANOMUOGHARAN
+</span>
+
+</div>
+
+
+<div class="account-row">
+
+<span class="account-label">
+Account Number
+</span>
+
+<span class="account-value">
+
+6493501689
+
+<button
+class="copy-btn"
+onclick="copyAccount()">
+
+Copy
+
+</button>
+
+</span>
+
+</div>
+
+
+<div class="account-row">
+
+<span class="account-label">
+Amount to Pay
+</span>
+
+<span
+class="account-value"
+id="opayAmount">
+
+₦0
+
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="notice">
+
+⚠️ Please transfer the exact amount shown
+above. Keep your payment receipt.
+
+</div>
+
+</div>
+
+
+<!-- BANK TRANSFER DETAILS -->
+
+<div
+class="payment-details"
+id="bankDetails">
+
+<h3>
+Bank Transfer
+</h3>
+
+<p>
+Transfer the exact amount to the account below.
+</p>
+
+
+<div class="account-box">
+
+
+<div class="account-row">
+
+<span class="account-label">
+Bank
+</span>
+
+<span class="account-value">
+OPay
+</span>
+
+</div>
+
+
+<div class="account-row">
+
+<span class="account-label">
+Account Name
+</span>
+
+<span class="account-value">
+JESSE EYITEMI ANOMUOGHARAN
+</span>
+
+</div>
+
+
+<div class="account-row">
+
+<span class="account-label">
+Account Number
+</span>
+
+<span class="account-value">
+
+6493501689
+
+<button
+class="copy-btn"
+onclick="copyAccount()">
+
+Copy
+
+</button>
+
+</span>
+
+</div>
+
+
+<div class="account-row">
+
+<span class="account-label">
+Amount to Pay
+</span>
+
+<span
+class="account-value"
+id="bankAmount">
+
+₦0
+
+</span>
+
+</div>
+
+
+</div>
+
+
+<div class="notice">
+
+⚠️ After making the transfer, keep your
+payment receipt. Your payment will be
+verified before course access is provided.
+
+</div>
+
+</div>
+
+
+<!-- PAYMENT CONFIRMATION -->
+
+<div class="confirm-box">
+
+<label class="checkbox-row">
+
+<input
+type="checkbox"
+id="paymentConfirm">
+
+<span>
+I confirm that I have made the payment
+using the payment method selected above.
+</span>
+
+</label>
+
+</div>
+
+
+<button
+class="submit-btn"
+onclick="submitEnrollment()">
+
+Submit Enrollment
+
+</button>
+
+
+<div
+class="success"
+id="success">
+
+<strong>
+✅ Enrollment Received
+</strong>
+
+<br><br>
+
+Thank you for enrolling with JG.
+
+<br><br>
+
+Your enrollment details have been received.
+Your payment will be verified before access
+to the selected course is provided.
+
+</div>
+
+
+</div>
+
+</div>
+
+
+<footer>
+
+© 2026 JG — Find Skills. Find Work.
+
+</footer>
+
+
+<!-- CHATBOT -->
+
+<button
+id="chatButton"
+onclick="openChat()">
+
+💬
+
+</button>
+
+
+<div id="chatBox">
+
+<div class="chat-header">
+
+<div>
+
+<strong>
+JG AI Assistant
+</strong>
+
+<small>
+Online • Ready to help
+</small>
+
+</div>
+
+<button
+class="close-chat"
+onclick="closeChat()">
+
+×
+
+</button>
+
+</div>
+
+
+<div id="messages">
+
+<div class="message bot">
+
+<strong>
+JG AI:
+</strong>
+
+<br><br>
+
+👋 Welcome to JG!
+
+I can help you with courses,
+prices, enrollment and payment.
+
+</div>
+
+</div>
+
+
+<div class="chat-input">
+
+<input
+id="chatInput"
+placeholder="Ask JG AI..."
+onkeydown="if(event.key==='Enter') sendMessage()">
+
+<button
+onclick="sendMessage()">
+
+➤
+
+</button>
+
+</div>
+
+</div>
+
+
+<script>
+
+
+let selectedPrice = 0;
+
+
+/* COURSE */
+
+function updateCourse(){
+
+    const value =
+        document.getElementById(
+            "course"
+        ).value;
+
+
+    if(!value){
+
+        selectedPrice = 0;
+
+        document.getElementById(
+            "price"
+        ).textContent = "₦0";
+
+        return;
+
+    }
+
+
+    const data =
+        value.split("|");
+
+
+    selectedPrice =
+        Number(data[1]);
+
+
+    const formatted =
+        "₦" +
+        selectedPrice.toLocaleString();
+
+
+    document.getElementById(
+        "price"
+    ).textContent =
+        formatted;
+
+
+    document.getElementById(
+        "opayAmount"
+    ).textContent =
+        formatted;
+
+
+    document.getElementById(
+        "bankAmount"
+    ).textContent =
+        formatted;
+
+}
+
+
+/* PAYMENT */
+
+function selectPayment(method){
+
+    document.getElementById(
+        "opayOption"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "bankOption"
+    ).classList.remove("active");
+
+
+    document.getElementById(
+        "opayDetails"
+    ).classList.remove("active");
+
+    document.getElementById(
+        "bankDetails"
+    ).classList.remove("active");
+
+
+    if(method === "opay"){
+
+        document.getElementById(
+            "opayOption"
+        ).classList.add("active");
+
+        document.getElementById(
+            "opayDetails"
+        ).classList.add("active");
+
+    }
+
+
+    if(method === "bank"){
+
+        document.getElementById(
+            "bankOption"
+        ).classList.add("active");
+
+        document.getElementById(
+            "bankDetails"
+        ).classList.add("active");
+
+    }
+
+}
+
+
+/* COPY */
+
+function copyAccount(){
+
+    navigator.clipboard
+    .writeText("6493501689")
+    .then(function(){
+
+        alert(
+            "OPay account number copied!"
+        );
+
+    });
+
+}
+
+
+/* ENROLL */
+
+function submitEnrollment(){
+
+    const course =
+        document.getElementById(
+            "course"
+        ).value;
+
+
+    const name =
+        document.getElementById(
+            "name"
+        ).value.trim();
+
+
+    const email =
+        document.getElementById(
+            "email"
+        ).value.trim();
+
+
+    const phone =
+        document.getElementById(
+            "phone"
+        ).value.trim();
+
+
+    const payment =
+        document.querySelector(
+            'input[name="payment"]:checked'
+        );
+
+
+    const confirmed =
+        document.getElementById(
+            "paymentConfirm"
+        ).checked;
+
+
+    if(!course){
+
+        alert(
+            "Please select a course."
+        );
+
+        return;
+
+    }
+
+
+    if(!name ||
+       !email ||
+       !phone){
+
+        alert(
+            "Please complete all your personal details."
+        );
+
+        return;
+
+    }
+
+
+    if(!payment){
+
+        alert(
+            "Please select a payment method."
+        );
+
+        return;
+
+    }
+
+
+    if(!confirmed){
+
+        alert(
+            "Please confirm that you have made the payment."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "success"
+    ).style.display =
+        "block";
+
+
+    document.getElementById(
+        "success"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
+
+}
+
+
+/* CHAT */
+
+function openChat(){
+
+    document.getElementById(
+        "chatBox"
+    ).style.display =
+        "flex";
+
+}
+
+
+function closeChat(){
+
+    document.getElementById(
+        "chatBox"
+    ).style.display =
+        "none";
+
+}
+
+
+function sendMessage(){
+
+    const input =
+        document.getElementById(
+            "chatInput"
+        );
+
+
+    const text =
+        input.value.trim();
+
+
+    if(!text){
+        return;
+    }
+
+
+    addMessage(
+        text,
+        "user"
+    );
+
+
+    input.value = "";
+
+
+    setTimeout(function(){
+
+        addMessage(
+            getBotResponse(text),
+            "bot"
+        );
+
+    },400);
+
+}
+
+
+function addMessage(text,type){
+
+    const messages =
+        document.getElementById(
+            "messages"
+        );
+
+
+    const div =
+        document.createElement(
+            "div"
+        );
+
+
+    div.className =
+        "message " + type;
+
+
+    div.innerHTML =
+        text;
+
+
+    messages.appendChild(div);
+
+
+    messages.scrollTop =
+        messages.scrollHeight;
+
+}
+
+
+function getBotResponse(message){
+
+    const text =
+        message.toLowerCase();
+
+
+    if(
+        text.includes("price") ||
+        text.includes("cost") ||
+        text.includes("how much")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        JG courses currently range from
+        ₦10,000 to ₦25,000.
+
+        <br><br>
+
+        Select a course above to see its
+        exact price.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("payment") ||
+        text.includes("opay") ||
+        text.includes("transfer")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        You can pay through OPay or
+        Bank Transfer.
+
+        <br><br>
+
+        <strong>Bank:</strong> OPay
+        <br>
+
+        <strong>Account Name:</strong>
+        JESSE EYITEMI ANOMUOGHARAN
+
+        <br>
+
+        <strong>Account Number:</strong>
+        6493501689
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("enroll") ||
+        text.includes("register")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        Select your course above,
+        enter your details, choose your
+        payment method and complete your
+        payment.
+
+        `;
+
+    }
+
+
+    return `
+
+    <strong>JG AI:</strong>
+
+    <br><br>
+
+    I can help you with:
+
+    <br><br>
+
+    • Courses
+    <br>
+    • Prices
+    <br>
+    • Enrollment
+    <br>
+    • OPay
+    <br>
+    • Bank Transfer
+
+    `;
+
+}
+
+</script>
+
+
+</body>
+
+</html>
