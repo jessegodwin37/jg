@@ -1,20 +1,30 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <title>JG - Find Skills. Find Work.</title>
 <style>
-body { background-color: #f5f7fa; text-align: center; padding: 50px; font-family: Arial; }
-h1 { font-size: 70px; }
-button { background-color: #111827; color: white; border: none; border-radius: 8px; padding: 14px 28px; margin: 10px; font-size: 16px; cursor: pointer; }
+body { background-color: #f5f7fa; text-align: center; padding: 50px 20px; font-family: Arial; margin:0; }
+h1 { font-size: 70px; color:#111827; margin:0; }
+h2 { color:#333; }
+.search-box { margin:30px auto; max-width:500px; }
+input { padding:14px; width:70%; border:2px solid #111827; border-radius:8px 0 0 8px; font-size:16px; }
+button { background-color: #111827; color: white; border: none; border-radius:0 8px 8px 0; padding: 14px 20px; font-size: 16px; cursor: pointer; }
 button:hover { background-color: #333; }
+.nav-btn { border-radius:8px; margin:10px; }
 </style>
 </head>
 <body>
 <h1>JG</h1>
 <h2>Find Skills. Find Work.</h2>
 <p>Connect with talented people and find work</p>
-<button onclick="window.location.href='skills.html'">Find a Skill</button>
-<button onclick="window.location.href='work.html'">Find Work</button>
+
+<div class="search-box">
+  <input type="text" placeholder="Search for skill or job...">
+  <button>Search</button>
+</div>
+
+<button class="nav-btn" onclick="window.location.href='skills.html'">Find a Skill</button>
+<button class="nav-btn" onclick="window.location.href='work.html'">Find Work</button>
 </body>
 </html>
