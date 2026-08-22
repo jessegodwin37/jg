@@ -3,1277 +3,550 @@
 
 <head>
 
-<meta charset="UTF-8">
+    <meta charset="UTF-8">
 
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-<title>JG | Create Account & Login</title>
+    <title>JG Account | Your Learning Dashboard</title>
 
-<link rel="stylesheet" href="style.css">
+    <meta name="description"
+          content="Manage your JG learning journey and track your progress.">
 
-<style>
-
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background:
-        linear-gradient(
-            135deg,
-            #eff6ff,
-            #f8fafc
-        );
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    color: #0f172a;
-}
-
-
-/* =========================
-   NAVBAR
-========================= */
-
-.navbar {
-
-    height: 74px;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    padding: 0 7%;
-
-    background: rgba(255,255,255,.92);
-
-    border-bottom:
-        1px solid #e2e8f0;
-
-    position: sticky;
-
-    top: 0;
-
-    z-index: 100;
-
-    backdrop-filter: blur(15px);
-
-}
-
-
-.logo {
-
-    text-decoration: none;
-
-    font-size: 28px;
-
-    font-weight: 950;
-
-    color: #0f172a;
-
-}
-
-
-.logo span {
-
-    color: #2563eb;
-
-}
-
-
-.nav-links {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 25px;
-
-}
-
-
-.nav-links a {
-
-    text-decoration: none;
-
-    color: #475569;
-
-    font-size: 14px;
-
-    font-weight: 700;
-
-}
-
-
-.nav-links a:hover {
-
-    color: #2563eb;
-
-}
-
-
-.nav-cta {
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
-
-    color: white !important;
-
-    padding: 11px 18px;
-
-    border-radius: 10px;
-
-}
-
-
-/* =========================
-   ACCOUNT PAGE
-========================= */
-
-.account-page {
-
-    min-height:
-        calc(100vh - 74px);
-
-    display: flex;
-
-    justify-content: center;
-
-    align-items: center;
-
-    padding: 55px 20px;
-
-}
-
-
-.account-card {
-
-    width: 100%;
-
-    max-width: 470px;
-
-    background: white;
-
-    border:
-        1px solid #e2e8f0;
-
-    border-radius: 24px;
-
-    padding: 32px;
-
-    box-shadow:
-        0 25px 70px
-        rgba(15,23,42,.12);
-
-}
-
-
-/* LOGO */
-
-.account-logo {
-
-    text-align: center;
-
-    font-size: 32px;
-
-    font-weight: 950;
-
-    margin-bottom: 5px;
-
-}
-
-
-.account-logo span {
-
-    color: #2563eb;
-
-}
-
-
-/* TITLE */
-
-.account-title {
-
-    text-align: center;
-
-    margin-bottom: 25px;
-
-}
-
-
-.account-title h1 {
-
-    margin: 0 0 7px;
-
-    font-size: 28px;
-
-}
-
-
-.account-title p {
-
-    margin: 0;
-
-    color: #64748b;
-
-    font-size: 13px;
-
-}
-
-
-/* TABS */
-
-.account-tabs {
-
-    display: grid;
-
-    grid-template-columns:
-        1fr 1fr;
-
-    gap: 5px;
-
-    background: #f1f5f9;
-
-    padding: 5px;
-
-    border-radius: 12px;
-
-    margin-bottom: 22px;
-
-}
-
-
-.account-tabs button {
-
-    border: none;
-
-    padding: 12px;
-
-    border-radius: 9px;
-
-    background: transparent;
-
-    color: #64748b;
-
-    font-weight: 800;
-
-    cursor: pointer;
-
-}
-
-
-.account-tabs button.active {
-
-    background: white;
-
-    color: #2563eb;
-
-    box-shadow:
-        0 3px 12px
-        rgba(15,23,42,.08);
-
-}
-
-
-/* FORMS */
-
-.account-form {
-
-    display: none;
-
-}
-
-
-.account-form.active {
-
-    display: block;
-
-}
-
-
-.account-form label {
-
-    display: block;
-
-    margin-bottom: 7px;
-
-    color: #334155;
-
-    font-size: 13px;
-
-    font-weight: 800;
-
-}
-
-
-.account-form input {
-
-    width: 100%;
-
-    height: 48px;
-
-    padding: 0 14px;
-
-    margin-bottom: 17px;
-
-    border:
-        1px solid #cbd5e1;
-
-    border-radius: 10px;
-
-    outline: none;
-
-    background: #f8fafc;
-
-    font-size: 14px;
-
-}
-
-
-.account-form input:focus {
-
-    background: white;
-
-    border-color: #2563eb;
-
-    box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,.09);
-
-}
-
-
-/* PASSWORD NOTE */
-
-.password-note {
-
-    margin-top: -10px;
-
-    margin-bottom: 17px;
-
-    color: #64748b;
-
-    font-size: 11px;
-
-}
-
-
-/* BUTTON */
-
-.account-submit {
-
-    width: 100%;
-
-    height: 49px;
-
-    border: none;
-
-    border-radius: 11px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
-
-    color: white;
-
-    font-weight: 900;
-
-    cursor: pointer;
-
-    font-size: 14px;
-
-    transition: .2s;
-
-}
-
-
-.account-submit:hover {
-
-    transform:
-        translateY(-1px);
-
-    box-shadow:
-        0 10px 25px
-        rgba(37,99,235,.22);
-
-}
-
-
-.account-submit:disabled {
-
-    opacity: .6;
-
-    cursor: not-allowed;
-
-}
-
-
-/* MESSAGE */
-
-.account-message {
-
-    display: none;
-
-    padding: 12px;
-
-    border-radius: 10px;
-
-    margin-bottom: 17px;
-
-    font-size: 13px;
-
-    line-height: 1.5;
-
-}
-
-
-.account-message.success {
-
-    display: block;
-
-    background: #f0fdf4;
-
-    border:
-        1px solid #bbf7d0;
-
-    color: #166534;
-
-}
-
-
-.account-message.error {
-
-    display: block;
-
-    background: #fef2f2;
-
-    border:
-        1px solid #fecaca;
-
-    color: #991b1b;
-
-}
-
-
-/* FOOTER */
-
-footer {
-
-    padding: 30px 20px;
-
-    text-align: center;
-
-    background: white;
-
-    border-top:
-        1px solid #e2e8f0;
-
-}
-
-
-.footer-logo {
-
-    font-size: 22px;
-
-    font-weight: 950;
-
-}
-
-
-.footer-logo span {
-
-    color: #2563eb;
-
-}
-
-
-footer p {
-
-    margin: 6px 0;
-
-    color: #64748b;
-
-    font-size: 12px;
-
-}
-
-
-/* MOBILE */
-
-@media(max-width:700px) {
-
-    .navbar {
-
-        padding: 0 20px;
-
-    }
-
-
-    .nav-links {
-
-        display: none;
-
-    }
-
-
-    .account-page {
-
-        padding:
-            35px 15px;
-
-    }
-
-
-    .account-card {
-
-        padding: 25px 20px;
-
-        border-radius: 20px;
-
-    }
-
-
-    .account-title h1 {
-
-        font-size: 24px;
-
-    }
-
-}
-
-</style>
+    <link rel="stylesheet"
+          href="css/style.css">
 
 </head>
-
 
 <body>
 
 
-<!-- =========================
-     NAVBAR
-========================= -->
+    <!-- NAVIGATION -->
 
-<nav class="navbar">
+    <nav class="navbar">
 
-    <a
-        href="index.html"
-        class="logo">
-
-        JG<span>.</span>
-
-    </a>
-
-
-    <div class="nav-links">
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="skills.html">
-            Skills
-        </a>
-
-        <a href="learn.html">
-            Learn
-        </a>
-
-        <a href="work.html">
-            Work
-        </a>
-
-        <a
-            href="account.html"
-            class="nav-cta">
-
-            Account
-
-        </a>
-
-    </div>
-
-</nav>
-
-
-
-<!-- =========================
-     ACCOUNT
-========================= -->
-
-<main class="account-page">
-
-    <div class="account-card">
-
-
-        <div class="account-logo">
+        <a href="index.html"
+           class="logo">
 
             JG<span>.</span>
+
+        </a>
+
+
+        <button class="menu-toggle"
+                aria-label="Open menu">
+
+            ☰
+
+        </button>
+
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="skills.html">
+                    Skills
+                </a>
+            </li>
+
+            <li>
+                <a href="learn.html">
+                    Learn
+                </a>
+            </li>
+
+            <li>
+                <a href="work.html">
+                    Work
+                </a>
+            </li>
+
+            <li>
+                <a href="account.html">
+                    Account
+                </a>
+            </li>
+
+            <li>
+                <a href="enrollment.html"
+                   class="nav-cta">
+
+                    Enroll
+
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+
+
+    <!-- DASHBOARD HEADER -->
+
+    <section class="page-hero">
+
+        <span class="badge">
+            JG DASHBOARD
+        </span>
+
+
+        <h1 id="accountName">
+
+            Welcome to JG.
+
+        </h1>
+
+
+        <p id="accountEmail">
+
+            Your learning journey starts here.
+
+        </p>
+
+    </section>
+
+
+
+    <!-- DASHBOARD -->
+
+    <main class="section">
+
+
+        <!-- PROFILE -->
+
+        <div class="dashboard-card">
+
+            <div>
+
+                <span class="badge">
+                    YOUR PROFILE
+                </span>
+
+
+                <h2>
+                    Keep Building.
+                </h2>
+
+
+                <p>
+
+                    Your progress is saved on this
+                    device while you learn.
+
+                </p>
+
+            </div>
+
+
+            <a href="enrollment.html"
+               class="btn btn-secondary">
+
+                Update Profile
+
+            </a>
 
         </div>
 
 
-        <div class="account-title">
 
-            <h1>
-                Welcome to JG
-            </h1>
+        <!-- LEARNING PROGRESS -->
+
+        <div class="section-title">
+
+            <span class="badge">
+                MY LEARNING
+            </span>
+
+
+            <h2>
+                Course Progress
+            </h2>
+
 
             <p>
-                Create your account or login
-                to continue.
+                Continue developing your skills.
             </p>
 
         </div>
 
 
 
-        <!-- TABS -->
-
-        <div class="account-tabs">
-
-            <button
-                id="signupTab"
-                class="active"
-                type="button">
-
-                Create Account
-
-            </button>
+        <div class="dashboard-grid">
 
 
-            <button
-                id="loginTab"
-                type="button">
+            <!-- WEB -->
 
-                Login
+            <article class="dashboard-course">
 
-            </button>
+                <div class="course-icon">
+                    💻
+                </div>
+
+
+                <h3>
+                    Web Development
+                </h3>
+
+
+                <p>
+                    HTML, CSS and JavaScript.
+                </p>
+
+
+                <div class="progress">
+
+                    <span data-progress="web"></span>
+
+                </div>
+
+
+                <strong data-progress-text="web">
+                    0%
+                </strong>
+
+
+                <br><br>
+
+
+                <a href="learn.html#web-development"
+                   class="btn btn-blue">
+
+                    Continue →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- DESIGN -->
+
+            <article class="dashboard-course">
+
+                <div class="course-icon">
+                    🎨
+                </div>
+
+
+                <h3>
+                    Graphic Design
+                </h3>
+
+
+                <p>
+                    Design and visual communication.
+                </p>
+
+
+                <div class="progress">
+
+                    <span data-progress="design"></span>
+
+                </div>
+
+
+                <strong data-progress-text="design">
+                    0%
+                </strong>
+
+
+                <br><br>
+
+
+                <a href="learn.html#graphic-design"
+                   class="btn btn-blue">
+
+                    Continue →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- VIDEO -->
+
+            <article class="dashboard-course">
+
+                <div class="course-icon">
+                    🎬
+                </div>
+
+
+                <h3>
+                    Video Editing
+                </h3>
+
+
+                <p>
+                    Editing and digital content.
+                </p>
+
+
+                <div class="progress">
+
+                    <span data-progress="video"></span>
+
+                </div>
+
+
+                <strong data-progress-text="video">
+                    0%
+                </strong>
+
+
+                <br><br>
+
+
+                <a href="learn.html#video-editing"
+                   class="btn btn-blue">
+
+                    Continue →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- MARKETING -->
+
+            <article class="dashboard-course">
+
+                <div class="course-icon">
+                    📢
+                </div>
+
+
+                <h3>
+                    Digital Marketing
+                </h3>
+
+
+                <p>
+                    Marketing and growth strategy.
+                </p>
+
+
+                <div class="progress">
+
+                    <span data-progress="marketing"></span>
+
+                </div>
+
+
+                <strong data-progress-text="marketing">
+                    0%
+                </strong>
+
+
+                <br><br>
+
+
+                <a href="learn.html#digital-marketing"
+                   class="btn btn-blue">
+
+                    Continue →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- SOCIAL -->
+
+            <article class="dashboard-course">
+
+                <div class="course-icon">
+                    📱
+                </div>
+
+
+                <h3>
+                    Social Media
+                </h3>
+
+
+                <p>
+                    Content and audience growth.
+                </p>
+
+
+                <div class="progress">
+
+                    <span data-progress="social"></span>
+
+                </div>
+
+
+                <strong data-progress-text="social">
+                    0%
+                </strong>
+
+
+                <br><br>
+
+
+                <a href="learn.html#social-media"
+                   class="btn btn-blue">
+
+                    Continue →
+
+                </a>
+
+            </article>
+
+
+
+            <!-- FREELANCE -->
+
+            <article class="dashboard-course">
+
+                <div class="course-icon">
+                    💼
+                </div>
+
+
+                <h3>
+                    Freelancing
+                </h3>
+
+
+                <p>
+                    Services, clients and career.
+                </p>
+
+
+                <div class="progress">
+
+                    <span data-progress="freelance"></span>
+
+                </div>
+
+
+                <strong data-progress-text="freelance">
+                    0%
+                </strong>
+
+
+                <br><br>
+
+
+                <a href="learn.html#freelancing"
+                   class="btn btn-blue">
+
+                    Continue →
+
+                </a>
+
+            </article>
+
 
         </div>
 
 
 
-        <!-- MESSAGE -->
+        <!-- NEXT STEP -->
 
-        <div
-            id="accountMessage"
-            class="account-message">
+        <section class="info-box">
+
+            <span class="badge">
+                YOUR NEXT STEP
+            </span>
+
+
+            <h2>
+                Keep learning and start building.
+            </h2>
+
+
+            <p>
+
+                Choose a course, complete lessons
+                and gradually build projects that
+                demonstrate your skills.
+
+            </p>
+
+
+            <a href="learn.html"
+               class="btn btn-primary">
+
+                Continue Learning →
+
+            </a>
+
+        </section>
+
+
+    </main>
+
+
+
+    <!-- CTA -->
+
+    <section class="cta">
+
+        <h2>
+            Skills become valuable when you use them.
+        </h2>
+
+
+        <p>
+
+            Learn → Practice → Build → Work
+
+        </p>
+
+
+        <a href="work.html"
+           class="btn btn-primary">
+
+            Explore Work →
+
+        </a>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <div>
+
+            <strong>
+                JG<span>.</span>
+            </strong>
+
+
+            <p>
+                Find Skills. Find Work.
+            </p>
 
         </div>
 
 
+        <p>
+            © 2026 JG. All rights reserved.
+        </p>
 
-        <!-- =========================
-             SIGN UP
-        ========================= -->
+    </footer>
 
-        <form
-            id="signupForm"
-            class="account-form active">
 
 
-            <label>
-                Full Name
-            </label>
+    <!-- JAVASCRIPT -->
 
-            <input
-                type="text"
-                id="signupName"
-                placeholder="Your full name"
-                autocomplete="name"
-                required>
-
-
-
-            <label>
-                Email Address
-            </label>
-
-            <input
-                type="email"
-                id="signupEmail"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required>
-
-
-
-            <label>
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="signupPassword"
-                placeholder="Create a password"
-                autocomplete="new-password"
-                minlength="6"
-                required>
-
-
-            <div class="password-note">
-
-                Use at least 6 characters.
-
-            </div>
-
-
-            <button
-                class="account-submit"
-                type="submit">
-
-                Create My Account
-
-            </button>
-
-        </form>
-
-
-
-        <!-- =========================
-             LOGIN
-        ========================= -->
-
-        <form
-            id="loginForm"
-            class="account-form">
-
-
-            <label>
-                Email Address
-            </label>
-
-            <input
-                type="email"
-                id="loginEmail"
-                placeholder="you@example.com"
-                autocomplete="email"
-                required>
-
-
-
-            <label>
-                Password
-            </label>
-
-            <input
-                type="password"
-                id="loginPassword"
-                placeholder="Your password"
-                autocomplete="current-password"
-                required>
-
-
-            <button
-                class="account-submit"
-                type="submit">
-
-                Login to JG
-
-            </button>
-
-        </form>
-
-
-    </div>
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="footer-logo">
-
-        JG<span>.</span>
-
-    </div>
-
-    <p>
-        Find Skills. Find Work.
-    </p>
-
-    <p>
-        © 2026 JG. All rights reserved.
-    </p>
-
-</footer>
-
-
-
-<!-- =========================
-     SUPABASE
-========================= -->
-
-<script
-src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2">
-</script>
-
-
-<script>
-
-/* =====================================================
-   JG SUPABASE ACCOUNT SYSTEM
-===================================================== */
-
-
-/* =========================
-   SUPABASE PROJECT
-========================= */
-
-const SUPABASE_URL =
-"https://klujwtajblqmxlbyzmvf.supabase.co";
-
-
-const SUPABASE_PUBLISHABLE_KEY =
-"sb_publishable_3izSsPLqY3_TR9ouARYjvQ_VBShNEGc";
-
-
-const supabaseClient =
-window.supabase.createClient(
-
-    SUPABASE_URL,
-
-    SUPABASE_PUBLISHABLE_KEY
-
-);
-
-
-
-/* =========================
-   ELEMENTS
-========================= */
-
-const signupTab =
-document.getElementById(
-    "signupTab"
-);
-
-
-const loginTab =
-document.getElementById(
-    "loginTab"
-);
-
-
-const signupForm =
-document.getElementById(
-    "signupForm"
-);
-
-
-const loginForm =
-document.getElementById(
-    "loginForm"
-);
-
-
-const message =
-document.getElementById(
-    "accountMessage"
-);
-
-
-
-/* =========================
-   MESSAGE
-========================= */
-
-function showMessage(
-    text,
-    type
-) {
-
-    message.textContent =
-        text;
-
-    message.className =
-        "account-message " +
-        type;
-
-}
-
-
-
-/* =========================
-   SIGNUP TAB
-========================= */
-
-signupTab.addEventListener(
-    "click",
-    function() {
-
-        signupTab.classList.add(
-            "active"
-        );
-
-        loginTab.classList.remove(
-            "active"
-        );
-
-        signupForm.classList.add(
-            "active"
-        );
-
-        loginForm.classList.remove(
-            "active"
-        );
-
-        message.className =
-            "account-message";
-
-    }
-);
-
-
-
-/* =========================
-   LOGIN TAB
-========================= */
-
-loginTab.addEventListener(
-    "click",
-    function() {
-
-        loginTab.classList.add(
-            "active"
-        );
-
-        signupTab.classList.remove(
-            "active"
-        );
-
-        loginForm.classList.add(
-            "active"
-        );
-
-        signupForm.classList.remove(
-            "active"
-        );
-
-        message.className =
-            "account-message";
-
-    }
-);
-
-
-
-/* =====================================================
-   CREATE ACCOUNT
-===================================================== */
-
-signupForm.addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-
-        const name =
-            document
-            .getElementById(
-                "signupName"
-            )
-            .value
-            .trim();
-
-
-        const email =
-            document
-            .getElementById(
-                "signupEmail"
-            )
-            .value
-            .trim();
-
-
-        const password =
-            document
-            .getElementById(
-                "signupPassword"
-            )
-            .value;
-
-
-        if (
-            !name ||
-            !email ||
-            !password
-        ) {
-
-            showMessage(
-                "Please complete all fields.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        if (
-            password.length < 6
-        ) {
-
-            showMessage(
-                "Password must contain at least 6 characters.",
-                "error"
-            );
-
-            return;
-
-        }
-
-
-        const button =
-            signupForm.querySelector(
-                "button"
-            );
-
-
-        button.disabled =
-            true;
-
-
-        button.textContent =
-            "Creating account...";
-
-
-        try {
-
-
-            const {
-                data,
-                error
-            } =
-            await supabaseClient
-            .auth
-            .signUp({
-
-                email:
-                    email,
-
-                password:
-                    password,
-
-                options: {
-
-                    data: {
-
-                        full_name:
-                            name
-
-                    },
-
-                    emailRedirectTo:
-                        window.location.origin +
-                        "/jg/account.html"
-
-                }
-
-            });
-
-
-            if (error) {
-
-                throw error;
-
-            }
-
-
-            if (
-                data.user &&
-                !data.session
-            ) {
-
-                showMessage(
-                    "Account created! Please check your email to verify your account before logging in.",
-                    "success"
-                );
-
-            } else {
-
-                showMessage(
-                    "Account created successfully! You can now use JG.",
-                    "success"
-                );
-
-            }
-
-
-            signupForm.reset();
-
-
-        } catch(error) {
-
-            console.error(
-                "JG SIGNUP ERROR:",
-                error
-            );
-
-
-            showMessage(
-                error.message ||
-                "Unable to create your account.",
-                "error"
-            );
-
-
-        } finally {
-
-            button.disabled =
-                false;
-
-            button.textContent =
-                "Create My Account";
-
-        }
-
-    }
-);
-
-
-
-/* =====================================================
-   LOGIN
-===================================================== */
-
-loginForm.addEventListener(
-    "submit",
-    async function(event) {
-
-        event.preventDefault();
-
-
-        const email =
-            document
-            .getElementById(
-                "loginEmail"
-            )
-            .value
-            .trim();
-
-
-        const password =
-            document
-            .getElementById(
-                "loginPassword"
-            )
-            .value;
-
-
-        const button =
-            loginForm.querySelector(
-                "button"
-            );
-
-
-        button.disabled =
-            true;
-
-
-        button.textContent =
-            "Logging in...";
-
-
-        try {
-
-
-            const {
-                data,
-                error
-            } =
-            await supabaseClient
-            .auth
-            .signInWithPassword({
-
-                email:
-                    email,
-
-                password:
-                    password
-
-            });
-
-
-            if (error) {
-
-                throw error;
-
-            }
-
-
-            showMessage(
-                "Login successful! Welcome back to JG.",
-                "success"
-            );
-
-
-            setTimeout(
-                function() {
-
-                    window.location.href =
-                        "index.html";
-
-                },
-                1000
-            );
-
-
-        } catch(error) {
-
-            console.error(
-                "JG LOGIN ERROR:",
-                error
-            );
-
-
-            showMessage(
-                error.message ||
-                "Unable to login.",
-                "error"
-            );
-
-
-        } finally {
-
-            button.disabled =
-                false;
-
-            button.textContent =
-                "Login to JG";
-
-        }
-
-    }
-);
-
-</script>
-
-
-<!-- JG CHATBOT -->
-
-<script src="chatbot.js"></script>
-
+    <script src="js/app.js"></script>
 
 </body>
 
