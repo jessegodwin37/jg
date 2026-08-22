@@ -1,882 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Learn | JG</title>
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f7fb;
-            color: #111827;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-        }
-
-        /* NAVBAR */
-
-        nav {
-            background: #07111f;
-            padding: 18px 7%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
-
-        .logo {
-            color: white;
-            font-size: 28px;
-            font-weight: 900;
-        }
-
-        .logo span {
-            color: #2563eb;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 25px;
-            align-items: center;
-        }
-
-        .nav-links a {
-            color: #dbeafe;
-            font-size: 14px;
-            font-weight: bold;
-        }
-
-        .nav-links a:hover {
-            color: #60a5fa;
-        }
-
-        .contact-btn {
-            background: #2563eb;
-            padding: 10px 16px;
-            border-radius: 7px;
-            color: white !important;
-        }
-
-        /* HERO */
-
-        .hero {
-            background: linear-gradient(135deg, #07111f, #172554);
-            color: white;
-            padding: 90px 7%;
-        }
-
-        .hero-content {
-            max-width: 850px;
-        }
-
-        .tag {
-            display: inline-block;
-            color: #93c5fd;
-            border: 1px solid #334155;
-            background: rgba(37, 99, 235, 0.15);
-            padding: 7px 14px;
-            border-radius: 30px;
-            font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 {
-            font-size: 60px;
-            line-height: 1.05;
-            margin-bottom: 20px;
-        }
-
-        .hero h1 span {
-            color: #60a5fa;
-        }
-
-        .hero p {
-            color: #cbd5e1;
-            font-size: 18px;
-            max-width: 680px;
-            margin-bottom: 30px;
-        }
-
-        .hero-button {
-            display: inline-block;
-            background: #2563eb;
-            color: white;
-            padding: 14px 24px;
-            border-radius: 8px;
-            font-weight: bold;
-        }
-
-        .hero-button:hover {
-            background: #1d4ed8;
-        }
-
-        /* STATS */
-
-        .stats {
-            max-width: 1100px;
-            margin: -35px auto 0;
-            padding: 0 20px;
-            position: relative;
-        }
-
-        .stats-box {
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            overflow: hidden;
-        }
-
-        .stat {
-            text-align: center;
-            padding: 28px;
-            border-right: 1px solid #e5e7eb;
-        }
-
-        .stat:last-child {
-            border-right: none;
-        }
-
-        .stat h2 {
-            color: #2563eb;
-            font-size: 30px;
-        }
-
-        .stat p {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        /* SECTION */
-
-        .section {
-            padding: 80px 7%;
-        }
-
-        .section-title {
-            max-width: 700px;
-            margin-bottom: 40px;
-        }
-
-        .section-title small {
-            color: #2563eb;
-            font-weight: bold;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .section-title h2 {
-            font-size: 40px;
-            margin: 10px 0;
-        }
-
-        .section-title p {
-            color: #64748b;
-        }
-
-        /* COURSE GRID */
-
-        .courses {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 25px;
-        }
-
-        .course {
-            background: white;
-            border: 1px solid #e5e7eb;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: 0.3s;
-        }
-
-        .course:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-        }
-
-        .course-top {
-            background: #eff6ff;
-            padding: 30px;
-        }
-
-        .icon {
-            width: 55px;
-            height: 55px;
-            background: #2563eb;
-            color: white;
-            border-radius: 12px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            font-weight: bold;
-            margin-bottom: 18px;
-        }
-
-        .course h3 {
-            font-size: 23px;
-            margin-bottom: 8px;
-        }
-
-        .course-description {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        .course-content {
-            padding: 25px 30px 30px;
-        }
-
-        .details {
-            display: flex;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-
-        .detail {
-            background: #f1f5f9;
-            color: #475569;
-            padding: 6px 9px;
-            border-radius: 6px;
-            font-size: 12px;
-            font-weight: bold;
-        }
-
-        .course-content h4 {
-            margin-bottom: 10px;
-        }
-
-        .course-content ul {
-            list-style: none;
-            margin-bottom: 20px;
-        }
-
-        .course-content li {
-            color: #64748b;
-            font-size: 13px;
-            margin-bottom: 7px;
-        }
-
-        .course-content li::before {
-            content: "✓";
-            color: #2563eb;
-            font-weight: bold;
-            margin-right: 8px;
-        }
-
-        .price-area {
-            border-top: 1px solid #e5e7eb;
-            padding-top: 18px;
-        }
-
-        .price-label {
-            color: #64748b;
-            font-size: 12px;
-        }
-
-        .price {
-            font-size: 30px;
-            font-weight: 900;
-            margin: 3px 0 15px;
-        }
-
-        .enroll {
-            display: block;
-            width: 100%;
-            background: #2563eb;
-            color: white;
-            border: none;
-            padding: 13px;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .enroll:hover {
-            background: #1d4ed8;
-        }
-
-        /* HOW IT WORKS */
-
-        .how {
-            background: white;
-        }
-
-        .steps {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-        }
-
-        .step {
-            border: 1px solid #e5e7eb;
-            border-radius: 12px;
-            padding: 25px;
-        }
-
-        .step-number {
-            width: 42px;
-            height: 42px;
-            background: #eff6ff;
-            color: #2563eb;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-
-        .step h3 {
-            margin-bottom: 8px;
-        }
-
-        .step p {
-            color: #64748b;
-            font-size: 14px;
-        }
-
-        /* CTA */
-
-        .cta {
-            background: #07111f;
-            color: white;
-            text-align: center;
-            padding: 80px 7%;
-        }
-
-        .cta h2 {
-            font-size: 40px;
-            margin-bottom: 15px;
-        }
-
-        .cta p {
-            color: #cbd5e1;
-            max-width: 650px;
-            margin: 0 auto 25px;
-        }
-
-        /* FOOTER */
-
-        footer {
-            background: #040912;
-            color: #94a3b8;
-            padding: 45px 7% 20px;
-        }
-
-        .footer-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 40px;
-        }
-
-        footer h3 {
-            color: white;
-            margin-bottom: 15px;
-        }
-
-        footer p {
-            font-size: 14px;
-        }
-
-        footer a {
-            display: block;
-            color: #94a3b8;
-            font-size: 14px;
-            margin-bottom: 8px;
-        }
-
-        footer a:hover {
-            color: #60a5fa;
-        }
-
-        .copyright {
-            border-top: 1px solid #1e293b;
-            margin-top: 35px;
-            padding-top: 20px;
-            font-size: 12px;
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 900px) {
-
-            .courses {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .steps {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            nav {
-                padding: 15px 5%;
-            }
-
-            .nav-links {
-                gap: 10px;
-            }
-
-            .nav-links a:nth-child(1),
-            .nav-links a:nth-child(2) {
-                display: none;
-            }
-
-            .hero {
-                padding: 70px 5%;
-            }
-
-            .hero h1 {
-                font-size: 43px;
-            }
-
-            .hero p {
-                font-size: 16px;
-            }
-
-            .section {
-                padding: 60px 5%;
-            }
-
-            .stats-box {
-                grid-template-columns: 1fr;
-            }
-
-            .stat {
-                border-right: none;
-                border-bottom: 1px solid #e5e7eb;
-            }
-
-            .stat:last-child {
-                border-bottom: none;
-            }
-
-            .courses,
-            .steps,
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .section-title h2 {
-                font-size: 30px;
-            }
-
-            .cta h2 {
-                font-size: 32px;
-            }
-        }
-    </style>
+
+<meta charset="UTF-8">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
+
+<title>JG | Find Work</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#111827;
+}
+
+nav{
+    background:#07111f;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:900;
+}
+
+.logo span{
+    color:#2563eb;
+}
+
+nav a{
+    color:#cbd5e1;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
+}
+
+.hero{
+    background:linear-gradient(135deg,#07111f,#172554);
+    color:white;
+    padding:75px 7%;
+}
+
+.hero h1{
+    font-size:50px;
+    margin-bottom:12px;
+}
+
+.hero p{
+    color:#cbd5e1;
+    max-width:650px;
+}
+
+.section{
+    padding:70px 7%;
+}
+
+.work-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
+}
+
+.work-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:30px;
+}
+
+.work-card h3{
+    margin-bottom:10px;
+}
+
+.work-card p{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:20px;
+}
+
+.tag{
+    display:inline-block;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
+}
+
+@media(max-width:800px){
+
+    .work-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
+}
+
+@media(max-width:600px){
+
+    .work-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
+}
+
+</style>
+
 </head>
 
 <body>
 
-    <!-- NAVIGATION -->
 
-    <nav>
+<nav>
 
-        <div class="logo">
-            J<span>G</span>
-        </div>
+<div class="logo">
+JG<span>.</span>
+</div>
 
-        <div class="nav-links">
+<div>
 
-            <a href="index.html">Home</a>
+<a href="index.html">
+Home
+</a>
 
-            <a href="skills.html">Skills</a>
+<a href="skills.html">
+Skills
+</a>
 
-            <a href="learn.html">Learn</a>
+<a href="learn.html">
+Learn
+</a>
 
-            <a href="work.html">Work</a>
+<a href="enrollment.html">
+Enroll
+</a>
 
-            <a
-                href="https://wa.me/2349070707689"
-                class="contact-btn">
-                Contact
-            </a>
+</div>
 
-        </div>
+</nav>
 
-    </nav>
 
+<section class="hero">
 
-    <!-- HERO -->
+<h1>
+Find Work
+</h1>
 
-    <section class="hero">
+<p>
+Turn your skills into experience, projects
+and opportunities.
+</p>
 
-        <div class="hero-content">
+</section>
 
-            <div class="tag">
-                JG LEARNING PLATFORM
-            </div>
 
-            <h1>
-                Learn skills.
-                <span>Build your future.</span>
-            </h1>
+<section class="section">
 
-            <p>
-                Learn practical digital skills from beginner
-                level, work on real projects and develop skills
-                you can use in the real world.
-            </p>
+<div class="work-grid">
 
-            <a href="#courses" class="hero-button">
-                Browse Courses
-            </a>
 
-        </div>
+<div class="work-card">
 
-    </section>
+<span class="tag">
+FREELANCE
+</span>
 
+<h3>
+Freelance Projects
+</h3>
 
-    <!-- STATS -->
+<p>
+Use your skills to work on projects for
+individuals and businesses.
+</p>
 
-    <div class="stats">
+</div>
 
-        <div class="stats-box">
 
-            <div class="stat">
-                <h2>6+</h2>
-                <p>Courses</p>
-            </div>
+<div class="work-card">
 
-            <div class="stat">
-                <h2>50+</h2>
-                <p>Lessons</p>
-            </div>
+<span class="tag">
+PORTFOLIO
+</span>
 
-            <div class="stat">
-                <h2>100%</h2>
-                <p>Practical Learning</p>
-            </div>
+<h3>
+Build Your Portfolio
+</h3>
 
-        </div>
+<p>
+Create projects that show potential clients
+and employers what you can do.
+</p>
 
-    </div>
+</div>
 
 
-    <!-- COURSES -->
+<div class="work-card">
 
-    <section class="section" id="courses">
+<span class="tag">
+REMOTE
+</span>
 
-        <div class="section-title">
+<h3>
+Remote Opportunities
+</h3>
 
-            <small>Our Courses</small>
+<p>
+Build digital skills that can be used from
+almost anywhere.
+</p>
 
-            <h2>
-                Choose a skill to learn
-            </h2>
+</div>
 
-            <p>
-                Select the course that matches your goals.
-                The price, lessons and skills included are
-                clearly shown before you enroll.
-            </p>
 
-        </div>
+<div class="work-card">
 
+<span class="tag">
+BUSINESS
+</span>
 
-        <div class="courses">
+<h3>
+Help Businesses
+</h3>
 
+<p>
+Use design, marketing, development or
+editing skills to help businesses grow.
+</p>
 
-            <!-- WEB DEVELOPMENT -->
+</div>
 
-            <div class="course">
 
-                <div class="course-top">
+<div class="work-card">
 
-                    <div class="icon">
-                        &lt;/&gt;
-                    </div>
+<span class="tag">
+CREATOR
+</span>
 
-                    <h3>
-                        Web Development
-                    </h3>
+<h3>
+Become a Creator
+</h3>
 
-                    <p class="course-description">
-                        Learn how to build modern websites
-                        from scratch.
-                    </p>
+<p>
+Create useful digital content and develop
+your personal brand.
+</p>
 
-                </div>
+</div>
 
-                <div class="course-content">
 
-                    <div class="details">
-                        <span class="detail">Beginner</span>
-                        <span class="detail">12 Lessons</span>
-                        <span class="detail">4 Weeks</span>
-                    </div>
+<div class="work-card">
 
-                    <h4>
-                        You will learn:
-                    </h4>
+<span class="tag">
+GROWTH
+</span>
 
-                    <ul>
-                        <li>HTML</li>
-                        <li>CSS</li>
-                        <li>Responsive Design</li>
-                        <li>JavaScript Basics</li>
-                        <li>Website Publishing</li>
-                    </ul>
+<h3>
+Keep Improving
+</h3>
 
-                    <div class="price-area">
+<p>
+The more valuable your skills become,
+the more opportunities you can pursue.
+</p>
 
-                        <div class="price-label">
-                            Course Price
-                        </div>
+</div>
 
-                        <div class="price">
-                            ₦25,000
-                        </div>
 
-                        <button
-                            class="enroll"
-                            onclick="enroll('Web Development','₦25,000')">
-                            Enroll Now
-                        </button>
+</div>
 
-                    </div>
+</section>
 
-                </div>
 
-            </div>
+<script src="chatbot.js"></script>
 
+</body>
 
-            <!-- GRAPHIC DESIGN -->
-
-            <div class="course">
-
-                <div class="course-top">
-
-                    <div class="icon">
-                        GD
-                    </div>
-
-                    <h3>
-                        Graphic Design
-                    </h3>
-
-                    <p class="course-description">
-                        Learn to create professional graphics
-                        and visual content.
-                    </p>
-
-                </div>
-
-                <div class="course-content">
-
-                    <div class="details">
-                        <span class="detail">Beginner</span>
-                        <span class="detail">10 Lessons</span>
-                        <span class="detail">3 Weeks</span>
-                    </div>
-
-                    <h4>
-                        You will learn:
-                    </h4>
-
-                    <ul>
-                        <li>Design Principles</li>
-                        <li>Canva</li>
-                        <li>Flyer Design</li>
-                        <li>Social Media Design</li>
-                        <li>Branding Basics</li>
-                    </ul>
-
-                    <div class="price-area">
-
-                        <div class="price-label">
-                            Course Price
-                        </div>
-
-                        <div class="price">
-                            ₦15,000
-                        </div>
-
-                        <button
-                            class="enroll"
-                            onclick="enroll('Graphic Design','₦15,000')">
-                            Enroll Now
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- VIDEO EDITING -->
-
-            <div class="course">
-
-                <div class="course-top">
-
-                    <div class="icon">
-                        VE
-                    </div>
-
-                    <h3>
-                        Video Editing
-                    </h3>
-
-                    <p class="course-description">
-                        Learn how to edit engaging videos
-                        for social media and businesses.
-                    </p>
-
-                </div>
-
-                <div class="course-content">
-
-                    <div class="details">
-                        <span class="detail">Beginner</span>
-                        <span class="detail">9 Lessons</span>
-                        <span class="detail">3 Weeks</span>
-                    </div>
-
-                    <h4>
-                        You will learn:
-                    </h4>
-
-                    <ul>
-                        <li>Video Editing Basics</li>
-                        <li>CapCut</li>
-                        <li>Transitions</li>
-                        <li>Captions</li>
-                        <li>Social Media Videos</li>
-                    </ul>
-
-                    <div class="price-area">
-
-                        <div class="price-label">
-                            Course Price
-                        </div>
-
-                        <div class="price">
-                            ₦15,000
-                        </div>
-
-                        <button
-                            class="enroll"
-                            onclick="enroll('Video Editing','₦15,000')">
-                            Enroll Now
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- PYTHON -->
-
-            <div class="course">
-
-                <div class="course-top">
-
-                    <div class="icon">
-                        PY
-                    </div>
-
-                    <h3>
-                        Python Programming
-                    </h3>
-
-                    <p class="course-description">
-                        Learn programming fundamentals with
-                        Python and build beginner projects.
-                    </p>
-
-                </div>
-
-                <div class="course-content">
-
-                    <div class="details">
-                        <span class="detail">Beginner</span>
-                        <span class="detail">15 Lessons</span>
-                        <span class="detail">5 Weeks</span>
-                    </div>
-
-                    <h4>
-                        You will learn:
-                    </h4>
-
-                    <ul>
-                        <li>Python Basics</li>
-                        <li>Variables</li>
-                        <li>Conditions</li>
-                        <li>Loops</li>
-                        <li>Functions</li>
-                    </ul>
-
-                    <div class="price-area">
-
-                        <div class="price-label">
-                            Course Price
-                        </div>
-
-                        <div class="price">
-                            ₦25,000
-                        </div>
-
-                        <button
-                            class="enroll"
-                            onclick="enroll('Python Programming','₦25,000')">
-                            Enroll Now
-                        </button>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- DIGITAL MARKETING -->
-
-            <div class="course">
-
-                <div class="course-top">
-
-                    <div class="icon">
-                        DM
-                    </div>
-
-                    <h3>
-                        Digital Marketing
-                    </h3>
-
-                    <p class="course-description">
-                        Learn how businesses use digital platforms
-                        to reach customers.
-                    </p>
-
-                </div>
-
-                <div class="course-content">
-
-                    <div class="details">
-                        <span class="
+</html>
