@@ -1,0 +1,541 @@
+/* =========================================
+   JG - GLOBAL STYLES
+   Find Skills. Find Work.
+========================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f6f8fc;
+    color: #111827;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+/* =========================================
+   NAVIGATION
+========================================= */
+
+.navbar {
+    background: #0b1120;
+    color: white;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo {
+    color: #38bdf8;
+    font-size: 28px;
+    font-weight: 900;
+    letter-spacing: 1px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 28px;
+    list-style: none;
+}
+
+.nav-links a {
+    color: white;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+    color: #38bdf8;
+}
+
+/* Mobile menu */
+
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 28px;
+    cursor: pointer;
+}
+
+/* =========================================
+   HERO
+========================================= */
+
+.hero {
+    min-height: 75vh;
+    padding: 80px 7%;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(
+        135deg,
+        #0b1120,
+        #172554,
+        #1d4ed8
+    );
+    color: white;
+}
+
+.hero-content {
+    max-width: 760px;
+}
+
+.badge {
+    display: inline-block;
+    padding: 8px 14px;
+    border-radius: 30px;
+    margin-bottom: 20px;
+    background: rgba(56, 189, 248, 0.15);
+    border: 1px solid rgba(56, 189, 248, 0.4);
+    color: #7dd3fc;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.hero h1 {
+    font-size: 60px;
+    line-height: 1.05;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: #38bdf8;
+}
+
+.hero p {
+    max-width: 680px;
+    margin-bottom: 35px;
+    color: #dbeafe;
+    font-size: 20px;
+}
+
+/* =========================================
+   BUTTONS
+========================================= */
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    display: inline-block;
+    padding: 14px 24px;
+    border-radius: 9px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    transform: translateY(-3px);
+}
+
+.btn-primary {
+    background: #38bdf8;
+    color: #082f49;
+}
+
+.btn-secondary {
+    border: 2px solid white;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: white;
+    color: #111827;
+}
+
+.btn-blue {
+    background: #2563eb;
+    color: white;
+}
+
+.btn-blue:hover {
+    background: #1d4ed8;
+}
+
+/* =========================================
+   STATS
+========================================= */
+
+.stats {
+    padding: 35px 7%;
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    text-align: center;
+}
+
+.stat h2 {
+    color: #2563eb;
+    font-size: 32px;
+}
+
+.stat p {
+    color: #6b7280;
+}
+
+/* =========================================
+   SECTIONS
+========================================= */
+
+.section {
+    padding: 80px 7%;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.section-title h2 {
+    font-size: 38px;
+    margin-bottom: 10px;
+}
+
+.section-title p {
+    color: #6b7280;
+}
+
+/* =========================================
+   CARDS
+========================================= */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.card {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+}
+
+.card-icon {
+    font-size: 42px;
+    margin-bottom: 15px;
+}
+
+.card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.card p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.card-link {
+    color: #2563eb;
+    font-weight: bold;
+}
+
+/* =========================================
+   PAGE HERO
+========================================= */
+
+.page-hero {
+    padding: 80px 7%;
+    text-align: center;
+    background: linear-gradient(
+        135deg,
+        #0b1120,
+        #1e3a8a
+    );
+    color: white;
+}
+
+.page-hero h1 {
+    font-size: 50px;
+    margin-bottom: 15px;
+}
+
+.page-hero h1 span {
+    color: #38bdf8;
+}
+
+.page-hero p {
+    max-width: 680px;
+    margin: auto;
+    color: #dbeafe;
+    font-size: 18px;
+}
+
+/* =========================================
+   SKILLS
+========================================= */
+
+.skill-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.skill-card {
+    background: white;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    transition: 0.3s;
+}
+
+.skill-card:hover {
+    transform: translateY(-8px);
+}
+
+.skill-icon {
+    font-size: 45px;
+    margin-bottom: 15px;
+}
+
+.skill-card h3 {
+    font-size: 22px;
+    margin-bottom: 12px;
+}
+
+.skill-card p {
+    color: #6b7280;
+    margin-bottom: 22px;
+}
+
+/* =========================================
+   WORK / JOBS
+========================================= */
+
+.job-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px;
+}
+
+.job-card {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+    transition: 0.3s;
+}
+
+.job-card:hover {
+    transform: translateY(-6px);
+}
+
+.job-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-bottom: 18px;
+}
+
+.job-card h3 {
+    font-size: 22px;
+}
+
+.tag {
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 6px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: bold;
+    height: fit-content;
+}
+
+.job-card p {
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.job-details {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+    color: #4b5563;
+    font-size: 14px;
+}
+
+/* =========================================
+   INFO BOX
+========================================= */
+
+.info-box {
+    margin-top: 45px;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.info-box h2 {
+    margin-bottom: 10px;
+}
+
+.info-box p {
+    color: #4b5563;
+}
+
+/* =========================================
+   CTA
+========================================= */
+
+.cta {
+    margin: 0 7% 80px;
+    padding: 70px 30px;
+    border-radius: 20px;
+    text-align: center;
+    background: #111827;
+    color: white;
+}
+
+.cta h2 {
+    font-size: 38px;
+    margin-bottom: 15px;
+}
+
+.cta p {
+    color: #d1d5db;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: #070b14;
+    color: #9ca3af;
+    text-align: center;
+    padding: 35px 20px;
+}
+
+footer strong {
+    color: #38bdf8;
+}
+
+/* =========================================
+   MOBILE RESPONSIVE DESIGN
+========================================= */
+
+@media (max-width: 800px) {
+
+    .navbar {
+        padding: 16px 5%;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: #0b1120;
+        flex-direction: column;
+        gap: 0;
+        padding: 10px 0 20px;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .nav-links a {
+        display: block;
+        padding: 12px;
+    }
+
+    .hero {
+        min-height: 70vh;
+        padding: 70px 5%;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+    }
+
+    .hero p {
+        font-size: 17px;
+    }
+
+    .page-hero {
+        padding: 65px 5%;
+    }
+
+    .page-hero h1 {
+        font-size: 38px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .cards,
+    .skill-grid,
+    .job-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .section {
+        padding: 60px 5%;
+    }
+
+    .section-title h2 {
+        font-size: 30px;
+    }
+
+    .cta {
+        margin: 0 5% 60px;
+        padding: 55px 20px;
+    }
+
+    .cta h2 {
+        font-size: 30px;
+    }
+
+    .job-top {
+        flex-direction: column;
+    }
+}
