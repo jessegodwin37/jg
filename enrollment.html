@@ -10,302 +10,42 @@ content="width=device-width, initial-scale=1.0">
 
 <title>JG | Enrollment</title>
 
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#f5f7fb;
-    color:#111827;
-}
-
-nav{
-    background:#07111f;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#2563eb;
-}
-
-nav a{
-    color:#cbd5e1;
-    text-decoration:none;
-    margin-left:20px;
-}
-
-.container{
-    max-width:850px;
-    margin:60px auto;
-    padding:0 20px;
-}
-
-.box{
-    background:white;
-    padding:35px;
-    border-radius:18px;
-    box-shadow:0 15px 45px rgba(0,0,0,.08);
-}
-
-.header{
-    text-align:center;
-    margin-bottom:30px;
-}
-
-.header h1{
-    font-size:38px;
-    margin-bottom:8px;
-}
-
-.header p{
-    color:#64748b;
-}
-
-.course-box{
-    background:#eff6ff;
-    border:1px solid #bfdbfe;
-    padding:20px;
-    border-radius:12px;
-    margin-bottom:25px;
-}
-
-label{
-    display:block;
-    font-weight:bold;
-    margin-bottom:7px;
-}
-
-input,
-select{
-    width:100%;
-    padding:14px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    font-size:15px;
-    outline:none;
-}
-
-input:focus,
-select:focus{
-    border-color:#2563eb;
-}
-
-.price{
-    font-size:30px;
-    font-weight:900;
-    color:#2563eb;
-    margin-top:15px;
-}
-
-.form-group{
-    margin-bottom:18px;
-}
-
-.payment-title{
-    margin:28px 0 15px;
-}
-
-.payment-options{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:15px;
-}
-
-.payment-option{
-    border:2px solid #e5e7eb;
-    border-radius:12px;
-    padding:20px;
-    text-align:center;
-    cursor:pointer;
-}
-
-.payment-option.active{
-    border-color:#2563eb;
-    background:#eff6ff;
-}
-
-.payment-option input{
-    display:none;
-}
-
-.payment-icon{
-    font-size:30px;
-    margin-bottom:8px;
-}
-
-.payment-option strong{
-    display:block;
-}
-
-.payment-option small{
-    color:#64748b;
-}
-
-.payment-details{
-    display:none;
-    background:#f8fafc;
-    border:1px solid #e2e8f0;
-    padding:22px;
-    border-radius:12px;
-    margin-top:20px;
-}
-
-.payment-details.active{
-    display:block;
-}
-
-.account-box{
-    background:white;
-    border:1px solid #dbeafe;
-    padding:18px;
-    border-radius:10px;
-    margin-top:15px;
-}
-
-.account-row{
-    padding:12px 0;
-    border-bottom:1px solid #e5e7eb;
-}
-
-.account-row:last-child{
-    border-bottom:none;
-}
-
-.account-label{
-    color:#64748b;
-    font-size:13px;
-    display:block;
-}
-
-.account-value{
-    font-weight:bold;
-}
-
-.copy-btn{
-    border:none;
-    background:#2563eb;
-    color:white;
-    padding:6px 9px;
-    border-radius:6px;
-    cursor:pointer;
-    margin-left:5px;
-}
-
-.notice{
-    margin-top:15px;
-    background:#fff7ed;
-    border:1px solid #fed7aa;
-    color:#9a3412;
-    padding:14px;
-    border-radius:8px;
-    font-size:13px;
-}
-
-.confirm{
-    margin-top:25px;
-    padding:18px;
-    background:#f8fafc;
-    border-radius:10px;
-}
-
-.confirm label{
-    display:flex;
-    gap:10px;
-    align-items:flex-start;
-    font-weight:normal;
-}
-
-.confirm input{
-    width:auto;
-    margin-top:4px;
-}
-
-.submit-btn{
-    width:100%;
-    border:none;
-    background:#2563eb;
-    color:white;
-    padding:16px;
-    border-radius:9px;
-    font-size:16px;
-    font-weight:900;
-    cursor:pointer;
-    margin-top:25px;
-}
-
-.submit-btn:disabled{
-    opacity:.6;
-    cursor:not-allowed;
-}
-
-.success{
-    display:none;
-    margin-top:20px;
-    background:#f0fdf4;
-    border:1px solid #bbf7d0;
-    color:#166534;
-    padding:20px;
-    border-radius:10px;
-}
-
-footer{
-    background:#07111f;
-    color:#94a3b8;
-    text-align:center;
-    padding:30px;
-}
-
-@media(max-width:600px){
-
-    .box{
-        padding:22px;
-    }
-
-    .payment-options{
-        grid-template-columns:1fr;
-    }
-
-    .header h1{
-        font-size:30px;
-    }
-
-}
-
-</style>
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
 
-<nav>
+<nav class="navbar">
 
-<div class="logo">
+<a href="index.html"
+class="logo">
 JG<span>.</span>
-</div>
+</a>
 
-<div>
+<div class="nav-links">
 
 <a href="index.html">
 Home
 </a>
 
+<a href="skills.html">
+Skills
+</a>
+
 <a href="learn.html">
 Learn
+</a>
+
+<a href="work.html">
+Work
+</a>
+
+<a href="enrollment.html"
+class="nav-cta">
+Enroll
 </a>
 
 </div>
@@ -313,33 +53,123 @@ Learn
 </nav>
 
 
-<div class="container">
 
-<div class="box">
+<section class="hero">
 
-<div class="header">
+<div class="hero-content">
+
+<div class="badge">
+JG ENROLLMENT
+</div>
 
 <h1>
-Complete Enrollment
+
+Start Your
+<span>Journey.</span>
+
 </h1>
 
 <p>
-Choose your course and complete payment.
+
+Complete your details, select your
+payment method and submit your enrollment.
+
+</p>
+
+</div>
+
+</section>
+
+
+
+<div class="container">
+
+<div class="enrollment-card">
+
+<div class="enrollment-content">
+
+
+<div class="section-header"
+style="margin-bottom:30px;">
+
+<div class="badge">
+STEP 1
+</div>
+
+<h2>
+Your Details
+</h2>
+
+<p>
+Please provide accurate information.
 </p>
 
 </div>
 
 
-<div class="course-box">
+
+<form id="enrollmentForm">
+
+
+<div class="form-grid">
+
+
+<div class="form-group">
 
 <label>
-Select Course
+Full Name
 </label>
 
-<select id="course">
+<input
+type="text"
+id="name"
+required
+placeholder="Your full name">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Email Address
+</label>
+
+<input
+type="email"
+id="email"
+required
+placeholder="you@example.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Phone Number
+</label>
+
+<input
+type="tel"
+id="phone"
+required
+placeholder="08012345678">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Choose Course
+</label>
+
+<select id="course"
+required>
 
 <option value="">
--- Select Course --
+Select a course
 </option>
 
 <option value="Web Development|25000">
@@ -368,410 +198,253 @@ Career Skills — ₦10,000
 
 </select>
 
-<div class="price" id="price">
-₦0
 </div>
 
-</div>
-
-
-<div class="form-group">
-
-<label>
-Full Name
-</label>
-
-<input
-id="name"
-type="text"
-placeholder="Enter your full name">
 
 </div>
 
 
-<div class="form-group">
 
-<label>
-Email Address
-</label>
-
-<input
-id="email"
-type="email"
-placeholder="Enter your email">
-
-</div>
-
-
-<div class="form-group">
-
-<label>
-Phone Number
-</label>
-
-<input
-id="phone"
-type="tel"
-placeholder="08012345678">
-
-</div>
-
-
-<h3 class="payment-title">
-Choose Payment Method
-</h3>
-
-
-<div class="payment-options">
-
-
-<label
-class="payment-option"
-id="opayOption"
-onclick="selectPayment('OPay')">
-
-<input
-type="radio"
-name="payment"
-value="OPay">
-
-<div class="payment-icon">
-📱
-</div>
-
-<strong>
-OPay
-</strong>
-
-<small>
-Pay with OPay
-</small>
-
-</label>
-
-
-<label
-class="payment-option"
-id="bankOption"
-onclick="selectPayment('Bank Transfer')">
-
-<input
-type="radio"
-name="payment"
-value="Bank Transfer">
-
-<div class="payment-icon">
-🏦
-</div>
-
-<strong>
-Bank Transfer
-</strong>
-
-<small>
-Transfer to our account
-</small>
-
-</label>
-
-</div>
-
-
-<div
-class="payment-details"
-id="paymentDetails">
+<div class="payment-box">
 
 <h3>
-Payment Details
+Payment Information
 </h3>
 
 <p>
-Send the exact amount below:
+Make your payment using the account below.
 </p>
 
 
-<div class="account-box">
-
-
 <div class="account-row">
 
-<span class="account-label">
-Bank
+<span>
+Bank / Platform
 </span>
 
-<span class="account-value">
+<strong>
 OPay
-</span>
+</strong>
 
 </div>
 
 
 <div class="account-row">
 
-<span class="account-label">
+<span>
 Account Name
 </span>
 
-<span class="account-value">
+<strong>
 JESSE EYITEMI ANOMUOGHARAN
-</span>
+</strong>
 
 </div>
 
 
 <div class="account-row">
 
-<span class="account-label">
+<span>
 Account Number
 </span>
 
-<span class="account-value">
-
+<strong>
 6493501689
-
-<button
-class="copy-btn"
-onclick="copyAccount()">
-
-Copy
-
-</button>
-
-</span>
+</strong>
 
 </div>
 
 
 <div class="account-row">
 
-<span class="account-label">
-Amount
+<span>
+Course Amount
 </span>
 
-<span
-class="account-value"
-id="paymentAmount">
-
+<strong id="amount">
 ₦0
-
-</span>
-
-</div>
+</strong>
 
 </div>
 
 
-<div class="notice">
-
-After payment, keep your transaction receipt.
-Your payment will be verified before course
-access is granted.
-
-</div>
-
 </div>
 
 
-<div class="confirm">
 
-<label>
+<div style="
+margin-top:25px;
+display:flex;
+align-items:flex-start;
+gap:10px;
+">
 
 <input
 type="checkbox"
-id="paymentConfirm">
+id="confirmed"
+required
+style="
+width:18px;
+height:18px;
+margin-top:3px;
+accent-color:#2563eb;
+">
 
-<span>
+<label
+for="confirmed"
+style="
+font-size:13px;
+color:#475569;
+">
+
 I confirm that I have made the payment
-using the selected payment method.
-</span>
+and that the information I provided is correct.
 
 </label>
 
 </div>
 
 
-<button
-class="submit-btn"
-id="submitBtn"
-onclick="submitEnrollment()">
 
-Submit Enrollment
+<button
+type="submit"
+class="btn btn-primary"
+style="
+width:100%;
+margin-top:25px;
+">
+
+Submit Enrollment →
 
 </button>
 
 
 <div
-class="success"
-id="success">
+id="successMessage"
+style="
+display:none;
+margin-top:20px;
+padding:18px;
+border-radius:12px;
+background:#f0fdf4;
+border:1px solid #bbf7d0;
+color:#166534;
+font-size:13px;
+">
 
 <strong>
-✅ Enrollment received successfully.
+Enrollment received 🎉
 </strong>
 
 <br><br>
 
-Your details have been sent to JG.
-Your payment will be verified before
-course access is provided.
+Your enrollment information has been
+submitted successfully. Your payment
+will need to be verified before access
+is provided.
+
+</div>
+
+
+</form>
+
 
 </div>
 
 </div>
 
 </div>
+
 
 
 <footer>
 
-© 2026 JG — Find Skills. Find Work.
+<div class="footer-logo">
+JG<span>.</span>
+</div>
+
+<p>
+Find Skills. Find Work.
+</p>
+
+<br>
+
+<p>
+© 2026 JG. All rights reserved.
+</p>
 
 </footer>
 
 
+
 <script>
 
-const BACKEND_URL =
-"PASTE_YOUR_APPS_SCRIPT_WEB_APP_URL_HERE";
-
-
-let selectedPayment = "";
-
-
-const courseSelect =
+const course =
 document.getElementById("course");
 
+const amount =
+document.getElementById("amount");
 
-courseSelect.addEventListener(
-"change",
-function(){
 
-    const value =
-    this.value;
+function updateAmount() {
 
-    if(!value){
+    if (!course.value) {
 
-        document.getElementById(
-            "price"
-        ).textContent = "₦0";
-
-        document.getElementById(
-            "paymentAmount"
-        ).textContent = "₦0";
+        amount.textContent = "₦0";
 
         return;
 
     }
 
     const parts =
-    value.split("|");
+        course.value.split("|");
 
-    const amount =
-    Number(parts[1]);
+    const price =
+        Number(parts[1]);
 
-    const formatted =
-    "₦" +
-    amount.toLocaleString();
-
-    document.getElementById(
-        "price"
-    ).textContent =
-    formatted;
-
-    document.getElementById(
-        "paymentAmount"
-    ).textContent =
-    formatted;
-
-});
-
-
-function selectPayment(method){
-
-    selectedPayment =
-    method;
-
-
-    document.getElementById(
-        "opayOption"
-    ).classList.remove("active");
-
-    document.getElementById(
-        "bankOption"
-    ).classList.remove("active");
-
-
-    if(method === "OPay"){
-
-        document.getElementById(
-            "opayOption"
-        ).classList.add("active");
-
-    }
-
-
-    if(method === "Bank Transfer"){
-
-        document.getElementById(
-            "bankOption"
-        ).classList.add("active");
-
-    }
-
-
-    document.getElementById(
-        "paymentDetails"
-    ).classList.add("active");
+    amount.textContent =
+        "₦" +
+        price.toLocaleString();
 
 }
 
 
-function copyAccount(){
-
-    navigator.clipboard
-    .writeText("6493501689")
-    .then(function(){
-
-        alert(
-            "OPay account number copied!"
-        );
-
-    });
-
-}
+course.addEventListener(
+    "change",
+    updateAmount
+);
 
 
-function getCourseFromURL(){
+/* LOAD COURSE FROM LEARN PAGE */
 
-    const params =
+const params =
     new URLSearchParams(
         window.location.search
     );
 
-    const course =
+const selectedCourse =
     params.get("course");
 
-    if(!course){
-        return;
-    }
 
+if (selectedCourse) {
 
-    const options =
-    courseSelect.options;
+    for (
+        let i = 0;
+        i < course.options.length;
+        i++
+    ) {
 
+        if (
+            course.options[i]
+                .value
+                .startsWith(
+                    selectedCourse + "|"
+                )
+        ) {
 
-    for(let i = 0; i < options.length; i++){
+            course.selectedIndex = i;
 
-        if(
-            options[i].value
-            .startsWith(course + "|")
-        ){
-
-            courseSelect.selectedIndex =
-            i;
-
-            courseSelect.dispatchEvent(
-                new Event("change")
-            );
+            updateAmount();
 
             break;
 
@@ -782,188 +455,106 @@ function getCourseFromURL(){
 }
 
 
-async function submitEnrollment(){
+/* ENROLLMENT */
 
-    const courseValue =
-    courseSelect.value;
+document
+.getElementById("enrollmentForm")
+.addEventListener(
+"submit",
+function(event) {
 
+    event.preventDefault();
 
     const name =
-    document.getElementById(
-        "name"
-    ).value.trim();
-
+        document
+        .getElementById("name")
+        .value;
 
     const email =
-    document.getElementById(
-        "email"
-    ).value.trim();
-
+        document
+        .getElementById("email")
+        .value;
 
     const phone =
-    document.getElementById(
-        "phone"
-    ).value.trim();
+        document
+        .getElementById("phone")
+        .value;
 
-
-    const confirmed =
-    document.getElementById(
-        "paymentConfirm"
-    ).checked;
-
-
-    if(!courseValue){
-
-        alert(
-            "Please select a course."
-        );
-
-        return;
-
-    }
-
-
-    if(!name ||
-       !email ||
-       !phone){
-
-        alert(
-            "Please complete your details."
-        );
-
-        return;
-
-    }
-
-
-    if(!selectedPayment){
-
-        alert(
-            "Please select a payment method."
-        );
-
-        return;
-
-    }
-
-
-    if(!confirmed){
-
-        alert(
-            "Please confirm your payment."
-        );
-
-        return;
-
-    }
-
+    const selected =
+        course.value;
 
     const parts =
-    courseValue.split("|");
+        selected.split("|");
+
+    const courseName =
+        parts[0];
+
+    const coursePrice =
+        parts[1];
 
 
-    const course =
-    parts[0];
+    /*
+       IMPORTANT:
+       Replace this later with your
+       real backend URL.
+    */
 
+    const enrollmentData = {
 
-    const amount =
-    parts[1];
+        name: name,
 
+        email: email,
 
-    const button =
-    document.getElementById(
-        "submitBtn"
-    );
+        phone: phone,
 
+        course: courseName,
 
-    button.disabled =
-    true;
+        amount: coursePrice,
 
+        paymentMethod:
+            "OPay / Bank Transfer",
 
-    button.textContent =
-    "Submitting...";
-
-
-    const enrollment = {
-
-        name:name,
-
-        email:email,
-
-        phone:phone,
-
-        course:course,
-
-        amount:amount,
-
-        payment:selectedPayment,
-
-        date:new Date().toISOString()
+        date:
+            new Date()
+            .toISOString()
 
     };
 
 
-    try{
-
-        await fetch(
-            BACKEND_URL,
-            {
-                method:"POST",
-
-                mode:"no-cors",
-
-                headers:{
-                    "Content-Type":
-                    "text/plain;charset=utf-8"
-                },
-
-                body:
-                JSON.stringify(
-                    enrollment
-                )
-            }
-        );
+    console.log(
+        "Enrollment:",
+        enrollmentData
+    );
 
 
-        document.getElementById(
-            "success"
-        ).style.display =
-        "block";
+    document
+    .getElementById(
+        "successMessage"
+    )
+    .style.display = "block";
 
 
-        document.getElementById(
-            "success"
-        ).scrollIntoView({
-            behavior:"smooth"
-        });
+    this.reset();
+
+    amount.textContent =
+        "₦0";
 
 
-        button.textContent =
-        "Enrollment Submitted";
+    window.scrollTo({
 
+        top:
+            document
+            .getElementById(
+                "successMessage"
+            )
+            .offsetTop - 120,
 
-    }catch(error){
+        behavior:
+            "smooth"
 
-        console.error(error);
+    });
 
-        alert(
-            "Unable to submit enrollment. Please try again."
-        );
-
-
-        button.disabled =
-        false;
-
-
-        button.textContent =
-        "Submit Enrollment";
-
-    }
-
-}
-
-
-getCourseFromURL();
+});
 
 </script>
 
