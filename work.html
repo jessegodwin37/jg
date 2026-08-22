@@ -10,132 +10,22 @@ content="width=device-width, initial-scale=1.0">
 
 <title>JG | Find Work</title>
 
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#f5f7fb;
-    color:#111827;
-}
-
-nav{
-    background:#07111f;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#2563eb;
-}
-
-nav a{
-    color:#cbd5e1;
-    text-decoration:none;
-    margin-left:20px;
-    font-size:14px;
-}
-
-.hero{
-    background:linear-gradient(135deg,#07111f,#172554);
-    color:white;
-    padding:75px 7%;
-}
-
-.hero h1{
-    font-size:50px;
-    margin-bottom:12px;
-}
-
-.hero p{
-    color:#cbd5e1;
-    max-width:650px;
-}
-
-.section{
-    padding:70px 7%;
-}
-
-.work-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.work-card{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:15px;
-    padding:30px;
-}
-
-.work-card h3{
-    margin-bottom:10px;
-}
-
-.work-card p{
-    color:#64748b;
-    font-size:14px;
-    margin-bottom:20px;
-}
-
-.tag{
-    display:inline-block;
-    background:#eff6ff;
-    color:#2563eb;
-    padding:7px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-@media(max-width:800px){
-
-    .work-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .work-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:40px;
-    }
-
-}
-
-</style>
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
 
-<nav>
+<nav class="navbar">
 
-<div class="logo">
+<a href="index.html"
+class="logo">
 JG<span>.</span>
-</div>
+</a>
 
-<div>
+<div class="nav-links">
 
 <a href="index.html">
 Home
@@ -149,7 +39,13 @@ Skills
 Learn
 </a>
 
-<a href="enrollment.html">
+<a href="work.html"
+class="active">
+Work
+</a>
+
+<a href="enrollment.html"
+class="nav-cta">
 Enroll
 </a>
 
@@ -158,128 +54,255 @@ Enroll
 </nav>
 
 
+
 <section class="hero">
 
+<div class="hero-content">
+
+<div class="badge">
+JG WORK
+</div>
+
 <h1>
-Find Work
+
+Turn Your Skills
+<span>Into Opportunities.</span>
+
 </h1>
 
 <p>
-Turn your skills into experience, projects
-and opportunities.
+
+The goal isn't only to learn.
+It's to develop skills you can use
+to create opportunities.
+
 </p>
+
+</div>
 
 </section>
 
 
+
 <section class="section">
+
+<div class="section-header">
+
+<div class="badge">
+OPPORTUNITIES
+</div>
+
+<h2>
+Find Work That Fits Your Skills
+</h2>
+
+<p>
+Explore the types of work you can pursue
+after developing your skills.
+</p>
+
+</div>
+
 
 <div class="work-grid">
 
 
 <div class="work-card">
 
-<span class="tag">
-FREELANCE
-</span>
+<div class="work-top">
 
 <h3>
-Freelance Projects
+Web Developer
 </h3>
 
+<span class="work-tag">
+DIGITAL
+</span>
+
+</div>
+
 <p>
-Use your skills to work on projects for
-individuals and businesses.
+Build websites and web experiences
+for individuals and businesses.
+</p>
+
+<a href="enrollment.html"
+class="btn btn-secondary">
+
+Build This Skill →
+
+</a>
+
+</div>
+
+
+
+<div class="work-card">
+
+<div class="work-top">
+
+<h3>
+Graphic Designer
+</h3>
+
+<span class="work-tag">
+CREATIVE
+</span>
+
+</div>
+
+<p>
+Create flyers, social media graphics,
+logos and visual content.
+</p>
+
+<a href="enrollment.html"
+class="btn btn-secondary">
+
+Build This Skill →
+
+</a>
+
+</div>
+
+
+
+<div class="work-card">
+
+<div class="work-top">
+
+<h3>
+Video Editor
+</h3>
+
+<span class="work-tag">
+CREATIVE
+</span>
+
+</div>
+
+<p>
+Edit videos for creators, businesses
+and social media brands.
+</p>
+
+<a href="enrollment.html"
+class="btn btn-secondary">
+
+Build This Skill →
+
+</a>
+
+</div>
+
+
+
+<div class="work-card">
+
+<div class="work-top">
+
+<h3>
+Digital Marketer
+</h3>
+
+<span class="work-tag">
+MARKETING
+</span>
+
+</div>
+
+<p>
+Help businesses reach customers
+through digital platforms.
+</p>
+
+<a href="enrollment.html"
+class="btn btn-secondary">
+
+Build This Skill →
+
+</a>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<section class="section">
+
+<div class="section-header">
+
+<div class="badge">
+THE JG PATH
+</div>
+
+<h2>
+Learn → Practice → Build → Work
+</h2>
+
+<p>
+JG is designed around a simple journey.
 </p>
 
 </div>
 
 
-<div class="work-card">
+<div class="card-grid">
 
-<span class="tag">
-PORTFOLIO
-</span>
+
+<div class="card">
+
+<div class="card-icon">
+1️⃣
+</div>
 
 <h3>
-Build Your Portfolio
+Learn
 </h3>
 
 <p>
-Create projects that show potential clients
-and employers what you can do.
+Choose a skill and develop your
+knowledge.
 </p>
 
 </div>
 
 
-<div class="work-card">
+<div class="card">
 
-<span class="tag">
-REMOTE
-</span>
+<div class="card-icon">
+2️⃣
+</div>
 
 <h3>
-Remote Opportunities
+Practice
 </h3>
 
 <p>
-Build digital skills that can be used from
-almost anywhere.
+Work on projects and improve
+through practice.
 </p>
 
 </div>
 
 
-<div class="work-card">
+<div class="card">
 
-<span class="tag">
-BUSINESS
-</span>
-
-<h3>
-Help Businesses
-</h3>
-
-<p>
-Use design, marketing, development or
-editing skills to help businesses grow.
-</p>
-
+<div class="card-icon">
+3️⃣
 </div>
 
-
-<div class="work-card">
-
-<span class="tag">
-CREATOR
-</span>
-
 <h3>
-Become a Creator
+Work
 </h3>
 
 <p>
-Create useful digital content and develop
-your personal brand.
-</p>
-
-</div>
-
-
-<div class="work-card">
-
-<span class="tag">
-GROWTH
-</span>
-
-<h3>
-Keep Improving
-</h3>
-
-<p>
-The more valuable your skills become,
-the more opportunities you can pursue.
+Use your skills to pursue real
+opportunities.
 </p>
 
 </div>
@@ -288,6 +311,48 @@ the more opportunities you can pursue.
 </div>
 
 </section>
+
+
+
+<section class="cta">
+
+<h2>
+Start With One Skill.
+</h2>
+
+<p>
+You don't need to know everything.
+You just need to start.
+</p>
+
+<a href="learn.html"
+class="btn">
+
+Explore Learning →
+
+</a>
+
+</section>
+
+
+
+<footer>
+
+<div class="footer-logo">
+JG<span>.</span>
+</div>
+
+<p>
+Find Skills. Find Work.
+</p>
+
+<br>
+
+<p>
+© 2026 JG. All rights reserved.
+</p>
+
+</footer>
 
 
 <script src="chatbot.js"></script>
