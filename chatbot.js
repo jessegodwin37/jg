@@ -1,743 +1,1438 @@
-(function(){
+/* =====================================================
+   JG AI CHATBOT
+   Professional JG-style chatbot
+===================================================== */
 
-const chatbotHTML = `
+(function () {
 
-<button id="jgChatButton">
-💬
-</button>
+    /* =========================
+       CHATBOT HTML
+    ========================= */
 
-<div id="jgChatBox">
+    const chatbotHTML = `
 
-<div class="jgChatHeader">
+    <button id="jgChatButton" aria-label="Open JG Assistant">
 
-<div>
-<strong>JG AI Assistant</strong>
-<small>Online • Ready to help</small>
-</div>
+        <div class="jg-chat-icon">
+            💬
+        </div>
 
-<button id="jgCloseChat">
-×
-</button>
+        <span>JG Assistant</span>
 
-</div>
+    </button>
 
 
-<div id="jgMessages">
+    <div id="jgChatWindow">
 
-<div class="jgMessage jgBot">
+        <!-- HEADER -->
 
-<strong>JG AI:</strong>
+        <div class="jg-chat-header">
 
-<br><br>
+            <div class="jg-bot-profile">
 
-👋 Welcome to JG!
+                <div class="jg-bot-avatar">
+                    JG
+                </div>
 
-I can help you with:
+                <div>
 
-<br><br>
+                    <strong>JG Assistant</strong>
 
-• Courses
-<br>
-• Prices
-<br>
-• Enrollment
-<br>
-• OPay
-<br>
-• Bank Transfer
-<br>
-• Choosing a skill
+                    <small>
+                        ● Online
+                    </small>
 
-<br><br>
+                </div>
 
-What would you like to know?
+            </div>
 
-</div>
 
-</div>
+            <button
+                id="jgCloseChat"
+                aria-label="Close chatbot">
 
+                ×
 
-<div class="jgChatInput">
+            </button>
 
-<input
-id="jgChatInput"
-type="text"
-placeholder="Ask JG AI..."
->
+        </div>
 
-<button id="jgSend">
-➤
-</button>
 
-</div>
+        <!-- WELCOME -->
 
-</div>
+        <div id="jgMessages"
+             class="jg-messages">
 
-`;
+            <div class="jg-message bot">
 
+                <div class="jg-message-avatar">
+                    JG
+                </div>
 
-const chatbotCSS = `
+                <div class="jg-message-content">
 
-#jgChatButton{
+                    <div class="jg-message-bubble">
 
-position:fixed;
+                        👋 Hey! Welcome to <strong>JG</strong>.
 
-right:20px;
+                        <br><br>
 
-bottom:20px;
+                        I'm your JG Assistant. I can help you
+                        choose a skill, understand our courses,
+                        learn how enrollment works, and answer
+                        questions about JG.
 
-width:62px;
+                    </div>
 
-height:62px;
+                    <span class="jg-time">
+                        Just now
+                    </span>
 
-border:none;
+                </div>
 
-border-radius:50%;
+            </div>
 
-background:#2563eb;
 
-color:white;
+            <!-- QUICK QUESTIONS -->
 
-font-size:26px;
+            <div class="jg-quick-title">
+                What would you like to know?
+            </div>
 
-cursor:pointer;
 
-box-shadow:0 10px 30px rgba(0,0,0,.25);
+            <div class="jg-quick-buttons">
 
-z-index:99999;
+                <button
+                    data-question="What skills can I learn?">
 
-}
+                    🎓
+                    <span>Skills I can learn</span>
 
+                </button>
 
-#jgChatBox{
 
-position:fixed;
+                <button
+                    data-question="How much are the courses?">
 
-right:20px;
+                    💰
+                    <span>Course prices</span>
 
-bottom:95px;
+                </button>
 
-width:360px;
 
-max-width:calc(100vw - 30px);
+                <button
+                    data-question="How do I enroll?">
 
-height:500px;
+                    📝
+                    <span>How to enroll</span>
 
-background:white;
+                </button>
 
-border-radius:18px;
 
-box-shadow:0 20px 60px rgba(0,0,0,.25);
+                <button
+                    data-question="How can I pay?">
 
-display:none;
+                    💳
+                    <span>Payment methods</span>
 
-flex-direction:column;
+                </button>
 
-overflow:hidden;
+            </div>
 
-z-index:99998;
+        </div>
 
-border:1px solid #e5e7eb;
 
-font-family:Arial,sans-serif;
+        <!-- TYPING -->
 
-}
+        <div
+            id="jgTyping"
+            class="jg-typing">
 
+            <span></span>
+            <span></span>
+            <span></span>
 
-.jgChatHeader{
+            JG Assistant is typing...
 
-background:#07111f;
+        </div>
 
-color:white;
 
-padding:17px;
+        <!-- INPUT -->
 
-display:flex;
+        <div class="jg-chat-input-area">
 
-justify-content:space-between;
+            <input
+                type="text"
+                id="jgChatInput"
+                placeholder="Ask JG Assistant..."
+                autocomplete="off"
+            >
 
-align-items:center;
+            <button
+                id="jgSendButton"
+                aria-label="Send message">
 
-}
+                ➤
 
+            </button>
 
-.jgChatHeader small{
+        </div>
 
-display:block;
 
-color:#93c5fd;
+        <div class="jg-chat-footer">
 
-font-size:11px;
+            Powered by <strong>JG</strong>
 
-margin-top:3px;
+        </div>
 
-}
-
-
-#jgCloseChat{
-
-background:none;
-
-border:none;
-
-color:white;
-
-font-size:28px;
-
-cursor:pointer;
-
-}
-
-
-#jgMessages{
-
-flex:1;
-
-overflow-y:auto;
-
-padding:15px;
-
-background:#f8fafc;
-
-}
-
-
-.jgMessage{
-
-max-width:88%;
-
-padding:12px;
-
-border-radius:13px;
-
-margin-bottom:12px;
-
-font-size:13px;
-
-line-height:1.5;
-
-}
-
-
-.jgBot{
-
-background:white;
-
-border:1px solid #e5e7eb;
-
-}
-
-
-.jgUser{
-
-background:#2563eb;
-
-color:white;
-
-margin-left:auto;
-
-}
-
-
-.jgChatInput{
-
-display:flex;
-
-gap:8px;
-
-padding:10px;
-
-border-top:1px solid #e5e7eb;
-
-background:white;
-
-}
-
-
-#jgChatInput{
-
-flex:1;
-
-padding:11px;
-
-border:1px solid #d1d5db;
-
-border-radius:8px;
-
-outline:none;
-
-}
-
-
-#jgSend{
-
-width:45px;
-
-border:none;
-
-border-radius:8px;
-
-background:#2563eb;
-
-color:white;
-
-cursor:pointer;
-
-}
-
-
-@media(max-width:600px){
-
-#jgChatBox{
-
-right:12px;
-
-width:calc(100vw - 24px);
-
-}
-
-}
-
-`;
-
-
-const style =
-document.createElement("style");
-
-style.textContent =
-chatbotCSS;
-
-document.head.appendChild(style);
-
-
-const wrapper =
-document.createElement("div");
-
-wrapper.innerHTML =
-chatbotHTML;
-
-document.body.appendChild(wrapper);
-
-
-const chatButton =
-document.getElementById(
-"jgChatButton"
-);
-
-
-const chatBox =
-document.getElementById(
-"jgChatBox"
-);
-
-
-const closeButton =
-document.getElementById(
-"jgCloseChat"
-);
-
-
-const input =
-document.getElementById(
-"jgChatInput"
-);
-
-
-const sendButton =
-document.getElementById(
-"jgSend"
-);
-
-
-const messages =
-document.getElementById(
-"jgMessages"
-);
-
-
-chatButton.onclick =
-function(){
-
-    chatBox.style.display =
-    "flex";
-
-    input.focus();
-
-};
-
-
-closeButton.onclick =
-function(){
-
-    chatBox.style.display =
-    "none";
-
-};
-
-
-function addMessage(
-    text,
-    type
-){
-
-    const message =
-    document.createElement(
-        "div"
-    );
-
-    message.className =
-    "jgMessage " +
-    type;
-
-    message.innerHTML =
-    text;
-
-    messages.appendChild(
-        message
-    );
-
-    messages.scrollTop =
-    messages.scrollHeight;
-
-}
-
-
-function getResponse(
-    message
-){
-
-    const text =
-    message.toLowerCase();
-
-
-    if(
-        text.includes("hello") ||
-        text.includes("hi") ||
-        text.includes("hey")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        👋 Hello!
-
-        Welcome to JG.
-
-        <br><br>
-
-        Ask me about courses,
-        prices, enrollment or payment.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("course") ||
-        text.includes("courses") ||
-        text.includes("learn")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        JG currently offers:
-
-        <br><br>
-
-        💻 Web Development — ₦25,000
-
-        <br>
-
-        🎨 Graphic Design — ₦15,000
-
-        <br>
-
-        🎬 Video Editing — ₦15,000
-
-        <br>
-
-        🐍 Python Programming — ₦25,000
-
-        <br>
-
-        📈 Digital Marketing — ₦20,000
-
-        <br>
-
-        💼 Career Skills — ₦10,000
-
-        <br><br>
-
-        Visit the Learn page to enroll.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("price") ||
-        text.includes("cost") ||
-        text.includes("how much")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        Our courses currently range from
-        ₦10,000 to ₦25,000.
-
-        <br><br>
-
-        You can see every course and price
-        on the Learn page.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("enroll") ||
-        text.includes("register")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        To enroll:
-
-        <br><br>
-
-        1. Choose a course.
-        <br>
-        2. Click Enroll Now.
-        <br>
-        3. Enter your details.
-        <br>
-        4. Select your payment method.
-        <br>
-        5. Make your payment.
-        <br>
-        6. Submit your enrollment.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("opay") ||
-        text.includes("transfer") ||
-        text.includes("payment")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        JG accepts OPay and Bank Transfer.
-
-        <br><br>
-
-        <strong>Bank:</strong>
-        OPay
-
-        <br>
-
-        <strong>Account Name:</strong>
-        JESSE EYITEMI ANOMUOGHARAN
-
-        <br>
-
-        <strong>Account Number:</strong>
-        6493501689
-
-        <br><br>
-
-        Please check your enrollment page
-        for the exact amount before paying.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("web") ||
-        text.includes("coding")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        Web Development is ₦25,000.
-
-        You can enroll from the Learn page.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("graphic") ||
-        text.includes("design")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        Graphic Design is ₦15,000.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("video")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        Video Editing is ₦15,000.
-
-        `;
-
-    }
-
-
-    if(
-        text.includes("python") ||
-        text.includes("programming")
-    ){
-
-        return `
-
-        <strong>JG AI:</strong>
-
-        <br><br>
-
-        Python Programming is ₦25,000.
-
-        `;
-
-    }
-
-
-    return `
-
-    <strong>JG AI:</strong>
-
-    <br><br>
-
-    I can help with:
-
-    <br><br>
-
-    • Courses
-    <br>
-    • Prices
-    <br>
-    • Enrollment
-    <br>
-    • OPay
-    <br>
-    • Bank Transfer
-    <br>
-    • Skills
-
-    <br><br>
-
-    Try asking:
-    <br>
-    <strong>
-    "How much is Web Development?"
-    </strong>
+    </div>
 
     `;
 
-}
 
-
-function sendMessage(){
-
-    const text =
-    input.value.trim();
-
-
-    if(!text){
-        return;
-    }
-
-
-    addMessage(
-        text,
-        "jgUser"
+    document.body.insertAdjacentHTML(
+        "beforeend",
+        chatbotHTML
     );
 
 
-    input.value = "";
+    /* =========================
+       CHATBOT CSS
+    ========================= */
+
+    const chatbotCSS = `
+
+    #jgChatButton,
+    #jgChatWindow,
+    #jgChatWindow * {
+        box-sizing: border-box;
+    }
 
 
-    setTimeout(
-        function(){
+    /* FLOATING BUTTON */
 
-            addMessage(
-                getResponse(text),
-                "jgBot"
+    #jgChatButton {
+
+        position: fixed;
+
+        right: 22px;
+
+        bottom: 22px;
+
+        z-index: 9999;
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 10px;
+
+        border: none;
+
+        padding: 9px 16px 9px 9px;
+
+        border-radius: 50px;
+
+        background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+        color: white;
+
+        font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+        font-size: 13px;
+
+        font-weight: 800;
+
+        cursor: pointer;
+
+        box-shadow:
+        0 12px 35px
+        rgba(37,99,235,.28);
+
+        transition:
+        transform .2s ease,
+        box-shadow .2s ease;
+
+    }
+
+
+    #jgChatButton:hover {
+
+        transform:
+        translateY(-3px);
+
+        box-shadow:
+        0 17px 40px
+        rgba(37,99,235,.35);
+
+    }
+
+
+    .jg-chat-icon {
+
+        width: 39px;
+
+        height: 39px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 50%;
+
+        background: white;
+
+        color: #2563eb;
+
+        font-size: 18px;
+
+    }
+
+
+    /* CHAT WINDOW */
+
+    #jgChatWindow {
+
+        position: fixed;
+
+        right: 22px;
+
+        bottom: 88px;
+
+        z-index: 9998;
+
+        width: 375px;
+
+        max-width:
+        calc(100vw - 28px);
+
+        height: 600px;
+
+        max-height:
+        calc(100vh - 110px);
+
+        display: none;
+
+        flex-direction: column;
+
+        overflow: hidden;
+
+        background: #ffffff;
+
+        border:
+        1px solid #e2e8f0;
+
+        border-radius: 22px;
+
+        box-shadow:
+        0 30px 80px
+        rgba(15,23,42,.20);
+
+        font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+        animation:
+        jgChatOpen .22s ease;
+
+    }
+
+
+    @keyframes jgChatOpen {
+
+        from {
+
+            opacity: 0;
+
+            transform:
+            translateY(15px)
+            scale(.97);
+
+        }
+
+        to {
+
+            opacity: 1;
+
+            transform:
+            translateY(0)
+            scale(1);
+
+        }
+
+    }
+
+
+    /* HEADER */
+
+    .jg-chat-header {
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        padding: 16px 17px;
+
+        background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+        color: white;
+
+    }
+
+
+    .jg-bot-profile {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 11px;
+
+    }
+
+
+    .jg-bot-avatar {
+
+        width: 43px;
+
+        height: 43px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 13px;
+
+        background: white;
+
+        color: #2563eb;
+
+        font-size: 13px;
+
+        font-weight: 1000;
+
+        box-shadow:
+        0 5px 15px
+        rgba(0,0,0,.12);
+
+    }
+
+
+    .jg-bot-profile strong {
+
+        display: block;
+
+        font-size: 14px;
+
+    }
+
+
+    .jg-bot-profile small {
+
+        display: block;
+
+        margin-top: 2px;
+
+        font-size: 11px;
+
+        opacity: .9;
+
+    }
+
+
+    .jg-chat-header button {
+
+        width: 35px;
+
+        height: 35px;
+
+        border: none;
+
+        border-radius: 9px;
+
+        background:
+        rgba(255,255,255,.14);
+
+        color: white;
+
+        font-size: 24px;
+
+        line-height: 1;
+
+        cursor: pointer;
+
+    }
+
+
+    /* MESSAGES */
+
+    .jg-messages {
+
+        flex: 1;
+
+        overflow-y: auto;
+
+        padding: 20px 15px;
+
+        background:
+        linear-gradient(
+            180deg,
+            #f8fafc,
+            #ffffff
+        );
+
+        scroll-behavior: smooth;
+
+    }
+
+
+    .jg-message {
+
+        display: flex;
+
+        align-items: flex-start;
+
+        gap: 8px;
+
+        margin-bottom: 17px;
+
+    }
+
+
+    .jg-message-avatar {
+
+        width: 29px;
+
+        height: 29px;
+
+        flex-shrink: 0;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: center;
+
+        border-radius: 9px;
+
+        background: #dbeafe;
+
+        color: #2563eb;
+
+        font-size: 9px;
+
+        font-weight: 1000;
+
+    }
+
+
+    .jg-message-content {
+
+        max-width: 84%;
+
+    }
+
+
+    .jg-message-bubble {
+
+        padding: 11px 13px;
+
+        border-radius:
+        5px 15px 15px 15px;
+
+        background: white;
+
+        border:
+        1px solid #e2e8f0;
+
+        color: #334155;
+
+        font-size: 13px;
+
+        line-height: 1.55;
+
+        box-shadow:
+        0 3px 12px
+        rgba(15,23,42,.04);
+
+    }
+
+
+    .jg-time {
+
+        display: block;
+
+        margin-top: 4px;
+
+        color: #94a3b8;
+
+        font-size: 9px;
+
+    }
+
+
+    /* USER MESSAGE */
+
+    .jg-message.user {
+
+        justify-content: flex-end;
+
+    }
+
+
+    .jg-message.user
+    .jg-message-content {
+
+        max-width: 82%;
+
+    }
+
+
+    .jg-message.user
+    .jg-message-bubble {
+
+        border: none;
+
+        border-radius:
+        15px 5px 15px 15px;
+
+        background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+        color: white;
+
+    }
+
+
+    .jg-message.user
+    .jg-time {
+
+        text-align: right;
+
+    }
+
+
+    /* QUICK QUESTIONS */
+
+    .jg-quick-title {
+
+        margin:
+        10px 0 10px 37px;
+
+        color: #64748b;
+
+        font-size: 11px;
+
+        font-weight: 800;
+
+    }
+
+
+    .jg-quick-buttons {
+
+        display: grid;
+
+        grid-template-columns:
+        1fr 1fr;
+
+        gap: 8px;
+
+        margin-left: 37px;
+
+    }
+
+
+    .jg-quick-buttons button {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 7px;
+
+        min-height: 47px;
+
+        padding: 8px 9px;
+
+        border:
+        1px solid #e2e8f0;
+
+        border-radius: 10px;
+
+        background: white;
+
+        color: #334155;
+
+        font-size: 10px;
+
+        font-weight: 700;
+
+        text-align: left;
+
+        cursor: pointer;
+
+        transition: .18s;
+
+    }
+
+
+    .jg-quick-buttons button:hover {
+
+        border-color: #93c5fd;
+
+        background: #eff6ff;
+
+        color: #1d4ed8;
+
+    }
+
+
+    .jg-quick-buttons button:first-letter {
+
+        font-size: 16px;
+
+    }
+
+
+    /* TYPING */
+
+    .jg-typing {
+
+        display: none;
+
+        align-items: center;
+
+        gap: 4px;
+
+        padding:
+        7px 17px;
+
+        background: #ffffff;
+
+        color: #94a3b8;
+
+        font-size: 9px;
+
+    }
+
+
+    .jg-typing span {
+
+        width: 5px;
+
+        height: 5px;
+
+        border-radius: 50%;
+
+        background: #2563eb;
+
+        animation:
+        jgTyping 1s infinite;
+
+    }
+
+
+    .jg-typing span:nth-child(2) {
+
+        animation-delay:
+        .15s;
+
+    }
+
+
+    .jg-typing span:nth-child(3) {
+
+        animation-delay:
+        .3s;
+
+    }
+
+
+    @keyframes jgTyping {
+
+        0%, 60%, 100% {
+
+            transform:translateY(0);
+
+            opacity:.35;
+
+        }
+
+        30% {
+
+            transform:
+            translateY(-3px);
+
+            opacity:1;
+
+        }
+
+    }
+
+
+    /* INPUT */
+
+    .jg-chat-input-area {
+
+        display: flex;
+
+        align-items: center;
+
+        gap: 8px;
+
+        padding:
+        11px 12px;
+
+        border-top:
+        1px solid #e5e7eb;
+
+        background: white;
+
+    }
+
+
+    #jgChatInput {
+
+        flex: 1;
+
+        min-width: 0;
+
+        height: 43px;
+
+        padding:
+        0 13px;
+
+        border:
+        1px solid #e2e8f0;
+
+        border-radius: 11px;
+
+        outline: none;
+
+        background: #f8fafc;
+
+        color: #111827;
+
+        font-size: 13px;
+
+        font-family: inherit;
+
+    }
+
+
+    #jgChatInput:focus {
+
+        border-color:
+        #93c5fd;
+
+        background: white;
+
+        box-shadow:
+        0 0 0 3px
+        rgba(37,99,235,.08);
+
+    }
+
+
+    #jgSendButton {
+
+        width: 43px;
+
+        height: 43px;
+
+        flex-shrink: 0;
+
+        border: none;
+
+        border-radius: 11px;
+
+        background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+        color: white;
+
+        font-size: 17px;
+
+        cursor: pointer;
+
+        transition: .18s;
+
+    }
+
+
+    #jgSendButton:hover {
+
+        transform:
+        translateY(-1px);
+
+    }
+
+
+    /* FOOTER */
+
+    .jg-chat-footer {
+
+        padding:
+        7px;
+
+        text-align: center;
+
+        background: #f8fafc;
+
+        color: #94a3b8;
+
+        font-size: 9px;
+
+        border-top:
+        1px solid #f1f5f9;
+
+    }
+
+
+    /* MOBILE */
+
+    @media(max-width:500px) {
+
+        #jgChatButton {
+
+            right: 15px;
+
+            bottom: 15px;
+
+        }
+
+
+        #jgChatButton span {
+
+            display: none;
+
+        }
+
+
+        #jgChatButton {
+
+            width: 55px;
+
+            height: 55px;
+
+            padding: 7px;
+
+            justify-content: center;
+
+        }
+
+
+        .jg-chat-icon {
+
+            width: 41px;
+
+            height: 41px;
+
+        }
+
+
+        #jgChatWindow {
+
+            right: 10px;
+
+            bottom: 80px;
+
+            width:
+            calc(100vw - 20px);
+
+            height:
+            min(620px, calc(100vh - 100px));
+
+            border-radius: 20px;
+
+        }
+
+    }
+
+    `;
+
+
+    const style =
+    document.createElement("style");
+
+    style.textContent =
+    chatbotCSS;
+
+    document.head.appendChild(style);
+
+
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const chatButton =
+    document.getElementById(
+        "jgChatButton"
+    );
+
+    const chatWindow =
+    document.getElementById(
+        "jgChatWindow"
+    );
+
+    const closeButton =
+    document.getElementById(
+        "jgCloseChat"
+    );
+
+    const input =
+    document.getElementById(
+        "jgChatInput"
+    );
+
+    const sendButton =
+    document.getElementById(
+        "jgSendButton"
+    );
+
+    const messages =
+    document.getElementById(
+        "jgMessages"
+    );
+
+    const typing =
+    document.getElementById(
+        "jgTyping"
+    );
+
+
+    /* =========================
+       OPEN / CLOSE
+    ========================= */
+
+    chatButton.addEventListener(
+        "click",
+        function () {
+
+            chatWindow.style.display =
+                "flex";
+
+            chatButton.style.display =
+                "none";
+
+            setTimeout(
+                () => input.focus(),
+                200
             );
 
-        },
-        350
+        }
     );
 
-}
+
+    closeButton.addEventListener(
+        "click",
+        function () {
+
+            chatWindow.style.display =
+                "none";
+
+            chatButton.style.display =
+                "flex";
+
+        }
+    );
 
 
-sendButton.onclick =
-sendMessage;
+    /* =========================
+       ADD MESSAGE
+    ========================= */
+
+    function addMessage(
+        text,
+        type = "bot"
+    ) {
+
+        const message =
+        document.createElement("div");
+
+        message.className =
+            "jg-message " + type;
 
 
-input.addEventListener(
-"keydown",
-function(event){
+        if(type === "bot") {
 
-    if(
-        event.key === "Enter"
-    ){
+            message.innerHTML = `
 
-        sendMessage();
+                <div class="jg-message-avatar">
+                    JG
+                </div>
+
+                <div class="jg-message-content">
+
+                    <div class="jg-message-bubble">
+                        ${text}
+                    </div>
+
+                    <span class="jg-time">
+                        Just now
+                    </span>
+
+                </div>
+
+            `;
+
+        } else {
+
+            message.innerHTML = `
+
+                <div class="jg-message-content">
+
+                    <div class="jg-message-bubble">
+                        ${text}
+                    </div>
+
+                    <span class="jg-time">
+                        Just now
+                    </span>
+
+                </div>
+
+            `;
+
+        }
+
+
+        messages.appendChild(message);
+
+        messages.scrollTop =
+            messages.scrollHeight;
 
     }
 
-});
+
+    /* =========================
+       BOT RESPONSE
+    ========================= */
+
+    function getBotResponse(message) {
+
+        const text =
+            message.toLowerCase();
+
+
+        if(
+            text.includes("skill") ||
+            text.includes("learn")
+        ) {
+
+            return `
+                JG currently offers practical
+                learning paths such as
+                <strong>Web Development</strong>,
+                <strong>Graphic Design</strong>,
+                <strong>Video Editing</strong>,
+                <strong>Python Programming</strong>
+                and more.
+                <br><br>
+                Visit the <strong>Learn</strong>
+                page to see the available courses.
+            `;
+
+        }
+
+
+        if(
+            text.includes("price") ||
+            text.includes("cost") ||
+            text.includes("how much")
+        ) {
+
+            return `
+                Course prices depend on the
+                skill you choose.
+                <br><br>
+                You can view the exact price
+                for each course on the
+                <strong>Learn</strong> page.
+            `;
+
+        }
+
+
+        if(
+            text.includes("enroll") ||
+            text.includes("register")
+        ) {
+
+            return `
+                Enrolling is simple.
+                <br><br>
+                1️⃣ Choose your course.<br>
+                2️⃣ Enter your details.<br>
+                3️⃣ Select your payment method.<br>
+                4️⃣ Complete your payment.<br>
+                5️⃣ Submit your enrollment.
+                <br><br>
+                You can start from the
+                <strong>Enroll</strong> page.
+            `;
+
+        }
+
+
+        if(
+            text.includes("pay") ||
+            text.includes("payment") ||
+            text.includes("transfer") ||
+            text.includes("opay")
+        ) {
+
+            return `
+                JG currently accepts
+                <strong>OPay / bank transfer</strong>.
+                <br><br>
+                Your enrollment page will show
+                the payment details and the
+                amount for your selected course.
+            `;
+
+        }
+
+
+        if(
+            text.includes("contact") ||
+            text.includes("help")
+        ) {
+
+            return `
+                I'm here to help you with
+                JG courses, enrollment,
+                payment and learning.
+                <br><br>
+                Tell me what you need help with
+                and I'll guide you.
+            `;
+
+        }
+
+
+        if(
+            text.includes("web") ||
+            text.includes("coding")
+        ) {
+
+            return `
+                Web Development is a great
+                skill if you want to build
+                websites and web applications.
+                <br><br>
+                You can learn HTML, CSS,
+                JavaScript and more through
+                the JG learning platform.
+            `;
+
+        }
+
+
+        if(
+            text.includes("graphic") ||
+            text.includes("design")
+        ) {
+
+            return `
+                Graphic Design is perfect if
+                you want to create professional
+                social media designs, flyers,
+                logos and other visual content.
+                <br><br>
+                Check the JG learning page
+                for the available course.
+            `;
+
+        }
+
+
+        if(
+            text.includes("hello") ||
+            text.includes("hi") ||
+            text.includes("hey")
+        ) {
+
+            return `
+                Hey 👋
+                <br><br>
+                Welcome to <strong>JG</strong>.
+                How can I help you today?
+            `;
+
+        }
+
+
+        return `
+            That's a good question.
+            <br><br>
+            I can help with <strong>JG courses,
+            skills, prices, enrollment,
+            payment and learning.</strong>
+            <br><br>
+            Try asking:
+            <br>
+            • What skills can I learn?<br>
+            • How much are the courses?<br>
+            • How do I enroll?<br>
+            • How can I pay?
+        `;
+
+    }
+
+
+    /* =========================
+       SEND MESSAGE
+    ========================= */
+
+    function sendMessage() {
+
+        const text =
+            input.value.trim();
+
+
+        if(!text) return;
+
+
+        addMessage(
+            escapeHTML(text),
+            "user"
+        );
+
+
+        input.value = "";
+
+
+        typing.style.display =
+            "flex";
+
+
+        messages.scrollTop =
+            messages.scrollHeight;
+
+
+        setTimeout(
+            function () {
+
+                typing.style.display =
+                    "none";
+
+                addMessage(
+                    getBotResponse(text),
+                    "bot"
+                );
+
+            },
+            700
+        );
+
+    }
+
+
+    /* =========================
+       SEND BUTTON
+    ========================= */
+
+    sendButton.addEventListener(
+        "click",
+        sendMessage
+    );
+
+
+    input.addEventListener(
+        "keydown",
+        function(event) {
+
+            if(
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                sendMessage();
+
+            }
+
+        }
+    );
+
+
+    /* =========================
+       QUICK QUESTIONS
+    ========================= */
+
+    document
+    .querySelectorAll(
+        ".jg-quick-buttons button"
+    )
+    .forEach(
+        function(button) {
+
+            button.addEventListener(
+                "click",
+                function() {
+
+                    const question =
+                        this.dataset.question;
+
+                    input.value =
+                        question;
+
+                    sendMessage();
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================
+       SECURITY
+    ========================= */
+
+    function escapeHTML(text) {
+
+        const div =
+            document.createElement("div");
+
+        div.textContent =
+            text;
+
+        return div.innerHTML;
+
+    }
 
 })();
