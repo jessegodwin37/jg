@@ -8,299 +8,1515 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>JG — Find Skills. Find Work.</title>
+<title>JG | Skills. Learning. Opportunities.</title>
 
-<meta name="description"
-content="JG helps people learn valuable digital skills and discover opportunities to work.">
+<meta
+name="description"
+content="JG helps you learn practical skills, discover opportunities and build your future."
+>
 
 <link rel="stylesheet" href="style.css">
 
+<style>
+
+/* =========================
+   RESET
+========================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+
+    color: #0f172a;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f8fbff,
+            #ffffff
+        );
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
+
+.jg-navbar {
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 1000;
+
+    height: 76px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    padding: 0 7%;
+
+    background:
+        rgba(255,255,255,.92);
+
+    border-bottom:
+        1px solid #e2e8f0;
+
+    backdrop-filter:
+        blur(16px);
+}
+
+
+.jg-logo {
+
+    text-decoration: none;
+
+    color: #0f172a;
+
+    font-size: 29px;
+
+    font-weight: 950;
+
+    letter-spacing: -1px;
+}
+
+
+.jg-logo span {
+    color: #2563eb;
+}
+
+
+/* DESKTOP NAV */
+
+.jg-nav-links {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 25px;
+}
+
+
+.jg-nav-links a {
+
+    text-decoration: none;
+
+    color: #475569;
+
+    font-size: 14px;
+
+    font-weight: 750;
+
+    transition: .2s;
+}
+
+
+.jg-nav-links a:hover {
+    color: #2563eb;
+}
+
+
+.jg-account-btn {
+
+    padding:
+        11px 18px;
+
+    border-radius: 10px;
+
+    color: white !important;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    box-shadow:
+        0 7px 20px
+        rgba(37,99,235,.18);
+}
+
+
+/* MENU */
+
+.jg-menu-btn {
+
+    display: none;
+
+    border: none;
+
+    background: transparent;
+
+    font-size: 26px;
+
+    cursor: pointer;
+
+    color: #0f172a;
+}
+
+
+/* =========================
+   MOBILE MENU
+========================= */
+
+.jg-mobile-menu {
+
+    display: none;
+
+    position: fixed;
+
+    top: 76px;
+
+    left: 0;
+
+    right: 0;
+
+    z-index: 999;
+
+    padding: 20px;
+
+    background: white;
+
+    border-bottom:
+        1px solid #e2e8f0;
+
+    box-shadow:
+        0 20px 40px
+        rgba(15,23,42,.10);
+}
+
+
+.jg-mobile-menu.open {
+    display: block;
+}
+
+
+.jg-mobile-menu a {
+
+    display: block;
+
+    padding: 14px;
+
+    text-decoration: none;
+
+    color: #334155;
+
+    font-weight: 750;
+
+    border-radius: 10px;
+}
+
+
+.jg-mobile-menu a:hover {
+    background: #eff6ff;
+    color: #2563eb;
+}
+
+
+/* =========================
+   HERO
+========================= */
+
+.jg-hero {
+
+    max-width: 1180px;
+
+    margin: auto;
+
+    padding:
+        95px 25px
+        85px;
+
+    display: grid;
+
+    grid-template-columns:
+        1.1fr .9fr;
+
+    gap: 60px;
+
+    align-items: center;
+}
+
+
+.jg-badge {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 8px;
+
+    padding:
+        8px 13px;
+
+    border-radius: 50px;
+
+    background: #eff6ff;
+
+    border:
+        1px solid #dbeafe;
+
+    color: #1d4ed8;
+
+    font-size: 12px;
+
+    font-weight: 850;
+
+    margin-bottom: 18px;
+}
+
+
+.jg-hero h1 {
+
+    margin: 0;
+
+    font-size:
+        clamp(42px, 6vw, 70px);
+
+    line-height: 1.02;
+
+    letter-spacing: -3px;
+}
+
+
+.jg-hero h1 span {
+    color: #2563eb;
+}
+
+
+.jg-hero p {
+
+    max-width: 590px;
+
+    margin:
+        24px 0;
+
+    color: #64748b;
+
+    font-size: 17px;
+
+    line-height: 1.75;
+}
+
+
+.jg-buttons {
+
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 12px;
+}
+
+
+.jg-primary-btn,
+.jg-secondary-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    min-height: 48px;
+
+    padding:
+        0 20px;
+
+    border-radius: 11px;
+
+    text-decoration: none;
+
+    font-size: 14px;
+
+    font-weight: 850;
+
+    transition: .2s;
+}
+
+
+.jg-primary-btn {
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1d4ed8
+        );
+
+    box-shadow:
+        0 12px 25px
+        rgba(37,99,235,.20);
+}
+
+
+.jg-secondary-btn {
+
+    color: #1e293b;
+
+    background: white;
+
+    border:
+        1px solid #cbd5e1;
+}
+
+
+.jg-primary-btn:hover,
+.jg-secondary-btn:hover {
+
+    transform:
+        translateY(-2px);
+}
+
+
+/* =========================
+   HERO CARD
+========================= */
+
+.jg-hero-card {
+
+    position: relative;
+
+    min-height: 390px;
+
+    border-radius: 28px;
+
+    padding: 28px;
+
+    overflow: hidden;
+
+    background:
+        linear-gradient(
+            145deg,
+            #0f172a,
+            #1e3a8a
+        );
+
+    box-shadow:
+        0 30px 70px
+        rgba(15,23,42,.20);
+}
+
+
+.jg-hero-card::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 210px;
+
+    height: 210px;
+
+    right: -60px;
+
+    top: -60px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(96,165,250,.25);
+}
+
+
+.jg-card-content {
+
+    position: relative;
+
+    z-index: 2;
+
+    color: white;
+}
+
+
+.jg-card-content small {
+
+    color: #bfdbfe;
+
+    font-weight: 800;
+}
+
+
+.jg-card-content h2 {
+
+    font-size: 31px;
+
+    line-height: 1.15;
+
+    margin:
+        12px 0;
+}
+
+
+.jg-card-content p {
+
+    color: #cbd5e1;
+
+    line-height: 1.6;
+
+    font-size: 14px;
+}
+
+
+.jg-mini-cards {
+
+    display: grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+
+.jg-mini-card {
+
+    padding: 16px;
+
+    border-radius: 15px;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.12);
+}
+
+
+.jg-mini-card strong {
+
+    display: block;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+
+.jg-mini-card span {
+
+    display: block;
+
+    margin-top: 5px;
+
+    color: #bfdbfe;
+
+    font-size: 11px;
+}
+
+
+/* =========================
+   ACCOUNT SECTION
+========================= */
+
+.jg-account-section {
+
+    padding:
+        25px 20px
+        85px;
+
+    text-align: center;
+}
+
+
+.jg-account-box {
+
+    max-width: 900px;
+
+    margin: auto;
+
+    padding:
+        45px 30px;
+
+    border-radius: 25px;
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    box-shadow:
+        0 20px 60px
+        rgba(15,23,42,.07);
+}
+
+
+.jg-account-box h2 {
+
+    margin: 0 0 10px;
+
+    font-size: 32px;
+}
+
+
+.jg-account-box p {
+
+    margin:
+        0 auto 25px;
+
+    max-width: 600px;
+
+    color: #64748b;
+
+    line-height: 1.6;
+}
+
+
+/* =========================
+   SERVICES
+========================= */
+
+.jg-section {
+
+    max-width: 1180px;
+
+    margin: auto;
+
+    padding:
+        85px 25px;
+}
+
+
+.jg-section-heading {
+
+    max-width: 650px;
+
+    margin-bottom: 35px;
+}
+
+
+.jg-section-heading small {
+
+    color: #2563eb;
+
+    font-weight: 900;
+
+    text-transform: uppercase;
+
+    letter-spacing: 1px;
+}
+
+
+.jg-section-heading h2 {
+
+    margin:
+        8px 0 12px;
+
+    font-size: 37px;
+
+    letter-spacing: -1px;
+}
+
+
+.jg-section-heading p {
+
+    color: #64748b;
+
+    line-height: 1.7;
+}
+
+
+.jg-service-grid {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 18px;
+}
+
+
+.jg-service-card {
+
+    padding: 25px;
+
+    background: white;
+
+    border:
+        1px solid #e2e8f0;
+
+    border-radius: 18px;
+
+    transition: .2s;
+}
+
+
+.jg-service-card:hover {
+
+    transform:
+        translateY(-5px);
+
+    box-shadow:
+        0 18px 40px
+        rgba(15,23,42,.08);
+}
+
+
+.jg-service-icon {
+
+    width: 48px;
+
+    height: 48px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 13px;
+
+    background: #eff6ff;
+
+    font-size: 21px;
+
+    margin-bottom: 18px;
+}
+
+
+.jg-service-card h3 {
+
+    margin:
+        0 0 8px;
+
+    font-size: 18px;
+}
+
+
+.jg-service-card p {
+
+    margin: 0;
+
+    color: #64748b;
+
+    font-size: 13px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================
+   CTA
+========================= */
+
+.jg-final-cta {
+
+    margin:
+        40px auto
+        90px;
+
+    max-width: 1100px;
+
+    padding:
+        55px 30px;
+
+    text-align: center;
+
+    border-radius: 25px;
+
+    color: white;
+
+    background:
+        linear-gradient(
+            135deg,
+            #2563eb,
+            #1e3a8a
+        );
+}
+
+
+.jg-final-cta h2 {
+
+    margin: 0 0 12px;
+
+    font-size: 34px;
+}
+
+
+.jg-final-cta p {
+
+    color: #dbeafe;
+
+    margin-bottom: 25px;
+}
+
+
+.jg-white-btn {
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        13px 22px;
+
+    border-radius: 10px;
+
+    background: white;
+
+    color: #1d4ed8;
+
+    text-decoration: none;
+
+    font-weight: 900;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
+.jg-footer {
+
+    padding:
+        45px 7%;
+
+    background: #0f172a;
+
+    color: white;
+}
+
+
+.jg-footer-inner {
+
+    max-width: 1180px;
+
+    margin: auto;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 30px;
+
+    flex-wrap: wrap;
+}
+
+
+.jg-footer-logo {
+
+    font-size: 25px;
+
+    font-weight: 950;
+}
+
+
+.jg-footer-logo span {
+    color: #60a5fa;
+}
+
+
+.jg-footer p {
+
+    color: #94a3b8;
+
+    font-size: 12px;
+}
+
+
+.jg-footer-links {
+
+    display: flex;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+
+.jg-footer-links a {
+
+    color: #cbd5e1;
+
+    text-decoration: none;
+
+    font-size: 12px;
+}
+
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:850px) {
+
+    .jg-nav-links {
+        display: none;
+    }
+
+    .jg-menu-btn {
+        display: block;
+    }
+
+    .jg-hero {
+
+        grid-template-columns: 1fr;
+
+        padding-top: 65px;
+    }
+
+    .jg-service-grid {
+
+        grid-template-columns:
+            1fr 1fr;
+    }
+
+}
+
+
+@media(max-width:550px) {
+
+    .jg-navbar {
+        padding: 0 20px;
+    }
+
+    .jg-hero {
+
+        padding:
+            55px 18px;
+    }
+
+    .jg-hero h1 {
+
+        font-size: 44px;
+
+        letter-spacing: -2px;
+    }
+
+    .jg-hero p {
+
+        font-size: 15px;
+    }
+
+    .jg-buttons {
+
+        flex-direction: column;
+    }
+
+    .jg-primary-btn,
+    .jg-secondary-btn {
+
+        width: 100%;
+    }
+
+    .jg-service-grid {
+
+        grid-template-columns: 1fr;
+    }
+
+    .jg-mini-cards {
+
+        grid-template-columns: 1fr;
+    }
+
+    .jg-section {
+
+        padding:
+            65px 18px;
+    }
+
+}
+
+</style>
+
 </head>
+
 
 <body>
 
 
-<!-- NAVBAR -->
+<!-- =========================
+     NAVBAR
+========================= -->
 
-<nav class="navbar">
+<nav class="jg-navbar">
 
-<a href="index.html"
-class="logo">
+    <a
+        href="index.html"
+        class="jg-logo">
 
-JG<span>.</span>
+        JG<span>.</span>
 
-</a>
+    </a>
 
 
-<div class="nav-links">
+    <!-- DESKTOP -->
 
-<a href="index.html"
-class="active">
-Home
-</a>
+    <div class="jg-nav-links">
 
-<a href="skills.html">
-Skills
-</a>
+        <a href="index.html">
+            Home
+        </a>
 
-<a href="learn.html">
-Learn
-</a>
+        <a href="#services">
+            Services
+        </a>
 
-<a href="work.html">
-Work
-</a>
+        <a href="skills.html">
+            Skills
+        </a>
 
-<a href="enrollment.html"
-class="nav-cta">
-Enroll
-</a>
+        <a href="learn.html">
+            Learn
+        </a>
 
-</div>
+        <a href="work.html">
+            Work
+        </a>
+
+        <a
+            href="account.html"
+            class="jg-account-btn">
+
+            Create Account
+
+        </a>
+
+    </div>
+
+
+    <!-- MOBILE -->
+
+    <button
+        id="jgMenuButton"
+        class="jg-menu-btn"
+        aria-label="Open menu">
+
+        ☰
+
+    </button>
 
 </nav>
 
 
 
-<!-- HERO -->
+<!-- =========================
+     MOBILE MENU
+========================= -->
 
-<section class="hero">
+<div
+    id="jgMobileMenu"
+    class="jg-mobile-menu">
 
-<div class="hero-content">
+    <a href="index.html">
+        🏠 Home
+    </a>
 
-<div class="badge">
-JG DIGITAL PLATFORM
-</div>
+    <a href="#services">
+        ⚡ Services
+    </a>
 
-<h1>
+    <a href="skills.html">
+        🎯 Skills
+    </a>
 
-Learn Skills.
-<br>
+    <a href="learn.html">
+        🎓 Learn
+    </a>
 
-<span>Find Opportunities.</span>
+    <a href="work.html">
+        💼 Work
+    </a>
 
-</h1>
+    <a href="account.html">
+        👤 Create an Account
+    </a>
 
-<p>
-
-JG is a platform designed to help you
-learn practical digital skills, improve
-your abilities and discover opportunities
-to put your skills to work.
-
-</p>
-
-
-<div class="hero-buttons">
-
-<a href="learn.html"
-class="btn btn-primary">
-
-Start Learning →
-
-</a>
-
-<a href="work.html"
-class="btn btn-secondary">
-
-Find Work
-
-</a>
+    <a href="account.html">
+        🔐 Login
+    </a>
 
 </div>
 
-</div>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<section class="jg-hero">
+
+
+    <div>
+
+        <div class="jg-badge">
+
+            ✦ Build your future with JG
+
+        </div>
+
+
+        <h1>
+
+            Learn skills.
+            <br>
+
+            <span>
+                Find opportunities.
+            </span>
+
+        </h1>
+
+
+        <p>
+
+            JG is a digital platform where
+            people can learn practical skills,
+            discover opportunities and take
+            the next step toward their goals.
+
+        </p>
+
+
+        <div class="jg-buttons">
+
+            <a
+                href="account.html"
+                class="jg-primary-btn">
+
+                Create an Account
+
+            </a>
+
+
+            <a
+                href="account.html"
+                class="jg-secondary-btn">
+
+                Already have an account? Login
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- HERO CARD -->
+
+    <div class="jg-hero-card">
+
+        <div class="jg-card-content">
+
+            <small>
+                JG PLATFORM
+            </small>
+
+
+            <h2>
+                Turn your skills
+                into opportunities.
+            </h2>
+
+
+            <p>
+
+                Learn practical skills,
+                improve your abilities and
+                discover new opportunities
+                through JG.
+
+            </p>
+
+
+            <div class="jg-mini-cards">
+
+                <div class="jg-mini-card">
+
+                    <strong>
+                        Learn
+                    </strong>
+
+                    <span>
+                        Practical skills
+                    </span>
+
+                </div>
+
+
+                <div class="jg-mini-card">
+
+                    <strong>
+                        Build
+                    </strong>
+
+                    <span>
+                        Your abilities
+                    </span>
+
+                </div>
+
+
+                <div class="jg-mini-card">
+
+                    <strong>
+                        Work
+                    </strong>
+
+                    <span>
+                        Find opportunities
+                    </span>
+
+                </div>
+
+
+                <div class="jg-mini-card">
+
+                    <strong>
+                        Grow
+                    </strong>
+
+                    <span>
+                        Build your future
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
 
 </section>
 
 
 
-<!-- WHY JG -->
+<!-- =========================
+     ACCOUNT CTA
+========================= -->
 
-<section class="section">
+<section class="jg-account-section">
 
-<div class="section-header">
+    <div class="jg-account-box">
 
-<div class="badge">
-WHY JG
-</div>
+        <h2>
+            Start your JG journey
+        </h2>
 
-<h2>
-Build Skills That Matter.
-</h2>
+        <p>
 
-<p>
+            Create your free JG account
+            and get access to the platform.
+            Already registered? Simply login
+            and continue where you left off.
 
-Learn practical skills and develop the
-confidence to use them in the real world.
-
-</p>
-
-</div>
+        </p>
 
 
-<div class="card-grid">
+        <div class="jg-buttons"
+             style="justify-content:center;">
+
+            <a
+                href="account.html"
+                class="jg-primary-btn">
+
+                Create Account
+
+            </a>
 
 
-<div class="card">
+            <a
+                href="account.html"
+                class="jg-secondary-btn">
 
-<div class="card-icon">
-🎓
-</div>
+                Login
 
-<h3>
-Learn Practical Skills
-</h3>
+            </a>
 
-<p>
-Focus on useful skills you can develop
-and apply instead of only learning theory.
-</p>
+        </div>
 
-</div>
-
-
-<div class="card">
-
-<div class="card-icon">
-💼
-</div>
-
-<h3>
-Discover Opportunities
-</h3>
-
-<p>
-Find opportunities where you can put
-your skills to work and build experience.
-</p>
-
-</div>
-
-
-<div class="card">
-
-<div class="card-icon">
-🚀
-</div>
-
-<h3>
-Grow Yourself
-</h3>
-
-<p>
-Build your knowledge, confidence,
-portfolio and professional abilities.
-</p>
-
-</div>
-
-
-</div>
+    </div>
 
 </section>
 
 
 
-<!-- STATS -->
+<!-- =========================
+     SERVICES
+========================= -->
 
-<section class="section">
-
-<div class="container">
-
-<div class="stats">
-
-<div class="stat">
-
-<strong>
-5+
-</strong>
-
-<span>
-Learning Paths
-</span>
-
-</div>
+<section
+    id="services"
+    class="jg-section">
 
 
-<div class="stat">
+    <div class="jg-section-heading">
 
-<strong>
-24/7
-</strong>
+        <small>
+            What JG offers
+        </small>
 
-<span>
-Online Access
-</span>
+        <h2>
+            Everything you need
+            to keep growing.
+        </h2>
 
-</div>
+        <p>
+
+            JG brings learning,
+            skill development and
+            opportunities together
+            in one platform.
+
+        </p>
+
+    </div>
 
 
-<div class="stat">
 
-<strong>
-1
-</strong>
+    <div class="jg-service-grid">
 
-<span>
-JG Community
-</span>
 
-</div>
+        <div class="jg-service-card">
 
-</div>
+            <div class="jg-service-icon">
+                🎓
+            </div>
 
-</div>
+            <h3>
+                Learn Skills
+            </h3>
+
+            <p>
+
+                Learn practical digital
+                skills through structured
+                learning programs.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="jg-service-card">
+
+            <div class="jg-service-icon">
+                💼
+            </div>
+
+            <h3>
+                Find Opportunities
+            </h3>
+
+            <p>
+
+                Discover opportunities
+                where your skills can
+                create value.
+
+            </p>
+
+        </div>
+
+
+
+        <div class="jg-service-card">
+
+            <div class="jg-service-icon">
+                🚀
+            </div>
+
+            <h3>
+                Build Your Future
+            </h3>
+
+            <p>
+
+                Develop your skills,
+                create projects and
+                move closer to your goals.
+
+            </p>
+
+        </div>
+
+    </div>
 
 </section>
 
 
 
-<!-- CTA -->
+<!-- =========================
+     FINAL CTA
+========================= -->
 
-<section class="cta">
+<section class="jg-final-cta">
 
-<h2>
-Your Next Skill Starts Here.
-</h2>
+    <h2>
+        Ready to get started?
+    </h2>
 
-<p>
-Choose a skill, start learning and take
-a step toward creating more opportunities
-for yourself.
-</p>
+    <p>
 
-<a href="learn.html"
-class="btn">
+        Create your JG account
+        and start exploring.
 
-Explore Courses →
+    </p>
 
-</a>
+
+    <a
+        href="account.html"
+        class="jg-white-btn">
+
+        Create Your Account
+
+    </a>
 
 </section>
 
 
 
-<footer>
+<!-- =========================
+     FOOTER
+========================= -->
 
-<div class="footer-logo">
-JG<span>.</span>
-</div>
+<footer class="jg-footer">
 
-<p>
-Find Skills. Find Work.
-</p>
+    <div class="jg-footer-inner">
 
-<br>
 
-<p>
-© 2026 JG. All rights reserved.
-</p>
+        <div>
+
+            <div class="jg-footer-logo">
+
+                JG<span>.</span>
+
+            </div>
+
+            <p>
+                Find Skills. Find Work.
+            </p>
+
+        </div>
+
+
+        <div class="jg-footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="#services">
+                Services
+            </a>
+
+            <a href="skills.html">
+                Skills
+            </a>
+
+            <a href="learn.html">
+                Learn
+            </a>
+
+            <a href="work.html">
+                Work
+            </a>
+
+            <a href="account.html">
+                Account
+            </a>
+
+        </div>
+
+
+    </div>
 
 </footer>
 
 
+
+<!-- =========================
+     MENU JAVASCRIPT
+========================= -->
+
+<script>
+
+const menuButton =
+document.getElementById(
+    "jgMenuButton"
+);
+
+const mobileMenu =
+document.getElementById(
+    "jgMobileMenu"
+);
+
+
+menuButton.addEventListener(
+    "click",
+    function() {
+
+        mobileMenu.classList.toggle(
+            "open"
+        );
+
+    }
+);
+
+
+/* Close menu after selecting a link */
+
+document
+.querySelectorAll(
+    "#jgMobileMenu a"
+)
+.forEach(
+    function(link) {
+
+        link.addEventListener(
+            "click",
+            function() {
+
+                mobileMenu.classList.remove(
+                    "open"
+                );
+
+            }
+        );
+
+    }
+);
+
+</script>
+
+
+
+<!-- =========================
+     JG CHATBOT
+========================= -->
+
 <script src="chatbot.js"></script>
+
 
 </body>
 
