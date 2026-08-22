@@ -1,735 +1,743 @@
-document.addEventListener("DOMContentLoaded", function () {
+(function(){
 
-    const chatbotHTML = `
-        <button id="jgChatButton" aria-label="Open JG AI Assistant">
-            💬
-        </button>
+const chatbotHTML = `
 
-        <div id="jgChatBox">
+<button id="jgChatButton">
+💬
+</button>
 
-            <div class="jg-chat-header">
+<div id="jgChatBox">
 
-                <div>
-                    <strong>JG AI Assistant</strong>
-                    <small>Online • Ready to help</small>
-                </div>
+<div class="jgChatHeader">
 
-                <button id="jgCloseChat">×</button>
+<div>
+<strong>JG AI Assistant</strong>
+<small>Online • Ready to help</small>
+</div>
 
-            </div>
+<button id="jgCloseChat">
+×
+</button>
 
-            <div id="jgMessages">
+</div>
 
-                <div class="jg-message bot">
-                    <strong>JG AI:</strong>
-                    👋 Hello! Welcome to JG.
 
-                    <br><br>
+<div id="jgMessages">
 
-                    I can help you with courses,
-                    prices, enrollment, payments and
-                    choosing a skill to learn.
-                </div>
+<div class="jgMessage jgBot">
 
-            </div>
+<strong>JG AI:</strong>
 
-            <div class="jg-quick-buttons">
+<br><br>
 
-                <button onclick="jgQuickQuestion('What courses do you offer?')">
-                    Courses
-                </button>
+👋 Welcome to JG!
 
-                <button onclick="jgQuickQuestion('How much are the courses?')">
-                    Prices
-                </button>
+I can help you with:
 
-                <button onclick="jgQuickQuestion('How do I enroll?')">
-                    Enrollment
-                </button>
+<br><br>
 
-            </div>
+• Courses
+<br>
+• Prices
+<br>
+• Enrollment
+<br>
+• OPay
+<br>
+• Bank Transfer
+<br>
+• Choosing a skill
 
-            <div class="jg-chat-input">
+<br><br>
 
-                <input
-                    type="text"
-                    id="jgUserInput"
-                    placeholder="Ask JG AI something..."
-                    autocomplete="off">
+What would you like to know?
 
-                <button id="jgSendButton">
-                    ➤
-                </button>
+</div>
 
-            </div>
+</div>
 
-        </div>
-    `;
 
-    document.body.insertAdjacentHTML(
-        "beforeend",
-        chatbotHTML
+<div class="jgChatInput">
+
+<input
+id="jgChatInput"
+type="text"
+placeholder="Ask JG AI..."
+>
+
+<button id="jgSend">
+➤
+</button>
+
+</div>
+
+</div>
+
+`;
+
+
+const chatbotCSS = `
+
+#jgChatButton{
+
+position:fixed;
+
+right:20px;
+
+bottom:20px;
+
+width:62px;
+
+height:62px;
+
+border:none;
+
+border-radius:50%;
+
+background:#2563eb;
+
+color:white;
+
+font-size:26px;
+
+cursor:pointer;
+
+box-shadow:0 10px 30px rgba(0,0,0,.25);
+
+z-index:99999;
+
+}
+
+
+#jgChatBox{
+
+position:fixed;
+
+right:20px;
+
+bottom:95px;
+
+width:360px;
+
+max-width:calc(100vw - 30px);
+
+height:500px;
+
+background:white;
+
+border-radius:18px;
+
+box-shadow:0 20px 60px rgba(0,0,0,.25);
+
+display:none;
+
+flex-direction:column;
+
+overflow:hidden;
+
+z-index:99998;
+
+border:1px solid #e5e7eb;
+
+font-family:Arial,sans-serif;
+
+}
+
+
+.jgChatHeader{
+
+background:#07111f;
+
+color:white;
+
+padding:17px;
+
+display:flex;
+
+justify-content:space-between;
+
+align-items:center;
+
+}
+
+
+.jgChatHeader small{
+
+display:block;
+
+color:#93c5fd;
+
+font-size:11px;
+
+margin-top:3px;
+
+}
+
+
+#jgCloseChat{
+
+background:none;
+
+border:none;
+
+color:white;
+
+font-size:28px;
+
+cursor:pointer;
+
+}
+
+
+#jgMessages{
+
+flex:1;
+
+overflow-y:auto;
+
+padding:15px;
+
+background:#f8fafc;
+
+}
+
+
+.jgMessage{
+
+max-width:88%;
+
+padding:12px;
+
+border-radius:13px;
+
+margin-bottom:12px;
+
+font-size:13px;
+
+line-height:1.5;
+
+}
+
+
+.jgBot{
+
+background:white;
+
+border:1px solid #e5e7eb;
+
+}
+
+
+.jgUser{
+
+background:#2563eb;
+
+color:white;
+
+margin-left:auto;
+
+}
+
+
+.jgChatInput{
+
+display:flex;
+
+gap:8px;
+
+padding:10px;
+
+border-top:1px solid #e5e7eb;
+
+background:white;
+
+}
+
+
+#jgChatInput{
+
+flex:1;
+
+padding:11px;
+
+border:1px solid #d1d5db;
+
+border-radius:8px;
+
+outline:none;
+
+}
+
+
+#jgSend{
+
+width:45px;
+
+border:none;
+
+border-radius:8px;
+
+background:#2563eb;
+
+color:white;
+
+cursor:pointer;
+
+}
+
+
+@media(max-width:600px){
+
+#jgChatBox{
+
+right:12px;
+
+width:calc(100vw - 24px);
+
+}
+
+}
+
+`;
+
+
+const style =
+document.createElement("style");
+
+style.textContent =
+chatbotCSS;
+
+document.head.appendChild(style);
+
+
+const wrapper =
+document.createElement("div");
+
+wrapper.innerHTML =
+chatbotHTML;
+
+document.body.appendChild(wrapper);
+
+
+const chatButton =
+document.getElementById(
+"jgChatButton"
+);
+
+
+const chatBox =
+document.getElementById(
+"jgChatBox"
+);
+
+
+const closeButton =
+document.getElementById(
+"jgCloseChat"
+);
+
+
+const input =
+document.getElementById(
+"jgChatInput"
+);
+
+
+const sendButton =
+document.getElementById(
+"jgSend"
+);
+
+
+const messages =
+document.getElementById(
+"jgMessages"
+);
+
+
+chatButton.onclick =
+function(){
+
+    chatBox.style.display =
+    "flex";
+
+    input.focus();
+
+};
+
+
+closeButton.onclick =
+function(){
+
+    chatBox.style.display =
+    "none";
+
+};
+
+
+function addMessage(
+    text,
+    type
+){
+
+    const message =
+    document.createElement(
+        "div"
     );
 
+    message.className =
+    "jgMessage " +
+    type;
 
-    const style = document.createElement("style");
+    message.innerHTML =
+    text;
 
-    style.textContent = `
+    messages.appendChild(
+        message
+    );
 
-        #jgChatButton {
+    messages.scrollTop =
+    messages.scrollHeight;
 
-            position: fixed;
-            right: 22px;
-            bottom: 22px;
+}
 
-            width: 62px;
-            height: 62px;
 
-            border: none;
-            border-radius: 50%;
+function getResponse(
+    message
+){
 
-            background: #2563eb;
-            color: white;
+    const text =
+    message.toLowerCase();
 
-            font-size: 27px;
 
-            cursor: pointer;
-
-            box-shadow:
-                0 10px 30px rgba(0,0,0,0.25);
-
-            z-index: 9999;
-
-            transition: 0.25s;
-        }
-
-
-        #jgChatButton:hover {
-            transform: scale(1.08);
-        }
-
-
-        #jgChatBox {
-
-            position: fixed;
-
-            right: 22px;
-            bottom: 95px;
-
-            width: 360px;
-            max-width: calc(100vw - 30px);
-
-            height: 520px;
-
-            background: white;
-
-            border-radius: 18px;
-
-            box-shadow:
-                0 20px 60px rgba(0,0,0,0.22);
-
-            overflow: hidden;
-
-            display: none;
-
-            flex-direction: column;
-
-            z-index: 9998;
-
-            border: 1px solid #e5e7eb;
-        }
-
-
-        .jg-chat-header {
-
-            background:
-                linear-gradient(
-                    135deg,
-                    #07111f,
-                    #172554
-                );
-
-            color: white;
-
-            padding: 18px;
-
-            display: flex;
-
-            justify-content: space-between;
-
-            align-items: center;
-        }
-
-
-        .jg-chat-header strong {
-
-            display: block;
-
-            font-size: 16px;
-        }
-
-
-        .jg-chat-header small {
-
-            color: #93c5fd;
-
-            font-size: 11px;
-        }
-
-
-        #jgCloseChat {
-
-            background: transparent;
-
-            border: none;
-
-            color: white;
-
-            font-size: 28px;
-
-            cursor: pointer;
-        }
-
-
-        #jgMessages {
-
-            flex: 1;
-
-            overflow-y: auto;
-
-            padding: 15px;
-
-            background: #f8fafc;
-        }
-
-
-        .jg-message {
-
-            max-width: 88%;
-
-            padding: 12px 14px;
-
-            border-radius: 13px;
-
-            margin-bottom: 12px;
-
-            font-size: 13px;
-
-            line-height: 1.5;
-        }
-
-
-        .jg-message.bot {
-
-            background: white;
-
-            border: 1px solid #e5e7eb;
-
-            color: #334155;
-
-            border-bottom-left-radius: 4px;
-        }
-
-
-        .jg-message.user {
-
-            background: #2563eb;
-
-            color: white;
-
-            margin-left: auto;
-
-            border-bottom-right-radius: 4px;
-        }
-
-
-        .jg-quick-buttons {
-
-            display: flex;
-
-            gap: 7px;
-
-            padding: 9px;
-
-            overflow-x: auto;
-
-            border-top: 1px solid #e5e7eb;
-
-            background: white;
-        }
-
-
-        .jg-quick-buttons button {
-
-            white-space: nowrap;
-
-            border: 1px solid #bfdbfe;
-
-            background: #eff6ff;
-
-            color: #1d4ed8;
-
-            padding: 7px 10px;
-
-            border-radius: 20px;
-
-            cursor: pointer;
-
-            font-size: 11px;
-        }
-
-
-        .jg-chat-input {
-
-            display: flex;
-
-            padding: 10px;
-
-            gap: 8px;
-
-            border-top: 1px solid #e5e7eb;
-
-            background: white;
-        }
-
-
-        #jgUserInput {
-
-            flex: 1;
-
-            border: 1px solid #d1d5db;
-
-            border-radius: 9px;
-
-            padding: 11px;
-
-            outline: none;
-
-            font-size: 13px;
-        }
-
-
-        #jgUserInput:focus {
-            border-color: #2563eb;
-        }
-
-
-        #jgSendButton {
-
-            width: 42px;
-
-            border: none;
-
-            border-radius: 9px;
-
-            background: #2563eb;
-
-            color: white;
-
-            cursor: pointer;
-
-            font-size: 17px;
-        }
-
-
-        @media (max-width: 500px) {
-
-            #jgChatBox {
-
-                right: 12px;
-                bottom: 88px;
-
-                width: calc(100vw - 24px);
-
-                height: 500px;
-            }
-
-            #jgChatButton {
-
-                right: 15px;
-                bottom: 15px;
-            }
-
-        }
-
-    `;
-
-    document.head.appendChild(style);
-
-
-    const chatButton =
-        document.getElementById("jgChatButton");
-
-    const chatBox =
-        document.getElementById("jgChatBox");
-
-    const closeButton =
-        document.getElementById("jgCloseChat");
-
-    const sendButton =
-        document.getElementById("jgSendButton");
-
-    const input =
-        document.getElementById("jgUserInput");
-
-
-    chatButton.addEventListener("click", function () {
-
-        chatBox.style.display = "flex";
-
-        input.focus();
-
-    });
-
-
-    closeButton.addEventListener("click", function () {
-
-        chatBox.style.display = "none";
-
-    });
-
-
-    sendButton.addEventListener("click", sendMessage);
-
-
-    input.addEventListener("keydown", function (event) {
-
-        if (event.key === "Enter") {
-
-            sendMessage();
-
-        }
-
-    });
-
-
-    window.jgQuickQuestion = function (question) {
-
-        input.value = question;
-
-        sendMessage();
-
-    };
-
-
-    function sendMessage() {
-
-        const text =
-            input.value.trim();
-
-        if (!text) {
-            return;
-        }
-
-
-        addMessage(
-            text,
-            "user"
-        );
-
-
-        input.value = "";
-
-
-        setTimeout(function () {
-
-            const response =
-                getJGResponse(text);
-
-            addMessage(
-                response,
-                "bot"
-            );
-
-        }, 450);
-
-    }
-
-
-    function addMessage(text, type) {
-
-        const messages =
-            document.getElementById("jgMessages");
-
-
-        const message =
-            document.createElement("div");
-
-
-        message.className =
-            "jg-message " + type;
-
-
-        if (type === "bot") {
-
-            message.innerHTML =
-                "<strong>JG AI:</strong> " +
-                text;
-
-        } else {
-
-            message.textContent =
-                text;
-
-        }
-
-
-        messages.appendChild(message);
-
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-    }
-
-
-    function getJGResponse(message) {
-
-        const text =
-            message.toLowerCase();
-
-
-        if (
-            text.includes("course") ||
-            text.includes("courses") ||
-            text.includes("learn")
-        ) {
-
-            return `
-                JG currently offers courses including
-                Web Development, Graphic Design,
-                Video Editing, Python Programming,
-                Digital Marketing and Career Skills.
-
-                <br><br>
-
-                You can see all available courses on
-                the <a href="learn.html">Learn page</a>.
-            `;
-
-        }
-
-
-        if (
-            text.includes("price") ||
-            text.includes("cost") ||
-            text.includes("how much")
-        ) {
-
-            return `
-                Current course prices include:
-
-                <br><br>
-
-                • Web Development — ₦25,000<br>
-                • Graphic Design — ₦15,000<br>
-                • Video Editing — ₦15,000<br>
-                • Python Programming — ₦25,000<br>
-                • Digital Marketing — ₦20,000<br>
-                • Career Skills — ₦10,000
-
-                <br><br>
-
-                Prices may change as JG adds new courses.
-            `;
-
-        }
-
-
-        if (
-            text.includes("enroll") ||
-            text.includes("registration") ||
-            text.includes("register")
-        ) {
-
-            return `
-                Enrolling is easy.
-
-                <br><br>
-
-                1. Choose a course.<br>
-                2. Click "Enroll Now".<br>
-                3. Enter your details.<br>
-                4. Select your payment method.<br>
-                5. Follow the payment instructions.
-
-                <br><br>
-
-                <a href="enroll.html">
-                    Start Enrollment →
-                </a>
-            `;
-
-        }
-
-
-        if (
-            text.includes("opay") ||
-            text.includes("transfer") ||
-            text.includes("payment")
-        ) {
-
-            return `
-                JG currently accepts payment through
-                OPay and bank transfer.
-
-                <br><br>
-
-                <strong>Bank:</strong> OPay<br>
-                <strong>Account Name:</strong>
-                JESSE EYITEMI ANOMUOGHARAN<br>
-                <strong>Account Number:</strong>
-                6493501689
-
-                <br><br>
-
-                Always check the enrollment page for
-                the exact course amount before paying.
-            `;
-
-        }
-
-
-        if (
-            text.includes("web development") ||
-            text.includes("website")
-        ) {
-
-            return `
-                Web Development teaches you how to
-                create websites using technologies such
-                as HTML, CSS and JavaScript.
-
-                <br><br>
-
-                The current course price is ₦25,000.
-            `;
-
-        }
-
-
-        if (
-            text.includes("graphic design") ||
-            text.includes("design")
-        ) {
-
-            return `
-                Graphic Design teaches you how to create
-                professional digital designs.
-
-                <br><br>
-
-                The current course price is ₦15,000.
-            `;
-
-        }
-
-
-        if (
-            text.includes("video editing") ||
-            text.includes("video")
-        ) {
-
-            return `
-                The Video Editing course teaches you
-                practical video editing skills.
-
-                <br><br>
-
-                The current course price is ₦15,000.
-            `;
-
-        }
-
-
-        if (
-            text.includes("python") ||
-            text.includes("programming") ||
-            text.includes("coding")
-        ) {
-
-            return `
-                Python Programming teaches programming
-                fundamentals using Python.
-
-                <br><br>
-
-                The current course price is ₦25,000.
-            `;
-
-        }
-
-
-        if (
-            text.includes("hello") ||
-            text.includes("hi") ||
-            text.includes("hey")
-        ) {
-
-            return `
-                👋 Hello!
-
-                Welcome to JG. I'm the JG AI Assistant.
-
-                <br><br>
-
-                Ask me about courses, prices,
-                enrollment, payments or skills.
-            `;
-
-        }
-
-
-        if (
-            text.includes("skill") ||
-            text.includes("which should")
-        ) {
-
-            return `
-                The best skill depends on your goal.
-
-                <br><br>
-
-                💻 Interested in technology?
-                Try Web Development or Python.
-
-                <br><br>
-
-                🎨 Interested in creativity?
-                Try Graphic Design or Video Editing.
-
-                <br><br>
-
-                📈 Interested in business?
-                Try Digital Marketing.
-
-                <br><br>
-
-                You can explore the available skills
-                on the <a href="skills.html">Skills page</a>.
-            `;
-
-        }
-
+    if(
+        text.includes("hello") ||
+        text.includes("hi") ||
+        text.includes("hey")
+    ){
 
         return `
-            I'm the JG Assistant and I can help with:
 
-            <br><br>
+        <strong>JG AI:</strong>
 
-            • Courses<br>
-            • Course prices<br>
-            • Enrollment<br>
-            • OPay payments<br>
-            • Bank transfer<br>
-            • Choosing a skill
+        <br><br>
 
-            <br><br>
+        👋 Hello!
 
-            Try asking:
-            <strong>"How much is Web Development?"</strong>
+        Welcome to JG.
+
+        <br><br>
+
+        Ask me about courses,
+        prices, enrollment or payment.
+
         `;
 
     }
 
+
+    if(
+        text.includes("course") ||
+        text.includes("courses") ||
+        text.includes("learn")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        JG currently offers:
+
+        <br><br>
+
+        💻 Web Development — ₦25,000
+
+        <br>
+
+        🎨 Graphic Design — ₦15,000
+
+        <br>
+
+        🎬 Video Editing — ₦15,000
+
+        <br>
+
+        🐍 Python Programming — ₦25,000
+
+        <br>
+
+        📈 Digital Marketing — ₦20,000
+
+        <br>
+
+        💼 Career Skills — ₦10,000
+
+        <br><br>
+
+        Visit the Learn page to enroll.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("price") ||
+        text.includes("cost") ||
+        text.includes("how much")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        Our courses currently range from
+        ₦10,000 to ₦25,000.
+
+        <br><br>
+
+        You can see every course and price
+        on the Learn page.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("enroll") ||
+        text.includes("register")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        To enroll:
+
+        <br><br>
+
+        1. Choose a course.
+        <br>
+        2. Click Enroll Now.
+        <br>
+        3. Enter your details.
+        <br>
+        4. Select your payment method.
+        <br>
+        5. Make your payment.
+        <br>
+        6. Submit your enrollment.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("opay") ||
+        text.includes("transfer") ||
+        text.includes("payment")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        JG accepts OPay and Bank Transfer.
+
+        <br><br>
+
+        <strong>Bank:</strong>
+        OPay
+
+        <br>
+
+        <strong>Account Name:</strong>
+        JESSE EYITEMI ANOMUOGHARAN
+
+        <br>
+
+        <strong>Account Number:</strong>
+        6493501689
+
+        <br><br>
+
+        Please check your enrollment page
+        for the exact amount before paying.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("web") ||
+        text.includes("coding")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        Web Development is ₦25,000.
+
+        You can enroll from the Learn page.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("graphic") ||
+        text.includes("design")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        Graphic Design is ₦15,000.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("video")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        Video Editing is ₦15,000.
+
+        `;
+
+    }
+
+
+    if(
+        text.includes("python") ||
+        text.includes("programming")
+    ){
+
+        return `
+
+        <strong>JG AI:</strong>
+
+        <br><br>
+
+        Python Programming is ₦25,000.
+
+        `;
+
+    }
+
+
+    return `
+
+    <strong>JG AI:</strong>
+
+    <br><br>
+
+    I can help with:
+
+    <br><br>
+
+    • Courses
+    <br>
+    • Prices
+    <br>
+    • Enrollment
+    <br>
+    • OPay
+    <br>
+    • Bank Transfer
+    <br>
+    • Skills
+
+    <br><br>
+
+    Try asking:
+    <br>
+    <strong>
+    "How much is Web Development?"
+    </strong>
+
+    `;
+
+}
+
+
+function sendMessage(){
+
+    const text =
+    input.value.trim();
+
+
+    if(!text){
+        return;
+    }
+
+
+    addMessage(
+        text,
+        "jgUser"
+    );
+
+
+    input.value = "";
+
+
+    setTimeout(
+        function(){
+
+            addMessage(
+                getResponse(text),
+                "jgBot"
+            );
+
+        },
+        350
+    );
+
+}
+
+
+sendButton.onclick =
+sendMessage;
+
+
+input.addEventListener(
+"keydown",
+function(event){
+
+    if(
+        event.key === "Enter"
+    ){
+
+        sendMessage();
+
+    }
+
 });
+
+})();
