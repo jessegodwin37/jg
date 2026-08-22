@@ -1,625 +1,297 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>JG | Find Work</title>
 
 <style>
-* {
-  box-sizing: border-box;
+
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
 }
 
-body {
-  margin: 0;
-  font-family: Arial, Helvetica, sans-serif;
-  background: #f8fafc;
-  color: #0f172a;
+body{
+    font-family:Arial,sans-serif;
+    background:#f5f7fb;
+    color:#111827;
 }
 
-nav {
-  height: 74px;
-  background: #0b1220;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 7%;
+nav{
+    background:#07111f;
+    padding:18px 7%;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  color: white;
-  text-decoration: none;
-  font-size: 25px;
-  font-weight: 800;
+.logo{
+    color:white;
+    font-size:28px;
+    font-weight:900;
 }
 
-.logo-mark {
-  width: 40px;
-  height: 40px;
-  background: #2563eb;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-weight: 900;
+.logo span{
+    color:#2563eb;
 }
 
-.nav-links {
-  display: flex;
-  gap: 28px;
+nav a{
+    color:#cbd5e1;
+    text-decoration:none;
+    margin-left:20px;
+    font-size:14px;
 }
 
-.nav-links a {
-  color: #cbd5e1;
-  text-decoration: none;
-  font-size: 15px;
-  font-weight: 600;
+.hero{
+    background:linear-gradient(135deg,#07111f,#172554);
+    color:white;
+    padding:75px 7%;
 }
 
-.nav-links a:hover {
-  color: white;
+.hero h1{
+    font-size:50px;
+    margin-bottom:12px;
 }
 
-.hero {
-  text-align: center;
-  padding: 75px 20px 50px;
-  background: linear-gradient(135deg, #eef4ff, #ffffff);
+.hero p{
+    color:#cbd5e1;
+    max-width:650px;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: 48px;
-  letter-spacing: -2px;
+.section{
+    padding:70px 7%;
 }
 
-.hero p {
-  color: #64748b;
-  font-size: 18px;
-  max-width: 650px;
-  margin: 15px auto 30px;
-  line-height: 1.6;
+.work-grid{
+    display:grid;
+    grid-template-columns:repeat(3,1fr);
+    gap:25px;
 }
 
-.search-box {
-  max-width: 650px;
-  margin: auto;
-  display: flex;
-  background: white;
-  padding: 6px;
-  border: 1px solid #dbe2ea;
-  border-radius: 14px;
-  box-shadow: 0 15px 40px rgba(15,23,42,0.08);
+.work-card{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:15px;
+    padding:30px;
 }
 
-.search-box input {
-  flex: 1;
-  border: none;
-  outline: none;
-  padding: 16px;
-  font-size: 16px;
+.work-card h3{
+    margin-bottom:10px;
 }
 
-.search-box button {
-  border: none;
-  background: #2563eb;
-  color: white;
-  padding: 0 25px;
-  border-radius: 10px;
-  font-weight: 700;
-  cursor: pointer;
+.work-card p{
+    color:#64748b;
+    font-size:14px;
+    margin-bottom:20px;
 }
 
-.container {
-  max-width: 1100px;
-  margin: auto;
-  padding: 60px 20px;
+.tag{
+    display:inline-block;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:7px 10px;
+    border-radius:20px;
+    font-size:12px;
+    font-weight:bold;
 }
 
-.section-title {
-  margin-bottom: 30px;
+@media(max-width:800px){
+
+    .work-grid{
+        grid-template-columns:1fr 1fr;
+    }
+
 }
 
-.section-title h2 {
-  margin: 0;
-  font-size: 28px;
+@media(max-width:600px){
+
+    .work-grid{
+        grid-template-columns:1fr;
+    }
+
+    .hero h1{
+        font-size:40px;
+    }
+
 }
 
-.jobs-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.job-card {
-  background: white;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 25px;
-  transition: 0.2s;
-}
-
-.job-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 15px 35px rgba(15,23,42,0.09);
-}
-
-.job-type {
-  display: inline-block;
-  padding: 6px 10px;
-  border-radius: 20px;
-  background: #eff6ff;
-  color: #2563eb;
-  font-size: 12px;
-  font-weight: 700;
-  margin-bottom: 15px;
-}
-
-.job-card h3 {
-  margin: 0 0 10px;
-  font-size: 20px;
-}
-
-.job-card p {
-  color: #64748b;
-  line-height: 1.6;
-  min-height: 75px;
-}
-
-.job-info {
-  padding: 7px 0;
-  font-size: 14px;
-  color: #475569;
-}
-
-.apply-btn {
-  width: 100%;
-  margin-top: 15px;
-  border: none;
-  background: #0b1220;
-  color: white;
-  padding: 13px;
-  border-radius: 9px;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.apply-btn:hover {
-  background: #2563eb;
-}
-
-.back {
-  text-align: center;
-  margin: 0 0 70px;
-}
-
-.back a {
-  color: #2563eb;
-  font-weight: 700;
-  text-decoration: none;
-}
-
-footer {
-  background: #070d18;
-  color: white;
-  text-align: center;
-  padding: 40px 20px;
-}
-
-footer p {
-  color: #94a3b8;
-  margin: 7px;
-}
-
-/* APPLICATION MODAL */
-
-.modal {
-  display: none;
-  position: fixed;
-  inset: 0;
-  background: rgba(2,6,23,0.7);
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  z-index: 20;
-}
-
-.modal-box {
-  width: 100%;
-  max-width: 460px;
-  background: white;
-  border-radius: 18px;
-  padding: 30px;
-  position: relative;
-}
-
-.modal-box h2 {
-  margin-top: 0;
-}
-
-.modal-box p {
-  color: #64748b;
-}
-
-.modal-box input,
-.modal-box textarea {
-  width: 100%;
-  padding: 13px;
-  margin: 7px 0;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font-family: inherit;
-}
-
-.modal-box textarea {
-  height: 110px;
-  resize: none;
-}
-
-.send-btn {
-  width: 100%;
-  margin-top: 8px;
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.close {
-  position: absolute;
-  right: 20px;
-  top: 15px;
-  font-size: 25px;
-  cursor: pointer;
-}
-
-@media (max-width: 750px) {
-
-  nav {
-    padding: 0 20px;
-  }
-
-  .nav-links {
-    gap: 12px;
-  }
-
-  .nav-links a {
-    font-size: 13px;
-  }
-
-  .jobs-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .hero h1 {
-    font-size: 38px;
-  }
-
-  .search-box {
-    width: 100%;
-  }
-}
 </style>
+
 </head>
 
 <body>
 
+
 <nav>
 
-  <a href="index.html" class="logo">
-    <div class="logo-mark">JG</div>
-    JG
-  </a>
+<div class="logo">
+JG<span>.</span>
+</div>
 
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="skills.html">Skills</a>
-    <a href="work.html">Work</a>
-  </div>
+<div>
+
+<a href="index.html">
+Home
+</a>
+
+<a href="skills.html">
+Skills
+</a>
+
+<a href="learn.html">
+Learn
+</a>
+
+<a href="enrollment.html">
+Enroll
+</a>
+
+</div>
 
 </nav>
 
+
 <section class="hero">
 
-  <h1>Find your next opportunity.</h1>
+<h1>
+Find Work
+</h1>
 
-  <p>
-    Discover projects and jobs where your skills can make an impact.
-  </p>
-
-  <div class="search-box">
-
-    <input
-      id="jobSearch"
-      type="text"
-      placeholder="Search web development, design, writing..."
-    >
-
-    <button onclick="searchJobs()">
-      Search
-    </button>
-
-  </div>
+<p>
+Turn your skills into experience, projects
+and opportunities.
+</p>
 
 </section>
 
-<main class="container">
 
-  <div class="section-title">
-    <h2>Latest Opportunities</h2>
-  </div>
+<section class="section">
 
-  <div class="jobs-grid">
+<div class="work-grid">
 
-    <div class="job-card">
 
-      <div class="job-type">REMOTE</div>
+<div class="work-card">
 
-      <h3>Graphic Designer</h3>
+<span class="tag">
+FREELANCE
+</span>
 
-      <p>
-        Create social media designs, promotional graphics and brand assets.
-      </p>
+<h3>
+Freelance Projects
+</h3>
 
-      <div class="job-info">💰 ₦20,000 – ₦50,000</div>
-      <div class="job-info">🎨 Graphic Design</div>
-      <div class="job-info">🌍 Remote</div>
-
-      <button
-        class="apply-btn"
-        onclick="openApplication('Graphic Designer')">
-        Apply Now
-      </button>
-
-    </div>
-
-    <div class="job-card">
-
-      <div class="job-type">PROJECT</div>
-
-      <h3>Website Developer</h3>
-
-      <p>
-        Build a modern responsive website for a growing business.
-      </p>
-
-      <div class="job-info">💰 ₦50,000 – ₦150,000</div>
-      <div class="job-info">💻 Web Development</div>
-      <div class="job-info">🌍 Remote</div>
-
-      <button
-        class="apply-btn"
-        onclick="openApplication('Website Developer')">
-        Apply Now
-      </button>
-
-    </div>
-
-    <div class="job-card">
-
-      <div class="job-type">PART-TIME</div>
-
-      <h3>Social Media Manager</h3>
-
-      <p>
-        Manage social accounts, plan content and improve engagement.
-      </p>
-
-      <div class="job-info">💰 ₦30,000 – ₦80,000</div>
-      <div class="job-info">📱 Social Media</div>
-      <div class="job-info">🌍 Remote</div>
-
-      <button
-        class="apply-btn"
-        onclick="openApplication('Social Media Manager')">
-        Apply Now
-      </button>
-
-    </div>
-
-    <div class="job-card">
-
-      <div class="job-type">PROJECT</div>
-
-      <h3>Video Editor</h3>
-
-      <p>
-        Edit short-form content for TikTok, Instagram and YouTube.
-      </p>
-
-      <div class="job-info">💰 ₦25,000 – ₦70,000</div>
-      <div class="job-info">🎬 Video Editing</div>
-      <div class="job-info">🌍 Remote</div>
-
-      <button
-        class="apply-btn"
-        onclick="openApplication('Video Editor')">
-        Apply Now
-      </button>
-
-    </div>
-
-    <div class="job-card">
-
-      <div class="job-type">REMOTE</div>
-
-      <h3>Content Writer</h3>
-
-      <p>
-        Write articles, website content and marketing materials.
-      </p>
-
-      <div class="job-info">💰 ₦15,000 – ₦50,000</div>
-      <div class="job-info">✍️ Writing</div>
-      <div class="job-info">🌍 Remote</div>
-
-      <button
-        class="apply-btn"
-        onclick="openApplication('Content Writer')">
-        Apply Now
-      </button>
-
-    </div>
-
-    <div class="job-card">
-
-      <div class="job-type">LOCAL</div>
-
-      <h3>Photographer</h3>
-
-      <p>
-        Photograph events, products and professional portraits.
-      </p>
-
-      <div class="job-info">💰 ₦30,000 – ₦100,000</div>
-      <div class="job-info">📸 Photography</div>
-      <div class="job-info">📍 Local</div>
-
-      <button
-        class="apply-btn"
-        onclick="openApplication('Photographer')">
-        Apply Now
-      </button>
-
-    </div>
-
-  </div>
-
-</main>
-
-<div class="back">
-  <a href="index.html">← Back to JG</a>
-</div>
-
-<footer>
-
-  <p><strong>JG</strong></p>
-  <p>Find Skills. Find Work.</p>
-  <p>© 2026 JG. All rights reserved.</p>
-
-</footer>
-
-<div class="modal" id="applicationModal">
-
-  <div class="modal-box">
-
-    <span class="close" onclick="closeApplication()">×</span>
-
-    <h2>Apply for Opportunity</h2>
-
-    <p id="selectedJob"></p>
-
-    <input
-      id="applicantName"
-      type="text"
-      placeholder="Your name"
-    >
-
-    <input
-      id="applicantEmail"
-      type="email"
-      placeholder="Your email"
-    >
-
-    <textarea
-      id="applicantMessage"
-      placeholder="Tell us about yourself and your experience..."
-    ></textarea>
-
-    <button class="send-btn" onclick="sendApplication()">
-      Continue to WhatsApp
-    </button>
-
-  </div>
+<p>
+Use your skills to work on projects for
+individuals and businesses.
+</p>
 
 </div>
 
-<script>
 
-const whatsappNumber = "2349070707689";
+<div class="work-card">
 
-let selectedJob = "";
+<span class="tag">
+PORTFOLIO
+</span>
 
-function openApplication(job) {
+<h3>
+Build Your Portfolio
+</h3>
 
-  selectedJob = job;
+<p>
+Create projects that show potential clients
+and employers what you can do.
+</p>
 
-  document.getElementById("selectedJob").innerText =
-    "You are applying for: " + job;
+</div>
 
-  document.getElementById("applicationModal").style.display = "flex";
-}
 
-function closeApplication() {
+<div class="work-card">
 
-  document.getElementById("applicationModal").style.display = "none";
+<span class="tag">
+REMOTE
+</span>
 
-}
+<h3>
+Remote Opportunities
+</h3>
 
-function sendApplication() {
+<p>
+Build digital skills that can be used from
+almost anywhere.
+</p>
 
-  const name =
-    document.getElementById("applicantName").value.trim();
+</div>
 
-  const email =
-    document.getElementById("applicantEmail").value.trim();
 
-  const message =
-    document.getElementById("applicantMessage").value.trim();
+<div class="work-card">
 
-  if (!name || !email || !message) {
+<span class="tag">
+BUSINESS
+</span>
 
-    alert("Please complete all fields.");
+<h3>
+Help Businesses
+</h3>
 
-    return;
-  }
+<p>
+Use design, marketing, development or
+editing skills to help businesses grow.
+</p>
 
-  const text =
-    "JG Job Application\n\n" +
-    "Position: " + selectedJob +
-    "\nName: " + name +
-    "\nEmail: " + email +
-    "\nApplication: " + message;
+</div>
 
-  window.open(
-    "https://wa.me/" +
-    whatsappNumber +
-    "?text=" +
-    encodeURIComponent(text),
-    "_blank"
-  );
-}
 
-function searchJobs() {
+<div class="work-card">
 
-  const search =
-    document.getElementById("jobSearch").value
-    .toLowerCase()
-    .trim();
+<span class="tag">
+CREATOR
+</span>
 
-  const cards =
-    document.querySelectorAll(".job-card");
+<h3>
+Become a Creator
+</h3>
 
-  cards.forEach(function(card) {
+<p>
+Create useful digital content and develop
+your personal brand.
+</p>
 
-    const text =
-      card.innerText.toLowerCase();
+</div>
 
-    card.style.display =
-      text.includes(search) ? "" : "none";
 
-  });
+<div class="work-card">
 
-}
+<span class="tag">
+GROWTH
+</span>
 
-</script>
+<h3>
+Keep Improving
+</h3>
+
+<p>
+The more valuable your skills become,
+the more opportunities you can pursue.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+<script src="chatbot.js"></script>
 
 </body>
+
 </html>
