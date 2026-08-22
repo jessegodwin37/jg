@@ -8,134 +8,24 @@
 <meta name="viewport"
 content="width=device-width, initial-scale=1.0">
 
-<title>JG | Find Work</title>
+<title>JG | Learn</title>
 
-<style>
-
-*{
-    box-sizing:border-box;
-    margin:0;
-    padding:0;
-}
-
-body{
-    font-family:Arial,sans-serif;
-    background:#f5f7fb;
-    color:#111827;
-}
-
-nav{
-    background:#07111f;
-    padding:18px 7%;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#2563eb;
-}
-
-nav a{
-    color:#cbd5e1;
-    text-decoration:none;
-    margin-left:20px;
-    font-size:14px;
-}
-
-.hero{
-    background:linear-gradient(135deg,#07111f,#172554);
-    color:white;
-    padding:75px 7%;
-}
-
-.hero h1{
-    font-size:50px;
-    margin-bottom:12px;
-}
-
-.hero p{
-    color:#cbd5e1;
-    max-width:650px;
-}
-
-.section{
-    padding:70px 7%;
-}
-
-.work-grid{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.work-card{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:15px;
-    padding:30px;
-}
-
-.work-card h3{
-    margin-bottom:10px;
-}
-
-.work-card p{
-    color:#64748b;
-    font-size:14px;
-    margin-bottom:20px;
-}
-
-.tag{
-    display:inline-block;
-    background:#eff6ff;
-    color:#2563eb;
-    padding:7px 10px;
-    border-radius:20px;
-    font-size:12px;
-    font-weight:bold;
-}
-
-@media(max-width:800px){
-
-    .work-grid{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    .work-grid{
-        grid-template-columns:1fr;
-    }
-
-    .hero h1{
-        font-size:40px;
-    }
-
-}
-
-</style>
+<link rel="stylesheet"
+href="style.css">
 
 </head>
 
 <body>
 
 
-<nav>
+<nav class="navbar">
 
-<div class="logo">
+<a href="index.html"
+class="logo">
 JG<span>.</span>
-</div>
+</a>
 
-<div>
+<div class="nav-links">
 
 <a href="index.html">
 Home
@@ -145,11 +35,17 @@ Home
 Skills
 </a>
 
-<a href="learn.html">
+<a href="learn.html"
+class="active">
 Learn
 </a>
 
-<a href="enrollment.html">
+<a href="work.html">
+Work
+</a>
+
+<a href="enrollment.html"
+class="nav-cta">
 Enroll
 </a>
 
@@ -158,129 +54,407 @@ Enroll
 </nav>
 
 
+
 <section class="hero">
 
+<div class="hero-content">
+
+<div class="badge">
+JG LEARNING
+</div>
+
 <h1>
-Find Work
+
+Learn.
+<span>Build.</span>
+Grow.
+
 </h1>
 
 <p>
-Turn your skills into experience, projects
-and opportunities.
+
+Choose a practical course, learn at your
+own pace and develop skills you can use.
+
 </p>
 
+</div>
+
 </section>
+
 
 
 <section class="section">
 
-<div class="work-grid">
+<div class="section-header">
 
+<div class="badge">
+COURSES
+</div>
 
-<div class="work-card">
-
-<span class="tag">
-FREELANCE
-</span>
-
-<h3>
-Freelance Projects
-</h3>
+<h2>
+Choose Your Course
+</h2>
 
 <p>
-Use your skills to work on projects for
-individuals and businesses.
+Select the skill you want to develop.
 </p>
 
 </div>
 
 
-<div class="work-card">
+<div class="course-grid">
 
-<span class="tag">
-PORTFOLIO
-</span>
+
+<!-- WEB -->
+
+<div class="course-card">
+
+<div class="course-top">
+
+<div class="course-icon">
+💻
+</div>
 
 <h3>
-Build Your Portfolio
+Web Development
 </h3>
 
 <p>
-Create projects that show potential clients
-and employers what you can do.
+Build modern websites from the ground up.
 </p>
 
 </div>
 
+<div class="course-body">
 
-<div class="work-card">
+<div class="price">
+₦25,000
+</div>
 
-<span class="tag">
-REMOTE
-</span>
+<ul class="course-list">
 
-<h3>
-Remote Opportunities
-</h3>
+<li>
+HTML & CSS
+</li>
 
-<p>
-Build digital skills that can be used from
-almost anywhere.
-</p>
+<li>
+JavaScript fundamentals
+</li>
+
+<li>
+Responsive websites
+</li>
+
+<li>
+Publishing websites
+</li>
+
+</ul>
+
+<a href="enrollment.html?course=Web%20Development"
+class="btn btn-primary">
+
+Enroll Now →
+
+</a>
+
+</div>
 
 </div>
 
 
-<div class="work-card">
 
-<span class="tag">
-BUSINESS
-</span>
+<!-- GRAPHIC -->
+
+<div class="course-card">
+
+<div class="course-top">
+
+<div class="course-icon">
+🎨
+</div>
 
 <h3>
-Help Businesses
+Graphic Design
 </h3>
 
 <p>
-Use design, marketing, development or
-editing skills to help businesses grow.
+Create professional visual designs.
 </p>
 
 </div>
 
+<div class="course-body">
 
-<div class="work-card">
+<div class="price">
+₦15,000
+</div>
 
-<span class="tag">
-CREATOR
-</span>
+<ul class="course-list">
 
-<h3>
-Become a Creator
-</h3>
+<li>
+Design fundamentals
+</li>
 
-<p>
-Create useful digital content and develop
-your personal brand.
-</p>
+<li>
+Canva
+</li>
+
+<li>
+Social media designs
+</li>
+
+<li>
+Branding basics
+</li>
+
+</ul>
+
+<a href="enrollment.html?course=Graphic%20Design"
+class="btn btn-primary">
+
+Enroll Now →
+
+</a>
+
+</div>
 
 </div>
 
 
-<div class="work-card">
 
-<span class="tag">
-GROWTH
-</span>
+<!-- VIDEO -->
+
+<div class="course-card">
+
+<div class="course-top">
+
+<div class="course-icon">
+🎬
+</div>
 
 <h3>
-Keep Improving
+Video Editing
 </h3>
 
 <p>
-The more valuable your skills become,
-the more opportunities you can pursue.
+Learn to create engaging video content.
 </p>
+
+</div>
+
+<div class="course-body">
+
+<div class="price">
+₦15,000
+</div>
+
+<ul class="course-list">
+
+<li>
+Editing fundamentals
+</li>
+
+<li>
+Transitions
+</li>
+
+<li>
+Text & effects
+</li>
+
+<li>
+Social media videos
+</li>
+
+</ul>
+
+<a href="enrollment.html?course=Video%20Editing"
+class="btn btn-primary">
+
+Enroll Now →
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- PYTHON -->
+
+<div class="course-card">
+
+<div class="course-top">
+
+<div class="course-icon">
+🐍
+</div>
+
+<h3>
+Python Programming
+</h3>
+
+<p>
+Start your journey into programming.
+</p>
+
+</div>
+
+<div class="course-body">
+
+<div class="price">
+₦25,000
+</div>
+
+<ul class="course-list">
+
+<li>
+Python basics
+</li>
+
+<li>
+Variables & functions
+</li>
+
+<li>
+Programming logic
+</li>
+
+<li>
+Mini projects
+</li>
+
+</ul>
+
+<a href="enrollment.html?course=Python%20Programming"
+class="btn btn-primary">
+
+Enroll Now →
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- MARKETING -->
+
+<div class="course-card">
+
+<div class="course-top">
+
+<div class="course-icon">
+📱
+</div>
+
+<h3>
+Digital Marketing
+</h3>
+
+<p>
+Learn how to market products online.
+</p>
+
+</div>
+
+<div class="course-body">
+
+<div class="price">
+₦20,000
+</div>
+
+<ul class="course-list">
+
+<li>
+Digital marketing basics
+</li>
+
+<li>
+Social media marketing
+</li>
+
+<li>
+Content strategy
+</li>
+
+<li>
+Audience building
+</li>
+
+</ul>
+
+<a href="enrollment.html?course=Digital%20Marketing"
+class="btn btn-primary">
+
+Enroll Now →
+
+</a>
+
+</div>
+
+</div>
+
+
+
+<!-- CAREER -->
+
+<div class="course-card">
+
+<div class="course-top">
+
+<div class="course-icon">
+💼
+</div>
+
+<h3>
+Career Skills
+</h3>
+
+<p>
+Develop skills for professional growth.
+</p>
+
+</div>
+
+<div class="course-body">
+
+<div class="price">
+₦10,000
+</div>
+
+<ul class="course-list">
+
+<li>
+Communication
+</li>
+
+<li>
+Professionalism
+</li>
+
+<li>
+Portfolio building
+</li>
+
+<li>
+Job readiness
+</li>
+
+</ul>
+
+<a href="enrollment.html?course=Career%20Skills"
+class="btn btn-primary">
+
+Enroll Now →
+
+</a>
+
+</div>
 
 </div>
 
@@ -288,6 +462,48 @@ the more opportunities you can pursue.
 </div>
 
 </section>
+
+
+
+<section class="cta">
+
+<h2>
+Don't Just Learn. Build.
+</h2>
+
+<p>
+Choose a course and take your first
+step toward developing a useful skill.
+</p>
+
+<a href="enrollment.html"
+class="btn">
+
+Start Enrollment →
+
+</a>
+
+</section>
+
+
+
+<footer>
+
+<div class="footer-logo">
+JG<span>.</span>
+</div>
+
+<p>
+Find Skills. Find Work.
+</p>
+
+<br>
+
+<p>
+© 2026 JG. All rights reserved.
+</p>
+
+</footer>
 
 
 <script src="chatbot.js"></script>
