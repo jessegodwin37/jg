@@ -1,390 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
 <title>JG — Find Skills. Find Work.</title>
 
 <meta name="description"
-content="JG helps you learn practical skills, build your career and discover work opportunities.">
+content="JG helps people learn valuable digital skills and discover opportunities to work.">
 
-<style>
+<link rel="stylesheet" href="style.css">
 
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html{
-    scroll-behavior:smooth;
-}
-
-body{
-    font-family:Arial,Helvetica,sans-serif;
-    background:#f5f7fb;
-    color:#111827;
-    line-height:1.6;
-}
-
-a{
-    text-decoration:none;
-}
-
-nav{
-    position:sticky;
-    top:0;
-    z-index:1000;
-
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-
-    padding:17px 7%;
-
-    background:#07111f;
-}
-
-.logo{
-    color:white;
-    font-size:28px;
-    font-weight:900;
-}
-
-.logo span{
-    color:#2563eb;
-}
-
-.nav-links{
-    display:flex;
-    align-items:center;
-    gap:25px;
-}
-
-.nav-links a{
-    color:#cbd5e1;
-    font-size:14px;
-    font-weight:bold;
-}
-
-.nav-links a:hover{
-    color:#60a5fa;
-}
-
-.enroll-nav{
-    background:#2563eb;
-    color:white !important;
-    padding:10px 17px;
-    border-radius:8px;
-}
-
-.hero{
-    min-height:650px;
-
-    display:flex;
-    align-items:center;
-
-    padding:80px 7%;
-
-    color:white;
-
-    background:
-    radial-gradient(
-        circle at 85% 20%,
-        rgba(37,99,235,.35),
-        transparent 30%
-    ),
-    linear-gradient(
-        135deg,
-        #07111f,
-        #172554
-    );
-}
-
-.hero-content{
-    max-width:850px;
-}
-
-.tag{
-    display:inline-block;
-
-    padding:8px 15px;
-
-    margin-bottom:20px;
-
-    border:1px solid #334155;
-    border-radius:30px;
-
-    color:#93c5fd;
-
-    font-size:12px;
-    font-weight:900;
-    letter-spacing:1px;
-}
-
-.hero h1{
-    font-size:clamp(45px,7vw,75px);
-    line-height:1;
-    letter-spacing:-3px;
-    margin-bottom:25px;
-}
-
-.hero h1 span{
-    color:#60a5fa;
-}
-
-.hero p{
-    max-width:680px;
-
-    color:#cbd5e1;
-
-    font-size:18px;
-
-    margin-bottom:32px;
-}
-
-.buttons{
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-}
-
-.btn{
-    display:inline-block;
-    padding:14px 22px;
-    border-radius:8px;
-    font-weight:800;
-}
-
-.primary{
-    background:#2563eb;
-    color:white;
-}
-
-.primary:hover{
-    background:#1d4ed8;
-}
-
-.secondary{
-    border:1px solid #475569;
-    color:white;
-}
-
-.section{
-    padding:80px 7%;
-}
-
-.section-title{
-    max-width:700px;
-    margin-bottom:40px;
-}
-
-.section-title small{
-    color:#2563eb;
-    font-weight:900;
-    letter-spacing:1.5px;
-}
-
-.section-title h2{
-    font-size:40px;
-    line-height:1.15;
-    margin:10px 0;
-}
-
-.section-title p{
-    color:#64748b;
-}
-
-.cards{
-    display:grid;
-    grid-template-columns:repeat(3,1fr);
-    gap:25px;
-}
-
-.card{
-    background:white;
-    border:1px solid #e5e7eb;
-    border-radius:15px;
-    padding:30px;
-    transition:.3s;
-}
-
-.card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 15px 35px rgba(0,0,0,.08);
-}
-
-.icon{
-    width:55px;
-    height:55px;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    background:#eff6ff;
-    color:#2563eb;
-
-    border-radius:12px;
-
-    font-weight:900;
-
-    margin-bottom:20px;
-}
-
-.card h3{
-    margin-bottom:8px;
-}
-
-.card p{
-    color:#64748b;
-    font-size:14px;
-}
-
-.course-preview{
-    background:white;
-}
-
-.course-card{
-    background:#f8fafc;
-    border:1px solid #e5e7eb;
-    border-radius:15px;
-    padding:25px;
-}
-
-.course-card h3{
-    margin-bottom:8px;
-}
-
-.course-card p{
-    color:#64748b;
-    font-size:14px;
-    margin-bottom:15px;
-}
-
-.price{
-    font-size:25px;
-    font-weight:900;
-    margin-bottom:18px;
-}
-
-.cta{
-    background:#07111f;
-    color:white;
-    text-align:center;
-    padding:80px 7%;
-}
-
-.cta h2{
-    font-size:42px;
-    margin-bottom:12px;
-}
-
-.cta p{
-    color:#cbd5e1;
-    max-width:650px;
-    margin:0 auto 28px;
-}
-
-footer{
-    background:#040912;
-    color:#94a3b8;
-    padding:45px 7% 20px;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr;
-    gap:40px;
-}
-
-footer h3{
-    color:white;
-    margin-bottom:12px;
-}
-
-footer a{
-    display:block;
-    color:#94a3b8;
-    margin-bottom:7px;
-}
-
-.copy{
-    border-top:1px solid #1e293b;
-    margin-top:30px;
-    padding-top:20px;
-    font-size:12px;
-}
-
-@media(max-width:800px){
-
-    .cards{
-        grid-template-columns:1fr 1fr;
-    }
-
-}
-
-@media(max-width:600px){
-
-    nav{
-        padding:15px 5%;
-    }
-
-    .nav-links{
-        gap:10px;
-    }
-
-    .nav-links a:nth-child(1),
-    .nav-links a:nth-child(2){
-        display:none;
-    }
-
-    .hero{
-        padding:70px 5%;
-    }
-
-    .hero h1{
-        font-size:45px;
-    }
-
-    .section{
-        padding:60px 5%;
-    }
-
-    .cards,
-    .footer-grid{
-        grid-template-columns:1fr;
-    }
-
-    .section-title h2{
-        font-size:32px;
-    }
-
-}
-
-</style>
 </head>
 
 <body>
 
-<nav>
 
-<div class="logo">
+<!-- NAVBAR -->
+
+<nav class="navbar">
+
+<a href="index.html"
+class="logo">
+
 JG<span>.</span>
-</div>
+
+</a>
+
 
 <div class="nav-links">
 
-<a href="index.html">Home</a>
+<a href="index.html"
+class="active">
+Home
+</a>
 
-<a href="skills.html">Skills</a>
+<a href="skills.html">
+Skills
+</a>
 
-<a href="work.html">Work</a>
+<a href="learn.html">
+Learn
+</a>
 
-<a href="learn.html">Learn</a>
+<a href="work.html">
+Work
+</a>
 
-<a href="enrollment.html" class="enroll-nav">
+<a href="enrollment.html"
+class="nav-cta">
 Enroll
 </a>
 
@@ -393,33 +61,50 @@ Enroll
 </nav>
 
 
+
+<!-- HERO -->
+
 <section class="hero">
 
 <div class="hero-content">
 
-<div class="tag">
-JG — FIND SKILLS. FIND WORK.
+<div class="badge">
+JG DIGITAL PLATFORM
 </div>
 
 <h1>
+
 Learn Skills.
-<span>Build Your Future.</span>
+<br>
+
+<span>Find Opportunities.</span>
+
 </h1>
 
 <p>
-JG is a platform designed to help you discover
-valuable skills, learn practical knowledge,
-build projects and find opportunities.
+
+JG is a platform designed to help you
+learn practical digital skills, improve
+your abilities and discover opportunities
+to put your skills to work.
+
 </p>
 
-<div class="buttons">
 
-<a href="learn.html" class="btn primary">
-Start Learning
+<div class="hero-buttons">
+
+<a href="learn.html"
+class="btn btn-primary">
+
+Start Learning →
+
 </a>
 
-<a href="work.html" class="btn secondary">
+<a href="work.html"
+class="btn btn-secondary">
+
 Find Work
+
 </a>
 
 </div>
@@ -428,58 +113,48 @@ Find Work
 
 </section>
 
+
+
+<!-- WHY JG -->
 
 <section class="section">
 
-<div class="section-title">
+<div class="section-header">
 
-<small>WHY JG</small>
+<div class="badge">
+WHY JG
+</div>
 
 <h2>
-Everything you need to move forward.
+Build Skills That Matter.
 </h2>
 
 <p>
-Discover skills, learn them and use them to
-build opportunities.
+
+Learn practical skills and develop the
+confidence to use them in the real world.
+
 </p>
 
 </div>
 
 
-<div class="cards">
-
-<div class="card">
-
-<div class="icon">
-01
-</div>
-
-<h3>
-Discover Skills
-</h3>
-
-<p>
-Explore practical digital and professional
-skills that can help you grow.
-</p>
-
-</div>
+<div class="card-grid">
 
 
 <div class="card">
 
-<div class="icon">
-02
+<div class="card-icon">
+🎓
 </div>
 
 <h3>
-Learn Directly
+Learn Practical Skills
 </h3>
 
 <p>
-Choose a course, see the price and enroll
-directly through JG.
+Focus on useful skills you can develop
+and apply instead of only learning theory.
 </p>
 
 </div>
@@ -487,18 +162,91 @@ directly through JG.
 
 <div class="card">
 
-<div class="icon">
-03
+<div class="card-icon">
+💼
 </div>
 
 <h3>
-Find Opportunities
+Discover Opportunities
 </h3>
 
 <p>
-Use your knowledge to build projects,
-gain experience and find work.
+Find opportunities where you can put
+your skills to work and build experience.
 </p>
+
+</div>
+
+
+<div class="card">
+
+<div class="card-icon">
+🚀
+</div>
+
+<h3>
+Grow Yourself
+</h3>
+
+<p>
+Build your knowledge, confidence,
+portfolio and professional abilities.
+</p>
+
+</div>
+
+
+</div>
+
+</section>
+
+
+
+<!-- STATS -->
+
+<section class="section">
+
+<div class="container">
+
+<div class="stats">
+
+<div class="stat">
+
+<strong>
+5+
+</strong>
+
+<span>
+Learning Paths
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>
+24/7
+</strong>
+
+<span>
+Online Access
+</span>
+
+</div>
+
+
+<div class="stat">
+
+<strong>
+1
+</strong>
+
+<span>
+JG Community
+</span>
+
+</div>
 
 </div>
 
@@ -507,177 +255,47 @@ gain experience and find work.
 </section>
 
 
-<section class="section course-preview">
 
-<div class="section-title">
-
-<small>LEARN WITH JG</small>
-
-<h2>
-Start learning a valuable skill.
-</h2>
-
-<p>
-Choose from our growing list of practical
-courses.
-</p>
-
-</div>
-
-
-<div class="cards">
-
-
-<div class="course-card">
-
-<h3>
-Web Development
-</h3>
-
-<p>
-Learn to build modern websites.
-</p>
-
-<div class="price">
-₦25,000
-</div>
-
-<a
-href="enrollment.html?course=Web%20Development"
-class="btn primary">
-
-Enroll
-
-</a>
-
-</div>
-
-
-<div class="course-card">
-
-<h3>
-Graphic Design
-</h3>
-
-<p>
-Learn professional graphic design.
-</p>
-
-<div class="price">
-₦15,000
-</div>
-
-<a
-href="enrollment.html?course=Graphic%20Design"
-class="btn primary">
-
-Enroll
-
-</a>
-
-</div>
-
-
-<div class="course-card">
-
-<h3>
-Python Programming
-</h3>
-
-<p>
-Learn programming from the beginning.
-</p>
-
-<div class="price">
-₦25,000
-</div>
-
-<a
-href="enrollment.html?course=Python%20Programming"
-class="btn primary">
-
-Enroll
-
-</a>
-
-</div>
-
-</div>
-
-</section>
-
+<!-- CTA -->
 
 <section class="cta">
 
 <h2>
-Ready to upgrade yourself?
+Your Next Skill Starts Here.
 </h2>
 
 <p>
-Choose a skill and start building your future
-with JG.
+Choose a skill, start learning and take
+a step toward creating more opportunities
+for yourself.
 </p>
 
-<a
-href="learn.html"
-class="btn primary">
+<a href="learn.html"
+class="btn">
 
-Explore All Courses
+Explore Courses →
 
 </a>
 
 </section>
 
 
+
 <footer>
 
-<div class="footer-grid">
-
-<div>
-
-<h3>JG</h3>
+<div class="footer-logo">
+JG<span>.</span>
+</div>
 
 <p>
 Find Skills. Find Work.
 </p>
 
-</div>
+<br>
 
-
-<div>
-
-<h3>Pages</h3>
-
-<a href="index.html">Home</a>
-<a href="skills.html">Skills</a>
-<a href="learn.html">Learn</a>
-<a href="work.html">Work</a>
-
-</div>
-
-
-<div>
-
-<h3>Support</h3>
-
-<a href="enrollment.html">
-Enrollment
-</a>
-
-<a href="https://wa.me/2349070707689">
-WhatsApp
-</a>
-
-</div>
-
-</div>
-
-
-<div class="copy">
-
+<p>
 © 2026 JG. All rights reserved.
-
-</div>
+</p>
 
 </footer>
 
@@ -685,4 +303,5 @@ WhatsApp
 <script src="chatbot.js"></script>
 
 </body>
+
 </html>
