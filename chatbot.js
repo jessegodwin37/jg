@@ -1,1438 +1,1924 @@
-/* =====================================================
-   JG AI CHATBOT
-   Professional JG-style chatbot
-===================================================== */
+/* =========================================================
+   JG ASSISTANT
+   Complete Website Chatbot
+   ========================================================= */
 
 (function () {
 
-    /* =========================
-       CHATBOT HTML
-    ========================= */
+    "use strict";
 
-    const chatbotHTML = `
 
-    <button id="jgChatButton" aria-label="Open JG Assistant">
+    /* =====================================================
+       CONFIGURATION
+       ===================================================== */
 
-        <div class="jg-chat-icon">
-            💬
-        </div>
+    const STORAGE_KEY = "jg_chat_history";
 
-        <span>JG Assistant</span>
+    const MAX_MESSAGES = 80;
 
-    </button>
 
+    /* =====================================================
+       WEBSITE LINKS
+       ===================================================== */
 
-    <div id="jgChatWindow">
+    const pages = {
 
-        <!-- HEADER -->
+        home: "index.html",
 
-        <div class="jg-chat-header">
+        skills: "skills.html",
 
-            <div class="jg-bot-profile">
+        learn: "learn.html",
 
-                <div class="jg-bot-avatar">
-                    JG
-                </div>
+        work: "work.html",
 
-                <div>
+        enrollment: "enrollment.html",
 
-                    <strong>JG Assistant</strong>
+        account: "account.html"
 
-                    <small>
-                        ● Online
-                    </small>
+    };
 
-                </div>
 
-            </div>
+    /* =====================================================
+       CHATBOT KNOWLEDGE
+       ===================================================== */
 
+    const responses = [
 
-            <button
-                id="jgCloseChat"
-                aria-label="Close chatbot">
+        {
+            keywords: [
+                "hello",
+                "hi",
+                "hey",
+                "good morning",
+                "good afternoon",
+                "good evening"
+            ],
 
-                ×
+            response:
+                "Hey! 👋 I'm JG Assistant. I can help you explore skills, learning paths, work opportunities and your JG journey."
+        },
 
-            </button>
 
-        </div>
+        {
+            keywords: [
+                "what is jg",
+                "what's jg",
+                "about jg",
+                "tell me about jg"
+            ],
 
+            response:
+                "JG is a platform built around a simple idea: Find Skills. Find Work. 🚀 You can explore digital skills, learn practical concepts, build projects and eventually use your skills to pursue opportunities."
+        },
 
-        <!-- WELCOME -->
 
-        <div id="jgMessages"
-             class="jg-messages">
+        {
+            keywords: [
+                "skills",
+                "skill",
+                "what can i learn",
+                "courses",
+                "course"
+            ],
 
-            <div class="jg-message bot">
+            response:
+                "JG currently focuses on Web Development 💻, Graphic Design 🎨, Video Editing 🎬, Digital Marketing 📢, Social Media 📱 and Freelancing 💼."
+        },
 
-                <div class="jg-message-avatar">
-                    JG
-                </div>
 
-                <div class="jg-message-content">
+        {
+            keywords: [
+                "web development",
+                "coding",
+                "programming",
+                "website",
+                "web developer"
+            ],
 
-                    <div class="jg-message-bubble">
+            response:
+                "💻 Web Development is a great starting point if you want to learn how websites are created. JG's path introduces HTML, CSS and JavaScript before moving toward practical projects."
+        },
 
-                        👋 Hey! Welcome to <strong>JG</strong>.
 
-                        <br><br>
-
-                        I'm your JG Assistant. I can help you
-                        choose a skill, understand our courses,
-                        learn how enrollment works, and answer
-                        questions about JG.
-
-                    </div>
-
-                    <span class="jg-time">
-                        Just now
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- QUICK QUESTIONS -->
-
-            <div class="jg-quick-title">
-                What would you like to know?
-            </div>
-
-
-            <div class="jg-quick-buttons">
-
-                <button
-                    data-question="What skills can I learn?">
-
-                    🎓
-                    <span>Skills I can learn</span>
-
-                </button>
-
-
-                <button
-                    data-question="How much are the courses?">
-
-                    💰
-                    <span>Course prices</span>
-
-                </button>
-
-
-                <button
-                    data-question="How do I enroll?">
-
-                    📝
-                    <span>How to enroll</span>
-
-                </button>
-
-
-                <button
-                    data-question="How can I pay?">
-
-                    💳
-                    <span>Payment methods</span>
-
-                </button>
-
-            </div>
-
-        </div>
-
-
-        <!-- TYPING -->
-
-        <div
-            id="jgTyping"
-            class="jg-typing">
-
-            <span></span>
-            <span></span>
-            <span></span>
-
-            JG Assistant is typing...
-
-        </div>
-
-
-        <!-- INPUT -->
-
-        <div class="jg-chat-input-area">
-
-            <input
-                type="text"
-                id="jgChatInput"
-                placeholder="Ask JG Assistant..."
-                autocomplete="off"
-            >
-
-            <button
-                id="jgSendButton"
-                aria-label="Send message">
-
-                ➤
-
-            </button>
-
-        </div>
-
-
-        <div class="jg-chat-footer">
-
-            Powered by <strong>JG</strong>
-
-        </div>
-
-    </div>
-
-    `;
-
-
-    document.body.insertAdjacentHTML(
-        "beforeend",
-        chatbotHTML
-    );
-
-
-    /* =========================
-       CHATBOT CSS
-    ========================= */
-
-    const chatbotCSS = `
-
-    #jgChatButton,
-    #jgChatWindow,
-    #jgChatWindow * {
-        box-sizing: border-box;
-    }
-
-
-    /* FLOATING BUTTON */
-
-    #jgChatButton {
-
-        position: fixed;
-
-        right: 22px;
-
-        bottom: 22px;
-
-        z-index: 9999;
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 10px;
-
-        border: none;
-
-        padding: 9px 16px 9px 9px;
-
-        border-radius: 50px;
-
-        background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
-
-        color: white;
-
-        font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-        font-size: 13px;
-
-        font-weight: 800;
-
-        cursor: pointer;
-
-        box-shadow:
-        0 12px 35px
-        rgba(37,99,235,.28);
-
-        transition:
-        transform .2s ease,
-        box-shadow .2s ease;
-
-    }
-
-
-    #jgChatButton:hover {
-
-        transform:
-        translateY(-3px);
-
-        box-shadow:
-        0 17px 40px
-        rgba(37,99,235,.35);
-
-    }
-
-
-    .jg-chat-icon {
-
-        width: 39px;
-
-        height: 39px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        border-radius: 50%;
-
-        background: white;
-
-        color: #2563eb;
-
-        font-size: 18px;
-
-    }
-
-
-    /* CHAT WINDOW */
-
-    #jgChatWindow {
-
-        position: fixed;
-
-        right: 22px;
-
-        bottom: 88px;
-
-        z-index: 9998;
-
-        width: 375px;
-
-        max-width:
-        calc(100vw - 28px);
-
-        height: 600px;
-
-        max-height:
-        calc(100vh - 110px);
-
-        display: none;
-
-        flex-direction: column;
-
-        overflow: hidden;
-
-        background: #ffffff;
-
-        border:
-        1px solid #e2e8f0;
-
-        border-radius: 22px;
-
-        box-shadow:
-        0 30px 80px
-        rgba(15,23,42,.20);
-
-        font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
-        animation:
-        jgChatOpen .22s ease;
-
-    }
-
-
-    @keyframes jgChatOpen {
-
-        from {
-
-            opacity: 0;
-
-            transform:
-            translateY(15px)
-            scale(.97);
-
+        {
+            keywords: [
+                "graphic design",
+                "design",
+                "canva",
+                "graphics"
+            ],
+
+            response:
+                "🎨 Graphic Design is useful for creating flyers, social media graphics, branding and other visual content. Start by learning layout, typography, colour and visual hierarchy."
+        },
+
+
+        {
+            keywords: [
+                "video editing",
+                "video",
+                "editor",
+                "capcut"
+            ],
+
+            response:
+                "🎬 Video Editing teaches you how to turn raw clips into useful content. Start with cutting, arranging clips, audio, transitions and storytelling."
+        },
+
+
+        {
+            keywords: [
+                "digital marketing",
+                "marketing",
+                "advertising",
+                "ads"
+            ],
+
+            response:
+                "📢 Digital Marketing focuses on helping businesses reach the right audience through digital platforms, content and marketing strategy."
+        },
+
+
+        {
+            keywords: [
+                "social media",
+                "instagram",
+                "facebook",
+                "tiktok",
+                "content"
+            ],
+
+            response:
+                "📱 Social Media teaches content planning, audience engagement, page management and digital growth."
+        },
+
+
+        {
+            keywords: [
+                "freelancing",
+                "freelance",
+                "clients",
+                "client"
+            ],
+
+            response:
+                "💼 Freelancing is about turning a useful skill into a service that solves a client's problem. Build your skill first, create examples of your work and then start looking for appropriate opportunities."
+        },
+
+
+        {
+            keywords: [
+                "learn",
+                "learning",
+                "lesson",
+                "lessons",
+                "study"
+            ],
+
+            response:
+                "📚 You can visit the Learn page to explore JG's learning paths. A good strategy is to choose ONE skill, learn the fundamentals, practise and build projects."
+        },
+
+
+        {
+            keywords: [
+                "work",
+                "job",
+                "jobs",
+                "opportunity",
+                "opportunities"
+            ],
+
+            response:
+                "💼 The Work page shows the kinds of opportunities you can pursue after developing useful skills. Remember: learning a skill doesn't automatically guarantee employment."
+        },
+
+
+        {
+            keywords: [
+                "enroll",
+                "enrollment",
+                "join",
+                "register",
+                "registration"
+            ],
+
+            response:
+                "🎓 You can use the Enroll page to choose a skill and tell JG what you're working toward."
+        },
+
+
+        {
+            keywords: [
+                "account",
+                "dashboard",
+                "profile",
+                "progress"
+            ],
+
+            response:
+                "📊 Your JG Account page is designed to become your personal learning dashboard, where you can track your learning progress and continue your courses."
+        },
+
+
+        {
+            keywords: [
+                "how do i start",
+                "where do i start",
+                "start",
+                "begin",
+                "beginner"
+            ],
+
+            response:
+                "🚀 Start simple: choose ONE skill → learn the basics → practise → build a project → improve → use the skill for opportunities."
+        },
+
+
+        {
+            keywords: [
+                "which skill",
+                "best skill",
+                "skill should i learn",
+                "recommend a skill"
+            ],
+
+            response:
+                "I can help you choose. 💡 If you enjoy technology, try Web Development. If you enjoy creativity, try Graphic Design or Video Editing. If you enjoy business and communication, try Digital Marketing or Social Media. If you want to turn an existing skill into a service, explore Freelancing."
+        },
+
+
+        {
+            keywords: [
+                "money",
+                "earn",
+                "make money",
+                "income"
+            ],
+
+            response:
+                "💰 A skill can create opportunities, but earning usually requires practice, useful work, communication and finding people who need the problem you can solve. JG focuses on building the skill first."
+        },
+
+
+        {
+            keywords: [
+                "free",
+                "price",
+                "cost",
+                "payment",
+                "pay"
+            ],
+
+            response:
+                "For current JG pricing or payment information, use the official enrollment process rather than relying on information from the chatbot."
+        },
+
+
+        {
+            keywords: [
+                "help",
+                "what can you do",
+                "commands"
+            ],
+
+            response:
+                "I can help with:\n\n📚 Learning paths\n💻 Web Development\n🎨 Graphic Design\n🎬 Video Editing\n📢 Digital Marketing\n📱 Social Media\n💼 Freelancing\n🎓 Enrollment\n📊 Account & progress\n🧭 Finding your way around JG"
+        },
+
+
+        {
+            keywords: [
+                "thank",
+                "thanks",
+                "thank you"
+            ],
+
+            response:
+                "You're welcome! 😎 Keep building. One skill at a time."
         }
 
-        to {
+    ];
 
-            opacity: 1;
 
-            transform:
-            translateY(0)
-            scale(1);
+    /* =====================================================
+       CREATE CHATBOT STYLES
+       ===================================================== */
 
+    function createStyles() {
+
+        if (document.getElementById("jg-chatbot-styles")) {
+            return;
         }
 
-    }
 
+        const style = document.createElement("style");
 
-    /* HEADER */
+        style.id = "jg-chatbot-styles";
 
-    .jg-chat-header {
 
-        display: flex;
+        style.textContent = `
 
-        align-items: center;
+        /* ===============================================
+           CHAT BUTTON
+           =============================================== */
 
-        justify-content: space-between;
+        .jg-chat-button {
 
-        padding: 16px 17px;
+            position: fixed;
 
-        background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
+            right: 20px;
 
-        color: white;
+            bottom: 20px;
 
-    }
+            width: 62px;
 
+            height: 62px;
 
-    .jg-bot-profile {
+            border: none;
 
-        display: flex;
+            border-radius: 50%;
 
-        align-items: center;
+            background:
+                linear-gradient(
+                    135deg,
+                    #38bdf8,
+                    #2563eb
+                );
 
-        gap: 11px;
+            color: white;
 
-    }
+            font-size: 27px;
 
+            cursor: pointer;
 
-    .jg-bot-avatar {
+            box-shadow:
+                0 12px 35px rgba(0,0,0,.30);
 
-        width: 43px;
+            z-index: 99998;
 
-        height: 43px;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        border-radius: 13px;
-
-        background: white;
-
-        color: #2563eb;
-
-        font-size: 13px;
-
-        font-weight: 1000;
-
-        box-shadow:
-        0 5px 15px
-        rgba(0,0,0,.12);
-
-    }
-
-
-    .jg-bot-profile strong {
-
-        display: block;
-
-        font-size: 14px;
-
-    }
-
-
-    .jg-bot-profile small {
-
-        display: block;
-
-        margin-top: 2px;
-
-        font-size: 11px;
-
-        opacity: .9;
-
-    }
-
-
-    .jg-chat-header button {
-
-        width: 35px;
-
-        height: 35px;
-
-        border: none;
-
-        border-radius: 9px;
-
-        background:
-        rgba(255,255,255,.14);
-
-        color: white;
-
-        font-size: 24px;
-
-        line-height: 1;
-
-        cursor: pointer;
-
-    }
-
-
-    /* MESSAGES */
-
-    .jg-messages {
-
-        flex: 1;
-
-        overflow-y: auto;
-
-        padding: 20px 15px;
-
-        background:
-        linear-gradient(
-            180deg,
-            #f8fafc,
-            #ffffff
-        );
-
-        scroll-behavior: smooth;
-
-    }
-
-
-    .jg-message {
-
-        display: flex;
-
-        align-items: flex-start;
-
-        gap: 8px;
-
-        margin-bottom: 17px;
-
-    }
-
-
-    .jg-message-avatar {
-
-        width: 29px;
-
-        height: 29px;
-
-        flex-shrink: 0;
-
-        display: flex;
-
-        align-items: center;
-
-        justify-content: center;
-
-        border-radius: 9px;
-
-        background: #dbeafe;
-
-        color: #2563eb;
-
-        font-size: 9px;
-
-        font-weight: 1000;
-
-    }
-
-
-    .jg-message-content {
-
-        max-width: 84%;
-
-    }
-
-
-    .jg-message-bubble {
-
-        padding: 11px 13px;
-
-        border-radius:
-        5px 15px 15px 15px;
-
-        background: white;
-
-        border:
-        1px solid #e2e8f0;
-
-        color: #334155;
-
-        font-size: 13px;
-
-        line-height: 1.55;
-
-        box-shadow:
-        0 3px 12px
-        rgba(15,23,42,.04);
-
-    }
-
-
-    .jg-time {
-
-        display: block;
-
-        margin-top: 4px;
-
-        color: #94a3b8;
-
-        font-size: 9px;
-
-    }
-
-
-    /* USER MESSAGE */
-
-    .jg-message.user {
-
-        justify-content: flex-end;
-
-    }
-
-
-    .jg-message.user
-    .jg-message-content {
-
-        max-width: 82%;
-
-    }
-
-
-    .jg-message.user
-    .jg-message-bubble {
-
-        border: none;
-
-        border-radius:
-        15px 5px 15px 15px;
-
-        background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
-
-        color: white;
-
-    }
-
-
-    .jg-message.user
-    .jg-time {
-
-        text-align: right;
-
-    }
-
-
-    /* QUICK QUESTIONS */
-
-    .jg-quick-title {
-
-        margin:
-        10px 0 10px 37px;
-
-        color: #64748b;
-
-        font-size: 11px;
-
-        font-weight: 800;
-
-    }
-
-
-    .jg-quick-buttons {
-
-        display: grid;
-
-        grid-template-columns:
-        1fr 1fr;
-
-        gap: 8px;
-
-        margin-left: 37px;
-
-    }
-
-
-    .jg-quick-buttons button {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 7px;
-
-        min-height: 47px;
-
-        padding: 8px 9px;
-
-        border:
-        1px solid #e2e8f0;
-
-        border-radius: 10px;
-
-        background: white;
-
-        color: #334155;
-
-        font-size: 10px;
-
-        font-weight: 700;
-
-        text-align: left;
-
-        cursor: pointer;
-
-        transition: .18s;
-
-    }
-
-
-    .jg-quick-buttons button:hover {
-
-        border-color: #93c5fd;
-
-        background: #eff6ff;
-
-        color: #1d4ed8;
-
-    }
-
-
-    .jg-quick-buttons button:first-letter {
-
-        font-size: 16px;
-
-    }
-
-
-    /* TYPING */
-
-    .jg-typing {
-
-        display: none;
-
-        align-items: center;
-
-        gap: 4px;
-
-        padding:
-        7px 17px;
-
-        background: #ffffff;
-
-        color: #94a3b8;
-
-        font-size: 9px;
-
-    }
-
-
-    .jg-typing span {
-
-        width: 5px;
-
-        height: 5px;
-
-        border-radius: 50%;
-
-        background: #2563eb;
-
-        animation:
-        jgTyping 1s infinite;
-
-    }
-
-
-    .jg-typing span:nth-child(2) {
-
-        animation-delay:
-        .15s;
-
-    }
-
-
-    .jg-typing span:nth-child(3) {
-
-        animation-delay:
-        .3s;
-
-    }
-
-
-    @keyframes jgTyping {
-
-        0%, 60%, 100% {
-
-            transform:translateY(0);
-
-            opacity:.35;
-
-        }
-
-        30% {
-
-            transform:
-            translateY(-3px);
-
-            opacity:1;
-
-        }
-
-    }
-
-
-    /* INPUT */
-
-    .jg-chat-input-area {
-
-        display: flex;
-
-        align-items: center;
-
-        gap: 8px;
-
-        padding:
-        11px 12px;
-
-        border-top:
-        1px solid #e5e7eb;
-
-        background: white;
-
-    }
-
-
-    #jgChatInput {
-
-        flex: 1;
-
-        min-width: 0;
-
-        height: 43px;
-
-        padding:
-        0 13px;
-
-        border:
-        1px solid #e2e8f0;
-
-        border-radius: 11px;
-
-        outline: none;
-
-        background: #f8fafc;
-
-        color: #111827;
-
-        font-size: 13px;
-
-        font-family: inherit;
-
-    }
-
-
-    #jgChatInput:focus {
-
-        border-color:
-        #93c5fd;
-
-        background: white;
-
-        box-shadow:
-        0 0 0 3px
-        rgba(37,99,235,.08);
-
-    }
-
-
-    #jgSendButton {
-
-        width: 43px;
-
-        height: 43px;
-
-        flex-shrink: 0;
-
-        border: none;
-
-        border-radius: 11px;
-
-        background:
-        linear-gradient(
-            135deg,
-            #2563eb,
-            #1d4ed8
-        );
-
-        color: white;
-
-        font-size: 17px;
-
-        cursor: pointer;
-
-        transition: .18s;
-
-    }
-
-
-    #jgSendButton:hover {
-
-        transform:
-        translateY(-1px);
-
-    }
-
-
-    /* FOOTER */
-
-    .jg-chat-footer {
-
-        padding:
-        7px;
-
-        text-align: center;
-
-        background: #f8fafc;
-
-        color: #94a3b8;
-
-        font-size: 9px;
-
-        border-top:
-        1px solid #f1f5f9;
-
-    }
-
-
-    /* MOBILE */
-
-    @media(max-width:500px) {
-
-        #jgChatButton {
-
-            right: 15px;
-
-            bottom: 15px;
+            transition:
+                transform .2s ease,
+                box-shadow .2s ease;
 
         }
 
 
-        #jgChatButton span {
+        .jg-chat-button:hover {
+
+            transform: translateY(-4px);
+
+            box-shadow:
+                0 16px 40px rgba(0,0,0,.38);
+
+        }
+
+
+        .jg-chat-button:active {
+
+            transform: scale(.94);
+
+        }
+
+
+        /* ===============================================
+           CHAT WINDOW
+           =============================================== */
+
+        .jg-chat-window {
+
+            position: fixed;
+
+            right: 20px;
+
+            bottom: 95px;
+
+            width: min(
+                390px,
+                calc(100vw - 30px)
+            );
+
+            height: min(
+                600px,
+                calc(100vh - 125px)
+            );
+
+            display: none;
+
+            flex-direction: column;
+
+            overflow: hidden;
+
+            background: #0b1220;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            border-radius: 22px;
+
+            box-shadow:
+                0 25px 70px rgba(0,0,0,.50);
+
+            z-index: 99999;
+
+            color: #f8fafc;
+
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+
+        }
+
+
+        .jg-chat-window.open {
+
+            display: flex;
+
+            animation:
+                jgChatOpen .2s ease;
+
+        }
+
+
+        @keyframes jgChatOpen {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(15px)
+                    scale(.97);
+
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+
+            }
+
+        }
+
+
+        /* ===============================================
+           HEADER
+           =============================================== */
+
+        .jg-chat-header {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 12px;
+
+            padding: 17px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #111c35,
+                    #102a5c
+                );
+
+            border-bottom:
+                1px solid rgba(255,255,255,.08);
+
+        }
+
+
+        .jg-chat-brand {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+        }
+
+
+        .jg-chat-avatar {
+
+            width: 42px;
+
+            height: 42px;
+
+            display: grid;
+
+            place-items: center;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #38bdf8,
+                    #2563eb
+                );
+
+            font-size: 21px;
+
+        }
+
+
+        .jg-chat-title {
+
+            font-size: 15px;
+
+            font-weight: 800;
+
+        }
+
+
+        .jg-chat-status {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 5px;
+
+            margin-top: 3px;
+
+            color: #94a3b8;
+
+            font-size: 11px;
+
+        }
+
+
+        .jg-online-dot {
+
+            width: 7px;
+
+            height: 7px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+        }
+
+
+        .jg-chat-actions {
+
+            display: flex;
+
+            gap: 5px;
+
+        }
+
+
+        .jg-chat-action {
+
+            width: 34px;
+
+            height: 34px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background:
+                rgba(255,255,255,.07);
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 15px;
+
+        }
+
+
+        /* ===============================================
+           MESSAGES
+           =============================================== */
+
+        .jg-chat-messages {
+
+            flex: 1;
+
+            overflow-y: auto;
+
+            padding: 17px;
+
+            scroll-behavior: smooth;
+
+        }
+
+
+        .jg-message {
+
+            display: flex;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .jg-message.user {
+
+            justify-content: flex-end;
+
+        }
+
+
+        .jg-message-content {
+
+            max-width: 84%;
+
+            padding: 11px 13px;
+
+            border-radius: 15px;
+
+            white-space: pre-line;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .jg-message.bot
+        .jg-message-content {
+
+            background: #162238;
+
+            border-bottom-left-radius: 5px;
+
+            color: #e2e8f0;
+
+        }
+
+
+        .jg-message.user
+        .jg-message-content {
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #38bdf8
+                );
+
+            color: white;
+
+            border-bottom-right-radius: 5px;
+
+        }
+
+
+        .jg-message-time {
+
+            display: block;
+
+            margin-top: 5px;
+
+            font-size: 9px;
+
+            opacity: .55;
+
+            text-align: right;
+
+        }
+
+
+        /* ===============================================
+           QUICK QUESTIONS
+           =============================================== */
+
+        .jg-quick-area {
+
+            display: flex;
+
+            gap: 7px;
+
+            overflow-x: auto;
+
+            padding:
+                0 14px 12px;
+
+            scrollbar-width: none;
+
+        }
+
+
+        .jg-quick-area::-webkit-scrollbar {
 
             display: none;
 
         }
 
 
-        #jgChatButton {
+        .jg-quick-button {
 
-            width: 55px;
+            flex:
+                0 0 auto;
 
-            height: 55px;
+            padding: 8px 11px;
 
-            padding: 7px;
-
-            justify-content: center;
-
-        }
-
-
-        .jg-chat-icon {
-
-            width: 41px;
-
-            height: 41px;
-
-        }
-
-
-        #jgChatWindow {
-
-            right: 10px;
-
-            bottom: 80px;
-
-            width:
-            calc(100vw - 20px);
-
-            height:
-            min(620px, calc(100vh - 100px));
+            border:
+                1px solid rgba(255,255,255,.13);
 
             border-radius: 20px;
 
+            background: #111b2d;
+
+            color: #cbd5e1;
+
+            cursor: pointer;
+
+            font-size: 11px;
+
         }
+
+
+        .jg-quick-button:hover {
+
+            border-color: #38bdf8;
+
+            color: white;
+
+        }
+
+
+        /* ===============================================
+           TYPING
+           =============================================== */
+
+        .jg-typing {
+
+            display: none;
+
+            align-items: center;
+
+            gap: 4px;
+
+            width: fit-content;
+
+            margin-bottom: 12px;
+
+            padding: 10px 13px;
+
+            border-radius: 14px;
+
+            background: #162238;
+
+        }
+
+
+        .jg-typing.show {
+
+            display: flex;
+
+        }
+
+
+        .jg-typing span {
+
+            width: 6px;
+
+            height: 6px;
+
+            border-radius: 50%;
+
+            background: #94a3b8;
+
+            animation:
+                jgTyping 1s infinite;
+
+        }
+
+
+        .jg-typing span:nth-child(2) {
+
+            animation-delay: .15s;
+
+        }
+
+
+        .jg-typing span:nth-child(3) {
+
+            animation-delay: .30s;
+
+        }
+
+
+        @keyframes jgTyping {
+
+            0%, 60%, 100% {
+
+                transform: translateY(0);
+
+                opacity: .45;
+
+            }
+
+            30% {
+
+                transform: translateY(-4px);
+
+                opacity: 1;
+
+            }
+
+        }
+
+
+        /* ===============================================
+           INPUT
+           =============================================== */
+
+        .jg-chat-input-area {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding: 12px;
+
+            border-top:
+                1px solid rgba(255,255,255,.08);
+
+            background: #09111e;
+
+        }
+
+
+        .jg-chat-input {
+
+            flex: 1;
+
+            min-width: 0;
+
+            height: 43px;
+
+            padding:
+                0 13px;
+
+            border:
+                1px solid rgba(255,255,255,.12);
+
+            border-radius: 13px;
+
+            outline: none;
+
+            background: #111b2d;
+
+            color: white;
+
+            font-size: 14px;
+
+        }
+
+
+        .jg-chat-input::placeholder {
+
+            color: #64748b;
+
+        }
+
+
+        .jg-chat-input:focus {
+
+            border-color: #38bdf8;
+
+        }
+
+
+        .jg-chat-send {
+
+            width: 43px;
+
+            height: 43px;
+
+            flex-shrink: 0;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #38bdf8
+                );
+
+            color: white;
+
+            cursor: pointer;
+
+            font-size: 18px;
+
+        }
+
+
+        /* ===============================================
+           NAVIGATION BUTTONS IN CHAT
+           =============================================== */
+
+        .jg-chat-links {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-top: 9px;
+
+        }
+
+
+        .jg-chat-link {
+
+            display: inline-block;
+
+            padding: 7px 10px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(56,189,248,.10);
+
+            border:
+                1px solid rgba(56,189,248,.25);
+
+            color: #7dd3fc;
+
+            text-decoration: none;
+
+            font-size: 11px;
+
+        }
+
+
+        /* ===============================================
+           MOBILE
+           =============================================== */
+
+        @media (max-width: 600px) {
+
+            .jg-chat-button {
+
+                right: 15px;
+
+                bottom: 15px;
+
+                width: 57px;
+
+                height: 57px;
+
+            }
+
+
+            .jg-chat-window {
+
+                right: 10px;
+
+                bottom: 82px;
+
+                width:
+                    calc(100vw - 20px);
+
+                height:
+                    min(
+                        610px,
+                        calc(100vh - 105px)
+                    );
+
+                border-radius: 18px;
+
+            }
+
+        }
+
+        `;
+
+
+        document.head.appendChild(style);
 
     }
 
-    `;
 
+    /* =====================================================
+       CREATE CHATBOT HTML
+       ===================================================== */
 
-    const style =
-    document.createElement("style");
+    function createChatbot() {
 
-    style.textContent =
-    chatbotCSS;
-
-    document.head.appendChild(style);
-
-
-    /* =========================
-       ELEMENTS
-    ========================= */
-
-    const chatButton =
-    document.getElementById(
-        "jgChatButton"
-    );
-
-    const chatWindow =
-    document.getElementById(
-        "jgChatWindow"
-    );
-
-    const closeButton =
-    document.getElementById(
-        "jgCloseChat"
-    );
-
-    const input =
-    document.getElementById(
-        "jgChatInput"
-    );
-
-    const sendButton =
-    document.getElementById(
-        "jgSendButton"
-    );
-
-    const messages =
-    document.getElementById(
-        "jgMessages"
-    );
-
-    const typing =
-    document.getElementById(
-        "jgTyping"
-    );
-
-
-    /* =========================
-       OPEN / CLOSE
-    ========================= */
-
-    chatButton.addEventListener(
-        "click",
-        function () {
-
-            chatWindow.style.display =
-                "flex";
-
-            chatButton.style.display =
-                "none";
-
-            setTimeout(
-                () => input.focus(),
-                200
-            );
-
+        if (document.getElementById("jgChatWindow")) {
+            return;
         }
-    );
 
 
-    closeButton.addEventListener(
-        "click",
-        function () {
+        const button = document.createElement("button");
 
-            chatWindow.style.display =
-                "none";
+        button.className = "jg-chat-button";
 
-            chatButton.style.display =
-                "flex";
+        button.id = "jgChatButton";
 
-        }
-    );
+        button.setAttribute(
+            "aria-label",
+            "Open JG Assistant"
+        );
+
+        button.innerHTML = "🤖";
 
 
-    /* =========================
+        const windowElement = document.createElement("div");
+
+        windowElement.className = "jg-chat-window";
+
+        windowElement.id = "jgChatWindow";
+
+
+        windowElement.innerHTML = `
+
+            <div class="jg-chat-header">
+
+                <div class="jg-chat-brand">
+
+                    <div class="jg-chat-avatar">
+                        🤖
+                    </div>
+
+                    <div>
+
+                        <div class="jg-chat-title">
+                            JG Assistant
+                        </div>
+
+                        <div class="jg-chat-status">
+
+                            <span class="jg-online-dot"></span>
+
+                            Ready to help
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="jg-chat-actions">
+
+                    <button
+                        class="jg-chat-action"
+                        id="jgClearChat"
+                        title="Clear chat">
+
+                        🗑️
+
+                    </button>
+
+
+                    <button
+                        class="jg-chat-action"
+                        id="jgCloseChat"
+                        title="Close">
+
+                        ✕
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="jg-chat-messages"
+                id="jgChatMessages">
+            </div>
+
+
+            <div
+                class="jg-typing"
+                id="jgTyping">
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </div>
+
+
+            <div
+                class="jg-quick-area"
+                id="jgQuickArea">
+
+                <button
+                    class="jg-quick-button"
+                    data-question="What is JG?">
+
+                    What is JG?
+
+                </button>
+
+
+                <button
+                    class="jg-quick-button"
+                    data-question="Which skill should I learn?">
+
+                    Which skill?
+
+                </button>
+
+
+                <button
+                    class="jg-quick-button"
+                    data-question="How do I start learning?">
+
+                    How do I start?
+
+                </button>
+
+
+                <button
+                    class="jg-quick-button"
+                    data-question="How can I find work?">
+
+                    Find work
+
+                </button>
+
+            </div>
+
+
+            <form
+                class="jg-chat-input-area"
+                id="jgChatForm">
+
+                <input
+                    class="jg-chat-input"
+                    id="jgChatInput"
+                    type="text"
+                    autocomplete="off"
+                    placeholder="Ask JG Assistant..."
+                    aria-label="Chat message"
+                >
+
+
+                <button
+                    class="jg-chat-send"
+                    type="submit"
+                    aria-label="Send">
+
+                    ➤
+
+                </button>
+
+            </form>
+
+        `;
+
+
+        document.body.appendChild(button);
+
+        document.body.appendChild(windowElement);
+
+
+        setupEvents();
+
+        loadHistory();
+
+    }
+
+
+    /* =====================================================
+       TIME
+       ===================================================== */
+
+    function getTime() {
+
+        return new Date().toLocaleTimeString(
+            [],
+            {
+                hour: "2-digit",
+                minute: "2-digit"
+            }
+        );
+
+    }
+
+
+    /* =====================================================
        ADD MESSAGE
-    ========================= */
+       ===================================================== */
 
     function addMessage(
         text,
-        type = "bot"
+        sender = "bot",
+        save = true,
+        links = []
     ) {
 
+        const container =
+            document.getElementById(
+                "jgChatMessages"
+            );
+
+
+        if (!container) {
+            return;
+        }
+
+
         const message =
-        document.createElement("div");
+            document.createElement("div");
+
 
         message.className =
-            "jg-message " + type;
+            `jg-message ${sender}`;
 
 
-        if(type === "bot") {
+        const content =
+            document.createElement("div");
 
-            message.innerHTML = `
 
-                <div class="jg-message-avatar">
-                    JG
-                </div>
+        content.className =
+            "jg-message-content";
 
-                <div class="jg-message-content">
 
-                    <div class="jg-message-bubble">
-                        ${text}
-                    </div>
+        content.textContent = text;
 
-                    <span class="jg-time">
-                        Just now
-                    </span>
 
-                </div>
+        const time =
+            document.createElement("span");
 
-            `;
 
-        } else {
+        time.className =
+            "jg-message-time";
 
-            message.innerHTML = `
 
-                <div class="jg-message-content">
+        time.textContent =
+            getTime();
 
-                    <div class="jg-message-bubble">
-                        ${text}
-                    </div>
 
-                    <span class="jg-time">
-                        Just now
-                    </span>
+        content.appendChild(time);
 
-                </div>
 
-            `;
+        if (links.length > 0) {
+
+            const linkContainer =
+                document.createElement("div");
+
+
+            linkContainer.className =
+                "jg-chat-links";
+
+
+            links.forEach(link => {
+
+                const anchor =
+                    document.createElement("a");
+
+
+                anchor.className =
+                    "jg-chat-link";
+
+
+                anchor.href =
+                    link.url;
+
+
+                anchor.textContent =
+                    link.label;
+
+
+                linkContainer.appendChild(anchor);
+
+            });
+
+
+            content.appendChild(linkContainer);
 
         }
 
 
-        messages.appendChild(message);
+        message.appendChild(content);
 
-        messages.scrollTop =
-            messages.scrollHeight;
+        container.appendChild(message);
+
+
+        container.scrollTop =
+            container.scrollHeight;
+
+
+        if (save) {
+
+            saveMessage(
+                text,
+                sender
+            );
+
+        }
 
     }
 
 
-    /* =========================
-       BOT RESPONSE
-    ========================= */
+    /* =====================================================
+       SAVE CHAT
+       ===================================================== */
 
-    function getBotResponse(message) {
+    function saveMessage(text, sender) {
+
+        try {
+
+            let history =
+                JSON.parse(
+                    localStorage.getItem(
+                        STORAGE_KEY
+                    ) || "[]"
+                );
+
+
+            history.push({
+
+                text: text,
+
+                sender: sender,
+
+                time: Date.now()
+
+            });
+
+
+            if (
+                history.length >
+                MAX_MESSAGES
+            ) {
+
+                history =
+                    history.slice(
+                        -MAX_MESSAGES
+                    );
+
+            }
+
+
+            localStorage.setItem(
+                STORAGE_KEY,
+                JSON.stringify(history)
+            );
+
+        } catch (error) {
+
+            console.warn(
+                "JG chatbot storage error:",
+                error
+            );
+
+        }
+
+    }
+
+
+    /* =====================================================
+       LOAD HISTORY
+       ===================================================== */
+
+    function loadHistory() {
+
+        try {
+
+            const history =
+                JSON.parse(
+                    localStorage.getItem(
+                        STORAGE_KEY
+                    ) || "[]"
+                );
+
+
+            if (history.length === 0) {
+
+                showWelcome();
+
+                return;
+
+            }
+
+
+            history.forEach(message => {
+
+                addMessage(
+                    message.text,
+                    message.sender,
+                    false
+                );
+
+            });
+
+        } catch (error) {
+
+            showWelcome();
+
+        }
+
+    }
+
+
+    /* =====================================================
+       WELCOME
+       ===================================================== */
+
+    function showWelcome() {
+
+        addMessage(
+            "Hey! 👋 I'm JG Assistant. Welcome to JG. Ask me about skills, learning, work, enrollment or how to get started."
+        );
+
+    }
+
+
+    /* =====================================================
+       CLEAR CHAT
+       ===================================================== */
+
+    function clearChat() {
+
+        localStorage.removeItem(
+            STORAGE_KEY
+        );
+
+
+        const messages =
+            document.getElementById(
+                "jgChatMessages"
+            );
+
+
+        messages.innerHTML = "";
+
+
+        showWelcome();
+
+    }
+
+
+    /* =====================================================
+       FIND RESPONSE
+       ===================================================== */
+
+    function findResponse(message) {
+
+        const text =
+            message
+                .toLowerCase()
+                .trim();
+
+
+        for (
+            const item of responses
+        ) {
+
+            for (
+                const keyword of item.keywords
+            ) {
+
+                if (
+                    text.includes(
+                        keyword
+                    )
+                ) {
+
+                    return item.response;
+
+                }
+
+            }
+
+        }
+
+
+        return null;
+
+    }
+
+
+    /* =====================================================
+       LINKS BASED ON QUESTION
+       ===================================================== */
+
+    function getLinks(message) {
 
         const text =
             message.toLowerCase();
 
 
-        if(
+        if (
             text.includes("skill") ||
-            text.includes("learn")
+            text.includes("course")
         ) {
 
-            return `
-                JG currently offers practical
-                learning paths such as
-                <strong>Web Development</strong>,
-                <strong>Graphic Design</strong>,
-                <strong>Video Editing</strong>,
-                <strong>Python Programming</strong>
-                and more.
-                <br><br>
-                Visit the <strong>Learn</strong>
-                page to see the available courses.
-            `;
+            return [
+
+                {
+                    label: "Explore Skills",
+                    url: pages.skills
+                },
+
+                {
+                    label: "Start Learning",
+                    url: pages.learn
+                }
+
+            ];
 
         }
 
 
-        if(
-            text.includes("price") ||
-            text.includes("cost") ||
-            text.includes("how much")
+        if (
+            text.includes("learn") ||
+            text.includes("lesson")
         ) {
 
-            return `
-                Course prices depend on the
-                skill you choose.
-                <br><br>
-                You can view the exact price
-                for each course on the
-                <strong>Learn</strong> page.
-            `;
+            return [
+
+                {
+                    label: "Open Learn",
+                    url: pages.learn
+                }
+
+            ];
 
         }
 
 
-        if(
+        if (
+            text.includes("work") ||
+            text.includes("job") ||
+            text.includes("opportunity")
+        ) {
+
+            return [
+
+                {
+                    label: "Explore Work",
+                    url: pages.work
+                }
+
+            ];
+
+        }
+
+
+        if (
             text.includes("enroll") ||
+            text.includes("join") ||
             text.includes("register")
         ) {
 
-            return `
-                Enrolling is simple.
-                <br><br>
-                1️⃣ Choose your course.<br>
-                2️⃣ Enter your details.<br>
-                3️⃣ Select your payment method.<br>
-                4️⃣ Complete your payment.<br>
-                5️⃣ Submit your enrollment.
-                <br><br>
-                You can start from the
-                <strong>Enroll</strong> page.
-            `;
+            return [
+
+                {
+                    label: "Enroll",
+                    url: pages.enrollment
+                }
+
+            ];
 
         }
 
 
-        if(
-            text.includes("pay") ||
-            text.includes("payment") ||
-            text.includes("transfer") ||
-            text.includes("opay")
+        if (
+            text.includes("account") ||
+            text.includes("progress")
         ) {
 
-            return `
-                JG currently accepts
-                <strong>OPay / bank transfer</strong>.
-                <br><br>
-                Your enrollment page will show
-                the payment details and the
-                amount for your selected course.
-            `;
+            return [
+
+                {
+                    label: "My Account",
+                    url: pages.account
+                }
+
+            ];
 
         }
 
 
-        if(
-            text.includes("contact") ||
-            text.includes("help")
-        ) {
-
-            return `
-                I'm here to help you with
-                JG courses, enrollment,
-                payment and learning.
-                <br><br>
-                Tell me what you need help with
-                and I'll guide you.
-            `;
-
-        }
-
-
-        if(
-            text.includes("web") ||
-            text.includes("coding")
-        ) {
-
-            return `
-                Web Development is a great
-                skill if you want to build
-                websites and web applications.
-                <br><br>
-                You can learn HTML, CSS,
-                JavaScript and more through
-                the JG learning platform.
-            `;
-
-        }
-
-
-        if(
-            text.includes("graphic") ||
-            text.includes("design")
-        ) {
-
-            return `
-                Graphic Design is perfect if
-                you want to create professional
-                social media designs, flyers,
-                logos and other visual content.
-                <br><br>
-                Check the JG learning page
-                for the available course.
-            `;
-
-        }
-
-
-        if(
-            text.includes("hello") ||
-            text.includes("hi") ||
-            text.includes("hey")
-        ) {
-
-            return `
-                Hey 👋
-                <br><br>
-                Welcome to <strong>JG</strong>.
-                How can I help you today?
-            `;
-
-        }
-
-
-        return `
-            That's a good question.
-            <br><br>
-            I can help with <strong>JG courses,
-            skills, prices, enrollment,
-            payment and learning.</strong>
-            <br><br>
-            Try asking:
-            <br>
-            • What skills can I learn?<br>
-            • How much are the courses?<br>
-            • How do I enroll?<br>
-            • How can I pay?
-        `;
+        return [];
 
     }
 
 
-    /* =========================
-       SEND MESSAGE
-    ========================= */
+    /* =====================================================
+       SMART FALLBACK
+       ===================================================== */
 
-    function sendMessage() {
+    function getFallback(message) {
 
         const text =
-            input.value.trim();
+            message.toLowerCase();
 
 
-        if(!text) return;
+        if (
+            text.includes("html") ||
+            text.includes("css") ||
+            text.includes("javascript")
+        ) {
+
+            return "💻 Those are core Web Development technologies. HTML handles structure, CSS handles presentation and JavaScript adds behaviour and interaction.";
+
+        }
+
+
+        if (
+            text.includes("phone") ||
+            text.includes("mobile")
+        ) {
+
+            return "📱 JG is designed to work across modern mobile and desktop browsers. You can explore the learning pages directly from your phone.";
+
+        }
+
+
+        if (
+            text.includes("project") ||
+            text.includes("portfolio")
+        ) {
+
+            return "🚀 Projects are important because they demonstrate what you can actually do. Try building small projects as you learn instead of only reading lessons.";
+
+        }
+
+
+        if (
+            text.includes("how long") ||
+            text.includes("time")
+        ) {
+
+            return "⏱️ Your learning speed depends on the skill and how consistently you practise. Focus on understanding and building rather than rushing through lessons.";
+
+        }
+
+
+        return "I'm still learning about that part of JG. 🤖 Try asking me about our skills, learning paths, work opportunities, enrollment or how to get started.";
+
+    }
+
+
+    /* =====================================================
+       RESPONSE ENGINE
+       ===================================================== */
+
+    function answerQuestion(message) {
+
+        const response =
+            findResponse(message) ||
+            getFallback(message);
+
+
+        const links =
+            getLinks(message);
+
+
+        const typing =
+            document.getElementById(
+                "jgTyping"
+            );
+
+
+        typing.classList.add("show");
+
+
+        setTimeout(() => {
+
+            typing.classList.remove(
+                "show"
+            );
+
+
+            addMessage(
+                response,
+                "bot",
+                true,
+                links
+            );
+
+        }, 650);
+
+    }
+
+
+    /* =====================================================
+       SEND MESSAGE
+       ===================================================== */
+
+    function sendMessage(message) {
+
+        const clean =
+            message.trim();
+
+
+        if (!clean) {
+            return;
+        }
 
 
         addMessage(
-            escapeHTML(text),
+            clean,
             "user"
         );
 
 
-        input.value = "";
-
-
-        typing.style.display =
-            "flex";
-
-
-        messages.scrollTop =
-            messages.scrollHeight;
-
-
-        setTimeout(
-            function () {
-
-                typing.style.display =
-                    "none";
-
-                addMessage(
-                    getBotResponse(text),
-                    "bot"
-                );
-
-            },
-            700
+        answerQuestion(
+            clean
         );
 
     }
 
 
-    /* =========================
-       SEND BUTTON
-    ========================= */
+    /* =====================================================
+       EVENTS
+       ===================================================== */
 
-    sendButton.addEventListener(
-        "click",
-        sendMessage
-    );
+    function setupEvents() {
+
+        const button =
+            document.getElementById(
+                "jgChatButton"
+            );
 
 
-    input.addEventListener(
-        "keydown",
-        function(event) {
+        const windowElement =
+            document.getElementById(
+                "jgChatWindow"
+            );
 
-            if(
-                event.key === "Enter"
-            ) {
+
+        const close =
+            document.getElementById(
+                "jgCloseChat"
+            );
+
+
+        const clear =
+            document.getElementById(
+                "jgClearChat"
+            );
+
+
+        const form =
+            document.getElementById(
+                "jgChatForm"
+            );
+
+
+        const input =
+            document.getElementById(
+                "jgChatInput"
+            );
+
+
+        button.addEventListener(
+            "click",
+            () => {
+
+                windowElement.classList.toggle(
+                    "open"
+                );
+
+
+                if (
+                    windowElement.classList.contains(
+                        "open"
+                    )
+                ) {
+
+                    setTimeout(
+                        () => input.focus(),
+                        100
+                    );
+
+                }
+
+            }
+        );
+
+
+        close.addEventListener(
+            "click",
+            () => {
+
+                windowElement.classList.remove(
+                    "open"
+                );
+
+            }
+        );
+
+
+        clear.addEventListener(
+            "click",
+            clearChat
+        );
+
+
+        form.addEventListener(
+            "submit",
+            event => {
 
                 event.preventDefault();
 
-                sendMessage();
+
+                sendMessage(
+                    input.value
+                );
+
+
+                input.value = "";
 
             }
-
-        }
-    );
+        );
 
 
-    /* =========================
-       QUICK QUESTIONS
-    ========================= */
+        document
+            .querySelectorAll(
+                ".jg-quick-button"
+            )
+            .forEach(button => {
 
-    document
-    .querySelectorAll(
-        ".jg-quick-buttons button"
-    )
-    .forEach(
-        function(button) {
+                button.addEventListener(
+                    "click",
+                    () => {
 
-            button.addEventListener(
-                "click",
-                function() {
+                        sendMessage(
+                            button.dataset.question
+                        );
 
-                    const question =
-                        this.dataset.question;
+                    }
+                );
 
-                    input.value =
-                        question;
+            });
 
-                    sendMessage();
+
+        document.addEventListener(
+            "keydown",
+            event => {
+
+                if (
+                    event.key === "Escape"
+                ) {
+
+                    windowElement.classList.remove(
+                        "open"
+                    );
 
                 }
-            );
 
-        }
-    );
-
-
-    /* =========================
-       SECURITY
-    ========================= */
-
-    function escapeHTML(text) {
-
-        const div =
-            document.createElement("div");
-
-        div.textContent =
-            text;
-
-        return div.innerHTML;
+            }
+        );
 
     }
+
+
+    /* =====================================================
+       START
+       ===================================================== */
+
+    function init() {
+
+        createStyles();
+
+        createChatbot();
+
+    }
+
+
+    if (
+        document.readyState ===
+        "loading"
+    ) {
+
+        document.addEventListener(
+            "DOMContentLoaded",
+            init
+        );
+
+    } else {
+
+        init();
+
+    }
+
 
 })();
