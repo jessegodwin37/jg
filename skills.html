@@ -8,7 +8,7 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>JG Skills | Choose Your Skill</title>
+    <title>JG Skills | Build Valuable Skills</title>
 
     <meta name="description"
           content="Explore practical digital skills you can learn with JG.">
@@ -20,26 +20,23 @@
 
 <body>
 
+<!-- =========================
+     NAVIGATION
+========================= -->
 
-    <!-- NAVIGATION -->
+<nav class="navbar">
 
-    <nav class="navbar">
+    <div class="nav-inner">
 
         <a href="index.html"
            class="logo">
-
             JG<span>.</span>
-
         </a>
 
-
         <button class="menu-toggle"
-                aria-label="Open menu">
-
+                aria-label="Open navigation menu">
             ☰
-
         </button>
-
 
         <ul class="nav-links">
 
@@ -50,7 +47,8 @@
             </li>
 
             <li>
-                <a href="skills.html">
+                <a href="skills.html"
+                   class="active">
                     Skills
                 </a>
             </li>
@@ -76,557 +74,369 @@
             <li>
                 <a href="enrollment.html"
                    class="nav-cta">
-
                     Enroll
-
                 </a>
             </li>
 
         </ul>
 
-    </nav>
+    </div>
+
+</nav>
 
 
+<!-- =========================
+     HERO
+========================= -->
 
-    <!-- PAGE HERO -->
+<header class="page-hero">
 
-    <section class="page-hero">
+    <div class="container">
 
         <span class="badge">
-            JG SKILLS
+            🎯 JG SKILLS
         </span>
 
-
         <h1>
-
-            Choose a
-            <span>Skill.</span>
-
+            Build Skills.
+            <span>Create Opportunities.</span>
         </h1>
 
-
         <p>
-
-            You don't need to master everything.
-            Choose one useful skill, learn it,
-            practice it and build with it.
-
+            Explore practical digital skills,
+            choose what interests you and start
+            building your knowledge.
         </p>
 
-    </section>
+    </div>
+
+</header>
 
 
+<!-- =========================
+     SEARCH
+========================= -->
 
-    <!-- SKILLS -->
+<section class="section">
 
-    <section class="section">
+    <div class="container">
 
+        <div class="search-box">
 
-        <div class="section-title">
-
-            <span class="badge">
-                EXPLORE
-            </span>
-
-
-            <h2>
-                Skills You Can Build
-            </h2>
-
-
-            <p>
-
-                Start with one path and grow
-                from there.
-
-            </p>
+            <input
+                type="search"
+                id="skillSearch"
+                placeholder="Search skills..."
+                aria-label="Search skills">
 
         </div>
 
 
+        <!-- =========================
+             SKILL GRID
+        ========================= -->
 
-        <div class="skill-grid">
+        <div class="grid skill-grid">
 
 
             <!-- WEB DEVELOPMENT -->
 
-            <article class="skill-card">
+            <article class="card skill-card"
+                     data-search="web development html css javascript coding websites">
 
-                <div class="skill-icon">
+                <div class="icon">
                     💻
                 </div>
 
-
-                <span class="tag">
+                <span class="badge">
                     DIGITAL
                 </span>
 
-
-                <h3>
+                <h2>
                     Web Development
-                </h3>
-
+                </h2>
 
                 <p>
-
-                    Learn HTML, CSS and JavaScript
-                    and create modern websites.
-
+                    Learn how websites are created
+                    using HTML, CSS and JavaScript.
                 </p>
 
+                <ul class="feature-list">
 
-                <div class="card-meta">
+                    <li>
+                        HTML fundamentals
+                    </li>
 
-                    <span>
-                        Beginner Friendly
-                    </span>
+                    <li>
+                        CSS styling
+                    </li>
 
-                    <span>
-                        Projects
-                    </span>
+                    <li>
+                        JavaScript basics
+                    </li>
 
-                </div>
+                    <li>
+                        Responsive websites
+                    </li>
 
+                </ul>
 
-                <a href="learn.html#web-development"
-                   class="btn btn-blue">
-
-                    Start Learning →
-
+                <a href="learn.html#web"
+                   class="btn btn-primary">
+                    Learn Web Development →
                 </a>
 
             </article>
-
 
 
             <!-- GRAPHIC DESIGN -->
 
-            <article class="skill-card">
+            <article class="card skill-card"
+                     data-search="graphic design canva photoshop posters logos branding">
 
-                <div class="skill-icon">
+                <div class="icon">
                     🎨
                 </div>
 
-
-                <span class="tag">
+                <span class="badge">
                     CREATIVE
                 </span>
 
-
-                <h3>
+                <h2>
                     Graphic Design
-                </h3>
-
+                </h2>
 
                 <p>
-
-                    Learn design fundamentals and
-                    create graphics for businesses,
-                    brands and social media.
-
+                    Learn how to create attractive
+                    visual content for people and businesses.
                 </p>
 
+                <ul class="feature-list">
 
-                <div class="card-meta">
+                    <li>
+                        Design principles
+                    </li>
 
-                    <span>
-                        Creative
-                    </span>
+                    <li>
+                        Canva
+                    </li>
 
-                    <span>
-                        Projects
-                    </span>
+                    <li>
+                        Social media graphics
+                    </li>
 
-                </div>
+                    <li>
+                        Branding
+                    </li>
 
+                </ul>
 
-                <a href="learn.html#graphic-design"
-                   class="btn btn-blue">
-
-                    Start Learning →
-
+                <a href="learn.html#design"
+                   class="btn btn-primary">
+                    Learn Graphic Design →
                 </a>
 
             </article>
-
 
 
             <!-- VIDEO EDITING -->
 
-            <article class="skill-card">
+            <article class="card skill-card"
+                     data-search="video editing capcut premiere videos content creator">
 
-                <div class="skill-icon">
+                <div class="icon">
                     🎬
                 </div>
 
-
-                <span class="tag">
+                <span class="badge">
                     CREATIVE
                 </span>
 
-
-                <h3>
+                <h2>
                     Video Editing
-                </h3>
-
+                </h2>
 
                 <p>
-
-                    Learn how to edit videos,
-                    create engaging content and
-                    improve your storytelling.
-
+                    Learn how to transform raw clips
+                    into engaging videos.
                 </p>
 
+                <ul class="feature-list">
 
-                <div class="card-meta">
+                    <li>
+                        Video cutting
+                    </li>
 
-                    <span>
-                        Content
-                    </span>
+                    <li>
+                        Transitions
+                    </li>
 
-                    <span>
-                        Projects
-                    </span>
+                    <li>
+                        Captions
+                    </li>
 
-                </div>
+                    <li>
+                        Short-form content
+                    </li>
 
+                </ul>
 
-                <a href="learn.html#video-editing"
-                   class="btn btn-blue">
-
-                    Start Learning →
-
+                <a href="learn.html#video"
+                   class="btn btn-primary">
+                    Learn Video Editing →
                 </a>
 
             </article>
-
 
 
             <!-- DIGITAL MARKETING -->
 
-            <article class="skill-card">
+            <article class="card skill-card"
+                     data-search="digital marketing marketing advertising sales customers">
 
-                <div class="skill-icon">
-                    📢
+                <div class="icon">
+                    📈
                 </div>
 
-
-                <span class="tag">
-                    MARKETING
+                <span class="badge">
+                    BUSINESS
                 </span>
 
-
-                <h3>
+                <h2>
                     Digital Marketing
-                </h3>
-
+                </h2>
 
                 <p>
-
                     Learn how businesses use digital
-                    platforms to reach customers and
-                    grow their audience.
-
+                    platforms to reach potential customers.
                 </p>
 
+                <ul class="feature-list">
 
-                <div class="card-meta">
+                    <li>
+                        Content marketing
+                    </li>
 
-                    <span>
-                        Business
-                    </span>
+                    <li>
+                        Online advertising
+                    </li>
 
-                    <span>
-                        Strategy
-                    </span>
+                    <li>
+                        Customer research
+                    </li>
 
-                </div>
+                    <li>
+                        Marketing strategy
+                    </li>
 
+                </ul>
 
-                <a href="learn.html#digital-marketing"
-                   class="btn btn-blue">
-
-                    Start Learning →
-
+                <a href="learn.html#marketing"
+                   class="btn btn-primary">
+                    Learn Marketing →
                 </a>
 
             </article>
-
 
 
             <!-- SOCIAL MEDIA -->
 
-            <article class="skill-card">
+            <article class="card skill-card"
+                     data-search="social media instagram facebook tiktok content management">
 
-                <div class="skill-icon">
+                <div class="icon">
                     📱
                 </div>
 
-
-                <span class="tag">
-                    DIGITAL
+                <span class="badge">
+                    SOCIAL
                 </span>
 
-
-                <h3>
+                <h2>
                     Social Media Management
-                </h3>
-
+                </h2>
 
                 <p>
-
-                    Learn content planning,
-                    account management, engagement
-                    and audience growth.
-
+                    Learn how to manage social platforms,
+                    create content and grow audiences.
                 </p>
 
+                <ul class="feature-list">
 
-                <div class="card-meta">
+                    <li>
+                        Content planning
+                    </li>
 
-                    <span>
-                        Content
-                    </span>
+                    <li>
+                        Social media strategy
+                    </li>
 
-                    <span>
-                        Strategy
-                    </span>
+                    <li>
+                        Community management
+                    </li>
 
-                </div>
+                    <li>
+                        Analytics
+                    </li>
 
+                </ul>
 
-                <a href="learn.html#social-media"
-                   class="btn btn-blue">
-
-                    Start Learning →
-
+                <a href="learn.html#social"
+                   class="btn btn-primary">
+                    Learn Social Media →
                 </a>
 
             </article>
-
 
 
             <!-- FREELANCING -->
 
-            <article class="skill-card">
+            <article class="card skill-card"
+                     data-search="freelancing clients remote work services money">
 
-                <div class="skill-icon">
+                <div class="icon">
                     💼
                 </div>
 
-
-                <span class="tag">
+                <span class="badge">
                     CAREER
                 </span>
 
-
-                <h3>
+                <h2>
                     Freelancing
-                </h3>
-
+                </h2>
 
                 <p>
-
-                    Learn how to turn your skills
-                    into services and prepare for
-                    working with clients.
-
+                    Learn how to package your skills
+                    into services and work with clients.
                 </p>
 
+                <ul class="feature-list">
 
-                <div class="card-meta">
+                    <li>
+                        Finding clients
+                    </li>
 
-                    <span>
-                        Career
-                    </span>
+                    <li>
+                        Building a portfolio
+                    </li>
 
-                    <span>
-                        Clients
-                    </span>
+                    <li>
+                        Pricing services
+                    </li>
 
-                </div>
+                    <li>
+                        Client communication
+                    </li>
 
+                </ul>
 
                 <a href="learn.html#freelancing"
-                   class="btn btn-blue">
-
-                    Start Learning →
-
+                   class="btn btn-primary">
+                    Learn Freelancing →
                 </a>
 
             </article>
 
 
-        </div>
-
-    </section>
-
-
-
-    <!-- LEARNING PATH -->
-
-    <section class="section section-dark">
-
-
-        <div class="section-title">
-
-            <span class="badge badge-light">
-                THE JG METHOD
-            </span>
-
-
-            <h2>
-
-                Don't just learn.
-                Build.
-
-            </h2>
-
-
-            <p>
-
-                Every skill should move you
-                closer to something you can do.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="mini-grid">
-
-
-            <div class="mini-card">
-
-                1️⃣
-
-                <span>
-                    Learn
-                </span>
-
-                <small>
-                    Understand the basics.
-                </small>
-
-            </div>
-
-
-            <div class="mini-card">
-
-                2️⃣
-
-                <span>
-                    Practice
-                </span>
-
-                <small>
-                    Repeat and improve.
-                </small>
-
-            </div>
-
-
-            <div class="mini-card">
-
-                3️⃣
-
-                <span>
-                    Build
-                </span>
-
-                <small>
-                    Create real projects.
-                </small>
-
-            </div>
-
-
-            <div class="mini-card">
-
-                4️⃣
-
-                <span>
-                    Work
-                </span>
-
-                <small>
-                    Pursue opportunities.
-                </small>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- CTA -->
-
-    <section class="cta">
-
-        <h2>
-
-            Ready to start?
-
-        </h2>
-
-
-        <p>
-
-            Pick one skill and take
-            your first lesson.
-
-        </p>
-
-
-        <a href="learn.html"
-           class="btn btn-primary">
-
-            Start Learning →
-
-        </a>
-
-    </section>
-
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-
-        <div>
-
-            <strong>
-                JG<span>.</span>
-            </strong>
-
-
-            <p>
-                Find Skills. Find Work.
-            </p>
-
-        </div>
-
-
-        <p>
-
-            © 2026 JG.
-            All rights reserved.
-
-        </p>
-
-
-    </footer>
-
-
-
-    <script src="js/app.js"></script>
-
-</body>
-
-</html>
+            <!--
