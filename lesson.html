@@ -8,238 +8,13 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>JG Lesson | Learn</title>
+    <title>JG Lesson | Learn Skills</title>
 
     <meta name="description"
-          content="Learn practical skills with JG.">
+          content="Learn practical digital skills with JG through structured lessons, exercises and quizzes.">
 
     <link rel="stylesheet"
           href="css/style.css">
-
-    <style>
-
-        .lesson-page {
-            min-height: 100vh;
-            padding: 120px 20px 80px;
-            background: #f5f7fb;
-        }
-
-        .lesson-container {
-            max-width: 1050px;
-            margin: auto;
-        }
-
-        .lesson-header {
-            background: #111827;
-            color: white;
-            padding: 45px;
-            border-radius: 24px;
-            margin-bottom: 25px;
-        }
-
-        .lesson-header h1 {
-            font-size: clamp(32px, 5vw, 55px);
-            margin: 15px 0;
-        }
-
-        .lesson-header p {
-            color: #d1d5db;
-            line-height: 1.8;
-            max-width: 750px;
-        }
-
-        .lesson-number {
-            color: #60a5fa;
-            font-weight: 800;
-            letter-spacing: 1px;
-        }
-
-        .lesson-layout {
-            display: grid;
-            grid-template-columns: 1fr 280px;
-            gap: 25px;
-        }
-
-        .lesson-content,
-        .lesson-sidebar {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 35px rgba(0,0,0,.06);
-        }
-
-        .lesson-content h2 {
-            margin-top: 0;
-            font-size: 30px;
-        }
-
-        .lesson-content h3 {
-            margin-top: 35px;
-        }
-
-        .lesson-content p {
-            color: #4b5563;
-            line-height: 1.9;
-        }
-
-        .lesson-content ul,
-        .lesson-content ol {
-            line-height: 2;
-            color: #4b5563;
-        }
-
-        .example-box {
-            background: #111827;
-            color: white;
-            padding: 20px;
-            border-radius: 14px;
-            margin: 20px 0;
-            overflow-x: auto;
-        }
-
-        .example-box pre {
-            margin: 0;
-            white-space: pre-wrap;
-            font-family: monospace;
-            line-height: 1.7;
-        }
-
-        .tip-box {
-            background: #eff6ff;
-            border-left: 4px solid #2563eb;
-            padding: 18px;
-            border-radius: 10px;
-            margin: 25px 0;
-        }
-
-        .tip-box strong {
-            display: block;
-            margin-bottom: 7px;
-        }
-
-        .exercise {
-            background: #f9fafb;
-            border: 1px solid #e5e7eb;
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 30px;
-        }
-
-        .exercise h3 {
-            margin-top: 0;
-        }
-
-        .quiz-option {
-            display: block;
-            padding: 12px;
-            margin: 8px 0;
-            border: 1px solid #d1d5db;
-            border-radius: 9px;
-            cursor: pointer;
-        }
-
-        .quiz-option:hover {
-            background: #eff6ff;
-        }
-
-        .quiz-option input {
-            margin-right: 8px;
-        }
-
-        .lesson-actions {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            margin-top: 35px;
-            padding-top: 25px;
-            border-top: 1px solid #e5e7eb;
-        }
-
-        .complete-button {
-            border: none;
-            cursor: pointer;
-        }
-
-        .complete-message {
-            display: none;
-            margin-top: 20px;
-            padding: 16px;
-            background: #ecfdf5;
-            border: 1px solid #10b981;
-            border-radius: 10px;
-            color: #047857;
-            font-weight: 700;
-        }
-
-        .sidebar-title {
-            margin-top: 0;
-        }
-
-        .sidebar-item {
-            padding: 12px;
-            border-radius: 10px;
-            margin-bottom: 8px;
-            background: #f9fafb;
-        }
-
-        .sidebar-item.active {
-            background: #eff6ff;
-            color: #2563eb;
-            font-weight: 700;
-        }
-
-        .progress-bar {
-            height: 9px;
-            background: #e5e7eb;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0%;
-            background: #2563eb;
-            transition: width .3s ease;
-        }
-
-        .progress-text {
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        @media (max-width: 800px) {
-
-            .lesson-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .lesson-header {
-                padding: 30px;
-            }
-
-        }
-
-        @media (max-width: 500px) {
-
-            .lesson-content,
-            .lesson-sidebar {
-                padding: 20px;
-            }
-
-            .lesson-actions {
-                flex-direction: column;
-            }
-
-            .lesson-actions a,
-            .lesson-actions button {
-                width: 100%;
-                text-align: center;
-            }
-
-        }
-
-    </style>
 
 </head>
 
@@ -247,9 +22,9 @@
 <body>
 
 
-<!-- =========================
+<!-- =====================================================
      NAVIGATION
-========================= -->
+===================================================== -->
 
 <nav class="navbar">
 
@@ -260,12 +35,19 @@
             JG<span>.</span>
         </a>
 
+
         <button class="menu-toggle"
-                aria-label="Open navigation menu">
+                id="menuToggle"
+                aria-label="Open navigation menu"
+                aria-expanded="false">
+
             ☰
+
         </button>
 
-        <ul class="nav-links">
+
+        <ul class="nav-links"
+            id="navLinks">
 
             <li>
                 <a href="index.html">
@@ -298,6 +80,13 @@
                 </a>
             </li>
 
+            <li>
+                <a href="enrollment.html"
+                   class="nav-cta">
+                    Enroll
+                </a>
+            </li>
+
         </ul>
 
     </div>
@@ -305,196 +94,1111 @@
 </nav>
 
 
-<!-- =========================
+
+<!-- =====================================================
      LESSON PAGE
-========================= -->
+===================================================== -->
 
 <main class="lesson-page">
+
 
     <div class="lesson-container">
 
 
-        <!-- LESSON HEADER -->
+        <!-- =================================================
+             LESSON HEADER
+        ================================================== -->
 
         <section class="lesson-header">
+
+
+            <div class="lesson-badge">
+                JG WEB DEVELOPMENT
+            </div>
+
 
             <div class="lesson-number">
                 LESSON 01
             </div>
 
+
             <h1 id="lessonTitle">
                 Introduction to Web Development
             </h1>
 
+
             <p id="lessonDescription">
+
                 Learn what web development is,
                 how websites work and what you
-                will learn throughout this course.
+                will learn throughout the JG
+                Web Development course.
+
             </p>
+
+
+            <div class="lesson-meta">
+
+                <span>
+                    ⏱️ 20 minutes
+                </span>
+
+                <span>
+                    📚 Beginner
+                </span>
+
+                <span>
+                    🧪 Quiz included
+                </span>
+
+            </div>
+
 
         </section>
 
 
+
+        <!-- =================================================
+             LESSON LAYOUT
+        ================================================== -->
+
         <div class="lesson-layout">
 
 
-            <!-- =====================
-                 LESSON CONTENT
-            ====================== -->
+            <!-- =================================================
+                 MAIN LESSON CONTENT
+            ================================================== -->
 
             <article class="lesson-content">
 
 
-                <h2>
-                    Introduction
-                </h2>
+                <!-- INTRODUCTION -->
 
-                <p>
-                    Web development is the process of
-                    creating websites and web applications.
-                    It combines structure, design and
-                    programming to create experiences
-                    people can use through a web browser.
-                </p>
+                <section class="lesson-section">
+
+                    <span class="section-label">
+                        PART 01
+                    </span>
 
 
-                <h3>
-                    What You Will Learn
-                </h3>
+                    <h2>
+                        What Is Web Development?
+                    </h2>
 
-                <ul>
-
-                    <li>
-                        How websites work
-                    </li>
-
-                    <li>
-                        HTML for website structure
-                    </li>
-
-                    <li>
-                        CSS for design and layout
-                    </li>
-
-                    <li>
-                        JavaScript for interaction
-                    </li>
-
-                    <li>
-                        How to build real projects
-                    </li>
-
-                    <li>
-                        How to publish websites
-                    </li>
-
-                </ul>
-
-
-                <h3>
-                    How a Website Works
-                </h3>
-
-                <p>
-                    When you visit a website, your browser
-                    requests files from a web server.
-                    The browser then interprets those files
-                    and displays the website.
-                </p>
-
-
-                <div class="tip-box">
-
-                    <strong>
-                        💡 JG Tip
-                    </strong>
-
-                    Don't try to memorize everything at once.
-                    Learn one concept, practice it and then
-                    move to the next concept.
-
-                </div>
-
-
-                <h3>
-                    HTML Example
-                </h3>
-
-                <p>
-                    HTML provides the structure of a webpage.
-                    For example, this creates a heading:
-                </p>
-
-
-                <div class="example-box">
-
-<pre>
-&lt;h1&gt;Welcome to JG&lt;/h1&gt;
-</pre>
-
-                </div>
-
-
-                <p>
-                    The browser reads the HTML and displays
-                    "Welcome to JG" as a heading.
-                </p>
-
-
-                <h3>
-                    Your First Exercise
-                </h3>
-
-
-                <div class="exercise">
-
-                    <h3>
-                        🧪 Practice
-                    </h3>
 
                     <p>
-                        Which language is primarily used
-                        to structure the content of a webpage?
+
+                        Web development is the process
+                        of creating websites and web
+                        applications that people can
+                        access through the internet.
+
                     </p>
 
 
-                    <label class="quiz-option">
+                    <p>
 
-                        <input
-                            type="radio"
-                            name="quiz"
-                            value="html">
+                        A website can be something simple,
+                        such as a personal portfolio, or
+                        something much larger, such as an
+                        online marketplace, learning
+                        platform or social network.
 
-                        HTML
-
-                    </label>
-
-
-                    <label class="quiz-option">
-
-                        <input
-                            type="radio"
-                            name="quiz"
-                            value="css">
-
-                        CSS
-
-                    </label>
+                    </p>
 
 
-                    <label class="quiz-option">
+                    <div class="tip-box">
 
-                        <input
-                            type="radio"
-                            name="quiz"
-                            value="javascript">
+                        <strong>
+                            💡 JG TIP
+                        </strong>
 
-                        JavaScript
+                        <p>
 
-                    </label>
+                            You don't need to understand
+                            everything on your first day.
+                            Learn one concept, practice it,
+                            and gradually build your skills.
+
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- THREE CORE TECHNOLOGIES -->
+
+                <section class="lesson-section">
+
+                    <span class="section-label">
+                        PART 02
+                    </span>
+
+
+                    <h2>
+                        The Three Core Technologies
+                    </h2>
+
+
+                    <p>
+
+                        Modern websites commonly use
+                        three fundamental technologies.
+
+                    </p>
+
+
+                    <div class="technology-grid">
+
+
+                        <div class="technology-card">
+
+                            <div class="technology-icon">
+                                🧱
+                            </div>
+
+                            <h3>
+                                HTML
+                            </h3>
+
+                            <p>
+
+                                HTML creates the structure
+                                and content of a webpage.
+
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="technology-card">
+
+                            <div class="technology-icon">
+                                🎨
+                            </div>
+
+                            <h3>
+                                CSS
+                            </h3>
+
+                            <p>
+
+                                CSS controls the appearance,
+                                layout and visual design.
+
+                            </p>
+
+                        </div>
+
+
+
+                        <div class="technology-card">
+
+                            <div class="technology-icon">
+                                ⚙️
+                            </div>
+
+                            <h3>
+                                JavaScript
+                            </h3>
+
+                            <p>
+
+                                JavaScript adds interaction
+                                and functionality.
+
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- HOW WEBSITE WORKS -->
+
+                <section class="lesson-section">
+
+                    <span class="section-label">
+                        PART 03
+                    </span>
+
+
+                    <h2>
+                        How Does a Website Work?
+                    </h2>
+
+
+                    <p>
+
+                        When you enter a website address
+                        into your browser, the browser
+                        requests the website's files from
+                        a server.
+
+                    </p>
+
+
+                    <div class="process-grid">
+
+
+                        <div class="process-card">
+
+                            <span>
+                                01
+                            </span>
+
+                            <h3>
+                                Browser
+                            </h3>
+
+                            <p>
+                                You enter a website address.
+                            </p>
+
+                        </div>
+
+
+                        <div class="process-card">
+
+                            <span>
+                                02
+                            </span>
+
+                            <h3>
+                                Request
+                            </h3>
+
+                            <p>
+                                The browser requests the files.
+                            </p>
+
+                        </div>
+
+
+                        <div class="process-card">
+
+                            <span>
+                                03
+                            </span>
+
+                            <h3>
+                                Server
+                            </h3>
+
+                            <p>
+                                The server sends the files.
+                            </p>
+
+                        </div>
+
+
+                        <div class="process-card">
+
+                            <span>
+                                04
+                            </span>
+
+                            <h3>
+                                Website
+                            </h3>
+
+                            <p>
+                                Your browser displays the page.
+                            </p>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- HTML -->
+
+                <section class="lesson-section">
+
+                    <span class="section-label">
+                        PART 04
+                    </span>
+
+
+                    <h2>
+                        Your First HTML Code
+                    </h2>
+
+
+                    <p>
+
+                        HTML uses elements called tags
+                        to describe the structure of
+                        webpage content.
+
+                    </p>
+
+
+                    <div class="code-box">
+
+<pre><code>&lt;h1&gt;Welcome to JG&lt;/h1&gt;
+
+&lt;p&gt;
+This is my first webpage.
+&lt;/p&gt;</code></pre>
+
+                    </div>
+
+
+                    <p>
+
+                        The <strong>h1</strong> element
+                        creates a main heading, while
+                        the <strong>p</strong> element
+                        creates a paragraph.
+
+                    </p>
+
+
+                    <div class="tip-box">
+
+                        <strong>
+                            💡 Remember
+                        </strong>
+
+                        <p>
+
+                            HTML is about structure.
+                            CSS is about appearance.
+                            JavaScript is about behaviour
+                            and interaction.
+
+                        </p>
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- PRACTICE -->
+
+                <section class="lesson-section">
+
+                    <span class="section-label">
+                        PART 05
+                    </span>
+
+
+                    <h2>
+                        Practice Exercise
+                    </h2>
+
+
+                    <div class="exercise-box">
+
+
+                        <h3>
+                            🧪 Your Task
+                        </h3>
+
+
+                        <p>
+
+                            Imagine you are creating a
+                            personal website.
+
+                            Write HTML that contains:
+
+                        </p>
+
+
+                        <ol>
+
+                            <li>
+                                A heading containing your name.
+                            </li>
+
+                            <li>
+                                A paragraph introducing yourself.
+                            </li>
+
+                            <li>
+                                A link to another webpage.
+                            </li>
+
+                        </ol>
+
+
+                        <p>
+
+                            Try writing the code yourself
+                            before looking at the answer.
+
+                        </p>
+
+
+                        <button
+                            type="button"
+                            class="btn btn-secondary"
+                            id="showExample">
+
+                            Show Example
+
+                        </button>
+
+
+                        <div id="exampleAnswer"
+                             class="hidden-answer">
+
+<pre><code>&lt;h1&gt;My Name&lt;/h1&gt;
+
+&lt;p&gt;
+Hello! I am learning web development with JG.
+&lt;/p&gt;
+
+&lt;a href="https://example.com"&gt;
+Visit Website
+&lt;/a&gt;</code></pre>
+
+                        </div>
+
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- QUIZ -->
+
+                <section class="lesson-section">
+
+                    <span class="section-label">
+                        PART 06
+                    </span>
+
+
+                    <h2>
+                        Lesson Quiz
+                    </h2>
+
+
+                    <p>
+
+                        Test your understanding before
+                        completing this lesson.
+
+                    </p>
+
+
+                    <form id="lessonQuiz">
+
+
+                        <!-- QUESTION 1 -->
+
+                        <div class="question">
+
+                            <h3>
+                                1. What is HTML mainly used for?
+                            </h3>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q1"
+                                    value="a">
+
+                                Designing colours
+
+                            </label>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q1"
+                                    value="b">
+
+                                Structuring webpage content
+
+                            </label>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q1"
+                                    value="c">
+
+                                Editing videos
+
+                            </label>
+
+                        </div>
+
+
+
+                        <!-- QUESTION 2 -->
+
+                        <div class="question">
+
+                            <h3>
+                                2. What is CSS mainly used for?
+                            </h3>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q2"
+                                    value="a">
+
+                                Styling webpages
+
+                            </label>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q2"
+                                    value="b">
+
+                                Creating databases
+
+                            </label>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q2"
+                                    value="c">
+
+                                Sending emails
+
+                            </label>
+
+                        </div>
+
+
+
+                        <!-- QUESTION 3 -->
+
+                        <div class="question">
+
+                            <h3>
+                                3. Which technology adds
+                                interaction to webpages?
+                            </h3>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q3"
+                                    value="a">
+
+                                HTML
+
+                            </label>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q3"
+                                    value="b">
+
+                                CSS
+
+                            </label>
+
+
+                            <label class="quiz-option">
+
+                                <input
+                                    type="radio"
+                                    name="q3"
+                                    value="c">
+
+                                JavaScript
+
+                            </label>
+
+                        </div>
+
+
+
+                        <button
+                            type="submit"
+                            class="btn btn-primary">
+
+                            Check Quiz
+
+                        </button>
+
+
+                    </form>
+
+
+                    <div id="quizResult"
+                         class="quiz-result">
+
+                    </div>
+
+
+                </section>
+
+
+
+                <!-- COMPLETE LESSON -->
+
+                <section class="lesson-completion">
+
+                    <h2>
+                        🎓 Ready to Complete This Lesson?
+                    </h2>
+
+
+                    <p>
+
+                        Make sure you understand the
+                        lesson and have completed the
+                        quiz before marking this lesson
+                        complete.
+
+                    </p>
 
 
                     <button
                         type="button"
-                        class="btn btn-primary"
-                        id="checkAnswer
+                        id="completeLesson"
+                        class="btn btn-primary">
+
+                        ✓ Mark Lesson Complete
+
+                    </button>
+
+
+                    <div id="completionMessage"
+                         class="completion-message">
+
+                        🎉 Congratulations!
+                        Lesson 01 has been completed.
+
+                    </div>
+
+                </section>
+
+
+
+                <!-- LESSON NAVIGATION -->
+
+                <div class="lesson-navigation">
+
+
+                    <a href="course.html"
+                       class="btn btn-secondary">
+
+                        ← Course
+
+                    </a>
+
+
+                    <a href="lesson.html"
+                       class="btn btn-primary">
+
+                        Next Lesson →
+
+                    </a>
+
+
+                </div>
+
+
+            </article>
+
+
+
+            <!-- =================================================
+                 SIDEBAR
+            ================================================== -->
+
+            <aside class="lesson-sidebar">
+
+
+                <div class="sidebar-card">
+
+
+                    <h3>
+                        📊 Your Progress
+                    </h3>
+
+
+                    <div class="progress-text">
+
+                        <span id="progressText">
+                            0%
+                        </span>
+
+                        Complete
+
+                    </div>
+
+
+                    <div class="progress-bar">
+
+                        <div id="progressFill"
+                             class="progress-fill">
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+
+                <div class="sidebar-card">
+
+
+                    <h3>
+                        📚 Course
+                    </h3>
+
+
+                    <a href="course.html"
+                       class="sidebar-link">
+
+                        Web Development
+
+                    </a>
+
+
+                </div>
+
+
+
+                <div class="sidebar-card">
+
+
+                    <h3>
+                        📝 Lessons
+                    </h3>
+
+
+                    <a href="lesson.html"
+                       class="sidebar-lesson active">
+
+                        ✓ 01 — Introduction
+
+                    </a>
+
+
+                    <a href="lesson.html"
+                       class="sidebar-lesson">
+
+                        02 — How Websites Work
+
+                    </a>
+
+
+                    <a href="lesson.html"
+                       class="sidebar-lesson">
+
+                        03 — HTML Basics
+
+                    </a>
+
+
+                    <a href="lesson.html"
+                       class="sidebar-lesson">
+
+                        04 — HTML Structure
+
+                    </a>
+
+
+                    <a href="lesson.html"
+                       class="sidebar-lesson">
+
+                        05 — HTML Elements
+
+                    </a>
+
+
+                </div>
+
+
+
+                <div class="sidebar-card certificate-card">
+
+
+                    <h3>
+                        🎓 Certificate
+                    </h3>
+
+
+                    <p>
+
+                        Complete the required course
+                        requirements to become eligible
+                        for your JG certificate.
+
+                    </p>
+
+
+                    <a href="certificate.html"
+                       class="btn btn-primary">
+
+                        View Certificate
+
+                    </a>
+
+
+                    <a href="verify.html"
+                       class="verify-link">
+
+                        Verify Certificate
+
+                    </a>
+
+
+                </div>
+
+
+            </aside>
+
+
+        </div>
+
+    </div>
+
+</main>
+
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer>
+
+    <div class="container">
+
+
+        <div class="footer-logo">
+            JG<span>.</span>
+        </div>
+
+
+        <p>
+            Find Skills. Find Work.
+        </p>
+
+
+        <div class="footer-links">
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="learn.html">
+                Learn
+            </a>
+
+            <a href="work.html">
+                Work
+            </a>
+
+            <a href="verify.html">
+                Verify Certificate
+            </a>
+
+        </div>
+
+
+        <p>
+            © 2026 JG. All rights reserved.
+        </p>
+
+
+    </div>
+
+</footer>
+
+
+
+<!-- =====================================================
+     JAVASCRIPT FILES
+===================================================== -->
+
+<script src="js/config.js"></script>
+
+<script src="js/app.js"></script>
+
+<script src="chatbot.js"></script>
+
+
+
+<!-- =====================================================
+     LESSON JAVASCRIPT
+===================================================== -->
+
+<script>
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function () {
+
+
+        /* ================================================
+           MOBILE MENU
+        ================================================= */
+
+        const menuToggle =
+            document.getElementById("menuToggle");
+
+        const navLinks =
+            document.getElementById("navLinks");
+
+
+        if (menuToggle && navLinks) {
+
+            menuToggle.addEventListener(
+                "click",
+                function () {
+
+                    navLinks.classList.toggle(
+                        "open"
+                    );
+
+
+                    const isOpen =
+                        navLinks.classList.contains(
+                            "open"
+                        );
+
+
+                    menuToggle.setAttribute(
+                        "aria-expanded",
+                        isOpen
+                    );
+
+                }
+            );
+
+        }
+
+
+
+        /* ================================================
+           SHOW EXAMPLE
+        ================================================= */
+
+        const showExample =
+            document.getElementById(
+                "showExample"
+            );
+
+        const exampleAnswer =
+            document.getElementById(
+                "exampleAnswer"
+            );
+
+
+        if (showExample && exampleAnswer) {
+
+            showExample.addEventListener(
+                "click",
+                function () {
+
+                    exampleAnswer.classList.toggle(
+                        "show"
+                    );
+
+
+                    if (
+                        exampleAnswer.classList.contains(
+                            "show"
+                        )
+                    ) {
+
+                        showExample.textContent =
+                            "Hide Example";
+
+                    } else {
+
+                        showExample.textContent =
+                            "Show Example";
+
+                    }
+
+                }
+            );
+
+        }
+
+
+
+        /* ================================================
+           QUIZ
+        ================================================= */
+
+        const quiz =
+            document.getElementById(
+                "lessonQuiz"
+            );
+
+
+        const quizResult =
+            document.getElementById(
+                "quizResult"
+            );
+
+
+        if (quiz) {
+
+            quiz.addEventListener(
+                "submit",
+                function (event) {
+
+                    event.preventDefault();
+
+
+                    const answers = {
+
+                        q1: "b",
+
+                        q2: "a",
+
+                        q3: "c"
+
+                    };
+
+
+                    let score = 0;
+
+
+                    Object.keys(
+                        answers
+                    ).forEach(
+                        function (
