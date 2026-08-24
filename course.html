@@ -1,0 +1,923 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>JG Course | Learn Skills</title>
+
+    <meta name="description"
+          content="Learn practical digital skills with JG.">
+
+    <link rel="stylesheet"
+          href="css/style.css">
+
+    <style>
+
+        .course-page {
+            min-height: 100vh;
+            padding: 120px 20px 80px;
+            background: #f5f7fb;
+        }
+
+        .course-container {
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        .course-header {
+            background: #111827;
+            color: white;
+            padding: 45px;
+            border-radius: 24px;
+            margin-bottom: 30px;
+        }
+
+        .course-header .badge {
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+
+        .course-header h1 {
+            font-size: clamp(35px, 6vw, 65px);
+            margin: 10px 0;
+        }
+
+        .course-header p {
+            max-width: 700px;
+            color: #d1d5db;
+            line-height: 1.8;
+        }
+
+        .course-stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+
+        .course-stat {
+            background: rgba(255,255,255,.08);
+            padding: 18px;
+            border-radius: 12px;
+        }
+
+        .course-stat strong {
+            display: block;
+            font-size: 20px;
+        }
+
+        .course-stat span {
+            color: #d1d5db;
+            font-size: 13px;
+        }
+
+        .course-layout {
+            display: grid;
+            grid-template-columns: 1fr 320px;
+            gap: 25px;
+        }
+
+        .course-content,
+        .course-sidebar {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 35px rgba(0,0,0,.06);
+        }
+
+        .course-content h2 {
+            margin-top: 0;
+        }
+
+        .module {
+            border: 1px solid #e5e7eb;
+            border-radius: 14px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .module-header {
+            padding: 20px;
+            background: #f9fafb;
+        }
+
+        .module-header h3 {
+            margin: 0 0 5px;
+        }
+
+        .module-header p {
+            margin: 0;
+            color: #6b7280;
+        }
+
+        .lesson-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+
+        .lesson-list li {
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .lesson-list a {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 16px 20px;
+            text-decoration: none;
+            color: #111827;
+        }
+
+        .lesson-list a:hover {
+            background: #eff6ff;
+        }
+
+        .lesson-number {
+            color: #2563eb;
+            font-weight: 800;
+        }
+
+        .progress-box {
+            margin-bottom: 25px;
+        }
+
+        .progress-top {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        .progress-bar {
+            height: 9px;
+            background: #e5e7eb;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            width: 0%;
+            height: 100%;
+            background: #2563eb;
+            transition: width .3s ease;
+        }
+
+        .sidebar-card {
+            padding: 18px;
+            background: #f9fafb;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+
+        .sidebar-card h3 {
+            margin-top: 0;
+        }
+
+        .certificate-card {
+            background: #eff6ff;
+        }
+
+        @media (max-width: 800px) {
+
+            .course-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .course-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 500px) {
+
+            .course-header {
+                padding: 28px;
+            }
+
+            .course-content,
+            .course-sidebar {
+                padding: 20px;
+            }
+
+            .course-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- NAVIGATION -->
+
+<nav class="navbar">
+
+    <div class="nav-inner">
+
+        <a href="index.html"
+           class="logo">
+            JG<span>.</span>
+        </a>
+
+        <button class="menu-toggle"
+                aria-label="Open navigation menu">
+            ☰
+        </button>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="index.html">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="skills.html">
+                    Skills
+                </a>
+            </li>
+
+            <li>
+                <a href="learn.html"
+                   class="active">
+                    Learn
+                </a>
+            </li>
+
+            <li>
+                <a href="work.html">
+                    Work
+                </a>
+            </li>
+
+            <li>
+                <a href="account.html">
+                    Account
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+<!-- COURSE -->
+
+<main class="course-page">
+
+    <div class="course-container">
+
+
+        <!-- COURSE HEADER -->
+
+        <section class="course-header">
+
+            <span class="badge">
+                💻 JG COURSE
+            </span>
+
+            <h1 id="courseTitle">
+                Web Development
+            </h1>
+
+            <p id="courseDescription">
+                Learn how to create modern websites
+                using HTML, CSS and JavaScript,
+                starting from the fundamentals and
+                progressing toward real projects.
+            </p>
+
+
+            <div class="course-stats">
+
+                <div class="course-stat">
+                    <strong>8</strong>
+                    <span>Modules</span>
+                </div>
+
+                <div class="course-stat">
+                    <strong>40+</strong>
+                    <span>Lessons</span>
+                </div>
+
+                <div class="course-stat">
+                    <strong>6</strong>
+                    <span>Projects</span>
+                </div>
+
+                <div class="course-stat">
+                    <strong>1</strong>
+                    <span>Certificate</span>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- COURSE LAYOUT -->
+
+        <div class="course-layout">
+
+
+            <!-- LESSONS -->
+
+            <section class="course-content">
+
+                <h2>
+                    Course Curriculum
+                </h2>
+
+                <p>
+                    Complete the modules in order and
+                    practice what you learn.
+                </p>
+
+
+                <!-- MODULE 1 -->
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <h3>
+                            Module 1 — Web Fundamentals
+                        </h3>
+
+                        <p>
+                            Understand how websites work.
+                        </p>
+
+                    </div>
+
+                    <ul class="lesson-list">
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <span class="lesson-number">
+                                        01
+                                    </span>
+                                    Introduction to Web Development
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <span class="lesson-number">
+                                        02
+                                    </span>
+                                    How Websites Work
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <span class="lesson-number">
+                                        03
+                                    </span>
+                                    HTML Basics
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    <span class="lesson-number">
+                                        04
+                                    </span>
+                                    HTML Structure
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- MODULE 2 -->
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <h3>
+                            Module 2 — HTML
+                        </h3>
+
+                        <p>
+                            Build the structure of webpages.
+                        </p>
+
+                    </div>
+
+                    <ul class="lesson-list">
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    01 — Headings and Paragraphs
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    02 — Links and Images
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    03 — Lists and Tables
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    04 — Forms and Inputs
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    05 — Semantic HTML
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- MODULE 3 -->
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <h3>
+                            Module 3 — CSS
+                        </h3>
+
+                        <p>
+                            Design professional websites.
+                        </p>
+
+                    </div>
+
+                    <ul class="lesson-list">
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    01 — CSS Fundamentals
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    02 — Colors and Typography
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    03 — Box Model
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    04 — Flexbox
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    05 — CSS Grid
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    06 — Responsive Design
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- MODULE 4 -->
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <h3>
+                            Module 4 — JavaScript
+                        </h3>
+
+                        <p>
+                            Add interaction and functionality.
+                        </p>
+
+                    </div>
+
+                    <ul class="lesson-list">
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    01 — JavaScript Basics
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    02 — Variables
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    03 — Functions
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    04 — Conditions
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    05 — Events
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- MODULE 5 -->
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <h3>
+                            Module 5 — Real Projects
+                        </h3>
+
+                        <p>
+                            Turn knowledge into practical work.
+                        </p>
+
+                    </div>
+
+                    <ul class="lesson-list">
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    01 — Personal Portfolio
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    02 — Business Website
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    03 — Landing Page
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    04 — JG Final Project
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+
+                <!-- MODULE 6 -->
+
+                <div class="module">
+
+                    <div class="module-header">
+
+                        <h3>
+                            Module 6 — Freelancing
+                        </h3>
+
+                        <p>
+                            Learn how to turn your skill
+                            into a service.
+                        </p>
+
+                    </div>
+
+                    <ul class="lesson-list">
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    01 — Building a Portfolio
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    02 — Finding Clients
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    03 — Pricing Your Work
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#">
+                                <span>
+                                    04 — Client Communication
+                                </span>
+                                <span>▶</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+            </section>
+
+
+            <!-- SIDEBAR -->
+
+            <aside class="course-sidebar">
+
+
+                <div class="progress-box">
+
+                    <div class="progress-top">
+
+                        <span>
+                            Course Progress
+                        </span>
+
+                        <span id="progressText">
+                            0%
+                        </span>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div class="progress-fill"
+                             id="progressFill">
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        🎯 Your Goal
+                    </h3>
+
+                    <p>
+                        Complete the lessons, practice
+                        through projects and prepare for
+                        the final assessment.
+                    </p>
+
+                </div>
+
+
+                <div class="sidebar-card">
+
+                    <h3>
+                        🧪 Assessment
+                    </h3>
+
+                    <p>
+                        Complete the required assessment
+                        before your certificate becomes
+                        eligible.
+                    </p>
+
+                </div>
+
+
+                <div class="sidebar-card certificate-card">
+
+                    <h3>
+                        🎓 Certificate
+                    </h3>
+
+                    <p>
+                        Successfully completing the
+                        requirements will make you eligible
+                        for a JG certificate.
+                    </p>
+
+                    <a href="certificate.html"
+                       class="btn btn-primary">
+
+                        Certificate
+
+                    </a>
+
+                </div>
+
+
+            </aside>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <div class="container">
+
+        <div class="footer-logo">
+            JG<span>.</span>
+        </div>
+
+        <p>
+            Find Skills. Find Work.
+        </p>
+
+        <p>
+            © 2026 JG. All rights reserved.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="js/config.js"></script>
+
+<script src="js/app.js"></script>
+
+<script src="chatbot.js"></script>
+
+
+<script>
+
+    /*
+     * BASIC LOCAL PROGRESS
+     *
+     * This is only the front-end version.
+     * Later we will connect progress to the
+     * student's JG account/database.
+     */
+
+    const completedLessons =
+        Number(
+            localStorage.getItem(
+                "jgCompletedLessons"
+            ) || 0
+        );
+
+
+    const totalLessons = 28;
+
+
+    const progress =
+        Math.min(
+            100,
+            Math.round(
+                (completedLessons / totalLessons) * 100
+            )
+        );
+
+
+    document.getElementById(
+        "progressFill"
+    ).style.width = progress + "%";
+
+
+    document.getElementById(
+        "progressText"
+    ).textContent = progress + "%";
+
+</script>
+
+
+</body>
+
+</html>
