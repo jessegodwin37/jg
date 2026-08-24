@@ -3,171 +3,330 @@
 
 <head>
 
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+<meta name="viewport"
+content="width=device-width, initial-scale=1.0">
 
-    <title>JG | Verify Certificate</title>
+<title>JG | Verify Certificate</title>
 
-    <meta name="description"
-          content="Verify a JG certificate using its unique certificate ID.">
+<meta name="description"
+content="Verify a JG Academy certificate using its unique certificate ID.">
 
-    <link rel="stylesheet"
-          href="css/style.css">
+<link rel="stylesheet"
+href="css/style.css">
 
-    <style>
+<style>
 
-        .verify-page {
-            min-height: 100vh;
-            padding: 130px 20px 80px;
-            background: #f5f7fb;
-        }
+/* =========================================
+   PAGE
+========================================= */
 
-        .verify-container {
-            max-width: 850px;
-            margin: auto;
-        }
+.verify-page {
+    min-height: 100vh;
+    padding: 130px 20px 90px;
+    background: #f5f7fb;
+}
 
-        .verify-header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+.verify-container {
+    width: 100%;
+    max-width: 950px;
+    margin: auto;
+}
 
-        .verify-header h1 {
-            font-size: clamp(36px, 6vw, 60px);
-            margin: 18px 0;
-        }
 
-        .verify-header h1 span {
-            color: #2563eb;
-        }
+/* =========================================
+   HEADER
+========================================= */
 
-        .verify-header p {
-            max-width: 650px;
-            margin: auto;
-            color: #6b7280;
-            line-height: 1.7;
-        }
+.verify-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
 
-        .verify-box {
-            background: #ffffff;
-            padding: 35px;
-            border-radius: 20px;
-            box-shadow: 0 15px 45px rgba(0, 0, 0, .08);
-        }
+.verify-header h1 {
+    font-size: clamp(38px, 7vw, 68px);
+    line-height: 1.05;
+    margin: 20px 0;
+    color: #111827;
+}
 
-        .verify-box label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 700;
-        }
+.verify-header h1 span {
+    color: #2563eb;
+}
 
-        .verify-input-row {
-            display: flex;
-            gap: 12px;
-        }
+.verify-header p {
+    max-width: 680px;
+    margin: auto;
+    color: #64748b;
+    line-height: 1.8;
+    font-size: 17px;
+}
 
-        .verify-input-row input {
-            flex: 1;
-            min-width: 0;
-            padding: 15px;
-            border: 1px solid #d1d5db;
-            border-radius: 10px;
-            font: inherit;
-            outline: none;
-        }
 
-        .verify-input-row input:focus {
-            border-color: #2563eb;
-        }
+/* =========================================
+   VERIFY CARD
+========================================= */
 
-        .verify-input-row button {
-            border: none;
-            cursor: pointer;
-        }
+.verify-box {
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,.08);
+}
 
-        .result {
-            margin-top: 25px;
-            padding: 25px;
-            border-radius: 15px;
-            display: none;
-        }
+.verify-box h2 {
+    margin-top: 0;
+    color: #111827;
+}
 
-        .result.success {
-            display: block;
-            background: #ecfdf5;
-            border: 1px solid #10b981;
-        }
+.verify-box-description {
+    color: #64748b;
+    line-height: 1.7;
+}
 
-        .result.error {
-            display: block;
-            background: #fef2f2;
-            border: 1px solid #ef4444;
-        }
 
-        .result h2 {
-            margin-top: 0;
-        }
+/* =========================================
+   FORM
+========================================= */
 
-        .result-details {
-            display: grid;
-            gap: 12px;
-            margin-top: 20px;
-        }
+.verify-box label {
+    display: block;
+    margin: 25px 0 9px;
+    font-weight: 800;
+    color: #111827;
+}
 
-        .result-details div {
-            padding: 12px;
-            background: rgba(255,255,255,.7);
-            border-radius: 8px;
-        }
+.verify-input-row {
+    display: flex;
+    gap: 12px;
+}
 
-        .result-details strong {
-            display: block;
-            font-size: 12px;
-            text-transform: uppercase;
-            color: #6b7280;
-            margin-bottom: 4px;
-        }
+.verify-input-row input {
+    flex: 1;
+    min-width: 0;
+    padding: 16px 18px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font: inherit;
+    font-size: 16px;
+    outline: none;
+    transition: .2s;
+}
 
-        .verify-info {
-            margin-top: 25px;
-            padding: 22px;
-            background: #eef4ff;
-            border-radius: 15px;
-        }
+.verify-input-row input:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 4px rgba(37,99,235,.10);
+}
 
-        .verify-info h3 {
-            margin-top: 0;
-        }
+.verify-input-row button {
+    border: none;
+    cursor: pointer;
+    white-space: nowrap;
+}
 
-        .verify-info p {
-            color: #4b5563;
-            line-height: 1.7;
-        }
 
-        .certificate-link {
-            display: inline-block;
-            margin-top: 15px;
-        }
+/* =========================================
+   RESULT
+========================================= */
 
-        @media (max-width: 600px) {
+.result {
+    margin-top: 30px;
+    padding: 30px;
+    border-radius: 18px;
+    display: none;
+}
 
-            .verify-box {
-                padding: 22px;
-            }
+.result.success {
+    display: block;
+    background: #ecfdf5;
+    border: 1px solid #10b981;
+    color: #064e3b;
+}
 
-            .verify-input-row {
-                flex-direction: column;
-            }
+.result.error {
+    display: block;
+    background: #fef2f2;
+    border: 1px solid #ef4444;
+    color: #7f1d1d;
+}
 
-            .verify-input-row button {
-                width: 100%;
-            }
+.result h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
 
-        }
+.result p {
+    line-height: 1.7;
+}
 
-    </style>
+
+/* =========================================
+   VERIFIED ICON
+========================================= */
+
+.verify-status-icon {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    background: #10b981;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    font-weight: 900;
+    margin-bottom: 18px;
+}
+
+.invalid-icon {
+    background: #ef4444;
+}
+
+
+/* =========================================
+   DETAILS
+========================================= */
+
+.result-details {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-top: 25px;
+}
+
+.result-details div {
+    padding: 16px;
+    background: rgba(255,255,255,.75);
+    border-radius: 12px;
+}
+
+.result-details strong {
+    display: block;
+    font-size: 11px;
+    letter-spacing: .7px;
+    text-transform: uppercase;
+    color: #64748b;
+    margin-bottom: 7px;
+}
+
+.result-details span {
+    font-weight: 800;
+    word-break: break-word;
+}
+
+
+/* =========================================
+   STATUS
+========================================= */
+
+.status-verified {
+    color: #059669 !important;
+}
+
+.status-invalid {
+    color: #dc2626 !important;
+}
+
+
+/* =========================================
+   INFO
+========================================= */
+
+.verify-info {
+    margin-top: 25px;
+    padding: 28px;
+    background: #eef4ff;
+    border-radius: 18px;
+}
+
+.verify-info h3 {
+    margin-top: 0;
+    color: #111827;
+}
+
+.verify-info p {
+    color: #475569;
+    line-height: 1.8;
+}
+
+.verify-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+    margin-top: 25px;
+}
+
+.verify-step {
+    background: #ffffff;
+    padding: 20px;
+    border-radius: 14px;
+}
+
+.verify-step-number {
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.verify-step h4 {
+    margin: 5px 0;
+}
+
+.verify-step p {
+    font-size: 14px;
+    margin: 0;
+}
+
+
+/* =========================================
+   PRIVACY NOTICE
+========================================= */
+
+.demo-notice {
+    margin-top: 25px;
+    padding: 18px;
+    border-radius: 12px;
+    background: #fff7ed;
+    border: 1px solid #fed7aa;
+    color: #9a3412;
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+
+/* =========================================
+   RESPONSIVE
+========================================= */
+
+@media (max-width: 700px) {
+
+    .verify-page {
+        padding-top: 110px;
+    }
+
+    .verify-box {
+        padding: 25px 20px;
+    }
+
+    .verify-input-row {
+        flex-direction: column;
+    }
+
+    .verify-input-row button {
+        width: 100%;
+    }
+
+    .result-details {
+        grid-template-columns: 1fr;
+    }
+
+    .verify-steps {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+</style>
 
 </head>
 
@@ -175,445 +334,123 @@
 <body>
 
 
-<!-- =========================
+<!-- =========================================
      NAVIGATION
-========================= -->
+========================================= -->
 
 <nav class="navbar">
 
-    <div class="nav-inner">
+<div class="nav-inner">
 
-        <a href="index.html"
-           class="logo">
-            JG<span>.</span>
-        </a>
+<a href="index.html"
+class="logo">
 
-        <button class="menu-toggle"
-                aria-label="Open navigation menu">
-            ☰
-        </button>
+JG<span>.</span>
 
-        <ul class="nav-links">
+</a>
 
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
 
-            <li>
-                <a href="skills.html">
-                    Skills
-                </a>
-            </li>
+<button
+class="menu-toggle"
+id="menuToggle"
+aria-label="Open navigation menu">
 
-            <li>
-                <a href="learn.html">
-                    Learn
-                </a>
-            </li>
+☰
 
-            <li>
-                <a href="work.html">
-                    Work
-                </a>
-            </li>
+</button>
 
-            <li>
-                <a href="account.html">
-                    Account
-                </a>
-            </li>
 
-            <li>
-                <a href="enrollment.html"
-                   class="nav-cta">
-                    Enroll
-                </a>
-            </li>
+<ul
+class="nav-links"
+id="navLinks">
 
-        </ul>
+<li>
+<a href="index.html">
+Home
+</a>
+</li>
 
-    </div>
+<li>
+<a href="skills.html">
+Skills
+</a>
+</li>
+
+<li>
+<a href="learn.html">
+Learn
+</a>
+</li>
+
+<li>
+<a href="work.html">
+Work
+</a>
+</li>
+
+<li>
+<a href="account.html">
+Account
+</a>
+</li>
+
+<li>
+<a href="verify.html"
+class="active">
+Verify
+</a>
+</li>
+
+<li>
+<a href="enrollment.html"
+class="nav-cta">
+Enroll
+</a>
+</li>
+
+</ul>
+
+</div>
 
 </nav>
 
 
-<!-- =========================
-     VERIFICATION
-========================= -->
+
+<!-- =========================================
+     MAIN
+========================================= -->
 
 <main class="verify-page">
 
-    <div class="verify-container">
+<div class="verify-container">
 
 
-        <div class="verify-header">
+<!-- HEADER -->
 
-            <span class="badge">
-                🎓 JG CERTIFICATE VERIFICATION
-            </span>
+<div class="verify-header">
 
-            <h1>
-                Verify a
-                <span>Certificate.</span>
-            </h1>
+<span class="badge">
+🎓 JG CERTIFICATE VERIFICATION
+</span>
 
-            <p>
-                Enter the unique Certificate ID shown
-                on a JG certificate to check its
-                verification record.
-            </p>
+<h1>
 
-        </div>
+Verify a
+<span>Certificate.</span>
 
+</h1>
 
-        <!-- =====================
-             SEARCH BOX
-        ====================== -->
+<p>
 
-        <section class="verify-box">
+Confirm whether a JG Academy certificate
+matches a completion record.
 
-            <form id="verificationForm">
+Enter the unique certificate ID below.
 
-                <label for="certificateInput">
-                    Certificate ID
-                </label>
+</p>
 
-                <div class="verify-input-row">
+</div>
 
-                    <input
-                        type="text"
-                        id="certificateInput"
-                        name="certificate"
-                        placeholder="Example: JG-2026-000001"
-                        autocomplete="off"
-                        required>
 
-                    <button
-                        type="submit"
-                        class="btn btn-primary">
 
-                        Verify
-
-                    </button>
-
-                </div>
-
-            </form>
-
-
-            <!-- RESULT -->
-
-            <div id="verificationResult"
-                 class="result">
-
-            </div>
-
-        </section>
-
-
-        <!-- =====================
-             INFORMATION
-        ====================== -->
-
-        <div class="verify-info">
-
-            <h3>
-                🔐 How verification works
-            </h3>
-
-            <p>
-                Every JG certificate should have a unique
-                Certificate ID. Enter that ID above to
-                check the certificate record.
-            </p>
-
-            <p>
-                A verified certificate should show the
-                student's name, course, completion date
-                and current certificate status.
-            </p>
-
-            <a href="learn.html"
-               class="certificate-link">
-
-                ← Back to JG Learning
-
-            </a>
-
-        </div>
-
-    </div>
-
-</main>
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="container">
-
-        <div class="footer-logo">
-            JG<span>.</span>
-        </div>
-
-        <p>
-            Find Skills. Find Work.
-        </p>
-
-        <p>
-            © 2026 JG. All rights reserved.
-        </p>
-
-    </div>
-
-</footer>
-
-
-<!-- =========================
-     JAVASCRIPT
-========================= -->
-
-<script src="js/config.js"></script>
-
-<script src="js/app.js"></script>
-
-<script src="chatbot.js"></script>
-
-
-<script>
-
-    /*
-     * TEMPORARY CERTIFICATE RECORDS
-     *
-     * This is for the front-end prototype.
-     *
-     * Later we will replace this with a real
-     * database/backend verification system.
-     */
-
-    const certificates = {
-
-        "JG-2026-000001": {
-
-            name: "Student Name",
-
-            course: "Web Development",
-
-            date: "August 24, 2026",
-
-            status: "Verified"
-
-        },
-
-        "JG-2026-000002": {
-
-            name: "Student Name",
-
-            course: "Graphic Design",
-
-            date: "August 24, 2026",
-
-            status: "Verified"
-
-        },
-
-        "JG-2026-000003": {
-
-            name: "Student Name",
-
-            course: "Video Editing",
-
-            date: "August 24, 2026",
-
-            status: "Verified"
-
-        }
-
-    };
-
-
-    const form =
-        document.getElementById(
-            "verificationForm"
-        );
-
-
-    const input =
-        document.getElementById(
-            "certificateInput"
-        );
-
-
-    const result =
-        document.getElementById(
-            "verificationResult"
-        );
-
-
-    form.addEventListener(
-        "submit",
-        function(event) {
-
-            event.preventDefault();
-
-
-            const certificateId =
-                input.value
-                .trim()
-                .toUpperCase();
-
-
-            if (!certificateId) {
-
-                result.className =
-                    "result error";
-
-                result.innerHTML = `
-                    <h2>❌ Certificate ID Required</h2>
-
-                    <p>
-                        Please enter a Certificate ID
-                        before verifying.
-                    </p>
-                `;
-
-                return;
-
-            }
-
-
-            const certificate =
-                certificates[certificateId];
-
-
-            if (certificate) {
-
-                result.className =
-                    "result success";
-
-
-                result.innerHTML = `
-
-                    <h2>
-                        ✅ Certificate Verified
-                    </h2>
-
-                    <p>
-                        This Certificate ID matches
-                        a JG certificate record.
-                    </p>
-
-                    <div class="result-details">
-
-                        <div>
-
-                            <strong>
-                                Student
-                            </strong>
-
-                            ${certificate.name}
-
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                Course
-                            </strong>
-
-                            ${certificate.course}
-
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                Completion Date
-                            </strong>
-
-                            ${certificate.date}
-
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                Certificate ID
-                            </strong>
-
-                            ${certificateId}
-
-                        </div>
-
-
-                        <div>
-
-                            <strong>
-                                Status
-                            </strong>
-
-                            ${certificate.status}
-
-                        </div>
-
-                    </div>
-
-                    <br>
-
-                    <a
-                        href="certificate.html"
-                        class="btn btn-primary">
-
-                        View Certificate
-
-                    </a>
-
-                `;
-
-            } else {
-
-                result.className =
-                    "result error";
-
-
-                result.innerHTML = `
-
-                    <h2>
-                        ❌ Certificate Not Found
-                    </h2>
-
-                    <p>
-                        We could not find a certificate
-                        matching:
-                    </p>
-
-                    <strong>
-                        ${certificateId}
-                    </strong>
-
-                    <p>
-                        Check the Certificate ID and
-                        try again.
-                    </p>
-
-                `;
-
-            }
-
-        }
-    );
-
-</script>
-
-
-</body>
-
-</html>
+<!-- =================================
