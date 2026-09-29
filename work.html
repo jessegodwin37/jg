@@ -3,1132 +3,622 @@
 <head>
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-    <meta name="description"
-          content="JG Work — Find freelance opportunities, projects and clients using your skills.">
+    <meta
+        name="description"
+        content="JG Work — Discover jobs, freelance projects and opportunities."
+    >
 
-    <meta name="theme-color"
-          content="#2563eb">
+    <meta name="theme-color" content="#2563eb">
 
     <title>JG Work | Find Skills. Find Work.</title>
 
     <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-        /* =========================================
-           WORK PAGE
-        ========================================= */
-
-        .work-hero {
-            padding: 90px 20px 70px;
-            position: relative;
-            overflow: hidden;
-            background:
-                radial-gradient(
-                    circle at 10% 20%,
-                    rgba(37, 99, 235, 0.15),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 90% 10%,
-                    rgba(124, 58, 237, 0.14),
-                    transparent 35%
-                );
-        }
-
-        .work-hero-inner {
-            max-width: 1180px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .work-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 999px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--primary);
-            font-size: 0.85rem;
-            font-weight: 700;
-            margin-bottom: 22px;
-        }
-
-        .work-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4.8rem);
-            line-height: 1.05;
-            margin: 0 auto 20px;
-            max-width: 900px;
-            letter-spacing: -2px;
-        }
-
-        .work-hero h1 span {
-            color: var(--primary);
-        }
-
-        .work-hero p {
-            max-width: 720px;
-            margin: 0 auto 35px;
-            color: var(--text-secondary);
-            font-size: 1.08rem;
-            line-height: 1.8;
-        }
-
-        .work-actions {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-        }
-
-        .work-search-section {
-            max-width: 1000px;
-            margin: -25px auto 60px;
-            padding: 0 20px;
-            position: relative;
-            z-index: 5;
-        }
-
-        .work-search-box {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            box-shadow: var(--shadow);
-        }
-
-        .work-search-box span {
-            font-size: 1.2rem;
-            padding-left: 6px;
-        }
-
-        .work-search-box input {
-            width: 100%;
-            border: none;
-            outline: none;
-            background: transparent;
-            color: var(--text);
-            font-size: 1rem;
-        }
-
-        .work-search-box input::placeholder {
-            color: var(--text-secondary);
-        }
-
-        .work-section {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 30px 20px 80px;
-        }
-
-        .section-heading {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            gap: 20px;
-            margin-bottom: 28px;
-        }
-
-        .section-heading h2 {
-            margin: 0 0 8px;
-            font-size: clamp(1.7rem, 4vw, 2.5rem);
-        }
-
-        .section-heading p {
-            margin: 0;
-            color: var(--text-secondary);
-        }
-
-        .work-filters {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .work-filter {
-            border: 1px solid var(--border);
-            background: var(--surface);
-            color: var(--text);
-            padding: 10px 16px;
-            border-radius: 999px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: 0.2s ease;
-        }
-
-        .work-filter:hover {
-            transform: translateY(-1px);
-        }
-
-        .work-filter.active {
-            background: var(--primary);
-            color: #fff;
-            border-color: var(--primary);
-        }
-
-        /* =========================================
-           STATS
-        ========================================= */
-
-        .work-stats {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 0 20px 70px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 18px;
-        }
-
-        .stat-card {
-            padding: 24px;
-            border: 1px solid var(--border);
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow);
-        }
-
-        .stat-icon {
-            font-size: 1.5rem;
-            margin-bottom: 14px;
-        }
-
-        .stat-number {
-            font-size: 1.8rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        /* =========================================
-           JOB CARDS
-        ========================================= */
-
-        .jobs-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-
-        .job-card {
-            padding: 26px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            background: var(--surface);
-            box-shadow: var(--shadow);
-            transition: transform 0.2s ease,
-                        border-color 0.2s ease;
-        }
-
-        .job-card:hover {
-            transform: translateY(-4px);
-            border-color: var(--primary);
-        }
-
-        .job-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
-            margin-bottom: 18px;
-        }
-
-        .job-category {
-            display: inline-block;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
-            font-size: 0.75rem;
-            font-weight: 800;
-        }
-
-        .demo-label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
-            border: 1px solid var(--border);
-            padding: 5px 8px;
-            border-radius: 6px;
-        }
-
-        .job-card h3 {
-            margin: 0 0 10px;
-            font-size: 1.25rem;
-        }
-
-        .job-description {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin-bottom: 20px;
-        }
-
-        .job-meta {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            padding: 18px 0;
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 18px;
-        }
-
-        .job-meta-item {
-            font-size: 0.85rem;
-        }
-
-        .job-meta-item strong {
-            display: block;
-            color: var(--text);
-            margin-top: 4px;
-        }
-
-        .job-meta-item span {
-            color: var(--text-secondary);
-        }
-
-        .job-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 7px;
-            margin-bottom: 22px;
-        }
-
-        .job-tag {
-            padding: 6px 9px;
-            border-radius: 7px;
-            background: var(--background);
-            border: 1px solid var(--border);
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .job-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .job-budget {
-            font-weight: 800;
-            font-size: 1rem;
-        }
-
-        .job-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 11px 16px;
-            border-radius: 10px;
-            background: var(--primary);
-            color: #fff;
-            text-decoration: none;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-        }
-
-        .job-button:hover {
-            opacity: 0.9;
-        }
-
-        /* =========================================
-           HOW IT WORKS
-        ========================================= */
-
-        .how-section {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 80px 20px;
-        }
-
-        .how-inner {
-            max-width: 1180px;
-            margin: auto;
-        }
-
-        .steps-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-top: 40px;
-        }
-
-        .step-card {
-            padding: 25px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            background: var(--background);
-        }
-
-        .step-number {
-            width: 42px;
-            height: 42px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 12px;
-            background: var(--primary);
-            color: #fff;
-            font-weight: 800;
-            margin-bottom: 18px;
-        }
-
-        .step-card h3 {
-            margin: 0 0 8px;
-        }
-
-        .step-card p {
-            color: var(--text-secondary);
-            line-height: 1.65;
-            margin: 0;
-            font-size: 0.9rem;
-        }
-
-        /* =========================================
-           AI MATCHING
-        ========================================= */
-
-        .ai-work-section {
-            max-width: 1180px;
-            margin: 0 auto;
-            padding: 80px 20px;
-        }
-
-        .ai-work-box {
-            padding: 45px;
-            border-radius: 28px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(37, 99, 235, 0.12),
-                    rgba(124, 58, 237, 0.12)
-                );
-            border: 1px solid var(--border);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 35px;
-        }
-
-        .ai-work-content {
-            max-width: 700px;
-        }
-
-        .ai-work-content h2 {
-            margin: 0 0 12px;
-            font-size: 2rem;
-        }
-
-        .ai-work-content p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* =========================================
-           EMPTY SEARCH STATE
-        ========================================= */
-
-        .no-results {
-            display: none;
-            text-align: center;
-            padding: 50px 20px;
-            border: 1px dashed var(--border);
-            border-radius: var(--radius-lg);
-            color: var(--text-secondary);
-            grid-column: 1 / -1;
-        }
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
-        @media (max-width: 900px) {
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .steps-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .ai-work-box {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-
-        @media (max-width: 700px) {
-
-            .work-hero {
-                padding-top: 65px;
-            }
-
-            .work-hero h1 {
-                letter-spacing: -1px;
-            }
-
-            .jobs-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .section-heading {
-                display: block;
-            }
-
-            .steps-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .ai-work-box {
-                padding: 30px 22px;
-            }
-        }
-
-        @media (max-width: 480px) {
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .job-footer {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .job-button {
-                width: 100%;
-            }
-
-            .work-search-box {
-                padding: 12px;
-            }
-        }
-
-    </style>
 </head>
 
 <body>
 
-<!-- =========================================
+<!-- =====================================================
      HEADER
-========================================= -->
+===================================================== -->
 
 <header class="site-header">
 
     <div class="container header-inner">
 
-        <a href="index.html"
-           class="logo"
-           aria-label="JG Home">
-            <strong>JG</strong>
-            <span>Find Skills. Find Work.</span>
+        <a href="index.html" class="brand" aria-label="JG Home">
+
+            <span class="brand-mark">JG</span>
+
+            <span class="brand-text">
+                <strong>JG</strong>
+                <small>Find Skills. Find Work.</small>
+            </span>
+
         </a>
 
-        <button
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open menu"
-            aria-expanded="false">
-            ☰
-        </button>
 
         <nav class="main-nav" id="mainNav">
 
             <a href="index.html">Home</a>
-
             <a href="skills.html">Skills</a>
-
-            <a href="work.html" class="active">
-                Work
-            </a>
-
+            <a href="work.html" class="active">Work</a>
             <a href="learn.html">Learn</a>
-
+            <a href="ai.html">JG AI</a>
             <a href="premium.html">Premium</a>
 
-            <a href="account.html">Account</a>
+        </nav>
 
-            <a href="ai.html">JG AI</a>
 
-            <a href="enrollment.html" class="nav-cta">
-                Enroll
-            </a>
+        <div class="header-actions">
 
             <button
-                class="theme-toggle"
+                class="icon-button"
                 id="themeToggle"
-                aria-label="Toggle dark mode">
-                🌙
+                type="button"
+                aria-label="Toggle dark mode"
+                title="Toggle theme"
+            >
+                <span id="themeIcon">☾</span>
             </button>
 
-        </nav>
+
+            <a
+                href="account.html"
+                class="btn btn-primary header-account"
+            >
+                Account
+            </a>
+
+
+            <button
+                class="menu-toggle"
+                id="mobileMenuBtn"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+        </div>
 
     </div>
 
 </header>
 
 
-<!-- =========================================
-     HERO
-========================================= -->
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
 <main>
 
-<section class="work-hero">
 
-    <div class="work-hero-inner">
+    <!-- =================================================
+         HERO
+    ================================================== -->
 
-        <div class="work-badge">
-            💼 JG WORK
-        </div>
+    <section class="hero hero-small">
 
-        <h1>
-            Turn your skills into
-            <span>opportunities.</span>
-        </h1>
+        <div class="container">
 
-        <p>
-            Discover projects that match your skills,
-            build your reputation, and create real
-            opportunities through JG.
-        </p>
+            <div class="hero-content">
 
-        <div class="work-actions">
+                <span class="eyebrow">
 
-            <a href="account.html"
-               class="btn btn-primary">
-                Build My Profile
-            </a>
+                    <span>✦</span>
 
-            <a href="ai.html"
-               class="btn btn-secondary">
-                🤖 Find Work With JG AI
-            </a>
+                    JG Work
 
-        </div>
-
-    </div>
-
-</section>
+                </span>
 
 
-<!-- =========================================
-     SEARCH
-========================================= -->
+                <h1>
 
-<section class="work-search-section">
+                    Turn your skills into
+                    <span class="gradient-text">
+                        opportunities.
+                    </span>
 
-    <div class="work-search-box">
-
-        <span>🔎</span>
-
-        <input
-            type="search"
-            id="workSearch"
-            placeholder="Search projects, skills or opportunities..."
-            autocomplete="off">
-
-    </div>
-
-</section>
+                </h1>
 
 
-<!-- =========================================
-     STATS
-========================================= -->
+                <p>
 
-<section class="work-stats">
+                    Discover jobs, freelance projects and
+                    opportunities where you can put your skills
+                    to work.
 
-    <div class="stats-grid">
+                </p>
 
-        <div class="stat-card">
 
-            <div class="stat-icon">
-                💼
-            </div>
+                <div class="hero-actions">
 
-            <div class="stat-number">
-                100+
-            </div>
+                    <a
+                        href="account.html"
+                        class="btn btn-primary btn-lg"
+                    >
+                        Build Your Profile
+                    </a>
 
-            <div class="stat-label">
-                Future opportunities
+
+                    <a
+                        href="#opportunities"
+                        class="btn btn-secondary btn-lg"
+                    >
+                        Explore Work
+                    </a>
+
+                </div>
+
             </div>
 
         </div>
 
+    </section>
 
-        <div class="stat-card">
 
-            <div class="stat-icon">
-                🧩
-            </div>
 
-            <div class="stat-number">
-                4+
-            </div>
+    <!-- =================================================
+         WORK STATS
+    ================================================== -->
 
-            <div class="stat-label">
-                Skill categories
+    <section class="section section-tight">
+
+        <div class="container">
+
+            <div class="stats-grid">
+
+                <article class="stat-card">
+
+                    <span class="stat-value">
+                        100+
+                    </span>
+
+                    <span class="stat-label">
+                        Opportunities
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-value">
+                        20+
+                    </span>
+
+                    <span class="stat-label">
+                        Skill Categories
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-value">
+                        24/7
+                    </span>
+
+                    <span class="stat-label">
+                        Platform Access
+                    </span>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-value">
+                        JG AI
+                    </span>
+
+                    <span class="stat-label">
+                        Opportunity Assistant
+                    </span>
+
+                </article>
+
             </div>
 
         </div>
 
-
-        <div class="stat-card">
-
-            <div class="stat-icon">
-                🌍
-            </div>
-
-            <div class="stat-number">
-                Remote
-            </div>
-
-            <div class="stat-label">
-                Flexible opportunities
-            </div>
-
-        </div>
+    </section>
 
 
-        <div class="stat-card">
 
-            <div class="stat-icon">
-                🤖
-            </div>
+    <!-- =================================================
+         OPPORTUNITIES
+    ================================================== -->
 
-            <div class="stat-number">
-                AI
-            </div>
+    <section
+        class="section section-tight"
+        id="opportunities"
+    >
 
-            <div class="stat-label">
-                Smart opportunity matching
-            </div>
-
-        </div>
-
-    </div>
-
-</section>
+        <div class="container">
 
 
-<!-- =========================================
-     OPPORTUNITIES
-========================================= -->
+            <div class="section-heading">
 
-<section class="work-section">
-
-    <div class="section-heading">
-
-        <div>
-            <h2>Explore opportunities</h2>
-
-            <p>
-                Example listings showing how JG Work
-                will operate.
-            </p>
-        </div>
-
-    </div>
-
-
-    <div class="work-filters">
-
-        <button
-            class="work-filter active"
-            data-filter="all">
-            All
-        </button>
-
-        <button
-            class="work-filter"
-            data-filter="web">
-            Web Development
-        </button>
-
-        <button
-            class="work-filter"
-            data-filter="design">
-            Graphic Design
-        </button>
-
-        <button
-            class="work-filter"
-            data-filter="video">
-            Video Editing
-        </button>
-
-        <button
-            class="work-filter"
-            data-filter="python">
-            Python
-        </button>
-
-    </div>
-
-
-    <div class="jobs-grid" id="jobsGrid">
-
-
-        <!-- JOB 1 -->
-
-        <article
-            class="job-card"
-            data-category="web"
-            data-search="landing page website web development html css javascript">
-
-            <div class="job-top">
-
-                <span class="job-category">
-                    Web Development
+                <span class="eyebrow">
+                    Explore opportunities
                 </span>
-
-                <span class="demo-label">
-                    Demo opportunity
-                </span>
-
-            </div>
-
-            <h3>
-                Landing Page for Small Business
-            </h3>
-
-            <p class="job-description">
-                Build a clean, responsive landing page
-                for a growing small business.
-            </p>
-
-            <div class="job-meta">
-
-                <div class="job-meta-item">
-
-                    <span>Project type</span>
-
-                    <strong>Fixed price</strong>
-
-                </div>
-
-                <div class="job-meta-item">
-
-                    <span>Deadline</span>
-
-                    <strong>7 days</strong>
-
-                </div>
-
-            </div>
-
-            <div class="job-tags">
-
-                <span class="job-tag">HTML</span>
-                <span class="job-tag">CSS</span>
-                <span class="job-tag">JavaScript</span>
-                <span class="job-tag">Responsive</span>
-
-            </div>
-
-            <div class="job-footer">
-
-                <div class="job-budget">
-                    ₦60,000 – ₦100,000
-                </div>
-
-                <a
-                    href="account.html"
-                    class="job-button">
-                    View Opportunity
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- JOB 2 -->
-
-        <article
-            class="job-card"
-            data-category="design"
-            data-search="social media brand kit graphic design logo branding canva">
-
-            <div class="job-top">
-
-                <span class="job-category">
-                    Graphic Design
-                </span>
-
-                <span class="demo-label">
-                    Demo opportunity
-                </span>
-
-            </div>
-
-            <h3>
-                Social Media Brand Kit
-            </h3>
-
-            <p class="job-description">
-                Create a professional visual identity
-                for a new social media business.
-            </p>
-
-            <div class="job-meta">
-
-                <div class="job-meta-item">
-
-                    <span>Project type</span>
-
-                    <strong>Fixed price</strong>
-
-                </div>
-
-                <div class="job-meta-item">
-
-                    <span>Deadline</span>
-
-                    <strong>5 days</strong>
-
-                </div>
-
-            </div>
-
-            <div class="job-tags">
-
-                <span class="job-tag">Canva</span>
-                <span class="job-tag">Branding</span>
-                <span class="job-tag">Logo</span>
-                <span class="job-tag">Social Media</span>
-
-            </div>
-
-            <div class="job-footer">
-
-                <div class="job-budget">
-                    ₦25,000 – ₦45,000
-                </div>
-
-                <a
-                    href="account.html"
-                    class="job-button">
-                    View Opportunity
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- JOB 3 -->
-
-        <article
-            class="job-card"
-            data-category="video"
-            data-search="short form video editor reels tiktok youtube video editing">
-
-            <div class="job-top">
-
-                <span class="job-category">
-                    Video Editing
-                </span>
-
-                <span class="demo-label">
-                    Demo opportunity
-                </span>
-
-            </div>
-
-            <h3>
-                Short-form Video Editor
-            </h3>
-
-            <p class="job-description">
-                Edit engaging short-form videos for
-                social media platforms.
-            </p>
-
-            <div class="job-meta">
-
-                <div class="job-meta-item">
-
-                    <span>Project type</span>
-
-                    <strong>Part-time</strong>
-
-                </div>
-
-                <div class="job-meta-item">
-
-                    <span>Deadline</span>
-
-                    <strong>Weekly</strong>
-
-                </div>
-
-            </div>
-
-            <div class="job-tags">
-
-                <span class="job-tag">CapCut</span>
-                <span class="job-tag">Reels</span>
-                <span class="job-tag">TikTok</span>
-                <span class="job-tag">YouTube</span>
-
-            </div>
-
-            <div class="job-footer">
-
-                <div class="job-budget">
-                    ₦30,000 – ₦60,000
-                </div>
-
-                <a
-                    href="account.html"
-                    class="job-button">
-                    View Opportunity
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <!-- JOB 4 -->
-
-        <article
-            class="job-card"
-            data-category="python"
-            data-search="python automation data script programming software">
-
-            <div class="job-top">
-
-                <span class="job-category">
-                    Python
-                </span>
-
-                <span class="demo-label">
-                    Demo opportunity
-                </span>
-
-            </div>
-
-            <h3>
-                Python Automation Task
-            </h3>
-
-            <p class="job-description">
-                Create a simple Python automation tool
-                to reduce repetitive business tasks.
-            </p>
-
-            <div class="job-meta">
-
-                <div class="job-meta-item">
-
-                    <span>Project type</span>
-
-                    <strong>Fixed price</strong>
-
-                </div>
-
-                <div class="job-meta-item">
-
-                    <span>Deadline</span>
-
-                    <strong>10 days</strong>
-
-                </div>
-
-            </div>
-
-            <div class="job-tags">
-
-                <span class="job-tag">Python</span>
-                <span class="job-tag">Automation</span>
-                <span class="job-tag">Scripts</span>
-                <span class="job-tag">Programming</span>
-
-            </div>
-
-            <div class="job-footer">
-
-                <div class="job-budget">
-                    ₦40,000 – ₦80,000
-                </div>
-
-                <a
-                    href="account.html"
-                    class="job-button">
-                    View Opportunity
-                </a>
-
-            </div>
-
-        </article>
-
-
-        <div
-            class="no-results"
-            id="noResults">
-
-            <h3>No opportunities found</h3>
-
-            <p>
-                Try another search or choose a
-                different category.
-            </p>
-
-        </div>
-
-    </div>
-
-</section>
-
-
-<!-- =========================================
-     HOW IT WORKS
-========================================= -->
-
-<section class="how-section">
-
-    <div class="how-inner">
-
-        <div class="section-heading">
-
-            <div>
 
                 <h2>
-                    How JG Work will work
+                    Find work that matches your skills.
                 </h2>
 
                 <p>
-                    A simple path from learning a skill
-                    to using it professionally.
+                    Search through opportunities and discover
+                    projects where your abilities can make an impact.
                 </p>
 
             </div>
 
-        </div>
+
+
+            <!-- SEARCH -->
+
+            <div class="search-box">
+
+                <span class="search-icon">
+                    ⌕
+                </span>
+
+                <input
+                    type="search"
+                    id="workSearch"
+                    placeholder="Search jobs, projects or skills..."
+                    aria-label="Search work opportunities"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+
+            <!-- FILTERS -->
+
+            <div
+                class="filter-row"
+                id="workFilters"
+            >
+
+                <button
+                    class="filter-chip active"
+                    type="button"
+                    data-filter="all"
+                >
+                    All
+                </button>
+
+
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="remote"
+                >
+                    Remote
+                </button>
+
+
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="technology"
+                >
+                    Technology
+                </button>
+
+
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="creative"
+                >
+                    Creative
+                </button>
+
+
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="business"
+                >
+                    Business
+                </button>
+
+            </div>
+
+
+
+            <!-- WORK GRID -->
+
+            <div
+                class="course-grid"
+                id="workGrid"
+            >
+
+
+                <!-- OPPORTUNITY 1 -->
+
+                <article
+                    class="course-card work-card"
+                    data-category="remote technology"
+                    data-name="frontend web developer"
+                >
+
+                    <div class="course-body">
+
+                        <div class="badge-row">
+
+                            <span class="badge badge-primary">
+                                Technology
+                            </span>
+
+                            <span class="badge">
+                                Remote
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Frontend Web Developer
+                        </h3>
+
+
+                        <p>
+                            Build responsive web interfaces
+                            and turn designs into functional
+                            websites.
+                        </p>
+
+
+                        <div class="course-meta">
+
+                            <span>
+                                💻 Remote
+                            </span>
+
+                            <span>
+                                🕐 Project
+                            </span>
+
+                        </div>
+
+
+                        <div class="work-footer">
+
+                            <strong>
+                                Web Development
+                            </strong>
+
+                            <a
+                                href="account.html"
+                                class="text-link"
+                            >
+                                View Opportunity →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- OPPORTUNITY 2 -->
+
+                <article
+                    class="course-card work-card"
+                    data-category="remote creative"
+                    data-name="graphic designer"
+                >
+
+                    <div class="course-body">
+
+                        <div class="badge-row">
+
+                            <span class="badge badge-primary">
+                                Creative
+                            </span>
+
+                            <span class="badge">
+                                Remote
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Graphic Designer
+                        </h3>
+
+
+                        <p>
+                            Create social media graphics,
+                            promotional materials and brand assets.
+                        </p>
+
+
+                        <div class="course-meta">
+
+                            <span>
+                                🎨 Design
+                            </span>
+
+                            <span>
+                                🕐 Project
+                            </span>
+
+                        </div>
+
+
+                        <div class="work-footer">
+
+                            <strong>
+                                Graphic Design
+                            </strong>
+
+                            <a
+                                href="account.html"
+                                class="text-link"
+                            >
+                                View Opportunity →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- OPPORTUNITY 3 -->
+
+                <article
+                    class="course-card work-card"
+                    data-category="remote creative"
+                    data-name="video editor"
+                >
+
+                    <div class="course-body">
+
+                        <div class="badge-row">
+
+                            <span class="badge badge-primary">
+                                Creative
+                            </span>
+
+                            <span class="badge">
+                                Remote
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Video Editor
+                        </h3>
+
+
+                        <p>
+                            Edit short-form videos,
+                            promotional content and social media clips.
+                        </p>
+
+
+                        <div class="course-meta">
+
+                            <span>
+                                🎬 Video
+                            </span>
+
+                            <span>
+                                🕐 Freelance
+                            </span>
+
+                        </div>
+
+
+                        <div class="work-footer">
+
+                            <strong>
+                                Video Editing
+                            </strong>
+
+                            <a
+                                href="account.html"
+                                class="text-link"
+                            >
+                                View Opportunity →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- OPPORTUNITY 4 -->
+
+                <article
+                    class="course-card work-card"
+                    data-category="technology"
+                    data-name="python developer"
+                >
+
+                    <div class="course-body">
+
+                        <div class="badge-row">
+
+                            <span class="badge badge-primary">
+                                Technology
+                            </span>
+
+                        </div>
+
+
+                        <h3>
+                            Python Developer
+                        </h3>
+
+
+                        <p>
+                            Help develop Python-based tools,
+                            automation scripts and applications.
+                        </p>
+
+
+                        <div class="course-meta">
+
+                            <span>
+                                🐍 Python
+                            </span>
+
+                            <span>
+                                🕐 Project
+                            </span>
+
+                        </div>
+
+
+                        <div class="work-footer">
+
+                            <strong>
+                                Programming
+                            </strong>
+
+                            <a
+                                href="account.html"
+                                class="text-link"
+                            >
+                                View Opportunity →
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </article>
+
+
+
+                <!-- OPPORTUNITY 5 -->
+
+                <article
+                    class="course
