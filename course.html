@@ -1,703 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-    <title>JG Course | Web Development</title>
+    <meta
+        name="description"
+        content="JG Course — Learn practical skills through structured lessons and projects."
+    >
 
-    <meta name="description"
-          content="JG Web Development course. Learn HTML, CSS, JavaScript and build real projects.">
+    <meta name="theme-color" content="#2563eb">
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <title>JG Course | Find Skills. Find Work.</title>
 
+    <link rel="stylesheet" href="css/style.css">
 </head>
-
 
 <body>
 
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-<!-- NAVIGATION -->
+<header class="site-header">
 
-<nav class="navbar">
+    <div class="container header-inner">
 
-    <div class="nav-inner">
+        <a
+            href="index.html"
+            class="brand"
+            aria-label="JG Home"
+        >
 
-        <a href="index.html" class="logo">
-            JG<span>.</span>
-        </a>
-
-        <button class="menu-toggle"
-                id="menuToggle"
-                aria-label="Open menu">
-
-            ☰
-
-        </button>
-
-        <ul class="nav-links"
-            id="navLinks">
-
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
-
-            <li>
-                <a href="skills.html">
-                    Skills
-                </a>
-            </li>
-
-            <li>
-                <a href="learn.html"
-                   class="active">
-                    Learn
-                </a>
-            </li>
-
-            <li>
-                <a href="work.html">
-                    Work
-                </a>
-            </li>
-
-            <li>
-                <a href="account.html">
-                    Account
-                </a>
-            </li>
-
-            <li>
-                <a href="enrollment.html"
-                   class="nav-cta">
-                    Enroll
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
-
-</nav>
-
-
-
-<!-- COURSE HERO -->
-
-<header class="course-hero">
-
-    <div class="container">
-
-        <div class="badge">
-            JG ACADEMY
-        </div>
-
-        <h1>
-            Web Development
-        </h1>
-
-        <p>
-            Learn how to build modern websites
-            from the ground up using HTML,
-            CSS and JavaScript.
-        </p>
-
-        <div class="course-meta">
-
-            <span>
-                📚 Beginner
+            <span class="brand-mark">
+                JG
             </span>
 
-            <span>
-                🧑‍💻 Practical
-            </span>
-
-            <span>
-                🎓 Certificate
-            </span>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-
-<!-- COURSE CONTENT -->
-
-<main class="section">
-
-    <div class="container">
-
-
-        <!-- PROGRESS -->
-
-        <div class="course-progress-card">
-
-            <div>
+            <span class="brand-text">
 
                 <strong>
-                    Your Progress
+                    JG
                 </strong>
 
-                <p id="progressText">
-                    0% Complete
-                </p>
+                <small>
+                    Find Skills. Find Work.
+                </small>
 
-            </div>
+            </span>
 
+        </a>
 
-            <div class="progress-bar">
 
-                <div class="progress-fill"
-                     id="progressFill">
-
-                </div>
-
-            </div>
-
-        </div>
-
-
-
-        <!-- COURSE DESCRIPTION -->
-
-        <div class="section-header">
-
-            <div class="badge">
-                COURSE OVERVIEW
-            </div>
-
-            <h2>
-                Become a Web Developer
-            </h2>
-
-            <p>
-                Follow the lessons in order.
-                Learn the concepts, complete the
-                exercises and test your knowledge.
-            </p>
-
-        </div>
-
-
-
-        <!-- LESSON LIST -->
-
-        <div class="course-lessons">
-
-
-            <!-- LESSON 01 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    01
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 01
-                    </span>
-
-                    <h3>
-                        Introduction to Web Development
-                    </h3>
-
-                    <p>
-                        Understand what web development is,
-                        how websites work and the technologies
-                        used to create them.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 20 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html"
-                   class="btn btn-primary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 02 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    02
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 02
-                    </span>
-
-                    <h3>
-                        How Websites Work
-                    </h3>
-
-                    <p>
-                        Learn about browsers, servers,
-                        domains, hosting and how information
-                        travels across the internet.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 25 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=2"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 03 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    03
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 03
-                    </span>
-
-                    <h3>
-                        HTML Basics
-                    </h3>
-
-                    <p>
-                        Learn HTML tags, headings,
-                        paragraphs, links, images and
-                        basic webpage structure.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 30 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=3"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 04 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    04
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 04
-                    </span>
-
-                    <h3>
-                        HTML Structure
-                    </h3>
-
-                    <p>
-                        Build complete HTML documents and
-                        understand head, body, sections,
-                        navigation and semantic elements.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 30 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=4"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 05 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    05
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 05
-                    </span>
-
-                    <h3>
-                        CSS Fundamentals
-                    </h3>
-
-                    <p>
-                        Learn colours, fonts, spacing,
-                        borders, buttons and how to style
-                        your webpages.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 35 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=5"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 06 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    06
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 06
-                    </span>
-
-                    <h3>
-                        Responsive Web Design
-                    </h3>
-
-                    <p>
-                        Learn how to make websites look
-                        professional on phones, tablets
-                        and computers.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 35 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=6"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 07 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    07
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 07
-                    </span>
-
-                    <h3>
-                        JavaScript Fundamentals
-                    </h3>
-
-                    <p>
-                        Understand variables, functions,
-                        events, conditions and interactive
-                        webpages.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 40 min
-                        </span>
-
-                        <span>
-                            🧪 Quiz
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=7"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- LESSON 08 -->
-
-            <article class="course-lesson">
-
-                <div class="lesson-icon">
-                    08
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        LESSON 08
-                    </span>
-
-                    <h3>
-                        Building Your First Project
-                    </h3>
-
-                    <p>
-                        Combine HTML, CSS and JavaScript
-                        to create a complete website.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            ⏱️ 60 min
-                        </span>
-
-                        <span>
-                            🛠️ Project
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="lesson.html?lesson=8"
-                   class="btn btn-secondary">
-
-                    Start Lesson →
-
-                </a>
-
-            </article>
-
-
-
-            <!-- FINAL PROJECT -->
-
-            <article class="course-lesson featured-lesson">
-
-                <div class="lesson-icon">
-                    🏆
-                </div>
-
-                <div class="lesson-info">
-
-                    <span class="lesson-label">
-                        FINAL PROJECT
-                    </span>
-
-                    <h3>
-                        Build a Complete Website
-                    </h3>
-
-                    <p>
-                        Create and publish your own
-                        professional website using everything
-                        you learned throughout the course.
-                    </p>
-
-                    <div class="lesson-details">
-
-                        <span>
-                            🛠️ Major Project
-                        </span>
-
-                        <span>
-                            🎓 Certificate
-                        </span>
-
-                    </div>
-
-                </div>
-
-                <a href="final-project.html"
-                   class="btn btn-primary">
-
-                    Start Project →
-
-                </a>
-
-            </article>
-
-
-        </div>
-
-
-
-        <!-- CERTIFICATE -->
-
-        <section class="certificate-section">
-
-            <div class="badge">
-                JG CERTIFICATE
-            </div>
-
-            <h2>
-                Complete the Course. Earn Your Certificate.
-            </h2>
-
-            <p>
-                Finish the required lessons, quizzes and
-                final project to become eligible for a
-                JG course certificate.
-            </p>
-
-            <div class="certificate-actions">
-
-                <a href="certificate.html"
-                   class="btn btn-primary">
-
-                    View Certificate
-
-                </a>
-
-                <a href="verify.html"
-                   class="btn btn-secondary">
-
-                    Verify Certificate
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-    </div>
-
-</main>
-
-
-
-<!-- FOOTER -->
-
-<footer>
-
-    <div class="container">
-
-        <div class="footer-logo">
-            JG<span>.</span>
-        </div>
-
-        <p>
-            Find Skills. Find Work.
-        </p>
-
-        <div class="footer-links">
+        <nav
+            class="main-nav"
+            id="mainNav"
+        >
 
             <a href="index.html">
                 Home
@@ -707,134 +68,574 @@
                 Skills
             </a>
 
-            <a href="learn.html">
-                Learn
-            </a>
-
             <a href="work.html">
                 Work
             </a>
 
-            <a href="verify.html">
-                Verify Certificate
+            <a
+                href="learn.html"
+                class="active"
+            >
+                Learn
             </a>
+
+            <a href="ai.html">
+                JG AI
+            </a>
+
+            <a href="premium.html">
+                Premium
+            </a>
+
+        </nav>
+
+
+        <div class="header-actions">
+
+            <button
+                class="icon-button"
+                id="themeToggle"
+                type="button"
+                aria-label="Toggle dark mode"
+                title="Toggle theme"
+            >
+                <span id="themeIcon">
+                    ☾
+                </span>
+            </button>
+
+
+            <a
+                href="account.html"
+                class="btn btn-primary header-account"
+            >
+                Account
+            </a>
+
+
+            <button
+                class="menu-toggle"
+                id="mobileMenuBtn"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+
+                <span></span>
+                <span></span>
+                <span></span>
+
+            </button>
 
         </div>
 
-        <p>
-            © 2026 JG. All rights reserved.
-        </p>
-
     </div>
 
-</footer>
+</header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
+<main>
+
+    <!-- =================================================
+         COURSE HERO
+    ================================================== -->
+
+    <section class="hero hero-small">
+
+        <div class="container">
+
+            <div class="hero-content">
+
+                <span
+                    class="eyebrow"
+                    id="courseCategory"
+                >
+                    Technology
+                </span>
+
+
+                <h1 id="courseTitle">
+                    Web Development
+                </h1>
+
+
+                <p id="courseDescription">
+
+                    Learn how modern websites are structured,
+                    designed and developed from the ground up.
+
+                </p>
+
+
+                <div class="badge-row">
+
+                    <span class="badge badge-primary">
+                        Beginner Friendly
+                    </span>
+
+                    <span class="badge">
+                        Self-paced
+                    </span>
+
+                    <span class="badge">
+                        Certificate
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
 
 
 
-<!-- JAVASCRIPT -->
+    <!-- =================================================
+         COURSE OVERVIEW
+    ================================================== -->
 
-<script src="js/config.js"></script>
+    <section class="section section-tight">
 
-<script src="js/app.js"></script>
+        <div class="container">
 
-<script src="chatbot.js"></script>
-
-
-<script>
-
-document.addEventListener(
-    "DOMContentLoaded",
-    function () {
+            <div class="dashboard-grid">
 
 
-        /* MOBILE MENU */
+                <!-- COURSE INFORMATION -->
 
-        const menuToggle =
-            document.getElementById(
-                "menuToggle"
-            );
+                <article class="dashboard-card">
 
-        const navLinks =
-            document.getElementById(
-                "navLinks"
-            );
+                    <div class="card-heading">
 
+                        <div>
 
-        if (menuToggle && navLinks) {
+                            <span class="eyebrow">
+                                Course overview
+                            </span>
 
-            menuToggle.addEventListener(
-                "click",
-                function () {
+                            <h3>
+                                What you'll learn
+                            </h3>
 
-                    navLinks.classList.toggle(
-                        "open"
-                    );
-
-                }
-            );
-
-        }
+                        </div>
 
 
-        /* COURSE PROGRESS */
+                        <span class="dashboard-icon">
+                            ✦
+                        </span>
 
-        const lessons = 8;
-
-        let completed = 0;
-
-
-        if (
-            localStorage.getItem(
-                "jgLesson01Completed"
-            ) === "true"
-        ) {
-
-            completed++;
-
-        }
+                    </div>
 
 
-        const percentage =
-            Math.round(
-                (completed / lessons) * 100
-            );
+                    <div class="mini-list">
+
+                        <div class="mini-list-item">
+
+                            <span class="mini-number">
+                                01
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Core concepts
+                                </strong>
+
+                                <small>
+                                    Understand the fundamentals.
+                                </small>
+
+                            </div>
+
+                        </div>
 
 
-        const progressFill =
-            document.getElementById(
-                "progressFill"
-            );
+                        <div class="mini-list-item">
+
+                            <span class="mini-number">
+                                02
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Practical skills
+                                </strong>
+
+                                <small>
+                                    Apply what you learn.
+                                </small>
+
+                            </div>
+
+                        </div>
 
 
-        const progressText =
-            document.getElementById(
-                "progressText"
-            );
+                        <div class="mini-list-item">
+
+                            <span class="mini-number">
+                                03
+                            </span>
+
+                            <div>
+
+                                <strong>
+                                    Projects
+                                </strong>
+
+                                <small>
+                                    Build practical work.
+                                </small>
+
+                            </div>
+
+                        </div>
 
 
-        if (progressFill) {
+                        <div class="mini-list-item">
 
-            progressFill.style.width =
-                percentage + "%";
+                            <span class="mini-number">
+                                04
+                            </span>
 
-        }
+                            <div>
+
+                                <strong>
+                                    Final assessment
+                                </strong>
+
+                                <small>
+                                    Test your understanding.
+                                </small>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </article>
 
 
-        if (progressText) {
 
-            progressText.textContent =
-                percentage +
-                "% Complete";
+                <!-- PROGRESS -->
 
-        }
+                <article class="dashboard-card">
 
-    }
+                    <div class="card-heading">
 
-);
+                        <div>
 
-</script>
+                            <span class="eyebrow">
+                                Your progress
+                            </span>
+
+                            <h3>
+                                0% complete
+                            </h3>
+
+                        </div>
+
+                        <span class="dashboard-icon">
+                            ↗
+                        </span>
+
+                    </div>
 
 
-</body>
+                    <div class="progress-block">
 
-</html>
+                        <div class="progress-label">
+
+                            <span>
+                                Course progress
+                            </span>
+
+                            <strong id="courseProgressText">
+                                0%
+                            </strong>
+
+                        </div>
+
+
+                        <div
+                            class="progress-bar"
+                            role="progressbar"
+                            aria-valuenow="0"
+                            aria-valuemin="0"
+                            aria-valuemax="100"
+                            id="courseProgressBar"
+                        >
+
+                            <span
+                                id="courseProgressFill"
+                                style="width: 0%;"
+                            ></span>
+
+                        </div>
+
+                    </div>
+
+
+                    <p>
+
+                        Your progress will be connected
+                        to your JG account when the backend
+                        is added.
+
+                    </p>
+
+
+                    <a
+                        href="account.html"
+                        class="btn btn-secondary btn-block"
+                    >
+                        Open Account
+                    </a>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =================================================
+         COURSE CONTENT
+    ================================================== -->
+
+    <section class="section section-tight">
+
+        <div class="container">
+
+            <div class="section-heading">
+
+                <span class="eyebrow">
+                    Course curriculum
+                </span>
+
+                <h2>
+                    Learn step by step.
+                </h2>
+
+                <p>
+
+                    Follow the modules in order or revisit
+                    lessons whenever you need them.
+
+                </p>
+
+            </div>
+
+
+
+            <div
+                class="lesson-list"
+                id="lessonList"
+            >
+
+
+                <!-- LESSON 1 -->
+
+                <article
+                    class="lesson-card"
+                    data-lesson="1"
+                >
+
+                    <div class="lesson-number">
+                        01
+                    </div>
+
+
+                    <div class="lesson-content">
+
+                        <span class="badge badge-primary">
+                            Module 1
+                        </span>
+
+
+                        <h3>
+                            Introduction & Fundamentals
+                        </h3>
+
+
+                        <p>
+                            Understand the basic concepts
+                            and tools you will use throughout
+                            the course.
+                        </p>
+
+
+                        <div class="lesson-meta">
+
+                            <span>
+                                📖 4 Lessons
+                            </span>
+
+                            <span>
+                                ⏱ Beginner
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="lesson.html?course=web-development&lesson=1"
+                        class="btn btn-secondary"
+                    >
+                        Start
+                    </a>
+
+                </article>
+
+
+
+                <!-- LESSON 2 -->
+
+                <article
+                    class="lesson-card"
+                    data-lesson="2"
+                >
+
+                    <div class="lesson-number">
+                        02
+                    </div>
+
+
+                    <div class="lesson-content">
+
+                        <span class="badge">
+                            Module 2
+                        </span>
+
+
+                        <h3>
+                            Core Skills
+                        </h3>
+
+
+                        <p>
+                            Learn the important techniques
+                            required to work confidently with
+                            your chosen skill.
+                        </p>
+
+
+                        <div class="lesson-meta">
+
+                            <span>
+                                📖 5 Lessons
+                            </span>
+
+                            <span>
+                                ⏱ Beginner
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="lesson.html?course=web-development&lesson=2"
+                        class="btn btn-secondary"
+                    >
+                        Start
+                    </a>
+
+                </article>
+
+
+
+                <!-- LESSON 3 -->
+
+                <article
+                    class="lesson-card"
+                    data-lesson="3"
+                >
+
+                    <div class="lesson-number">
+                        03
+                    </div>
+
+
+                    <div class="lesson-content">
+
+                        <span class="badge">
+                            Module 3
+                        </span>
+
+
+                        <h3>
+                            Practical Application
+                        </h3>
+
+
+                        <p>
+                            Put your knowledge into practice
+                            through guided exercises.
+                        </p>
+
+
+                        <div class="lesson-meta">
+
+                            <span>
+                                📖 5 Lessons
+                            </span>
+
+                            <span>
+                                ⏱ Intermediate
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <a
+                        href="lesson.html?course=web-development&lesson=3"
+                        class="btn btn-secondary"
+                    >
+                        Start
+                    </a>
+
+                </article>
+
+
+
+                <!-- LESSON 4 -->
+
+                <article
+                    class="lesson-card"
+                    data-lesson="4"
+                >
+
+                    <div class="lesson-number">
+                        04
+                    </div>
+
+
+                    <div class="lesson-content">
+
+                        <span class="badge">
+                            Module 4
+                        </span>
+
+
+                        <h3>
+                            Building Your Project
+                        </h3>
+
+
+                        <p>
+                            Use the skills you have
