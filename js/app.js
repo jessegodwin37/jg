@@ -1,59 +1,120 @@
 /* =========================================================
-   JG — GLOBAL APP JAVASCRIPT
-   Theme + Mobile Navigation + Shared UI
+   JG PLATFORM
+   GLOBAL APPLICATION JAVASCRIPT
+   JG — Find Skills. Find Work.
+   
+   Theme • Navigation • UI • Security Helpers
+   Mobile Experience • Shared App Utilities
 ========================================================= */
 
-(function () {
-
+(() => {
     "use strict";
 
-
     /* =====================================================
-       1. GET ELEMENTS
+       CORE
     ===================================================== */
 
     const html = document.documentElement;
+    const body = document.body;
+
+    const STORAGE = {
+        theme: "jg-theme"
+    };
+
+    const JG_VERSION = "2.0.0";
+
+
+    /* =====================================================
+       SAFE STORAGE
+    ===================================================== */
+
+    const storage = {
+        get(key) {
+            try {
+                return localStorage.getItem(key);
+            } catch {
+                return null;
+            }
+        },
+
+        set(key, value) {
+            try {
+                localStorage.setItem(key, value);
+            } catch {
+                /* Storage may be unavailable. */
+            }
+        },
+
+        remove(key) {
+            try {
+                localStorage.removeItem(key);
+            } catch {
+                /* Storage may be unavailable. */
+            }
+        }
+    };
+
+
+    /* =====================================================
+       THEME SYSTEM
+    ===================================================== */
 
     const themeToggle =
         document.getElementById("themeToggle");
 
-    const mobileMenuBtn =
-        document.getElementById("mobileMenuBtn");
-
-    const mainNav =
-        document.getElementById("mainNav");
-
-
-    /* =====================================================
-       2. THEME SYSTEM
-    ===================================================== */
-
     const savedTheme =
-        localStorage.getItem("jg-theme");
+        storage.get(STORAGE.theme);
 
-    const systemDark =
+    const systemPrefersDark =
         window.matchMedia &&
         window.matchMedia(
             "(prefers-color-scheme: dark)"
         ).matches;
 
-
-    /*
-       Decide which theme should load.
-
-       Priority:
-
-       1. User's saved choice
-       2. Phone's system theme
-       3. Light mode
-    */
-
     let currentTheme =
         savedTheme ||
-        (systemDark ? "dark" : "light");
+        (systemPrefersDark ? "dark" : "light");
 
 
-    function applyTheme(theme) {
+    function updateThemeButton() {
+
+        if (!themeToggle) return;
+
+        const isDark =
+            currentTheme === "dark";
+
+        themeToggle.textContent =
+            isDark ? "☀️" : "🌙";
+
+        themeToggle.setAttribute(
+            "aria-label",
+            isDark
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+        );
+
+        themeToggle.setAttribute(
+            "title",
+            isDark
+                ? "Switch to light mode"
+                : "Switch to dark mode"
+        );
+
+        themeToggle.setAttribute(
+            "aria-pressed",
+            String(isDark)
+        );
+    }
+
+
+    function applyTheme(theme, save = true) {
+
+        if (
+            theme !== "light" &&
+            theme !== "dark"
+        ) {
+            return;
+        }
 
         currentTheme = theme;
 
@@ -62,460 +123,221 @@
             theme
         );
 
-
-        localStorage.setItem(
-            "jg-theme",
-            theme
-        );
-
+        if (save) {
+            storage.set(
+                STORAGE.theme,
+                theme
+            );
+        }
 
         updateThemeButton();
+
+        document.dispatchEvent(
+            new CustomEvent(
+                "jg:themechange",
+                {
+                    detail: {
+                        theme
+                    }
+                }
+            )
+        );
     }
 
 
-    function updateThemeButton() {
+    applyTheme(currentTheme, false);
 
-        if (!themeToggle) {
-            return;
-        }
-
-
-        if (currentTheme === "dark") {
-
-            themeToggle.textContent = "☀️";
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to light mode"
-            );
-
-            themeToggle.setAttribute(
-                "title",
-                "Switch to light mode"
-            );
-
-        } else {
-
-            themeToggle.textContent = "🌙";
-
-            themeToggle.setAttribute(
-                "aria-label",
-                "Switch to dark mode"
-            );
-
-            themeToggle.setAttribute(
-                "title",
-                "Switch to dark mode"
-            );
-        }
-    }
-
-
-    /* Apply theme immediately */
-
-    applyTheme(currentTheme);
-
-
-    /* =====================================================
-       3. THEME TOGGLE
-    ===================================================== */
 
     if (themeToggle) {
 
         themeToggle.addEventListener(
             "click",
-            function () {
+            () => {
 
-                const newTheme =
+                applyTheme(
                     currentTheme === "dark"
                         ? "light"
-                        : "dark";
-
-                applyTheme(newTheme);
+                        : "dark"
+                );
 
             }
         );
+
     }
 
 
     /* =====================================================
-       4. FOLLOW SYSTEM THEME
+       SYSTEM THEME CHANGES
     ===================================================== */
 
-    if (
-        window.matchMedia
-    ) {
+    if (window.matchMedia) {
 
         const mediaQuery =
             window.matchMedia(
                 "(prefers-color-scheme: dark)"
             );
 
+        const handleSystemThemeChange =
+            event => {
 
-        function systemThemeChanged(event) {
+                if (
+                    !storage.get(
+                        STORAGE.theme
+                    )
+                ) {
 
-            /*
-              Only follow the system automatically
-              if the user has NOT manually selected
-              a theme.
-            */
+                    applyTheme(
+                        event.matches
+                            ? "dark"
+                            : "light",
+                        false
+                    );
 
-            if (
-                !localStorage.getItem("jg-theme")
-            ) {
+                }
 
-                applyTheme(
-                    event.matches
-                        ? "dark"
-                        : "light"
-                );
-            }
-        }
+            };
 
 
         if (
-            mediaQuery.addEventListener
+            typeof mediaQuery.addEventListener ===
+            "function"
         ) {
 
             mediaQuery.addEventListener(
                 "change",
-                systemThemeChanged
+                handleSystemThemeChange
             );
 
         } else if (
-            mediaQuery.addListener
+            typeof mediaQuery.addListener ===
+            "function"
         ) {
 
             mediaQuery.addListener(
-                systemThemeChanged
+                handleSystemThemeChange
             );
+
         }
+
     }
 
 
     /* =====================================================
-       5. MOBILE MENU
+       MOBILE NAVIGATION
     ===================================================== */
+
+    const mobileMenuBtn =
+        document.getElementById(
+            "mobileMenuBtn"
+        );
+
+    const mainNav =
+        document.getElementById(
+            "mainNav"
+        );
+
+
+    function closeMobileMenu() {
+
+        if (!mainNav) return;
+
+        mainNav.classList.remove(
+            "open"
+        );
+
+        if (mobileMenuBtn) {
+
+            mobileMenuBtn.textContent =
+                "☰";
+
+            mobileMenuBtn.setAttribute(
+                "aria-label",
+                "Open menu"
+            );
+
+            mobileMenuBtn.setAttribute(
+                "aria-expanded",
+                "false"
+            );
+
+        }
+
+        body.classList.remove(
+            "menu-open"
+        );
+
+    }
+
+
+    function openMobileMenu() {
+
+        if (!mainNav) return;
+
+        mainNav.classList.add(
+            "open"
+        );
+
+        if (mobileMenuBtn) {
+
+            mobileMenuBtn.textContent =
+                "✕";
+
+            mobileMenuBtn.setAttribute(
+                "aria-label",
+                "Close menu"
+            );
+
+            mobileMenuBtn.setAttribute(
+                "aria-expanded",
+                "true"
+            );
+
+        }
+
+        body.classList.add(
+            "menu-open"
+        );
+
+    }
+
 
     if (
         mobileMenuBtn &&
         mainNav
     ) {
 
+        mobileMenuBtn.setAttribute(
+            "aria-expanded",
+            "false"
+        );
+
+        mobileMenuBtn.setAttribute(
+            "aria-label",
+            "Open menu"
+        );
+
+
         mobileMenuBtn.addEventListener(
             "click",
-            function () {
+            event => {
+
+                event.stopPropagation();
 
                 const isOpen =
-                    mainNav.classList.toggle(
+                    mainNav.classList.contains(
                         "open"
                     );
 
-
-                mobileMenuBtn.textContent =
-                    isOpen
-                        ? "✕"
-                        : "☰";
-
-
-                mobileMenuBtn.setAttribute(
-                    "aria-label",
-                    isOpen
-                        ? "Close menu"
-                        : "Open menu"
-                );
-            }
-        );
-
-
-        /* Close menu after clicking a link */
-
-        const navLinks =
-            mainNav.querySelectorAll(
-                "a"
-            );
-
-
-        navLinks.forEach(
-            function (link) {
-
-                link.addEventListener(
-                    "click",
-                    function () {
-
-                        mainNav.classList.remove(
-                            "open"
-                        );
-
-                        mobileMenuBtn.textContent =
-                            "☰";
-
-                        mobileMenuBtn.setAttribute(
-                            "aria-label",
-                            "Open menu"
-                        );
-                    }
-                );
-
-            }
-        );
-
-
-        /* Close menu if user taps outside */
-
-        document.addEventListener(
-            "click",
-            function (event) {
-
-                const clickedInsideMenu =
-                    mainNav.contains(
-                        event.target
-                    );
-
-                const clickedButton =
-                    mobileMenuBtn.contains(
-                        event.target
-                    );
-
-
-                if (
-                    !clickedInsideMenu &&
-                    !clickedButton
-                ) {
-
-                    mainNav.classList.remove(
-                        "open"
-                    );
-
-                    mobileMenuBtn.textContent =
-                        "☰";
-
-                    mobileMenuBtn.setAttribute(
-                        "aria-label",
-                        "Open menu"
-                    );
-                }
-
-            }
-        );
-    }
-
-
-    /* =====================================================
-       6. ACTIVE NAVIGATION
-    ===================================================== */
-
-    function setActiveNavigation() {
-
-        const currentPage =
-            window.location.pathname
-                .split("/")
-                .pop()
-                .toLowerCase();
-
-
-        const links =
-            document.querySelectorAll(
-                ".main-nav a"
-            );
-
-
-        links.forEach(
-            function (link) {
-
-                const href =
-                    link
-                        .getAttribute("href")
-                        ?.split("/")
-                        .pop()
-                        .toLowerCase();
-
-
-                if (
-                    href &&
-                    href === currentPage
-                ) {
-
-                    link.classList.add(
-                        "active"
-                    );
-
+                if (isOpen) {
+                    closeMobileMenu();
                 } else {
-
-                    link.classList.remove(
-                        "active"
-                    );
+                    openMobileMenu();
                 }
 
             }
         );
 
 
-        /*
-          GitHub Pages can sometimes load the
-          homepage without explicitly showing
-          index.html.
-        */
-
-        if (
-            currentPage === "" ||
-            currentPage === "/"
-        ) {
-
-            const home =
-                document.querySelector(
-                    '.main-nav a[href="index.html"]'
-                );
-
-
-            if (home) {
-
-                home.classList.add(
-                    "active"
-                );
-            }
-        }
-    }
-
-
-    setActiveNavigation();
-
-
-    /* =====================================================
-       7. SMOOTH INTERNAL LINKS
-    ===================================================== */
-
-    const anchorLinks =
-        document.querySelectorAll(
-            'a[href^="#"]'
-        );
-
-
-    anchorLinks.forEach(
-        function (link) {
-
-            link.addEventListener(
-                "click",
-                function (event) {
-
-                    const targetId =
-                        link.getAttribute(
-                            "href"
-                        );
-
-
-                    if (
-                        !targetId ||
-                        targetId === "#"
-                    ) {
-                        return;
-                    }
-
-
-                    const target =
-                        document.querySelector(
-                            targetId
-                        );
-
-
-                    if (target) {
-
-                        event.preventDefault();
-
-
-                        target.scrollIntoView({
-                            behavior: "smooth",
-                            block: "start"
-                        });
-
-                    }
-
-                }
-            );
-
-        }
-    );
-
-
-    /* =====================================================
-       8. ADD CURRENT YEAR
-    ===================================================== */
-
-    const yearElements =
-        document.querySelectorAll(
-            "[data-current-year]"
-        );
-
-
-    yearElements.forEach(
-        function (element) {
-
-            element.textContent =
-                new Date().getFullYear();
-
-        }
-    );
-
-
-    /* =====================================================
-       9. GLOBAL JG OBJECT
-    ===================================================== */
-
-    /*
-       This gives the other JG JavaScript files
-       a shared place to access basic app settings.
-    */
-
-    window.JG = {
-
-        version: "1.0.0",
-
-        theme: function () {
-            return currentTheme;
-        },
-
-        setTheme: function (theme) {
-
-            if (
-                theme === "dark" ||
-                theme === "light"
-            ) {
-
-                applyTheme(theme);
-            }
-        },
-
-        toggleTheme: function () {
-
-            applyTheme(
-                currentTheme === "dark"
-                    ? "light"
-                    : "dark"
-            );
-        }
-
-    };
-
-
-    /* =====================================================
-       10. PAGE READY EVENT
-    ===================================================== */
-
-    document.dispatchEvent(
-        new CustomEvent(
-            "jg:ready",
-            {
-                detail: {
-                    version: "1.0.0",
-                    theme: currentTheme
-                }
-            }
-        )
-    );
-
-
-    console.log(
-        "JG platform initialized."
-    );
-
-})();
+        mainNav
+            .querySelectorAll("a")
+            .forEach
