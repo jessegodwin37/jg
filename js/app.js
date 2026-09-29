@@ -1,328 +1,521 @@
-document.addEventListener("DOMContentLoaded", () => {
+/* =========================================================
+   JG — GLOBAL APP JAVASCRIPT
+   Theme + Mobile Navigation + Shared UI
+========================================================= */
 
-    /* =========================
-       MOBILE MENU
-    ========================= */
+(function () {
 
-    const menuButton = document.querySelector(".menu-toggle");
-    const nav = document.querySelector(".nav-links");
+    "use strict";
 
-    if (menuButton && nav) {
 
-        menuButton.addEventListener("click", () => {
+    /* =====================================================
+       1. GET ELEMENTS
+    ===================================================== */
 
-            nav.classList.toggle("show");
+    const html = document.documentElement;
 
-            if (nav.classList.contains("show")) {
-                menuButton.textContent = "✕";
-            } else {
-                menuButton.textContent = "☰";
-            }
+    const themeToggle =
+        document.getElementById("themeToggle");
 
-        });
+    const mobileMenuBtn =
+        document.getElementById("mobileMenuBtn");
 
-        nav.querySelectorAll("a").forEach(link => {
+    const mainNav =
+        document.getElementById("mainNav");
 
-            link.addEventListener("click", () => {
 
-                nav.classList.remove("show");
+    /* =====================================================
+       2. THEME SYSTEM
+    ===================================================== */
 
-                menuButton.textContent = "☰";
+    const savedTheme =
+        localStorage.getItem("jg-theme");
 
-            });
+    const systemDark =
+        window.matchMedia &&
+        window.matchMedia(
+            "(prefers-color-scheme: dark)"
+        ).matches;
 
-        });
 
-    }
+    /*
+       Decide which theme should load.
 
+       Priority:
 
-    /* =========================
-       ACTIVE NAVIGATION
-    ========================= */
+       1. User's saved choice
+       2. Phone's system theme
+       3. Light mode
+    */
 
-    const currentPage =
-        location.pathname.split("/").pop() || "index.html";
+    let currentTheme =
+        savedTheme ||
+        (systemDark ? "dark" : "light");
 
-    document
-        .querySelectorAll(".nav-links a")
-        .forEach(link => {
 
-            if (link.getAttribute("href") === currentPage) {
+    function applyTheme(theme) {
 
-                link.classList.add("active");
+        currentTheme = theme;
 
-            }
-
-        });
-
-
-    /* =========================
-       COURSE PROGRESS
-    ========================= */
-
-    const courseKeys = [
-        "web",
-        "design",
-        "video",
-        "marketing",
-        "social",
-        "freelance"
-    ];
-
-
-    function getProgress(course) {
-
-        return Number(
-            localStorage.getItem(
-                "jg_progress_" + course
-            ) || 0
-        );
-
-    }
-
-
-    function updateProgress() {
-
-        courseKeys.forEach(course => {
-
-            const progress =
-                getProgress(course);
-
-
-            /* Progress bars */
-
-            document
-                .querySelectorAll(
-                    `[data-progress="${course}"]`
-                )
-                .forEach(element => {
-
-                    element.style.width =
-                        progress + "%";
-
-                });
-
-
-            /* Percentage text */
-
-            document
-                .querySelectorAll(
-                    `[data-progress-text="${course}"]`
-                )
-                .forEach(element => {
-
-                    element.textContent =
-                        progress + "%";
-
-                });
-
-        });
-
-    }
-
-
-    updateProgress();
-
-
-    /* =========================
-       COMPLETE LESSON
-    ========================= */
-
-    document
-        .querySelectorAll(".complete-lesson")
-        .forEach(button => {
-
-            const course =
-                button.dataset.course;
-
-
-            const currentProgress =
-                getProgress(course);
-
-
-            if (currentProgress >= 100) {
-
-                button.textContent =
-                    "Lesson Completed ✓";
-
-            }
-
-
-            button.addEventListener("click", () => {
-
-                localStorage.setItem(
-                    "jg_progress_" + course,
-                    "100"
-                );
-
-
-                button.textContent =
-                    "Lesson Completed ✓";
-
-
-                updateProgress();
-
-            });
-
-        });
-
-
-    /* =========================
-       ENROLLMENT FORM
-    ========================= */
-
-    const enrollmentForm =
-        document.getElementById(
-            "enrollmentForm"
+        html.setAttribute(
+            "data-theme",
+            theme
         );
 
 
-    if (enrollmentForm) {
-
-        const savedEnrollment =
-            JSON.parse(
-                localStorage.getItem(
-                    "jg_enrollment"
-                ) || "null"
-            );
+        localStorage.setItem(
+            "jg-theme",
+            theme
+        );
 
 
-        /* Load previous information */
-
-        if (savedEnrollment) {
-
-            [
-                "name",
-                "email",
-                "skill",
-                "goal"
-            ].forEach(fieldName => {
-
-                const field =
-                    enrollmentForm.elements[
-                        fieldName
-                    ];
+        updateThemeButton();
+    }
 
 
-                if (
-                    field &&
-                    savedEnrollment[fieldName]
-                ) {
+    function updateThemeButton() {
 
-                    field.value =
-                        savedEnrollment[fieldName];
-
-                }
-
-            });
-
+        if (!themeToggle) {
+            return;
         }
 
 
-        /* Submit form */
+        if (currentTheme === "dark") {
 
-        enrollmentForm.addEventListener(
-            "submit",
-            event => {
+            themeToggle.textContent = "☀️";
 
-                event.preventDefault();
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to light mode"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                "Switch to light mode"
+            );
+
+        } else {
+
+            themeToggle.textContent = "🌙";
+
+            themeToggle.setAttribute(
+                "aria-label",
+                "Switch to dark mode"
+            );
+
+            themeToggle.setAttribute(
+                "title",
+                "Switch to dark mode"
+            );
+        }
+    }
 
 
-                const formData =
-                    Object.fromEntries(
-                        new FormData(
-                            enrollmentForm
-                        ).entries()
-                    );
+    /* Apply theme immediately */
+
+    applyTheme(currentTheme);
 
 
-                localStorage.setItem(
-                    "jg_enrollment",
-                    JSON.stringify(formData)
+    /* =====================================================
+       3. THEME TOGGLE
+    ===================================================== */
+
+    if (themeToggle) {
+
+        themeToggle.addEventListener(
+            "click",
+            function () {
+
+                const newTheme =
+                    currentTheme === "dark"
+                        ? "light"
+                        : "dark";
+
+                applyTheme(newTheme);
+
+            }
+        );
+    }
+
+
+    /* =====================================================
+       4. FOLLOW SYSTEM THEME
+    ===================================================== */
+
+    if (
+        window.matchMedia
+    ) {
+
+        const mediaQuery =
+            window.matchMedia(
+                "(prefers-color-scheme: dark)"
+            );
+
+
+        function systemThemeChanged(event) {
+
+            /*
+              Only follow the system automatically
+              if the user has NOT manually selected
+              a theme.
+            */
+
+            if (
+                !localStorage.getItem("jg-theme")
+            ) {
+
+                applyTheme(
+                    event.matches
+                        ? "dark"
+                        : "light"
                 );
+            }
+        }
 
 
-                const message =
-                    document.getElementById(
-                        "formMessage"
+        if (
+            mediaQuery.addEventListener
+        ) {
+
+            mediaQuery.addEventListener(
+                "change",
+                systemThemeChanged
+            );
+
+        } else if (
+            mediaQuery.addListener
+        ) {
+
+            mediaQuery.addListener(
+                systemThemeChanged
+            );
+        }
+    }
+
+
+    /* =====================================================
+       5. MOBILE MENU
+    ===================================================== */
+
+    if (
+        mobileMenuBtn &&
+        mainNav
+    ) {
+
+        mobileMenuBtn.addEventListener(
+            "click",
+            function () {
+
+                const isOpen =
+                    mainNav.classList.toggle(
+                        "open"
                     );
 
 
-                if (message) {
-
-                    message.hidden = false;
-
-                    message.textContent =
-                        "Enrollment saved successfully! Your JG learning dashboard is ready.";
-
-                }
+                mobileMenuBtn.textContent =
+                    isOpen
+                        ? "✕"
+                        : "☰";
 
 
-                window.scrollTo({
+                mobileMenuBtn.setAttribute(
+                    "aria-label",
+                    isOpen
+                        ? "Close menu"
+                        : "Open menu"
+                );
+            }
+        );
 
-                    top:
-                        message
-                            ? message.getBoundingClientRect().top +
-                              window.scrollY -
-                              120
-                            : 0,
 
-                    behavior: "smooth"
+        /* Close menu after clicking a link */
 
-                });
+        const navLinks =
+            mainNav.querySelectorAll(
+                "a"
+            );
+
+
+        navLinks.forEach(
+            function (link) {
+
+                link.addEventListener(
+                    "click",
+                    function () {
+
+                        mainNav.classList.remove(
+                            "open"
+                        );
+
+                        mobileMenuBtn.textContent =
+                            "☰";
+
+                        mobileMenuBtn.setAttribute(
+                            "aria-label",
+                            "Open menu"
+                        );
+                    }
+                );
 
             }
         );
 
+
+        /* Close menu if user taps outside */
+
+        document.addEventListener(
+            "click",
+            function (event) {
+
+                const clickedInsideMenu =
+                    mainNav.contains(
+                        event.target
+                    );
+
+                const clickedButton =
+                    mobileMenuBtn.contains(
+                        event.target
+                    );
+
+
+                if (
+                    !clickedInsideMenu &&
+                    !clickedButton
+                ) {
+
+                    mainNav.classList.remove(
+                        "open"
+                    );
+
+                    mobileMenuBtn.textContent =
+                        "☰";
+
+                    mobileMenuBtn.setAttribute(
+                        "aria-label",
+                        "Open menu"
+                    );
+                }
+
+            }
+        );
     }
 
 
-    /* =========================
-       ACCOUNT DASHBOARD
-    ========================= */
+    /* =====================================================
+       6. ACTIVE NAVIGATION
+    ===================================================== */
 
-    const savedAccount =
-        JSON.parse(
-            localStorage.getItem(
-                "jg_enrollment"
-            ) || "null"
+    function setActiveNavigation() {
+
+        const currentPage =
+            window.location.pathname
+                .split("/")
+                .pop()
+                .toLowerCase();
+
+
+        const links =
+            document.querySelectorAll(
+                ".main-nav a"
+            );
+
+
+        links.forEach(
+            function (link) {
+
+                const href =
+                    link
+                        .getAttribute("href")
+                        ?.split("/")
+                        .pop()
+                        .toLowerCase();
+
+
+                if (
+                    href &&
+                    href === currentPage
+                ) {
+
+                    link.classList.add(
+                        "active"
+                    );
+
+                } else {
+
+                    link.classList.remove(
+                        "active"
+                    );
+                }
+
+            }
         );
 
 
-    const accountName =
-        document.getElementById(
-            "accountName"
-        );
+        /*
+          GitHub Pages can sometimes load the
+          homepage without explicitly showing
+          index.html.
+        */
+
+        if (
+            currentPage === "" ||
+            currentPage === "/"
+        ) {
+
+            const home =
+                document.querySelector(
+                    '.main-nav a[href="index.html"]'
+                );
 
 
-    const accountEmail =
-        document.getElementById(
-            "accountEmail"
-        );
+            if (home) {
 
-
-    if (
-        savedAccount &&
-        accountName
-    ) {
-
-        accountName.textContent =
-            "Welcome, " +
-            savedAccount.name;
-
+                home.classList.add(
+                    "active"
+                );
+            }
+        }
     }
 
 
-    if (
-        savedAccount &&
-        accountEmail
-    ) {
+    setActiveNavigation();
 
-        accountEmail.textContent =
-            savedAccount.email +
-            " • " +
-            savedAccount.skill;
 
-    }
+    /* =====================================================
+       7. SMOOTH INTERNAL LINKS
+    ===================================================== */
 
-});
+    const anchorLinks =
+        document.querySelectorAll(
+            'a[href^="#"]'
+        );
+
+
+    anchorLinks.forEach(
+        function (link) {
+
+            link.addEventListener(
+                "click",
+                function (event) {
+
+                    const targetId =
+                        link.getAttribute(
+                            "href"
+                        );
+
+
+                    if (
+                        !targetId ||
+                        targetId === "#"
+                    ) {
+                        return;
+                    }
+
+
+                    const target =
+                        document.querySelector(
+                            targetId
+                        );
+
+
+                    if (target) {
+
+                        event.preventDefault();
+
+
+                        target.scrollIntoView({
+                            behavior: "smooth",
+                            block: "start"
+                        });
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =====================================================
+       8. ADD CURRENT YEAR
+    ===================================================== */
+
+    const yearElements =
+        document.querySelectorAll(
+            "[data-current-year]"
+        );
+
+
+    yearElements.forEach(
+        function (element) {
+
+            element.textContent =
+                new Date().getFullYear();
+
+        }
+    );
+
+
+    /* =====================================================
+       9. GLOBAL JG OBJECT
+    ===================================================== */
+
+    /*
+       This gives the other JG JavaScript files
+       a shared place to access basic app settings.
+    */
+
+    window.JG = {
+
+        version: "1.0.0",
+
+        theme: function () {
+            return currentTheme;
+        },
+
+        setTheme: function (theme) {
+
+            if (
+                theme === "dark" ||
+                theme === "light"
+            ) {
+
+                applyTheme(theme);
+            }
+        },
+
+        toggleTheme: function () {
+
+            applyTheme(
+                currentTheme === "dark"
+                    ? "light"
+                    : "dark"
+            );
+        }
+
+    };
+
+
+    /* =====================================================
+       10. PAGE READY EVENT
+    ===================================================== */
+
+    document.dispatchEvent(
+        new CustomEvent(
+            "jg:ready",
+            {
+                detail: {
+                    version: "1.0.0",
+                    theme: currentTheme
+                }
+            }
+        )
+    );
+
+
+    console.log(
+        "JG platform initialized."
+    );
+
+})();
