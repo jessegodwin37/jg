@@ -1,457 +1,1051 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-    <meta name="theme-color"
-          content="#2563eb">
+    <meta
+        name="description"
+        content="JG Skills — Discover practical skills you can learn and use to build your future."
+    >
 
-    <meta name="description"
-          content="Explore digital skills on JG and start building skills that can create opportunities.">
+    <meta name="theme-color" content="#2563eb">
 
-    <title>JG Skills | Learn Skills. Build Your Future.</title>
+    <title>JG Skills | Find Skills. Find Work.</title>
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
 
-    <style>
+<body>
 
-        /* =====================================================
-           SKILLS PAGE
-        ===================================================== */
+<!-- =====================================================
+     HEADER
+===================================================== -->
 
-        .page-hero {
+<header class="site-header">
 
-            width: min(
-                calc(100% - 40px),
-                900px
-            );
+    <div class="container header-inner">
 
-            margin: auto;
+        <a href="index.html" class="brand" aria-label="JG Home">
+            <span class="brand-mark">JG</span>
 
-            text-align: center;
+            <span class="brand-text">
+                <strong>JG</strong>
+                <small>Find Skills. Find Work.</small>
+            </span>
+        </a>
 
-            padding: 85px 0 55px;
-        }
+        <nav class="main-nav" id="mainNav">
 
+            <a href="index.html">Home</a>
+            <a href="skills.html" class="active">Skills</a>
+            <a href="work.html">Work</a>
+            <a href="learn.html">Learn</a>
+            <a href="ai.html">JG AI</a>
+            <a href="premium.html">Premium</a>
 
-        .page-hero h1 {
+        </nav>
 
-            font-size:
-                clamp(
-                    42px,
-                    7vw,
-                    68px
-                );
+        <div class="header-actions">
 
-            line-height: 1;
+            <button
+                class="icon-button"
+                id="themeToggle"
+                type="button"
+                aria-label="Toggle dark mode"
+                title="Toggle theme"
+            >
+                <span id="themeIcon">☾</span>
+            </button>
 
-            letter-spacing: -3px;
+            <a href="account.html" class="btn btn-primary header-account">
+                Account
+            </a>
 
-            margin-bottom: 20px;
-        }
+            <button
+                class="menu-toggle"
+                id="mobileMenuBtn"
+                type="button"
+                aria-label="Open navigation"
+                aria-expanded="false"
+            >
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
+        </div>
 
-        .page-hero h1 span {
+    </div>
 
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--primary),
-                    var(--secondary)
-                );
+</header>
 
-            -webkit-background-clip: text;
 
-            background-clip: text;
+<!-- =====================================================
+     MAIN
+===================================================== -->
 
-            color: transparent;
-        }
+<main>
 
+    <!-- HERO -->
 
-        .page-hero p {
+    <section class="hero hero-small">
 
-            max-width: 650px;
+        <div class="container">
 
-            margin: auto;
+            <div class="hero-content">
 
-            color: var(--text-secondary);
+                <span class="eyebrow">
+                    <span>✦</span>
+                    Explore your potential
+                </span>
 
-            font-size: 17px;
-        }
+                <h1>
+                    Discover skills that can
+                    <span class="gradient-text">change your future.</span>
+                </h1>
 
+                <p>
+                    Explore practical skills, learn at your own pace,
+                    build real projects and prepare yourself for
+                    opportunities.
+                </p>
 
-        /* =====================================================
-           SKILLS FILTER
-        ===================================================== */
+                <div class="hero-actions">
 
-        .skills-controls {
+                    <a href="learn.html" class="btn btn-primary btn-lg">
+                        Start Learning
+                    </a>
 
-            width: min(
-                calc(100% - 40px),
-                var(--max-width)
-            );
+                    <a href="work.html" class="btn btn-secondary btn-lg">
+                        Find Work
+                    </a>
 
-            margin: 0 auto 35px;
+                </div>
 
-            display: flex;
+            </div>
 
-            align-items: center;
+        </div>
 
-            justify-content: space-between;
+    </section>
 
-            gap: 15px;
 
-            flex-wrap: wrap;
-        }
+    <!-- =================================================
+         SEARCH / FILTER
+    ================================================== -->
 
+    <section class="section section-tight">
 
-        .skills-search {
+        <div class="container">
 
-            flex: 1;
+            <div class="section-heading">
 
-            min-width: 220px;
+                <span class="eyebrow">
+                    Skill discovery
+                </span>
 
-            position: relative;
-        }
+                <h2>Find a skill for your next move.</h2>
 
+                <p>
+                    Choose something you're interested in or
+                    explore a skill that can open new opportunities.
+                </p>
 
-        .skills-search input {
+            </div>
 
-            padding-left: 43px;
 
-            min-height: 48px;
-        }
+            <div class="search-box">
 
+                <span class="search-icon">⌕</span>
 
-        .search-icon {
+                <input
+                    type="search"
+                    id="skillSearch"
+                    placeholder="Search skills..."
+                    aria-label="Search skills"
+                    autocomplete="off"
+                >
 
-            position: absolute;
+            </div>
 
-            left: 15px;
 
-            top: 50%;
+            <div class="filter-row" id="skillFilters">
 
-            transform:
-                translateY(-50%);
+                <button
+                    class="filter-chip active"
+                    type="button"
+                    data-filter="all"
+                >
+                    All Skills
+                </button>
 
-            color: var(--text-muted);
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="technology"
+                >
+                    Technology
+                </button>
 
-            pointer-events: none;
-        }
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="creative"
+                >
+                    Creative
+                </button>
 
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="business"
+                >
+                    Business
+                </button>
 
-        .skill-filters {
+                <button
+                    class="filter-chip"
+                    type="button"
+                    data-filter="digital"
+                >
+                    Digital
+                </button>
 
-            display: flex;
+            </div>
 
-            gap: 7px;
+        </div>
 
-            flex-wrap: wrap;
-        }
+    </section>
 
 
-        .filter-btn {
+    <!-- =================================================
+         SKILLS
+    ================================================== -->
 
-            min-height: 42px;
+    <section class="section section-tight">
 
-            padding:
-                0 14px;
+        <div class="container">
 
-            border:
-                1px solid var(--border);
+            <div
+                class="course-grid"
+                id="skillsGrid"
+            >
 
-            border-radius: 10px;
+                <!-- WEB DEVELOPMENT -->
 
-            background:
-                var(--surface);
+                <article
+                    class="course-card skill-card"
+                    data-category="technology digital"
+                    data-name="web development"
+                >
 
-            color:
-                var(--text-secondary);
+                    <div class="course-image skill-icon-box">
+                        <span>&lt;/&gt;</span>
+                    </div>
 
-            font-size: 12px;
+                    <div class="course-body">
 
-            font-weight: 700;
-        }
+                        <div class="badge-row">
 
+                            <span class="badge badge-primary">
+                                Technology
+                            </span>
 
-        .filter-btn.active {
+                            <span class="badge">
+                                Popular
+                            </span>
 
-            color: white;
+                        </div>
 
-            border-color:
-                var(--primary);
+                        <h3>Web Development</h3>
 
-            background:
-                var(--primary);
-        }
+                        <p>
+                            Learn how websites and modern web
+                            applications are designed and built.
+                        </p>
 
+                        <div class="course-meta">
 
-        /* =====================================================
-           SKILLS GRID
-        ===================================================== */
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
-        .skills-grid {
+                        </div>
 
-            width: min(
-                calc(100% - 40px),
-                var(--max-width)
-            );
+                        <a
+                            href="course.html?course=web-development"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
-            margin: auto;
+                    </div>
 
-            display: grid;
+                </article>
 
-            grid-template-columns:
-                repeat(2, 1fr);
 
-            gap: 20px;
-        }
+                <!-- GRAPHIC DESIGN -->
 
+                <article
+                    class="course-card skill-card"
+                    data-category="creative digital"
+                    data-name="graphic design"
+                >
 
-        .skill-card {
+                    <div class="course-image skill-icon-box">
+                        <span>✦</span>
+                    </div>
 
-            position: relative;
+                    <div class="course-body">
 
-            overflow: hidden;
+                        <div class="badge-row">
 
-            padding: 30px;
+                            <span class="badge badge-primary">
+                                Creative
+                            </span>
 
-            border:
-                1px solid var(--border);
+                        </div>
 
-            border-radius:
-                var(--radius-lg);
+                        <h3>Graphic Design</h3>
 
-            background:
-                var(--surface);
+                        <p>
+                            Learn visual design, branding,
+                            layouts and digital graphics.
+                        </p>
 
-            box-shadow:
-                var(--shadow-sm);
+                        <div class="course-meta">
 
-            transition:
-                transform .25s ease,
-                box-shadow .25s ease,
-                border-color .25s ease;
-        }
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
+                        </div>
 
-        .skill-card:hover {
+                        <a
+                            href="course.html?course=graphic-design"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
-            transform:
-                translateY(-6px);
+                    </div>
 
-            box-shadow:
-                var(--shadow);
+                </article>
 
-            border-color:
-                rgba(
-                    37,
-                    99,
-                    235,
-                    .25
-                );
-        }
 
+                <!-- VIDEO EDITING -->
 
-        .skill-card::after {
+                <article
+                    class="course-card skill-card"
+                    data-category="creative digital"
+                    data-name="video editing"
+                >
 
-            content: "";
+                    <div class="course-image skill-icon-box">
+                        <span>▶</span>
+                    </div>
 
-            position: absolute;
+                    <div class="course-body">
 
-            width: 180px;
+                        <div class="badge-row">
 
-            height: 180px;
+                            <span class="badge badge-primary">
+                                Creative
+                            </span>
 
-            border-radius: 50%;
+                            <span class="badge">
+                                In Demand
+                            </span>
 
-            background:
-                rgba(
-                    37,
-                    99,
-                    235,
-                    .06
-                );
+                        </div>
 
-            filter: blur(45px);
+                        <h3>Video Editing</h3>
 
-            right: -70px;
+                        <p>
+                            Learn how to turn raw footage into
+                            engaging professional videos.
+                        </p>
 
-            top: -70px;
+                        <div class="course-meta">
 
-            pointer-events: none;
-        }
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
+                        </div>
 
-        .skill-card-top {
+                        <a
+                            href="course.html?course=video-editing"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
-            display: flex;
+                    </div>
 
-            align-items: flex-start;
+                </article>
 
-            justify-content:
-                space-between;
 
-            gap: 15px;
+                <!-- PYTHON -->
 
-            margin-bottom: 22px;
-        }
+                <article
+                    class="course-card skill-card"
+                    data-category="technology digital"
+                    data-name="python programming"
+                >
 
+                    <div class="course-image skill-icon-box">
+                        <span>Py</span>
+                    </div>
 
-        .skill-icon {
+                    <div class="course-body">
 
-            width: 58px;
+                        <div class="badge-row">
 
-            height: 58px;
+                            <span class="badge badge-primary">
+                                Technology
+                            </span>
 
-            display: grid;
+                        </div>
 
-            place-items: center;
+                        <h3>Python Programming</h3>
 
-            border-radius: 17px;
+                        <p>
+                            Start programming with Python and
+                            build a strong foundation in coding.
+                        </p>
 
-            background:
-                rgba(
-                    37,
-                    99,
-                    235,
-                    .09
-                );
+                        <div class="course-meta">
 
-            font-size: 27px;
-        }
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
+                        </div>
 
-        .skill-level {
+                        <a
+                            href="course.html?course=python"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
-            padding:
-                6px 9px;
+                    </div>
 
-            border-radius:
-                999px;
+                </article>
 
-            background:
-                var(--bg-soft);
 
-            color:
-                var(--text-muted);
+                <!-- DIGITAL MARKETING -->
 
-            font-size: 10px;
+                <article
+                    class="course-card skill-card"
+                    data-category="business digital"
+                    data-name="digital marketing"
+                >
 
-            font-weight: 750;
-        }
+                    <div class="course-image skill-icon-box">
+                        <span>📈</span>
+                    </div>
 
+                    <div class="course-body">
 
-        .skill-card h2 {
+                        <div class="badge-row">
 
-            font-size: 23px;
+                            <span class="badge badge-primary">
+                                Business
+                            </span>
 
-            letter-spacing:
-                -.5px;
+                        </div>
 
-            margin-bottom: 9px;
-        }
+                        <h3>Digital Marketing</h3>
 
+                        <p>
+                            Learn how digital platforms can be
+                            used to promote brands, products and services.
+                        </p>
 
-        .skill-card > p {
+                        <div class="course-meta">
 
-            color:
-                var(--text-secondary);
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
-            font-size: 14px;
+                        </div>
 
-            line-height: 1.7;
+                        <a
+                            href="course.html?course=digital-marketing"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
-            margin-bottom: 22px;
-        }
+                    </div>
 
+                </article>
 
-        .skill-topics {
 
-            display: flex;
+                <!-- DATA ANALYSIS -->
 
-            flex-wrap: wrap;
+                <article
+                    class="course-card skill-card"
+                    data-category="technology business digital"
+                    data-name="data analysis"
+                >
 
-            gap: 7px;
+                    <div class="course-image skill-icon-box">
+                        <span>▥</span>
+                    </div>
 
-            margin-bottom: 25px;
-        }
+                    <div class="course-body">
 
+                        <div class="badge-row">
 
-        .skill-topic {
+                            <span class="badge badge-primary">
+                                Technology
+                            </span>
 
-            padding:
-                6px 9px;
+                        </div>
 
-            border:
-                1px solid var(--border);
+                        <h3>Data Analysis</h3>
 
-            border-radius:
-                8px;
+                        <p>
+                            Learn how to work with data,
+                            identify patterns and communicate insights.
+                        </p>
 
-            color:
-                var(--text-muted);
+                        <div class="course-meta">
 
-            background:
-                var(--bg-soft);
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
-            font-size: 10px;
+                        </div>
 
-            font-weight: 650;
-        }
+                        <a
+                            href="course.html?course=data-analysis"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
+                    </div>
 
-        .skill-card-bottom {
+                </article>
 
-            display: flex;
 
-            align-items: center;
+                <!-- UI UX -->
 
-            justify-content:
-                space-between;
+                <article
+                    class="course-card skill-card"
+                    data-category="creative technology"
+                    data-name="ui ux design"
+                >
 
-            gap: 15px;
+                    <div class="course-image skill-icon-box">
+                        <span>◈</span>
+                    </div>
 
-            padding-top: 20px;
+                    <div class="course-body">
 
-            border-top:
-                1px solid var(--border);
-        }
+                        <div class="badge-row">
 
+                            <span class="badge badge-primary">
+                                Creative
+                            </span>
 
-        .skill-meta {
+                        </div>
 
-            display: flex;
+                        <h3>UI/UX Design</h3>
 
-            flex-direction: column;
+                        <p>
+                            Learn how to design digital experiences
+                            that are useful, clear and enjoyable.
+                        </p>
 
-            gap: 3px;
-        }
+                        <div class="course-meta">
 
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
 
-        .skill-meta strong {
+                        </div>
 
-            font-size: 14px;
-        }
+                        <a
+                            href="course.html?course=ui-ux"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
 
+                    </div>
 
-        .skill-meta span {
+                </article>
 
-            color:
-                var(--text-muted);
 
-            font-size: 11px;
-        }
+                <!-- CONTENT CREATION -->
 
+                <article
+                    class="course-card skill-card"
+                    data-category="creative digital"
+                    data-name="content creation"
+                >
 
-        .skill-btn {
+                    <div class="course-image skill-icon-box">
+                        <span>✎</span>
+                    </div>
 
-            display: inline-flex;
+                    <div class="course-body">
 
-            align-items
+                        <div class="badge-row">
+
+                            <span class="badge badge-primary">
+                                Creative
+                            </span>
+
+                        </div>
+
+                        <h3>Content Creation</h3>
+
+                        <p>
+                            Learn how to create useful and engaging
+                            content for digital audiences.
+                        </p>
+
+                        <div class="course-meta">
+
+                            <span>📚 Beginner Friendly</span>
+                            <span>⏱ Self-paced</span>
+
+                        </div>
+
+                        <a
+                            href="course.html?course=content-creation"
+                            class="btn btn-secondary btn-block"
+                        >
+                            Explore Skill
+                        </a>
+
+                    </div>
+
+                </article>
+
+            </div>
+
+
+            <!-- NO RESULTS -->
+
+            <div
+                id="skillsEmpty"
+                class="empty-state"
+                hidden
+            >
+
+                <div class="empty-icon">
+                    ⌕
+                </div>
+
+                <h3>No skills found</h3>
+
+                <p>
+                    Try another search or choose a different category.
+                </p>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    id="clearSkillSearch"
+                >
+                    Clear Search
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         WHY LEARN
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="section-heading center">
+
+                <span class="eyebrow">
+                    Learn with purpose
+                </span>
+
+                <h2>Turn knowledge into opportunity.</h2>
+
+                <p>
+                    JG is designed to help you move from learning
+                    to actually using your skills.
+                </p>
+
+            </div>
+
+
+            <div class="feature-grid">
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        01
+                    </div>
+
+                    <h3>Learn</h3>
+
+                    <p>
+                        Build practical knowledge through structured
+                        learning paths.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        02
+                    </div>
+
+                    <h3>Practice</h3>
+
+                    <p>
+                        Work through projects and activities that
+                        help turn knowledge into experience.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        03
+                    </div>
+
+                    <h3>Showcase</h3>
+
+                    <p>
+                        Build a professional profile and demonstrate
+                        what you can actually do.
+                    </p>
+
+                </article>
+
+
+                <article class="feature-card">
+
+                    <div class="feature-icon">
+                        04
+                    </div>
+
+                    <h3>Grow</h3>
+
+                    <p>
+                        Discover opportunities and continue developing
+                        your career.
+                    </p>
+
+                </article>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         AI CTA
+    ================================================== -->
+
+    <section class="section">
+
+        <div class="container">
+
+            <div class="cta-card">
+
+                <div>
+
+                    <span class="eyebrow">
+                        Powered by JG AI
+                    </span>
+
+                    <h2>
+                        Not sure what skill to learn?
+                    </h2>
+
+                    <p>
+                        JG AI will eventually help you explore skills,
+                        learning paths and opportunities based on your
+                        goals.
+                    </p>
+
+                </div>
+
+                <a
+                    href="ai.html"
+                    class="btn btn-primary btn-lg"
+                >
+                    Explore JG AI
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =================================================
+         FINAL CTA
+    ================================================== -->
+
+    <section class="section section-last">
+
+        <div class="container">
+
+            <div class="hero-card">
+
+                <span class="eyebrow">
+                    Your next chapter starts here
+                </span>
+
+                <h2>
+                    Choose a skill.
+                    Build something.
+                    Move forward.
+                </h2>
+
+                <p>
+                    Start learning today and build skills you can
+                    use in the real world.
+                </p>
+
+                <div class="hero-actions">
+
+                    <a
+                        href="learn.html"
+                        class="btn btn-primary btn-lg"
+                    >
+                        Start Learning
+                    </a>
+
+                    <a
+                        href="account.html"
+                        class="btn btn-secondary btn-lg"
+                    >
+                        Open Account
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <div class="footer-grid">
+
+            <div class="footer-brand">
+
+                <a href="index.html" class="brand">
+
+                    <span class="brand-mark">
+                        JG
+                    </span>
+
+                    <span class="brand-text">
+                        <strong>JG</strong>
+                        <small>Find Skills. Find Work.</small>
+                    </span>
+
+                </a>
+
+                <p>
+                    A platform for learning skills, discovering
+                    opportunities and building your future.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Platform</h4>
+
+                <a href="skills.html">Skills</a>
+                <a href="learn.html">Learn</a>
+                <a href="work.html">Work</a>
+                <a href="ai.html">JG AI</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>Account</h4>
+
+                <a href="account.html">Account</a>
+                <a href="premium.html">Premium</a>
+                <a href="certificate.html">Certificates</a>
+                <a href="verify.html">Verify Certificate</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>JG</h4>
+
+                <a href="index.html">Home</a>
+                <a href="enrollment.html">Enrollment</a>
+                <a href="exam.html">Exam</a>
+                <a href="final project.html">Final Project</a>
+
+            </div>
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span data-current-year></span> JG.
+                All rights reserved.
+            </p>
+
+            <p>
+                Built for learning, growth and opportunity.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- =====================================================
+     PAGE SCRIPT
+===================================================== -->
+
+<script src="js/app.js" defer></script>
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const searchInput = document.getElementById("skillSearch");
+    const filters = document.querySelectorAll(".filter-chip");
+    const cards = document.querySelectorAll(".skill-card");
+    const emptyState = document.getElementById("skillsEmpty");
+    const clearButton = document.getElementById("clearSkillSearch");
+
+    let currentFilter = "all";
+
+    function filterSkills() {
+
+        const searchTerm =
+            searchInput.value
+                .trim()
+                .toLowerCase();
+
+        let visibleCount = 0;
+
+        cards.forEach(card => {
+
+            const name =
+                card.dataset.name || "";
+
+            const category =
+                card.dataset.category || "";
+
+            const matchesSearch =
+                !searchTerm ||
+                name.includes(searchTerm);
+
+            const matchesFilter =
+                currentFilter === "all" ||
+                category.includes(currentFilter);
+
+            const shouldShow =
+                matchesSearch &&
+                matchesFilter;
+
+            card.hidden = !shouldShow;
+
+            if (shouldShow) {
+                visibleCount++;
+            }
+
+        });
+
+        emptyState.hidden = visibleCount !== 0;
+    }
+
+
+    searchInput?.addEventListener(
+        "input",
+        filterSkills
+    );
+
+
+    filters.forEach(button => {
+
+        button.addEventListener("click", () => {
+
+            filters.forEach(item => {
+                item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            currentFilter =
+                button.dataset.filter || "all";
+
+            filterSkills();
+
+        });
+
+    });
+
+
+    clearButton?.addEventListener("click", () => {
+
+        searchInput.value = "";
+
+        currentFilter = "all";
+
+        filters.forEach(item => {
+            item.classList.remove("active");
+        });
+
+        filters[0]?.classList.add("active");
+
+        filterSkills();
+
+        searchInput.focus();
+
+    });
+
+});
+</script>
+
+</body>
+</html>
