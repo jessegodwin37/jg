@@ -3,375 +3,1133 @@
 
 <head>
 
-<meta charset="UTF-8">
-
-<meta name="viewport"
-      content="width=device-width, initial-scale=1.0">
-
-<title>JG | Course Lesson</title>
-
-<meta name="description"
-      content="Learn practical digital skills with JG.">
-
-<link rel="stylesheet"
-      href="css/style.css">
-
-<style>
-
-/* =====================================================
-   LESSON PAGE
-===================================================== */
-
-.lesson-page {
-    min-height: 100vh;
-    background: #f5f7fb;
-    padding: 115px 20px 70px;
-}
-
-.lesson-container {
-    max-width: 1200px;
-    margin: auto;
-}
-
-
-/* =====================================================
-   TOP BAR
-===================================================== */
-
-.lesson-top {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px 25px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-    margin-bottom: 22px;
-    box-shadow: 0 10px 30px rgba(15,23,42,.06);
-}
-
-.lesson-course-name {
-    display: flex;
-    align-items: center;
-    gap: 14px;
-}
-
-.lesson-course-icon {
-    width: 52px;
-    height: 52px;
-    border-radius: 14px;
-    background: #eff6ff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 25px;
-}
-
-.lesson-course-name h1 {
-    margin: 0 0 4px;
-    font-size: 22px;
-}
-
-.lesson-course-name p {
-    margin: 0;
-    color: #64748b;
-}
-
-
-/* =====================================================
-   PROGRESS
-===================================================== */
-
-.lesson-progress-box {
-    min-width: 260px;
-}
-
-.lesson-progress-header {
-    display: flex;
-    justify-content: space-between;
-    font-size: 13px;
-    font-weight: 800;
-    margin-bottom: 7px;
-}
-
-.lesson-progress {
-    height: 9px;
-    background: #e2e8f0;
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.lesson-progress span {
-    display: block;
-    height: 100%;
-    width: 0%;
-    background: #2563eb;
-    transition: width .4s ease;
-}
-
-
-/* =====================================================
-   MAIN GRID
-===================================================== */
-
-.lesson-layout {
-    display: grid;
-    grid-template-columns: 280px 1fr;
-    gap: 22px;
-}
-
-
-/* =====================================================
-   LESSON SIDEBAR
-===================================================== */
-
-.lesson-sidebar {
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 20px;
-    height: fit-content;
-    box-shadow: 0 10px 30px rgba(15,23,42,.06);
-}
-
-.lesson-sidebar h2 {
-    font-size: 18px;
-    margin-top: 0;
-}
-
-.lesson-list {
-    display: grid;
-    gap: 8px;
-}
-
-.lesson-item {
-    width: 100%;
-    text-align: left;
-    border: 0;
-    background: transparent;
-    padding: 13px;
-    border-radius: 10px;
-    cursor: pointer;
-    font: inherit;
-    color: #334155;
-}
-
-.lesson-item:hover {
-    background: #f1f5f9;
-}
-
-.lesson-item.active {
-    background: #eff6ff;
-    color: #1d4ed8;
-    font-weight: 800;
-}
-
-.lesson-item.completed {
-    color: #059669;
-}
-
-.lesson-item-number {
-    display: inline-flex;
-    width: 27px;
-    height: 27px;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    background: #e2e8f0;
-    margin-right: 7px;
-    font-size: 12px;
-}
-
-.lesson-item.active .lesson-item-number {
-    background: #2563eb;
-    color: #ffffff;
-}
-
-.lesson-item.completed .lesson-item-number {
-    background: #10b981;
-    color: #ffffff;
-}
-
-
-/* =====================================================
-   LESSON CONTENT
-===================================================== */
-
-.lesson-content {
-    background: #ffffff;
-    border-radius: 22px;
-    padding: 35px;
-    box-shadow: 0 10px 30px rgba(15,23,42,.06);
-    min-height: 600px;
-}
-
-.lesson-badge {
-    display: inline-block;
-    padding: 7px 11px;
-    border-radius: 999px;
-    background: #eff6ff;
-    color: #2563eb;
-    font-size: 12px;
-    font-weight: 900;
-    letter-spacing: .05em;
-}
-
-.lesson-content h2 {
-    font-size: clamp(30px, 5vw, 46px);
-    margin: 17px 0 12px;
-    line-height: 1.1;
-}
-
-.lesson-intro {
-    color: #64748b;
-    font-size: 17px;
-    line-height: 1.8;
-}
-
-.lesson-body {
-    margin-top: 30px;
-    line-height: 1.8;
-    color: #334155;
-}
-
-.lesson-body h3 {
-    margin-top: 30px;
-    color: #111827;
-}
-
-.lesson-body ul {
-    padding-left: 22px;
-}
-
-.lesson-body li {
-    margin-bottom: 9px;
-}
-
-.lesson-note {
-    margin: 25px 0;
-    padding: 20px;
-    background: #eff6ff;
-    border-left: 4px solid #2563eb;
-    border-radius: 10px;
-}
-
-.lesson-example {
-    margin: 25px 0;
-    padding: 20px;
-    background: #0f172a;
-    color: #e2e8f0;
-    border-radius: 12px;
-    overflow-x: auto;
-}
-
-.lesson-example pre {
-    margin: 0;
-    white-space: pre-wrap;
-}
-
-
-/* =====================================================
-   ACTIONS
-===================================================== */
-
-.lesson-actions {
-    display: flex;
-    justify-content: space-between;
-    gap: 12px;
-    margin-top: 35px;
-    padding-top: 25px;
-    border-top: 1px solid #e5e7eb;
-}
-
-.lesson-actions button {
-    border: 0;
-    cursor: pointer;
-}
-
-
-/* =====================================================
-   COMPLETE BUTTON
-===================================================== */
-
-.complete-button.completed {
-    background: #059669;
-}
-
-
-/* =====================================================
-   QUIZ
-===================================================== */
-
-.lesson-quiz {
-    margin-top: 35px;
-    padding: 25px;
-    border-radius: 16px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-}
-
-.quiz-question {
-    font-weight: 800;
-    margin-bottom: 15px;
-}
-
-.quiz-option {
-    display: block;
-    padding: 12px;
-    margin: 8px 0;
-    border: 1px solid #cbd5e1;
-    border-radius: 10px;
-    cursor: pointer;
-}
-
-.quiz-option:hover {
-    background: #ffffff;
-}
-
-.quiz-result {
-    margin-top: 15px;
-    font-weight: 800;
-}
-
-
-/* =====================================================
-   COMPLETION CARD
-===================================================== */
-
-.course-complete {
-    display: none;
-    margin-top: 30px;
-    padding: 25px;
-    border-radius: 18px;
-    background: #ecfdf5;
-    border: 1px solid #10b981;
-}
-
-.course-complete.show {
-    display: block;
-}
-
-.course-complete h3 {
-    color: #047857;
-    margin-top: 0;
-}
-
-
-/* =====================================================
-   RESPONSIVE
-===================================================== */
-
-@media (max-width: 900px) {
-
-    .lesson-layout {
-        grid-template-columns: 1fr;
-    }
-
-    .lesson-sidebar {
-        order: 2;
-    }
-
-    .lesson-content {
-        order: 1;
-    }
-
-    .lesson
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="JG Learning Environment — Learn, practice, track progress and build real skills."
+    >
+
+    <title>JG Learning | Learn & Practice</title>
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
+    <style>
+
+        /* ==============================
+           LESSON PAGE
+        ============================== */
+
+        .lesson-page {
+            padding: 110px 20px 70px;
+            min-height: 100vh;
+        }
+
+        .lesson-container {
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        .lesson-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .lesson-breadcrumb {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .lesson-breadcrumb strong {
+            color: var(--text);
+        }
+
+        .lesson-course-title {
+            margin-top: 7px;
+            font-size: clamp(28px, 5vw, 42px);
+            line-height: 1.1;
+        }
+
+        .lesson-layout {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* ==============================
+           SIDEBAR
+        ============================== */
+
+        .lesson-sidebar {
+            position: sticky;
+            top: 95px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .sidebar-header {
+            padding: 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .sidebar-header h3 {
+            margin-bottom: 8px;
+        }
+
+        .sidebar-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .progress-wrapper {
+            padding: 20px 22px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 9px;
+            background: var(--border);
+            border-radius: 999px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(
+                90deg,
+                var(--primary),
+                var(--secondary)
+            );
+            border-radius: inherit;
+            transition: width .35s ease;
+        }
+
+        .lesson-list {
+            max-height: 520px;
+            overflow-y: auto;
+        }
+
+        .lesson-item {
+            width: 100%;
+            border: 0;
+            border-bottom: 1px solid var(--border);
+            background: transparent;
+            color: var(--text);
+            text-align: left;
+            padding: 16px 20px;
+            cursor: pointer;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+            transition: .2s ease;
+        }
+
+        .lesson-item:hover {
+            background: var(--surface-alt);
+        }
+
+        .lesson-item.active {
+            background: rgba(37, 99, 235, .10);
+        }
+
+        .lesson-number {
+            width: 30px;
+            height: 30px;
+            min-width: 30px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--surface-alt);
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .lesson-item.completed .lesson-number {
+            background: var(--primary);
+            color: white;
+        }
+
+        .lesson-item-text strong {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 4px;
+        }
+
+        .lesson-item-text span {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        /* ==============================
+           MAIN LESSON
+        ============================== */
+
+        .lesson-content {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .lesson-video {
+            min-height: 310px;
+            display: grid;
+            place-items: center;
+            background:
+                radial-gradient(
+                    circle at center,
+                    rgba(37,99,235,.18),
+                    transparent 55%
+                ),
+                var(--surface-alt);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .video-placeholder {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .play-button {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            border: 0;
+            background: var(--primary);
+            color: white;
+            font-size: 25px;
+            cursor: pointer;
+            margin-bottom: 18px;
+            box-shadow: 0 12px 35px rgba(37,99,235,.25);
+        }
+
+        .video-placeholder h3 {
+            margin-bottom: 8px;
+        }
+
+        .video-placeholder p {
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin: auto;
+        }
+
+        .lesson-body {
+            padding: 35px;
+        }
+
+        .lesson-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .meta-pill {
+            padding: 7px 12px;
+            border-radius: 999px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            font-size: 13px;
+        }
+
+        .lesson-body h1 {
+            font-size: clamp(28px, 5vw, 40px);
+            margin-bottom: 15px;
+        }
+
+        .lesson-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 28px;
+        }
+
+        .lesson-section {
+            margin-top: 30px;
+        }
+
+        .lesson-section h2 {
+            margin-bottom: 14px;
+        }
+
+        .lesson-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .topic-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .topic {
+            padding: 14px 16px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+        }
+
+        .topic strong {
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .topic span {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* ==============================
+           QUIZ
+        ============================== */
+
+        .quiz-box {
+            margin-top: 35px;
+            padding: 25px;
+            background: var(--surface-alt);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+        }
+
+        .quiz-box h2 {
+            margin-bottom: 8px;
+        }
+
+        .quiz-box > p {
+            color: var(--text-secondary);
+            margin-bottom: 20px;
+        }
+
+        .quiz-question {
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .quiz-option {
+            display: block;
+            padding: 14px;
+            margin-bottom: 10px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .quiz-option:hover {
+            border-color: var(--primary);
+        }
+
+        .quiz-option input {
+            margin-right: 8px;
+        }
+
+        .quiz-result {
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        /* ==============================
+           ACTIONS
+        ============================== */
+
+        .lesson-actions {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            margin-top: 35px;
+            padding-top: 25px;
+            border-top: 1px solid var(--border);
+        }
+
+        .lesson-actions button {
+            border: 0;
+            cursor: pointer;
+            padding: 13px 20px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 14px;
+        }
+
+        .btn-secondary {
+            background: var(--surface-alt);
+            color: var(--text);
+            border: 1px solid var(--border) !important;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover,
+        .play-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .completion-box {
+            display: none;
+            margin-top: 25px;
+            padding: 20px;
+            border-radius: 15px;
+            background: rgba(34,197,94,.10);
+            border: 1px solid rgba(34,197,94,.30);
+        }
+
+        .completion-box.show {
+            display: block;
+        }
+
+        .completion-box strong {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .ai-learning {
+            margin-top: 25px;
+            padding: 22px;
+            border-radius: 18px;
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37,99,235,.10),
+                    rgba(124,58,237,.08)
+                );
+            border: 1px solid var(--border);
+        }
+
+        .ai-learning h3 {
+            margin-bottom: 8px;
+        }
+
+        .ai-learning p {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 15px;
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+
+        @media (max-width: 900px) {
+
+            .lesson-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .lesson-sidebar {
+                position: static;
+            }
+
+            .lesson-list {
+                max-height: 320px;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .lesson-page {
+                padding: 95px 14px 50px;
+            }
+
+            .lesson-body {
+                padding: 22px;
+            }
+
+            .lesson-video {
+                min-height: 240px;
+            }
+
+            .lesson-actions {
+                flex-direction: column;
+            }
+
+            .lesson-actions button {
+                width: 100%;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ==============================
+     HEADER
+============================== -->
+
+<header class="site-header">
+
+    <div class="container nav-container">
+
+        <a
+            href="index.html"
+            class="logo"
+        >
+            JG
+        </a>
+
+        <button
+            id="mobileMenuBtn"
+            class="mobile-menu-btn"
+            aria-label="Open navigation"
+        >
+            ☰
+        </button>
+
+        <nav
+            id="mainNav"
+            class="main-nav"
+        >
+
+            <a href="index.html">
+                Home
+            </a>
+
+            <a href="skills.html">
+                Skills
+            </a>
+
+            <a href="work.html">
+                Work
+            </a>
+
+            <a
+                href="learn.html"
+                class="active"
+            >
+                Learn
+            </a>
+
+            <a href="premium.html">
+                Premium
+            </a>
+
+            <a href="account.html">
+                Account
+            </a>
+
+            <a href="ai.html">
+                JG AI
+            </a>
+
+            <a
+                href="enrollment.html"
+                class="nav-cta"
+            >
+                Enroll
+            </a>
+
+            <button
+                id="themeToggle"
+                class="theme-toggle"
+                type="button"
+                aria-label="Toggle theme"
+            >
+                ◐
+            </button>
+
+        </nav>
+
+    </div>
+
+</header>
+
+
+<!-- ==============================
+     LESSON PAGE
+============================== -->
+
+<main class="lesson-page">
+
+    <div class="lesson-container">
+
+
+        <!-- TOP -->
+
+        <div class="lesson-top">
+
+            <div>
+
+                <div class="lesson-breadcrumb">
+
+                    Learn /
+                    <strong id="courseBreadcrumb">
+                        Web Development
+                    </strong>
+
+                </div>
+
+                <h1
+                    class="lesson-course-title"
+                    id="courseTitle"
+                >
+                    Web Development
+                </h1>
+
+            </div>
+
+            <a
+                href="ai.html"
+                class="btn-primary"
+                style="
+                    text-decoration:none;
+                    padding:13px 18px;
+                    border-radius:12px;
+                    display:inline-block;
+                "
+            >
+                🤖 Ask JG AI
+            </a>
+
+        </div>
+
+
+        <!-- LEARNING LAYOUT -->
+
+        <div class="lesson-layout">
+
+
+            <!-- ==========================
+                 SIDEBAR
+            =========================== -->
+
+            <aside class="lesson-sidebar">
+
+                <div class="sidebar-header">
+
+                    <h3>
+                        Course lessons
+                    </h3>
+
+                    <p>
+                        Follow the lessons in order
+                        and track your progress.
+                    </p>
+
+                </div>
+
+
+                <div class="progress-wrapper">
+
+                    <div class="progress-info">
+
+                        <span>
+                            Course progress
+                        </span>
+
+                        <strong id="progressText">
+                            0%
+                        </strong>
+
+                    </div>
+
+                    <div class="progress-bar">
+
+                        <div
+                            id="progressFill"
+                            class="progress-fill"
+                        ></div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="lessonList"
+                    class="lesson-list"
+                >
+                </div>
+
+            </aside>
+
+
+            <!-- ==========================
+                 MAIN CONTENT
+            =========================== -->
+
+            <section class="lesson-content">
+
+
+                <div class="lesson-video">
+
+                    <div class="video-placeholder">
+
+                        <button
+                            class="play-button"
+                            id="playLesson"
+                            type="button"
+                            aria-label="Start lesson"
+                        >
+                            ▶
+                        </button>
+
+                        <h3>
+                            Lesson learning area
+                        </h3>
+
+                        <p>
+                            Video and interactive lesson
+                            content will be connected here
+                            when JG's content system is ready.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="lesson-body">
+
+
+                    <div class="lesson-meta">
+
+                        <span
+                            class="meta-pill"
+                            id="lessonLevel"
+                        >
+                            Beginner
+                        </span>
+
+                        <span
+                            class="meta-pill"
+                            id="lessonDuration"
+                        >
+                            20 minutes
+                        </span>
+
+                        <span
+                            class="meta-pill"
+                        >
+                            JG Learning
+                        </span>
+
+                    </div>
+
+
+                    <h1 id="lessonTitle">
+                        Introduction to Web Development
+                    </h1>
+
+
+                    <p
+                        class="lesson-description"
+                        id="lessonDescription"
+                    >
+                        Learn the foundations of building
+                        websites and understand how HTML,
+                        CSS and JavaScript work together.
+                    </p>
+
+
+                    <!-- WHAT YOU WILL LEARN -->
+
+                    <div class="lesson-section">
+
+                        <h2>
+                            What you'll learn
+                        </h2>
+
+                        <div
+                            class="topic-list"
+                            id="topicList"
+                        >
+                        </div>
+
+                    </div>
+
+
+                    <!-- LESSON CONTENT -->
+
+                    <div class="lesson-section">
+
+                        <h2>
+                            Lesson overview
+                        </h2>
+
+                        <p id="lessonContentText">
+                            In this lesson, you will learn
+                            the basic structure of a website.
+                            You will understand how HTML gives
+                            a page structure, CSS controls its
+                            appearance and JavaScript adds
+                            interaction.
+                        </p>
+
+                    </div>
+
+
+                    <!-- QUIZ -->
+
+                    <div class="quiz-box">
+
+                        <h2>
+                            🧠 Quick Check
+                        </h2>
+
+                        <p>
+                            Test what you learned from this lesson.
+                        </p>
+
+                        <div class="quiz-question">
+
+                            What is HTML mainly used for?
+
+                        </div>
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="quiz"
+                                value="wrong"
+                            >
+
+                            Creating database servers
+
+                        </label>
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="quiz"
+                                value="correct"
+                            >
+
+                            Structuring the content of a webpage
+
+                        </label>
+
+                        <label class="quiz-option">
+
+                            <input
+                                type="radio"
+                                name="quiz"
+                                value="wrong"
+                            >
+
+                            Editing videos
+
+                        </label>
+
+                        <button
+                            id="checkQuiz"
+                            class="btn-primary"
+                            type="button"
+                            style="
+                                margin-top:10px;
+                                padding:12px 18px;
+                                border:0;
+                                border-radius:10px;
+                                cursor:pointer;
+                            "
+                        >
+                            Check answer
+                        </button>
+
+                        <div
+                            id="quizResult"
+                            class="quiz-result"
+                        ></div>
+
+                    </div>
+
+
+                    <!-- AI -->
+
+                    <div class="ai-learning">
+
+                        <h3>
+                            🤖 Need help understanding this?
+                        </h3>
+
+                        <p>
+                            Ask JG AI to explain this lesson,
+                            give you examples, create practice
+                            questions or help you understand a
+                            difficult topic.
+                        </p>
+
+                        <a
+                            href="ai.html"
+                            class="btn-primary"
+                            style="
+                                display:inline-block;
+                                padding:12px 17px;
+                                border-radius:10px;
+                                text-decoration:none;
+                            "
+                        >
+                            Open JG AI
+                        </a>
+
+                    </div>
+
+
+                    <!-- COMPLETION -->
+
+                    <div
+                        id="completionBox"
+                        class="completion-box"
+                    >
+
+                        <strong>
+                            🎉 Lesson completed!
+                        </strong>
+
+                        <span>
+                            Your progress has been saved on
+                            this device.
+                        </span>
+
+                    </div>
+
+
+                    <!-- ACTIONS -->
+
+                    <div class="lesson-actions">
+
+                        <button
+                            id="previousLesson"
+                            class="btn-secondary"
+                            type="button"
+                        >
+                            ← Previous lesson
+                        </button>
+
+                        <button
+                            id="completeLesson"
+                            class="btn-primary"
+                            type="button"
+                        >
+                            Mark as completed ✓
+                        </button>
+
+                        <button
+                            id="nextLesson"
+                            class="btn-primary"
+                            type="button"
+                        >
+                            Next lesson →
+                        </button>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<!-- ==============================
+     FOOTER
+============================== -->
+
+<footer class="site-footer">
+
+    <div class="container">
+
+        <p>
+            ©
+            <span data-current-year></span>
+            JG — Find Skills. Find Work.
+        </p>
+
+        <p>
+            Learn. Build. Work. Grow.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<script src="js/app.js"></script>
+
+
+<script>
+
+    /*
+    =====================================
+    JG LEARNING ENGINE
+    =====================================
+    */
+
+    const courseData = {
+
+        web: {
+
+            title: "Web Development",
+
+            lessons: [
+
+                {
+                    title: "Introduction to Web Development",
+                    duration: "20 minutes",
+                    description:
+                        "Learn how websites work and understand the role of HTML, CSS and JavaScript.",
+                    topics: [
+                        [
+                            "HTML",
+                            "The structure of webpages."
+                        ],
+                        [
+                            "CSS",
+                            "The language used to style webpages."
+                        ],
+                        [
+                            "JavaScript",
+                            "The language used to add interaction."
+                        ]
+                    ],
+                    content:
+                        "Web development combines structure, design and interaction. HTML creates the structure of a page, CSS controls how the page looks and JavaScript allows the page to respond to users."
+                },
+
+                {
+                    title: "HTML Fundamentals",
+                    duration: "25 minutes",
+                    description:
+                        "Learn the building blocks of modern webpages using HTML.",
+                    topics: [
+                        [
+                            "Elements",
+                            "Learn how HTML elements work."
+                        ],
+                        [
+                            "Headings",
+                            "Create structured page headings."
+                        ],
+                        [
+                            "Links",
+                            "Connect pages and resources."
+                        ]
+                    ],
+                    content:
+                        "HTML is the foundation of the web. You will learn how to create headings, paragraphs, links, images, lists and other important page elements."
+                },
+
+                {
+                    title: "CSS Fundamentals",
+                    duration: "30 minutes",
+                    description:
+                        "Learn how to make websites attractive, responsive and professional.",
+                    topics: [
+                        [
+                            "Selectors",
+                            "Target HTML elements."
+                        ],
+                        [
+                            "Colors",
+                            "Create attractive visual designs."
+                        ],
+                        [
+                            "Layouts",
+                            "Build flexible webpage layouts."
+                        ]
+                    ],
+                    content:
+                        "CSS controls the visual presentation of a webpage. You will learn selectors, spacing, typography, colors, borders and modern layouts."
+                },
+
+                {
+                    title: "JavaScript Basics",
+                    duration: "35 minutes",
+                    description:
+                        "Learn the fundamentals of JavaScript and website interaction.",
+                    topics: [
+                        [
+                            "Variables",
+                            "Store and work with information."
+                        ],
+                        [
+                            "Functions",
+                            "Create reusable pieces of logic."
+                        ],
+                        [
+                            "Events",
+                            "Respond to user actions."
+                        ]
+                    ],
+                    content:
+                        "JavaScript allows websites to become interactive. You will learn variables, functions, conditions and browser events."
+                },
+
+                {
+                    title: "Build Your First Website",
+                    duration: "45 minutes",
+                    description:
+                        "Combine HTML, CSS and JavaScript to build a simple project.",
+                    topics: [
+                        [
+                            "Planning",
+                            "Plan the structure of your project."
+                        ],
+                        [
+                            "Development",
+                            "Build the website."
+                        ],
+                        [
+                            "Testing",
+                            "Check your website before publishing."
+                        ]
+                    ],
+                    content:
+                        "This project lesson combines everything you have learned. You will create a simple website and prepare it for publishing."
+                }
+
+            ]
+
+        }
+
+    };
+
+
+    /*
+    =====================================
+    GET COURSE
+    =====================================
+    */
+
+    const params =
+        new URL
