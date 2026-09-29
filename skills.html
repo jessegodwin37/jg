@@ -8,435 +8,450 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>JG Skills | Build Valuable Skills</title>
+    <meta name="theme-color"
+          content="#2563eb">
 
     <meta name="description"
-          content="Explore practical digital skills you can learn with JG.">
+          content="Explore digital skills on JG and start building skills that can create opportunities.">
+
+    <title>JG Skills | Learn Skills. Build Your Future.</title>
 
     <link rel="stylesheet"
           href="css/style.css">
 
-</head>
+    <style>
 
-<body>
+        /* =====================================================
+           SKILLS PAGE
+        ===================================================== */
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+        .page-hero {
 
-<nav class="navbar">
+            width: min(
+                calc(100% - 40px),
+                900px
+            );
 
-    <div class="nav-inner">
+            margin: auto;
 
-        <a href="index.html"
-           class="logo">
-            JG<span>.</span>
-        </a>
+            text-align: center;
 
-        <button class="menu-toggle"
-                aria-label="Open navigation menu">
-            ☰
-        </button>
+            padding: 85px 0 55px;
+        }
 
-        <ul class="nav-links">
 
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
+        .page-hero h1 {
 
-            <li>
-                <a href="skills.html"
-                   class="active">
-                    Skills
-                </a>
-            </li>
+            font-size:
+                clamp(
+                    42px,
+                    7vw,
+                    68px
+                );
 
-            <li>
-                <a href="learn.html">
-                    Learn
-                </a>
-            </li>
+            line-height: 1;
 
-            <li>
-                <a href="work.html">
-                    Work
-                </a>
-            </li>
+            letter-spacing: -3px;
 
-            <li>
-                <a href="account.html">
-                    Account
-                </a>
-            </li>
+            margin-bottom: 20px;
+        }
 
-            <li>
-                <a href="enrollment.html"
-                   class="nav-cta">
-                    Enroll
-                </a>
-            </li>
 
-        </ul>
+        .page-hero h1 span {
 
-    </div>
+            background:
+                linear-gradient(
+                    90deg,
+                    var(--primary),
+                    var(--secondary)
+                );
 
-</nav>
+            -webkit-background-clip: text;
 
+            background-clip: text;
 
-<!-- =========================
-     HERO
-========================= -->
+            color: transparent;
+        }
 
-<header class="page-hero">
 
-    <div class="container">
+        .page-hero p {
 
-        <span class="badge">
-            🎯 JG SKILLS
-        </span>
+            max-width: 650px;
 
-        <h1>
-            Build Skills.
-            <span>Create Opportunities.</span>
-        </h1>
+            margin: auto;
 
-        <p>
-            Explore practical digital skills,
-            choose what interests you and start
-            building your knowledge.
-        </p>
+            color: var(--text-secondary);
 
-    </div>
+            font-size: 17px;
+        }
 
-</header>
 
+        /* =====================================================
+           SKILLS FILTER
+        ===================================================== */
 
-<!-- =========================
-     SEARCH
-========================= -->
+        .skills-controls {
 
-<section class="section">
+            width: min(
+                calc(100% - 40px),
+                var(--max-width)
+            );
 
-    <div class="container">
+            margin: 0 auto 35px;
 
-        <div class="search-box">
+            display: flex;
 
-            <input
-                type="search"
-                id="skillSearch"
-                placeholder="Search skills..."
-                aria-label="Search skills">
+            align-items: center;
 
-        </div>
+            justify-content: space-between;
 
+            gap: 15px;
 
-        <!-- =========================
-             SKILL GRID
-        ========================= -->
+            flex-wrap: wrap;
+        }
 
-        <div class="grid skill-grid">
 
+        .skills-search {
 
-            <!-- WEB DEVELOPMENT -->
+            flex: 1;
 
-            <article class="card skill-card"
-                     data-search="web development html css javascript coding websites">
+            min-width: 220px;
 
-                <div class="icon">
-                    💻
-                </div>
+            position: relative;
+        }
 
-                <span class="badge">
-                    DIGITAL
-                </span>
 
-                <h2>
-                    Web Development
-                </h2>
+        .skills-search input {
 
-                <p>
-                    Learn how websites are created
-                    using HTML, CSS and JavaScript.
-                </p>
+            padding-left: 43px;
 
-                <ul class="feature-list">
+            min-height: 48px;
+        }
 
-                    <li>
-                        HTML fundamentals
-                    </li>
 
-                    <li>
-                        CSS styling
-                    </li>
+        .search-icon {
 
-                    <li>
-                        JavaScript basics
-                    </li>
+            position: absolute;
 
-                    <li>
-                        Responsive websites
-                    </li>
+            left: 15px;
 
-                </ul>
+            top: 50%;
 
-                <a href="learn.html#web"
-                   class="btn btn-primary">
-                    Learn Web Development →
-                </a>
+            transform:
+                translateY(-50%);
 
-            </article>
+            color: var(--text-muted);
 
+            pointer-events: none;
+        }
 
-            <!-- GRAPHIC DESIGN -->
 
-            <article class="card skill-card"
-                     data-search="graphic design canva photoshop posters logos branding">
+        .skill-filters {
 
-                <div class="icon">
-                    🎨
-                </div>
+            display: flex;
 
-                <span class="badge">
-                    CREATIVE
-                </span>
+            gap: 7px;
 
-                <h2>
-                    Graphic Design
-                </h2>
+            flex-wrap: wrap;
+        }
 
-                <p>
-                    Learn how to create attractive
-                    visual content for people and businesses.
-                </p>
 
-                <ul class="feature-list">
+        .filter-btn {
 
-                    <li>
-                        Design principles
-                    </li>
+            min-height: 42px;
 
-                    <li>
-                        Canva
-                    </li>
+            padding:
+                0 14px;
 
-                    <li>
-                        Social media graphics
-                    </li>
+            border:
+                1px solid var(--border);
 
-                    <li>
-                        Branding
-                    </li>
+            border-radius: 10px;
 
-                </ul>
+            background:
+                var(--surface);
 
-                <a href="learn.html#design"
-                   class="btn btn-primary">
-                    Learn Graphic Design →
-                </a>
+            color:
+                var(--text-secondary);
 
-            </article>
+            font-size: 12px;
 
+            font-weight: 700;
+        }
 
-            <!-- VIDEO EDITING -->
 
-            <article class="card skill-card"
-                     data-search="video editing capcut premiere videos content creator">
+        .filter-btn.active {
 
-                <div class="icon">
-                    🎬
-                </div>
+            color: white;
 
-                <span class="badge">
-                    CREATIVE
-                </span>
+            border-color:
+                var(--primary);
 
-                <h2>
-                    Video Editing
-                </h2>
+            background:
+                var(--primary);
+        }
 
-                <p>
-                    Learn how to transform raw clips
-                    into engaging videos.
-                </p>
 
-                <ul class="feature-list">
+        /* =====================================================
+           SKILLS GRID
+        ===================================================== */
 
-                    <li>
-                        Video cutting
-                    </li>
+        .skills-grid {
 
-                    <li>
-                        Transitions
-                    </li>
+            width: min(
+                calc(100% - 40px),
+                var(--max-width)
+            );
 
-                    <li>
-                        Captions
-                    </li>
+            margin: auto;
 
-                    <li>
-                        Short-form content
-                    </li>
+            display: grid;
 
-                </ul>
+            grid-template-columns:
+                repeat(2, 1fr);
 
-                <a href="learn.html#video"
-                   class="btn btn-primary">
-                    Learn Video Editing →
-                </a>
+            gap: 20px;
+        }
 
-            </article>
 
+        .skill-card {
 
-            <!-- DIGITAL MARKETING -->
+            position: relative;
 
-            <article class="card skill-card"
-                     data-search="digital marketing marketing advertising sales customers">
+            overflow: hidden;
 
-                <div class="icon">
-                    📈
-                </div>
+            padding: 30px;
 
-                <span class="badge">
-                    BUSINESS
-                </span>
+            border:
+                1px solid var(--border);
 
-                <h2>
-                    Digital Marketing
-                </h2>
+            border-radius:
+                var(--radius-lg);
 
-                <p>
-                    Learn how businesses use digital
-                    platforms to reach potential customers.
-                </p>
+            background:
+                var(--surface);
 
-                <ul class="feature-list">
+            box-shadow:
+                var(--shadow-sm);
 
-                    <li>
-                        Content marketing
-                    </li>
+            transition:
+                transform .25s ease,
+                box-shadow .25s ease,
+                border-color .25s ease;
+        }
 
-                    <li>
-                        Online advertising
-                    </li>
 
-                    <li>
-                        Customer research
-                    </li>
+        .skill-card:hover {
 
-                    <li>
-                        Marketing strategy
-                    </li>
+            transform:
+                translateY(-6px);
 
-                </ul>
+            box-shadow:
+                var(--shadow);
 
-                <a href="learn.html#marketing"
-                   class="btn btn-primary">
-                    Learn Marketing →
-                </a>
+            border-color:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    .25
+                );
+        }
 
-            </article>
 
+        .skill-card::after {
 
-            <!-- SOCIAL MEDIA -->
+            content: "";
 
-            <article class="card skill-card"
-                     data-search="social media instagram facebook tiktok content management">
+            position: absolute;
 
-                <div class="icon">
-                    📱
-                </div>
+            width: 180px;
 
-                <span class="badge">
-                    SOCIAL
-                </span>
+            height: 180px;
 
-                <h2>
-                    Social Media Management
-                </h2>
+            border-radius: 50%;
 
-                <p>
-                    Learn how to manage social platforms,
-                    create content and grow audiences.
-                </p>
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    .06
+                );
 
-                <ul class="feature-list">
+            filter: blur(45px);
 
-                    <li>
-                        Content planning
-                    </li>
+            right: -70px;
 
-                    <li>
-                        Social media strategy
-                    </li>
+            top: -70px;
 
-                    <li>
-                        Community management
-                    </li>
+            pointer-events: none;
+        }
 
-                    <li>
-                        Analytics
-                    </li>
 
-                </ul>
+        .skill-card-top {
 
-                <a href="learn.html#social"
-                   class="btn btn-primary">
-                    Learn Social Media →
-                </a>
+            display: flex;
 
-            </article>
+            align-items: flex-start;
 
+            justify-content:
+                space-between;
 
-            <!-- FREELANCING -->
+            gap: 15px;
 
-            <article class="card skill-card"
-                     data-search="freelancing clients remote work services money">
+            margin-bottom: 22px;
+        }
 
-                <div class="icon">
-                    💼
-                </div>
 
-                <span class="badge">
-                    CAREER
-                </span>
+        .skill-icon {
 
-                <h2>
-                    Freelancing
-                </h2>
+            width: 58px;
 
-                <p>
-                    Learn how to package your skills
-                    into services and work with clients.
-                </p>
+            height: 58px;
 
-                <ul class="feature-list">
+            display: grid;
 
-                    <li>
-                        Finding clients
-                    </li>
+            place-items: center;
 
-                    <li>
-                        Building a portfolio
-                    </li>
+            border-radius: 17px;
 
-                    <li>
-                        Pricing services
-                    </li>
+            background:
+                rgba(
+                    37,
+                    99,
+                    235,
+                    .09
+                );
 
-                    <li>
-                        Client communication
-                    </li>
+            font-size: 27px;
+        }
 
-                </ul>
 
-                <a href="learn.html#freelancing"
-                   class="btn btn-primary">
-                    Learn Freelancing →
-                </a>
+        .skill-level {
 
-            </article>
+            padding:
+                6px 9px;
 
+            border-radius:
+                999px;
 
-            <!--
+            background:
+                var(--bg-soft);
+
+            color:
+                var(--text-muted);
+
+            font-size: 10px;
+
+            font-weight: 750;
+        }
+
+
+        .skill-card h2 {
+
+            font-size: 23px;
+
+            letter-spacing:
+                -.5px;
+
+            margin-bottom: 9px;
+        }
+
+
+        .skill-card > p {
+
+            color:
+                var(--text-secondary);
+
+            font-size: 14px;
+
+            line-height: 1.7;
+
+            margin-bottom: 22px;
+        }
+
+
+        .skill-topics {
+
+            display: flex;
+
+            flex-wrap: wrap;
+
+            gap: 7px;
+
+            margin-bottom: 25px;
+        }
+
+
+        .skill-topic {
+
+            padding:
+                6px 9px;
+
+            border:
+                1px solid var(--border);
+
+            border-radius:
+                8px;
+
+            color:
+                var(--text-muted);
+
+            background:
+                var(--bg-soft);
+
+            font-size: 10px;
+
+            font-weight: 650;
+        }
+
+
+        .skill-card-bottom {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content:
+                space-between;
+
+            gap: 15px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid var(--border);
+        }
+
+
+        .skill-meta {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 3px;
+        }
+
+
+        .skill-meta strong {
+
+            font-size: 14px;
+        }
+
+
+        .skill-meta span {
+
+            color:
+                var(--text-muted);
+
+            font-size: 11px;
+        }
+
+
+        .skill-btn {
+
+            display: inline-flex;
+
+            align-items
