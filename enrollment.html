@@ -1,489 +1,620 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
 
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
+    <meta name="description"
+          content="Enroll in a JG course and start building practical skills.">
+
+    <meta name="theme-color"
+          content="#2563eb">
+
     <title>JG Enrollment | Start Learning</title>
 
-    <meta name="description"
-          content="Join JG and choose the skill you want to develop.">
+    <link rel="stylesheet" href="css/style.css">
 
-    <link rel="stylesheet"
-          href="css/style.css">
+    <style>
 
+        /* =========================================
+           ENROLLMENT PAGE
+        ========================================= */
+
+        .enroll-hero {
+            padding: 75px 20px 55px;
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(37, 99, 235, .14),
+                    transparent 35%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(124, 58, 237, .12),
+                    transparent 35%
+                );
+        }
+
+        .enroll-hero-inner {
+            max-width: 900px;
+            margin: auto;
+            text-align: center;
+        }
+
+        .enroll-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 14px;
+            border-radius: 999px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            color: var(--primary);
+            font-size: .82rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .enroll-hero h1 {
+            margin: 0 0 16px;
+            font-size: clamp(2.3rem, 6vw, 4rem);
+            line-height: 1.05;
+            letter-spacing: -1.5px;
+        }
+
+        .enroll-hero p {
+            max-width: 680px;
+            margin: auto;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .enrollment-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 45px 20px 90px;
+        }
+
+        .enrollment-layout {
+            display: grid;
+            grid-template-columns: 1.4fr .8fr;
+            gap: 25px;
+            align-items: start;
+        }
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .enrollment-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 30px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-header {
+            margin-bottom: 30px;
+        }
+
+        .form-header h2 {
+            margin: 0 0 8px;
+        }
+
+        .form-header p {
+            margin: 0;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .form-section {
+            margin-bottom: 32px;
+        }
+
+        .form-section-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+
+        .form-section-number {
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 9px;
+            background: var(--primary);
+            color: #fff;
+            font-size: .8rem;
+            font-weight: 800;
+        }
+
+        .form-section-title h3 {
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 17px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 7px;
+        }
+
+        .form-group.full {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            font-size: .85rem;
+            font-weight: 700;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            box-sizing: border-box;
+            border: 1px solid var(--border);
+            background: var(--background);
+            color: var(--text);
+            border-radius: 11px;
+            padding: 13px 14px;
+            outline: none;
+            font-family: inherit;
+            font-size: .92rem;
+            transition: border-color .2s ease,
+                        box-shadow .2s ease;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
+        }
+
+        .field-note {
+            color: var(--text-secondary);
+            font-size: .75rem;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           COURSE SELECTOR
+        ========================================= */
+
+        .course-options {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .course-option {
+            position: relative;
+        }
+
+        .course-option input {
+            position: absolute;
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .course-option label {
+            display: block;
+            padding: 17px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            cursor: pointer;
+            transition: .2s ease;
+            height: 100%;
+            box-sizing: border-box;
+        }
+
+        .course-option label:hover {
+            border-color: var(--primary);
+        }
+
+        .course-option input:checked + label {
+            border-color: var(--primary);
+            background: rgba(37, 99, 235, .07);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, .1);
+        }
+
+        .course-icon {
+            font-size: 1.4rem;
+            margin-bottom: 8px;
+        }
+
+        .course-name {
+            display: block;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .course-price {
+            color: var(--primary);
+            font-size: .82rem;
+            font-weight: 800;
+        }
+
+        /* =========================================
+           PAYMENT
+        ========================================= */
+
+        .payment-options {
+            display: grid;
+            gap: 10px;
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary);
+        }
+
+        .payment-option input {
+            accent-color: var(--primary);
+        }
+
+        .payment-info strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        .payment-info span {
+            color: var(--text-secondary);
+            font-size: .78rem;
+        }
+
+        /* =========================================
+           TERMS
+        ========================================= */
+
+        .terms-box {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            margin: 25px 0;
+        }
+
+        .terms-box input {
+            margin-top: 4px;
+            accent-color: var(--primary);
+        }
+
+        .terms-box label {
+            color: var(--text-secondary);
+            font-size: .82rem;
+            line-height: 1.6;
+        }
+
+        .terms-box a {
+            color: var(--primary);
+        }
+
+        .submit-button {
+            width: 100%;
+            border: none;
+            border-radius: 12px;
+            padding: 15px;
+            background: var(--primary);
+            color: #fff;
+            font-size: 1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: .2s ease;
+        }
+
+        .submit-button:hover {
+            opacity: .92;
+            transform: translateY(-1px);
+        }
+
+        .submit-button:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* =========================================
+           SUMMARY
+        ========================================= */
+
+        .summary-card {
+            position: sticky;
+            top: 90px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 25px;
+            box-shadow: var(--shadow);
+        }
+
+        .summary-label {
+            color: var(--text-secondary);
+            font-size: .78rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .5px;
+        }
+
+        .selected-course {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .selected-course-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .selected-course h3 {
+            margin: 0 0 6px;
+        }
+
+        .selected-course p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: .85rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--border);
+            font-size: .88rem;
+        }
+
+        .summary-row span:first-child {
+            color: var(--text-secondary);
+        }
+
+        .summary-total {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 20px;
+            font-weight: 800;
+        }
+
+        .summary-total strong {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .secure-note {
+            margin-top: 20px;
+            padding: 13px;
+            border-radius: 10px;
+            background: rgba(34, 197, 94, .08);
+            color: var(--text-secondary);
+            font-size: .76rem;
+            line-height: 1.5;
+        }
+
+        /* =========================================
+           PAYMENT INFO
+        ========================================= */
+
+        .bank-details {
+            display: none;
+            margin-top: 15px;
+            padding: 18px;
+            border: 1px dashed var(--border);
+            border-radius: 12px;
+            background: var(--background);
+        }
+
+        .bank-details.show {
+            display: block;
+        }
+
+        .bank-details h4 {
+            margin: 0 0 12px;
+        }
+
+        .bank-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            padding: 7px 0;
+            font-size: .84rem;
+        }
+
+        .bank-row span {
+            color: var(--text-secondary);
+        }
+
+        .bank-row strong {
+            text-align: right;
+        }
+
+        /* =========================================
+           SUCCESS MESSAGE
+        ========================================= */
+
+        .success-message {
+            display: none;
+            padding: 25px;
+            border: 1px solid rgba(34, 197, 94, .3);
+            background: rgba(34, 197, 94, .08);
+            border-radius: 14px;
+            margin-bottom: 25px;
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        .success-icon {
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .success-message h3 {
+            margin: 0 0 8px;
+        }
+
+        .success-message p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        /* =========================================
+           RESPONSIVE
+        ========================================= */
+
+        @media (max-width: 850px) {
+
+            .enrollment-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .summary-card {
+                position: static;
+                order: -1;
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            .enroll-hero {
+                padding-top: 55px;
+            }
+
+            .enrollment-card {
+                padding: 21px;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-group.full {
+                grid-column: auto;
+            }
+
+            .course-options {
+                grid-template-columns: 1fr;
+            }
+
+            .bank-row {
+                flex-direction: column;
+                gap: 3px;
+            }
+
+            .bank-row strong {
+                text-align: left;
+            }
+
+        }
+
+    </style>
 </head>
 
 <body>
 
+<!-- =========================================
+     HEADER
+========================================= -->
 
-    <!-- NAVIGATION -->
+<header class="site-header">
 
-    <nav class="navbar">
+    <div class="container header-inner">
 
         <a href="index.html"
-           class="logo">
+           class="logo"
+           aria-label="JG Home">
 
-            JG<span>.</span>
+            <strong>JG</strong>
+
+            <span>
+                Find Skills. Find Work.
+            </span>
 
         </a>
 
 
-        <button class="menu-toggle"
-                aria-label="Open menu">
+        <button
+            class="mobile-menu-btn"
+            id="mobileMenuBtn"
+            aria-label="Open menu"
+            aria-expanded="false">
 
             ☰
 
         </button>
 
 
-        <ul class="nav-links">
+        <nav class="main-nav" id="mainNav">
 
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
+            <a href="index.html">
+                Home
+            </a>
 
-            <li>
-                <a href="skills.html">
-                    Skills
-                </a>
-            </li>
+            <a href="skills.html">
+                Skills
+            </a>
 
-            <li>
-                <a href="learn.html">
-                    Learn
-                </a>
-            </li>
+            <a href="work.html">
+                Work
+            </a>
 
-            <li>
-                <a href="work.html">
-                    Work
-                </a>
-            </li>
+            <a href="learn.html">
+                Learn
+            </a>
 
-            <li>
-                <a href="account.html">
-                    Account
-                </a>
-            </li>
+            <a href="premium.html">
+                Premium
+            </a>
 
-            <li>
-                <a href="enrollment.html"
-                   class="nav-cta">
+            <a href="account.html">
+                Account
+            </a>
 
-                    Enroll
+            <a href="ai.html">
+                JG AI
+            </a>
 
-                </a>
-            </li>
+            <a href="enrollment.html"
+               class="nav-cta active">
+                Enroll
+            </a>
 
-        </ul>
+            <button
+                class="theme-toggle"
+                id="themeToggle"
+                aria-label="Toggle dark mode">
 
-    </nav>
+                🌙
 
-
-
-    <!-- PAGE HERO -->
-
-    <section class="page-hero">
-
-        <span class="badge">
-            JOIN JG
-        </span>
-
-
-        <h1>
-
-            Start Your
-            <span>Journey.</span>
-
-        </h1>
-
-
-        <p>
-
-            Choose a skill, tell us what you're
-            working toward and start learning.
-
-        </p>
-
-    </section>
-
-
-
-    <!-- ENROLLMENT -->
-
-    <section class="section">
-
-
-        <div class="form-container">
-
-
-            <div class="section-title">
-
-                <span class="badge">
-                    ENROLLMENT
-                </span>
-
-
-                <h2>
-                    Create Your Learning Profile
-                </h2>
-
-
-                <p>
-
-                    Start by telling us a little
-                    about yourself.
-
-                </p>
-
-            </div>
-
-
-
-            <form id="enrollmentForm">
-
-
-                <!-- NAME -->
-
-                <div class="form-group">
-
-                    <label for="name">
-                        Full Name
-                    </label>
-
-
-                    <input
-                        type="text"
-                        id="name"
-                        name="name"
-                        placeholder="Enter your full name"
-                        required
-                    >
-
-                </div>
-
-
-
-                <!-- EMAIL -->
-
-                <div class="form-group">
-
-                    <label for="email">
-                        Email Address
-                    </label>
-
-
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Enter your email"
-                        required
-                    >
-
-                </div>
-
-
-
-                <!-- SKILL -->
-
-                <div class="form-group">
-
-                    <label for="skill">
-                        Choose Your Skill
-                    </label>
-
-
-                    <select
-                        id="skill"
-                        name="skill"
-                        required
-                    >
-
-                        <option value="">
-                            Select a skill
-                        </option>
-
-                        <option value="Web Development">
-                            Web Development
-                        </option>
-
-                        <option value="Graphic Design">
-                            Graphic Design
-                        </option>
-
-                        <option value="Video Editing">
-                            Video Editing
-                        </option>
-
-                        <option value="Digital Marketing">
-                            Digital Marketing
-                        </option>
-
-                        <option value="Social Media">
-                            Social Media
-                        </option>
-
-                        <option value="Freelancing">
-                            Freelancing
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-
-                <!-- GOAL -->
-
-                <div class="form-group">
-
-                    <label for="goal">
-                        What Do You Want To Achieve?
-                    </label>
-
-
-                    <textarea
-                        id="goal"
-                        name="goal"
-                        rows="5"
-                        placeholder="Tell us what you want to achieve with this skill..."
-                        required
-                    ></textarea>
-
-                </div>
-
-
-
-                <!-- TERMS -->
-
-                <div class="checkbox-group">
-
-                    <input
-                        type="checkbox"
-                        id="terms"
-                        required
-                    >
-
-
-                    <label for="terms">
-
-                        I understand that JG is a
-                        learning platform and that
-                        completing a course does not
-                        guarantee employment.
-
-                    </label>
-
-                </div>
-
-
-
-                <!-- SUBMIT -->
-
-                <button
-                    type="submit"
-                    class="btn btn-primary">
-
-                    Start My JG Journey →
-
-                </button>
-
-
-                <!-- MESSAGE -->
-
-                <div
-                    id="formMessage"
-                    class="form-message"
-                    hidden>
-
-                </div>
-
-
-            </form>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- WHAT HAPPENS NEXT -->
-
-    <section class="section section-dark">
-
-
-        <div class="section-title">
-
-            <span class="badge badge-light">
-                WHAT'S NEXT
-            </span>
-
-
-            <h2>
-                Your JG Journey
-            </h2>
-
-
-            <p>
-
-                Follow a simple process as you
-                develop your chosen skill.
-
-            </p>
-
-        </div>
-
-
-
-        <div class="mini-grid">
-
-
-            <div class="mini-card">
-
-                <span>
-                    01
-                </span>
-
-                <strong>
-                    Choose
-                </strong>
-
-                <small>
-                    Select the skill you want
-                    to develop.
-                </small>
-
-            </div>
-
-
-            <div class="mini-card">
-
-                <span>
-                    02
-                </span>
-
-                <strong>
-                    Learn
-                </strong>
-
-                <small>
-                    Follow your learning path.
-                </small>
-
-            </div>
-
-
-            <div class="mini-card">
-
-                <span>
-                    03
-                </span>
-
-                <strong>
-                    Practice
-                </strong>
-
-                <small>
-                    Build your ability through
-                    practical work.
-                </small>
-
-            </div>
-
-
-            <div class="mini-card">
-
-                <span>
-                    04
-                </span>
-
-                <strong>
-                    Build
-                </strong>
-
-                <small>
-                    Create projects that show
-                    what you can do.
-                </small>
-
-            </div>
-
-
-        </div>
-
-    </section>
-
-
-
-    <!-- CTA -->
-
-    <section class="cta">
-
-        <h2>
-            One skill can change your direction.
-        </h2>
-
-
-        <p>
-
-            Start small. Stay consistent.
-            Keep building.
-
-        </p>
-
-
-        <a href="learn.html"
-           class="btn btn-primary">
-
-            Explore Lessons →
-
-        </a>
-
-    </section>
-
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div>
-
-            <strong>
-                JG<span>.</span>
-            </strong>
-
-
-            <p>
-                Find Skills. Find Work.
-            </p>
-
-        </div>
-
-
-        <p>
-
-            © 2026 JG.
-            All rights reserved.
-
-        </p>
-
-    </footer>
-
-
-
-    <!-- JAVASCRIPT -->
-
-    <script src="js/app.js"></script>
-
-</body>
-
-</html>
+           
