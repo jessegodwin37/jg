@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
   <meta charset="UTF-8">
 
@@ -26,34 +27,20 @@
   <title>JG — Find Skills. Find Work.</title>
 
   <!-- =====================================================
-       STYLES
-       ===================================================== -->
-
-  <link
-    rel="stylesheet"
-    href="css/style.css"
-  >
-
-  <!-- =====================================================
-       EARLY THEME SCRIPT
-       Prevents unnecessary light/dark flash
+       EARLY THEME
        ===================================================== -->
 
   <script>
     (function () {
       try {
-        const saved =
-          localStorage.getItem("jg-theme");
+        const saved = localStorage.getItem("jg-theme");
 
         const systemDark =
           window.matchMedia &&
-          window.matchMedia(
-            "(prefers-color-scheme: dark)"
-          ).matches;
+          window.matchMedia("(prefers-color-scheme: dark)").matches;
 
         const theme =
-          saved === "dark" ||
-          saved === "light"
+          saved === "dark" || saved === "light"
             ? saved
             : systemDark
               ? "dark"
@@ -71,7 +58,17 @@
       }
     })();
   </script>
+
+  <!-- =====================================================
+       STYLES
+       ===================================================== -->
+
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
 </head>
+
 
 <body>
 
@@ -83,10 +80,12 @@
 
     <div class="container header-inner">
 
+      <!-- BRAND -->
+
       <a
         href="index.html"
         class="brand"
-        aria-label="JG home"
+        aria-label="JG Home"
       >
 
         <span
@@ -96,17 +95,20 @@
           JG
         </span>
 
-        <span>
-          <span class="brand-text">
-            JG
-          </span>
+        <span class="brand-text">
 
-          <span class="brand-subtitle">
+          <strong>JG</strong>
+
+          <small>
             Find Skills. Find Work.
-          </span>
+          </small>
+
         </span>
 
       </a>
+
+
+      <!-- NAVIGATION -->
 
       <nav
         class="nav"
@@ -116,9 +118,7 @@
 
         <a
           href="index.html"
-          class="active"
           data-nav-link
-          aria-current="page"
         >
           Home
         </a>
@@ -165,9 +165,12 @@
           Account
         </a>
 
-      </nav>
-
-      <div class="header-actions">
+        <a
+          href="enrollment.html"
+          class="btn btn-primary nav-cta"
+        >
+          Get Started
+        </a>
 
         <button
           type="button"
@@ -176,36 +179,37 @@
           aria-label="Switch to dark mode"
           title="Switch to dark mode"
         >
-          <span data-theme-icon>
-            ☾
-          </span>
+          <span data-theme-icon>☾</span>
         </button>
 
-        <a
-          href="enrollment.html"
-          class="btn btn-primary"
-        >
-          Get Started
-        </a>
+      </nav>
 
-        <button
-          type="button"
-          class="mobile-menu-btn"
-          data-mobile-menu
-          aria-label="Open navigation menu"
-          aria-expanded="false"
-        >
-          ☰
-        </button>
 
-      </div>
+      <!-- MOBILE MENU BUTTON -->
+
+      <button
+        type="button"
+        class="mobile-menu-btn"
+        data-mobile-menu
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
     </div>
 
   </header>
 
 
+  <!-- =====================================================
+       MAIN
+       ===================================================== -->
+
   <main>
+
 
     <!-- ===================================================
          HERO
@@ -215,28 +219,48 @@
 
       <div class="container hero-grid">
 
+
+        <!-- HERO TEXT -->
+
         <div
           class="hero-copy"
           data-reveal
         >
 
           <div class="hero-badge">
-            <span>✦</span>
-            <span>Build skills. Discover opportunities.</span>
+
+            <span aria-hidden="true">
+              ✦
+            </span>
+
+            <span>
+              Build skills. Discover opportunities.
+            </span>
+
           </div>
 
+
           <h1>
+
             Your skills can become
+
             <span class="gradient-text">
               your future.
             </span>
+
           </h1>
 
+
           <p class="lead">
+
             JG connects people with practical skills,
             learning opportunities and work possibilities
             in one modern platform.
+
           </p>
+
+
+          <!-- HERO BUTTONS -->
 
           <div class="hero-actions">
 
@@ -245,8 +269,13 @@
               class="btn btn-primary btn-lg"
             >
               Explore Skills
-              <span aria-hidden="true">→</span>
+
+              <span aria-hidden="true">
+                →
+              </span>
+
             </a>
+
 
             <a
               href="learn.html"
@@ -257,9 +286,10 @@
 
           </div>
 
-          <div
-            class="flex flex-wrap gap-3 mt-4"
-          >
+
+          <!-- TRUST BADGES -->
+
+          <div class="hero-trust">
 
             <span class="badge badge-success">
               ✓ Practical learning
@@ -278,9 +308,9 @@
         </div>
 
 
-        <!-- =============================================
+        <!-- =================================================
              APP PREVIEW
-             ============================================= -->
+             ================================================= -->
 
         <div
           class="hero-visual"
@@ -291,12 +321,17 @@
 
             <div class="preview-window">
 
+
+              <!-- PREVIEW HEADER -->
+
               <div class="preview-top">
 
                 <div class="preview-dots">
+
                   <span class="preview-dot"></span>
                   <span class="preview-dot"></span>
                   <span class="preview-dot"></span>
+
                 </div>
 
                 <span class="badge badge-primary">
@@ -306,13 +341,16 @@
               </div>
 
 
+              <!-- PREVIEW CONTENT -->
+
               <div class="preview-body">
+
+
+                <!-- JOURNEY CARD -->
 
                 <div class="preview-card">
 
-                  <div
-                    class="flex justify-between items-center gap-2"
-                  >
+                  <div class="preview-card-row">
 
                     <div>
 
@@ -331,9 +369,11 @@
 
                     </div>
 
+
                     <div
                       class="feature-icon"
                       style="margin-bottom:0;"
+                      aria-hidden="true"
                     >
                       ✦
                     </div>
@@ -343,14 +383,1191 @@
                 </div>
 
 
+                <!-- PROGRESS CARD -->
+
                 <div class="preview-card">
 
-                  <div
-                    class="flex justify-between items-center"
-                  >
+                  <div class="preview-card-row">
 
                     <strong>
                       Learning progress
                     </strong>
 
-                    <span class="badge
+                    <span class="badge badge-success">
+                      68%
+                    </span>
+
+                  </div>
+
+
+                  <div class="progress mt-3">
+
+                    <span
+                      style="width:68%;"
+                    ></span>
+
+                  </div>
+
+
+                  <p class="muted mt-2 mb-0">
+                    Keep building your skills.
+                  </p>
+
+                </div>
+
+
+                <!-- SKILLS CARD -->
+
+                <div class="preview-card">
+
+                  <div class="preview-card-row">
+
+                    <strong>
+                      Recommended skills
+                    </strong>
+
+                    <a
+                      href="skills.html"
+                      class="text-link"
+                    >
+                      View all
+                    </a>
+
+                  </div>
+
+
+                  <div class="preview-skill-list">
+
+                    <div class="preview-skill">
+
+                      <span class="preview-skill-icon">
+                        &lt;/&gt;
+                      </span>
+
+                      <span>
+                        Web Development
+                      </span>
+
+                      <span class="preview-arrow">
+                        →
+                      </span>
+
+                    </div>
+
+
+                    <div class="preview-skill">
+
+                      <span class="preview-skill-icon">
+                        Py
+                      </span>
+
+                      <span>
+                        Python Programming
+                      </span>
+
+                      <span class="preview-arrow">
+                        →
+                      </span>
+
+                    </div>
+
+
+                    <div class="preview-skill">
+
+                      <span class="preview-skill-icon">
+                        ✦
+                      </span>
+
+                      <span>
+                        Graphic Design
+                      </span>
+
+                      <span class="preview-arrow">
+                        →
+                      </span>
+
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- AI CARD -->
+
+                <div class="preview-ai">
+
+                  <div class="preview-ai-icon">
+                    ✦
+                  </div>
+
+                  <div>
+
+                    <strong>
+                      JG AI
+                    </strong>
+
+                    <p>
+                      Your intelligent learning
+                      companion.
+                    </p>
+
+                  </div>
+
+                  <a
+                    href="ai.html"
+                    class="preview-ai-button"
+                    aria-label="Open JG AI"
+                  >
+                    →
+                  </a>
+
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PLATFORM STATS
+         =================================================== -->
+
+    <section class="section section-tight">
+
+      <div class="container">
+
+        <div
+          class="stats-grid"
+          data-reveal
+        >
+
+          <div class="stat-card">
+
+            <strong>
+              40+
+            </strong>
+
+            <span>
+              Skill paths
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <strong>
+              100+
+            </strong>
+
+            <span>
+              Learning topics
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <strong>
+              24/7
+            </strong>
+
+            <span>
+              JG AI guidance
+            </span>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <strong>
+              1
+            </strong>
+
+            <span>
+              Connected platform
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         WHY JG
+         =================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+
+        <div
+          class="section-heading"
+          data-reveal
+        >
+
+          <span class="eyebrow">
+            Why JG
+          </span>
+
+          <h2>
+            Everything you need to move forward.
+          </h2>
+
+          <p>
+            JG brings skills, learning, guidance and
+            opportunities together in one place.
+          </p>
+
+        </div>
+
+
+        <div
+          class="card-grid card-grid-3"
+          data-reveal
+        >
+
+
+          <!-- CARD 1 -->
+
+          <article class="feature-card card">
+
+            <div class="feature-icon">
+              ◈
+            </div>
+
+            <h3>
+              Discover Skills
+            </h3>
+
+            <p>
+              Explore practical skills across
+              technology, design, business, media
+              and career development.
+            </p>
+
+            <a
+              href="skills.html"
+              class="text-link"
+            >
+              Explore skills →
+            </a>
+
+          </article>
+
+
+          <!-- CARD 2 -->
+
+          <article class="feature-card card">
+
+            <div class="feature-icon">
+              ◉
+            </div>
+
+            <h3>
+              Learn Practically
+            </h3>
+
+            <p>
+              Follow structured learning paths,
+              study useful topics and build knowledge
+              you can apply.
+            </p>
+
+            <a
+              href="learn.html"
+              class="text-link"
+            >
+              Start learning →
+            </a>
+
+          </article>
+
+
+          <!-- CARD 3 -->
+
+          <article class="feature-card card">
+
+            <div class="feature-icon">
+              ✦
+            </div>
+
+            <h3>
+              Get AI Guidance
+            </h3>
+
+            <p>
+              JG AI can help you understand skills,
+              plan learning and explore possible
+              next steps.
+            </p>
+
+            <a
+              href="ai.html"
+              class="text-link"
+            >
+              Meet JG AI →
+            </a>
+
+          </article>
+
+
+          <!-- CARD 4 -->
+
+          <article class="feature-card card">
+
+            <div class="feature-icon">
+              ◎
+            </div>
+
+            <h3>
+              Find Opportunities
+            </h3>
+
+            <p>
+              Explore work-related opportunities and
+              discover ways your skills can connect
+              with practical projects.
+            </p>
+
+            <a
+              href="work.html"
+              class="text-link"
+            >
+              Explore work →
+            </a>
+
+          </article>
+
+
+          <!-- CARD 5 -->
+
+          <article class="feature-card card">
+
+            <div class="feature-icon">
+              ✓
+            </div>
+
+            <h3>
+              Build Your Profile
+            </h3>
+
+            <p>
+              Keep your learning journey and account
+              experience organized as the platform
+              grows.
+            </p>
+
+            <a
+              href="account.html"
+              class="text-link"
+            >
+              Open account →
+            </a>
+
+          </article>
+
+
+          <!-- CARD 6 -->
+
+          <article class="feature-card card">
+
+            <div class="feature-icon">
+              ★
+            </div>
+
+            <h3>
+              Go Further
+            </h3>
+
+            <p>
+              Premium features will provide additional
+              tools and experiences as JG develops.
+            </p>
+
+            <a
+              href="premium.html"
+              class="text-link"
+            >
+              View Premium →
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SKILLS PREVIEW
+         =================================================== -->
+
+    <section class="section section-soft">
+
+      <div class="container">
+
+
+        <div
+          class="section-heading-row"
+          data-reveal
+        >
+
+          <div>
+
+            <span class="eyebrow">
+              Explore
+            </span>
+
+            <h2>
+              Popular skill paths.
+            </h2>
+
+            <p class="section-description">
+              Start with a direction and develop
+              practical skills step by step.
+            </p>
+
+          </div>
+
+
+          <a
+            href="skills.html"
+            class="btn btn-secondary"
+          >
+            View all skills
+          </a>
+
+        </div>
+
+
+        <div
+          class="card-grid card-grid-4"
+          data-reveal
+        >
+
+
+          <!-- SKILL -->
+
+          <article class="skill-card card">
+
+            <div class="card-top">
+
+              <div class="icon-box icon-blue">
+                &lt;/&gt;
+              </div>
+
+              <span class="badge badge-primary">
+                Technology
+              </span>
+
+            </div>
+
+            <h3>
+              Web Development
+            </h3>
+
+            <p>
+              Learn how modern websites and web
+              applications are built.
+            </p>
+
+            <div class="tag-row">
+
+              <span class="tag">
+                HTML
+              </span>
+
+              <span class="tag">
+                CSS
+              </span>
+
+              <span class="tag">
+                JavaScript
+              </span>
+
+            </div>
+
+            <a
+              href="learn.html?course=web-development"
+              class="btn btn-primary btn-sm"
+            >
+              Learn
+            </a>
+
+          </article>
+
+
+          <!-- SKILL -->
+
+          <article class="skill-card card">
+
+            <div class="card-top">
+
+              <div class="icon-box icon-yellow">
+                Py
+              </div>
+
+              <span class="badge badge-primary">
+                Technology
+              </span>
+
+            </div>
+
+            <h3>
+              Python Programming
+            </h3>
+
+            <p>
+              Build programming foundations with
+              Python.
+            </p>
+
+            <div class="tag-row">
+
+              <span class="tag">
+                Python
+              </span>
+
+              <span class="tag">
+                Logic
+              </span>
+
+              <span class="tag">
+                Coding
+              </span>
+
+            </div>
+
+            <a
+              href="learn.html?course=python"
+              class="btn btn-primary btn-sm"
+            >
+              Learn
+            </a>
+
+          </article>
+
+
+          <!-- SKILL -->
+
+          <article class="skill-card card">
+
+            <div class="card-top">
+
+              <div class="icon-box icon-purple">
+                ✦
+              </div>
+
+              <span class="badge badge-purple">
+                Design
+              </span>
+
+            </div>
+
+            <h3>
+              Graphic Design
+            </h3>
+
+            <p>
+              Create visuals for brands, businesses
+              and digital platforms.
+            </p>
+
+            <div class="tag-row">
+
+              <span class="tag">
+                Canva
+              </span>
+
+              <span class="tag">
+                Branding
+              </span>
+
+              <span class="tag">
+                Design
+              </span>
+
+            </div>
+
+            <a
+              href="learn.html?course=graphic-design"
+              class="btn btn-primary btn-sm"
+            >
+              Learn
+            </a>
+
+          </article>
+
+
+          <!-- SKILL -->
+
+          <article class="skill-card card">
+
+            <div class="card-top">
+
+              <div class="icon-box icon-orange">
+                ▶
+              </div>
+
+              <span class="badge badge-warning">
+                Media
+              </span>
+
+            </div>
+
+            <h3>
+              Video Editing
+            </h3>
+
+            <p>
+              Learn to create engaging videos for
+              digital platforms.
+            </p>
+
+            <div class="tag-row">
+
+              <span class="tag">
+                Editing
+              </span>
+
+              <span class="tag">
+                Storytelling
+              </span>
+
+              <span class="tag">
+                Content
+              </span>
+
+            </div>
+
+            <a
+              href="learn.html?course=video-editing"
+              class="btn btn-primary btn-sm"
+            >
+              Learn
+            </a>
+
+          </article>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         HOW IT WORKS
+         =================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+
+        <div
+          class="section-heading"
+          data-reveal
+        >
+
+          <span class="eyebrow">
+            How JG works
+          </span>
+
+          <h2>
+            From curiosity to capability.
+          </h2>
+
+          <p>
+            Follow a simple path while JG grows into
+            a complete skills and opportunity platform.
+          </p>
+
+        </div>
+
+
+        <div
+          class="steps-grid"
+          data-reveal
+        >
+
+
+          <div class="step-card">
+
+            <span class="step-number">
+              01
+            </span>
+
+            <div>
+
+              <h3>
+                Choose a direction
+              </h3>
+
+              <p>
+                Explore skills and find something
+                that matches your interests.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <span class="step-number">
+              02
+            </span>
+
+            <div>
+
+              <h3>
+                Learn
+              </h3>
+
+              <p>
+                Follow structured lessons and
+                develop useful knowledge.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <span class="step-number">
+              03
+            </span>
+
+            <div>
+
+              <h3>
+                Build
+              </h3>
+
+              <p>
+                Work on projects and turn knowledge
+                into practical ability.
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="step-card">
+
+            <span class="step-number">
+              04
+            </span>
+
+            <div>
+
+              <h3>
+                Discover opportunities
+              </h3>
+
+              <p>
+                Explore work and other ways to
+                apply the skills you develop.
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         JG AI
+         =================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div
+          class="ai-cta"
+          data-reveal
+        >
+
+          <div class="ai-cta-content">
+
+            <span class="eyebrow">
+              JG AI
+            </span>
+
+            <h2>
+              Your next step can start with one question.
+            </h2>
+
+            <p>
+              Ask JG AI about skills, learning paths,
+              projects, career preparation or how to
+              get started.
+            </p>
+
+          </div>
+
+
+          <a
+            href="ai.html"
+            class="btn btn-light"
+          >
+            Open JG AI
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         PREMIUM
+         =================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+
+        <div
+          class="premium-banner"
+          data-reveal
+        >
+
+          <div>
+
+            <span class="eyebrow">
+              JG Premium
+            </span>
+
+            <h2>
+              More tools. More possibilities.
+            </h2>
+
+            <p>
+              Explore the Premium experience as JG
+              continues to expand its learning and
+              opportunity tools.
+            </p>
+
+          </div>
+
+
+          <a
+            href="premium.html"
+            class="btn btn-primary"
+          >
+            Explore Premium
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         FINAL CTA
+         =================================================== -->
+
+    <section class="section">
+
+      <div class="container">
+
+        <div
+          class="final-cta"
+          data-reveal
+        >
+
+          <div>
+
+            <span class="eyebrow">
+              Start today
+            </span>
+
+            <h2>
+              Find the skill.
+              Build the future.
+            </h2>
+
+            <p>
+              Explore JG and take your next step.
+            </p>
+
+          </div>
+
+
+          <div class="hero-actions">
+
+            <a
+              href="skills.html"
+              class="btn btn-primary"
+            >
+              Explore Skills
+            </a>
+
+            <a
+              href="enrollment.html"
+              class="btn btn-secondary"
+            >
+              Get Started
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =====================================================
+       FOOTER
+       ===================================================== -->
+
+  <footer class="site-footer">
+
+    <div class="container">
+
+
+      <div class="footer-grid">
+
+
+        <!-- BRAND -->
+
+        <div class="footer-brand">
+
+          <a
+            href="index.html"
+            class="brand"
+            aria-label="JG Home"
+          >
+
+            <span class="brand-mark">
+              JG
+            </span>
+
+            <span class="brand-text">
+
+              <strong>
+                JG
+              </strong>
+
+              <small>
+                Find Skills. Find Work.
+              </small>
+
+            </span>
+
+          </a>
+
+
+          <p>
+            A modern platform for discovering
+            practical skills, learning and
+            opportunities.
+          </p>
+
+        </div>
+
+
+        <!-- PLATFORM -->
+
+        <div class="footer-column">
+
+          <h3>
+            Platform
+          </h3>
+
+          <a href="skills.html">
+            Skills
+          </a>
+
+          <a href="work.html">
+            Work
+          </a>
+
+          <a href="learn.html">
+            Learn
+          </a>
+
+          <a href="ai.html">
+            JG AI
+          </a>
+
+        </div>
+
+
+        <!-- ACCOUNT -->
+
+        <div class="footer-column">
+
+          <h3>
+            Account
+          </h3>
+
+          <a href="account.html">
+            Account
+          </a>
+
+          <a href="premium.html">
+            Premium
+          </a>
+
+          <a href="enrollment.html">
+            Enrollment
+          </a>
+
+          <a href="verify.html">
+            Certificate Verification
+          </a>
+
+        </div>
+
+
+        <!-- LEARNING -->
+
+        <div class="footer-column">
+
+          <h3>
+            Learning
+          </h3>
+
+          <a href="course.html">
+            Courses
+          </a>
+
+          <a href="exam.html">
+            Assessments
+          </a>
+
+          <a href="final%20project.html">
+            Final Project
+          </a>
+
+          <a href="certificate.html">
+            Certificate
+          </a>
+
+        </div>
+
+      </div>
+
+
+      <!-- FOOTER BOTTOM -->
+
+      <div class="footer-bottom">
+
+        <span>
+          ©
+          <span data-current-year></span>
+          JG. All rights reserved.
+        </span>
+
+        <span>
+          Find Skills. Find Work.
+        </span>
+
+      </div>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =====================================================
+       GLOBAL JAVASCRIPT
+       ===================================================== -->
+
+  <script src="js/app.js"></script>
+
+
+  <!-- =====================================================
+       HOME PAGE JAVASCRIPT
+       ===================================================== -->
+
+  <script>
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        const cards =
+          document.querySelectorAll(
+            ".skill-card"
+          );
+
+        cards.forEach(
+          function (card) {
+
+            card.addEventListener(
+              "click",
+              function (event) {
+
+                const clickedButton =
+                  event.target.closest(
+                    "a, button"
+                  );
+
+                if (clickedButton) {
+                  return;
+                }
+
+                const link =
+                  card.querySelector(
+                    "a"
+                  );
+
+                if (link) {
+                  window.location.href =
+                    link.href;
+                }
+
+              }
+            );
+
+          }
+        );
+
+      }
+    );
+
+  </script>
+
+</body>
+</html>
