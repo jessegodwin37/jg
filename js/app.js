@@ -1,343 +1,303 @@
 /* =========================================================
-   JG PLATFORM
+   JG — FIND SKILLS. FIND WORK.
    GLOBAL APPLICATION JAVASCRIPT
-   JG — Find Skills. Find Work.
-   
-   Theme • Navigation • UI • Security Helpers
-   Mobile Experience • Shared App Utilities
-========================================================= */
+   Frontend foundation
+   ========================================================= */
 
 (() => {
-    "use strict";
+  "use strict";
 
-    /* =====================================================
-       CORE
-    ===================================================== */
+  /* =======================================================
+     CONFIGURATION
+     ======================================================= */
 
-    const html = document.documentElement;
-    const body = document.body;
+  const JG_CONFIG = {
+    version: "2.0.0",
+    themeKey: "jg-theme",
+    mobileBreakpoint: 1024
+  };
 
-    const STORAGE = {
-        theme: "jg-theme"
-    };
+  /* =======================================================
+     SAFE STORAGE
+     ======================================================= */
 
-    const JG_VERSION = "2.0.0";
+  const storage = {
+    get(key) {
+      try {
+        return localStorage.getItem(key);
+      } catch {
+        return null;
+      }
+    },
 
+    set(key, value) {
+      try {
+        localStorage.setItem(key, value);
+        return true;
+      } catch {
+        return false;
+      }
+    },
 
-    /* =====================================================
-       SAFE STORAGE
-    ===================================================== */
+    remove(key) {
+      try {
+        localStorage.removeItem(key);
+        return true;
+      } catch {
+        return false;
+      }
+    }
+  };
 
-    const storage = {
-        get(key) {
-            try {
-                return localStorage.getItem(key);
-            } catch {
-                return null;
-            }
-        },
+  /* =======================================================
+     DOM HELPERS
+     ======================================================= */
 
-        set(key, value) {
-            try {
-                localStorage.setItem(key, value);
-            } catch {
-                /* Storage may be unavailable. */
-            }
-        },
+  const $ = (selector, scope = document) =>
+    scope.querySelector(selector);
 
-        remove(key) {
-            try {
-                localStorage.removeItem(key);
-            } catch {
-                /* Storage may be unavailable. */
-            }
-        }
-    };
+  const $$ = (selector, scope = document) =>
+    Array.from(scope.querySelectorAll(selector));
 
+  /* =======================================================
+     HTML ESCAPING
+     ======================================================= */
 
-    /* =====================================================
-       THEME SYSTEM
-    ===================================================== */
+  function escapeHTML(value) {
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
 
-    const themeToggle =
-        document.getElementById("themeToggle");
+  /* =======================================================
+     THEME SYSTEM
+     ======================================================= */
 
-    const savedTheme =
-        storage.get(STORAGE.theme);
+  function getSystemTheme() {
+    return window.matchMedia &&
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
+  }
 
-    const systemPrefersDark =
-        window.matchMedia &&
-        window.matchMedia(
-            "(prefers-color-scheme: dark)"
-        ).matches;
+  function getSavedTheme() {
+    const saved = storage.get(JG_CONFIG.themeKey);
 
-    let currentTheme =
-        savedTheme ||
-        (systemPrefersDark ? "dark" : "light");
-
-
-    function updateThemeButton() {
-
-        if (!themeToggle) return;
-
-        const isDark =
-            currentTheme === "dark";
-
-        themeToggle.textContent =
-            isDark ? "☀️" : "🌙";
-
-        themeToggle.setAttribute(
-            "aria-label",
-            isDark
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-        );
-
-        themeToggle.setAttribute(
-            "title",
-            isDark
-                ? "Switch to light mode"
-                : "Switch to dark mode"
-        );
-
-        themeToggle.setAttribute(
-            "aria-pressed",
-            String(isDark)
-        );
+    if (saved === "dark" || saved === "light") {
+      return saved;
     }
 
+    return getSystemTheme();
+  }
 
-    function applyTheme(theme, save = true) {
+  function applyTheme(theme, save = true) {
+    const safeTheme = theme === "dark" ? "dark" : "light";
 
-        if (
-            theme !== "light" &&
-            theme !== "dark"
-        ) {
-            return;
-        }
+    document.documentElement.setAttribute(
+      "data-theme",
+      safeTheme
+    );
 
-        currentTheme = theme;
-
-        html.setAttribute(
-            "data-theme",
-            theme
-        );
-
-        if (save) {
-            storage.set(
-                STORAGE.theme,
-                theme
-            );
-        }
-
-        updateThemeButton();
-
-        document.dispatchEvent(
-            new CustomEvent(
-                "jg:themechange",
-                {
-                    detail: {
-                        theme
-                    }
-                }
-            )
-        );
+    if (save) {
+      storage.set(JG_CONFIG.themeKey, safeTheme);
     }
 
+    updateThemeControls(safeTheme);
+  }
 
-    applyTheme(currentTheme, false);
+  function updateThemeControls(theme) {
+    const darkMode = theme === "dark";
 
+    $$("[data-theme-toggle]").forEach(button => {
+      button.setAttribute(
+        "aria-label",
+        darkMode
+          ? "Switch to light mode"
+          : "Switch to dark mode"
+      );
 
-    if (themeToggle) {
+      button.setAttribute(
+        "title",
+        darkMode
+          ? "Switch to light mode"
+          : "Switch to dark mode"
+      );
 
-        themeToggle.addEventListener(
-            "click",
-            () => {
+      const icon = button.querySelector(
+        "[data-theme-icon]"
+      );
 
-                applyTheme(
-                    currentTheme === "dark"
-                        ? "light"
-                        : "dark"
-                );
+      if (icon) {
+        icon.textContent = darkMode ? "☀" : "☾";
+      }
+    });
+  }
 
-            }
-        );
+  function toggleTheme() {
+    const current =
+      document.documentElement.getAttribute("data-theme") ||
+      "light";
 
-    }
+    applyTheme(
+      current === "dark" ? "light" : "dark"
+    );
+  }
 
-
-    /* =====================================================
-       SYSTEM THEME CHANGES
-    ===================================================== */
+  function initTheme() {
+    applyTheme(getSavedTheme(), false);
 
     if (window.matchMedia) {
+      const media =
+        window.matchMedia("(prefers-color-scheme: dark)");
 
-        const mediaQuery =
-            window.matchMedia(
-                "(prefers-color-scheme: dark)"
-            );
+      const systemThemeChanged = event => {
+        if (!storage.get(JG_CONFIG.themeKey)) {
+          applyTheme(
+            event.matches ? "dark" : "light",
+            false
+          );
+        }
+      };
 
-        const handleSystemThemeChange =
-            event => {
+      if (typeof media.addEventListener === "function") {
+        media.addEventListener(
+          "change",
+          systemThemeChanged
+        );
+      } else if (
+        typeof media.addListener === "function"
+      ) {
+        media.addListener(systemThemeChanged);
+      }
+    }
+  }
 
-                if (
-                    !storage.get(
-                        STORAGE.theme
-                    )
-                ) {
+  function initThemeButtons() {
+    $$("[data-theme-toggle]").forEach(button => {
+      button.addEventListener("click", toggleTheme);
+    });
+  }
 
-                    applyTheme(
-                        event.matches
-                            ? "dark"
-                            : "light",
-                        false
-                    );
+  /* =======================================================
+     MOBILE NAVIGATION
+     ======================================================= */
 
-                }
+  function initMobileNavigation() {
+    const menuButton =
+      $("[data-mobile-menu]") ||
+      $(".mobile-menu-btn");
 
-            };
+    const nav =
+      $("[data-main-nav]") ||
+      $(".nav");
 
+    if (!menuButton || !nav) {
+      return;
+    }
 
+    menuButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+    menuButton.addEventListener("click", () => {
+      const isOpen =
+        nav.classList.toggle("open");
+
+      menuButton.setAttribute(
+        "aria-expanded",
+        String(isOpen)
+      );
+
+      menuButton.setAttribute(
+        "aria-label",
+        isOpen
+          ? "Close navigation menu"
+          : "Open navigation menu"
+      );
+    });
+
+    $$("a", nav).forEach(link => {
+      link.addEventListener("click", () => {
+        nav.classList.remove("open");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+
+        menuButton.setAttribute(
+          "aria-label",
+          "Open navigation menu"
+        );
+      });
+    });
+
+    document.addEventListener("click", event => {
+      if (
+        window.innerWidth <=
+        JG_CONFIG.mobileBreakpoint
+      ) {
         if (
-            typeof mediaQuery.addEventListener ===
-            "function"
+          !nav.contains(event.target) &&
+          !menuButton.contains(event.target)
         ) {
+          nav.classList.remove("open");
 
-            mediaQuery.addEventListener(
-                "change",
-                handleSystemThemeChange
-            );
-
-        } else if (
-            typeof mediaQuery.addListener ===
-            "function"
-        ) {
-
-            mediaQuery.addListener(
-                handleSystemThemeChange
-            );
-
-        }
-
-    }
-
-
-    /* =====================================================
-       MOBILE NAVIGATION
-    ===================================================== */
-
-    const mobileMenuBtn =
-        document.getElementById(
-            "mobileMenuBtn"
-        );
-
-    const mainNav =
-        document.getElementById(
-            "mainNav"
-        );
-
-
-    function closeMobileMenu() {
-
-        if (!mainNav) return;
-
-        mainNav.classList.remove(
-            "open"
-        );
-
-        if (mobileMenuBtn) {
-
-            mobileMenuBtn.textContent =
-                "☰";
-
-            mobileMenuBtn.setAttribute(
-                "aria-label",
-                "Open menu"
-            );
-
-            mobileMenuBtn.setAttribute(
-                "aria-expanded",
-                "false"
-            );
-
-        }
-
-        body.classList.remove(
-            "menu-open"
-        );
-
-    }
-
-
-    function openMobileMenu() {
-
-        if (!mainNav) return;
-
-        mainNav.classList.add(
-            "open"
-        );
-
-        if (mobileMenuBtn) {
-
-            mobileMenuBtn.textContent =
-                "✕";
-
-            mobileMenuBtn.setAttribute(
-                "aria-label",
-                "Close menu"
-            );
-
-            mobileMenuBtn.setAttribute(
-                "aria-expanded",
-                "true"
-            );
-
-        }
-
-        body.classList.add(
-            "menu-open"
-        );
-
-    }
-
-
-    if (
-        mobileMenuBtn &&
-        mainNav
-    ) {
-
-        mobileMenuBtn.setAttribute(
+          menuButton.setAttribute(
             "aria-expanded",
             "false"
+          );
+        }
+      }
+    });
+
+    window.addEventListener("resize", () => {
+      if (
+        window.innerWidth >
+        JG_CONFIG.mobileBreakpoint
+      ) {
+        nav.classList.remove("open");
+
+        menuButton.setAttribute(
+          "aria-expanded",
+          "false"
         );
+      }
+    });
+  }
 
-        mobileMenuBtn.setAttribute(
-            "aria-label",
-            "Open menu"
-        );
+  /* =======================================================
+     ACTIVE NAVIGATION
+     ======================================================= */
 
+  function getCurrentPage() {
+    const path =
+      window.location.pathname
+        .split("/")
+        .pop()
+        .toLowerCase();
 
-        mobileMenuBtn.addEventListener(
-            "click",
-            event => {
+    return path || "index.html";
+  }
 
-                event.stopPropagation();
+  function initActiveNavigation() {
+    const currentPage =
+      getCurrentPage();
 
-                const isOpen =
-                    mainNav.classList.contains(
-                        "open"
-                    );
+    $$("[data-nav-link], .nav a").forEach(link => {
+      const href =
+        link.getAttribute("href") || "";
 
-                if (isOpen) {
-                    closeMobileMenu();
-                } else {
-                    openMobileMenu();
-                }
+      if (
+        !href ||
+        href.startsWith("#") ||
+        href.startsWith("http")
+      ) {
+        return;
+      }
 
-            }
-        );
-
-
-        mainNav
-            .querySelectorAll("a")
-            .forEach
+      const
