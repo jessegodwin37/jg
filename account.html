@@ -1,54 +1,79 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    >
 
-    <meta name="description"
-          content="JG Account — Manage your learning, skills, certificates and work profile.">
+    <meta
+        name="description"
+        content="JG Account — Manage your learning, skills, certificates and work profile."
+    >
 
-    <meta name="theme-color"
-          content="#2563eb">
+    <meta name="theme-color" content="#f7f8fc">
 
     <title>JG Account | Your Dashboard</title>
 
     <link rel="stylesheet" href="css/style.css">
 
     <style>
+        /* =========================================================
+           JG ACCOUNT
+           Premium dashboard layer
+           Light + Dark + Mobile-first
+        ========================================================= */
 
-        /* =========================================
-           ACCOUNT PAGE
-        ========================================= */
+        .account-page {
+            width: 100%;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* =========================================================
+           ACCOUNT HERO
+        ========================================================= */
 
         .account-hero {
-            padding: 60px 20px 35px;
-
+            position: relative;
+            overflow: hidden;
+            padding: 42px 0 35px;
             background:
                 radial-gradient(
-                    circle at 10% 10%,
-                    rgba(37, 99, 235, .14),
-                    transparent 35%
+                    circle at 85% 10%,
+                    rgba(37, 99, 235, 0.10),
+                    transparent 30%
                 ),
                 radial-gradient(
-                    circle at 90% 10%,
-                    rgba(124, 58, 237, .12),
-                    transparent 35%
+                    circle at 10% 80%,
+                    rgba(124, 58, 237, 0.07),
+                    transparent 30%
                 );
         }
 
-        .account-container {
-            max-width: 1180px;
-            margin: auto;
-            padding: 0 20px 80px;
+        .account-hero::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -170px;
+            top: -170px;
+            border-radius: 50%;
+            background: rgba(37, 99, 235, 0.08);
+            pointer-events: none;
+        }
+
+        .account-hero .container {
+            position: relative;
+            z-index: 2;
         }
 
         .account-welcome {
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
             gap: 25px;
         }
 
@@ -56,837 +81,84 @@
             display: flex;
             align-items: center;
             gap: 18px;
+            min-width: 0;
         }
 
-        .avatar {
-            width: 72px;
-            height: 72px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 22px;
-
+        .account-avatar {
+            width: 76px;
+            height: 76px;
+            flex: 0 0 76px;
+            display: grid;
+            place-items: center;
+            border-radius: 24px;
             background:
                 linear-gradient(
                     135deg,
-                    var(--primary),
+                    #2563eb,
                     #7c3aed
                 );
-
             color: #fff;
-
-            font-size: 1.7rem;
-            font-weight: 900;
-
-            box-shadow: var(--shadow);
+            font-size: 1.55rem;
+            font-weight: 850;
+            box-shadow:
+                0 12px 30px rgba(37, 99, 235, 0.22);
         }
 
         .welcome-text h1 {
-            margin: 0 0 7px;
-
-            font-size:
-                clamp(1.7rem, 4vw, 2.5rem);
+            margin: 3px 0 7px;
+            font-size: clamp(1.65rem, 4vw, 2.35rem);
+            letter-spacing: -0.04em;
         }
 
         .welcome-text p {
             margin: 0;
-
-            color: var(--text-secondary);
+            color: var(--muted);
+            line-height: 1.55;
         }
 
-        .profile-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-
-            padding: 11px 17px;
-
-            border-radius: 10px;
-
-            border: 1px solid var(--border);
-
-            background: var(--surface);
-            color: var(--text);
-
-            text-decoration: none;
-
-            font-weight: 700;
+        .account-hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
         }
 
-        /* =========================================
-           DASHBOARD GRID
-        ========================================= */
+        /* =========================================================
+           MAIN ACCOUNT LAYOUT
+        ========================================================= */
 
-        .dashboard {
+        .account-layout {
             display: grid;
-
-            grid-template-columns:
-                260px 1fr;
-
-            gap: 25px;
-
-            padding-top: 30px;
+            grid-template-columns: 240px minmax(0, 1fr);
+            gap: 22px;
+            align-items: start;
         }
 
-        .dashboard-sidebar {
-            align-self: start;
+        /* =========================================================
+           SIDEBAR
+        ========================================================= */
 
-            background: var(--surface);
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            padding: 12px;
-
+        .account-sidebar {
             position: sticky;
-            top: 90px;
+            top: 95px;
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            background: var(--surface);
+            box-shadow: var(--shadow-sm);
+            padding: 10px;
         }
 
-        .dashboard-nav {
+        .account-nav {
             display: grid;
-            gap: 5px;
+            gap: 4px;
         }
 
-        .dashboard-nav button {
-            width: 100%;
-
+        .account-nav a {
             display: flex;
             align-items: center;
             gap: 11px;
-
-            padding: 12px;
-
-            border: none;
-            border-radius: 10px;
-
-            background: transparent;
-            color: var(--text);
-
-            text-align: left;
-
-            font-family: inherit;
-            font-size: .9rem;
-            font-weight: 700;
-
-            cursor: pointer;
-        }
-
-        .dashboard-nav button:hover {
-            background: var(--background);
-        }
-
-        .dashboard-nav button.active {
-            background: rgba(37, 99, 235, .1);
-            color: var(--primary);
-        }
-
-        .sidebar-divider {
-            height: 1px;
-            background: var(--border);
-            margin: 10px 5px;
-        }
-
-        /* =========================================
-           CONTENT
-        ========================================= */
-
-        .dashboard-content {
-            min-width: 0;
-        }
-
-        .dashboard-panel {
-            display: none;
-        }
-
-        .dashboard-panel.active {
-            display: block;
-        }
-
-        .panel-heading {
-            margin-bottom: 20px;
-        }
-
-        .panel-heading h2 {
-            margin: 0 0 7px;
-        }
-
-        .panel-heading p {
-            margin: 0;
-            color: var(--text-secondary);
-        }
-
-        /* =========================================
-           STATS
-        ========================================= */
-
-        .dashboard-stats {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 15px;
-
-            margin-bottom: 25px;
-        }
-
-        .dashboard-stat {
-            padding: 20px;
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            background: var(--surface);
-
-            box-shadow: var(--shadow);
-        }
-
-        .dashboard-stat-icon {
-            font-size: 1.3rem;
-            margin-bottom: 12px;
-        }
-
-        .dashboard-stat-number {
-            font-size: 1.65rem;
-            font-weight: 900;
-            margin-bottom: 4px;
-        }
-
-        .dashboard-stat-label {
-            color: var(--text-secondary);
-            font-size: .8rem;
-        }
-
-        /* =========================================
-           COURSE CARD
-        ========================================= */
-
-        .learning-card {
-            padding: 24px;
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            background: var(--surface);
-
-            box-shadow: var(--shadow);
-
-            margin-bottom: 20px;
-        }
-
-        .learning-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 15px;
-
-            margin-bottom: 20px;
-        }
-
-        .course-title-area {
-            display: flex;
-            align-items: center;
-            gap: 13px;
-        }
-
-        .course-icon {
-            width: 46px;
-            height: 46px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 13px;
-
-            background:
-                rgba(37, 99, 235, .1);
-
-            font-size: 1.35rem;
-        }
-
-        .course-title-area h3 {
-            margin: 0 0 4px;
-        }
-
-        .course-title-area p {
-            margin: 0;
-
-            color: var(--text-secondary);
-
-            font-size: .8rem;
-        }
-
-        .course-status {
-            padding: 6px 10px;
-
-            border-radius: 999px;
-
-            background: rgba(34, 197, 94, .1);
-
-            color: #16a34a;
-
-            font-size: .72rem;
-
-            font-weight: 800;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-
-            margin-bottom: 8px;
-
-            font-size: .8rem;
-        }
-
-        .progress-header span:first-child {
-            color: var(--text-secondary);
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 9px;
-
-            background: var(--background);
-
-            border: 1px solid var(--border);
-
-            border-radius: 999px;
-
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 35%;
-
-            background:
-                linear-gradient(
-                    90deg,
-                    var(--primary),
-                    #7c3aed
-                );
-
-            border-radius: inherit;
-        }
-
-        .learning-footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            gap: 15px;
-
-            margin-top: 20px;
-        }
-
-        .learning-meta {
-            color: var(--text-secondary);
-            font-size: .8rem;
-        }
-
-        .continue-button {
-            display: inline-flex;
-
-            padding: 10px 15px;
-
-            background: var(--primary);
-            color: #fff;
-
-            border-radius: 9px;
-
+            min-height: 46px;
+            padding: 10px 12px;
+            border-radius: 14px;
+            color: var(--muted);
             text-decoration: none;
-
-            font-weight: 700;
-
-            font-size: .82rem;
-        }
-
-        /* =========================================
-           QUICK ACTIONS
-        ========================================= */
-
-        .quick-actions {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, 1fr);
-
-            gap: 15px;
-
-            margin-top: 25px;
-        }
-
-        .quick-action {
-            padding: 20px;
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            background: var(--surface);
-
-            text-decoration: none;
-
-            color: var(--text);
-
-            transition: .2s ease;
-        }
-
-        .quick-action:hover {
-            transform: translateY(-3px);
-            border-color: var(--primary);
-        }
-
-        .quick-action-icon {
-            font-size: 1.5rem;
-            margin-bottom: 12px;
-        }
-
-        .quick-action h3 {
-            margin: 0 0 6px;
-            font-size: .95rem;
-        }
-
-        .quick-action p {
-            margin: 0;
-
-            color: var(--text-secondary);
-
-            font-size: .78rem;
-
-            line-height: 1.5;
-        }
-
-        /* =========================================
-           PROFILE
-        ========================================= */
-
-        .profile-card {
-            background: var(--surface);
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            padding: 25px;
-        }
-
-        .profile-row {
-            display: flex;
-            justify-content: space-between;
-
-            gap: 20px;
-
-            padding: 15px 0;
-
-            border-bottom: 1px solid var(--border);
-        }
-
-        .profile-row:last-child {
-            border-bottom: none;
-        }
-
-        .profile-row span {
-            color: var(--text-secondary);
-            font-size: .82rem;
-        }
-
-        .profile-row strong {
-            text-align: right;
-            font-size: .88rem;
-        }
-
-        .edit-profile-button {
-            margin-top: 20px;
-
-            width: 100%;
-
-            padding: 13px;
-
-            border: 1px solid var(--border);
-
-            border-radius: 10px;
-
-            background: var(--background);
-
-            color: var(--text);
-
-            font-family: inherit;
-
-            font-weight: 700;
-
-            cursor: pointer;
-        }
-
-        /* =========================================
-           CERTIFICATE
-        ========================================= */
-
-        .certificate-card {
-            padding: 30px;
-
-            border-radius: var(--radius-lg);
-
-            border: 1px solid var(--border);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(37, 99, 235, .08),
-                    rgba(124, 58, 237, .08)
-                );
-
-            text-align: center;
-        }
-
-        .certificate-icon {
-            font-size: 3rem;
-            margin-bottom: 15px;
-        }
-
-        .certificate-card h3 {
-            margin: 0 0 10px;
-        }
-
-        .certificate-card p {
-            color: var(--text-secondary);
-
-            line-height: 1.6;
-
-            max-width: 600px;
-
-            margin: 0 auto 20px;
-        }
-
-        /* =========================================
-           WORK PROFILE
-        ========================================= */
-
-        .skill-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-
-            margin: 20px 0;
-        }
-
-        .skill-tag {
-            padding: 7px 10px;
-
-            border-radius: 8px;
-
-            background: var(--background);
-
-            border: 1px solid var(--border);
-
-            color: var(--text-secondary);
-
-            font-size: .75rem;
-
-            font-weight: 700;
-        }
-
-        .profile-progress {
-            margin-top: 20px;
-        }
-
-        /* =========================================
-           SETTINGS
-        ========================================= */
-
-        .setting-card {
-            padding: 20px;
-
-            background: var(--surface);
-
-            border: 1px solid var(--border);
-
-            border-radius: var(--radius-lg);
-
-            margin-bottom: 15px;
-        }
-
-        .setting-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            gap: 20px;
-        }
-
-        .setting-row h3 {
-            margin: 0 0 5px;
-            font-size: .95rem;
-        }
-
-        .setting-row p {
-            margin: 0;
-
-            color: var(--text-secondary);
-
-            font-size: .78rem;
-
-            line-height: 1.5;
-        }
-
-        .setting-badge {
-            padding: 7px 10px;
-
-            border-radius: 8px;
-
-            background: var(--background);
-
-            border: 1px solid var(--border);
-
-            font-size: .72rem;
-
-            color: var(--text-secondary);
-
-            white-space: nowrap;
-        }
-
-        /* =========================================
-           AI CARD
-        ========================================= */
-
-        .ai-dashboard-card {
-            padding: 28px;
-
-            border-radius: var(--radius-lg);
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(37, 99, 235, .12),
-                    rgba(124, 58, 237, .12)
-                );
-
-            border: 1px solid var(--border);
-
-            margin-top: 25px;
-        }
-
-        .ai-dashboard-card h3 {
-            margin: 0 0 8px;
-        }
-
-        .ai-dashboard-card p {
-            color: var(--text-secondary);
-
-            line-height: 1.6;
-
-            margin: 0 0 18px;
-        }
-
-        /* =========================================
-           MOBILE
-        ========================================= */
-
-        @media (max-width: 900px) {
-
-            .dashboard {
-                grid-template-columns: 1fr;
-            }
-
-            .dashboard-sidebar {
-                position: static;
-            }
-
-            .dashboard-nav {
-                display: flex;
-                overflow-x: auto;
-            }
-
-            .dashboard-nav button {
-                width: auto;
-                white-space: nowrap;
-            }
-
-        }
-
-        @media (max-width: 650px) {
-
-            .account-welcome {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .dashboard-stats {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .quick-actions {
-                grid-template-columns: 1fr;
-            }
-
-            .learning-header {
-                flex-direction: column;
-            }
-
-            .learning-footer {
-                align-items: flex-start;
-                flex-direction: column;
-            }
-
-            .continue-button {
-                width: 100%;
-                justify-content: center;
-            }
-
-            .profile-row {
-                flex-direction: column;
-                gap: 5px;
-            }
-
-            .profile-row strong {
-                text-align: left;
-            }
-
-        }
-
-        @media (max-width: 420px) {
-
-            .dashboard-stats {
-                grid-template-columns: 1fr;
-            }
-
-            .avatar {
-                width: 60px;
-                height: 60px;
-            }
-
-        }
-
-    </style>
-
-</head>
-
-<body>
-
-
-<!-- =========================================
-     HEADER
-========================================= -->
-
-<header class="site-header">
-
-    <div class="container header-inner">
-
-        <a
-            href="index.html"
-            class="logo">
-
-            <strong>JG</strong>
-
-            <span>
-                Find Skills. Find Work.
-            </span>
-
-        </a>
-
-
-        <button
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open menu"
-            aria-expanded="false">
-
-            ☰
-
-        </button>
-
-
-        <nav
-            class="main-nav"
-            id="mainNav">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="skills.html">
-                Skills
-            </a>
-
-            <a href="work.html">
-                Work
-            </a>
-
-            <a href="learn.html">
-                Learn
-            </a>
-
-            <a href="premium.html">
-                Premium
-            </a>
-
-            <a
-                href="account.html"
-                class="active">
-
-                Account
-
-            </a>
-
-            <a href="ai.html">
-                JG AI
-            </a>
-
-            <a
-                href="enrollment.html"
-                class="nav-cta">
-
-                Enroll
-
-            </a>
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle dark mode">
-
-                🌙
-
-            </button>
-
-        </nav>
-
-    </div>
-
-</header>
-
-
-<!-- =========================================
-     WELCOME
-========================================= -->
-
-<section class="account-hero">
-
-    <div class="account-container">
-
-        <div class="account-welcome">
-
-            <div class="welcome-left">
-
-                <div
-                    class="avatar"
-                    id="avatar">
-
-                    JG
-
-                </div>
-
-                <div class="welcome-text">
-
-                    <h1>
-                        Welcome to your JG dashboard
-                    </h1>
-
-                    <
+           
