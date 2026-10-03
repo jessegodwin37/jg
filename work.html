@@ -1,624 +1,168 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <meta
-        name="description"
-        content="JG Work — Discover jobs, freelance projects and opportunities."
-    >
-
-    <meta name="theme-color" content="#2563eb">
-
-    <title>JG Work | Find Skills. Find Work.</title>
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="site-header">
-
-    <div class="container header-inner">
-
-        <a href="index.html" class="brand" aria-label="JG Home">
-
-            <span class="brand-mark">JG</span>
-
-            <span class="brand-text">
-                <strong>JG</strong>
-                <small>Find Skills. Find Work.</small>
-            </span>
-
-        </a>
-
-
-        <nav class="main-nav" id="mainNav">
-
-            <a href="index.html">Home</a>
-            <a href="skills.html">Skills</a>
-            <a href="work.html" class="active">Work</a>
-            <a href="learn.html">Learn</a>
-            <a href="ai.html">JG AI</a>
-            <a href="premium.html">Premium</a>
-
-        </nav>
-
-
-        <div class="header-actions">
-
-            <button
-                class="icon-button"
-                id="themeToggle"
-                type="button"
-                aria-label="Toggle dark mode"
-                title="Toggle theme"
-            >
-                <span id="themeIcon">☾</span>
-            </button>
-
-
-            <a
-                href="account.html"
-                class="btn btn-primary header-account"
-            >
-                Account
-            </a>
-
-
-            <button
-                class="menu-toggle"
-                id="mobileMenuBtn"
-                type="button"
-                aria-label="Open navigation"
-                aria-expanded="false"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main>
-
-
-    <!-- =================================================
-         HERO
-    ================================================== -->
-
-    <section class="hero hero-small">
-
-        <div class="container">
-
-            <div class="hero-content">
-
-                <span class="eyebrow">
-
-                    <span>✦</span>
-
-                    JG Work
-
-                </span>
-
-
-                <h1>
-
-                    Turn your skills into
-                    <span class="gradient-text">
-                        opportunities.
-                    </span>
-
-                </h1>
-
-
-                <p>
-
-                    Discover jobs, freelance projects and
-                    opportunities where you can put your skills
-                    to work.
-
-                </p>
-
-
-                <div class="hero-actions">
-
-                    <a
-                        href="account.html"
-                        class="btn btn-primary btn-lg"
-                    >
-                        Build Your Profile
-                    </a>
-
-
-                    <a
-                        href="#opportunities"
-                        class="btn btn-secondary btn-lg"
-                    >
-                        Explore Work
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         WORK STATS
-    ================================================== -->
-
-    <section class="section section-tight">
-
-        <div class="container">
-
-            <div class="stats-grid">
-
-                <article class="stat-card">
-
-                    <span class="stat-value">
-                        100+
-                    </span>
-
-                    <span class="stat-label">
-                        Opportunities
-                    </span>
-
-                </article>
-
-
-                <article class="stat-card">
-
-                    <span class="stat-value">
-                        20+
-                    </span>
-
-                    <span class="stat-label">
-                        Skill Categories
-                    </span>
-
-                </article>
-
-
-                <article class="stat-card">
-
-                    <span class="stat-value">
-                        24/7
-                    </span>
-
-                    <span class="stat-label">
-                        Platform Access
-                    </span>
-
-                </article>
-
-
-                <article class="stat-card">
-
-                    <span class="stat-value">
-                        JG AI
-                    </span>
-
-                    <span class="stat-label">
-                        Opportunity Assistant
-                    </span>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-    <!-- =================================================
-         OPPORTUNITIES
-    ================================================== -->
-
-    <section
-        class="section section-tight"
-        id="opportunities"
-    >
-
-        <div class="container">
-
-
-            <div class="section-heading">
-
-                <span class="eyebrow">
-                    Explore opportunities
-                </span>
-
-                <h2>
-                    Find work that matches your skills.
-                </h2>
-
-                <p>
-                    Search through opportunities and discover
-                    projects where your abilities can make an impact.
-                </p>
-
-            </div>
-
-
-
-            <!-- SEARCH -->
-
-            <div class="search-box">
-
-                <span class="search-icon">
-                    ⌕
-                </span>
-
-                <input
-                    type="search"
-                    id="workSearch"
-                    placeholder="Search jobs, projects or skills..."
-                    aria-label="Search work opportunities"
-                    autocomplete="off"
-                >
-
-            </div>
-
-
-
-            <!-- FILTERS -->
-
-            <div
-                class="filter-row"
-                id="workFilters"
-            >
-
-                <button
-                    class="filter-chip active"
-                    type="button"
-                    data-filter="all"
-                >
-                    All
-                </button>
-
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="remote"
-                >
-                    Remote
-                </button>
-
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="technology"
-                >
-                    Technology
-                </button>
-
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="creative"
-                >
-                    Creative
-                </button>
-
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="business"
-                >
-                    Business
-                </button>
-
-            </div>
-
-
-
-            <!-- WORK GRID -->
-
-            <div
-                class="course-grid"
-                id="workGrid"
-            >
-
-
-                <!-- OPPORTUNITY 1 -->
-
-                <article
-                    class="course-card work-card"
-                    data-category="remote technology"
-                    data-name="frontend web developer"
-                >
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Technology
-                            </span>
-
-                            <span class="badge">
-                                Remote
-                            </span>
-
-                        </div>
-
-
-                        <h3>
-                            Frontend Web Developer
-                        </h3>
-
-
-                        <p>
-                            Build responsive web interfaces
-                            and turn designs into functional
-                            websites.
-                        </p>
-
-
-                        <div class="course-meta">
-
-                            <span>
-                                💻 Remote
-                            </span>
-
-                            <span>
-                                🕐 Project
-                            </span>
-
-                        </div>
-
-
-                        <div class="work-footer">
-
-                            <strong>
-                                Web Development
-                            </strong>
-
-                            <a
-                                href="account.html"
-                                class="text-link"
-                            >
-                                View Opportunity →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- OPPORTUNITY 2 -->
-
-                <article
-                    class="course-card work-card"
-                    data-category="remote creative"
-                    data-name="graphic designer"
-                >
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Creative
-                            </span>
-
-                            <span class="badge">
-                                Remote
-                            </span>
-
-                        </div>
-
-
-                        <h3>
-                            Graphic Designer
-                        </h3>
-
-
-                        <p>
-                            Create social media graphics,
-                            promotional materials and brand assets.
-                        </p>
-
-
-                        <div class="course-meta">
-
-                            <span>
-                                🎨 Design
-                            </span>
-
-                            <span>
-                                🕐 Project
-                            </span>
-
-                        </div>
-
-
-                        <div class="work-footer">
-
-                            <strong>
-                                Graphic Design
-                            </strong>
-
-                            <a
-                                href="account.html"
-                                class="text-link"
-                            >
-                                View Opportunity →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- OPPORTUNITY 3 -->
-
-                <article
-                    class="course-card work-card"
-                    data-category="remote creative"
-                    data-name="video editor"
-                >
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Creative
-                            </span>
-
-                            <span class="badge">
-                                Remote
-                            </span>
-
-                        </div>
-
-
-                        <h3>
-                            Video Editor
-                        </h3>
-
-
-                        <p>
-                            Edit short-form videos,
-                            promotional content and social media clips.
-                        </p>
-
-
-                        <div class="course-meta">
-
-                            <span>
-                                🎬 Video
-                            </span>
-
-                            <span>
-                                🕐 Freelance
-                            </span>
-
-                        </div>
-
-
-                        <div class="work-footer">
-
-                            <strong>
-                                Video Editing
-                            </strong>
-
-                            <a
-                                href="account.html"
-                                class="text-link"
-                            >
-                                View Opportunity →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- OPPORTUNITY 4 -->
-
-                <article
-                    class="course-card work-card"
-                    data-category="technology"
-                    data-name="python developer"
-                >
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Technology
-                            </span>
-
-                        </div>
-
-
-                        <h3>
-                            Python Developer
-                        </h3>
-
-
-                        <p>
-                            Help develop Python-based tools,
-                            automation scripts and applications.
-                        </p>
-
-
-                        <div class="course-meta">
-
-                            <span>
-                                🐍 Python
-                            </span>
-
-                            <span>
-                                🕐 Project
-                            </span>
-
-                        </div>
-
-
-                        <div class="work-footer">
-
-                            <strong>
-                                Programming
-                            </strong>
-
-                            <a
-                                href="account.html"
-                                class="text-link"
-                            >
-                                View Opportunity →
-                            </a>
-
-                        </div>
-
-                    </div>
-
-                </article>
-
-
-
-                <!-- OPPORTUNITY 5 -->
-
-                <article
-                    class="course
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="JG Work — discover jobs, freelance projects, contracts and opportunities that match your skills."
+  >
+
+  <meta name="theme-color" content="#2563eb">
+
+  <title>Work | JG — Find Skills. Find Work.</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =========================================================
+       JG WORK — PAGE-SPECIFIC STYLES
+       ========================================================= */
+
+    .work-page {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .work-hero {
+      position: relative;
+      padding: clamp(32px, 6vw, 72px) 0 28px;
+      overflow: hidden;
+    }
+
+    .work-hero::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      top: -160px;
+      right: -140px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.12);
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .work-hero::after {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      bottom: -170px;
+      left: -120px;
+      border-radius: 50%;
+      background: rgba(124, 58, 237, 0.10);
+      pointer-events: none;
+    }
+
+    .work-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .work-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 7px 11px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface);
+      color: var(--primary);
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.02em;
+      margin-bottom: 16px;
+    }
+
+    .work-kicker-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #16a34a;
+      box-shadow: 0 0 0 5px rgba(22, 163, 74, 0.10);
+    }
+
+    .work-hero h1 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2rem, 7vw, 4.25rem);
+      line-height: 0.98;
+      letter-spacing: -0.055em;
+    }
+
+    .work-gradient-text {
+      background: linear-gradient(
+        120deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .work-hero p {
+      max-width: 700px;
+      margin: 20px 0 0;
+      color: var(--muted);
+      font-size: clamp(0.98rem, 2vw, 1.1rem);
+      line-height: 1.75;
+    }
+
+    .work-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 25px;
+    }
+
+    .work-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .work-stat {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .work-stat strong {
+      display: block;
+      font-size: 1.35rem;
+      letter-spacing: -0.03em;
+    }
+
+    .work-stat span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+
+    /* Search */
+
+    .work-search-section {
+      position: relative;
+      z-index: 2;
+      margin-top: 4px;
+    }
+
+    .work-search-card {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      background: var(--surface);
+      box-shadow: var(--shadow-md);
+   
