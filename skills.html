@@ -1,1051 +1,224 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
-
-    <meta
-        name="description"
-        content="JG Skills — Discover practical skills you can learn and use to build your future."
-    >
-
-    <meta name="theme-color" content="#2563eb">
-
-    <title>JG Skills | Find Skills. Find Work.</title>
-
-    <link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
-
-<!-- =====================================================
-     HEADER
-===================================================== -->
-
-<header class="site-header">
-
-    <div class="container header-inner">
-
-        <a href="index.html" class="brand" aria-label="JG Home">
-            <span class="brand-mark">JG</span>
-
-            <span class="brand-text">
-                <strong>JG</strong>
-                <small>Find Skills. Find Work.</small>
-            </span>
-        </a>
-
-        <nav class="main-nav" id="mainNav">
-
-            <a href="index.html">Home</a>
-            <a href="skills.html" class="active">Skills</a>
-            <a href="work.html">Work</a>
-            <a href="learn.html">Learn</a>
-            <a href="ai.html">JG AI</a>
-            <a href="premium.html">Premium</a>
-
-        </nav>
-
-        <div class="header-actions">
-
-            <button
-                class="icon-button"
-                id="themeToggle"
-                type="button"
-                aria-label="Toggle dark mode"
-                title="Toggle theme"
-            >
-                <span id="themeIcon">☾</span>
-            </button>
-
-            <a href="account.html" class="btn btn-primary header-account">
-                Account
-            </a>
-
-            <button
-                class="menu-toggle"
-                id="mobileMenuBtn"
-                type="button"
-                aria-label="Open navigation"
-                aria-expanded="false"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-        </div>
-
-    </div>
-
-</header>
-
-
-<!-- =====================================================
-     MAIN
-===================================================== -->
-
-<main>
-
-    <!-- HERO -->
-
-    <section class="hero hero-small">
-
-        <div class="container">
-
-            <div class="hero-content">
-
-                <span class="eyebrow">
-                    <span>✦</span>
-                    Explore your potential
-                </span>
-
-                <h1>
-                    Discover skills that can
-                    <span class="gradient-text">change your future.</span>
-                </h1>
-
-                <p>
-                    Explore practical skills, learn at your own pace,
-                    build real projects and prepare yourself for
-                    opportunities.
-                </p>
-
-                <div class="hero-actions">
-
-                    <a href="learn.html" class="btn btn-primary btn-lg">
-                        Start Learning
-                    </a>
-
-                    <a href="work.html" class="btn btn-secondary btn-lg">
-                        Find Work
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         SEARCH / FILTER
-    ================================================== -->
-
-    <section class="section section-tight">
-
-        <div class="container">
-
-            <div class="section-heading">
-
-                <span class="eyebrow">
-                    Skill discovery
-                </span>
-
-                <h2>Find a skill for your next move.</h2>
-
-                <p>
-                    Choose something you're interested in or
-                    explore a skill that can open new opportunities.
-                </p>
-
-            </div>
-
-
-            <div class="search-box">
-
-                <span class="search-icon">⌕</span>
-
-                <input
-                    type="search"
-                    id="skillSearch"
-                    placeholder="Search skills..."
-                    aria-label="Search skills"
-                    autocomplete="off"
-                >
-
-            </div>
-
-
-            <div class="filter-row" id="skillFilters">
-
-                <button
-                    class="filter-chip active"
-                    type="button"
-                    data-filter="all"
-                >
-                    All Skills
-                </button>
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="technology"
-                >
-                    Technology
-                </button>
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="creative"
-                >
-                    Creative
-                </button>
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="business"
-                >
-                    Business
-                </button>
-
-                <button
-                    class="filter-chip"
-                    type="button"
-                    data-filter="digital"
-                >
-                    Digital
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         SKILLS
-    ================================================== -->
-
-    <section class="section section-tight">
-
-        <div class="container">
-
-            <div
-                class="course-grid"
-                id="skillsGrid"
-            >
-
-                <!-- WEB DEVELOPMENT -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="technology digital"
-                    data-name="web development"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>&lt;/&gt;</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Technology
-                            </span>
-
-                            <span class="badge">
-                                Popular
-                            </span>
-
-                        </div>
-
-                        <h3>Web Development</h3>
-
-                        <p>
-                            Learn how websites and modern web
-                            applications are designed and built.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=web-development"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- GRAPHIC DESIGN -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="creative digital"
-                    data-name="graphic design"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>✦</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Creative
-                            </span>
-
-                        </div>
-
-                        <h3>Graphic Design</h3>
-
-                        <p>
-                            Learn visual design, branding,
-                            layouts and digital graphics.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=graphic-design"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- VIDEO EDITING -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="creative digital"
-                    data-name="video editing"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>▶</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Creative
-                            </span>
-
-                            <span class="badge">
-                                In Demand
-                            </span>
-
-                        </div>
-
-                        <h3>Video Editing</h3>
-
-                        <p>
-                            Learn how to turn raw footage into
-                            engaging professional videos.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=video-editing"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- PYTHON -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="technology digital"
-                    data-name="python programming"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>Py</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Technology
-                            </span>
-
-                        </div>
-
-                        <h3>Python Programming</h3>
-
-                        <p>
-                            Start programming with Python and
-                            build a strong foundation in coding.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=python"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- DIGITAL MARKETING -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="business digital"
-                    data-name="digital marketing"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>📈</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Business
-                            </span>
-
-                        </div>
-
-                        <h3>Digital Marketing</h3>
-
-                        <p>
-                            Learn how digital platforms can be
-                            used to promote brands, products and services.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=digital-marketing"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- DATA ANALYSIS -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="technology business digital"
-                    data-name="data analysis"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>▥</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Technology
-                            </span>
-
-                        </div>
-
-                        <h3>Data Analysis</h3>
-
-                        <p>
-                            Learn how to work with data,
-                            identify patterns and communicate insights.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=data-analysis"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- UI UX -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="creative technology"
-                    data-name="ui ux design"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>◈</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Creative
-                            </span>
-
-                        </div>
-
-                        <h3>UI/UX Design</h3>
-
-                        <p>
-                            Learn how to design digital experiences
-                            that are useful, clear and enjoyable.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=ui-ux"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-
-                <!-- CONTENT CREATION -->
-
-                <article
-                    class="course-card skill-card"
-                    data-category="creative digital"
-                    data-name="content creation"
-                >
-
-                    <div class="course-image skill-icon-box">
-                        <span>✎</span>
-                    </div>
-
-                    <div class="course-body">
-
-                        <div class="badge-row">
-
-                            <span class="badge badge-primary">
-                                Creative
-                            </span>
-
-                        </div>
-
-                        <h3>Content Creation</h3>
-
-                        <p>
-                            Learn how to create useful and engaging
-                            content for digital audiences.
-                        </p>
-
-                        <div class="course-meta">
-
-                            <span>📚 Beginner Friendly</span>
-                            <span>⏱ Self-paced</span>
-
-                        </div>
-
-                        <a
-                            href="course.html?course=content-creation"
-                            class="btn btn-secondary btn-block"
-                        >
-                            Explore Skill
-                        </a>
-
-                    </div>
-
-                </article>
-
-            </div>
-
-
-            <!-- NO RESULTS -->
-
-            <div
-                id="skillsEmpty"
-                class="empty-state"
-                hidden
-            >
-
-                <div class="empty-icon">
-                    ⌕
-                </div>
-
-                <h3>No skills found</h3>
-
-                <p>
-                    Try another search or choose a different category.
-                </p>
-
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    id="clearSkillSearch"
-                >
-                    Clear Search
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         WHY LEARN
-    ================================================== -->
-
-    <section class="section">
-
-        <div class="container">
-
-            <div class="section-heading center">
-
-                <span class="eyebrow">
-                    Learn with purpose
-                </span>
-
-                <h2>Turn knowledge into opportunity.</h2>
-
-                <p>
-                    JG is designed to help you move from learning
-                    to actually using your skills.
-                </p>
-
-            </div>
-
-
-            <div class="feature-grid">
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        01
-                    </div>
-
-                    <h3>Learn</h3>
-
-                    <p>
-                        Build practical knowledge through structured
-                        learning paths.
-                    </p>
-
-                </article>
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        02
-                    </div>
-
-                    <h3>Practice</h3>
-
-                    <p>
-                        Work through projects and activities that
-                        help turn knowledge into experience.
-                    </p>
-
-                </article>
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        03
-                    </div>
-
-                    <h3>Showcase</h3>
-
-                    <p>
-                        Build a professional profile and demonstrate
-                        what you can actually do.
-                    </p>
-
-                </article>
-
-
-                <article class="feature-card">
-
-                    <div class="feature-icon">
-                        04
-                    </div>
-
-                    <h3>Grow</h3>
-
-                    <p>
-                        Discover opportunities and continue developing
-                        your career.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         AI CTA
-    ================================================== -->
-
-    <section class="section">
-
-        <div class="container">
-
-            <div class="cta-card">
-
-                <div>
-
-                    <span class="eyebrow">
-                        Powered by JG AI
-                    </span>
-
-                    <h2>
-                        Not sure what skill to learn?
-                    </h2>
-
-                    <p>
-                        JG AI will eventually help you explore skills,
-                        learning paths and opportunities based on your
-                        goals.
-                    </p>
-
-                </div>
-
-                <a
-                    href="ai.html"
-                    class="btn btn-primary btn-lg"
-                >
-                    Explore JG AI
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- =================================================
-         FINAL CTA
-    ================================================== -->
-
-    <section class="section section-last">
-
-        <div class="container">
-
-            <div class="hero-card">
-
-                <span class="eyebrow">
-                    Your next chapter starts here
-                </span>
-
-                <h2>
-                    Choose a skill.
-                    Build something.
-                    Move forward.
-                </h2>
-
-                <p>
-                    Start learning today and build skills you can
-                    use in the real world.
-                </p>
-
-                <div class="hero-actions">
-
-                    <a
-                        href="learn.html"
-                        class="btn btn-primary btn-lg"
-                    >
-                        Start Learning
-                    </a>
-
-                    <a
-                        href="account.html"
-                        class="btn btn-secondary btn-lg"
-                    >
-                        Open Account
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<!-- =====================================================
-     FOOTER
-===================================================== -->
-
-<footer class="site-footer">
-
-    <div class="container">
-
-        <div class="footer-grid">
-
-            <div class="footer-brand">
-
-                <a href="index.html" class="brand">
-
-                    <span class="brand-mark">
-                        JG
-                    </span>
-
-                    <span class="brand-text">
-                        <strong>JG</strong>
-                        <small>Find Skills. Find Work.</small>
-                    </span>
-
-                </a>
-
-                <p>
-                    A platform for learning skills, discovering
-                    opportunities and building your future.
-                </p>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>Platform</h4>
-
-                <a href="skills.html">Skills</a>
-                <a href="learn.html">Learn</a>
-                <a href="work.html">Work</a>
-                <a href="ai.html">JG AI</a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>Account</h4>
-
-                <a href="account.html">Account</a>
-                <a href="premium.html">Premium</a>
-                <a href="certificate.html">Certificates</a>
-                <a href="verify.html">Verify Certificate</a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>JG</h4>
-
-                <a href="index.html">Home</a>
-                <a href="enrollment.html">Enrollment</a>
-                <a href="exam.html">Exam</a>
-                <a href="final project.html">Final Project</a>
-
-            </div>
-
-        </div>
-
-
-        <div class="footer-bottom">
-
-            <p>
-                © <span data-current-year></span> JG.
-                All rights reserved.
-            </p>
-
-            <p>
-                Built for learning, growth and opportunity.
-            </p>
-
-        </div>
-
-    </div>
-
-</footer>
-
-
-<!-- =====================================================
-     PAGE SCRIPT
-===================================================== -->
-
-<script src="js/app.js" defer></script>
-
-
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-
-    const searchInput = document.getElementById("skillSearch");
-    const filters = document.querySelectorAll(".filter-chip");
-    const cards = document.querySelectorAll(".skill-card");
-    const emptyState = document.getElementById("skillsEmpty");
-    const clearButton = document.getElementById("clearSkillSearch");
-
-    let currentFilter = "all";
-
-    function filterSkills() {
-
-        const searchTerm =
-            searchInput.value
-                .trim()
-                .toLowerCase();
-
-        let visibleCount = 0;
-
-        cards.forEach(card => {
-
-            const name =
-                card.dataset.name || "";
-
-            const category =
-                card.dataset.category || "";
-
-            const matchesSearch =
-                !searchTerm ||
-                name.includes(searchTerm);
-
-            const matchesFilter =
-                currentFilter === "all" ||
-                category.includes(currentFilter);
-
-            const shouldShow =
-                matchesSearch &&
-                matchesFilter;
-
-            card.hidden = !shouldShow;
-
-            if (shouldShow) {
-                visibleCount++;
-            }
-
-        });
-
-        emptyState.hidden = visibleCount !== 0;
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="JG Skills — Discover valuable skills, learn faster and connect your skills to opportunities."
+  >
+
+  <meta name="theme-color" content="#2563eb">
+
+  <title>Skills | JG — Find Skills. Find Work.</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =========================================================
+       JG SKILLS
+       Premium Skill Discovery Experience
+    ========================================================= */
+
+    html,
+    body {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
     }
 
+    * {
+      box-sizing: border-box;
+    }
 
-    searchInput?.addEventListener(
-        "input",
-        filterSkills
-    );
+    body {
+      background: var(--background);
+    }
 
+    .skills-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      background:
+        radial-gradient(
+          circle at 10% 5%,
+          rgba(37, 99, 235, 0.08),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 18%,
+          rgba(124, 58, 237, 0.07),
+          transparent 28%
+        ),
+        var(--background);
+    }
 
-    filters.forEach(button => {
+    /* =========================================================
+       HERO
+    ========================================================= */
 
-        button.addEventListener("click", () => {
+    .skills-hero {
+      padding: 58px 20px 30px;
+    }
 
-            filters.forEach(item => {
-                item.classList.remove("active");
-            });
+    .skills-hero-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+    }
 
-            button.classList.add("active");
+    .skills-hero-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: 30px;
+      padding: 42px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(37, 99, 235, 0.11),
+          rgba(124, 58, 237, 0.08),
+          rgba(6, 182, 212, 0.05)
+        ),
+        var(--surface);
+      box-shadow: var(--shadow-md);
+    }
 
-            currentFilter =
-                button.dataset.filter || "all";
+    .skills-hero-card::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -100px;
+      top: -110px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.09);
+      pointer-events: none;
+    }
 
-            filterSkills();
+    .skills-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 780px;
+    }
 
-        });
+    .skills-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      margin-bottom: 17px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: var(--surface-2);
+      color: var(--primary);
+      font-size: 0.76rem;
+      font-weight: 800;
+    }
 
-    });
+    .skills-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--primary);
+    }
 
+    .skills-hero h1 {
+      margin: 0;
+      color: var(--text);
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      line-height: 1.02;
+      letter-spacing: -0.05em;
+    }
 
-    clearButton?.addEventListener("click", () => {
+    .skills-hero h1 span {
+      background: linear-gradient(
+        90deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
 
-        searchInput.value = "";
+    .skills-hero-description {
+      max-width: 700px;
+      margin: 17px 0 0;
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+    }
 
-        currentFilter = "all";
+    .skills-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+      margin-top: 25px;
+    }
 
-        filters.forEach(item => {
-            item.classList.remove("active");
-        });
+    /* =========================================================
+       STATS
+    ========================================================= */
 
-        filters[0]?.classList.add("active");
+    .skills-stats {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto 28px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
 
-        filterSkills();
+    .skill-stat {
+      padding: 19px;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
 
-        searchInput.focus();
+    .skill-stat strong {
+      display: block;
+      color: var(--text);
+      font-size: 1.35rem;
+      letter-spacing: -0.02em;
+    }
 
-    });
+    .skill-stat span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 0.74rem;
+      line-height: 1.4;
+    }
 
-});
-</script>
+    /* =========================================================
+       MAIN CONTENT
+    ========================================================= */
 
-</body>
-</html>
+    .skills-main {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto 70px;
+    }
+
+    .skills-layout {
+      display: grid;
+      grid-template-columns: 250px minmax(0, 1fr);
+      gap: 18px;
+      align-items: start;
+    }
+
+    /* =========================================================
+       FILTER SIDEBAR
+    ========================================================= */
+
+    .skills-filter {
+      position: sticky;
