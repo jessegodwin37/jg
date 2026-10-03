@@ -1,620 +1,243 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="Enroll in a JG course and start building practical skills.">
-
-    <meta name="theme-color"
-          content="#2563eb">
-
-    <title>JG Enrollment | Start Learning</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-        /* =========================================
-           ENROLLMENT PAGE
-        ========================================= */
-
-        .enroll-hero {
-            padding: 75px 20px 55px;
-            background:
-                radial-gradient(
-                    circle at 10% 10%,
-                    rgba(37, 99, 235, .14),
-                    transparent 35%
-                ),
-                radial-gradient(
-                    circle at 90% 20%,
-                    rgba(124, 58, 237, .12),
-                    transparent 35%
-                );
-        }
-
-        .enroll-hero-inner {
-            max-width: 900px;
-            margin: auto;
-            text-align: center;
-        }
-
-        .enroll-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 14px;
-            border-radius: 999px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            color: var(--primary);
-            font-size: .82rem;
-            font-weight: 800;
-            margin-bottom: 20px;
-        }
-
-        .enroll-hero h1 {
-            margin: 0 0 16px;
-            font-size: clamp(2.3rem, 6vw, 4rem);
-            line-height: 1.05;
-            letter-spacing: -1.5px;
-        }
-
-        .enroll-hero p {
-            max-width: 680px;
-            margin: auto;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        .enrollment-container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 45px 20px 90px;
-        }
-
-        .enrollment-layout {
-            display: grid;
-            grid-template-columns: 1.4fr .8fr;
-            gap: 25px;
-            align-items: start;
-        }
-
-        /* =========================================
-           FORM
-        ========================================= */
-
-        .enrollment-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 30px;
-            box-shadow: var(--shadow);
-        }
-
-        .form-header {
-            margin-bottom: 30px;
-        }
-
-        .form-header h2 {
-            margin: 0 0 8px;
-        }
-
-        .form-header p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        .form-section {
-            margin-bottom: 32px;
-        }
-
-        .form-section-title {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 18px;
-        }
-
-        .form-section-number {
-            width: 30px;
-            height: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 9px;
-            background: var(--primary);
-            color: #fff;
-            font-size: .8rem;
-            font-weight: 800;
-        }
-
-        .form-section-title h3 {
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 17px;
-        }
-
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 7px;
-        }
-
-        .form-group.full {
-            grid-column: 1 / -1;
-        }
-
-        .form-group label {
-            font-size: .85rem;
-            font-weight: 700;
-        }
-
-        .form-group input,
-        .form-group select,
-        .form-group textarea {
-            width: 100%;
-            box-sizing: border-box;
-            border: 1px solid var(--border);
-            background: var(--background);
-            color: var(--text);
-            border-radius: 11px;
-            padding: 13px 14px;
-            outline: none;
-            font-family: inherit;
-            font-size: .92rem;
-            transition: border-color .2s ease,
-                        box-shadow .2s ease;
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus,
-        .form-group textarea:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, .1);
-        }
-
-        .field-note {
-            color: var(--text-secondary);
-            font-size: .75rem;
-            line-height: 1.5;
-        }
-
-        /* =========================================
-           COURSE SELECTOR
-        ========================================= */
-
-        .course-options {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-        }
-
-        .course-option {
-            position: relative;
-        }
-
-        .course-option input {
-            position: absolute;
-            opacity: 0;
-            pointer-events: none;
-        }
-
-        .course-option label {
-            display: block;
-            padding: 17px;
-            border: 1px solid var(--border);
-            border-radius: 13px;
-            cursor: pointer;
-            transition: .2s ease;
-            height: 100%;
-            box-sizing: border-box;
-        }
-
-        .course-option label:hover {
-            border-color: var(--primary);
-        }
-
-        .course-option input:checked + label {
-            border-color: var(--primary);
-            background: rgba(37, 99, 235, .07);
-            box-shadow: 0 0 0 2px rgba(37, 99, 235, .1);
-        }
-
-        .course-icon {
-            font-size: 1.4rem;
-            margin-bottom: 8px;
-        }
-
-        .course-name {
-            display: block;
-            font-weight: 800;
-            margin-bottom: 5px;
-        }
-
-        .course-price {
-            color: var(--primary);
-            font-size: .82rem;
-            font-weight: 800;
-        }
-
-        /* =========================================
-           PAYMENT
-        ========================================= */
-
-        .payment-options {
-            display: grid;
-            gap: 10px;
-        }
-
-        .payment-option {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 15px;
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: .2s ease;
-        }
-
-        .payment-option:hover {
-            border-color: var(--primary);
-        }
-
-        .payment-option input {
-            accent-color: var(--primary);
-        }
-
-        .payment-info strong {
-            display: block;
-            margin-bottom: 3px;
-        }
-
-        .payment-info span {
-            color: var(--text-secondary);
-            font-size: .78rem;
-        }
-
-        /* =========================================
-           TERMS
-        ========================================= */
-
-        .terms-box {
-            display: flex;
-            align-items: flex-start;
-            gap: 10px;
-            margin: 25px 0;
-        }
-
-        .terms-box input {
-            margin-top: 4px;
-            accent-color: var(--primary);
-        }
-
-        .terms-box label {
-            color: var(--text-secondary);
-            font-size: .82rem;
-            line-height: 1.6;
-        }
-
-        .terms-box a {
-            color: var(--primary);
-        }
-
-        .submit-button {
-            width: 100%;
-            border: none;
-            border-radius: 12px;
-            padding: 15px;
-            background: var(--primary);
-            color: #fff;
-            font-size: 1rem;
-            font-weight: 800;
-            cursor: pointer;
-            transition: .2s ease;
-        }
-
-        .submit-button:hover {
-            opacity: .92;
-            transform: translateY(-1px);
-        }
-
-        .submit-button:disabled {
-            opacity: .6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* =========================================
-           SUMMARY
-        ========================================= */
-
-        .summary-card {
-            position: sticky;
-            top: 90px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: var(--radius-lg);
-            padding: 25px;
-            box-shadow: var(--shadow);
-        }
-
-        .summary-label {
-            color: var(--text-secondary);
-            font-size: .78rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: .5px;
-        }
-
-        .selected-course {
-            padding: 20px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .selected-course-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .selected-course h3 {
-            margin: 0 0 6px;
-        }
-
-        .selected-course p {
-            margin: 0;
-            color: var(--text-secondary);
-            font-size: .85rem;
-        }
-
-        .summary-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 13px 0;
-            border-bottom: 1px solid var(--border);
-            font-size: .88rem;
-        }
-
-        .summary-row span:first-child {
-            color: var(--text-secondary);
-        }
-
-        .summary-total {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 20px;
-            font-weight: 800;
-        }
-
-        .summary-total strong {
-            color: var(--primary);
-            font-size: 1.25rem;
-        }
-
-        .secure-note {
-            margin-top: 20px;
-            padding: 13px;
-            border-radius: 10px;
-            background: rgba(34, 197, 94, .08);
-            color: var(--text-secondary);
-            font-size: .76rem;
-            line-height: 1.5;
-        }
-
-        /* =========================================
-           PAYMENT INFO
-        ========================================= */
-
-        .bank-details {
-            display: none;
-            margin-top: 15px;
-            padding: 18px;
-            border: 1px dashed var(--border);
-            border-radius: 12px;
-            background: var(--background);
-        }
-
-        .bank-details.show {
-            display: block;
-        }
-
-        .bank-details h4 {
-            margin: 0 0 12px;
-        }
-
-        .bank-row {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            padding: 7px 0;
-            font-size: .84rem;
-        }
-
-        .bank-row span {
-            color: var(--text-secondary);
-        }
-
-        .bank-row strong {
-            text-align: right;
-        }
-
-        /* =========================================
-           SUCCESS MESSAGE
-        ========================================= */
-
-        .success-message {
-            display: none;
-            padding: 25px;
-            border: 1px solid rgba(34, 197, 94, .3);
-            background: rgba(34, 197, 94, .08);
-            border-radius: 14px;
-            margin-bottom: 25px;
-        }
-
-        .success-message.show {
-            display: block;
-        }
-
-        .success-icon {
-            font-size: 2rem;
-            margin-bottom: 10px;
-        }
-
-        .success-message h3 {
-            margin: 0 0 8px;
-        }
-
-        .success-message p {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin: 0;
-        }
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
-        @media (max-width: 850px) {
-
-            .enrollment-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .summary-card {
-                position: static;
-                order: -1;
-            }
-
-        }
-
-        @media (max-width: 600px) {
-
-            .enroll-hero {
-                padding-top: 55px;
-            }
-
-            .enrollment-card {
-                padding: 21px;
-            }
-
-            .form-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-group.full {
-                grid-column: auto;
-            }
-
-            .course-options {
-                grid-template-columns: 1fr;
-            }
-
-            .bank-row {
-                flex-direction: column;
-                gap: 3px;
-            }
-
-            .bank-row strong {
-                text-align: left;
-            }
-
-        }
-
-    </style>
-</head>
-
-<body>
-
-<!-- =========================================
-     HEADER
-========================================= -->
-
-<header class="site-header">
-
-    <div class="container header-inner">
-
-        <a href="index.html"
-           class="logo"
-           aria-label="JG Home">
-
-            <strong>JG</strong>
-
-            <span>
-                Find Skills. Find Work.
-            </span>
-
-        </a>
-
-
-        <button
-            class="mobile-menu-btn"
-            id="mobileMenuBtn"
-            aria-label="Open menu"
-            aria-expanded="false">
-
-            ☰
-
-        </button>
-
-
-        <nav class="main-nav" id="mainNav">
-
-            <a href="index.html">
-                Home
-            </a>
-
-            <a href="skills.html">
-                Skills
-            </a>
-
-            <a href="work.html">
-                Work
-            </a>
-
-            <a href="learn.html">
-                Learn
-            </a>
-
-            <a href="premium.html">
-                Premium
-            </a>
-
-            <a href="account.html">
-                Account
-            </a>
-
-            <a href="ai.html">
-                JG AI
-            </a>
-
-            <a href="enrollment.html"
-               class="nav-cta active">
-                Enroll
-            </a>
-
-            <button
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Toggle dark mode">
-
-                🌙
-
-           
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="Enroll in a JG learning course and begin building practical skills."
+  >
+
+  <meta name="theme-color" content="#2563eb">
+
+  <title>Enrollment | JG — Find Skills. Find Work.</title>
+
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /* =========================================================
+       JG ENROLLMENT — PAGE SPECIFIC STYLES
+       ========================================================= */
+
+    .enrollment-page {
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    .enrollment-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 34px 0 24px;
+    }
+
+    .enrollment-hero::before {
+      content: "";
+      position: absolute;
+      width: 380px;
+      height: 380px;
+      top: -210px;
+      right: -150px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.10);
+      pointer-events: none;
+    }
+
+    .enrollment-hero-inner {
+      position: relative;
+      z-index: 1;
+    }
+
+    .enrollment-breadcrumb {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-bottom: 17px;
+      color: var(--muted);
+      font-size: 0.78rem;
+    }
+
+    .enrollment-breadcrumb a {
+      color: var(--muted);
+    }
+
+    .enrollment-breadcrumb a:hover {
+      color: var(--primary);
+    }
+
+    .enrollment-breadcrumb-current {
+      color: var(--text);
+      font-weight: 750;
+    }
+
+    .enrollment-hero h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: clamp(2rem, 6vw, 3.6rem);
+      line-height: 1;
+      letter-spacing: -0.055em;
+    }
+
+    .enrollment-gradient {
+      background: linear-gradient(
+        120deg,
+        var(--primary),
+        var(--secondary),
+        var(--accent)
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .enrollment-hero p {
+      max-width: 700px;
+      margin: 15px 0 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 0.93rem;
+    }
+
+    /* =========================================================
+       PROGRESS
+       ========================================================= */
+
+    .enrollment-progress {
+      margin: 16px 0 25px;
+    }
+
+    .progress-track {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+    }
+
+    .progress-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      padding: 10px 11px;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+      background: var(--surface);
+    }
+
+    .progress-number {
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: var(--surface-2);
+      color: var(--muted);
+      font-size: 0.72rem;
+      font-weight: 900;
+    }
+
+    .progress-step.active {
+      border-color: rgba(37, 99, 235, 0.30);
+      background: rgba(37, 99, 235, 0.06);
+    }
+
+    .progress-step.active .progress-number {
+      background: var(--primary);
+      color: #fff;
+    }
+
+    .progress-step.complete .progress-number {
+      background: #16a34a;
+      color: #fff;
+    }
+
+    .progress-text strong {
+      display: block;
+      font-size: 0.72rem;
+    }
+
+    .progress-text span {
+      display: block;
+      margin-top: 2px;
+      color: var(--muted);
+      font-size: 0.64rem;
+    }
+
+    /* =========================================================
+       MAIN GRID
+       ========================================================= */
+
+    .enrollment-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 350px;
+      gap: 23px;
+      align-items: start;
+      padding-bottom: 60px;
+    }
+
+    .enrollment-main {
+      min-width: 0;
+    }
+
+    .enrollment-sidebar {
+      position: sticky;
+      top: 80px;
+      display: grid;
+      gap: 13px;
+    }
+
+    .enrollment-card {
+      padding: 21px;
+      border: 1px solid var(--border);
+      border-radius: 21px;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .enrollment-card + .enrollment-card {
+      margin-top: 14px;
+    }
+
+    .card-heading {
+      margin-bottom: 17px;
+    }
+
+    .card-heading h2 {
+      margin: 0;
+      font-size: 1.08rem;
+      letter-spacing: -0.025em;
+    }
+
+    .card-heading p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.76rem;
+    }
+
+    /* =========================================================
+       FORM
+       ========================================================= */
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 13px;
+    }
+
+    .form-group {
+      min-width: 0;
+    }
+
+    .form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .form-label {
+      display: block;
+      margin
