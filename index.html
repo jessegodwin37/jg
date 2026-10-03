@@ -1,318 +1,356 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-    <meta
-        name="theme-color"
-        content="#2563eb"
-    >
+  <meta
+    name="theme-color"
+    content="#2563eb"
+  >
 
-    <meta
-        name="description"
-        content="JG — Find Skills. Find Work. Learn practical skills, build your career and connect with opportunities."
-    >
+  <meta
+    name="description"
+    content="JG — Find Skills. Find Work. Learn practical skills, discover opportunities and build your future with JG."
+  >
 
-    <meta
-        name="robots"
-        content="index, follow"
-    >
+  <meta
+    name="robots"
+    content="index, follow"
+  >
 
-    <title>JG — Find Skills. Find Work.</title>
+  <title>JG — Find Skills. Find Work.</title>
 
-    <!-- Main stylesheet -->
-    <link
-        rel="stylesheet"
-        href="css/style.css"
-    >
+  <!-- =====================================================
+       STYLES
+       ===================================================== -->
 
-    <!-- Basic PWA / app metadata -->
-    <meta
-        name="mobile-web-app-capable"
-        content="yes"
-    >
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
 
-    <meta
-        name="apple-mobile-web-app-capable"
-        content="yes"
-    >
+  <!-- =====================================================
+       EARLY THEME SCRIPT
+       Prevents unnecessary light/dark flash
+       ===================================================== -->
 
-    <meta
-        name="apple-mobile-web-app-status-bar-style"
-        content="default"
-    >
+  <script>
+    (function () {
+      try {
+        const saved =
+          localStorage.getItem("jg-theme");
 
-    <meta
-        name="apple-mobile-web-app-title"
-        content="JG"
-    >
+        const systemDark =
+          window.matchMedia &&
+          window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+
+        const theme =
+          saved === "dark" ||
+          saved === "light"
+            ? saved
+            : systemDark
+              ? "dark"
+              : "light";
+
+        document.documentElement.setAttribute(
+          "data-theme",
+          theme
+        );
+      } catch (error) {
+        document.documentElement.setAttribute(
+          "data-theme",
+          "light"
+        );
+      }
+    })();
+  </script>
 </head>
 
 <body>
 
-<!-- =====================================================
-     HEADER
-===================================================== -->
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
 
-<header class="site-header">
+  <header class="site-header">
 
-    <div class="container nav-container">
+    <div class="container header-inner">
+
+      <a
+        href="index.html"
+        class="brand"
+        aria-label="JG home"
+      >
+
+        <span
+          class="brand-mark"
+          aria-hidden="true"
+        >
+          JG
+        </span>
+
+        <span>
+          <span class="brand-text">
+            JG
+          </span>
+
+          <span class="brand-subtitle">
+            Find Skills. Find Work.
+          </span>
+        </span>
+
+      </a>
+
+      <nav
+        class="nav"
+        data-main-nav
+        aria-label="Main navigation"
+      >
 
         <a
-            href="index.html"
-            class="logo"
-            aria-label="JG Home"
+          href="index.html"
+          class="active"
+          data-nav-link
+          aria-current="page"
         >
-
-            <span class="logo-mark">
-                JG
-            </span>
-
-            <span class="logo-text">
-                Find Skills. Find Work.
-            </span>
-
+          Home
         </a>
 
-
-        <nav
-            class="main-nav"
-            id="mainNav"
-            aria-label="Main navigation"
+        <a
+          href="skills.html"
+          data-nav-link
         >
+          Skills
+        </a>
 
-            <a
-                href="index.html"
-                class="active"
-            >
-                Home
-            </a>
+        <a
+          href="work.html"
+          data-nav-link
+        >
+          Work
+        </a>
 
-            <a href="skills.html">
-                Skills
-            </a>
+        <a
+          href="learn.html"
+          data-nav-link
+        >
+          Learn
+        </a>
 
-            <a href="work.html">
-                Work
-            </a>
+        <a
+          href="ai.html"
+          data-nav-link
+        >
+          JG AI
+        </a>
 
-            <a href="learn.html">
-                Learn
-            </a>
+        <a
+          href="premium.html"
+          data-nav-link
+        >
+          Premium
+        </a>
 
-            <a href="ai.html">
-                JG AI
-            </a>
+        <a
+          href="account.html"
+          data-nav-link
+        >
+          Account
+        </a>
 
-            <a
-                href="premium.html"
-                class="nav-cta"
-            >
-                Premium
-            </a>
+      </nav>
 
-        </nav>
+      <div class="header-actions">
 
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          aria-label="Switch to dark mode"
+          title="Switch to dark mode"
+        >
+          <span data-theme-icon>
+            ☾
+          </span>
+        </button>
 
-        <div class="nav-actions">
+        <a
+          href="enrollment.html"
+          class="btn btn-primary"
+        >
+          Get Started
+        </a>
 
-            <button
-                type="button"
-                class="theme-toggle"
-                id="themeToggle"
-                aria-label="Switch to dark mode"
-                aria-pressed="false"
-                title="Switch theme"
-            >
-                🌙
-            </button>
+        <button
+          type="button"
+          class="mobile-menu-btn"
+          data-mobile-menu
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
 
-            <button
-                type="button"
-                class="mobile-menu-btn"
-                id="mobileMenuBtn"
-                aria-label="Open menu"
-                aria-expanded="false"
-                aria-controls="mainNav"
-            >
-                ☰
-            </button>
-
-        </div>
+      </div>
 
     </div>
 
-</header>
+  </header>
 
 
-<!-- =====================================================
-     MAIN
-===================================================== -->
+  <main>
 
-<main>
-
-    <!-- =================================================
+    <!-- ===================================================
          HERO
-    ================================================== -->
+         =================================================== -->
 
     <section class="hero">
 
-        <div class="container hero-grid">
+      <div class="container hero-grid">
 
-            <div class="hero-content">
+        <div
+          class="hero-copy"
+          data-reveal
+        >
 
-                <div class="hero-eyebrow">
-                    ✦ Build skills. Build your future.
+          <div class="hero-badge">
+            <span>✦</span>
+            <span>Build skills. Discover opportunities.</span>
+          </div>
+
+          <h1>
+            Your skills can become
+            <span class="gradient-text">
+              your future.
+            </span>
+          </h1>
+
+          <p class="lead">
+            JG connects people with practical skills,
+            learning opportunities and work possibilities
+            in one modern platform.
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              href="skills.html"
+              class="btn btn-primary btn-lg"
+            >
+              Explore Skills
+              <span aria-hidden="true">→</span>
+            </a>
+
+            <a
+              href="learn.html"
+              class="btn btn-secondary btn-lg"
+            >
+              Start Learning
+            </a>
+
+          </div>
+
+          <div
+            class="flex flex-wrap gap-3 mt-4"
+          >
+
+            <span class="badge badge-success">
+              ✓ Practical learning
+            </span>
+
+            <span class="badge badge-primary">
+              ✦ JG AI guidance
+            </span>
+
+            <span class="badge">
+              ◉ Mobile friendly
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- =============================================
+             APP PREVIEW
+             ============================================= -->
+
+        <div
+          class="hero-visual"
+          data-reveal
+        >
+
+          <div class="app-preview">
+
+            <div class="preview-window">
+
+              <div class="preview-top">
+
+                <div class="preview-dots">
+                  <span class="preview-dot"></span>
+                  <span class="preview-dot"></span>
+                  <span class="preview-dot"></span>
                 </div>
 
+                <span class="badge badge-primary">
+                  JG Platform
+                </span>
 
-                <h1>
-                    Learn skills.
-                    <span class="text-gradient">
-                        Find opportunities.
-                    </span>
-                    Grow.
-                </h1>
+              </div>
 
 
-                <p class="hero-description">
-                    JG is a modern platform designed to help
-                    you learn practical skills, develop your
-                    abilities and discover opportunities to
-                    put those skills to work.
-                </p>
+              <div class="preview-body">
 
+                <div class="preview-card">
 
-                <div class="hero-actions">
+                  <div
+                    class="flex justify-between items-center gap-2"
+                  >
 
-                    <a
-                        href="learn.html"
-                        class="btn btn-primary btn-lg"
-                    >
-                        Start Learning
-                        <span aria-hidden="true">
-                            →
-                        </span>
-                    </a>
+                    <div>
 
-                    <a
-                        href="work.html"
-                        class="btn btn-secondary btn-lg"
-                    >
-                        Explore Work
-                    </a>
+                      <span class="badge badge-primary">
+                        Your journey
+                      </span>
 
-                </div>
+                      <h3 class="mt-2 mb-1">
+                        Learn & Grow
+                      </h3>
 
-
-                <div
-                    class="hero-trust"
-                    style="
-                        display:flex;
-                        flex-wrap:wrap;
-                        gap:18px;
-                        margin-top:28px;
-                        color:var(--text-secondary);
-                        font-size:13px;
-                        font-weight:600;
-                    "
-                >
-
-                    <span>
-                        ✓ Practical learning
-                    </span>
-
-                    <span>
-                        ✓ Career-focused
-                    </span>
-
-                    <span>
-                        ✓ Built for mobile
-                    </span>
-
-                </div>
-
-            </div>
-
-
-            <!-- HERO VISUAL -->
-
-            <div>
-
-                <div
-                    class="card"
-                    style="
-                        padding:0;
-                        overflow:hidden;
-                        background:
-                            linear-gradient(
-                                145deg,
-                                var(--surface),
-                                var(--surface-2)
-                            );
-                    "
-                >
-
-                    <div
-                        style="
-                            padding:22px;
-                            border-bottom:1px solid var(--border);
-                        "
-                    >
-
-                        <div
-                            style="
-                                display:flex;
-                                align-items:center;
-                                justify-content:space-between;
-                                gap:12px;
-                            "
-                        >
-
-                            <div
-                                style="
-                                    display:flex;
-                                    align-items:center;
-                                    gap:10px;
-                                "
-                            >
-
-                                <span class="card-icon">
-                                    JG
-                                </span>
-
-                                <div>
-
-                                    <strong>
-                                        JG Dashboard
-                                    </strong>
-
-                                    <div
-                                        style="
-                                            color:var(--text-secondary);
-                                            font-size:12px;
-                                        "
-                                    >
-                                        Your progress
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-
-                            <span class="badge badge-success">
-                                Active
-                            </span>
-
-                        </div>
+                      <p class="muted mb-0">
+                        Build practical skills
+                        at your own pace.
+                      </p>
 
                     </div>
 
+                    <div
+                      class="feature-icon"
+                      style="margin-bottom:0;"
+                    >
+                      ✦
+                    </div>
 
-                   
+                  </div>
+
+                </div>
+
+
+                <div class="preview-card">
+
+                  <div
+                    class="flex justify-between items-center"
+                  >
+
+                    <strong>
+                      Learning progress
+                    </strong>
+
+                    <span class="badge
