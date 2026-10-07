@@ -1,1058 +1,1086 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="JG Premium — unlock more learning, AI and career features.">
-
-    <title>JG Premium | Unlock More</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <style>
-        /* ================================
-           PREMIUM PAGE
-        ================================= */
-
-        .premium-page {
-            min-height: 100vh;
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(37, 99, 235, 0.12),
-                    transparent 35%
-                ),
-                var(--background);
-        }
-
-        .premium-hero {
-            padding: 90px 20px 70px;
-            text-align: center;
-        }
-
-        .premium-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 9px 15px;
-            border-radius: 999px;
-            background: rgba(37, 99, 235, 0.1);
-            border: 1px solid rgba(37, 99, 235, 0.2);
-            color: var(--primary);
-            font-size: 14px;
-            font-weight: 700;
-            margin-bottom: 20px;
-        }
-
-        .premium-hero h1 {
-            max-width: 850px;
-            margin: 0 auto 20px;
-            font-size: clamp(42px, 7vw, 76px);
-            line-height: 1.03;
-            letter-spacing: -2px;
-            color: var(--text);
-        }
-
-        .premium-hero h1 span {
-            color: var(--primary);
-        }
-
-        .premium-hero p {
-            max-width: 680px;
-            margin: 0 auto;
-            color: var(--text-secondary);
-            font-size: 18px;
-            line-height: 1.8;
-        }
-
-        .premium-actions {
-            display: flex;
-            justify-content: center;
-            gap: 14px;
-            flex-wrap: wrap;
-            margin-top: 30px;
-        }
-
-        .premium-btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 52px;
-            padding: 0 24px;
-            border-radius: 14px;
-            text-decoration: none;
-            font-weight: 800;
-            transition: 0.2s ease;
-        }
-
-        .premium-btn.primary {
-            background: var(--primary);
-            color: #fff;
-            box-shadow: 0 12px 30px rgba(37, 99, 235, 0.22);
-        }
-
-        .premium-btn.primary:hover {
-            transform: translateY(-2px);
-        }
-
-        .premium-btn.secondary {
-            background: var(--surface);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .premium-btn.secondary:hover {
-            transform: translateY(-2px);
-        }
-
-        /* Pricing */
-
-        .pricing-section {
-            padding: 20px 20px 80px;
-        }
-
-        .pricing-container {
-            max-width: 1150px;
-            margin: auto;
-        }
-
-        .pricing-card {
-            max-width: 560px;
-            margin: auto;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 28px;
-            padding: 35px;
-            box-shadow: var(--shadow);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pricing-card::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 5px;
-            background: var(--primary);
-        }
-
-        .pricing-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-            margin-bottom: 25px;
-        }
-
-        .pricing-top h2 {
-            margin: 0 0 8px;
-            color: var(--text);
-            font-size: 28px;
-        }
-
-        .pricing-top p {
-            margin: 0;
-            color: var(--text-secondary);
-        }
-
-        .premium-label {
-            padding: 7px 11px;
-            border-radius: 999px;
-            background: rgba(37, 99, 235, 0.1);
-            color: var(--primary);
-            font-size: 12px;
-            font-weight: 800;
-            white-space: nowrap;
-        }
-
-        .price {
-            display: flex;
-            align-items: baseline;
-            gap: 8px;
-            margin: 25px 0;
-        }
-
-        .price strong {
-            font-size: 48px;
-            line-height: 1;
-            color: var(--text);
-        }
-
-        .price span {
-            color: var(--text-secondary);
-        }
-
-        .pricing-note {
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .premium-cta {
-            width: 100%;
-            border: 0;
-            cursor: pointer;
-            font: inherit;
-        }
-
-        /* Benefits */
-
-        .benefits-section {
-            padding: 30px 20px 90px;
-        }
-
-        .section-heading {
-            max-width: 720px;
-            margin: 0 auto 45px;
-            text-align: center;
-        }
-
-        .section-heading .eyebrow {
-            color: var(--primary);
-            font-weight: 800;
-            font-size: 14px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 10px;
-        }
-
-        .section-heading h2 {
-            margin: 0 0 14px;
-            color: var(--text);
-            font-size: clamp(32px, 5vw, 48px);
-        }
-
-        .section-heading p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        .benefits-grid {
-            max-width: 1150px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-
-        .benefit-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 22px;
-            padding: 28px;
-            transition: 0.2s ease;
-        }
-
-        .benefit-card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow);
-        }
-
-        .benefit-icon {
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-            background: rgba(37, 99, 235, 0.1);
-            font-size: 24px;
-            margin-bottom: 20px;
-        }
-
-        .benefit-card h3 {
-            margin: 0 0 10px;
-            color: var(--text);
-            font-size: 20px;
-        }
-
-        .benefit-card p {
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.7;
-            font-size: 15px;
-        }
-
-        /* Comparison */
-
-        .comparison-section {
-            padding: 20px 20px 90px;
-        }
-
-        .comparison-wrapper {
-            max-width: 1000px;
-            margin: auto;
-            overflow-x: auto;
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            background: var(--surface);
-            box-shadow: var(--shadow);
-        }
-
-        .comparison-table {
-            width: 100%;
-            min-width: 650px;
-            border-collapse: collapse;
-        }
-
-        .comparison-table th,
-        .comparison-table td {
-            padding: 18px 20px;
-            text-align: left;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-        }
-
-        .comparison-table th {
-            font-size: 15px;
-        }
-
-        .comparison-table td {
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .comparison-table th:not(:first-child),
-        .comparison-table td:not(:first-child) {
-            text-align: center;
-        }
-
-        .comparison-table tr:last-child td {
-            border-bottom: none;
-        }
-
-        .check {
-            color: #16a34a;
-            font-weight: 900;
-            font-size: 20px;
-        }
-
-        .dash {
-            color: var(--text-secondary);
-        }
-
-        /* AI Section */
-
-        .ai-premium-section {
-            padding: 30px 20px 90px;
-        }
-
-        .ai-premium-card {
-            max-width: 1150px;
-            margin: auto;
-            padding: 45px;
-            border-radius: 30px;
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(37, 99, 235, 0.12),
-                    rgba(124, 58, 237, 0.1)
-                );
-            border: 1px solid var(--border);
-            display: grid;
-            grid-template-columns: 1.1fr 0.9fr;
-            gap: 40px;
-            align-items: center;
-        }
-
-        .ai-premium-card h2 {
-            margin: 0 0 15px;
-            color: var(--text);
-            font-size: clamp(30px, 5vw, 48px);
-        }
-
-        .ai-premium-card p {
-            color: var(--text-secondary);
-            line-height: 1.8;
-            margin-bottom: 25px;
-        }
-
-        .ai-list {
-            display: grid;
-            gap: 12px;
-        }
-
-        .ai-list div {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        .ai-visual {
-            min-height: 300px;
-            border-radius: 24px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            padding: 25px;
-            box-shadow: var(--shadow);
-        }
-
-        .ai-window {
-            height: 100%;
-            min-height: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            gap: 12px;
-        }
-
-        .ai-message {
-            max-width: 85%;
-            padding: 13px 15px;
-            border-radius: 15px;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .ai-message.user {
-            align-self: flex-end;
-            background: var(--primary);
-            color: #fff;
-        }
-
-        .ai-message.bot {
-            align-self: flex-start;
-            background: var(--background);
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        /* FAQ */
-
-        .faq-section {
-            padding: 10px 20px 90px;
-        }
-
-        .faq-list {
-            max-width: 850px;
-            margin: auto;
-            display: grid;
-            gap: 12px;
-        }
-
-        .faq-item {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            padding: 20px 22px;
-        }
-
-        .faq-item summary {
-            cursor: pointer;
-            color: var(--text);
-            font-weight: 800;
-        }
-
-        .faq-item p {
-            color: var(--text-secondary);
-            line-height: 1.7;
-            margin: 15px 0 0;
-        }
-
-        /* Final CTA */
-
-        .final-cta {
-            padding: 20px 20px 100px;
-        }
-
-        .final-cta-card {
-            max-width: 1000px;
-            margin: auto;
-            text-align: center;
-            padding: 60px 30px;
-            border-radius: 30px;
-            background: var(--surface);
-            border: 1px solid var(--border);
-        }
-
-        .final-cta-card h2 {
-            margin: 0 0 15px;
-            color: var(--text);
-            font-size: clamp(32px, 5vw, 50px);
-        }
-
-        .final-cta-card p {
-            max-width: 650px;
-            margin: 0 auto 25px;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* Notice */
-
-        .premium-notice {
-            max-width: 760px;
-            margin: 30px auto 0;
-            padding: 15px 18px;
-            border-radius: 14px;
-            background: rgba(245, 158, 11, 0.08);
-            border: 1px solid rgba(245, 158, 11, 0.2);
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        /* Responsive */
-
-        @media (max-width: 850px) {
-            .benefits-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .ai-premium-card {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .premium-hero {
-                padding-top: 60px;
-            }
-
-            .premium-hero h1 {
-                letter-spacing: -1px;
-            }
-
-            .pricing-card {
-                padding: 25px;
-            }
-
-            .pricing-top {
-                flex-direction: column;
-            }
-
-            .benefits-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .ai-premium-card {
-                padding: 28px;
-            }
-
-            .premium-actions {
-                flex-direction: column;
-            }
-
-            .premium-btn {
-                width: 100%;
-            }
-
-            .final-cta-card {
-                padding: 45px 22px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="theme-color" content="#07111f" />
+  <meta name="description" content="JG Premium — Learn without ads and unlock premium learning features." />
+  <title>JG Premium</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    :root {
+      --premium-bg: #07111f;
+      --premium-card: rgba(15, 27, 48, .9);
+      --premium-card-2: rgba(21, 35, 60, .95);
+      --premium-border: rgba(148, 163, 184, .16);
+      --premium-text: #f8fafc;
+      --premium-muted: #94a3b8;
+      --premium-blue: #3b82f6;
+      --premium-purple: #7c3aed;
+      --premium-cyan: #22d3ee;
+      --premium-gold: #fbbf24;
+      --premium-green: #22c55e;
+      --radius: 24px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--premium-text);
+      background:
+        radial-gradient(circle at 10% 0%, rgba(59,130,246,.16), transparent 28%),
+        radial-gradient(circle at 90% 8%, rgba(124,58,237,.14), transparent 28%),
+        var(--premium-bg);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .premium-page {
+      width: min(1180px, 100%);
+      margin: auto;
+      padding: 22px 18px 120px;
+    }
+
+    .premium-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 44px 30px;
+      border: 1px solid var(--premium-border);
+      border-radius: 32px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(59,130,246,.18),
+          rgba(124,58,237,.16)
+        ),
+        var(--premium-card);
+      box-shadow: 0 30px 80px rgba(0,0,0,.25);
+    }
+
+    .premium-hero::before {
+      content: "";
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      right: -90px;
+      top: -120px;
+      border-radius: 50%;
+      background: rgba(34,211,238,.12);
+      filter: blur(10px);
+    }
+
+    .premium-badge {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 8px 13px;
+      border: 1px solid rgba(251,191,36,.28);
+      border-radius: 999px;
+      background: rgba(251,191,36,.09);
+      color: #fcd34d;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .premium-hero h1 {
+      position: relative;
+      z-index: 1;
+      margin: 18px 0 0;
+      max-width: 760px;
+      font-size: clamp(36px, 7vw, 62px);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+
+    .premium-hero h1 span {
+      background: linear-gradient(
+        90deg,
+        #60a5fa,
+        #a78bfa,
+        #22d3ee
+      );
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .premium-hero p {
+      position: relative;
+      z-index: 1;
+      max-width: 690px;
+      margin: 18px 0 0;
+      color: var(--premium-muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .hero-actions {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 25px;
+    }
+
+    .primary-btn,
+    .secondary-btn {
+      border-radius: 14px;
+      padding: 13px 18px;
+      font-weight: 800;
+      transition: .2s ease;
+    }
+
+    .primary-btn {
+      border: 0;
+      color: white;
+      background: linear-gradient(
+        135deg,
+        var(--premium-blue),
+        var(--premium-purple)
+      );
+      box-shadow: 0 12px 28px rgba(59,130,246,.2);
+    }
+
+    .secondary-btn {
+      border: 1px solid var(--premium-border);
+      color: var(--premium-text);
+      background: rgba(255,255,255,.04);
+    }
+
+    .primary-btn:hover,
+    .secondary-btn:hover {
+      transform: translateY(-2px);
+    }
+
+    .section {
+      margin-top: 28px;
+    }
+
+    .section-heading {
+      margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .section-heading p {
+      margin: 6px 0 0;
+      color: var(--premium-muted);
+      font-size: 14px;
+    }
+
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    .plan-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 23px;
+      border: 1px solid var(--premium-border);
+      border-radius: var(--radius);
+      background: var(--premium-card);
+      box-shadow: 0 18px 50px rgba(0,0,0,.16);
+    }
+
+    .plan-card.featured {
+      border-color: rgba(59,130,246,.48);
+      background:
+        linear-gradient(
+          180deg,
+          rgba(59,130,246,.12),
+          transparent
+        ),
+        var(--premium-card);
+    }
+
+    .popular {
+      position: absolute;
+      right: 16px;
+      top: 16px;
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: rgba(59,130,246,.13);
+      color: #93c5fd;
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .plan-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      background: rgba(251,191,36,.10);
+      font-size: 21px;
+    }
+
+    .plan-card h3 {
+      margin: 18px 0 6px;
+      font-size: 20px;
+    }
+
+    .plan-description {
+      min-height: 48px;
+      margin: 0;
+      color: var(--premium-muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .price {
+      margin: 21px 0 3px;
+      font-size: 34px;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .price small {
+      color: var(--premium-muted);
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .plan-features {
+      display: grid;
+      gap: 11px;
+      margin: 20px 0;
+      padding: 0;
+      list-style: none;
+      flex: 1;
+    }
+
+    .plan-features li {
+      display: flex;
+      gap: 9px;
+      color: #cbd5e1;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .check {
+      flex: 0 0 auto;
+      color: #4ade80;
+      font-weight: 900;
+    }
+
+    .plan-button {
+      width: 100%;
+      border: 0;
+      border-radius: 13px;
+      padding: 13px;
+      color: white;
+      background: linear-gradient(
+        135deg,
+        var(--premium-blue),
+        var(--premium-purple)
+      );
+      font-weight: 850;
+    }
+
+    .plan-button.secondary {
+      border: 1px solid var(--premium-border);
+      background: rgba(255,255,255,.04);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 13px;
+    }
+
+    .feature {
+      padding: 19px;
+      border: 1px solid var(--premium-border);
+      border-radius: 19px;
+      background: var(--premium-card);
+    }
+
+    .feature-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      background: rgba(59,130,246,.10);
+      margin-bottom: 13px;
+    }
+
+    .feature h3 {
+      margin: 0 0 7px;
+      font-size: 15px;
+    }
+
+    .feature p {
+      margin: 0;
+      color: var(--premium-muted);
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .ad-example {
+      padding: 23px;
+      border: 1px solid var(--premium-border);
+      border-radius: var(--radius);
+      background: var(--premium-card);
+    }
+
+    .comparison {
+      width: 100%;
+      border-collapse: collapse;
+      overflow: hidden;
+      border-radius: 18px;
+      border: 1px solid var(--premium-border);
+      background: var(--premium-card);
+    }
+
+    .comparison th,
+    .comparison td {
+      padding: 14px 15px;
+      border-bottom: 1px solid var(--premium-border);
+      text-align: left;
+      font-size: 13px;
+    }
+
+    .comparison th {
+      color: white;
+      background: rgba(255,255,255,.04);
+    }
+
+    .comparison td {
+      color: var(--premium-muted);
+    }
+
+    .comparison tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .yes {
+      color: #4ade80 !important;
+      font-weight: 800;
+    }
+
+    .no {
+      color: #64748b !important;
+    }
+
+    .faq {
+      display: grid;
+      gap: 10px;
+    }
+
+    .faq-item {
+      border: 1px solid var(--premium-border);
+      border-radius: 16px;
+      background: var(--premium-card);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 17px;
+      border: 0;
+      background: transparent;
+      color: var(--premium-text);
+      text-align: left;
+      font-weight: 750;
+    }
+
+    .faq-answer {
+      display: none;
+      padding: 0 17px 17px;
+      color: var(--premium-muted);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+
+    .faq-item.open .faq-answer {
+      display: block;
+    }
+
+    .faq-item.open .faq-plus {
+      transform: rotate(45deg);
+    }
+
+    .faq-plus {
+      transition: .2s ease;
+      color: var(--premium-muted);
+      font-size: 20px;
+    }
+
+    .notice {
+      display: none;
+      margin-top: 15px;
+      padding: 14px 15px;
+      border: 1px solid rgba(34,197,94,.25);
+      border-radius: 14px;
+      background: rgba(34,197,94,.08);
+      color: #bbf7d0;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .notice.show {
+      display: block;
+    }
+
+    .payment-note {
+      margin-top: 16px;
+      padding: 15px;
+      border: 1px solid rgba(251,191,36,.18);
+      border-radius: 16px;
+      background: rgba(251,191,36,.06);
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 950px) {
+      .plans {
+        grid-template-columns: 1fr;
+      }
+
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 600px) {
+      .premium-page {
+        padding: 14px 12px 105px;
+      }
+
+      .premium-hero {
+        padding: 30px 19px;
+        border-radius: 24px;
+      }
+
+      .premium-hero h1 {
+        font-size: 40px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+        width: 100%;
+        text-align: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison {
+        font-size: 12px;
+      }
+
+      .comparison th,
+      .comparison td {
+        padding: 11px 9px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<div class="premium-page">
+  <header class="site-header">
+    <div class="container nav-container">
 
-    <!-- ================= HEADER ================= -->
+      <a href="index.html" class="brand">JG</a>
 
-    <header class="site-header">
-        <div class="container">
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="skills.html">Skills</a>
+        <a href="work.html">Work</a>
+        <a href="ai.html">JG AI</a>
+      </nav>
 
-            <a href="index.html"
-               class="brand"
-               aria-label="JG Home">
-                <strong>JG</strong>
-                <span>Find Skills. Find Work.</span>
-            </a>
+      <div class="nav-actions">
 
-            <button
-                class="mobile-menu-btn"
-                id="mobileMenuBtn"
-                aria-label="Open navigation"
-                aria-expanded="false">
-                ☰
-            </button>
+        <button
+          type="button"
+          id="themeButton"
+          class="icon-btn"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
 
-            <nav class="main-nav" id="mainNav">
+        <a href="account.html" class="account-link">
+          Account
+        </a>
 
-                <a href="index.html">Home</a>
-                <a href="skills.html">Skills</a>
-                <a href="work.html">Work</a>
-                <a href="learn.html">Learn</a>
+        <button
+          type="button"
+          id="mobileMenuButton"
+          class="mobile-menu-btn"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
 
-                <a href="premium.html"
-                   class="active">
-                    Premium
-                </a>
+      </div>
+    </div>
 
-                <a href="account.html">
-                    Account
-                </a>
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="skills.html">Skills</a>
+      <a href="work.html">Work</a>
+      <a href="ai.html">JG AI</a>
+      <a href="premium.html">Premium</a>
+      <a href="account.html">Account</a>
+    </div>
+  </header>
 
-                <a href="ai.html">
-                    JG AI
-                </a>
+  <main class="premium-page">
 
-                <a href="enrollment.html"
-                   class="nav-cta">
-                    Enroll
-                </a>
+    <section class="premium-hero">
 
-                <button
-                    type="button"
-                    id="themeToggle"
-                    class="theme-toggle"
-                    aria-label="Toggle light and dark mode">
-                    ◐
-                </button>
+      <div class="premium-badge">
+        ✦ JG PREMIUM
+      </div>
 
-            </nav>
+      <h1>
+        Learn without limits.
+        <span>Go Premium.</span>
+      </h1>
+
+      <p>
+        Upgrade your JG experience with an ad-free learning environment,
+        premium learning features and a smoother way to focus on building
+        valuable skills.
+      </p>
+
+      <div class="hero-actions">
+
+        <a href="#plans" class="primary-btn">
+          View Premium Plans
+        </a>
+
+        <a href="learn.html" class="secondary-btn">
+          Continue Learning
+        </a>
+
+      </div>
+
+    </section>
+
+    <section id="plans" class="section">
+
+      <div class="section-heading">
+        <h2>Choose your Premium plan</h2>
+        <p>
+          Plans and pricing can be configured by JG through the backend.
+        </p>
+      </div>
+
+      <div class="plans">
+
+        <article class="plan-card">
+
+          <div class="plan-icon">🌱</div>
+
+          <h3>Monthly</h3>
+
+          <p class="plan-description">
+            Flexible Premium access for learners who want to upgrade month by
+            month.
+          </p>
+
+          <div class="price">
+            ₦2,500
+            <small>/ month</small>
+          </div>
+
+          <ul class="plan-features">
+            <li>
+              <span class="check">✓</span>
+              Ad-free learning
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Premium learning experience
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              JG AI access where available
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Cancel according to subscription terms
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            class="plan-button"
+            data-plan="monthly"
+          >
+            Choose Monthly
+          </button>
+
+        </article>
+
+        <article class="plan-card featured">
+
+          <div class="popular">
+            Most Popular
+          </div>
+
+          <div class="plan-icon">⭐</div>
+
+          <h3>Yearly</h3>
+
+          <p class="plan-description">
+            Best for learners committed to consistent long-term growth.
+          </p>
+
+          <div class="price">
+            ₦20,000
+            <small>/ year</small>
+          </div>
+
+          <ul class="plan-features">
+            <li>
+              <span class="check">✓</span>
+              Ad-free learning
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Premium learning experience
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              JG AI access where available
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Long-term Premium access
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            class="plan-button"
+            data-plan="yearly"
+          >
+            Choose Yearly
+          </button>
+
+        </article>
+
+        <article class="plan-card">
+
+          <div class="plan-icon">💎</div>
+
+          <h3>Premium Plus</h3>
+
+          <p class="plan-description">
+            A higher-tier plan for learners who want the complete Premium
+            experience.
+          </p>
+
+          <div class="price">
+            ₦35,000
+            <small>/ year</small>
+          </div>
+
+          <ul class="plan-features">
+            <li>
+              <span class="check">✓</span>
+              Everything in Premium
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Enhanced learning features
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Priority features when available
+            </li>
+
+            <li>
+              <span class="check">✓</span>
+              Designed for serious learners
+            </li>
+          </ul>
+
+          <button
+            type="button"
+            class="plan-button secondary"
+            data-plan="premium-plus"
+          >
+            Choose Premium Plus
+          </button>
+
+        </article>
+
+      </div>
+
+      <div id="planNotice" class="notice"></div>
+
+      <div class="payment-note">
+        <strong>Payment:</strong>
+        The frontend is prepared for a secure payment system. Actual payment
+        processing will be connected through the JG backend and an approved
+        payment provider before real transactions are enabled.
+      </div>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-heading">
+        <h2>What Premium unlocks</h2>
+        <p>
+          Built around a cleaner and more focused learning experience.
+        </p>
+      </div>
+
+      <div class="features-grid">
+
+        <article class="feature">
+          <div class="feature-icon">🚫</div>
+          <h3>Ad-free learning</h3>
+          <p>
+            Premium users can learn without the advertising experience shown
+            to free users.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">🧠</div>
+          <h3>JG AI</h3>
+          <p>
+            Use JG AI for learning assistance, explanations, planning and
+            practical guidance where included in the active plan.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">🎓</div>
+          <h3>Learning tools</h3>
+          <p>
+            Access the premium features JG makes available as the platform
+            grows.
+          </p>
+        </article>
+
+        <article class="feature">
+          <div class="feature-icon">⚡</div>
+          <h3>Better experience</h3>
+          <p>
+            Keep your attention on your courses, projects and personal
+            development.
+          </p>
+        </article>
+
+      </div>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-heading">
+        <h2>Free vs Premium</h2>
+        <p>
+          JG can support a free learning experience while Premium helps fund
+          the platform.
+        </p>
+      </div>
+
+      <div style="overflow-x:auto; border-radius:18px;">
+
+        <table class="comparison">
+
+          <thead>
+            <tr>
+              <th>Feature</th>
+              <th>Free</th>
+              <th>Premium</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Learn JG courses</td>
+              <td class="yes">✓</td>
+              <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+              <td>Find external opportunities</td>
+              <td class="yes">✓</td>
+              <td class="yes">✓</td>
+            </tr>
+
+            <tr>
+              <td>Advertising</td>
+              <td>Supported</td>
+              <td class="yes">Ad-free</td>
+            </tr>
+
+            <tr>
+              <td>JG AI</td>
+              <td>Available features</td>
+              <td class="yes">Premium access where included</td>
+            </tr>
+
+            <tr>
+              <td>Premium learning features</td>
+              <td class="no">Limited</td>
+              <td class="yes">✓</td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+    <section class="section">
+
+      <div class="section-heading">
+        <h2>Frequently asked questions</h2>
+      </div>
+
+      <div class="faq">
+
+        <div class="faq-item">
+
+          <button type="button" class="faq-question">
+            <span>What does Premium do?</span>
+            <span class="faq-plus">+</span>
+          </button>
+
+          <div class="faq-answer">
+            Premium is designed to provide an upgraded JG experience,
+            including an ad-free environment and additional premium features
+            depending on the active plan.
+          </div>
 
         </div>
-    </header>
 
+        <div class="faq-item">
 
-    <!-- ================= HERO ================= -->
+          <button type="button" class="faq-question">
+            <span>Will free users still be able to learn?</span>
+            <span class="faq-plus">+</span>
+          </button>
 
-    <main>
+          <div class="faq-answer">
+            Yes. JG is designed to keep a useful free learning experience
+            available. Advertising can help support the free version.
+          </div>
 
-        <section class="premium-hero">
+        </div>
 
-            <div class="premium-badge">
-                ✦ JG Premium
-            </div>
+        <div class="faq-item">
 
-            <h1>
-                Go further with
-                <span>JG Premium.</span>
-            </h1>
+          <button type="button" class="faq-question">
+            <span>Does JG pay users for finding work?</span>
+            <span class="faq-plus">+</span>
+          </button>
 
-            <p>
-                Unlock a more powerful learning and career experience
-                with advanced JG features designed to help you learn,
-                build, and find opportunities.
-            </p>
+          <div class="faq-answer">
+            No. JG does not operate a user wallet or payout system. Find Work
+            can help users discover external opportunities, but JG does not
+            pay users simply for applying to or finding those opportunities.
+          </div>
 
-            <div class="premium-actions">
+        </div>
 
-                <a href="#plans"
-                   class="premium-btn primary">
-                    Explore Premium
-                </a>
+        <div class="faq-item">
 
-                <a href="ai.html"
-                   class="premium-btn secondary">
-                    Try JG AI
-                </a>
+          <button type="button" class="faq-question">
+            <span>Can Premium pricing change?</span>
+            <span class="faq-plus">+</span>
+          </button>
 
-            </div>
+          <div class="faq-answer">
+            Yes. Final pricing should be controlled from the JG backend so
+            the Owner can configure plans and prices without rebuilding the
+            entire frontend.
+          </div>
 
-            <div class="premium-notice">
-                Premium payments and account upgrades are not connected
-                yet. This page is currently the frontend preview.
-                Secure payment and membership activation will be added
-                when the JG backend is built.
-            </div>
+        </div>
 
-        </section>
+      </div>
 
+    </section>
 
-        <!-- ================= PRICING ================= -->
+  </main>
 
-        <section class="pricing-section"
-                 id="plans">
+  <nav class="bottom-nav">
 
-            <div class="pricing-container">
+    <a href="index.html">
+      <span>⌂</span>
+      <small>Home</small>
+    </a>
 
-                <div class="pricing-card">
+    <a href="learn.html">
+      <span>▣</span>
+      <small>Learn</small>
+    </a>
 
-                    <div class="pricing-top">
+    <a href="work.html">
+      <span>⌁</span>
+      <small>Work</small>
+    </a>
 
-                        <div>
-                            <h2>JG Premium</h2>
+    <a href="ai.html">
+      <span>✦</span>
+      <small>JG AI</small>
+    </a>
 
-                            <p>
-                                For learners who want more from JG.
-                            </p>
-                        </div>
+    <a href="account.html">
+      <span>◉</span>
+      <small>Account</small>
+    </a>
 
-                        <span class="premium-label">
-                            PREMIUM
-                        </span>
+  </nav>
 
-                    </div>
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
 
-                    <div class="price">
-                        <strong>₦5,000</strong>
-                        <span>/ month</span>
-                    </div>
+  <script>
+    (() => {
 
-                    <p class="pricing-note">
-                        The displayed price is a planned membership
-                        price for the frontend preview. Final pricing,
-                        billing and payment processing will be configured
-                        before launch.
-                    </p>
+      const notice = document.getElementById("planNotice");
 
-                    <button
-                        type="button"
-                        class="premium-btn primary premium-cta"
-                        id="upgradeBtn">
-                        Upgrade to Premium
-                    </button>
+      function showNotice(message) {
+        notice.textContent = message;
+        notice.classList.add("show");
 
-                </div>
+        setTimeout(() => {
+          notice.classList.remove("show");
+        }, 6000);
+      }
 
-            </div>
+      document.querySelectorAll("[data-plan]").forEach((button) => {
 
-        </section>
+        button.addEventListener("click", async () => {
 
+          const plan = button.getAttribute("data-plan");
 
-        <!-- ================= BENEFITS ================= -->
+          button.disabled = true;
+          const originalText = button.textContent;
+          button.textContent = "Checking...";
 
-        <section class="benefits-section">
+          try {
 
-            <div class="section-heading">
+            /*
+             * If the shared API helper exists, try to use it.
+             * The backend will eventually control the real plan/payment flow.
+             */
+            if (
+              window.JG_API &&
+              typeof window.JG_API.subscribePremium === "function"
+            ) {
 
-                <div class="eyebrow">
-                    Why Premium?
-                </div>
+              const result =
+                await window.JG_API.subscribePremium(plan);
 
-                <h2>
-                    More tools. More possibilities.
-                </h2>
+              if (result) {
+                showNotice(
+                  "Your Premium request has been started. Continue through the secure payment process."
+                );
+              } else {
+                showNotice(
+                  "Premium payment is not connected yet. The JG backend will handle the secure payment flow."
+                );
+              }
 
-                <p>
-                    JG Premium is designed to give serious learners
-                    additional tools as they develop their skills and
-                    pursue opportunities.
-                </p>
+            } else {
 
-            </div>
+              showNotice(
+                "Premium is ready on the frontend. Secure payment processing will be connected through the JG backend."
+              );
 
+            }
 
-            <div class="benefits-grid">
+          } catch (error) {
 
-                <article class="benefit-card">
+            showNotice(
+              "Premium payment is not available yet. Please try again after the JG backend payment system is connected."
+            );
 
-                    <div class="benefit-icon">
-                        🤖
-                    </div>
+          }
 
-                    <h3>
-                        Advanced JG AI
-                    </h3>
+          button.disabled = false;
+          button.textContent = originalText;
 
-                    <p>
-                        Get access to planned advanced AI features
-                        for learning, coding, career guidance and
-                        work preparation.
-                    </p>
+        });
 
-                </article>
+      });
 
+      document.querySelectorAll(".faq-question").forEach((button) => {
 
-                <article class="benefit-card">
+        button.addEventListener("click", () => {
 
-                    <div class="benefit-icon">
-                        📚
-                    </div>
+          const item = button.closest(".faq-item");
 
-                    <h3>
-                        Learning Tools
-                    </h3>
+          if (!item) return;
 
-                    <p>
-                        Use additional learning resources and
-                        structured tools designed to help you
-                        stay consistent.
-                    </p>
+          item.classList.toggle("open");
 
-                </article>
+        });
 
+      });
 
-                <article class="benefit-card">
+    })();
+  </script>
 
-                    <div class="benefit-icon">
-                        💼
-                    </div>
-
-                    <h3>
-                        Career Features
-                    </h3>
-
-                    <p>
-                        Build a stronger professional profile and
-                        prepare for opportunities through planned
-                        JG career features.
-                    </p>
-
-                </article>
-
-
-                <article class="benefit-card">
-
-                    <div class="benefit-icon">
-                        🚀
-                    </div>
-
-                    <h3>
-                        Project Support
-                    </h3>
-
-                    <p>
-                        Get structured help turning your skills into
-                        practical projects you can showcase.
-                    </p>
-
-                </article>
-
-
-                <article class="benefit-card">
-
-                    <div class="benefit-icon">
-                        🎯
-                    </div>
-
-                    <h3>
-                        Personalized Guidance
-                    </h3>
-
-                    <p>
-                        Planned personalized recommendations can help
-                        you choose what to learn and what to build next.
-                    </p>
-
-                </article>
-
-
-                <article class="benefit-card">
-
-                    <div class="benefit-icon">
-                        🏆
-                    </div>
-
-                    <h3>
-                        Progress & Recognition
-                    </h3>
-
-                    <p>
-                        Track your development and prepare for future
-                        certificates and portfolio opportunities.
-                    </p>
-
-                </article>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= COMPARISON ================= -->
-
-        <section class="comparison-section">
-
-            <div class="section-heading">
-
-                <div class="eyebrow">
-                    Compare
-                </div>
-
-                <h2>
-                    Free vs Premium
-                </h2>
-
-                <p>
-                    A simple look at the planned difference between
-                    the standard JG experience and Premium.
-                </p>
-
-            </div>
-
-
-            <div class="comparison-wrapper">
-
-                <table class="comparison-table">
-
-                    <thead>
-                        <tr>
-                            <th>Feature</th>
-                            <th>Free</th>
-                            <th>Premium</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-                            <td>Access to JG platform</td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Course discovery</td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Basic JG AI</td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Advanced AI features</td>
-                            <td>
-                                <span class="dash">—</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Advanced learning tools</td>
-                            <td>
-                                <span class="dash">—</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Premium career tools</td>
-                            <td>
-                                <span class="dash">—</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td>Personalized learning support</td>
-                            <td>
-                                <span class="dash">—</span>
-                            </td>
-                            <td>
-                                <span class="check">✓</span>
-                            </td>
-                        </tr>
-
-                    </tbody>
-
-                </table>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= AI ================= -->
-
-        <section class="ai-premium-section">
-
-            <div class="ai-premium-card">
-
-                <div>
-
-                    <div class="premium-badge">
-                        ✦ JG AI
-                    </div>
-
-                    <h2>
-                        Your AI learning partner.
-                    </h2>
-
-                    <p>
-                        JG AI is being built to help users learn,
-                        code, plan projects, prepare for work and
-                        understand career paths.
-                    </p>
-
-                    <div class="ai-list">
-
-                        <div>
-                            ✓ Explain difficult concepts
-                        </div>
-
-                        <div>
-                            ✓ Help with coding
-                        </div>
-
-                        <div>
-                            ✓ Create learning plans
-                        </div>
-
-                        <div>
-                            ✓ Help prepare project ideas
-                        </div>
-
-                        <div>
-                            ✓ Support career exploration
-                        </div>
-
-                    </div>
-
-                    <div style="margin-top:25px;">
-
-                        <a href="ai.html"
-                           class="premium-btn primary">
-                            Open JG AI
-                        </a>
-
-                    </div>
-
-                </div>
-
-
-                <div class="ai-visual">
-
-                    <div class="ai-window">
-
-                        <div class="ai-message bot">
-                            Hi 👋 I'm JG AI. What are you
-                            learning today?
-                        </div>
-
-                        <div class="ai-message user">
-                            I want to become a web developer.
-                        </div>
-
-                        <div class="ai-message bot">
-                            Great. I can help you create a
-                            step-by-step learning path.
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- ================= FAQ ================= -->
-
-        <
+</body>
+</html>
