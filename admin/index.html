@@ -1,1 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#07111f"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <title>JG Owner Control Center</title>
+
+  <link
+    rel="stylesheet"
+    href="../css/style.css"
+  >
+
+  <style>
+    /*
+      Admin entry-page enhancements.
+      Main shared styling remains in ../css/style.css.
+    */
+
+    .admin-gate {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-gate::before,
+    .admin-gate::after {
+      content: "";
+      position: absolute;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: .18;
+      pointer-events: none;
+    }
+
+    .admin-gate::before {
+      top: -120px;
+      right: -100px;
+      background: #2563eb;
+    }
+
+    .admin-gate::after {
+      bottom: -140px;
+      left: -100px;
+      background: #7c3aed;
+    }
+
+    .admin-entry-card {
+      width: min(100%, 560px);
+      position: relative;
+      z-index: 2;
+      padding: 34px;
+      border: 1px solid var(--border-color, rgba(255,255,255,.1));
+      border-radius: 28px;
+      background: var(--card-bg, rgba(15,23,42,.88));
+      box-shadow: 0 24px 80px rgba(0,0,0,.28);
+      backdrop-filter: blur(18px);
+    }
+
+    .admin-brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .admin-logo {
+      width: 58px;
+      height: 58px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 22px;
+      font-weight: 900;
+      color: #fff;
+      background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+      );
+      box-shadow: 0 12px 30px rgba(37,99,235,.28);
+    }
+
+    .admin-brand h1 {
+      margin: 0;
+      font-size: 1.25rem;
+    }
+
+    .admin-brand p {
+      margin: 4px 0 0;
+      opacity: .68;
+      font-size: .88rem;
+    }
+
+    .admin-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      background: rgba(37,99,235,.12);
+      color: #60a5fa;
+      border: 1px solid rgba(37,99,235,.22);
+      font-size: .78rem;
+      font-weight: 700;
+      margin-bottom: 14px;
+    }
+
+    .admin-entry-card h2 {
+      margin: 0 0 10px;
+      font-size: clamp(1.7rem, 5vw, 2.25rem);
+      line-height: 1.1;
+    }
+
+    .admin-description {
+      margin: 0 0 24px;
+      line-height: 1.7;
+      opacity: .72;
+    }
+
+    .admin-feature-list {
+      display: grid;
+      gap: 11px;
+      margin: 22px 0 28px;
+    }
+
+    .admin-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      padding: 12px 14px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.035);
+      border: 1px solid rgba(255,255,255,.06);
+    }
+
+    .admin-feature-icon {
+      flex: 0 0 auto;
+      width: 30px;
+      height: 30px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(37,99,235,.13);
+    }
+
+    .admin-feature strong {
+      display: block;
+      margin-bottom: 2px;
+      font-size: .92rem;
+    }
+
+    .admin-feature span {
+      font-size: .78rem;
+      opacity: .62;
+      line-height: 1.45;
+    }
+
+    .admin-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .admin-security-note {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      margin-top: 18px;
+      padding: 13px;
+      border-radius: 13px;
+      background: rgba(34,197,94,.07);
+      border: 1px solid rgba(34,197,94,.15);
+      font-size: .78rem;
+      line-height: 1.5;
+      opacity: .82;
+    }
+
+    .admin-footer {
+      text-align: center;
+      margin-top: 22px;
+      font-size: .75rem;
+      opacity: .5;
+    }
+
+    @media (max-width: 520px) {
+      .admin-gate {
+        padding: 15px;
+      }
+
+      .admin-entry-card {
+        padding: 23px 18px;
+        border-radius: 22px;
+      }
+
+      .admin-brand {
+        margin-bottom: 22px;
+      }
+
+      .admin-logo {
+        width: 50px;
+        height: 50px;
+        border-radius: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="admin-gate">
+
+    <section
+      class="admin-entry-card"
+      aria-labelledby="adminTitle"
+    >
+
+      <!-- Brand -->
+      <div class="admin-brand">
+
+        <div
+          class="admin-logo"
+          aria-hidden="true"
+        >
+          JG
+        </div>
+
+        <div>
+          <h1>JG</h1>
+          <p>Owner Control Center</p>
+        </div>
+
+      </div>
+
+      <!-- Security Badge -->
+      <div class="admin-badge">
+        <span aria-hidden="true">🔐</span>
+        Private administration area
+      </div>
+
+      <!-- Heading -->
+      <h2 id="adminTitle">
+        Welcome to JG Control Center
+      </h2>
+
+      <p class="admin-description">
+        Manage the JG platform from one secure
+        administration environment. The Owner has
+        ultimate control over the platform and can
+        delegate permissions to other administrators.
+      </p>
+
+      <!-- Feature List -->
+      <div class="admin-feature-list">
+
+        <div class="admin-feature">
+          <div
+            class="admin-feature-icon"
+            aria-hidden="true"
+          >
+            👥
+          </div>
+
+          <div>
+            <strong>User Management</strong>
+            <span>
+              Manage accounts, roles, access and
+              platform users.
+            </span>
+          </div>
+        </div>
+
+        <div class="admin-feature">
+          <div
+            class="admin-feature-icon"
+            aria-hidden="true"
+          >
+            📚
+          </div>
+
+          <div>
+            <strong>Learning Management</strong>
+            <span>
+              Manage courses, lessons, exams and
+              certificates.
+            </span>
+          </div>
+        </div>
+
+        <div class="admin-feature">
+          <div
+            class="admin-feature-icon"
+            aria-hidden="true"
+          >
+            💼
+          </div>
+
+          <div>
+            <strong>Work Opportunities</strong>
+            <span>
+              Control opportunities displayed through
+              Find Work.
+            </span>
+          </div>
+        </div>
+
+        <div class="admin-feature">
+          <div
+            class="admin-feature-icon"
+            aria-hidden="true"
+          >
+            💎
+          </div>
+
+          <div>
+            <strong>Premium & Advertising</strong>
+            <span>
+              Manage Premium plans and JG advertising
+              placements.
+            </span>
+          </div>
+        </div>
+
+        <div class="admin-feature">
+          <div
+            class="admin-feature-icon"
+            aria-hidden="true"
+          >
+            🤖
+          </div>
+
+          <div>
+            <strong>JG AI Control</strong>
+            <span>
+              Configure and monitor the JG AI service
+              through the secure backend.
+            </span>
+          </div>
+        </div>
+
+        <div class="admin-feature">
+          <div
+            class="admin-feature-icon"
+            aria-hidden="true"
+          >
+            🛡️
+          </div>
+
+          <div>
+            <strong>Security & Audit</strong>
+            <span>
+              Review administrative activity and
+              security events.
+            </span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Actions -->
+      <div class="admin-actions">
+
+        <a
+          href="login.html"
+          class="btn btn-primary btn-lg"
+          style="width:100%; text-align:center;"
+        >
+          🔐 Open Secure Admin Login
+        </a>
+
+        <a
+          href="../index.html"
+          class="btn btn-secondary"
+          style="width:100%; text-align:center;"
+        >
+          ← Return to JG
+        </a>
+
+      </div>
+
+      <!-- Security Notice -->
+      <div class="admin-security-note">
+        <span aria-hidden="true">🛡️</span>
+
+        <span>
+          Admin access is separate from normal JG
+          user access. Production authentication,
+          role-based permissions, secure sessions,
+          audit logging and server-side authorization
+          will be enforced by the JG backend.
+        </span>
+      </div>
+
+      <div class="admin-footer">
+        JG Owner Control Center ·
+        <span id="adminVersion">
+          v1.0.0
+        </span>
+      </div>
+
+    </section>
+
+  </main>
+
+  <script
+    src="../js/config.js"
+  ></script>
+
+  <script
+    src="../js/ui.js"
+  ></script>
+
+  <script
+    src="../js/app.js"
+  ></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      var version =
+        window.JG_CONFIG &&
+        window.JG_CONFIG.APP_VERSION;
+
+      var element =
+        document.getElementById(
+          "adminVersion"
+        );
+
+      if (element && version) {
+        element.textContent =
+          "v" + version;
+      }
+    })();
+  </script>
+
+</body>
+</html>
