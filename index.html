@@ -1,954 +1,1485 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
-    <meta
-        name="description"
-        content="JG — Learn skills. Find opportunities. Build your future."
-    >
+  <meta
+    name="description"
+    content="JG — Find Skills. Find Opportunities. Learn practical skills, discover opportunities and build your future."
+  >
 
-    <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#070b14">
 
-    <title>JG — Learn Skills. Find Opportunities.</title>
+  <title>JG — Find Skills. Find Opportunities.</title>
 
-    <link rel="stylesheet" href="css/style.css">
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
 
-    <script>
-        if (localStorage.getItem("jg-theme") === "dark") {
-            document.documentElement.classList.add("dark");
-        }
-    </script>
+  <!-- Shared stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <style>
+    /*
+      JG HOME PAGE
+      These styles are intentionally scoped to this page.
+      The main design system remains inside css/style.css.
+    */
+
+    .jg-home {
+      min-height: 100vh;
+      padding-bottom: 100px;
+    }
+
+    .jg-hero {
+      position: relative;
+      overflow: hidden;
+      padding: 28px 18px 34px;
+      border-radius: 0 0 32px 32px;
+      background:
+        radial-gradient(
+          circle at 85% 10%,
+          rgba(37, 99, 235, .28),
+          transparent 35%
+        ),
+        radial-gradient(
+          circle at 10% 80%,
+          rgba(124, 58, 237, .18),
+          transparent 32%
+        );
+    }
+
+    .jg-hero::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      right: -80px;
+      top: 80px;
+      border-radius: 50%;
+      background: rgba(6, 182, 212, .08);
+      filter: blur(4px);
+      pointer-events: none;
+    }
+
+    .jg-topbar {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 14px;
+      margin-bottom: 38px;
+    }
+
+    .jg-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .jg-logo {
+      width: 44px;
+      height: 44px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 14px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #7c3aed
+        );
+
+      color: white;
+      font-size: 17px;
+      font-weight: 900;
+
+      box-shadow:
+        0 12px 30px rgba(37, 99, 235, .25);
+    }
+
+    .jg-brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 1px;
+    }
+
+    .jg-brand-name {
+      font-size: 17px;
+      font-weight: 900;
+      letter-spacing: -.3px;
+    }
+
+    .jg-brand-tagline {
+      font-size: 10px;
+      opacity: .58;
+    }
+
+    .jg-top-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .jg-icon-button {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border: 1px solid rgba(127, 127, 127, .16);
+      border-radius: 13px;
+
+      background: rgba(255, 255, 255, .055);
+      color: inherit;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        background .2s ease,
+        border-color .2s ease;
+    }
+
+    .jg-icon-button:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, .09);
+      border-color: rgba(37, 99, 235, .45);
+    }
+
+    .jg-icon-button:active {
+      transform: scale(.94);
+    }
+
+    .jg-hero-content {
+      position: relative;
+      z-index: 1;
+      max-width: 760px;
+    }
+
+    .jg-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 7px 11px;
+
+      border: 1px solid rgba(37, 99, 235, .25);
+      border-radius: 999px;
+
+      background: rgba(37, 99, 235, .08);
+
+      color: #60a5fa;
+
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    .jg-eyebrow-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, .10);
+    }
+
+    .jg-hero h1 {
+      margin: 18px 0 14px;
+
+      font-size: clamp(38px, 10vw, 68px);
+      line-height: .98;
+      letter-spacing: -2.5px;
+      font-weight: 950;
+    }
+
+    .jg-gradient-text {
+      background:
+        linear-gradient(
+          100deg,
+          #60a5fa,
+          #a78bfa,
+          #22d3ee
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .jg-hero-description {
+      max-width: 610px;
+
+      margin: 0;
+
+      font-size: 16px;
+      line-height: 1.7;
+
+      opacity: .68;
+    }
+
+    .jg-hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 11px;
+
+      margin-top: 24px;
+    }
+
+    .jg-primary-button,
+    .jg-secondary-button {
+      min-height: 48px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+
+      padding: 0 18px;
+
+      border-radius: 14px;
+
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 850;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease,
+        background .2s ease;
+    }
+
+    .jg-primary-button {
+      border: 1px solid rgba(255, 255, 255, .08);
+
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #7c3aed
+        );
+
+      color: white;
+
+      box-shadow:
+        0 12px 30px rgba(37, 99, 235, .25);
+    }
+
+    .jg-secondary-button {
+      border: 1px solid rgba(127, 127, 127, .18);
+      background: rgba(255, 255, 255, .055);
+      color: inherit;
+    }
+
+    .jg-primary-button:hover,
+    .jg-secondary-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .jg-primary-button:active,
+    .jg-secondary-button:active {
+      transform: scale(.97);
+    }
+
+    .jg-section {
+      padding: 25px 18px 0;
+    }
+
+    .jg-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 16px;
+
+      margin-bottom: 15px;
+    }
+
+    .jg-section-title {
+      margin: 0;
+
+      font-size: 21px;
+      font-weight: 900;
+      letter-spacing: -.5px;
+    }
+
+    .jg-section-subtitle {
+      margin: 5px 0 0;
+
+      font-size: 12px;
+      line-height: 1.5;
+      opacity: .56;
+    }
+
+    .jg-see-all {
+      border: 0;
+      background: transparent;
+
+      color: #60a5fa;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .jg-feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .jg-feature-card {
+      position: relative;
+      overflow: hidden;
+
+      min-height: 145px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      padding: 17px;
+
+      border: 1px solid rgba(127, 127, 127, .13);
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.075),
+          rgba(255,255,255,.025)
+        );
+
+      text-decoration: none;
+      color: inherit;
+
+      cursor: pointer;
+
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
+    }
+
+    .jg-feature-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(37, 99, 235, .32);
+      box-shadow: 0 15px 35px rgba(0,0,0,.12);
+    }
+
+    .jg-feature-card:active {
+      transform: scale(.98);
+    }
+
+    .jg-feature-icon {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 13px;
+
+      background: rgba(37, 99, 235, .12);
+
+      font-size: 20px;
+    }
+
+    .jg-feature-card h3 {
+      margin: 14px 0 4px;
+
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .jg-feature-card p {
+      margin: 0;
+
+      font-size: 11px;
+      line-height: 1.5;
+      opacity: .56;
+    }
+
+    .jg-progress-card {
+      padding: 18px;
+
+      border:
+        1px solid rgba(37, 99, 235, .18);
+
+      border-radius: 22px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(37, 99, 235, .12),
+          rgba(124, 58, 237, .08)
+        );
+    }
+
+    .jg-progress-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .jg-progress-label {
+      margin: 0 0 5px;
+
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+
+      opacity: .58;
+    }
+
+    .jg-progress-title {
+      margin: 0;
+
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .jg-progress-percent {
+      font-size: 22px;
+      font-weight: 950;
+      color: #60a5fa;
+    }
+
+    .jg-progress-bar {
+      height: 8px;
+
+      margin-top: 17px;
+
+      overflow: hidden;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,.08);
+    }
+
+    .jg-progress-fill {
+      width: 32%;
+      height: 100%;
+
+      border-radius: inherit;
+
+      background:
+        linear-gradient(
+          90deg,
+          #2563eb,
+          #7c3aed,
+          #06b6d4
+        );
+    }
+
+    .jg-progress-footer {
+      display: flex;
+      justify-content: space-between;
+
+      margin-top: 9px;
+
+      font-size: 10px;
+      opacity: .55;
+    }
+
+    .jg-opportunity-card {
+      display: block;
+
+      padding: 18px;
+
+      border: 1px solid rgba(127,127,127,.13);
+      border-radius: 20px;
+
+      background: rgba(255,255,255,.04);
+
+      text-decoration: none;
+      color: inherit;
+
+      transition: transform .2s ease, border-color .2s ease;
+    }
+
+    .jg-opportunity-card:hover {
+      transform: translateY(-2px);
+      border-color: rgba(37,99,235,.3);
+    }
+
+    .jg-opportunity-badge {
+      display: inline-flex;
+
+      padding: 5px 8px;
+
+      border-radius: 999px;
+
+      background: rgba(34,197,94,.09);
+      color: #4ade80;
+
+      font-size: 9px;
+      font-weight: 850;
+      text-transform: uppercase;
+    }
+
+    .jg-opportunity-card h3 {
+      margin: 11px 0 6px;
+
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    .jg-opportunity-card p {
+      margin: 0;
+
+      font-size: 12px;
+      line-height: 1.6;
+      opacity: .58;
+    }
+
+    .jg-ai-card {
+      position: relative;
+      overflow: hidden;
+
+      padding: 22px;
+
+      border: 1px solid rgba(124,58,237,.22);
+      border-radius: 24px;
+
+      background:
+        radial-gradient(
+          circle at 90% 20%,
+          rgba(124,58,237,.22),
+          transparent 38%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(37,99,235,.10),
+          rgba(124,58,237,.09)
+        );
+    }
+
+    .jg-ai-card::after {
+      content: "AI";
+
+      position: absolute;
+      right: -5px;
+      bottom: -28px;
+
+      font-size: 120px;
+      font-weight: 950;
+
+      opacity: .025;
+
+      pointer-events: none;
+    }
+
+    .jg-ai-icon {
+      width: 46px;
+      height: 46px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(37,99,235,.28),
+          rgba(124,58,237,.28)
+        );
+
+      font-size: 21px;
+    }
+
+    .jg-ai-card h2 {
+      margin: 14px 0 7px;
+
+      font-size: 20px;
+      font-weight: 950;
+    }
+
+    .jg-ai-card p {
+      max-width: 520px;
+
+      margin: 0;
+
+      font-size: 12px;
+      line-height: 1.65;
+
+      opacity: .62;
+    }
+
+    .jg-ai-button {
+      margin-top: 17px;
+    }
+
+    .jg-ad-slot {
+      min-height: 75px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border: 1px dashed rgba(127,127,127,.18);
+      border-radius: 18px;
+
+      background: rgba(255,255,255,.018);
+
+      color: rgba(255,255,255,.34);
+
+      font-size: 10px;
+      letter-spacing: .4px;
+      text-transform: uppercase;
+    }
+
+    .jg-footer {
+      padding: 35px 18px 120px;
+
+      text-align: center;
+
+      font-size: 11px;
+      line-height: 1.7;
+
+      opacity: .46;
+    }
+
+    .jg-footer strong {
+      opacity: .9;
+    }
+
+    /*
+      MOBILE BOTTOM NAV
+    */
+
+    .jg-bottom-nav {
+      position: fixed;
+      z-index: 1000;
+
+      left: 10px;
+      right: 10px;
+      bottom: max(10px, env(safe-area-inset-bottom));
+
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+
+      min-height: 64px;
+
+      padding: 7px;
+
+      border:
+        1px solid rgba(127,127,127,.18);
+
+      border-radius: 22px;
+
+      background:
+        rgba(12,17,29,.88);
+
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.28);
+    }
+
+    .jg-nav-item {
+      min-width: 0;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+
+      border: 0;
+      border-radius: 16px;
+
+      background: transparent;
+      color: inherit;
+
+      text-decoration: none;
+
+      cursor: pointer;
+
+      opacity: .52;
+
+      transition:
+        background .2s ease,
+        opacity .2s ease,
+        transform .2s ease;
+    }
+
+    .jg-nav-item:hover {
+      opacity: .85;
+    }
+
+    .jg-nav-item:active {
+      transform: scale(.92);
+    }
+
+    .jg-nav-item.active {
+      opacity: 1;
+
+      background:
+        rgba(37,99,235,.14);
+
+      color: #60a5fa;
+    }
+
+    .jg-nav-icon {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .jg-nav-label {
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    /*
+      LIGHT MODE
+    */
+
+    body.jg-light .jg-bottom-nav {
+      background: rgba(255,255,255,.88);
+      box-shadow: 0 18px 50px rgba(0,0,0,.12);
+    }
+
+    body.jg-light .jg-feature-card,
+    body.jg-light .jg-opportunity-card {
+      background: rgba(0,0,0,.025);
+    }
+
+    body.jg-light .jg-ad-slot {
+      background: rgba(0,0,0,.015);
+    }
+
+    /*
+      DESKTOP
+    */
+
+    @media (min-width: 760px) {
+
+      .jg-hero {
+        padding:
+          34px
+          max(34px, calc((100vw - 1180px) / 2 + 18px))
+          55px;
+      }
+
+      .jg-topbar {
+        margin-bottom: 65px;
+      }
+
+      .jg-section {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding-left: 24px;
+        padding-right: 24px;
+      }
+
+      .jg-feature-grid {
+        grid-template-columns:
+          repeat(4, minmax(0, 1fr));
+      }
+
+      .jg-feature-card {
+        min-height: 180px;
+      }
+
+      .jg-bottom-nav {
+        left: 50%;
+        right: auto;
+        width: min(620px, calc(100% - 30px));
+
+        transform: translateX(-50%);
+      }
+
+      .jg-footer {
+        padding-bottom: 125px;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- =========================================================
-     APP SHELL
-========================================================= -->
+  <!-- =========================================
+       JG HOME
+  ========================================== -->
 
-<div id="jgApp" class="jg-app">
+  <main class="jg-home">
 
-    <!-- =====================================================
-         HEADER
-    ====================================================== -->
+    <!-- HERO -->
+    <section class="jg-hero">
 
-    <header class="top-header">
+      <header class="jg-topbar">
 
-        <div class="brand-area">
+        <a class="jg-brand" href="index.html" aria-label="JG Home">
 
-            <a href="index.html" class="brand" aria-label="JG Home">
+          <span class="jg-logo">JG</span>
 
-                <div class="brand-icon">
-                    JG
-                </div>
+          <span class="jg-brand-text">
+            <span class="jg-brand-name">JG</span>
+            <span class="jg-brand-tagline">
+              Find Skills. Find Opportunities.
+            </span>
+          </span>
 
-                <div class="brand-text">
-                    <strong>JG</strong>
-                    <span>Learn. Build. Grow.</span>
-                </div>
-
-            </a>
-
-        </div>
-
-
-        <nav class="desktop-nav" aria-label="Main navigation">
-
-            <a href="index.html" class="nav-link active">
-                Home
-            </a>
-
-            <a href="learn.html" class="nav-link">
-                Learn
-            </a>
-
-            <a href="skills.html" class="nav-link">
-                Skills
-            </a>
-
-            <a href="work.html" class="nav-link">
-                Work
-            </a>
-
-            <a href="ai.html" class="nav-link">
-                JG AI
-            </a>
-
-        </nav>
-
-
-        <div class="header-actions">
-
-            <button
-                type="button"
-                class="icon-button"
-                id="themeButton"
-                aria-label="Toggle theme"
-                title="Toggle theme"
-            >
-                <span id="themeIcon">☾</span>
-            </button>
-
-            <a
-                href="account.html"
-                class="account-button"
-                aria-label="Open account"
-            >
-                <span class="account-avatar">
-                    J
-                </span>
-            </a>
-
-            <button
-                type="button"
-                class="menu-button"
-                id="menuButton"
-                aria-label="Open navigation"
-                aria-expanded="false"
-            >
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-
-        </div>
-
-    </header>
-
-
-    <!-- =====================================================
-         MOBILE MENU
-    ====================================================== -->
-
-    <div class="mobile-menu" id="mobileMenu">
-
-        <div class="mobile-menu-header">
-
-            <strong>JG</strong>
-
-            <button
-                type="button"
-                class="icon-button"
-                id="closeMenuButton"
-                aria-label="Close menu"
-            >
-                ×
-            </button>
-
-        </div>
-
-        <a href="index.html" class="mobile-nav-link active">
-            <span>⌂</span>
-            Home
         </a>
 
-        <a href="learn.html" class="mobile-nav-link">
-            <span>📚</span>
-            Learn
-        </a>
-
-        <a href="skills.html" class="mobile-nav-link">
-            <span>✦</span>
-            Skills
-        </a>
-
-        <a href="work.html" class="mobile-nav-link">
-            <span>💼</span>
-            Find Work
-        </a>
-
-        <a href="ai.html" class="mobile-nav-link">
-            <span>✧</span>
-            JG AI
-        </a>
-
-        <a href="premium.html" class="mobile-nav-link">
-            <span>♛</span>
-            Premium
-        </a>
-
-        <a href="account.html" class="mobile-nav-link">
-            <span>◉</span>
-            Account
-        </a>
-
-    </div>
-
-
-    <!-- =====================================================
-         MAIN
-    ====================================================== -->
-
-    <main class="main-content">
-
-
-        <!-- =================================================
-             HERO
-        ================================================== -->
-
-        <section class="hero-section">
-
-            <div class="hero-content">
-
-                <div class="hero-badge">
-                    <span class="status-dot"></span>
-                    Your skills. Your future.
-                </div>
-
-                <h1>
-                    Learn skills.
-                    <span>Find opportunities.</span>
-                    Build your future.
-                </h1>
-
-                <p class="hero-description">
-                    JG helps you learn practical digital skills,
-                    discover opportunities and use intelligent tools
-                    to move forward with confidence.
-                </p>
-
-
-                <div class="hero-actions">
-
-                    <a
-                        href="learn.html"
-                        class="primary-button"
-                    >
-                        Start Learning
-                        <span>→</span>
-                    </a>
-
-                    <a
-                        href="skills.html"
-                        class="secondary-button"
-                    >
-                        Explore Skills
-                    </a>
-
-                </div>
-
-
-                <div class="hero-trust">
-
-                    <div class="trust-item">
-                        <strong>Learn</strong>
-                        <span>Practical courses</span>
-                    </div>
-
-                    <div class="trust-divider"></div>
-
-                    <div class="trust-item">
-                        <strong>Build</strong>
-                        <span>Real projects</span>
-                    </div>
-
-                    <div class="trust-divider"></div>
-
-                    <div class="trust-item">
-                        <strong>Grow</strong>
-                        <span>Discover opportunities</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- Hero visual -->
-
-            <div class="hero-visual">
-
-                <div class="hero-card">
-
-                    <div class="hero-card-top">
-
-                        <div>
-                            <span class="small-label">
-                                Your learning
-                            </span>
-
-                            <h3>
-                                Continue learning
-                            </h3>
-                        </div>
-
-                        <span class="progress-circle">
-                            29%
-                        </span>
-
-                    </div>
-
-
-                    <div class="course-preview">
-
-                        <div class="course-icon web-icon">
-                            &lt;/&gt;
-                        </div>
-
-                        <div class="course-info">
-
-                            <strong>
-                                Web Development
-                            </strong>
-
-                            <span>
-                                Lesson 7 of 24
-                            </span>
-
-                            <div class="progress-bar">
-                                <span style="width:29%"></span>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-                    <a
-                        href="lesson.html"
-                        class="card-action"
-                    >
-                        Continue lesson
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-
-                <div class="floating-card ai-floating-card">
-
-                    <div class="floating-icon">
-                        ✧
-                    </div>
-
-                    <div>
-                        <strong>JG AI</strong>
-                        <span>Your intelligent learning guide</span>
-                    </div>
-
-                </div>
-
-
-                <div class="floating-card opportunity-floating-card">
-
-                    <div class="floating-icon">
-                        ↗
-                    </div>
-
-                    <div>
-                        <strong>Opportunities</strong>
-                        <span>Discover what's next</span>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             AD SLOT
-        ================================================== -->
-
-        <section class="ad-section">
-
-            <div class="ad-slot">
-
-                <span class="ad-label">
-                    Sponsored
-                </span>
-
-                <p>
-                    Advertisement
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             SKILLS
-        ================================================== -->
-
-        <section class="section-block">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="eyebrow">
-                        LEARN SOMETHING USEFUL
-                    </span>
-
-                    <h2>
-                        Build skills that matter.
-                    </h2>
-
-                </div>
-
-                <a
-                    href="skills.html"
-                    class="text-link"
-                >
-                    View all skills →
-                </a>
-
-            </div>
-
-
-            <div class="skill-grid">
-
-
-                <a
-                    href="course.html?course=web-development"
-                    class="skill-card"
-                >
-
-                    <div class="skill-card-icon web">
-                        &lt;/&gt;
-                    </div>
-
-                    <div class="skill-card-body">
-
-                        <span class="skill-level">
-                            Beginner → Advanced
-                        </span>
-
-                        <h3>
-                            Web Development
-                        </h3>
-
-                        <p>
-                            Learn how websites and web applications
-                            are designed and built.
-                        </p>
-
-                        <span class="skill-link">
-                            Explore course →
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="course.html?course=graphic-design"
-                    class="skill-card"
-                >
-
-                    <div class="skill-card-icon design">
-                        ◈
-                    </div>
-
-                    <div class="skill-card-body">
-
-                        <span class="skill-level">
-                            Creative skill
-                        </span>
-
-                        <h3>
-                            Graphic Design
-                        </h3>
-
-                        <p>
-                            Learn visual communication, design
-                            principles and digital creativity.
-                        </p>
-
-                        <span class="skill-link">
-                            Explore course →
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="course.html?course=video-editing"
-                    class="skill-card"
-                >
-
-                    <div class="skill-card-icon video">
-                        ▶
-                    </div>
-
-                    <div class="skill-card-body">
-
-                        <span class="skill-level">
-                            Creative skill
-                        </span>
-
-                        <h3>
-                            Video Editing
-                        </h3>
-
-                        <p>
-                            Learn how to create and edit engaging
-                            digital video content.
-                        </p>
-
-                        <span class="skill-link">
-                            Explore course →
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-                <a
-                    href="course.html?course=python"
-                    class="skill-card"
-                >
-
-                    <div class="skill-card-icon python">
-                        Py
-                    </div>
-
-                    <div class="skill-card-body">
-
-                        <span class="skill-level">
-                            Programming
-                        </span>
-
-                        <h3>
-                            Python Programming
-                        </h3>
-
-                        <p>
-                            Start programming with Python and build
-                            useful projects.
-                        </p>
-
-                        <span class="skill-link">
-                            Explore course →
-                        </span>
-
-                    </div>
-
-                </a>
-
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             LEARNING JOURNEY
-        ================================================== -->
-
-        <section class="journey-section">
-
-            <div class="journey-content">
-
-                <span class="eyebrow">
-                    HOW JG WORKS
-                </span>
-
-                <h2>
-                    One place to learn,
-                    build and discover.
-                </h2>
-
-                <p>
-                    JG brings learning, intelligent guidance and
-                    opportunity discovery into one connected
-                    experience.
-                </p>
-
-            </div>
-
-
-            <div class="journey-steps">
-
-                <div class="journey-step">
-
-                    <span class="step-number">
-                        01
-                    </span>
-
-                    <div>
-                        <h3>
-                            Learn
-                        </h3>
-
-                        <p>
-                            Follow structured lessons designed
-                            around practical skills.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="journey-step">
-
-                    <span class="step-number">
-                        02
-                    </span>
-
-                    <div>
-                        <h3>
-                            Practice
-                        </h3>
-
-                        <p>
-                            Test what you know with exercises,
-                            projects and assessments.
-                        </p>
-                    </div>
-
-                </div>
-
-
-                <div class="journey-step">
-
-                    <span class="step-number">
-                        03
-                    </span>
-
-                    <div>
-                        <h3>
-                            Discover
-                        </h3>
-
-                        <p>
-                            Find external opportunities that
-                            match the skills you are building.
-                        </p>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             JG AI
-        ================================================== -->
-
-        <section class="ai-section">
-
-            <div class="ai-card">
-
-                <div class="ai-card-visual">
-
-                    <div class="ai-orbit">
-                        <span>✧</span>
-                    </div>
-
-                </div>
-
-
-                <div class="ai-card-content">
-
-                    <span class="eyebrow">
-                        INTELLIGENT ASSISTANCE
-                    </span>
-
-                    <h2>
-                        Meet JG AI.
-                    </h2>
-
-                    <p>
-                        Get help understanding lessons, planning
-                        your learning journey, exploring skills and
-                        thinking through career-related questions.
-                    </p>
-
-                    <a
-                        href="ai.html"
-                        class="primary-button"
-                    >
-                        Open JG AI
-                        <span>→</span>
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             FIND WORK
-        ================================================== -->
-
-        <section class="work-preview section-block">
-
-            <div class="section-heading">
-
-                <div>
-
-                    <span class="eyebrow">
-                        OPPORTUNITIES
-                    </span>
-
-                    <h2>
-                        Discover what's next.
-                    </h2>
-
-                </div>
-
-                <a
-                    href="work.html"
-                    class="text-link"
-                >
-                    Explore opportunities →
-                </a>
-
-            </div>
-
-
-            <div class="opportunity-grid">
-
-                <a
-                    href="work.html"
-                    class="opportunity-card"
-                >
-
-                    <div class="opportunity-top">
-
-                        <span class="opportunity-tag">
-                            External opportunity
-                        </span>
-
-                        <span>
-                            ↗
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Remote Digital Opportunities
-                    </h3>
-
-                    <p>
-                        Explore opportunities from external
-                        organizations and platforms.
-                    </p>
-
-                    <span class="opportunity-action">
-                        View opportunities →
-                    </span>
-
-                </a>
-
-
-                <a
-                    href="work.html"
-                    class="opportunity-card"
-                >
-
-                    <div class="opportunity-top">
-
-                        <span class="opportunity-tag">
-                            Skill focused
-                        </span>
-
-                        <span>
-                            ↗
-                        </span>
-
-                    </div>
-
-                    <h3>
-                        Creative & Tech Opportunities
-                    </h3>
-
-                    <p>
-                        Discover opportunities related to digital
-                        and technology skills.
-                    </p>
-
-                    <span class="opportunity-action">
-                        View opportunities →
-                    </span>
-
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             PREMIUM
-        ================================================== -->
-
-        <section class="premium-section">
-
-            <div class="premium-card">
-
-                <div class="premium-badge">
-                    ♛ JG PREMIUM
-                </div>
-
-                <h2>
-                    Learn without interruptions.
-                </h2>
-
-                <p>
-                    Upgrade to Premium for an ad-free JG
-                    experience and additional premium features
-                    as they become available.
-                </p>
-
-                <a
-                    href="premium.html"
-                    class="premium-button"
-                >
-                    Explore Premium
-                    <span>→</span>
-                </a>
-
-            </div>
-
-        </section>
-
-
-        <!-- =================================================
-             FINAL CTA
-        ================================================== -->
-
-        <section class="final-cta">
-
-            <div>
-
-                <span class="eyebrow">
-                    YOUR NEXT STEP
-                </span>
-
-                <h2>
-                    Start building your future today.
-                </h2>
-
-                <p>
-                    Choose a skill, start learning and keep moving.
-                </p>
-
-            </div>
-
-            <a
-                href="learn.html"
-                class="primary-button large"
-            >
-                Start Learning
-                <span>→</span>
-            </a>
-
-        </section>
-
-    </main>
-
-
-    <!-- =====================================================
-         MOBILE BOTTOM NAV
-    ====================================================== -->
-
-    <nav class="bottom-nav" aria-label="Mobile navigation">
-
-        <a
-            href="index.html"
-            class="bottom-nav-item active"
-        >
-            <span>⌂</span>
-            <small>Home</small>
-        </a>
-
-        <a
-            href="learn.html"
-            class="bottom-nav-item"
-        >
-            <span>📚</span>
-            <small>Learn</small>
-        </a>
-
-        <a
-            href="work.html"
-            class="bottom-nav-item"
-        >
-            <span>💼</span>
-            <small>Work</small>
-        </a>
-
-        <a
-            href="ai.html"
-            class="bottom-nav-item"
-        >
-            <span>✧</span>
-            <small>JG AI</small>
-        </a>
-
-        <a
+        <div class="jg-top-actions">
+
+          <!-- Theme -->
+          <button
+            id="themeButton"
+            class="jg-icon-button"
+            type="button"
+            aria-label="Toggle theme"
+            title="Toggle theme"
+          >
+            ◐
+          </button>
+
+          <!-- Account -->
+          <a
+            class="jg-icon-button"
             href="account.html"
-            class="bottom-nav-item"
+            aria-label="Account"
+            title="Account"
+          >
+            ♙
+          </a>
+
+        </div>
+
+      </header>
+
+
+      <div class="jg-hero-content">
+
+        <span class="jg-eyebrow">
+          <span class="jg-eyebrow-dot"></span>
+          Build your future
+        </span>
+
+        <h1>
+          Learn skills.
+          <br>
+          <span class="jg-gradient-text">
+            Find opportunities.
+          </span>
+        </h1>
+
+        <p class="jg-hero-description">
+          JG helps you learn practical skills, improve your knowledge,
+          discover opportunities and build a stronger future from one
+          powerful platform.
+        </p>
+
+        <div class="jg-hero-actions">
+
+          <a
+            class="jg-primary-button"
+            href="learn.html"
+          >
+            Start Learning
+            <span>→</span>
+          </a>
+
+          <a
+            class="jg-secondary-button"
+            href="skills.html"
+          >
+            Explore Skills
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         QUICK FEATURES
+    ========================================== -->
+
+    <section class="jg-section">
+
+      <div class="jg-section-header">
+
+        <div>
+          <h2 class="jg-section-title">
+            What do you want to do?
+          </h2>
+
+          <p class="jg-section-subtitle">
+            Choose where you want to start.
+          </p>
+        </div>
+
+      </div>
+
+
+      <div class="jg-feature-grid">
+
+        <!-- Learn -->
+        <a
+          class="jg-feature-card"
+          href="learn.html"
         >
-            <span>◉</span>
-            <small>Account</small>
+
+          <div class="jg-feature-icon">
+            📚
+          </div>
+
+          <div>
+            <h3>Learn Skills</h3>
+
+            <p>
+              Learn practical skills through structured courses.
+            </p>
+          </div>
+
         </a>
 
-    </nav>
+
+        <!-- Skills -->
+        <a
+          class="jg-feature-card"
+          href="skills.html"
+        >
+
+          <div class="jg-feature-icon">
+            🧠
+          </div>
+
+          <div>
+            <h3>Explore Skills</h3>
+
+            <p>
+              Discover skills that can help you grow.
+            </p>
+          </div>
+
+        </a>
 
 
-    <!-- =====================================================
-         GLOBAL MODAL
-    ====================================================== -->
+        <!-- Work -->
+        <a
+          class="jg-feature-card"
+          href="work.html"
+        >
 
-    <div
-        class="modal"
-        id="globalModal"
-        aria-hidden="true"
-    >
+          <div class="jg-feature-icon">
+            💼
+          </div>
+
+          <div>
+            <h3>Find Work</h3>
+
+            <p>
+              Discover external opportunities and useful resources.
+            </p>
+          </div>
+
+        </a>
+
+
+        <!-- AI -->
+        <a
+          class="jg-feature-card"
+          href="ai.html"
+        >
+
+          <div class="jg-feature-icon">
+            ✦
+          </div>
+
+          <div>
+            <h3>JG AI</h3>
+
+            <p>
+              Get intelligent learning and career assistance.
+            </p>
+          </div>
+
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         LEARNING PROGRESS
+    ========================================== -->
+
+    <section class="jg-section">
+
+      <div class="jg-section-header">
+
+        <div>
+          <h2 class="jg-section-title">
+            Continue learning
+          </h2>
+
+          <p class="jg-section-subtitle">
+            Pick up where you left off.
+          </p>
+        </div>
+
+        <a
+          class="jg-see-all"
+          href="learn.html"
+        >
+          View all
+        </a>
+
+      </div>
+
+
+      <a
+        class="jg-progress-card"
+        href="course.html"
+        style="display:block;text-decoration:none;color:inherit;"
+      >
+
+        <div class="jg-progress-top">
+
+          <div>
+
+            <p class="jg-progress-label">
+              Web Development
+            </p>
+
+            <h3 class="jg-progress-title">
+              Build your first modern website
+            </h3>
+
+          </div>
+
+          <span class="jg-progress-percent">
+            32%
+          </span>
+
+        </div>
+
 
         <div
-            class="modal-backdrop"
-            data-modal-close
-        ></div>
+          class="jg-progress-bar"
+          aria-label="Course progress"
+        >
 
-        <div class="modal-panel">
-
-            <button
-                type="button"
-                class="modal-close"
-                data-modal-close
-                aria-label="Close"
-            >
-                ×
-            </button>
-
-            <div id="modalContent"></div>
+          <div class="jg-progress-fill"></div>
 
         </div>
 
-    </div>
 
-</div>
+        <div class="jg-progress-footer">
+
+          <span>
+            Lesson 7 of 24
+          </span>
+
+          <span>
+            Continue →
+          </span>
+
+        </div>
+
+      </a>
+
+    </section>
 
 
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
+    <!-- =========================================
+         AD SLOT
+    ========================================== -->
 
-<script src="js/config.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/auth.js"></script>
-<script src="js/api.js"></script>
-<script src="js/app.js"></script>
+    <section class="jg-section">
+
+      <div class="jg-ad-slot">
+        Sponsored
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         JG AI
+    ========================================== -->
+
+    <section class="jg-section">
+
+      <div class="jg-ai-card">
+
+        <div class="jg-ai-icon">
+          ✦
+        </div>
+
+        <h2>
+          Meet JG AI
+        </h2>
+
+        <p>
+          Your intelligent JG learning companion. Ask questions,
+          understand difficult concepts, plan what to learn next,
+          explore skills and get useful guidance.
+        </p>
+
+        <a
+          href="ai.html"
+          class="jg-primary-button jg-ai-button"
+        >
+          Open JG AI
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         OPPORTUNITY
+    ========================================== -->
+
+    <section class="jg-section">
+
+      <div class="jg-section-header">
+
+        <div>
+          <h2 class="jg-section-title">
+            Discover opportunities
+          </h2>
+
+          <p class="jg-section-subtitle">
+            Explore opportunities from outside JG.
+          </p>
+        </div>
+
+        <a
+          class="jg-see-all"
+          href="work.html"
+        >
+          Explore
+        </a>
+
+      </div>
+
+
+      <a
+        href="work.html"
+        class="jg-opportunity-card"
+      >
+
+        <span class="jg-opportunity-badge">
+          Opportunities
+        </span>
+
+        <h3>
+          Find your next opportunity
+        </h3>
+
+        <p>
+          Explore internships, freelance opportunities, programs,
+          competitions and other external opportunities.
+        </p>
+
+      </a>
+
+    </section>
+
+
+    <!-- =========================================
+         PREMIUM
+    ========================================== -->
+
+    <section class="jg-section">
+
+      <a
+        href="premium.html"
+        class="jg-progress-card"
+        style="display:block;text-decoration:none;color:inherit;"
+      >
+
+        <div class="jg-progress-top">
+
+          <div>
+
+            <p class="jg-progress-label">
+              JG Premium
+            </p>
+
+            <h3 class="jg-progress-title">
+              Learn without advertising
+            </h3>
+
+          </div>
+
+          <span
+            style="
+              font-size:20px;
+              font-weight:900;
+            "
+          >
+            ✦
+          </span>
+
+        </div>
+
+        <p
+          style="
+            margin:12px 0 0;
+            font-size:12px;
+            line-height:1.6;
+            opacity:.62;
+          "
+        >
+          Upgrade to Premium for an ad-free JG experience
+          and other premium features.
+        </p>
+
+      </a>
+
+    </section>
+
+
+    <!-- =========================================
+         SECOND AD
+    ========================================== -->
+
+    <section class="jg-section">
+
+      <div class="jg-ad-slot">
+        Sponsored
+      </div>
+
+    </section>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================== -->
+
+    <footer class="jg-footer">
+
+      <strong>JG</strong>
+      — Find Skills. Find Opportunities.
+
+      <br>
+
+      Learn. Build. Grow.
+
+    </footer>
+
+  </main>
+
+
+  <!-- =========================================
+       MOBILE BOTTOM NAV
+  ========================================== -->
+
+  <nav
+    class="jg-bottom-nav"
+    aria-label="Main navigation"
+  >
+
+    <a
+      class="jg-nav-item active"
+      href="index.html"
+      aria-label="Home"
+    >
+      <span class="jg-nav-icon">⌂</span>
+      <span class="jg-nav-label">Home</span>
+    </a>
+
+
+    <a
+      class="jg-nav-item"
+      href="learn.html"
+      aria-label="Learn"
+    >
+      <span class="jg-nav-icon">▣</span>
+      <span class="jg-nav-label">Learn</span>
+    </a>
+
+
+    <a
+      class="jg-nav-item"
+      href="work.html"
+      aria-label="Work"
+    >
+      <span class="jg-nav-icon">◆</span>
+      <span class="jg-nav-label">Work</span>
+    </a>
+
+
+    <a
+      class="jg-nav-item"
+      href="ai.html"
+      aria-label="JG AI"
+    >
+      <span class="jg-nav-icon">✦</span>
+      <span class="jg-nav-label">JG AI</span>
+    </a>
+
+
+    <a
+      class="jg-nav-item"
+      href="account.html"
+      aria-label="Account"
+    >
+      <span class="jg-nav-icon">♙</span>
+      <span class="jg-nav-label">Account</span>
+    </a>
+
+  </nav>
+
+
+  <!-- =========================================
+       SHARED JG JAVASCRIPT
+  ========================================== -->
+
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+
+
+  <!-- =========================================
+       HOME PAGE FALLBACK FUNCTIONALITY
+  ========================================== -->
+
+  <script>
+
+    /*
+      Theme fallback.
+
+      The main theme system will also live inside
+      js/app.js / js/ui.js.
+
+      This makes the button work even if those files
+      have not been created yet.
+    */
+
+    (function () {
+
+      const themeButton =
+        document.getElementById("themeButton");
+
+      if (!themeButton) return;
+
+
+      function applyTheme(theme) {
+
+        if (theme === "light") {
+
+          document.body.classList.add("jg-light");
+
+          themeButton.textContent = "☾";
+
+        } else {
+
+          document.body.classList.remove("jg-light");
+
+          themeButton.textContent = "☀";
+
+        }
+
+      }
+
+
+      let savedTheme =
+        localStorage.getItem("jg-theme");
+
+
+      if (!savedTheme) {
+
+        savedTheme = "dark";
+
+      }
+
+
+      applyTheme(savedTheme);
+
+
+      themeButton.addEventListener(
+        "click",
+        function () {
+
+          const isLight =
+            document.body.classList.contains("jg-light");
+
+
+          const nextTheme =
+            isLight ? "dark" : "light";
+
+
+          localStorage.setItem(
+            "jg-theme",
+            nextTheme
+          );
+
+
+          applyTheme(nextTheme);
+
+        }
+      );
+
+    })();
+
+
+    /*
+      Prevent accidental broken links from
+      looking like buttons that do nothing.
+
+      These are normal HTML links, so they work
+      even without the backend.
+    */
+
+    document.querySelectorAll(
+      ".jg-primary-button, .jg-secondary-button, .jg-feature-card, .jg-opportunity-card, .jg-progress-card"
+    ).forEach(function (element) {
+
+      element.addEventListener(
+        "click",
+        function () {
+
+          element.style.transform = "scale(.98)";
+
+          setTimeout(function () {
+
+            element.style.transform = "";
+
+          }, 120);
+
+        }
+      );
+
+    });
+
+  </script>
 
 </body>
 </html>
