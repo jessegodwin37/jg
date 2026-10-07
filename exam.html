@@ -1,262 +1,2544 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
+  <meta charset="UTF-8" />
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
+  />
 
   <meta
     name="description"
-    content="Complete your JG course assessment and track your learning progress."
-  >
+    content="JG Course Assessment — Test what you have learned and qualify for your JG certificate."
+  />
 
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#07111f" />
 
-  <title>Assessment | JG — Find Skills. Find Work.</title>
+  <title>Course Assessment — JG</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 
   <style>
     /* =========================================================
-       JG EXAM — PAGE-SPECIFIC STYLES
+       JG EXAM PAGE
        ========================================================= */
 
     .exam-page {
       min-height: 100vh;
-      overflow-x: hidden;
+      padding-bottom: 110px;
     }
 
     .exam-hero {
-      padding: 30px 0 20px;
+      padding: 26px 18px 25px;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.14));
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(124,58,237,.2),
+          transparent 38%
+        ),
+        rgba(7,17,31,.95);
     }
 
-    .exam-breadcrumb {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-bottom: 14px;
-      color: var(--muted);
-      font-size: .76rem;
+    .exam-hero-inner,
+    .exam-main {
+      max-width: 900px;
+      margin: 0 auto;
     }
 
-    .exam-breadcrumb a {
-      color: var(--muted);
+    .exam-back {
+      display: inline-flex;
+      color: var(--muted, #94a3b8);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+      margin-bottom: 21px;
     }
 
-    .exam-breadcrumb a:hover {
-      color: var(--primary);
+    .exam-label {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(124,58,237,.1);
+      border: 1px solid rgba(124,58,237,.2);
+      color: #c4b5fd;
+      font-size: 11px;
+      font-weight: 850;
+      margin-bottom: 12px;
     }
 
-    .exam-title-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 20px;
-    }
-
-    .exam-title h1 {
+    .exam-hero h1 {
       margin: 0;
-      font-size: clamp(1.9rem, 5vw, 3rem);
-      line-height: 1.02;
-      letter-spacing: -.05em;
+      font-size: clamp(29px, 8vw, 48px);
+      line-height: 1.03;
+      letter-spacing: -1.7px;
     }
 
-    .exam-title p {
-      max-width: 650px;
-      margin: 10px 0 0;
-      color: var(--muted);
-      font-size: .82rem;
+    .exam-description {
+      max-width: 680px;
+      margin: 12px 0 0;
+      color: var(--muted, #94a3b8);
+      font-size: 14px;
       line-height: 1.6;
     }
 
-    .exam-title-gradient {
-      background: linear-gradient(
-        120deg,
-        var(--primary),
-        var(--secondary),
-        var(--accent)
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    /* =========================================================
-       EXAM STATUS BAR
-       ========================================================= */
-
-    .exam-status {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 20px;
-    }
-
-    .status-card {
+    .exam-meta {
       display: flex;
-      align-items: center;
-      gap: 11px;
-      padding: 13px;
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      background: var(--surface);
-      box-shadow: var(--shadow-sm);
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
     }
 
-    .status-icon {
-      width: 38px;
-      height: 38px;
-      flex: 0 0 38px;
-      display: grid;
-      place-items: center;
-      border-radius: 11px;
-      background: var(--surface-2);
-      border: 1px solid var(--border);
-      font-size: .95rem;
-    }
-
-    .status-card span {
-      display: block;
-      color: var(--muted);
-      font-size: .63rem;
-    }
-
-    .status-card strong {
-      display: block;
-      margin-top: 3px;
-      font-size: .82rem;
-    }
-
-    .timer-card {
-      border-color: rgba(37, 99, 235, .22);
-      background: rgba(37, 99, 235, .045);
-    }
-
-    .timer-value {
-      font-variant-numeric: tabular-nums;
-    }
-
-    .timer-warning {
-      color: #b45309 !important;
-    }
-
-    .timer-danger {
-      color: #dc2626 !important;
-    }
-
-    /* =========================================================
-       EXAM LAYOUT
-       ========================================================= */
-
-    .exam-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 290px;
-      gap: 18px;
-      align-items: start;
-      padding-bottom: 60px;
-    }
-
-    .exam-main {
-      min-width: 0;
-    }
-
-    .exam-sidebar {
-      position: sticky;
-      top: 80px;
-      display: grid;
-      gap: 13px;
-    }
-
-    /* =========================================================
-       QUESTION CARD
-       ========================================================= */
-
-    .question-card {
-      padding: 22px;
-      border: 1px solid var(--border);
-      border-radius: 21px;
-      background: var(--surface);
-      box-shadow: var(--shadow-md);
-    }
-
-    .question-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      padding-bottom: 15px;
-      border-bottom: 1px solid var(--border);
-    }
-
-    .question-label {
-      color: var(--primary);
-      font-size: .68rem;
-      font-weight: 850;
-      letter-spacing: .06em;
-      text-transform: uppercase;
-    }
-
-    .question-number {
-      color: var(--muted);
-      font-size: .68rem;
+    .exam-meta span {
+      padding: 8px 10px;
+      border-radius: 10px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(148,163,184,.12);
+      color: #cbd5e1;
+      font-size: 11px;
       font-weight: 750;
     }
 
-    .question-progress {
-      height: 5px;
-      margin-top: 13px;
-      overflow: hidden;
-      border-radius: 99px;
-      background: var(--surface-2);
+    .exam-main {
+      padding: 22px 18px;
     }
 
-    .question-progress-bar {
-      width: 10%;
+    .exam-notice {
+      margin-bottom: 17px;
+      padding: 15px;
+      border-radius: 16px;
+      background: rgba(37,99,235,.08);
+      border: 1px solid rgba(37,99,235,.17);
+      color: #bfdbfe;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .exam-card {
+      border: 1px solid var(--border, rgba(148,163,184,.14));
+      border-radius: 21px;
+      background: var(--card, rgba(15,23,42,.7));
+      overflow: hidden;
+    }
+
+    .exam-card-header {
+      padding: 18px;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.1));
+    }
+
+    .exam-card-header-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .exam-card-header h2 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .question-count {
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .exam-progress {
+      height: 6px;
+      margin-top: 13px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(148,163,184,.12);
+    }
+
+    .exam-progress-bar {
+      width: 0;
       height: 100%;
       border-radius: inherit;
       background: linear-gradient(
         90deg,
-        var(--primary),
-        var(--secondary)
+        #2563eb,
+        #7c3aed
       );
       transition: width .25s ease;
     }
 
-    .question-content {
-      padding: 24px 0 18px;
+    .question-area {
+      padding: 20px 18px;
     }
 
-    .question-content h2 {
-      max-width: 820px;
+    .question-number {
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 9px;
+    }
+
+    .question-text {
       margin: 0;
-      font-size: clamp(1.1rem, 3vw, 1.55rem);
-      line-height: 1.4;
-      letter-spacing: -.025em;
+      font-size: 19px;
+      line-height: 1.35;
+      letter-spacing: -.4px;
     }
 
-    .question-hint {
-      margin-top: 8px;
-      color: var(--muted);
-      font-size: .7rem;
-    }
-
-    /* =========================================================
-       ANSWERS
-       ========================================================= */
-
-    .answers {
+    .options {
       display: grid;
       gap: 10px;
       margin-top: 20px;
     }
 
-    .answer {
-      position: relative;
+    .option {
+      width: 100%;
+      min-height: 55px;
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 12px;
+      box-sizing: border-box;
+      border: 1px solid var(--border, rgba(148,163,184,.14));
+      border-radius: 15px;
+      background: rgba(255,255,255,.02);
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: .2s ease;
     }
 
-    .answer input {
-     
+    .option:hover {
+      border-color: rgba(59,130,246,.4);
+      background: rgba(59,130,246,.05);
+    }
+
+    .option.selected {
+      border-color: #2563eb;
+      background: rgba(37,99,235,.1);
+    }
+
+    .option-letter {
+      flex: 0 0 auto;
+      width: 31px;
+      height: 31px;
+      display: grid;
+      place-items: center;
+      border-radius: 9px;
+      background: rgba(148,163,184,.09);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .option.selected .option-letter {
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .option-text {
+      font-size: 13px;
+      line-height: 1.4;
+    }
+
+    .exam-actions {
+      display: flex;
+      gap: 9px;
+      padding: 17px 18px;
+      border-top: 1px solid var(--border, rgba(148,163,184,.1));
+    }
+
+    .exam-button {
+      flex: 1;
+      min-height: 47px;
+      border-radius: 13px;
+      font-size: 12px;
+      font-weight: 850;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .exam-button.secondary {
+      border: 1px solid var(--border, rgba(148,163,184,.15));
+      background: transparent;
+      color: inherit;
+    }
+
+    .exam-button.primary {
+      border: 0;
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .exam-button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .exam-button:not(:disabled):hover {
+      transform: translateY(-1px);
+    }
+
+    .exam-result {
+      display: none;
+      text-align: center;
+      padding: 28px 20px;
+    }
+
+    .result-icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 16px;
+      border-radius: 50%;
+      background: rgba(34,197,94,.1);
+      border: 1px solid rgba(34,197,94,.18);
+      color: #4ade80;
+      font-size: 30px;
+    }
+
+    .exam-result.failed .result-icon {
+      background: rgba(239,68,68,.1);
+      border-color: rgba(239,68,68,.18);
+      color: #f87171;
+    }
+
+    .exam-result h2 {
+      margin: 0;
+      font-size: 25px;
+    }
+
+    .exam-result p {
+      max-width: 560px;
+      margin: 10px auto 0;
+      color: var(--muted, #94a3b8);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .score {
+      margin: 20px 0;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+    }
+
+    .result-actions {
+      display: grid;
+      gap: 9px;
+      max-width: 350px;
+      margin: 0 auto;
+    }
+
+    .result-button {
+      min-height: 47px;
+      border-radius: 13px;
+      font-size: 12px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .result-button.primary {
+      border: 0;
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .result-button.secondary {
+      border: 1px solid var(--border, rgba(148,163,184,.15));
+      background: transparent;
+      color: inherit;
+    }
+
+    .exam-error {
+      display: none;
+      padding: 16px;
+      border-radius: 15px;
+      margin-bottom: 17px;
+      background: rgba(239,68,68,.07);
+      border: 1px solid rgba(239,68,68,.2);
+      color: #fecaca;
+      font-size: 13px;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="exam-page">
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="index.html" class="brand">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-copy">
+          <strong>JG</strong>
+          <small>Find Skills. Find Opportunities.</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html" class="active">Learn</a>
+        <a href="skills.html">Skills</a>
+        <a href="work.html">Work</a>
+        <a href="ai.html">JG AI</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <a
+          href="account.html"
+          class="header-account"
+        >
+          Account
+        </a>
+
+        <button
+          id="menuButton"
+          class="icon-button mobile-menu-button"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =======================================================
+       MOBILE MENU
+       ======================================================= -->
+
+  <div
+    id="mobileMenu"
+    class="mobile-menu"
+    hidden
+  >
+    <a href="index.html">Home</a>
+    <a href="learn.html">Learn</a>
+    <a href="skills.html">Skills</a>
+    <a href="work.html">Find Work</a>
+    <a href="ai.html">JG AI</a>
+    <a href="premium.html">Premium</a>
+    <a href="account.html">Account</a>
+  </div>
+
+
+  <!-- =======================================================
+       EXAM HERO
+       ======================================================= -->
+
+  <section class="exam-hero">
+
+    <div class="exam-hero-inner">
+
+      <a
+        id="backToCourse"
+        href="course.html?course=web-development"
+        class="exam-back"
+      >
+        ← Back to course
+      </a>
+
+      <div class="exam-label">
+        Course Assessment
+      </div>
+
+      <h1 id="examTitle">
+        Web Development Assessment
+      </h1>
+
+      <p class="exam-description">
+        Test your understanding of the course. Answer the questions
+        carefully before submitting your assessment.
+      </p>
+
+      <div class="exam-meta">
+
+        <span id="questionMeta">
+          10 Questions
+        </span>
+
+        <span>
+          Pass mark: 70%
+        </span>
+
+        <span>
+          Certificate eligible
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <main class="exam-main">
+
+    <div
+      id="examError"
+      class="exam-error"
+    ></div>
+
+
+    <div
+      id="examNotice"
+      class="exam-notice"
+    >
+      Complete the course lessons before taking the assessment.
+      Your answers are processed when you submit the exam.
+    </div>
+
+
+    <section
+      id="examCard"
+      class="exam-card"
+    >
+
+      <div class="exam-card-header">
+
+        <div class="exam-card-header-top">
+
+          <h2>
+            Assessment
+          </h2>
+
+          <span
+            id="questionCount"
+            class="question-count"
+          >
+            Question 1 of 10
+          </span>
+
+        </div>
+
+        <div class="exam-progress">
+          <div
+            id="examProgressBar"
+            class="exam-progress-bar"
+          ></div>
+        </div>
+
+      </div>
+
+
+      <div class="question-area">
+
+        <div
+          id="questionNumber"
+          class="question-number"
+        >
+          Question 1
+        </div>
+
+        <h3
+          id="questionText"
+          class="question-text"
+        >
+          Loading question...
+        </h3>
+
+        <div
+          id="options"
+          class="options"
+        >
+        </div>
+
+      </div>
+
+
+      <div class="exam-actions">
+
+        <button
+          id="previousButton"
+          class="exam-button secondary"
+          type="button"
+        >
+          ← Previous
+        </button>
+
+        <button
+          id="nextButton"
+          class="exam-button primary"
+          type="button"
+          disabled
+        >
+          Next →
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RESULT
+         ===================================================== -->
+
+    <section
+      id="examResult"
+      class="exam-card exam-result"
+    >
+
+      <div class="result-icon" id="resultIcon">
+        ✓
+      </div>
+
+      <h2 id="resultTitle">
+        Assessment Passed
+      </h2>
+
+      <p id="resultDescription">
+        Excellent work. You passed the assessment.
+      </p>
+
+      <div
+        id="score"
+        class="score"
+      >
+        0%
+      </div>
+
+      <div class="result-actions">
+
+        <button
+          id="certificateButton"
+          class="result-button primary"
+          type="button"
+        >
+          View Certificate
+        </button>
+
+        <button
+          id="retryButton"
+          class="result-button secondary"
+          type="button"
+        >
+          Retake Assessment
+        </button>
+
+        <button
+          id="courseButton"
+          class="result-button secondary"
+          type="button"
+        >
+          Back to Course
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =======================================================
+       BOTTOM NAVIGATION
+       ======================================================= -->
+
+  <nav
+    class="bottom-nav"
+    aria-label="Mobile navigation"
+  >
+
+    <a
+      href="index.html"
+      class="bottom-nav-item"
+    >
+      <span>⌂</span>
+      <small>Home</small>
+    </a>
+
+    <a
+      href="learn.html"
+      class="bottom-nav-item active"
+    >
+      <span>▣</span>
+      <small>Learn</small>
+    </a>
+
+    <a
+      href="skills.html"
+      class="bottom-nav-item"
+    >
+      <span>✦</span>
+      <small>Skills</small>
+    </a>
+
+    <a
+      href="work.html"
+      class="bottom-nav-item"
+    >
+      <span>◫</span>
+      <small>Work</small>
+    </a>
+
+    <a
+      href="ai.html"
+      class="bottom-nav-item"
+    >
+      <span>✧</span>
+      <small>JG AI</small>
+    </a>
+
+  </nav>
+
+</div>
+
+
+<!-- =========================================================
+     SHARED JG JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/config.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+
+<!-- =========================================================
+     EXAM JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =========================================================
+     CONFIGURATION
+     ========================================================= */
+
+  const PASS_MARK = 70;
+
+
+  /* =========================================================
+     COURSE DATA
+     ========================================================= */
+
+  const courses = {
+
+    "web-development": {
+      name: "Web Development",
+
+      questions: [
+
+        {
+          question:
+            "What is HTML primarily used for?",
+
+          options: [
+            "Styling a webpage",
+            "Structuring webpage content",
+            "Managing databases",
+            "Hosting websites"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What does CSS primarily control?",
+
+          options: [
+            "The visual presentation of a webpage",
+            "The database server",
+            "User passwords",
+            "Domain registration"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Which language is commonly used to add behaviour and interactivity to webpages?",
+
+          options: [
+            "HTML",
+            "CSS",
+            "JavaScript",
+            "SQL"
+          ],
+
+          answer: 2
+        },
+
+        {
+          question:
+            "What does a web browser do?",
+
+          options: [
+            "Only stores passwords",
+            "Requests and displays web resources",
+            "Creates domain names",
+            "Manufactures computers"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What is responsive web design?",
+
+          options: [
+            "A website that only works on desktop",
+            "A website that automatically deletes itself",
+            "A design approach that adapts to different screen sizes",
+            "A programming language"
+          ],
+
+          answer: 2
+        },
+
+        {
+          question:
+            "What is JavaScript commonly used for?",
+
+          options: [
+            "Adding interaction and application logic",
+            "Replacing electricity",
+            "Creating physical hardware",
+            "Registering trademarks"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is Git primarily used for?",
+
+          options: [
+            "Video editing",
+            "Version control",
+            "Graphic design",
+            "Email marketing"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What is an API?",
+
+          options: [
+            "A type of computer monitor",
+            "A method that allows software systems to communicate",
+            "A CSS colour",
+            "A web browser"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What is deployment?",
+
+          options: [
+            "Making an application available in its target environment",
+            "Deleting all source code",
+            "Changing a keyboard",
+            "Drawing a logo"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Which combination represents a common foundation of modern frontend development?",
+
+          options: [
+            "HTML, CSS and JavaScript",
+            "Excel, Photoshop and Word",
+            "Python, SQL and PowerPoint",
+            "Bluetooth, Wi-Fi and GPS"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "python-programming": {
+      name: "Python Programming",
+
+      questions: [
+
+        {
+          question:
+            "Which function is commonly used to display output in Python?",
+
+          options: [
+            "show()",
+            "displayText()",
+            "print()",
+            "writeScreen()"
+          ],
+
+          answer: 2
+        },
+
+        {
+          question:
+            "Which symbol is used to assign a value to a variable in Python?",
+
+          options: [
+            "=",
+            "==",
+            "=>",
+            ":="
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Which of these is a Python list?",
+
+          options: [
+            "{1, 2, 3}",
+            "[1, 2, 3]",
+            "(1: 2: 3)",
+            "<1, 2, 3>"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What is a function?",
+
+          options: [
+            "A reusable block of code",
+            "A computer screen",
+            "A database server",
+            "A web browser"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Which keyword is used to define a function in Python?",
+
+          options: [
+            "function",
+            "func",
+            "def",
+            "define"
+          ],
+
+          answer: 2
+        },
+
+        {
+          question:
+            "Which data type represents True or False?",
+
+          options: [
+            "String",
+            "Boolean",
+            "List",
+            "Float"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What is a loop used for?",
+
+          options: [
+            "Repeating instructions",
+            "Changing a monitor",
+            "Installing a keyboard",
+            "Deleting Python"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is debugging?",
+
+          options: [
+            "Finding and fixing problems in code",
+            "Designing logos",
+            "Creating advertisements",
+            "Writing emails"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a module?",
+
+          options: [
+            "A reusable Python file or component",
+            "A computer mouse",
+            "A monitor setting",
+            "A domain name"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is testing important?",
+
+          options: [
+            "To identify whether software behaves as expected",
+            "To make a phone heavier",
+            "To change a keyboard",
+            "To remove all documentation"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "graphic-design": {
+      name: "Graphic Design",
+
+      questions: [
+
+        {
+          question:
+            "What is graphic design primarily about?",
+
+          options: [
+            "Communicating ideas visually",
+            "Repairing computers",
+            "Managing databases",
+            "Writing server code"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What does typography deal with?",
+
+          options: [
+            "Sound",
+            "The arrangement and appearance of text",
+            "Computer networking",
+            "Video compression"
+          ],
+
+          answer: 1
+        },
+
+        {
+          question:
+            "What is visual hierarchy?",
+
+          options: [
+            "Using visual emphasis to guide attention",
+            "Installing software",
+            "Building servers",
+            "Writing Python"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a logo?",
+
+          options: [
+            "A visual identifier for a brand or organization",
+            "A database",
+            "A programming language",
+            "An operating system"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is colour important in design?",
+
+          options: [
+            "It can influence perception and communicate meaning",
+            "It replaces typography",
+            "It creates a database",
+            "It installs applications"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is composition?",
+
+          options: [
+            "How visual elements are arranged",
+            "How a server is powered",
+            "How a database is encrypted",
+            "How a phone charges"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is branding?",
+
+          options: [
+            "Creating a consistent identity and perception",
+            "Installing an operating system",
+            "Writing backend code",
+            "Creating passwords"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a design brief?",
+
+          options: [
+            "A description of a design project's requirements",
+            "A type of monitor",
+            "A programming error",
+            "A database table"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is consistency important in design?",
+
+          options: [
+            "It creates a clearer and more recognizable visual system",
+            "It makes computers faster",
+            "It replaces research",
+            "It removes the need for typography"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What should a good design communicate?",
+
+          options: [
+            "A clear message appropriate for its audience",
+            "Only random decoration",
+            "Nothing",
+            "Only technical information"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "video-editing": {
+      name: "Video Editing",
+
+      questions: [
+
+        {
+          question:
+            "What is video editing?",
+
+          options: [
+            "The process of arranging and modifying video and audio",
+            "Creating a database",
+            "Writing HTML",
+            "Installing a phone"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What does trimming do?",
+
+          options: [
+            "Removes unwanted portions of media",
+            "Changes a domain name",
+            "Creates a password",
+            "Builds a server"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a timeline used for?",
+
+          options: [
+            "Arranging media in sequence",
+            "Creating email accounts",
+            "Managing databases",
+            "Designing logos"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is colour correction?",
+
+          options: [
+            "Adjusting footage to achieve balanced colour and exposure",
+            "Adding passwords",
+            "Writing code",
+            "Changing a keyboard"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is audio important in video?",
+
+          options: [
+            "It contributes to clarity, emotion and storytelling",
+            "It replaces video",
+            "It creates databases",
+            "It hosts websites"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What are transitions?",
+
+          options: [
+            "Visual changes between clips or scenes",
+            "Computer passwords",
+            "Database fields",
+            "Programming variables"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What are captions?",
+
+          options: [
+            "Text displayed to represent spoken or relevant audio",
+            "Video cameras",
+            "Database tables",
+            "Computer processors"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is storytelling in video editing?",
+
+          options: [
+            "Using images, sound and timing to communicate a narrative",
+            "Deleting all footage",
+            "Changing a domain",
+            "Creating an email"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is exporting?",
+
+          options: [
+            "Creating a final video file from an editing project",
+            "Deleting the project",
+            "Changing the monitor",
+            "Creating a password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why should an editor review a final video before publishing?",
+
+          options: [
+            "To identify mistakes and quality issues",
+            "To remove all audio",
+            "To delete the project",
+            "To stop the video from playing"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "digital-skills": {
+      name: "Digital Skills",
+
+      questions: [
+
+        {
+          question:
+            "What is a strong password?",
+
+          options: [
+            "A password that is difficult to guess",
+            "Your first name",
+            "123456",
+            "password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is cloud storage?",
+
+          options: [
+            "Storing files on remote servers accessible through the internet",
+            "Storing files only on paper",
+            "A computer keyboard",
+            "A phone charger"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is file organization important?",
+
+          options: [
+            "It makes information easier to find and manage",
+            "It makes a phone heavier",
+            "It removes the internet",
+            "It replaces passwords"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is digital privacy?",
+
+          options: [
+            "Protecting personal information and controlling how it is shared",
+            "Deleting every application",
+            "Using a larger monitor",
+            "Buying a new keyboard"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is two-factor authentication?",
+
+          options: [
+            "An additional verification step beyond a password",
+            "Two usernames",
+            "Two computers",
+            "Two browsers"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is digital collaboration?",
+
+          options: [
+            "Working together using digital tools",
+            "Working without technology",
+            "Deleting files",
+            "Turning off the internet"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is online research?",
+
+          options: [
+            "Finding and evaluating information using online sources",
+            "Deleting browser history",
+            "Installing a keyboard",
+            "Changing a screen"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why should you verify information online?",
+
+          options: [
+            "Online information can be inaccurate or misleading",
+            "The internet is always wrong",
+            "Verification makes computers faster",
+            "It changes your password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a spreadsheet useful for?",
+
+          options: [
+            "Organizing, calculating and analyzing data",
+            "Only watching videos",
+            "Only sending emails",
+            "Only drawing logos"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is digital productivity?",
+
+          options: [
+            "Using digital tools effectively to complete tasks",
+            "Buying a new phone",
+            "Deleting applications",
+            "Avoiding technology"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "digital-marketing": {
+      name: "Digital Marketing",
+
+      questions: [
+
+        {
+          question:
+            "What is digital marketing?",
+
+          options: [
+            "Marketing products or services through digital channels",
+            "Repairing computers",
+            "Writing operating systems",
+            "Building physical roads"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is understanding an audience important?",
+
+          options: [
+            "It helps create relevant marketing messages",
+            "It makes computers faster",
+            "It removes the need for content",
+            "It replaces branding"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is content marketing?",
+
+          options: [
+            "Using useful or relevant content to attract and engage an audience",
+            "Deleting social media",
+            "Installing software",
+            "Writing computer drivers"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is SEO?",
+
+          options: [
+            "Search Engine Optimization",
+            "Software Editing Operation",
+            "Server Email Output",
+            "System Encryption Option"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a conversion?",
+
+          options: [
+            "A desired action taken by a user",
+            "A computer restart",
+            "A new password",
+            "A video export"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is copywriting?",
+
+          options: [
+            "Writing persuasive marketing text",
+            "Copying computer files",
+            "Programming a server",
+            "Editing a database"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why are analytics useful?",
+
+          options: [
+            "They help measure performance and make informed decisions",
+            "They replace customers",
+            "They create logos automatically",
+            "They remove marketing"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a landing page?",
+
+          options: [
+            "A webpage designed around a particular campaign or goal",
+            "A computer monitor",
+            "A database server",
+            "A social media password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is social media marketing?",
+
+          options: [
+            "Using social platforms to communicate with and reach audiences",
+            "Building computer hardware",
+            "Creating operating systems",
+            "Managing Wi-Fi"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why should marketing campaigns be measured?",
+
+          options: [
+            "To understand what is working and what should improve",
+            "To delete the campaign",
+            "To remove customers",
+            "To avoid learning"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "entrepreneurship": {
+      name: "Entrepreneurship",
+
+      questions: [
+
+        {
+          question:
+            "What is entrepreneurship?",
+
+          options: [
+            "Creating and developing solutions or businesses around opportunities",
+            "Only working for a large company",
+            "Repairing computers",
+            "Writing code only"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is customer research important?",
+
+          options: [
+            "It helps you understand real customer needs",
+            "It guarantees success",
+            "It removes competition",
+            "It replaces a product"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a business model?",
+
+          options: [
+            "A framework describing how a business creates and captures value",
+            "A company logo",
+            "A computer application",
+            "A password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a value proposition?",
+
+          options: [
+            "The value a product or service aims to provide customers",
+            "A company password",
+            "A tax receipt",
+            "A computer screen"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is testing an idea important?",
+
+          options: [
+            "It helps discover whether the idea solves a real problem",
+            "It guarantees investors",
+            "It eliminates all risk",
+            "It replaces customers"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is market research?",
+
+          options: [
+            "Collecting information about customers, competitors and a market",
+            "Creating a keyboard",
+            "Writing HTML",
+            "Editing videos"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is pricing?",
+
+          options: [
+            "Determining how much customers will pay for an offering",
+            "Creating a logo",
+            "Building a website",
+            "Changing a password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is customer feedback?",
+
+          options: [
+            "Information customers provide about their experience or needs",
+            "A computer update",
+            "A website domain",
+            "A video transition"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is a business risk?",
+
+          options: [
+            "A possibility that could negatively affect the business",
+            "A guaranteed profit",
+            "A logo",
+            "A lesson"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why should entrepreneurs solve real problems?",
+
+          options: [
+            "Solutions to meaningful problems can create genuine customer value",
+            "It guarantees instant wealth",
+            "It removes the need for work",
+            "It makes research unnecessary"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    },
+
+
+    "communication": {
+      name: "Communication",
+
+      questions: [
+
+        {
+          question:
+            "What is active listening?",
+
+          options: [
+            "Giving focused attention and trying to understand the speaker",
+            "Ignoring the speaker",
+            "Speaking continuously",
+            "Avoiding questions"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is body language important?",
+
+          options: [
+            "It can influence how communication is perceived",
+            "It replaces all words",
+            "It creates websites",
+            "It controls computers"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is professional communication?",
+
+          options: [
+            "Clear and appropriate communication in a professional context",
+            "Using complicated words unnecessarily",
+            "Avoiding people",
+            "Only sending messages"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is clarity important?",
+
+          options: [
+            "It reduces misunderstanding",
+            "It makes messages longer",
+            "It removes listening",
+            "It replaces confidence"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is public speaking?",
+
+          options: [
+            "Communicating ideas to an audience",
+            "Writing code",
+            "Editing photos",
+            "Managing files"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is feedback?",
+
+          options: [
+            "Information about performance or communication",
+            "A computer virus",
+            "A programming language",
+            "A password"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is confidence useful in communication?",
+
+          options: [
+            "It can help you express ideas clearly and calmly",
+            "It guarantees that everyone agrees",
+            "It replaces preparation",
+            "It removes the need to listen"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is negotiation?",
+
+          options: [
+            "A process where people discuss terms to reach an agreement",
+            "A programming language",
+            "A video effect",
+            "A database"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "Why is empathy useful?",
+
+          options: [
+            "It helps you understand another person's perspective",
+            "It prevents communication",
+            "It replaces facts",
+            "It removes listening"
+          ],
+
+          answer: 0
+        },
+
+        {
+          question:
+            "What is effective communication?",
+
+          options: [
+            "Communication that clearly conveys meaning to its intended audience",
+            "Communication using the longest possible sentences",
+            "Communication without listening",
+            "Communication that avoids feedback"
+          ],
+
+          answer: 0
+        }
+
+      ]
+    }
+
+  };
+
+
+  /* =========================================================
+     GET COURSE
+     ========================================================= */
+
+  const params =
+    new URLSearchParams(
+      window.location.search
+    );
+
+  const courseKey =
+    params.get("course") ||
+    localStorage.getItem("jg_current_course") ||
+    "web-development";
+
+  const course =
+    courses[courseKey] ||
+    courses["web-development"];
+
+
+  /* =========================================================
+     ELEMENTS
+     ========================================================= */
+
+  const examTitle =
+    document.getElementById("examTitle");
+
+  const questionMeta =
+    document.getElementById("questionMeta");
+
+  const questionCount =
+    document.getElementById("questionCount");
+
+  const questionNumber =
+    document.getElementById("questionNumber");
+
+  const questionText =
+    document.getElementById("questionText");
+
+  const options =
+    document.getElementById("options");
+
+  const progressBar =
+    document.getElementById("examProgressBar");
+
+  const previousButton =
+    document.getElementById("previousButton");
+
+  const nextButton =
+    document.getElementById("nextButton");
+
+  const examCard =
+    document.getElementById("examCard");
+
+  const examResult =
+    document.getElementById("examResult");
+
+  const examNotice =
+    document.getElementById("examNotice");
+
+  const resultTitle =
+    document.getElementById("resultTitle");
+
+  const resultDescription =
+    document.getElementById("resultDescription");
+
+  const score =
+    document.getElementById("score");
+
+  const resultIcon =
+    document.getElementById("resultIcon");
+
+  const certificateButton =
+    document.getElementById("certificateButton");
+
+  const retryButton =
+    document.getElementById("retryButton");
+
+  const courseButton =
+    document.getElementById("courseButton");
+
+  const examError =
+    document.getElementById("examError");
+
+
+  /* =========================================================
+     STATE
+     ========================================================= */
+
+  let currentQuestion = 0;
+
+  let answers =
+    new Array(
+      course.questions.length
+    ).fill(null);
+
+
+  /* =========================================================
+     UPDATE COURSE INFO
+     ========================================================= */
+
+  examTitle.textContent =
+    course.name +
+    " Assessment";
+
+  questionMeta.textContent =
+    course.questions.length +
+    " Questions";
+
+  document.getElementById(
+    "backToCourse"
+  ).href =
+    "course.html?course=" +
+    encodeURIComponent(courseKey);
+
+
+  /* =========================================================
+     SHOW QUESTION
+     ========================================================= */
+
+  function renderQuestion() {
+
+    const total =
+      course.questions.length;
+
+    const question =
+      course.questions[currentQuestion];
+
+    questionNumber.textContent =
+      "Question " +
+      (currentQuestion + 1);
+
+    questionCount.textContent =
+      "Question " +
+      (currentQuestion + 1) +
+      " of " +
+      total;
+
+    questionText.textContent =
+      question.question;
+
+
+    const percentage =
+      ((currentQuestion + 1) / total) * 100;
+
+    progressBar.style.width =
+      percentage + "%";
+
+
+    options.innerHTML = "";
+
+
+    const letters =
+      ["A", "B", "C", "D"];
+
+
+    question.options.forEach(
+      function (optionText, index) {
+
+        const button =
+          document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+          "option";
+
+        if (
+          answers[currentQuestion] === index
+        ) {
+          button.classList.add(
+            "selected"
+          );
+        }
+
+
+        button.innerHTML = `
+
+          <span class="option-letter">
+            ${letters[index]}
+          </span>
+
+          <span class="option-text">
+            ${escapeHtml(optionText)}
+          </span>
+
+        `;
+
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            answers[currentQuestion] =
+              index;
+
+            renderQuestion();
+
+          }
+        );
+
+
+        options.appendChild(
+          button
+        );
+
+      }
+    );
+
+
+    previousButton.disabled =
+      currentQuestion === 0;
+
+
+    nextButton.disabled =
+      answers[currentQuestion] === null;
+
+
+    if (
+      currentQuestion ===
+      total - 1
+    ) {
+
+      nextButton.textContent =
+        "Submit Assessment";
+
+    } else {
+
+      nextButton.textContent =
+        "Next →";
+
+    }
+
+  }
+
+
+  /* =========================================================
+     NEXT / SUBMIT
+     ========================================================= */
+
+  nextButton.addEventListener(
+    "click",
+    function () {
+
+      if (
+        answers[currentQuestion] === null
+      ) {
+        return;
+      }
+
+
+      if (
+        currentQuestion <
+        course.questions.length - 1
+      ) {
+
+        currentQuestion++;
+
+        renderQuestion();
+
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth"
+        });
+
+        return;
+      }
+
+
+      submitExam();
+
+    }
+  );
+
+
+  /* =========================================================
+     PREVIOUS
+     ========================================================= */
+
+  previousButton.addEventListener(
+    "click",
+    function () {
+
+      if (
+        currentQuestion <= 0
+      ) {
+        return;
+      }
+
+      currentQuestion--;
+
+      renderQuestion();
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+
+  /* =========================================================
+     SUBMIT EXAM
+     ========================================================= */
+
+  function submitExam() {
+
+    let correct = 0;
+
+
+    course.questions.forEach(
+      function (question, index) {
+
+        if (
+          answers[index] ===
+          question.answer
+        ) {
+          correct++;
+        }
+
+      }
+    );
+
+
+    const total =
+      course.questions.length;
+
+    const percentage =
+      Math.round(
+        (correct / total) * 100
+      );
+
+
+    const passed =
+      percentage >= PASS_MARK;
+
+
+    localStorage.setItem(
+      "jg_exam_result_" + courseKey,
+      JSON.stringify({
+        score: percentage,
+        correct: correct,
+        total: total,
+        passed: passed,
+        completedAt:
+          new Date().toISOString()
+      })
+    );
+
+
+    showResult(
+      percentage,
+      correct,
+      total,
+      passed
+    );
+
+  }
+
+
+  /* =========================================================
+     RESULT
+     ========================================================= */
+
+  function showResult(
+    percentage,
+    correct,
+    total,
+    passed
+  ) {
+
+    examCard.style.display =
+      "none";
+
+    examNotice.style.display =
+      "none";
+
+    examResult.style.display =
+      "block";
+
+
+    score.textContent =
+      percentage + "%";
+
+
+    if (passed) {
+
+      examResult.classList.remove(
+        "failed"
+      );
+
+      resultIcon.textContent =
+        "✓";
+
+      resultTitle.textContent =
+        "Assessment Passed";
+
+      resultDescription.textContent =
+        "Excellent work. You answered " +
+        correct +
+        " of " +
+        total +
+        " questions correctly and reached the " +
+        PASS_MARK +
+        "% pass mark.";
+
+      certificateButton.style.display =
+        "block";
+
+    } else {
+
+      examResult.classList.add(
+        "failed"
+      );
+
+      resultIcon.textContent =
+        "×";
+
+      resultTitle.textContent =
+        "Assessment Not Passed";
+
+      resultDescription.textContent =
+        "You answered " +
+        correct +
+        " of " +
+        total +
+        " questions correctly. You need at least " +
+        PASS_MARK +
+        "% to pass.";
+
+      certificateButton.style.display =
+        "none";
+
+    }
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+
+  /* =========================================================
+     RETRY
+     ========================================================= */
+
+  retryButton.addEventListener(
+    "click",
+    function () {
+
+      currentQuestion = 0;
+
+      answers =
+        new Array(
+          course.questions.length
+        ).fill(null);
+
+
+      examResult.style.display =
+        "none";
+
+      examCard.style.display =
+        "block";
+
+      examNotice.style.display =
+        "block";
+
+
+      renderQuestion();
+
+
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
+
+    }
+  );
+
+
+  /* =========================================================
+     CERTIFICATE
+     ========================================================= */
+
+  certificateButton.addEventListener(
+    "click",
+    function () {
+
+      /*
+        The production backend will issue and
+        verify the actual certificate.
+
+        For the frontend build, the result is
+        passed to certificate.html.
+      */
+
+      window.location.href =
+        "certificate.html?course=" +
+        encodeURIComponent(courseKey);
+
+    }
+  );
+
+
+  /* =========================================================
+     COURSE BUTTON
+     ========================================================= */
+
+  courseButton.addEventListener(
+    "click",
+    function () {
+
+      window.location.href =
+        "course.html?course=" +
+        encodeURIComponent(courseKey);
+
+    }
+  );
+
+
+  /* =========================================================
+     HTML ESCAPE
+     ========================================================= */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =========================================================
+     MOBILE MENU
+     ========================================================= */
+
+  const menuButton =
+    document.getElementById("menuButton");
+
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+  if (
+    menuButton &&
+    mobileMenu
+  ) {
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        const open =
+          !mobileMenu.hasAttribute("hidden");
+
+        if (open) {
+
+          mobileMenu.setAttribute(
+            "hidden",
+            ""
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        } else {
+
+          mobileMenu.removeAttribute(
+            "hidden"
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     INITIALIZE
+     ========================================================= */
+
+  renderQuestion();
+
+});
+
+</script>
+
+</body>
+</html>
