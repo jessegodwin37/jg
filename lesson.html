@@ -1,785 +1,1625 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="description"
-          content="JG Learning — Learn practical digital skills step by step.">
-
-    <title>JG Learning | Lessons</title>
-
-    <link rel="stylesheet" href="css/style.css">
-
-    <style>
-
-        /* =========================================
-           LESSON PAGE
-        ========================================= */
-
-        .lesson-page {
-            min-height: 100vh;
-            background: var(--background);
-        }
-
-        .lesson-hero {
-            padding: 55px 20px 35px;
-            border-bottom: 1px solid var(--border);
-            background:
-                radial-gradient(
-                    circle at top right,
-                    rgba(37, 99, 235, 0.10),
-                    transparent 35%
-                );
-        }
-
-        .lesson-container {
-            max-width: 1250px;
-            margin: auto;
-        }
-
-        .breadcrumb {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .breadcrumb a {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        .lesson-hero h1 {
-            margin: 0 0 12px;
-            color: var(--text);
-            font-size: clamp(34px, 5vw, 55px);
-            letter-spacing: -1.5px;
-        }
-
-        .lesson-hero p {
-            max-width: 750px;
-            margin: 0;
-            color: var(--text-secondary);
-            line-height: 1.7;
-        }
-
-        /* =========================================
-           MAIN LAYOUT
-        ========================================= */
-
-        .lesson-layout {
-            max-width: 1250px;
-            margin: 35px auto 80px;
-            padding: 0 20px;
-
-            display: grid;
-            grid-template-columns: 320px minmax(0, 1fr);
-            gap: 25px;
-
-            align-items: start;
-        }
-
-        /* =========================================
-           SIDEBAR
-        ========================================= */
-
-        .lesson-sidebar {
-            position: sticky;
-            top: 20px;
-
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-
-        .course-summary {
-            padding: 24px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .course-icon {
-            width: 55px;
-            height: 55px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 16px;
-            background: rgba(37, 99, 235, 0.10);
-
-            font-size: 25px;
-
-            margin-bottom: 16px;
-        }
-
-        .course-summary h2 {
-            margin: 0 0 8px;
-            color: var(--text);
-            font-size: 21px;
-        }
-
-        .course-summary p {
-            margin: 0;
-            color: var(--text-secondary);
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        .progress-area {
-            margin-top: 20px;
-        }
-
-        .progress-info {
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-
-            margin-bottom: 8px;
-
-            font-size: 13px;
-            color: var(--text-secondary);
-        }
-
-        .progress-info strong {
-            color: var(--text);
-        }
-
-        .progress-bar {
-            height: 9px;
-
-            background: var(--border);
-
-            border-radius: 999px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            width: 0%;
-            height: 100%;
-
-            background: var(--primary);
-
-            border-radius: inherit;
-
-            transition: width 0.3s ease;
-        }
-
-        .lesson-list-title {
-            padding: 18px 22px 10px;
-
-            color: var(--text-secondary);
-
-            font-size: 12px;
-            font-weight: 800;
-
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-
-        .lesson-list {
-            padding: 8px 12px 16px;
-        }
-
-        .lesson-item {
-            width: 100%;
-
-            display: flex;
-            align-items: center;
-            gap: 12px;
-
-            padding: 13px 12px;
-
-            border: 0;
-            border-radius: 14px;
-
-            background: transparent;
-
-            color: var(--text);
-
-            text-align: left;
-
-            cursor: pointer;
-
-            font: inherit;
-
-            transition: 0.2s ease;
-        }
-
-        .lesson-item:hover {
-            background: var(--background);
-        }
-
-        .lesson-item.active {
-            background: rgba(37, 99, 235, 0.10);
-            color: var(--primary);
-        }
-
-        .lesson-item.completed {
-            opacity: 0.8;
-        }
-
-        .lesson-number {
-            flex: 0 0 auto;
-
-            width: 32px;
-            height: 32px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            border-radius: 10px;
-
-            background: var(--background);
-            border: 1px solid var(--border);
-
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        .lesson-item.active .lesson-number {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .lesson-item.completed .lesson-number {
-            background: #16a34a;
-            color: white;
-            border-color: #16a34a;
-        }
-
-        .lesson-item-info {
-            min-width: 0;
-        }
-
-        .lesson-item-title {
-            display: block;
-
-            font-size: 14px;
-            font-weight: 700;
-
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .lesson-item-duration {
-            display: block;
-
-            margin-top: 3px;
-
-            color: var(--text-secondary);
-
-            font-size: 11px;
-        }
-
-        /* =========================================
-           COURSE SWITCHER
-        ========================================= */
-
-        .course-switcher {
-            padding: 16px 20px;
-            border-top: 1px solid var(--border);
-        }
-
-        .course-switcher label {
-            display: block;
-            margin-bottom: 8px;
-
-            color: var(--text-secondary);
-
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        .course-select {
-            width: 100%;
-
-            padding: 12px 13px;
-
-            border-radius: 12px;
-
-            border: 1px solid var(--border);
-
-            background: var(--background);
-            color: var(--text);
-
-            font: inherit;
-
-            outline: none;
-        }
-
-        /* =========================================
-           MAIN CONTENT
-        ========================================= */
-
-        .lesson-content {
-            min-width: 0;
-        }
-
-        .lesson-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 26px;
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .lesson-heading {
-            padding: 30px 32px 24px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .lesson-tag {
-            display: inline-flex;
-
-            padding: 7px 11px;
-
-            border-radius: 999px;
-
-            background: rgba(37, 99, 235, 0.10);
-            color: var(--primary);
-
-            font-size: 12px;
-            font-weight: 800;
-
-            margin-bottom: 14px;
-        }
-
-        .lesson-heading h2 {
-            margin: 0 0 10px;
-
-            color: var(--text);
-
-            font-size: clamp(28px, 4vw, 42px);
-            line-height: 1.15;
-        }
-
-        .lesson-heading p {
-            margin: 0;
-
-            color: var(--text-secondary);
-
-            line-height: 1.7;
-        }
-
-        /* =========================================
-           VIDEO
-        ========================================= */
-
-        .video-placeholder {
-            margin: 28px 32px;
-
-            min-height: 350px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            text-align: center;
-
-            border-radius: 22px;
-
-            background:
-                linear-gradient(
-                    135deg,
-                    rgba(37, 99, 235, 0.12),
-                    rgba(124, 58, 237, 0.12)
-                );
-
-            border: 1px solid var(--border);
-
-            position: relative;
-            overflow: hidden;
-        }
-
-        .video-placeholder::before {
-            content: "";
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            border-radius: 50%;
-
-            background: rgba(37, 99, 235, 0.08);
-
-            top: -80px;
-            right: -50px;
-        }
-
-        .video-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .play-button {
-            width: 75px;
-            height: 75px;
-
-            display: flex;
-            align-items: center;
-            justify-content: center;
-
-            margin: 0 auto 18px;
-
-            border-radius: 50%;
-
-            background: var(--primary);
-            color: white;
-
-            font-size: 27px;
-
-            box-shadow:
-                0 12px 30px
-                rgba(37, 99, 235, 0.25);
-        }
-
-        .video-content h3 {
-            margin: 0 0 8px;
-
-            color: var(--text);
-
-            font-size: 22px;
-        }
-
-        .video-content p {
-            margin: 0;
-
-            color: var(--text-secondary);
-
-            font-size: 14px;
-        }
-
-        /* =========================================
-           LESSON BODY
-        ========================================= */
-
-        .lesson-body {
-            padding: 0 32px 32px;
-        }
-
-        .lesson-body h3 {
-            margin: 28px 0 12px;
-
-            color: var(--text);
-
-            font-size: 23px;
-        }
-
-        .lesson-body p {
-            color: var(--text-secondary);
-
-            line-height: 1.8;
-        }
-
-        .topic-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(2, minmax(0, 1fr));
-
-            gap: 12px;
-
-            margin-top: 18px;
-        }
-
-        .topic {
-            padding: 16px;
-
-            border-radius: 15px;
-
-            background: var(--background);
-
-            border: 1px solid var(--border);
-
-            color: var(--text);
-
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .topic::before {
-            content: "✓";
-
-            color: var(--primary);
-
-            font-weight: 900;
-
-            margin-right: 8px;
-        }
-
-        /* =========================================
-           QUIZ
-        ========================================= */
-
-        .quiz-box {
-            margin-top: 35px;
-
-            padding: 25px;
-
-            border-radius: 20px;
-
-            background: var(--background);
-
-            border: 1px solid var(--border);
-        }
-
-        .quiz-box h3 {
-            margin-top: 0;
-        }
-
-        .quiz-question {
-            color: var(--text);
-
-            font-weight: 800;
-
-            line-height: 1.6;
-
-            margin-bottom: 15px;
-        }
-
-        .quiz-options {
-            display: grid;
-            gap: 10px;
-        }
-
-        .quiz-option {
-            width: 100%;
-
-            padding: 13px 15px;
-
-            border-radius: 12px;
-
-            border: 1px solid var(--border);
-
-            background: var(--surface);
-
-            color: var(--text);
-
-            text-align: left;
-
-            cursor: pointer;
-
-            font: inherit;
-
-            transition: 0.2s ease;
-        }
-
-        .quiz-option:hover {
-            border-color: var(--primary);
-        }
-
-        .quiz-option.correct {
-            border-color: #16a34a;
-            background: rgba(22, 163, 74, 0.08);
-        }
-
-        .quiz-option.wrong {
-            border-color: #dc2626;
-            background: rgba(220, 38, 38, 0.08);
-        }
-
-        .quiz-result {
-            display: none;
-
-            margin-top: 15px;
-
-            padding: 12px 14px;
-
-            border-radius: 12px;
-
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .quiz-result.show {
-            display: block;
-        }
-
-        /* =========================================
-           LESSON ACTIONS
-        ========================================= */
-
-        .lesson-actions {
-            display: flex;
-
-            align-items: center;
-            justify-content: space-between;
-
-            gap: 15px;
-
-            padding: 22px 32px;
-
-            border-top: 1px solid var(--border);
-        }
-
-        .action-btn {
-            min-height: 46px;
-
-            padding: 0 18px;
-
-            border-radius: 12px;
-
-            border: 1px solid var(--border);
-
-            background: var(--surface);
-
-            color: var(--text);
-
-            font: inherit;
-            font-weight: 800;
-
-            cursor: pointer;
-
-            transition: 0.2s ease;
-        }
-
-        .action-btn:hover {
-            transform: translateY(-1px);
-        }
-
-        .action-btn.primary {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-
-        .action-btn:disabled {
-            opacity: 0.45;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .complete-status {
-            display: none;
-
-            color: #16a34a;
-
-            font-size: 13px;
-            font-weight: 800;
-        }
-
-        .complete-status.show {
-            display: block;
-        }
-
-        /* =========================================
-           BOTTOM INFO
-        ========================================= */
-
-        .lesson-info-grid {
-            display: grid;
-
-            grid-template-columns:
-                repeat(3, minmax(0, 1fr));
-
-            gap: 15px;
-
-            margin-top: 20px;
-        }
-
-        .info-card {
-            padding: 20px;
-
-            background: var(--surface);
-
-            border: 1px solid var(--border);
-
-            border-radius: 18px;
-        }
-
-        .info-card span {
-            display: block;
-
-            color: var(--text-secondary);
-
-            font-size: 12px;
-
-            margin-bottom: 6px;
-        }
-
-        .info-card strong {
-            color: var(--text);
-
-            font-size: 15px;
-        }
-
-        /* =========================================
-           RESPONSIVE
-        ========================================= */
-
-        @media (max-width: 950px) {
-
-            .lesson-layout {
-                grid-template-columns: 1fr;
-            }
-
-            .lesson-sidebar {
-                position: static;
-            }
-
-            .lesson-list {
-                display: grid;
-
-                grid-template-columns:
-                    repeat(2, minmax(0, 1fr));
-
-                gap: 5px;
-            }
-
-            .lesson-info-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 650px) {
-
-            .lesson-hero {
-                padding-top: 40px;
-            }
-
-            .lesson-layout {
-                padding: 0 14px;
-            }
-
-            .lesson-heading {
-                padding: 24px 20px 20px;
-            }
-
-            .lesson-body {
-                padding: 0 20px 25px;
-            }
-
-            .video-placeholder {
-                margin: 22px 20px;
-
-                min-height: 230px;
-            }
-
-            .lesson-actions {
-                padding: 18px 20px;
-
-                flex-wrap: wrap;
-            }
-
-            .lesson-actions .action-btn {
-                flex: 1;
-            }
-
-            .lesson-list {
-               
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
+
+  <meta
+    name="description"
+    content="JG Lesson — Learn practical skills with guided lessons, examples and activities."
+  />
+
+  <meta name="theme-color" content="#07111f" />
+
+  <title>Lesson — JG</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* =========================================================
+       JG LESSON PAGE
+       ========================================================= */
+
+    .lesson-page {
+      min-height: 100vh;
+      padding-bottom: 110px;
+    }
+
+    .lesson-top {
+      padding: 22px 18px 24px;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.14));
+      background:
+        radial-gradient(
+          circle at 90% 0%,
+          rgba(37,99,235,.18),
+          transparent 38%
+        ),
+        rgba(7,17,31,.94);
+    }
+
+    .lesson-top-inner {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .lesson-back {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--muted, #94a3b8);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 750;
+      margin-bottom: 20px;
+    }
+
+    .lesson-course-name {
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .7px;
+      margin-bottom: 9px;
+    }
+
+    .lesson-top h1 {
+      margin: 0;
+      font-size: clamp(27px, 7vw, 44px);
+      line-height: 1.08;
+      letter-spacing: -1.4px;
+    }
+
+    .lesson-subtitle {
+      margin: 10px 0 0;
+      color: var(--muted, #94a3b8);
+      font-size: 13px;
+    }
+
+    .lesson-progress {
+      margin-top: 19px;
+    }
+
+    .lesson-progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+      color: var(--muted, #94a3b8);
+      font-size: 11px;
+      font-weight: 750;
+    }
+
+    .lesson-progress-top strong {
+      color: #60a5fa;
+    }
+
+    .lesson-progress-track {
+      height: 7px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(148,163,184,.13);
+    }
+
+    .lesson-progress-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        #2563eb,
+        #06b6d4
+      );
+      transition: width .3s ease;
+    }
+
+    .lesson-main {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 22px 18px;
+    }
+
+    .lesson-content {
+      border: 1px solid var(--border, rgba(148,163,184,.14));
+      border-radius: 22px;
+      background: var(--card, rgba(15,23,42,.7));
+      overflow: hidden;
+    }
+
+    .lesson-body {
+      padding: 21px;
+    }
+
+    .lesson-body h2 {
+      margin: 0 0 13px;
+      font-size: 21px;
+      letter-spacing: -.5px;
+    }
+
+    .lesson-body h3 {
+      margin: 27px 0 9px;
+      font-size: 17px;
+    }
+
+    .lesson-body p {
+      margin: 0 0 15px;
+      color: var(--muted, #cbd5e1);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .lesson-body ul,
+    .lesson-body ol {
+      margin: 0 0 18px;
+      padding-left: 21px;
+      color: var(--muted, #cbd5e1);
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    .lesson-body li {
+      margin-bottom: 5px;
+    }
+
+    .lesson-highlight {
+      margin: 19px 0;
+      padding: 16px;
+      border-radius: 16px;
+      border-left: 3px solid #2563eb;
+      background: rgba(37,99,235,.08);
+    }
+
+    .lesson-highlight strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .lesson-highlight p {
+      margin: 0;
+      font-size: 13px;
+    }
+
+    .lesson-example {
+      margin: 19px 0;
+      border: 1px solid rgba(148,163,184,.13);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .lesson-example-title {
+      padding: 11px 14px;
+      background: rgba(148,163,184,.055);
+      border-bottom: 1px solid rgba(148,163,184,.1);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .lesson-example pre {
+      margin: 0;
+      padding: 15px;
+      overflow-x: auto;
+      background: rgba(0,0,0,.18);
+      color: #cbd5e1;
+      font-size: 12px;
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    .video-placeholder {
+      min-height: 210px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border-radius: 18px;
+      border: 1px solid rgba(148,163,184,.13);
+      background:
+        radial-gradient(
+          circle at center,
+          rgba(37,99,235,.16),
+          transparent 48%
+        ),
+        rgba(2,6,23,.55);
+      text-align: center;
+    }
+
+    .video-placeholder-inner {
+      padding: 20px;
+    }
+
+    .video-play {
+      width: 62px;
+      height: 62px;
+      display: grid;
+      place-items: center;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #fff;
+      font-size: 24px;
+    }
+
+    .video-placeholder strong {
+      display: block;
+      font-size: 14px;
+    }
+
+    .video-placeholder span {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted, #94a3b8);
+      font-size: 11px;
+    }
+
+    .lesson-actions {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      margin-top: 24px;
+      padding-top: 19px;
+      border-top: 1px solid var(--border, rgba(148,163,184,.1));
+    }
+
+    .lesson-button {
+      min-height: 48px;
+      border-radius: 13px;
+      padding: 0 12px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .lesson-button.secondary {
+      border: 1px solid var(--border, rgba(148,163,184,.15));
+      background: transparent;
+      color: inherit;
+    }
+
+    .lesson-button.primary {
+      border: 0;
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .lesson-button:disabled {
+      opacity: .4;
+      cursor: not-allowed;
+    }
+
+    .lesson-button:not(:disabled):hover {
+      transform: translateY(-1px);
+    }
+
+    .lesson-complete {
+      display: none;
+      margin-top: 18px;
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(34,197,94,.09);
+      border: 1px solid rgba(34,197,94,.18);
+      color: #86efac;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .lesson-complete strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .lesson-error {
+      display: none;
+      padding: 20px;
+      border-radius: 17px;
+      border: 1px solid rgba(239,68,68,.2);
+      background: rgba(239,68,68,.07);
+      color: #fecaca;
+      text-align: center;
+    }
+
+    .lesson-ad {
+      min-height: 90px;
+      display: grid;
+      place-items: center;
+      margin-top: 18px;
+      border: 1px dashed rgba(148,163,184,.18);
+      border-radius: 18px;
+      color: var(--muted, #64748b);
+      font-size: 11px;
+    }
+
+    @media (min-width: 700px) {
+      .lesson-body {
+        padding: 32px;
+      }
+
+      .video-placeholder {
+        min-height: 330px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="lesson-page">
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="index.html" class="brand">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-copy">
+          <strong>JG</strong>
+          <small>Find Skills. Find Opportunities.</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html" class="active">Learn</a>
+        <a href="skills.html">Skills</a>
+        <a href="work.html">Work</a>
+        <a href="ai.html">JG AI</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <a
+          href="account.html"
+          class="header-account"
+        >
+          Account
+        </a>
+
+        <button
+          id="menuButton"
+          class="icon-button mobile-menu-button"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =======================================================
+       MOBILE MENU
+       ======================================================= -->
+
+  <div
+    id="mobileMenu"
+    class="mobile-menu"
+    hidden
+  >
+    <a href="index.html">Home</a>
+    <a href="learn.html">Learn</a>
+    <a href="skills.html">Skills</a>
+    <a href="work.html">Find Work</a>
+    <a href="ai.html">JG AI</a>
+    <a href="premium.html">Premium</a>
+    <a href="account.html">Account</a>
+  </div>
+
+
+  <!-- =======================================================
+       LESSON HEADER
+       ======================================================= -->
+
+  <section class="lesson-top">
+
+    <div class="lesson-top-inner">
+
+      <a
+        id="backToCourse"
+        href="course.html?course=web-development"
+        class="lesson-back"
+      >
+        ← Back to course
+      </a>
+
+      <div
+        id="lessonCourseName"
+        class="lesson-course-name"
+      >
+        Web Development
+      </div>
+
+      <h1 id="lessonTitle">
+        Introduction to Web Development
+      </h1>
+
+      <p
+        id="lessonSubtitle"
+        class="lesson-subtitle"
+      >
+        Lesson 1 · Practical learning
+      </p>
+
+      <div class="lesson-progress">
+
+        <div class="lesson-progress-top">
+          <span>
+            Course progress
+          </span>
+
+          <strong id="lessonProgressText">
+            0%
+          </strong>
+        </div>
+
+        <div class="lesson-progress-track">
+          <div
+            id="lessonProgressBar"
+            class="lesson-progress-bar"
+          ></div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       MAIN LESSON
+       ======================================================= -->
+
+  <main class="lesson-main">
+
+    <div
+      id="lessonError"
+      class="lesson-error"
+    >
+      This lesson could not be loaded.
+    </div>
+
+
+    <article
+      id="lessonContent"
+      class="lesson-content"
+    >
+
+      <div class="lesson-body">
+
+        <!-- VIDEO AREA -->
+
+        <div class="video-placeholder">
+
+          <div class="video-placeholder-inner">
+
+            <div class="video-play">
+              ▶
+            </div>
+
+            <strong>
+              Lesson video
+            </strong>
+
+            <span>
+              Video lessons will be connected to JG's content system.
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- LESSON TEXT -->
+
+        <h2 id="contentHeading">
+          What is this lesson about?
+        </h2>
+
+        <div id="lessonText">
+
+          <p>
+            Welcome to JG. In this lesson, you will build a clear
+            understanding of the subject before moving into practical
+            exercises.
+          </p>
+
+          <p>
+            JG courses are designed to take you from the fundamentals
+            to practical application. You should focus on understanding
+            the ideas rather than simply memorising information.
+          </p>
+
+          <div class="lesson-highlight">
+
+            <strong>
+              Key idea
+            </strong>
+
+            <p>
+              Strong skills come from understanding the fundamentals,
+              practising them and applying them to real problems.
+            </p>
+
+          </div>
+
+          <h3>
+            What you should learn
+          </h3>
+
+          <ul>
+            <li>Understand the main concept introduced in this lesson.</li>
+            <li>Know the important terminology.</li>
+            <li>Understand how the concept is used in practice.</li>
+            <li>Be able to explain what you learned in your own words.</li>
+          </ul>
+
+          <h3>
+            Practical example
+          </h3>
+
+          <p>
+            Imagine that you are learning a new skill because you want
+            to build something useful. The goal is not just to finish
+            the lesson. The goal is to understand enough to use the
+            knowledge when solving a real problem.
+          </p>
+
+          <div class="lesson-example">
+
+            <div class="lesson-example-title">
+              Example
+            </div>
+
+            <pre>Learn → Understand → Practise → Build → Improve</pre>
+
+          </div>
+
+          <h3>
+            Your task
+          </h3>
+
+          <ol>
+            <li>Read through the lesson carefully.</li>
+            <li>Review the example.</li>
+            <li>Try applying the concept yourself.</li>
+            <li>Complete the lesson before moving forward.</li>
+          </ol>
+
+        </div>
+
+
+        <!-- COMPLETE / NAVIGATION -->
+
+        <div
+          id="completionMessage"
+          class="lesson-complete"
+        >
+          <strong>Lesson completed ✓</strong>
+          Your progress has been saved on this device.
+        </div>
+
+
+        <div class="lesson-actions">
+
+          <button
+            id="previousButton"
+            class="lesson-button secondary"
+            type="button"
+          >
+            ← Previous
+          </button>
+
+          <button
+            id="completeButton"
+            class="lesson-button primary"
+            type="button"
+          >
+            Mark Complete
+          </button>
+
+        </div>
+
+      </div>
+
+    </article>
+
+
+    <div class="lesson-ad">
+      JG Ad Space
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       BOTTOM NAV
+       ======================================================= -->
+
+  <nav
+    class="bottom-nav"
+    aria-label="Mobile navigation"
+  >
+
+    <a
+      href="index.html"
+      class="bottom-nav-item"
+    >
+      <span>⌂</span>
+      <small>Home</small>
+    </a>
+
+    <a
+      href="learn.html"
+      class="bottom-nav-item active"
+    >
+      <span>▣</span>
+      <small>Learn</small>
+    </a>
+
+    <a
+      href="skills.html"
+      class="bottom-nav-item"
+    >
+      <span>✦</span>
+      <small>Skills</small>
+    </a>
+
+    <a
+      href="work.html"
+      class="bottom-nav-item"
+    >
+      <span>◫</span>
+      <small>Work</small>
+    </a>
+
+    <a
+      href="ai.html"
+      class="bottom-nav-item"
+    >
+      <span>✧</span>
+      <small>JG AI</small>
+    </a>
+
+  </nav>
+
+</div>
+
+
+<!-- =========================================================
+     SHARED JG JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/config.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+
+<!-- =========================================================
+     LESSON JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =========================================================
+     COURSE DATA
+     ========================================================= */
+
+  const courses = {
+
+    "web-development": {
+      name: "Web Development",
+      lessons: [
+        "Introduction to Web Development",
+        "How the Web Works",
+        "HTML Fundamentals",
+        "HTML Structure and Semantics",
+        "Links, Images and Media",
+        "Forms and User Input",
+        "CSS Fundamentals",
+        "Layouts and Responsive Design",
+        "Flexbox",
+        "CSS Grid",
+        "Responsive Websites",
+        "JavaScript Fundamentals",
+        "Variables and Data Types",
+        "Functions and Logic",
+        "DOM Manipulation",
+        "Events and Interaction",
+        "Working With APIs",
+        "Building Interactive Interfaces",
+        "Git and Version Control",
+        "Introduction to GitHub",
+        "Website Deployment",
+        "Web Security Basics",
+        "Final Practical Project",
+        "Course Assessment"
+      ]
+    },
+
+    "graphic-design": {
+      name: "Graphic Design",
+      lessons: [
+        "Introduction to Graphic Design",
+        "Design Principles",
+        "Colour Theory",
+        "Typography",
+        "Layout and Composition",
+        "Shapes and Visual Elements",
+        "Brand Identity",
+        "Logo Design",
+        "Social Media Design",
+        "Poster Design",
+        "Flyer Design",
+        "Designing With Canva",
+        "Image Editing",
+        "Visual Hierarchy",
+        "Design Consistency",
+        "Creating Professional Presentations",
+        "Digital Branding",
+        "Client Design Briefs",
+        "Design Workflow",
+        "Building a Design Portfolio",
+        "Working With Clients",
+        "Common Design Mistakes",
+        "Final Design Project",
+        "Course Assessment"
+      ]
+    },
+
+    "video-editing": {
+      name: "Video Editing",
+      lessons: [
+        "Introduction to Video Editing",
+        "Understanding Video Formats",
+        "Importing Media",
+        "Timeline Fundamentals",
+        "Cutting and Trimming",
+        "Transitions",
+        "Text and Titles",
+        "Audio Editing",
+        "Sound Effects",
+        "Music and Timing",
+        "Colour Correction",
+        "Colour Grading",
+        "Speed Effects",
+        "Captions and Subtitles",
+        "Visual Effects",
+        "Storytelling Through Editing",
+        "Short-Form Video",
+        "Social Media Video",
+        "YouTube Video Editing",
+        "Mobile Video Editing",
+        "Professional Editing Workflow",
+        "Export Settings",
+        "Final Video Project",
+        "Course Assessment"
+      ]
+    },
+
+    "python-programming": {
+      name: "Python Programming",
+      lessons: [
+        "Introduction to Programming",
+        "Installing and Using Python",
+        "Variables",
+        "Data Types",
+        "Operators",
+        "Strings",
+        "Lists",
+        "Tuples and Sets",
+        "Dictionaries",
+        "Conditional Statements",
+        "Loops",
+        "Functions",
+        "Modules",
+        "Error Handling",
+        "Working With Files",
+        "Object-Oriented Programming",
+        "APIs and Requests",
+        "Working With Data",
+        "Automation",
+        "Introduction to Databases",
+        "Building Python Applications",
+        "Debugging",
+        "Final Python Project",
+        "Course Assessment"
+      ]
+    },
+
+    "digital-skills": {
+      name: "Digital Skills",
+      lessons: [
+        "Introduction to Digital Skills",
+        "Computer and Mobile Fundamentals",
+        "Internet Fundamentals",
+        "Search and Research",
+        "Email Communication",
+        "Cloud Storage",
+        "Documents and Word Processing",
+        "Spreadsheets",
+        "Presentations",
+        "Digital Collaboration",
+        "Online Communication",
+        "Digital Productivity",
+        "File Management",
+        "Online Safety",
+        "Password Security",
+        "Privacy Basics",
+        "Social Media Skills",
+        "Digital Branding",
+        "Remote Work Tools",
+        "AI Productivity Tools",
+        "Online Learning",
+        "Digital Problem Solving",
+        "Final Practical Project",
+        "Course Assessment"
+      ]
+    },
+
+    "digital-marketing": {
+      name: "Digital Marketing",
+      lessons: [
+        "Introduction to Digital Marketing",
+        "Understanding Customers",
+        "Market Research",
+        "Brand Positioning",
+        "Content Strategy",
+        "Social Media Marketing",
+        "Instagram Marketing",
+        "TikTok Marketing",
+        "Facebook Marketing",
+        "Email Marketing",
+        "Search Engine Basics",
+        "SEO Fundamentals",
+        "Paid Advertising",
+        "Marketing Analytics",
+        "Conversion Fundamentals",
+        "Landing Pages",
+        "Copywriting",
+        "Video Marketing",
+        "Influencer Marketing",
+        "Building Campaigns",
+        "Measuring Results",
+        "Marketing Mistakes",
+        "Final Marketing Project",
+        "Course Assessment"
+      ]
+    },
+
+    "entrepreneurship": {
+      name: "Entrepreneurship",
+      lessons: [
+        "Introduction to Entrepreneurship",
+        "Finding Problems Worth Solving",
+        "Generating Business Ideas",
+        "Understanding Customers",
+        "Market Research",
+        "Competitor Research",
+        "Value Propositions",
+        "Business Models",
+        "Business Planning",
+        "Branding",
+        "Marketing",
+        "Sales Fundamentals",
+        "Customer Service",
+        "Pricing",
+        "Basic Financial Management",
+        "Building a Product",
+        "Testing an Idea",
+        "Getting Customer Feedback",
+        "Digital Business",
+        "Growing a Business",
+        "Managing Risk",
+        "Common Entrepreneurial Mistakes",
+        "Final Business Project",
+        "Course Assessment"
+      ]
+    },
+
+    "communication": {
+      name: "Communication",
+      lessons: [
+        "Introduction to Communication",
+        "Communication Fundamentals",
+        "Active Listening",
+        "Speaking Clearly",
+        "Body Language",
+        "Building Confidence",
+        "Professional Conversations",
+        "Writing Clearly",
+        "Email Communication",
+        "Presentation Skills",
+        "Public Speaking",
+        "Storytelling",
+        "Persuasion",
+        "Negotiation Basics",
+        "Giving Feedback",
+        "Receiving Feedback",
+        "Communication at Work",
+        "Handling Difficult Conversations",
+        "Digital Communication",
+        "Interview Communication",
+        "Professional Networking",
+        "Common Communication Mistakes",
+        "Final Practical Project",
+        "Course Assessment"
+      ]
+    }
+
+  };
+
+
+  /* =========================================================
+     URL PARAMETERS
+     ========================================================= */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const courseKey =
+    params.get("course") || "web-development";
+
+  let lessonNumber =
+    Number(params.get("lesson") || 1);
+
+
+  const course =
+    courses[courseKey] || courses["web-development"];
+
+
+  if (
+    !Number.isInteger(lessonNumber) ||
+    lessonNumber < 1
+  ) {
+    lessonNumber = 1;
+  }
+
+
+  if (
+    lessonNumber > course.lessons.length
+  ) {
+    lessonNumber =
+      course.lessons.length;
+  }
+
+
+  /* =========================================================
+     ELEMENTS
+     ========================================================= */
+
+  const courseName =
+    document.getElementById("lessonCourseName");
+
+  const title =
+    document.getElementById("lessonTitle");
+
+  const subtitle =
+    document.getElementById("lessonSubtitle");
+
+  const progressText =
+    document.getElementById("lessonProgressText");
+
+  const progressBar =
+    document.getElementById("lessonProgressBar");
+
+  const backToCourse =
+    document.getElementById("backToCourse");
+
+  const previousButton =
+    document.getElementById("previousButton");
+
+  const completeButton =
+    document.getElementById("completeButton");
+
+  const completionMessage =
+    document.getElementById("completionMessage");
+
+  const lessonText =
+    document.getElementById("lessonText");
+
+  const contentHeading =
+    document.getElementById("contentHeading");
+
+
+  /* =========================================================
+     STORAGE
+     ========================================================= */
+
+  const storageKey =
+    "jg_course_progress_" + courseKey;
+
+
+  let completedLessons =
+    JSON.parse(
+      localStorage.getItem(storageKey) || "[]"
+    );
+
+
+  if (!Array.isArray(completedLessons)) {
+    completedLessons = [];
+  }
+
+
+  /* =========================================================
+     COURSE INFORMATION
+     ========================================================= */
+
+  courseName.textContent =
+    course.name;
+
+  title.textContent =
+    course.lessons[lessonNumber - 1];
+
+  subtitle.textContent =
+    "Lesson " +
+    lessonNumber +
+    " of " +
+    course.lessons.length +
+    " · Practical learning";
+
+  backToCourse.href =
+    "course.html?course=" +
+    encodeURIComponent(courseKey);
+
+
+  /* =========================================================
+     PROGRESS
+     ========================================================= */
+
+  function updateProgress() {
+
+    const total =
+      course.lessons.length;
+
+    const completed =
+      completedLessons.length;
+
+    const percentage =
+      total === 0
+        ? 0
+        : Math.round(
+            (completed / total) * 100
+          );
+
+    progressText.textContent =
+      percentage + "%";
+
+    progressBar.style.width =
+      percentage + "%";
+
+  }
+
+
+  /* =========================================================
+     LESSON CONTENT
+     ========================================================= */
+
+  const lessonContent = {
+
+    "web-development": {
+
+      1: {
+        heading: "What is Web Development?",
+        paragraphs: [
+          "Web development is the process of creating websites and web applications that people can use through a browser.",
+          "A modern website usually combines structure, presentation and behaviour. These are commonly represented by HTML, CSS and JavaScript."
+        ],
+        highlight:
+          "Web development is not just about writing code. It is about using technology to solve problems and create useful experiences.",
+        example:
+          "HTML → Structure\nCSS → Presentation\nJavaScript → Behaviour"
+      },
+
+      2: {
+        heading: "How the Web Works",
+        paragraphs: [
+          "When you open a website, your browser communicates with a server to request information. The server then sends resources that the browser can display.",
+          "Understanding this basic process will make it easier to understand websites, APIs, hosting and backend systems later."
+        ],
+        highlight:
+          "Browser → Request → Server → Response → Browser",
+        example:
+          "User opens JG\n\nBrowser requests page\n↓\nJG server responds\n↓\nBrowser displays the page"
+      },
+
+      3: {
+        heading: "HTML Fundamentals",
+        paragraphs: [
+          "HTML stands for HyperText Markup Language. It provides the structure of a webpage.",
+          "HTML uses elements such as headings, paragraphs, links, images, forms and buttons to describe content."
+        ],
+        highlight:
+          "HTML answers the question: What is this content?",
+        example:
+          "<h1>Welcome to JG</h1>\n<p>Learn skills and find opportunities.</p>"
+      }
+
+    },
+
+    "python-programming": {
+
+      1: {
+        heading: "Introduction to Programming",
+        paragraphs: [
+          "Programming is the process of giving a computer instructions that it can execute.",
+          "Python is a popular programming language because its syntax is relatively readable and it can be used for many different types of projects."
+        ],
+        highlight:
+          "Programming is problem solving expressed as instructions a computer can execute.",
+        example:
+          "Problem\n↓\nPlan\n↓\nWrite instructions\n↓\nRun program\n↓\nTest and improve"
+      },
+
+      2: {
+        heading: "Using Python",
+        paragraphs: [
+          "Python programs are made from instructions that Python can interpret and execute.",
+          "Before building large applications, you should become comfortable with basic syntax and how Python executes instructions."
+        ],
+        highlight:
+          "Start small. Understand each instruction before combining many instructions together.",
+        example:
+          "print(\"Hello, JG\")"
+      }
+
+    },
+
+    "graphic-design": {
+
+      1: {
+        heading: "Introduction to Graphic Design",
+        paragraphs: [
+          "Graphic design is the process of communicating ideas visually.",
+          "Good design combines elements such as typography, colour, spacing, images and composition to communicate a clear message."
+        ],
+        highlight:
+          "Good design is not simply making something look beautiful. It is making communication clearer and more effective.",
+        example:
+          "Message\n+\nVisual hierarchy\n+\nTypography\n+\nColour\n=\nEffective design"
+      }
+
+    }
+
+  };
+
+
+  /* =========================================================
+     GENERIC LESSON CONTENT
+     ========================================================= */
+
+  function renderLessonContent() {
+
+    const courseLessons =
+      lessonContent[courseKey];
+
+    const specific =
+      courseLessons &&
+      courseLessons[lessonNumber];
+
+
+    if (specific) {
+
+      contentHeading.textContent =
+        specific.heading;
+
+      let html = "";
+
+      specific.paragraphs.forEach(
+        function (paragraph) {
+
+          html +=
+            "<p>" +
+            escapeHtml(paragraph) +
+            "</p>";
+
+        }
+      );
+
+
+      html += `
+        <div class="lesson-highlight">
+
+          <strong>
+            Key idea
+          </strong>
+
+          <p>
+            ${escapeHtml(specific.highlight)}
+          </p>
+
+        </div>
+
+        <h3>
+          Practical example
+        </h3>
+
+        <p>
+          Apply what you have learned by connecting the concept
+          to a realistic problem or project.
+        </p>
+
+        <div class="lesson-example">
+
+          <div class="lesson-example-title">
+            Example
+          </div>
+
+          <pre>${escapeHtml(specific.example)}</pre>
+
+        </div>
+
+        <h3>
+          Your task
+        </h3>
+
+        <ol>
+          <li>Review the concept carefully.</li>
+          <li>Explain the concept in your own words.</li>
+          <li>Try the example yourself.</li>
+          <li>Think about where this skill could be used.</li>
+        </ol>
+      `;
+
+      lessonText.innerHTML =
+        html;
+
+      return;
+    }
+
+
+    /* Generic content for lessons
+       that have not yet received their
+       final curriculum content. */
+
+    contentHeading.textContent =
+      course.lessons[lessonNumber - 1];
+
+
+    lessonText.innerHTML = `
+
+      <p>
+        In this lesson, you will study
+        <strong>
+          ${escapeHtml(course.lessons[lessonNumber - 1])}
+        </strong>.
+      </p>
+
+      <p>
+        This lesson is part of the
+        ${escapeHtml(course.name)}
+        learning path. Focus on understanding the
+        concept, terminology and practical application.
+      </p>
+
+      <div class="lesson-highlight">
+
+        <strong>
+          Learning objective
+        </strong>
+
+        <p>
+          By the end of this lesson, you should be able
+          to explain the main concept and identify how it
+          can be applied in a practical situation.
+        </p>
+
+      </div>
+
+      <h3>
+        Learn the concept
+      </h3>
+
+      <p>
+        Read the lesson carefully and take notes on the
+        important ideas. Understanding the fundamentals
+        will make later lessons easier.
+      </p>
+
+      <h3>
+        Think practically
+      </h3>
+
+      <p>
+        Ask yourself how this concept could be used to
+        solve a real problem or help you build something.
+      </p>
+
+      <div class="lesson-example">
+
+        <div class="lesson-example-title">
+          JG Learning Method
+        </div>
+
+        <pre>
+Learn
+↓
+Understand
+↓
+Practise
+↓
+Build
+↓
+Improve</pre>
+
+      </div>
+
+      <h3>
+        Your task
+      </h3>
+
+      <ol>
+        <li>Review the lesson.</li>
+        <li>Write down the important ideas.</li>
+        <li>Try applying the concept.</li>
+        <li>Mark the lesson complete when ready.</li>
+      </ol>
+
+    `;
+
+  }
+
+
+  /* =========================================================
+     MARK COMPLETE
+     ========================================================= */
+
+  function markComplete() {
+
+    if (
+      !completedLessons.includes(
+        lessonNumber
+      )
+    ) {
+
+      completedLessons.push(
+        lessonNumber
+      );
+
+    }
+
+
+    completedLessons =
+      completedLessons
+        .filter(function (number) {
+          return (
+            Number.isInteger(number) &&
+            number >= 1 &&
+            number <= course.lessons.length
+          );
+        })
+        .sort(function (a, b) {
+          return a - b;
+        });
+
+
+    localStorage.setItem(
+      storageKey,
+      JSON.stringify(completedLessons)
+    );
+
+
+    updateProgress();
+
+
+    completionMessage.style.display =
+      "block";
+
+
+    if (
+      lessonNumber <
+      course.lessons.length
+    ) {
+
+      completeButton.textContent =
+        "Completed ✓";
+
+    } else {
+
+      completeButton.textContent =
+        "Course Completed ✓";
+
+    }
+
+  }
+
+
+  /* =========================================================
+     COMPLETE BUTTON
+     ========================================================= */
+
+  completeButton.addEventListener(
+    "click",
+    function () {
+
+      markComplete();
+
+      setTimeout(
+        function () {
+
+          if (
+            lessonNumber <
+            course.lessons.length
+          ) {
+
+            window.location.href =
+              "lesson.html?course=" +
+              encodeURIComponent(courseKey) +
+              "&lesson=" +
+              (lessonNumber + 1);
+
+          } else {
+
+            window.location.href =
+              "exam.html?course=" +
+              encodeURIComponent(courseKey);
+
+          }
+
+        },
+        700
+      );
+
+    }
+  );
+
+
+  /* =========================================================
+     PREVIOUS BUTTON
+     ========================================================= */
+
+  if (lessonNumber <= 1) {
+
+    previousButton.disabled =
+      true;
+
+  }
+
+
+  previousButton.addEventListener(
+    "click",
+    function () {
+
+      if (lessonNumber <= 1) {
+        return;
+      }
+
+      window.location.href =
+        "lesson.html?course=" +
+        encodeURIComponent(courseKey) +
+        "&lesson=" +
+        (lessonNumber - 1);
+
+    }
+  );
+
+
+  /* =========================================================
+     ALREADY COMPLETED
+     ========================================================= */
+
+  if (
+    completedLessons.includes(
+      lessonNumber
+    )
+  ) {
+
+    completionMessage.style.display =
+      "block";
+
+    completeButton.textContent =
+      lessonNumber <
+      course.lessons.length
+        ? "Completed ✓"
+        : "Course Completed ✓";
+
+  }
+
+
+  /* =========================================================
+     HTML ESCAPE
+     ========================================================= */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =========================================================
+     MOBILE MENU
+     ========================================================= */
+
+  const menuButton =
+    document.getElementById("menuButton");
+
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+  if (
+    menuButton &&
+    mobileMenu
+  ) {
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        const open =
+          !mobileMenu.hasAttribute("hidden");
+
+        if (open) {
+
+          mobileMenu.setAttribute(
+            "hidden",
+            ""
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        } else {
+
+          mobileMenu.removeAttribute(
+            "hidden"
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     INITIALIZE
+     ========================================================= */
+
+  renderLessonContent();
+
+  updateProgress();
+
+});
+
+</script>
+
+</body>
+</html>
