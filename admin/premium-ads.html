@@ -1,1 +1,2717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="description"
+    content="JG Premium and Advertising Control Center."
+  >
+
+  <meta name="theme-color" content="#07111f">
+
+  <title>Premium & Ads — JG Admin</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-premium-ads">
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+
+  <header class="site-header">
+
+    <div class="container header-inner">
+
+      <a href="dashboard.html" class="brand">
+
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+
+      </a>
+
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <a
+          href="dashboard.html"
+          class="btn btn-secondary btn-sm"
+        >
+          ← Dashboard
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main class="container page-content">
+
+    <!-- HERO -->
+
+    <section class="hero-card">
+
+      <div class="hero-content">
+
+        <span class="badge badge-primary">
+          REVENUE CONTROL
+        </span>
+
+        <h1>Premium & Advertising</h1>
+
+        <p>
+          Manage JG Premium subscriptions and advertising
+          placements from one central control panel.
+        </p>
+
+      </div>
+
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="refreshButton"
+        >
+          ↻ Refresh
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="createPlanButton"
+        >
+          + Premium Plan
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- BUSINESS MODEL -->
+
+    <section class="alert alert-info">
+
+      <div>
+
+        <strong>
+          JG revenue model
+        </strong>
+
+        <p>
+          JG earns revenue through advertising and Premium
+          subscriptions. JG users do not receive wallets,
+          balances, withdrawals or payouts from JG.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         REVENUE STATS
+    ======================================================== -->
+
+    <section class="grid grid-4">
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Premium Plans
+        </span>
+
+        <strong id="planCount">
+          0
+        </strong>
+
+        <small>
+          Available plans
+        </small>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Active Subscriptions
+        </span>
+
+        <strong id="subscriptionCount">
+          0
+        </strong>
+
+        <small>
+          Current Premium users
+        </small>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Ad Placements
+        </span>
+
+        <strong id="adCount">
+          0
+        </strong>
+
+        <small>
+          Configured placements
+        </small>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Ad Status
+        </span>
+
+        <strong id="adStatus">
+          —
+        </strong>
+
+        <small>
+          Platform advertising
+        </small>
+
+      </article>
+
+    </section>
+
+
+    <!-- =======================================================
+         TABS
+    ======================================================== -->
+
+    <section class="card">
+
+      <div class="tabs">
+
+        <button
+          type="button"
+          class="tab-btn active"
+          data-tab="premium"
+        >
+          Premium
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-tab="ads"
+        >
+          Advertising
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-tab="subscriptions"
+        >
+          Subscriptions
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         PREMIUM SECTION
+    ======================================================== -->
+
+    <section
+      class="card"
+      id="premiumSection"
+    >
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            PREMIUM
+          </span>
+
+          <h2>
+            Premium Plans
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          id="createPlanButtonTop"
+        >
+          + Add Plan
+        </button>
+
+      </div>
+
+
+      <div
+        class="grid grid-3"
+        id="plansGrid"
+      >
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            ↻
+          </div>
+
+          <h3>
+            Loading plans...
+          </h3>
+
+          <p>
+            Please wait.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         ADS SECTION
+    ======================================================== -->
+
+    <section
+      class="card"
+      id="adsSection"
+      hidden
+    >
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            ADVERTISING
+          </span>
+
+          <h2>
+            Ad Placements
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="btn btn-primary btn-sm"
+          id="createAdButton"
+        >
+          + Add Placement
+        </button>
+
+      </div>
+
+
+      <div
+        class="grid grid-3"
+        id="adsGrid"
+      >
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            ↻
+          </div>
+
+          <h3>
+            Loading ad placements...
+          </h3>
+
+          <p>
+            Please wait.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SUBSCRIPTIONS SECTION
+    ======================================================== -->
+
+    <section
+      class="card"
+      id="subscriptionsSection"
+      hidden
+    >
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            PREMIUM MEMBERS
+          </span>
+
+          <h2>
+            Subscription Overview
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="alert alert-warning">
+
+        <strong>
+          Payment integration status
+        </strong>
+
+        <p>
+          Premium plans can be configured now, but a real payment
+          provider must be connected before subscriptions can be
+          considered paid and active.
+        </p>
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                User
+              </th>
+
+              <th>
+                Plan
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Started
+              </th>
+
+              <th>
+                Expires
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="subscriptionsTableBody">
+
+            <tr>
+
+              <td colspan="5">
+
+                <div class="empty-state">
+
+                  <div class="empty-icon">
+                    ◫
+                  </div>
+
+                  <h3>
+                    No subscription data
+                  </h3>
+
+                  <p>
+                    Payment and subscription data will appear here
+                    after the backend is connected.
+                  </p>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         REVENUE SAFETY
+    ======================================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            REVENUE SAFETY
+          </span>
+
+          <h2>
+            Platform Rules
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-3">
+
+        <article class="card card-small">
+
+          <span class="badge badge-primary">
+            PREMIUM
+          </span>
+
+          <h3>
+            Ad-free experience
+          </h3>
+
+          <p>
+            Premium users can receive an advertising-free JG
+            experience according to their active plan.
+          </p>
+
+        </article>
+
+
+        <article class="card card-small">
+
+          <span class="badge badge-success">
+            OWNER
+          </span>
+
+          <h3>
+            Revenue control
+          </h3>
+
+          <p>
+            The Owner controls plans, advertising configuration
+            and revenue-related settings.
+          </p>
+
+        </article>
+
+
+        <article class="card card-small">
+
+          <span class="badge badge-warning">
+            PAYMENT
+          </span>
+
+          <h3>
+            No fake payments
+          </h3>
+
+          <p>
+            The frontend must never claim that money was received
+            until the payment backend verifies it.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       PREMIUM PLAN MODAL
+  ========================================================== -->
+
+  <div
+    class="modal"
+    id="planModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-backdrop"
+      data-modal-close
+    ></div>
+
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="planModalTitle"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            PREMIUM
+          </span>
+
+          <h2 id="planModalTitle">
+            Create Premium Plan
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="planForm">
+
+        <input
+          type="hidden"
+          id="planId"
+        >
+
+
+        <div class="form-group">
+
+          <label for="planName">
+            Plan name
+          </label>
+
+          <input
+            type="text"
+            id="planName"
+            class="form-control"
+            placeholder="e.g. JG Premium Monthly"
+            maxlength="100"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="planPrice">
+              Price
+            </label>
+
+            <input
+              type="number"
+              id="planPrice"
+              class="form-control"
+              min="0"
+              step="0.01"
+              placeholder="0"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="planCurrency">
+              Currency
+            </label>
+
+            <select
+              id="planCurrency"
+              class="form-control"
+            >
+
+              <option value="NGN">
+                NGN — Nigerian Naira
+              </option>
+
+              <option value="USD">
+                USD — US Dollar
+              </option>
+
+              <option value="GBP">
+                GBP — British Pound
+              </option>
+
+              <option value="EUR">
+                EUR — Euro
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="planInterval">
+            Billing interval
+          </label>
+
+          <select
+            id="planInterval"
+            class="form-control"
+          >
+
+            <option value="monthly">
+              Monthly
+            </option>
+
+            <option value="yearly">
+              Yearly
+            </option>
+
+            <option value="lifetime">
+              Lifetime
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="planDescription">
+            Description
+          </label>
+
+          <textarea
+            id="planDescription"
+            class="form-control"
+            rows="4"
+            maxlength="1000"
+            placeholder="Explain what Premium includes..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="planStatus">
+            Status
+          </label>
+
+          <select
+            id="planStatus"
+            class="form-control"
+          >
+
+            <option value="active">
+              Active
+            </option>
+
+            <option value="inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-modal-close
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="savePlanButton"
+          >
+            Save Plan
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       AD PLACEMENT MODAL
+  ========================================================== -->
+
+  <div
+    class="modal"
+    id="adModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-backdrop"
+      data-modal-close
+    ></div>
+
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="adModalTitle"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            ADVERTISING
+          </span>
+
+          <h2 id="adModalTitle">
+            Add Ad Placement
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="adForm">
+
+        <input
+          type="hidden"
+          id="adId"
+        >
+
+
+        <div class="form-group">
+
+          <label for="adName">
+            Placement name
+          </label>
+
+          <input
+            type="text"
+            id="adName"
+            class="form-control"
+            placeholder="e.g. Learn Page Banner"
+            maxlength="120"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="adLocation">
+              Location
+            </label>
+
+            <select
+              id="adLocation"
+              class="form-control"
+            >
+
+              <option value="home">
+                Home
+              </option>
+
+              <option value="learn">
+                Learn
+              </option>
+
+              <option value="skills">
+                Skills
+              </option>
+
+              <option value="work">
+                Find Work
+              </option>
+
+              <option value="course">
+                Course
+              </option>
+
+              <option value="account">
+                Account
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="adFormat">
+              Format
+            </label>
+
+            <select
+              id="adFormat"
+              class="form-control"
+            >
+
+              <option value="banner">
+                Banner
+              </option>
+
+              <option value="card">
+                Card
+              </option>
+
+              <option value="native">
+                Native
+              </option>
+
+              <option value="sponsor">
+                Sponsored
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="adDescription">
+            Description
+          </label>
+
+          <textarea
+            id="adDescription"
+            class="form-control"
+            rows="4"
+            maxlength="1000"
+            placeholder="Describe this placement..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="adStatus">
+            Status
+          </label>
+
+          <select
+            id="adStatus"
+            class="form-control"
+          >
+
+            <option value="active">
+              Active
+            </option>
+
+            <option value="inactive">
+              Inactive
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-modal-close
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="saveAdButton"
+          >
+            Save Placement
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SCRIPTS
+  ========================================================== -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <script>
+    (() => {
+
+      "use strict";
+
+
+      /* ========================================================
+         STATE
+      ======================================================== */
+
+      const state = {
+
+        plans: [],
+
+        ads: [],
+
+        subscriptions: [],
+
+        editingPlan: null,
+
+        editingAd: null
+
+      };
+
+
+      /* ========================================================
+         DEMO DATA
+      ======================================================== */
+
+      const demoPlans = [
+
+        {
+          id: "premium-monthly",
+          name: "JG Premium Monthly",
+          price: 2500,
+          currency: "NGN",
+          interval: "monthly",
+          description:
+            "Ad-free JG experience and Premium features.",
+          status: "active"
+        },
+
+        {
+          id: "premium-yearly",
+          name: "JG Premium Yearly",
+          price: 25000,
+          currency: "NGN",
+          interval: "yearly",
+          description:
+            "Annual Premium access with an ad-free experience.",
+          status: "active"
+        }
+
+      ];
+
+
+      const demoAds = [
+
+        {
+          id: "ad-home-banner",
+          name: "Home Banner",
+          location: "home",
+          format: "banner",
+          description:
+            "Main advertising placement on the JG home page.",
+          status: "active"
+        },
+
+        {
+          id: "ad-learn-card",
+          name: "Learn Sponsored Card",
+          location: "learn",
+          format: "card",
+          description:
+            "Sponsored placement between learning content.",
+          status: "active"
+        },
+
+        {
+          id: "ad-work-native",
+          name: "Work Native Placement",
+          location: "work",
+          format: "native",
+          description:
+            "Native sponsored placement in Find Work.",
+          status: "inactive"
+        }
+
+      ];
+
+
+      /* ========================================================
+         HELPERS
+      ======================================================== */
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+
+      }
+
+
+      function formatMoney(
+        amount,
+        currency = "NGN"
+      ) {
+
+        try {
+
+          return new Intl.NumberFormat(
+            undefined,
+            {
+              style: "currency",
+              currency
+            }
+          ).format(
+            Number(amount || 0)
+          );
+
+        } catch {
+
+          return `${currency} ${amount || 0}`;
+
+        }
+
+      }
+
+
+      function notify(
+        message,
+        type = "info"
+      ) {
+
+        if (
+          window.JG_UI &&
+          typeof window.JG_UI.toast ===
+            "function"
+        ) {
+
+          window.JG_UI.toast(
+            message,
+            type
+          );
+
+          return;
+
+        }
+
+
+        if (
+          window.JG_APP &&
+          typeof window.JG_APP.toast ===
+            "function"
+        ) {
+
+          window.JG_APP.toast(
+            message,
+            type
+          );
+
+          return;
+
+        }
+
+
+        alert(message);
+
+      }
+
+
+      function openModal(id) {
+
+        const modal =
+          document.getElementById(id);
+
+        if (!modal) return;
+
+        modal.classList.add("active");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      }
+
+
+      function closeModal(id) {
+
+        const modal =
+          document.getElementById(id);
+
+        if (!modal) return;
+
+        modal.classList.remove("active");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+
+
+      /* ========================================================
+         LOAD PLANS
+      ======================================================== */
+
+      async function loadPlans() {
+
+        let plans = [];
+
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.premiumPlans ===
+              "function"
+          ) {
+
+            const response =
+              await window.JG_API.premiumPlans();
+
+
+            if (Array.isArray(response)) {
+
+              plans = response;
+
+            } else if (
+              response &&
+              Array.isArray(response.items)
+            ) {
+
+              plans =
+                response.items;
+
+            } else if (
+              response &&
+              Array.isArray(response.data)
+            ) {
+
+              plans =
+                response.data;
+
+            }
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Premium API unavailable:",
+            error
+          );
+
+        }
+
+
+        if (!plans.length) {
+
+          plans = [
+            ...demoPlans
+          ];
+
+        }
+
+
+        state.plans = plans;
+
+        renderPlans();
+
+        updateStats();
+
+      }
+
+
+      /* ========================================================
+         LOAD ADS
+      ======================================================== */
+
+      async function loadAds() {
+
+        let ads = [];
+
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.adPlacements ===
+              "function"
+          ) {
+
+            const response =
+              await window.JG_API.adPlacements();
+
+
+            if (Array.isArray(response)) {
+
+              ads = response;
+
+            } else if (
+              response &&
+              Array.isArray(response.items)
+            ) {
+
+              ads =
+                response.items;
+
+            } else if (
+              response &&
+              Array.isArray(response.data)
+            ) {
+
+              ads =
+                response.data;
+
+            }
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Advertising API unavailable:",
+            error
+          );
+
+        }
+
+
+        if (!ads.length) {
+
+          ads = [
+            ...demoAds
+          ];
+
+        }
+
+
+        state.ads = ads;
+
+        renderAds();
+
+        updateStats();
+
+      }
+
+
+      /* ========================================================
+         RENDER PLANS
+      ======================================================== */
+
+      function renderPlans() {
+
+        const grid =
+          document.getElementById(
+            "plansGrid"
+          );
+
+
+        if (!state.plans.length) {
+
+          grid.innerHTML = `
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                ◫
+              </div>
+
+              <h3>
+                No Premium plans
+              </h3>
+
+              <p>
+                Create your first Premium plan.
+              </p>
+
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        grid.innerHTML =
+          state.plans.map(plan => {
+
+            const active =
+              plan.status !== "inactive";
+
+
+            return `
+              <article class="card card-small">
+
+                <div class="section-header">
+
+                  <div>
+
+                    <span class="badge ${
+                      active
+                        ? "badge-success"
+                        : "badge-neutral"
+                    }">
+
+                      ${
+                        active
+                          ? "Active"
+                          : "Inactive"
+                      }
+
+                    </span>
+
+                    <h3>
+                      ${escapeHtml(
+                        plan.name
+                      )}
+                    </h3>
+
+                  </div>
+
+                </div>
+
+
+                <div class="price">
+
+                  <strong>
+                    ${formatMoney(
+                      plan.price,
+                      plan.currency
+                    )}
+                  </strong>
+
+                  <small>
+                    / ${escapeHtml(
+                      plan.interval ||
+                      "period"
+                    )}
+                  </small>
+
+                </div>
+
+
+                <p>
+                  ${escapeHtml(
+                    plan.description ||
+                    "Premium JG access."
+                  )}
+                </p>
+
+
+                <div class="form-actions">
+
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-sm"
+                    data-plan-action="edit"
+                    data-id="${escapeHtml(
+                      plan.id
+                    )}"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-sm ${
+                      active
+                        ? "btn-warning"
+                        : "btn-primary"
+                    }"
+                    data-plan-action="toggle"
+                    data-id="${escapeHtml(
+                      plan.id
+                    )}"
+                  >
+
+                    ${
+                      active
+                        ? "Deactivate"
+                        : "Activate"
+                    }
+
+                  </button>
+
+                </div>
+
+              </article>
+            `;
+
+          }).join("");
+
+      }
+
+
+      /* ========================================================
+         RENDER ADS
+      ======================================================== */
+
+      function renderAds() {
+
+        const grid =
+          document.getElementById(
+            "adsGrid"
+          );
+
+
+        if (!state.ads.length) {
+
+          grid.innerHTML = `
+            <div class="empty-state">
+
+              <div class="empty-icon">
+                ◫
+              </div>
+
+              <h3>
+                No advertising placements
+              </h3>
+
+              <p>
+                Add an advertising placement to begin.
+              </p>
+
+            </div>
+          `;
+
+          return;
+
+        }
+
+
+        grid.innerHTML =
+          state.ads.map(ad => {
+
+            const active =
+              ad.status !== "inactive";
+
+
+            return `
+              <article class="card card-small">
+
+                <div class="section-header">
+
+                  <div>
+
+                    <span class="badge ${
+                      active
+                        ? "badge-success"
+                        : "badge-neutral"
+                    }">
+
+                      ${
+                        active
+                          ? "Active"
+                          : "Inactive"
+                      }
+
+                    </span>
+
+                    <h3>
+                      ${escapeHtml(
+                        ad.name
+                      )}
+                    </h3>
+
+                  </div>
+
+                </div>
+
+
+                <p>
+                  ${escapeHtml(
+                    ad.description ||
+                    "Advertising placement."
+                  )}
+                </p>
+
+
+                <div class="form-grid">
+
+                  <div>
+
+                    <small>
+                      Location
+                    </small>
+
+                    <strong>
+                      ${escapeHtml(
+                        ad.location ||
+                        "—"
+                      )}
+                    </strong>
+
+                  </div>
+
+
+                  <div>
+
+                    <small>
+                      Format
+                    </small>
+
+                    <strong>
+                      ${escapeHtml(
+                        ad.format ||
+                        "—"
+                      )}
+                    </strong>
+
+                  </div>
+
+                </div>
+
+
+                <div class="form-actions">
+
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-sm"
+                    data-ad-action="edit"
+                    data-id="${escapeHtml(
+                      ad.id
+                    )}"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-sm ${
+                      active
+                        ? "btn-warning"
+                        : "btn-primary"
+                    }"
+                    data-ad-action="toggle"
+                    data-id="${escapeHtml(
+                      ad.id
+                    )}"
+                  >
+
+                    ${
+                      active
+                        ? "Deactivate"
+                        : "Activate"
+                    }
+
+                  </button>
+
+                </div>
+
+              </article>
+            `;
+
+          }).join("");
+
+      }
+
+
+      /* ========================================================
+         STATS
+      ======================================================== */
+
+      function updateStats() {
+
+        document.getElementById(
+          "planCount"
+        ).textContent =
+          state.plans.length;
+
+
+        const activeSubscriptions =
+          state.subscriptions.filter(
+            subscription =>
+              subscription.status ===
+              "active"
+          ).length;
+
+
+        document.getElementById(
+          "subscriptionCount"
+        ).textContent =
+          activeSubscriptions;
+
+
+        document.getElementById(
+          "adCount"
+        ).textContent =
+          state.ads.length;
+
+
+        const activeAds =
+          state.ads.filter(
+            ad =>
+              ad.status !== "inactive"
+          ).length;
+
+
+        document.getElementById(
+          "adStatus"
+        ).textContent =
+          activeAds > 0
+            ? "Active"
+            : "Off";
+
+      }
+
+
+      /* ========================================================
+         TABS
+      ======================================================== */
+
+      document
+        .querySelectorAll("[data-tab]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              document
+                .querySelectorAll(
+                  "[data-tab]"
+                )
+                .forEach(tab =>
+                  tab.classList.remove(
+                    "active"
+                  )
+                );
+
+
+              button.classList.add(
+                "active"
+              );
+
+
+              const tab =
+                button.dataset.tab;
+
+
+              document.getElementById(
+                "premiumSection"
+              ).hidden =
+                tab !== "premium";
+
+
+              document.getElementById(
+                "adsSection"
+              ).hidden =
+                tab !== "ads";
+
+
+              document.getElementById(
+                "subscriptionsSection"
+              ).hidden =
+                tab !== "subscriptions";
+
+            }
+          );
+
+        });
+
+
+      /* ========================================================
+         MODAL CLOSE
+      ======================================================== */
+
+      document
+        .querySelectorAll(
+          "[data-modal-close]"
+        )
+        .forEach(element => {
+
+          element.addEventListener(
+            "click",
+            () => {
+
+              const modal =
+                element.closest(
+                  ".modal"
+                );
+
+
+              if (modal) {
+
+                closeModal(
+                  modal.id
+                );
+
+              }
+
+            }
+          );
+
+        });
+
+
+      /* ========================================================
+         CREATE PLAN
+      ======================================================== */
+
+      function openCreatePlan() {
+
+        state.editingPlan = null;
+
+
+        document
+          .getElementById(
+            "planForm"
+          )
+          .reset();
+
+
+        document
+          .getElementById(
+            "planId"
+          )
+          .value = "";
+
+
+        document
+          .getElementById(
+            "planModalTitle"
+          )
+          .textContent =
+            "Create Premium Plan";
+
+
+        openModal(
+          "planModal"
+        );
+
+      }
+
+
+      document
+        .getElementById(
+          "createPlanButton"
+        )
+        .addEventListener(
+          "click",
+          openCreatePlan
+        );
+
+
+      document
+        .getElementById(
+          "createPlanButtonTop"
+        )
+        .addEventListener(
+          "click",
+          openCreatePlan
+        );
+
+
+      /* ========================================================
+         EDIT PLAN
+      ======================================================== */
+
+      document
+        .getElementById(
+          "plansGrid"
+        )
+        .addEventListener(
+          "click",
+          event => {
+
+            const button =
+              event.target.closest(
+                "[data-plan-action]"
+              );
+
+
+            if (!button) return;
+
+
+            const id =
+              button.dataset.id;
+
+
+            const plan =
+              state.plans.find(
+                item =>
+                  String(item.id) ===
+                  String(id)
+              );
+
+
+            if (!plan) return;
+
+
+            const action =
+              button.dataset.planAction;
+
+
+            if (action === "edit") {
+
+              state.editingPlan =
+                plan;
+
+
+              document.getElementById(
+                "planId"
+              ).value =
+                plan.id || "";
+
+
+              document.getElementById(
+                "planName"
+              ).value =
+                plan.name || "";
+
+
+              document.getElementById(
+                "planPrice"
+              ).value =
+                plan.price ?? 0;
+
+
+              document.getElementById(
+                "planCurrency"
+              ).value =
+                plan.currency || "NGN";
+
+
+              document.getElementById(
+                "planInterval"
+              ).value =
+                plan.interval ||
+                "monthly";
+
+
+              document.getElementById(
+                "planDescription"
+              ).value =
+                plan.description || "";
+
+
+              document.getElementById(
+                "planStatus"
+              ).value =
+                plan.status ||
+                "active";
+
+
+              document.getElementById(
+                "planModalTitle"
+              ).textContent =
+                "Edit Premium Plan";
+
+
+              openModal(
+                "planModal"
+              );
+
+
+              return;
+
+            }
+
+
+            if (action === "toggle") {
+
+              togglePlan(
+                plan
+              );
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         SAVE PLAN
+      ======================================================== */
+
+      document
+        .getElementById(
+          "planForm"
+        )
+        .addEventListener(
+          "submit",
+          async event => {
+
+            event.preventDefault();
+
+
+            const button =
+              document.getElementById(
+                "savePlanButton"
+              );
+
+
+            const payload = {
+
+              name:
+                document.getElementById(
+                  "planName"
+                ).value.trim(),
+
+              price:
+                Number(
+                  document.getElementById(
+                    "planPrice"
+                  ).value
+                ),
+
+              currency:
+                document.getElementById(
+                  "planCurrency"
+                ).value,
+
+              interval:
+                document.getElementById(
+                  "planInterval"
+                ).value,
+
+              description:
+                document.getElementById(
+                  "planDescription"
+                ).value.trim(),
+
+              status:
+                document.getElementById(
+                  "planStatus"
+                ).value
+
+            };
+
+
+            if (
+              !payload.name ||
+              Number.isNaN(
+                payload.price
+              )
+            ) {
+
+              notify(
+                "Please complete the required plan fields.",
+                "warning"
+              );
+
+              return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+              state.editingPlan
+                ? "Saving..."
+                : "Creating...";
+
+
+            try {
+
+              if (
+                state.editingPlan &&
+                window.JG_API &&
+                typeof window.JG_API.updatePremiumPlan ===
+                  "function"
+              ) {
+
+                await window.JG_API.updatePremiumPlan(
+                  state.editingPlan.id,
+                  payload
+                );
+
+              } else if (
+                !state.editingPlan &&
+                window.JG_API &&
+                typeof window.JG_API.createPremiumPlan ===
+                  "function"
+              ) {
+
+                await window.JG_API.createPremiumPlan(
+                  payload
+                );
+
+              } else {
+
+                /*
+                 * Frontend development fallback.
+                 */
+
+                if (
+                  state.editingPlan
+                ) {
+
+                  Object.assign(
+                    state.editingPlan,
+                    payload
+                  );
+
+                } else {
+
+                  state.plans.unshift({
+
+                    id:
+                      `plan-${Date.now()}`,
+
+                    ...payload
+
+                  });
+
+                }
+
+              }
+
+
+              closeModal(
+                "planModal"
+              );
+
+
+              notify(
+                state.editingPlan
+                  ? "Premium plan updated."
+                  : "Premium plan created.",
+                "success"
+              );
+
+
+              state.editingPlan =
+                null;
+
+
+              renderPlans();
+
+              updateStats();
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              notify(
+                error?.message ||
+                "Unable to save Premium plan.",
+                "error"
+              );
+
+            } finally {
+
+              button.disabled = false;
+
+              button.textContent =
+                "Save Plan";
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         TOGGLE PLAN
+      ======================================================== */
+
+      async function togglePlan(plan) {
+
+        const nextStatus =
+          plan.status === "inactive"
+            ? "active"
+            : "inactive";
+
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.updatePremiumPlan ===
+              "function"
+          ) {
+
+            await window.JG_API.updatePremiumPlan(
+              plan.id,
+              {
+                status:
+                  nextStatus
+              }
+            );
+
+          } else {
+
+            plan.status =
+              nextStatus;
+
+          }
+
+
+          notify(
+            nextStatus === "active"
+              ? "Premium plan activated."
+              : "Premium plan deactivated.",
+            "success"
+          );
+
+
+          renderPlans();
+
+          updateStats();
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          notify(
+            error?.message ||
+            "Unable to update Premium plan.",
+            "error"
+          );
+
+        }
+
+      }
+
+
+      /* ========================================================
+         CREATE AD
+      ======================================================== */
+
+      document
+        .getElementById(
+          "createAdButton"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            state.editingAd = null;
+
+
+            document
+              .getElementById(
+                "adForm"
+              )
+              .reset();
+
+
+            document
+              .getElementById(
+                "adId"
+              )
+              .value = "";
+
+
+            document
+              .getElementById(
+                "adModalTitle"
+              )
+              .textContent =
+                "Add Ad Placement";
+
+
+            openModal(
+              "adModal"
+            );
+
+          }
+        );
+
+
+      /* ========================================================
+         EDIT / TOGGLE ADS
+      ======================================================== */
+
+      document
+        .getElementById(
+          "adsGrid"
+        )
+        .addEventListener(
+          "click",
+          event => {
+
+            const button =
+              event.target.closest(
+                "[data-ad-action]"
+              );
+
+
+            if (!button) return;
+
+
+            const id =
+              button.dataset.id;
+
+
+            const ad =
+              state.ads.find(
+                item =>
+                  String(item.id) ===
+                  String(id)
+              );
+
+
+            if (!ad) return;
+
+
+            const action =
+              button.dataset.adAction;
+
+
+            if (action === "edit") {
+
+              state.editingAd =
+                ad;
+
+
+              document.getElementById(
+                "adId"
+              ).value =
+                ad.id || "";
+
+
+              document.getElementById(
+                "adName"
+              ).value =
+                ad.name || "";
+
+
+              document.getElementById(
+                "adLocation"
+              ).value =
+                ad.location ||
+                "home";
+
+
+              document.getElementById(
+                "adFormat"
+              ).value =
+                ad.format ||
+                "banner";
+
+
+              document.getElementById(
+                "adDescription"
+              ).value =
+                ad.description ||
+                "";
+
+
+              document.getElementById(
+                "adStatus"
+              ).value =
+                ad.status ||
+                "active";
+
+
+              document.getElementById(
+                "adModalTitle"
+              ).textContent =
+                "Edit Ad Placement";
+
+
+              openModal(
+                "adModal"
+              );
+
+
+              return;
+
+            }
+
+
+            if (action === "toggle") {
+
+              toggleAd(
+                ad
+              );
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         SAVE AD
+      ======================================================== */
+
+      document
+        .getElementById(
+          "adForm"
+        )
+        .addEventListener(
+          "submit",
+          async event => {
+
+            event.preventDefault();
+
+
+            const button =
+              document.getElementById(
+                "saveAdButton"
+              );
+
+
+            const payload = {
+
+              name:
+                document.getElementById(
+                  "adName"
+                ).value.trim(),
+
+              location:
+                document.getElementById(
+                  "adLocation"
+                ).value,
+
+              format:
+                document.getElementById(
+                  "adFormat"
+                ).value,
+
+              description:
+                document.getElementById(
+                  "adDescription"
+                ).value.trim(),
+
+              status:
+                document.getElementById(
+                  "adStatus"
+                ).value
+
+            };
+
+
+            if (!payload.name) {
+
+              notify(
+                "Please enter an ad placement name.",
+                "warning"
+              );
+
+              return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+              "Saving...";
+
+
+            try {
+
+              if (
+                state.editingAd &&
+                window.JG_API &&
+                typeof window.JG_API.updateAdPlacement ===
+                  "function"
+              ) {
+
+                await window.JG_API.updateAdPlacement(
+                  state.editingAd.id,
+                  payload
+                );
+
+              } else if (
+                !state.editingAd &&
+                window.JG_API &&
+                typeof window.JG_API.createAdPlacement ===
+                  "function"
+              ) {
+
+                await window.JG_API.createAdPlacement(
+                  payload
+                );
+
+              } else {
+
+                /*
+                 * Frontend development fallback.
+                 */
+
+                if (
+                  state.editingAd
+                ) {
+
+                  Object.assign(
+                    state.editingAd,
+                    payload
+                  );
+
+                } else {
+
+                  state.ads.unshift({
+
+                    id:
+                      `ad-${Date.now()}`,
+
+                    ...payload
+
+                  });
+
+                }
+
+              }
+
+
+              closeModal(
+                "adModal"
+              );
+
+
+              notify(
+                state.editingAd
+                  ? "Ad placement updated."
+                  : "Ad placement created.",
+                "success"
+              );
+
+
+              state.editingAd =
+                null;
+
+
+              renderAds();
+
+              updateStats();
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              notify(
+                error?.message ||
+                "Unable to save ad placement.",
+                "error"
+              );
+
+            } finally {
+
+              button.disabled = false;
+
+              button.textContent =
+                "Save Placement";
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         TOGGLE AD
+      ======================================================== */
+
+      async function toggleAd(ad) {
+
+        const nextStatus =
+          ad.status === "inactive"
+            ? "active"
+            : "inactive";
+
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.updateAdPlacement ===
+              "function"
+          ) {
+
+            await window.JG_API.updateAdPlacement(
+              ad.id,
+              {
+                status:
+                  nextStatus
+              }
+            );
+
+          } else {
+
+            ad.status =
+              nextStatus;
+
+          }
+
+
+          notify(
+            nextStatus === "active"
+              ? "Ad placement activated."
+              : "Ad placement deactivated.",
+            "success"
+          );
+
+
+          renderAds();
+
+          updateStats();
+
+        } catch (error) {
+
+          console.error(error);
+
+
+          notify(
+            error?.message ||
+            "Unable to update ad placement.",
+            "error"
+          );
+
+        }
+
+      }
+
+
+      /* ========================================================
+         REFRESH
+      ======================================================== */
+
+      document
+        .getElementById(
+          "refreshButton"
+        )
+        .addEventListener(
+          "click",
+          async () => {
+
+            await Promise.all([
+              loadPlans(),
+              loadAds()
+            ]);
+
+          }
+        );
+
+
+      /* ========================================================
+         INITIALIZE
+      ======================================================== */
+
+      async function initialize() {
+
+        try {
+
+          if (
+            window.JG_AUTH &&
+            typeof window.JG_AUTH.requireAdmin ===
+              "function"
+          ) {
+
+            await window.JG_AUTH.requireAdmin();
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Admin authorization check:",
+            error
+          );
+
+        }
+
+
+        await Promise.all([
+          loadPlans(),
+          loadAds()
+        ]);
+
+        updateStats();
+
+      }
+
+
+      initialize();
+
+    })();
+  </script>
+
+</body>
+</html>
