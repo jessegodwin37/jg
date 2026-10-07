@@ -1,1 +1,1980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
+  <meta
+    name="description"
+    content="JG Owner and Admin Content Control Center."
+  >
+
+  <meta name="theme-color" content="#07111f">
+
+  <title>Content Control — JG Admin</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-content">
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="dashboard.html" class="brand">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary btn-sm"
+          data-action="back"
+        >
+          ← Dashboard
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+  <main class="container page-content">
+
+    <!-- PAGE HERO -->
+    <section class="hero-card">
+
+      <div class="hero-content">
+
+        <span class="badge badge-primary">
+          OWNER / ADMIN
+        </span>
+
+        <h1>Content Control</h1>
+
+        <p>
+          Manage JG courses, lessons, exams, certificates and other
+          educational content from one secure control center.
+        </p>
+
+      </div>
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="refreshContent"
+        >
+          ↻ Refresh
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="createContentButton"
+        >
+          + Add Content
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         SECURITY NOTICE
+    ======================================================== -->
+    <section class="alert alert-info">
+
+      <div>
+        <strong>Content lifecycle protection</strong>
+
+        <p>
+          Removing content should normally be recoverable. Permanent
+          deletion is restricted to the Owner and should only be used
+          when content must be permanently destroyed.
+        </p>
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         STATS
+    ======================================================== -->
+    <section class="grid grid-4">
+
+      <article class="stat-card">
+        <span class="stat-label">Courses</span>
+        <strong id="courseCount">0</strong>
+        <small>Educational programs</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Lessons</span>
+        <strong id="lessonCount">0</strong>
+        <small>Learning materials</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Exams</span>
+        <strong id="examCount">0</strong>
+        <small>Assessments</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Removed</span>
+        <strong id="removedCount">0</strong>
+        <small>Recoverable content</small>
+      </article>
+
+    </section>
+
+
+    <!-- =======================================================
+         CONTENT FILTERS
+    ======================================================== -->
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="eyebrow">CONTENT LIBRARY</span>
+          <h2>Manage Content</h2>
+        </div>
+
+      </div>
+
+
+      <div class="tabs" role="tablist">
+
+        <button
+          type="button"
+          class="tab-btn active"
+          data-content-tab="all"
+        >
+          All
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-content-tab="courses"
+        >
+          Courses
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-content-tab="lessons"
+        >
+          Lessons
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-content-tab="exams"
+        >
+          Exams
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-content-tab="certificates"
+        >
+          Certificates
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-content-tab="removed"
+        >
+          Removed
+        </button>
+
+      </div>
+
+
+      <!-- SEARCH -->
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label for="contentSearch">
+            Search content
+          </label>
+
+          <input
+            type="search"
+            id="contentSearch"
+            class="form-control"
+            placeholder="Search by title, ID or description..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="statusFilter">
+            Status
+          </label>
+
+          <select
+            id="statusFilter"
+            class="form-control"
+          >
+            <option value="all">All statuses</option>
+            <option value="active">Active</option>
+            <option value="draft">Draft</option>
+            <option value="removed">Removed</option>
+          </select>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CONTENT TABLE
+    ======================================================== -->
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="eyebrow">LIBRARY</span>
+          <h2 id="contentHeading">All Content</h2>
+        </div>
+
+        <span
+          class="badge badge-neutral"
+          id="resultCount"
+        >
+          0 items
+        </span>
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+            <tr>
+
+              <th>Content</th>
+
+              <th>Type</th>
+
+              <th>Status</th>
+
+              <th>Updated</th>
+
+              <th>Actions</th>
+
+            </tr>
+          </thead>
+
+          <tbody id="contentTableBody">
+
+            <tr>
+              <td colspan="5">
+
+                <div class="empty-state">
+
+                  <div class="empty-icon">
+                    ◫
+                  </div>
+
+                  <h3>Loading content...</h3>
+
+                  <p>
+                    JG is loading the content library.
+                  </p>
+
+                </div>
+
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         CONTENT MANAGEMENT RULES
+    ======================================================== -->
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+          <span class="eyebrow">CONTROL RULES</span>
+          <h2>Content Lifecycle</h2>
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-3">
+
+        <article class="card card-small">
+
+          <span class="badge badge-success">
+            ACTIVE
+          </span>
+
+          <h3>Published</h3>
+
+          <p>
+            Content available to JG users.
+          </p>
+
+        </article>
+
+
+        <article class="card card-small">
+
+          <span class="badge badge-warning">
+            REMOVED
+          </span>
+
+          <h3>Recoverable</h3>
+
+          <p>
+            Removed content can be restored by an authorized admin.
+          </p>
+
+        </article>
+
+
+        <article class="card card-small">
+
+          <span class="badge badge-danger">
+            PERMANENT
+          </span>
+
+          <h3>Permanent Delete</h3>
+
+          <p>
+            Only the Owner can permanently delete content.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         DANGER ZONE
+    ======================================================== -->
+    <section class="card danger-zone">
+
+      <div class="section-header">
+
+        <div>
+          <span class="eyebrow">OWNER SECURITY</span>
+          <h2>Permanent Deletion</h2>
+        </div>
+
+      </div>
+
+      <p>
+        Permanent deletion removes content from the active system
+        permanently. This action should only be used when absolutely
+        necessary.
+      </p>
+
+      <div class="alert alert-warning">
+
+        <strong>Important</strong>
+
+        <p>
+          The frontend never bypasses backend authorization. The
+          server must verify that the current user is the Owner before
+          allowing permanent deletion.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       CREATE CONTENT MODAL
+  ========================================================== -->
+  <div
+    class="modal"
+    id="contentModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="contentModalTitle"
+    >
+
+      <div class="modal-header">
+
+        <div>
+          <span class="eyebrow">CONTENT</span>
+
+          <h2 id="contentModalTitle">
+            Add Content
+          </h2>
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="contentForm">
+
+        <div class="form-group">
+
+          <label for="contentType">
+            Content type
+          </label>
+
+          <select
+            id="contentType"
+            name="type"
+            class="form-control"
+            required
+          >
+
+            <option value="course">
+              Course
+            </option>
+
+            <option value="lesson">
+              Lesson
+            </option>
+
+            <option value="exam">
+              Exam
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="contentTitle">
+            Title
+          </label>
+
+          <input
+            type="text"
+            id="contentTitle"
+            name="title"
+            class="form-control"
+            placeholder="Enter content title"
+            maxlength="160"
+            required
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="contentDescription">
+            Description
+          </label>
+
+          <textarea
+            id="contentDescription"
+            name="description"
+            class="form-control"
+            rows="5"
+            maxlength="2000"
+            placeholder="Describe this content..."
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-modal-close
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="saveContentButton"
+          >
+            Create Content
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       DELETE CONFIRMATION MODAL
+  ========================================================== -->
+  <div
+    class="modal"
+    id="deleteModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="deleteModalTitle"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            SECURITY
+          </span>
+
+          <h2 id="deleteModalTitle">
+            Remove Content?
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="alert alert-warning">
+
+        <strong>
+          This action is recoverable.
+        </strong>
+
+        <p>
+          The selected content will be removed from normal user
+          access. Authorized administrators can restore it later.
+        </p>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-modal-close
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="confirmRemoveButton"
+        >
+          Remove Content
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       PERMANENT DELETE MODAL
+  ========================================================== -->
+  <div
+    class="modal"
+    id="permanentDeleteModal"
+    aria-hidden="true"
+  >
+
+    <div class="modal-backdrop" data-modal-close></div>
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="permanentDeleteTitle"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            OWNER ONLY
+          </span>
+
+          <h2 id="permanentDeleteTitle">
+            Permanently Delete
+          </h2>
+
+        </div>
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="alert alert-danger">
+
+        <strong>
+          Permanent deletion cannot normally be undone.
+        </strong>
+
+        <p>
+          The backend must verify Owner authorization before this
+          operation is accepted.
+        </p>
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label for="permanentDeleteConfirmation">
+          Type DELETE to continue
+        </label>
+
+        <input
+          type="text"
+          id="permanentDeleteConfirmation"
+          class="form-control"
+          placeholder="DELETE"
+          autocomplete="off"
+        >
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-modal-close
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="confirmPermanentDeleteButton"
+          disabled
+        >
+          Permanently Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================== -->
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <script>
+    (() => {
+      "use strict";
+
+      /*
+       * ========================================================
+       * JG CONTENT CONTROL
+       * ========================================================
+       */
+
+      const state = {
+        activeTab: "all",
+        status: "all",
+        search: "",
+        items: [],
+        selectedItem: null
+      };
+
+
+      /*
+       * --------------------------------------------------------
+       * DEMO FALLBACK
+       * --------------------------------------------------------
+       *
+       * This exists only so the frontend remains visually usable
+       * before the backend is connected.
+       */
+
+      const demoContent = [
+        {
+          id: "course-web-development",
+          title: "Web Development",
+          description: "Learn modern web development.",
+          type: "course",
+          status: "active",
+          updatedAt: new Date().toISOString()
+        },
+
+        {
+          id: "course-graphic-design",
+          title: "Graphic Design",
+          description: "Learn professional graphic design.",
+          type: "course",
+          status: "active",
+          updatedAt: new Date().toISOString()
+        },
+
+        {
+          id: "course-video-editing",
+          title: "Video Editing",
+          description: "Learn video editing fundamentals.",
+          type: "course",
+          status: "active",
+          updatedAt: new Date().toISOString()
+        },
+
+        {
+          id: "lesson-web-001",
+          title: "Introduction to HTML",
+          description: "Learn the foundations of HTML.",
+          type: "lesson",
+          status: "active",
+          updatedAt: new Date().toISOString()
+        },
+
+        {
+          id: "lesson-web-002",
+          title: "CSS Fundamentals",
+          description: "Learn how CSS styles webpages.",
+          type: "lesson",
+          status: "draft",
+          updatedAt: new Date().toISOString()
+        },
+
+        {
+          id: "exam-web-001",
+          title: "Web Development Final Exam",
+          description: "Final assessment for Web Development.",
+          type: "exam",
+          status: "draft",
+          updatedAt: new Date().toISOString()
+        }
+      ];
+
+
+      /*
+       * --------------------------------------------------------
+       * HELPERS
+       * --------------------------------------------------------
+       */
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+
+      function formatDate(value) {
+        if (!value) return "—";
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+          return "—";
+        }
+
+        return date.toLocaleDateString(undefined, {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        });
+      }
+
+
+      function typeLabel(type) {
+        const labels = {
+          course: "Course",
+          lesson: "Lesson",
+          exam: "Exam",
+          certificate: "Certificate"
+        };
+
+        return labels[type] || type;
+      }
+
+
+      function statusBadge(status) {
+        const classes = {
+          active: "badge-success",
+          draft: "badge-warning",
+          removed: "badge-danger"
+        };
+
+        const className =
+          classes[status] || "badge-neutral";
+
+        return `
+          <span class="badge ${className}">
+            ${escapeHtml(status)}
+          </span>
+        `;
+      }
+
+
+      function notify(message, type = "info") {
+        if (
+          window.JG_UI &&
+          typeof window.JG_UI.toast === "function"
+        ) {
+          window.JG_UI.toast(message, type);
+          return;
+        }
+
+        if (
+          window.JG_APP &&
+          typeof window.JG_APP.toast === "function"
+        ) {
+          window.JG_APP.toast(message, type);
+          return;
+        }
+
+        alert(message);
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * LOAD CONTENT
+       * --------------------------------------------------------
+       */
+
+      async function loadContent() {
+
+        const tableBody =
+          document.getElementById("contentTableBody");
+
+        tableBody.innerHTML = `
+          <tr>
+            <td colspan="5">
+              <div class="empty-state">
+                <div class="empty-icon">↻</div>
+                <h3>Loading content...</h3>
+                <p>Please wait.</p>
+              </div>
+            </td>
+          </tr>
+        `;
+
+
+        let items = [];
+
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.getAdminCourses === "function"
+          ) {
+
+            const response =
+              await window.JG_API.getAdminCourses();
+
+            if (Array.isArray(response)) {
+              items = response;
+            } else if (
+              response &&
+              Array.isArray(response.data)
+            ) {
+              items = response.data;
+            } else if (
+              response &&
+              Array.isArray(response.items)
+            ) {
+              items = response.items;
+            }
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "JG content API unavailable:",
+            error
+          );
+
+        }
+
+
+        /*
+         * Before the backend is connected, use the safe demo
+         * library. No fake server operation is performed.
+         */
+
+        if (!items.length) {
+          items = [...demoContent];
+        }
+
+
+        state.items = items;
+
+        renderContent();
+
+        updateStats();
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * FILTER
+       * --------------------------------------------------------
+       */
+
+      function getFilteredItems() {
+
+        let items = [...state.items];
+
+
+        if (state.activeTab === "courses") {
+          items = items.filter(
+            item => item.type === "course"
+          );
+        }
+
+        if (state.activeTab === "lessons") {
+          items = items.filter(
+            item => item.type === "lesson"
+          );
+        }
+
+        if (state.activeTab === "exams") {
+          items = items.filter(
+            item => item.type === "exam"
+          );
+        }
+
+        if (state.activeTab === "certificates") {
+          items = items.filter(
+            item => item.type === "certificate"
+          );
+        }
+
+        if (state.activeTab === "removed") {
+          items = items.filter(
+            item =>
+              item.status === "removed" ||
+              item.deletedAt
+          );
+        }
+
+
+        if (state.status !== "all") {
+          items = items.filter(
+            item =>
+              (item.status || "active") === state.status
+          );
+        }
+
+
+        if (state.search) {
+
+          const search =
+            state.search.toLowerCase();
+
+          items = items.filter(item => {
+
+            const text = [
+              item.id,
+              item.title,
+              item.name,
+              item.description,
+              item.type
+            ]
+              .filter(Boolean)
+              .join(" ")
+              .toLowerCase();
+
+            return text.includes(search);
+          });
+        }
+
+
+        return items;
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * RENDER
+       * --------------------------------------------------------
+       */
+
+      function renderContent() {
+
+        const tableBody =
+          document.getElementById("contentTableBody");
+
+        const items =
+          getFilteredItems();
+
+
+        document.getElementById("resultCount").textContent =
+          `${items.length} item${items.length === 1 ? "" : "s"}`;
+
+
+        const headings = {
+          all: "All Content",
+          courses: "Courses",
+          lessons: "Lessons",
+          exams: "Exams",
+          certificates: "Certificates",
+          removed: "Removed Content"
+        };
+
+
+        document.getElementById("contentHeading").textContent =
+          headings[state.activeTab] || "Content";
+
+
+        if (!items.length) {
+
+          tableBody.innerHTML = `
+            <tr>
+              <td colspan="5">
+
+                <div class="empty-state">
+
+                  <div class="empty-icon">
+                    ◫
+                  </div>
+
+                  <h3>No content found</h3>
+
+                  <p>
+                    There are no items matching the current filters.
+                  </p>
+
+                </div>
+
+              </td>
+            </tr>
+          `;
+
+          return;
+        }
+
+
+        tableBody.innerHTML = items.map(item => {
+
+          const isRemoved =
+            item.status === "removed" ||
+            Boolean(item.deletedAt);
+
+
+          const actions = isRemoved
+
+            ? `
+              <div class="table-actions">
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-secondary"
+                  data-action-content="restore"
+                  data-id="${escapeHtml(item.id)}"
+                >
+                  Restore
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-danger"
+                  data-action-content="permanent-delete"
+                  data-id="${escapeHtml(item.id)}"
+                >
+                  Delete Forever
+                </button>
+
+              </div>
+            `
+
+            : `
+              <div class="table-actions">
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-secondary"
+                  data-action-content="view"
+                  data-id="${escapeHtml(item.id)}"
+                >
+                  View
+                </button>
+
+                <button
+                  type="button"
+                  class="btn btn-sm btn-warning"
+                  data-action-content="remove"
+                  data-id="${escapeHtml(item.id)}"
+                >
+                  Remove
+                </button>
+
+              </div>
+            `;
+
+
+          return `
+            <tr>
+
+              <td>
+
+                <div class="table-primary">
+                  ${escapeHtml(
+                    item.title ||
+                    item.name ||
+                    "Untitled"
+                  )}
+                </div>
+
+                <small>
+                  ${escapeHtml(item.id || "No ID")}
+                </small>
+
+              </td>
+
+
+              <td>
+                ${escapeHtml(
+                  typeLabel(item.type || "content")
+                )}
+              </td>
+
+
+              <td>
+                ${statusBadge(
+                  item.status || "active"
+                )}
+              </td>
+
+
+              <td>
+                ${formatDate(
+                  item.updatedAt ||
+                  item.createdAt
+                )}
+              </td>
+
+
+              <td>
+                ${actions}
+              </td>
+
+            </tr>
+          `;
+
+        }).join("");
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * STATS
+       * --------------------------------------------------------
+       */
+
+      function updateStats() {
+
+        const courses =
+          state.items.filter(
+            item => item.type === "course"
+          ).length;
+
+        const lessons =
+          state.items.filter(
+            item => item.type === "lesson"
+          ).length;
+
+        const exams =
+          state.items.filter(
+            item => item.type === "exam"
+          ).length;
+
+        const removed =
+          state.items.filter(
+            item =>
+              item.status === "removed" ||
+              item.deletedAt
+          ).length;
+
+
+        document.getElementById("courseCount").textContent =
+          courses;
+
+        document.getElementById("lessonCount").textContent =
+          lessons;
+
+        document.getElementById("examCount").textContent =
+          exams;
+
+        document.getElementById("removedCount").textContent =
+          removed;
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * TABS
+       * --------------------------------------------------------
+       */
+
+      document
+        .querySelectorAll("[data-content-tab]")
+        .forEach(button => {
+
+          button.addEventListener("click", () => {
+
+            document
+              .querySelectorAll("[data-content-tab]")
+              .forEach(btn =>
+                btn.classList.remove("active")
+              );
+
+            button.classList.add("active");
+
+            state.activeTab =
+              button.dataset.contentTab;
+
+            renderContent();
+          });
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * SEARCH
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById("contentSearch")
+        .addEventListener("input", event => {
+
+          state.search =
+            event.target.value.trim();
+
+          renderContent();
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * STATUS FILTER
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById("statusFilter")
+        .addEventListener("change", event => {
+
+          state.status =
+            event.target.value;
+
+          renderContent();
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * MODALS
+       * --------------------------------------------------------
+       */
+
+      function openModal(id) {
+
+        const modal =
+          document.getElementById(id);
+
+        if (!modal) return;
+
+        modal.classList.add("active");
+        modal.setAttribute("aria-hidden", "false");
+
+      }
+
+
+      function closeModal(id) {
+
+        const modal =
+          document.getElementById(id);
+
+        if (!modal) return;
+
+        modal.classList.remove("active");
+        modal.setAttribute("aria-hidden", "true");
+
+      }
+
+
+      document
+        .querySelectorAll("[data-modal-close]")
+        .forEach(element => {
+
+          element.addEventListener("click", () => {
+
+            const modal =
+              element.closest(".modal");
+
+            if (!modal) return;
+
+            closeModal(modal.id);
+
+          });
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * ADD CONTENT
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById("createContentButton")
+        .addEventListener("click", () => {
+
+          document
+            .getElementById("contentForm")
+            .reset();
+
+          openModal("contentModal");
+
+        });
+
+
+      document
+        .getElementById("contentForm")
+        .addEventListener("submit", async event => {
+
+          event.preventDefault();
+
+
+          const button =
+            document.getElementById(
+              "saveContentButton"
+            );
+
+
+          const type =
+            document.getElementById(
+              "contentType"
+            ).value;
+
+
+          const title =
+            document.getElementById(
+              "contentTitle"
+            ).value.trim();
+
+
+          const description =
+            document.getElementById(
+              "contentDescription"
+            ).value.trim();
+
+
+          if (!title) {
+            notify(
+              "Please enter a content title.",
+              "warning"
+            );
+            return;
+          }
+
+
+          button.disabled = true;
+          button.textContent = "Creating...";
+
+
+          try {
+
+            /*
+             * Use backend when the matching API exists.
+             */
+
+            if (
+              window.JG_API &&
+              typeof window.JG_API.createAdminCourse ===
+                "function" &&
+              type === "course"
+            ) {
+
+              await window.JG_API.createAdminCourse({
+                title,
+                description,
+                status: "draft"
+              });
+
+              notify(
+                "Course created successfully.",
+                "success"
+              );
+
+              closeModal("contentModal");
+
+              await loadContent();
+
+              return;
+            }
+
+
+            /*
+             * Frontend-only fallback.
+             *
+             * This does not pretend that a server record was
+             * created. It only lets the UI remain usable during
+             * frontend development.
+             */
+
+            const localItem = {
+              id:
+                `${type}-${Date.now()}`,
+              title,
+              description,
+              type,
+              status: "draft",
+              createdAt:
+                new Date().toISOString(),
+              updatedAt:
+                new Date().toISOString()
+            };
+
+
+            state.items.unshift(localItem);
+
+            renderContent();
+            updateStats();
+
+            closeModal("contentModal");
+
+            notify(
+              "Content added to the current frontend session. Connect the backend to permanently save it.",
+              "info"
+            );
+
+          } catch (error) {
+
+            console.error(error);
+
+            notify(
+              error?.message ||
+              "Unable to create content.",
+              "error"
+            );
+
+          } finally {
+
+            button.disabled = false;
+            button.textContent = "Create Content";
+
+          }
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * TABLE ACTIONS
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById("contentTableBody")
+        .addEventListener("click", event => {
+
+          const button =
+            event.target.closest(
+              "[data-action-content]"
+            );
+
+          if (!button) return;
+
+
+          const action =
+            button.dataset.actionContent;
+
+          const id =
+            button.dataset.id;
+
+
+          const item =
+            state.items.find(
+              content => String(content.id) === String(id)
+            );
+
+
+          if (!item) return;
+
+
+          state.selectedItem = item;
+
+
+          if (action === "view") {
+
+            notify(
+              `Selected: ${
+                item.title ||
+                item.name ||
+                item.id
+              }`,
+              "info"
+            );
+
+            return;
+          }
+
+
+          if (action === "remove") {
+
+            openModal("deleteModal");
+
+            return;
+          }
+
+
+          if (action === "restore") {
+
+            restoreContent(item);
+
+            return;
+          }
+
+
+          if (action === "permanent-delete") {
+
+            document
+              .getElementById(
+                "permanentDeleteConfirmation"
+              )
+              .value = "";
+
+            document
+              .getElementById(
+                "confirmPermanentDeleteButton"
+              )
+              .disabled = true;
+
+            openModal("permanentDeleteModal");
+
+          }
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * REMOVE
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById("confirmRemoveButton")
+        .addEventListener("click", async () => {
+
+          const item =
+            state.selectedItem;
+
+          if (!item) return;
+
+
+          try {
+
+            if (
+              window.JG_API &&
+              typeof window.JG_API.removeContent ===
+                "function"
+            ) {
+
+              await window.JG_API.removeContent(
+                item.type,
+                item.id
+              );
+
+            } else {
+
+              /*
+               * Frontend fallback only.
+               */
+
+              item.status = "removed";
+              item.deletedAt =
+                new Date().toISOString();
+
+            }
+
+
+            closeModal("deleteModal");
+
+            notify(
+              "Content removed. It can be restored if the backend supports recovery.",
+              "success"
+            );
+
+            renderContent();
+            updateStats();
+
+          } catch (error) {
+
+            console.error(error);
+
+            notify(
+              error?.message ||
+              "Unable to remove content.",
+              "error"
+            );
+
+          }
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * RESTORE
+       * --------------------------------------------------------
+       */
+
+      async function restoreContent(item) {
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.restoreContent ===
+              "function"
+          ) {
+
+            await window.JG_API.restoreContent(
+              item.type,
+              item.id
+            );
+
+          } else {
+
+            item.status = "active";
+            delete item.deletedAt;
+
+          }
+
+
+          notify(
+            "Content restored.",
+            "success"
+          );
+
+          renderContent();
+          updateStats();
+
+        } catch (error) {
+
+          console.error(error);
+
+          notify(
+            error?.message ||
+            "Unable to restore content.",
+            "error"
+          );
+
+        }
+
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * PERMANENT DELETE CONFIRMATION
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById(
+          "permanentDeleteConfirmation"
+        )
+        .addEventListener("input", event => {
+
+          document
+            .getElementById(
+              "confirmPermanentDeleteButton"
+            )
+            .disabled =
+              event.target.value.trim() !== "DELETE";
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * PERMANENT DELETE
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById(
+          "confirmPermanentDeleteButton"
+        )
+        .addEventListener("click", async () => {
+
+          const item =
+            state.selectedItem;
+
+          if (!item) return;
+
+
+          const confirmation =
+            document
+              .getElementById(
+                "permanentDeleteConfirmation"
+              )
+              .value
+              .trim();
+
+
+          if (confirmation !== "DELETE") {
+
+            notify(
+              "Type DELETE to confirm permanent deletion.",
+              "warning"
+            );
+
+            return;
+          }
+
+
+          try {
+
+            /*
+             * IMPORTANT:
+             * The backend must enforce Owner authorization.
+             */
+
+            if (
+              window.JG_API &&
+              typeof window.JG_API.permanentDeleteContent ===
+                "function"
+            ) {
+
+              await window.JG_API.permanentDeleteContent(
+                item.type,
+                item.id
+              );
+
+            } else {
+
+              /*
+               * Frontend fallback removes only the temporary
+               * in-memory record.
+               */
+
+              state.items =
+                state.items.filter(
+                  content =>
+                    content.id !== item.id
+                );
+
+            }
+
+
+            closeModal("permanentDeleteModal");
+
+            state.selectedItem = null;
+
+            notify(
+              "Content permanently deleted.",
+              "success"
+            );
+
+            renderContent();
+            updateStats();
+
+          } catch (error) {
+
+            console.error(error);
+
+            notify(
+              error?.message ||
+              "Permanent deletion was rejected.",
+              "error"
+            );
+
+          }
+
+        });
+
+
+      /*
+       * --------------------------------------------------------
+       * REFRESH
+       * --------------------------------------------------------
+       */
+
+      document
+        .getElementById("refreshContent")
+        .addEventListener(
+          "click",
+          loadContent
+        );
+
+
+      /*
+       * --------------------------------------------------------
+       * AUTHORIZATION
+       * --------------------------------------------------------
+       *
+       * Do not rely only on frontend authorization.
+       * The backend must enforce Owner/Admin permissions.
+       */
+
+      async function initialize() {
+
+        try {
+
+          if (
+            window.JG_AUTH &&
+            typeof window.JG_AUTH.requireAdmin ===
+              "function"
+          ) {
+
+            await window.JG_AUTH.requireAdmin();
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Admin authorization check:",
+            error
+          );
+
+        }
+
+
+        await loadContent();
+
+      }
+
+
+      /*
+       * --------------------------------------------------------
+       * START
+       * --------------------------------------------------------
+       */
+
+      initialize();
+
+    })();
+  </script>
+
+</body>
+</html>
