@@ -1,1 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta
+    name="theme-color"
+    content="#07111f"
+  >
+
+  <meta
+    name="robots"
+    content="noindex, nofollow"
+  >
+
+  <title>Admin Login — JG</title>
+
+  <link
+    rel="stylesheet"
+    href="../css/style.css"
+  >
+
+  <style>
+    .admin-login-page {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .admin-login-page::before,
+    .admin-login-page::after {
+      content: "";
+      position: absolute;
+      width: 330px;
+      height: 330px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: .16;
+      pointer-events: none;
+    }
+
+    .admin-login-page::before {
+      top: -130px;
+      right: -100px;
+      background: #2563eb;
+    }
+
+    .admin-login-page::after {
+      bottom: -150px;
+      left: -120px;
+      background: #7c3aed;
+    }
+
+    .admin-login-card {
+      width: min(100%, 470px);
+      position: relative;
+      z-index: 2;
+      padding: 32px;
+      border-radius: 28px;
+      border: 1px solid var(--border-color, rgba(255,255,255,.1));
+      background: var(--card-bg, rgba(15,23,42,.9));
+      box-shadow: 0 25px 80px rgba(0,0,0,.3);
+      backdrop-filter: blur(18px);
+    }
+
+    .admin-login-brand {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+
+    .admin-login-logo {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 14px;
+      border-radius: 19px;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-size: 23px;
+      font-weight: 900;
+      background: linear-gradient(
+        135deg,
+        #2563eb,
+        #7c3aed
+      );
+      box-shadow: 0 15px 35px rgba(37,99,235,.28);
+    }
+
+    .admin-login-brand h1 {
+      margin: 0;
+      font-size: 1.65rem;
+    }
+
+    .admin-login-brand p {
+      margin: 6px 0 0;
+      opacity: .62;
+      font-size: .88rem;
+    }
+
+    .secure-label {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      margin-bottom: 22px;
+      font-size: .78rem;
+      font-weight: 700;
+      color: #60a5fa;
+    }
+
+    .admin-login-form {
+      display: grid;
+      gap: 17px;
+    }
+
+    .admin-field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .admin-field label {
+      font-size: .84rem;
+      font-weight: 700;
+    }
+
+    .password-wrapper {
+      position: relative;
+    }
+
+    .password-wrapper input {
+      padding-right: 48px;
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 38px;
+      height: 38px;
+      border: 0;
+      border-radius: 10px;
+      background: transparent;
+      color: inherit;
+      cursor: pointer;
+      opacity: .65;
+    }
+
+    .password-toggle:hover {
+      opacity: 1;
+      background: rgba(255,255,255,.06);
+    }
+
+    .login-options {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: .8rem;
+    }
+
+    .remember-option {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      cursor: pointer;
+      opacity: .72;
+    }
+
+    .remember-option input {
+      accent-color: #2563eb;
+    }
+
+    .forgot-link {
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 700;
+    }
+
+    .forgot-link:hover {
+      text-decoration: underline;
+    }
+
+    .admin-login-message {
+      display: none;
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: .82rem;
+      line-height: 1.5;
+    }
+
+    .admin-login-message.show {
+      display: block;
+    }
+
+    .admin-login-message.error {
+      background: rgba(239,68,68,.09);
+      border: 1px solid rgba(239,68,68,.2);
+      color: #fca5a5;
+    }
+
+    .admin-login-message.success {
+      background: rgba(34,197,94,.09);
+      border: 1px solid rgba(34,197,94,.2);
+      color: #86efac;
+    }
+
+    .admin-login-security {
+      margin-top: 22px;
+      padding: 14px;
+      display: flex;
+      gap: 9px;
+      border-radius: 14px;
+      background: rgba(34,197,94,.06);
+      border: 1px solid rgba(34,197,94,.13);
+      font-size: .76rem;
+      line-height: 1.55;
+      opacity: .78;
+    }
+
+    .admin-back {
+      display: block;
+      margin-top: 20px;
+      text-align: center;
+      color: inherit;
+      text-decoration: none;
+      font-size: .8rem;
+      opacity: .62;
+    }
+
+    .admin-back:hover {
+      opacity: 1;
+    }
+
+    .admin-login-footer {
+      text-align: center;
+      margin-top: 18px;
+      font-size: .7rem;
+      opacity: .42;
+    }
+
+    @media (max-width: 520px) {
+      .admin-login-page {
+        padding: 14px;
+      }
+
+      .admin-login-card {
+        padding: 24px 18px;
+        border-radius: 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="admin-login-page">
+
+    <section
+      class="admin-login-card"
+      aria-labelledby="loginTitle"
+    >
+
+      <!-- Brand -->
+      <div class="admin-login-brand">
+
+        <div
+          class="admin-login-logo"
+          aria-hidden="true"
+        >
+          JG
+        </div>
+
+        <h1 id="loginTitle">
+          Admin Login
+        </h1>
+
+        <p>
+          JG Owner & Administration Control Center
+        </p>
+
+      </div>
+
+      <div class="secure-label">
+        🔐 Secure administrative access
+      </div>
+
+      <!-- Login message -->
+      <div
+        id="adminLoginMessage"
+        class="admin-login-message"
+        role="alert"
+        aria-live="polite"
+      ></div>
+
+      <!-- Login form -->
+      <form
+        id="adminLoginForm"
+        class="admin-login-form"
+        novalidate
+      >
+
+        <!-- Email -->
+        <div class="admin-field">
+
+          <label for="adminEmail">
+            Admin email
+          </label>
+
+          <input
+            type="email"
+            id="adminEmail"
+            name="email"
+            autocomplete="username"
+            placeholder="admin@example.com"
+            required
+          >
+
+        </div>
+
+        <!-- Password -->
+        <div class="admin-field">
+
+          <label for="adminPassword">
+            Password
+          </label>
+
+          <div class="password-wrapper">
+
+            <input
+              type="password"
+              id="adminPassword"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter your password"
+              minlength="8"
+              required
+            >
+
+            <button
+              type="button"
+              class="password-toggle"
+              id="toggleAdminPassword"
+              aria-label="Show password"
+              aria-pressed="false"
+            >
+              👁️
+            </button>
+
+          </div>
+
+        </div>
+
+        <!-- Options -->
+        <div class="login-options">
+
+          <label class="remember-option">
+
+            <input
+              type="checkbox"
+              id="rememberAdmin"
+              name="remember"
+            >
+
+            <span>
+              Remember this device
+            </span>
+
+          </label>
+
+          <a
+            href="#"
+            class="forgot-link"
+            id="forgotAdminPassword"
+          >
+            Forgot password?
+          </a>
+
+        </div>
+
+        <!-- Submit -->
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg"
+          id="adminLoginButton"
+          style="width:100%;"
+        >
+          🔐 Sign in to Control Center
+        </button>
+
+      </form>
+
+      <!-- Security notice -->
+      <div class="admin-login-security">
+
+        <span aria-hidden="true">
+          🛡️
+        </span>
+
+        <span>
+          Your admin credentials must never be placed
+          inside frontend files or GitHub. Authentication
+          and authorization are handled by the secure JG
+          backend.
+        </span>
+
+      </div>
+
+      <!-- Back -->
+      <a
+        href="index.html"
+        class="admin-back"
+      >
+        ← Back to Admin Control Center
+      </a>
+
+      <a
+        href="../index.html"
+        class="admin-back"
+        style="margin-top:9px;"
+      >
+        ← Return to JG
+      </a>
+
+      <div class="admin-login-footer">
+        JG Administration ·
+        <span id="adminLoginVersion">v1.0.0</span>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Shared frontend scripts -->
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (function () {
+      "use strict";
+
+      const form =
+        document.getElementById("adminLoginForm");
+
+      const emailInput =
+        document.getElementById("adminEmail");
+
+      const passwordInput =
+        document.getElementById("adminPassword");
+
+      const loginButton =
+        document.getElementById("adminLoginButton");
+
+      const message =
+        document.getElementById("adminLoginMessage");
+
+      const togglePassword =
+        document.getElementById("toggleAdminPassword");
+
+      const forgotPassword =
+        document.getElementById("forgotAdminPassword");
+
+      const version =
+        document.getElementById("adminLoginVersion");
+
+      if (
+        window.JG_CONFIG &&
+        window.JG_CONFIG.APP_VERSION
+      ) {
+        version.textContent =
+          "v" + window.JG_CONFIG.APP_VERSION;
+      }
+
+      function showMessage(text, type) {
+        message.textContent = text;
+        message.className =
+          "admin-login-message show " + type;
+      }
+
+      function clearMessage() {
+        message.textContent = "";
+        message.className =
+          "admin-login-message";
+      }
+
+      function setLoading(loading) {
+        if (!loginButton) return;
+
+        loginButton.disabled = loading;
+
+        loginButton.textContent = loading
+          ? "Signing in..."
+          : "🔐 Sign in to Control Center";
+      }
+
+      /*
+       * Password visibility
+       */
+      togglePassword.addEventListener(
+        "click",
+        function () {
+
+          const isPassword =
+            passwordInput.type === "password";
+
+          passwordInput.type =
+            isPassword
+              ? "text"
+              : "password";
+
+          togglePassword.textContent =
+            isPassword
+              ? "🙈"
+              : "👁️";
+
+          togglePassword.setAttribute(
+            "aria-label",
+            isPassword
+              ? "Hide password"
+              : "Show password"
+          );
+
+          togglePassword.setAttribute(
+            "aria-pressed",
+            String(isPassword)
+          );
+        }
+      );
+
+      /*
+       * Login
+       */
+      form.addEventListener(
+        "submit",
+        async function (event) {
+
+          event.preventDefault();
+
+          clearMessage();
+
+          const email =
+            emailInput.value.trim();
+
+          const password =
+            passwordInput.value;
+
+          if (!email) {
+            showMessage(
+              "Please enter your admin email.",
+              "error"
+            );
+
+            emailInput.focus();
+            return;
+          }
+
+          if (!email.includes("@")) {
+            showMessage(
+              "Please enter a valid email address.",
+              "error"
+            );
+
+            emailInput.focus();
+            return;
+          }
+
+          if (!password) {
+            showMessage(
+              "Please enter your password.",
+              "error"
+            );
+
+            passwordInput.focus();
+            return;
+          }
+
+          setLoading(true);
+
+          try {
+
+            if (
+              !window.JG_AUTH ||
+              typeof window.JG_AUTH.login !==
+                "function"
+            ) {
+              throw new Error(
+                "Authentication service is not available."
+              );
+            }
+
+            const result =
+              await window.JG_AUTH.login(
+                email,
+                password
+              );
+
+            if (!result || result.success === false) {
+              throw new Error(
+                result &&
+                result.message
+                  ? result.message
+                  : "Admin login failed."
+              );
+            }
+
+            const user =
+              result.user ||
+              (
+                typeof window.JG_AUTH.getUser ===
+                "function"
+                  ? window.JG_AUTH.getUser()
+                  : null
+              );
+
+            /*
+             * The frontend never decides authorization
+             * by itself. The backend must return the
+             * authenticated user's actual role.
+             */
+            const role =
+              user &&
+              user.role
+                ? String(user.role).toUpperCase()
+                : "";
+
+            const roles =
+              user &&
+              Array.isArray(user.roles)
+                ? user.roles.map(function (item) {
+                    return String(item).toUpperCase();
+                  })
+                : [];
+
+            const isOwner =
+              role === "OWNER" ||
+              roles.includes("OWNER");
+
+            const isAdmin =
+              role === "ADMIN" ||
+              roles.includes("ADMIN") ||
+              isOwner;
+
+            if (!isAdmin) {
+
+              if (
+                typeof window.JG_AUTH.logout ===
+                "function"
+              ) {
+                await window.JG_AUTH.logout();
+              }
+
+              showMessage(
+                "This account does not have administrative access.",
+                "error"
+              );
+
+              setLoading(false);
+              return;
+            }
+
+            showMessage(
+              "Login successful. Opening Control Center...",
+              "success"
+            );
+
+            setTimeout(function () {
+
+              window.location.href =
+                "dashboard.html";
+
+            }, 500);
+
+          } catch (error) {
+
+            console.error(
+              "JG admin login error:",
+              error
+            );
+
+            showMessage(
+              error && error.message
+                ? error.message
+                : "Unable to sign in. Please try again.",
+              "error"
+            );
+
+            setLoading(false);
+          }
+        }
+      );
+
+      /*
+       * Password reset.
+       * The actual reset flow will use the backend
+       * when the password-reset service is enabled.
+       */
+      forgotPassword.addEventListener(
+        "click",
+        async function (event) {
+
+          event.preventDefault();
+
+          const email =
+            emailInput.value.trim();
+
+          if (!email) {
+
+            showMessage(
+              "Enter your admin email first, then select Forgot password.",
+              "error"
+            );
+
+            emailInput.focus();
+            return;
+          }
+
+          if (
+            !window.JG_AUTH ||
+            typeof window.JG_AUTH.forgotPassword !==
+              "function"
+          ) {
+
+            showMessage(
+              "Password recovery is not available yet.",
+              "error"
+            );
+
+            return;
+          }
+
+          try {
+
+            await window.JG_AUTH.forgotPassword(
+              email
+            );
+
+            showMessage(
+              "If the account is eligible, password-reset instructions will be sent through the configured secure recovery system.",
+              "success"
+            );
+
+          } catch (error) {
+
+            showMessage(
+              error && error.message
+                ? error.message
+                : "Unable to start password recovery.",
+              "error"
+            );
+          }
+        }
+      );
+
+    })();
+  </script>
+
+</body>
+</html>
