@@ -1,1 +1,1657 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+  <meta name="theme-color" content="#07111f">
+  <meta
+    name="description"
+    content="JG Admin Export Center — secure owner data export and backup controls."
+  >
+
+  <title>JG Admin — Export Center</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-export">
+
+  <!-- PAGE LOADER -->
+  <div id="pageLoader" class="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <span>Loading Export Center...</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-inner">
+
+      <a
+        href="dashboard.html"
+        class="brand"
+        aria-label="JG Admin Dashboard"
+      >
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline btn-sm"
+          data-action="back"
+        >
+          ← Back
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="app-main">
+
+    <!-- HERO -->
+    <section class="page-hero">
+
+      <div>
+
+        <span class="eyebrow">
+          OWNER CONTROL CENTER
+        </span>
+
+        <h1>Export Center</h1>
+
+        <p>
+          Export JG operational data for administration, migration,
+          auditing, backup and future platform transfer.
+        </p>
+
+      </div>
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="refreshButton"
+        >
+          ↻ Refresh
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- SECURITY NOTICE -->
+    <section class="alert alert-warning">
+
+      <strong>Owner-only data control:</strong>
+
+      Exported data may contain sensitive platform information. Production
+      exports must be authorized by the backend, logged in the audit system,
+      protected during transfer and handled securely.
+
+    </section>
+
+    <!-- STATUS -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Export Service
+        </span>
+
+        <strong id="serviceStatus">
+          Checking...
+        </strong>
+
+        <small id="serviceStatusText">
+          Checking backend connection
+        </small>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Available Datasets
+        </span>
+
+        <strong id="datasetCount">
+          —
+        </strong>
+
+        <small>
+          Backend-controlled datasets
+        </small>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Last Export
+        </span>
+
+        <strong id="lastExport">
+          —
+        </strong>
+
+        <small>
+          Recorded by the backend
+        </small>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Access
+        </span>
+
+        <strong>
+          Owner
+        </strong>
+
+        <small>
+          Restricted administrative function
+        </small>
+
+      </article>
+
+    </section>
+
+    <!-- EXPORT OPTIONS -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            DATA EXPORT
+          </span>
+
+          <h2>Select Data</h2>
+
+        </div>
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-ghost btn-sm"
+            id="selectAllButton"
+          >
+            Select All
+          </button>
+
+          <button
+            type="button"
+            class="btn btn-ghost btn-sm"
+            id="clearAllButton"
+          >
+            Clear
+          </button>
+
+        </div>
+
+      </div>
+
+      <p class="muted">
+        Choose the datasets required for the export. Sensitive fields should
+        be filtered or redacted by the backend before the export is created.
+      </p>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Users</strong>
+
+            <small>
+              Account profiles, roles and supported user metadata.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="users"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Courses</strong>
+
+            <small>
+              Course records, categories, descriptions and configuration.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="courses"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Lessons</strong>
+
+            <small>
+              Lesson structures and learning content metadata.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="lessons"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Learning Progress</strong>
+
+            <small>
+              User learning progress and completion records.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="progress"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Exams</strong>
+
+            <small>
+              Exam definitions, questions and configuration metadata.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="exams"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Certificates</strong>
+
+            <small>
+              Certificate records and verification information.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="certificates"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Work Opportunities</strong>
+
+            <small>
+              External opportunity listings and platform metadata.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="opportunities"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Premium</strong>
+
+            <small>
+              Premium plans and subscription records.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="premium"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Advertisements</strong>
+
+            <small>
+              Advertisement placements and configuration.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="ads"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Administrators & Permissions</strong>
+
+            <small>
+              Roles, permissions and administrative configuration.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="admins"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Audit Logs</strong>
+
+            <small>
+              Administrative and security activity records.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            class="dataset-checkbox"
+            value="audit"
+          >
+
+        </label>
+
+      </div>
+
+    </section>
+
+    <!-- FORMAT -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            FORMAT
+          </span>
+
+          <h2>Export Format</h2>
+
+        </div>
+
+      </div>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+
+          <label for="exportFormat">
+            File format
+          </label>
+
+          <select
+            id="exportFormat"
+            class="form-input"
+          >
+
+            <option value="json">
+              JSON
+            </option>
+
+            <option value="csv">
+              CSV
+            </option>
+
+          </select>
+
+          <small class="form-help">
+            JSON is recommended for application migration and technical
+            backups. CSV is useful for spreadsheet analysis.
+          </small>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="exportScope">
+            Export scope
+          </label>
+
+          <select
+            id="exportScope"
+            class="form-input"
+          >
+
+            <option value="selected">
+              Selected datasets
+            </option>
+
+            <option value="all">
+              Complete export
+            </option>
+
+          </select>
+
+          <small class="form-help">
+            Complete export requires Owner authorization on the backend.
+          </small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- PRIVACY -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            PRIVACY
+          </span>
+
+          <h2>Export Protection</h2>
+
+        </div>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Redact sensitive fields</strong>
+
+            <small>
+              Remove passwords, authentication secrets and other protected
+              fields from exports.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            id="redactSensitive"
+            checked
+            disabled
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Record export in audit log</strong>
+
+            <small>
+              Record who generated the export and when.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            id="auditExport"
+            checked
+            disabled
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+
+            <strong>Protect authentication data</strong>
+
+            <small>
+              Password hashes, session tokens, API keys and secrets must
+              never be exported as plain sensitive data.
+            </small>
+
+          </span>
+
+          <input
+            type="checkbox"
+            id="protectAuthData"
+            checked
+            disabled
+          >
+
+        </label>
+
+      </div>
+
+      <div class="alert alert-info">
+
+        JG must never export OpenAI API keys, payment-provider secret keys,
+        session secrets, passwords or other private credentials.
+
+      </div>
+
+    </section>
+
+    <!-- EXPORT ACTION -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            GENERATE
+          </span>
+
+          <h2>Create Export</h2>
+
+        </div>
+
+      </div>
+
+      <div class="info-card">
+
+        <strong id="selectionSummary">
+          10 datasets selected
+        </strong>
+
+        <p>
+          Review your selection before generating an export.
+        </p>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="generateExportButton"
+        >
+          Generate Export
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="previewButton"
+        >
+          Preview Selection
+        </button>
+
+      </div>
+
+      <div
+        id="exportStatus"
+        class="alert hidden"
+        aria-live="polite"
+      ></div>
+
+    </section>
+
+    <!-- EXPORT RESULT -->
+    <section
+      class="card hidden"
+      id="resultCard"
+    >
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            EXPORT READY
+          </span>
+
+          <h2>Generated Export</h2>
+
+        </div>
+
+        <span
+          class="badge badge-success"
+          id="resultStatus"
+        >
+          Ready
+        </span>
+
+      </div>
+
+      <div class="grid-2">
+
+        <div class="info-card">
+
+          <span class="muted">
+            Export ID
+          </span>
+
+          <strong id="resultExportId">
+            —
+          </strong>
+
+        </div>
+
+        <div class="info-card">
+
+          <span class="muted">
+            Format
+          </span>
+
+          <strong id="resultFormat">
+            —
+          </strong>
+
+        </div>
+
+        <div class="info-card">
+
+          <span class="muted">
+            Created
+          </span>
+
+          <strong id="resultCreated">
+            —
+          </strong>
+
+        </div>
+
+        <div class="info-card">
+
+          <span class="muted">
+            Datasets
+          </span>
+
+          <strong id="resultDatasets">
+            —
+          </strong>
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="downloadButton"
+          disabled
+        >
+          Download Export
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="copyExportIdButton"
+        >
+          Copy Export ID
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- MIGRATION -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            FUTURE TRANSFER
+          </span>
+
+          <h2>Sale & Platform Migration</h2>
+
+        </div>
+
+      </div>
+
+      <p class="muted">
+        JG should remain structured so the Owner can migrate or transfer the
+        platform in the future without losing the source code, database
+        structure, content or operational documentation.
+      </p>
+
+      <div class="grid-2">
+
+        <div class="info-card">
+
+          <strong>Source code</strong>
+
+          <p>
+            Keep the complete frontend and backend source under controlled
+            version management.
+          </p>
+
+        </div>
+
+        <div class="info-card">
+
+          <strong>Database structure</strong>
+
+          <p>
+            Maintain documented schemas and migration procedures.
+          </p>
+
+        </div>
+
+        <div class="info-card">
+
+          <strong>Deployment configuration</strong>
+
+          <p>
+            Keep deployment instructions separate from private secrets.
+          </p>
+
+        </div>
+
+        <div class="info-card">
+
+          <strong>Documentation</strong>
+
+          <p>
+            Maintain setup, operations, security and ownership-transfer
+            documentation.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- DANGER ZONE -->
+    <section class="card danger-zone">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            DANGER ZONE
+          </span>
+
+          <h2>Data Destruction</h2>
+
+        </div>
+
+        <span class="badge badge-danger">
+          Owner only
+        </span>
+
+      </div>
+
+      <p class="muted">
+        Exporting data does not delete anything. Permanent deletion belongs
+        to the separate Owner-controlled deletion lifecycle.
+      </p>
+
+      <div class="alert alert-warning">
+
+        <strong>Important:</strong>
+        Never use an export action as a substitute for deleting or restoring
+        platform data. Deletion must go through the protected content and
+        database lifecycle.
+
+      </div>
+
+      <div class="form-actions">
+
+        <a
+          href="content.html"
+          class="btn btn-outline"
+        >
+          Content Lifecycle
+        </a>
+
+        <a
+          href="audit.html"
+          class="btn btn-outline"
+        >
+          Audit Logs
+        </a>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ADMIN BOTTOM NAV -->
+  <nav class="bottom-nav" aria-label="Admin navigation">
+
+    <a
+      href="dashboard.html"
+      class="bottom-nav-item"
+      data-nav="dashboard"
+    >
+      <span>⌂</span>
+      <small>Dashboard</small>
+    </a>
+
+    <a
+      href="users.html"
+      class="bottom-nav-item"
+      data-nav="users"
+    >
+      <span>♙</span>
+      <small>Users</small>
+    </a>
+
+    <a
+      href="content.html"
+      class="bottom-nav-item"
+      data-nav="content"
+    >
+      <span>▣</span>
+      <small>Content</small>
+    </a>
+
+    <a
+      href="premium-ads.html"
+      class="bottom-nav-item"
+      data-nav="premium"
+    >
+      <span>★</span>
+      <small>Premium</small>
+    </a>
+
+    <a
+      href="settings.html"
+      class="bottom-nav-item"
+      data-nav="settings"
+    >
+      <span>⚙</span>
+      <small>Settings</small>
+    </a>
+
+  </nav>
+
+  <!-- TOAST -->
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const $ = (id) =>
+        document.getElementById(id);
+
+      const checkboxes = () =>
+        Array.from(
+          document.querySelectorAll(
+            ".dataset-checkbox"
+          )
+        );
+
+      function toast(
+        message,
+        type = "info"
+      ) {
+
+        if (
+          window.JG_UI &&
+          typeof JG_UI.toast ===
+            "function"
+        ) {
+          JG_UI.toast(
+            message,
+            type
+          );
+          return;
+        }
+
+        if (
+          window.JG_APP &&
+          typeof JG_APP.toast ===
+            "function"
+        ) {
+          JG_APP.toast(
+            message,
+            type
+          );
+          return;
+        }
+
+        alert(message);
+      }
+
+      function selectedDatasets() {
+
+        return checkboxes()
+          .filter(
+            (checkbox) =>
+              checkbox.checked
+          )
+          .map(
+            (checkbox) =>
+              checkbox.value
+          );
+      }
+
+      function updateSelectionSummary() {
+
+        const selected =
+          selectedDatasets();
+
+        $("selectionSummary")
+          .textContent =
+          `${selected.length} dataset${
+            selected.length === 1
+              ? ""
+              : "s"
+          } selected`;
+      }
+
+      function selectAll() {
+
+        checkboxes()
+          .forEach(
+            (checkbox) => {
+              checkbox.checked = true;
+            }
+          );
+
+        updateSelectionSummary();
+
+        toast(
+          "All datasets selected.",
+          "info"
+        );
+      }
+
+      function clearAll() {
+
+        checkboxes()
+          .forEach(
+            (checkbox) => {
+              checkbox.checked = false;
+            }
+          );
+
+        updateSelectionSummary();
+
+        toast(
+          "All datasets cleared.",
+          "info"
+        );
+      }
+
+      function showStatus(
+        message,
+        type = "info"
+      ) {
+
+        const box =
+          $("exportStatus");
+
+        box.className =
+          `alert alert-${type}`;
+
+        box.textContent =
+          message;
+      }
+
+      function hideStatus() {
+
+        $("exportStatus")
+          .classList.add(
+            "hidden"
+          );
+      }
+
+      function previewSelection() {
+
+        const selected =
+          selectedDatasets();
+
+        if (
+          selected.length === 0
+        ) {
+
+          showStatus(
+            "Select at least one dataset before creating an export.",
+            "warning"
+          );
+
+          return;
+        }
+
+        showStatus(
+          `Selected datasets: ${selected.join(", ")}.`,
+          "info"
+        );
+
+        toast(
+          `${selected.length} dataset${
+            selected.length === 1
+              ? ""
+              : "s"
+          } selected.`,
+          "success"
+        );
+      }
+
+      function setLoading(
+        loading
+      ) {
+
+        const button =
+          $("generateExportButton");
+
+        if (loading) {
+
+          button.disabled = true;
+
+          button.dataset.originalText =
+            button.textContent;
+
+          button.textContent =
+            "Generating...";
+
+        } else {
+
+          button.disabled = false;
+
+          button.textContent =
+            button.dataset.originalText ||
+            "Generate Export";
+        }
+      }
+
+      function normalizeExportResponse(
+        response
+      ) {
+
+        if (!response) {
+          return null;
+        }
+
+        if (
+          response.export
+        ) {
+          return response.export;
+        }
+
+        if (
+          response.data &&
+          typeof response.data ===
+            "object"
+        ) {
+          return response.data;
+        }
+
+        return response;
+      }
+
+      async function generateExport() {
+
+        const selected =
+          selectedDatasets();
+
+        if (
+          selected.length === 0
+        ) {
+
+          showStatus(
+            "Select at least one dataset.",
+            "warning"
+          );
+
+          return;
+        }
+
+        const format =
+          $("exportFormat").value;
+
+        const scope =
+          $("exportScope").value;
+
+        if (
+          scope === "all"
+        ) {
+
+          const confirmed =
+            confirm(
+              "Complete exports may contain sensitive platform data. Continue?"
+            );
+
+          if (!confirmed) {
+            return;
+          }
+        }
+
+        setLoading(true);
+
+        hideStatus();
+
+        try {
+
+          if (
+            !window.JG_API ||
+            typeof JG_API.adminExport !==
+              "function"
+          ) {
+            throw new Error(
+              "Export API is not connected."
+            );
+          }
+
+          const response =
+            await JG_API.adminExport({
+              datasets: selected,
+              format,
+              scope
+            });
+
+          const result =
+            normalizeExportResponse(
+              response
+            );
+
+          if (!result) {
+            throw new Error(
+              "The export service returned no result."
+            );
+          }
+
+          const exportId =
+            result.id ||
+            result.exportId ||
+            result.export_id ||
+            "—";
+
+          const createdAt =
+            result.createdAt ||
+            result.created_at ||
+            new Date()
+              .toISOString();
+
+          const resultDatasets =
+            result.datasets ||
+            selected;
+
+          $("resultExportId")
+            .textContent =
+            exportId;
+
+          $("resultFormat")
+            .textContent =
+            String(format)
+              .toUpperCase();
+
+          $("resultCreated")
+            .textContent =
+            formatDate(
+              createdAt
+            );
+
+          $("resultDatasets")
+            .textContent =
+            Array.isArray(
+              resultDatasets
+            )
+              ? resultDatasets.length
+              : resultDatasets;
+
+          $("resultCard")
+            .classList.remove(
+              "hidden"
+            );
+
+          $("lastExport")
+            .textContent =
+            formatDate(
+              createdAt
+            );
+
+          const downloadUrl =
+            result.downloadUrl ||
+            result.download_url ||
+            result.url;
+
+          const downloadButton =
+            $("downloadButton");
+
+          if (downloadUrl) {
+
+            downloadButton.disabled =
+              false;
+
+            downloadButton.onclick =
+              () => {
+                window.location.href =
+                  downloadUrl;
+              };
+
+          } else {
+
+            downloadButton.disabled =
+              true;
+
+          }
+
+          $("serviceStatus")
+            .textContent =
+            "Connected";
+
+          $("serviceStatusText")
+            .textContent =
+            "Export generated successfully.";
+
+          showStatus(
+            "Export generated successfully.",
+            "success"
+          );
+
+          toast(
+            "JG export created.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "Export generation failed:",
+            error
+          );
+
+          $("serviceStatus")
+            .textContent =
+            "Backend Required";
+
+          $("serviceStatusText")
+            .textContent =
+            "Live export service is not connected.";
+
+          showStatus(
+            "The export backend is not connected yet. The frontend is ready for the secure Owner export API.",
+            "warning"
+          );
+
+          toast(
+            "Export backend is not connected yet.",
+            "warning"
+          );
+
+        } finally {
+
+          setLoading(false);
+        }
+      }
+
+      function formatDate(
+        value
+      ) {
+
+        if (!value) {
+          return "—";
+        }
+
+        const date =
+          new Date(value);
+
+        if (
+          Number.isNaN(
+            date.getTime()
+          )
+        ) {
+          return String(value);
+        }
+
+        return date.toLocaleString(
+          undefined,
+          {
+            dateStyle: "medium",
+            timeStyle: "short"
+          }
+        );
+      }
+
+      function copyExportId() {
+
+        const id =
+          $("resultExportId")
+            .textContent
+            .trim();
+
+        if (
+          !id ||
+          id === "—"
+        ) {
+          toast(
+            "There is no export ID to copy.",
+            "warning"
+          );
+          return;
+        }
+
+        if (
+          navigator.clipboard
+        ) {
+
+          navigator.clipboard
+            .writeText(id)
+            .then(() => {
+
+              toast(
+                "Export ID copied.",
+                "success"
+              );
+
+            })
+            .catch(() => {
+
+              toast(
+                "Could not copy export ID.",
+                "error"
+              );
+
+            });
+
+          return;
+        }
+
+        toast(
+          "Clipboard is not available.",
+          "warning"
+        );
+      }
+
+      async function checkService() {
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof JG_API.health ===
+              "function"
+          ) {
+
+            const response =
+              await JG_API.health();
+
+            if (response) {
+
+              $("serviceStatus")
+                .textContent =
+                "Backend Online";
+
+              $("serviceStatusText")
+                .textContent =
+                "JG backend responded.";
+
+              return;
+            }
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Export service check failed:",
+            error
+          );
+        }
+
+        $("serviceStatus")
+          .textContent =
+          "Not Connected";
+
+        $("serviceStatusText")
+          .textContent =
+          "Connect the secure backend export service.";
+
+      }
+
+      function bindEvents() {
+
+        checkboxes()
+          .forEach(
+            (checkbox) => {
+
+              checkbox.addEventListener(
+                "change",
+                updateSelectionSummary
+              );
+
+            }
+          );
+
+        $("selectAllButton")
+          .addEventListener(
+            "click",
+            selectAll
+          );
+
+        $("clearAllButton")
+          .addEventListener(
+            "click",
+            clearAll
+          );
+
+        $("previewButton")
+          .addEventListener(
+            "click",
+            previewSelection
+          );
+
+        $("generateExportButton")
+          .addEventListener(
+            "click",
+            generateExport
+          );
+
+        $("copyExportIdButton")
+          .addEventListener(
+            "click",
+            copyExportId
+          );
+
+        $("refreshButton")
+          .addEventListener(
+            "click",
+            checkService
+          );
+      }
+
+      function initialize() {
+
+        updateSelectionSummary();
+
+        bindEvents();
+
+        checkService();
+
+        if (
+          window.JG_AUTH &&
+          typeof JG_AUTH.requireOwner ===
+            "function"
+        ) {
+
+          try {
+
+            JG_AUTH.requireOwner();
+
+          } catch (error) {
+
+            console.warn(
+              "Owner authentication handled by auth module.",
+              error
+            );
+
+          }
+
+        } else if (
+          window.JG_AUTH &&
+          typeof JG_AUTH.requireAdmin ===
+            "function"
+        ) {
+
+          try {
+
+            JG_AUTH.requireAdmin();
+
+          } catch (error) {
+
+            console.warn(
+              "Admin authentication handled by auth module.",
+              error
+            );
+
+          }
+
+        }
+
+        setTimeout(() => {
+
+          const loader =
+            $("pageLoader");
+
+          if (loader) {
+
+            loader.classList.add(
+              "hidden"
+            );
+
+          }
+
+        }, 300);
+      }
+
+      if (
+        document.readyState ===
+        "loading"
+      ) {
+
+        document.addEventListener(
+          "DOMContentLoaded",
+          initialize
+        );
+
+      } else {
+
+        initialize();
+
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
