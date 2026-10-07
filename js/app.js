@@ -1,131 +1,151 @@
 /* =========================================================
-   JG — FIND SKILLS. FIND WORK.
-   GLOBAL APPLICATION JAVASCRIPT
-   Frontend Foundation v2.1
+   JG — Global Application Controller
+   File: frontend/js/app.js
    ========================================================= */
 
-(() => {
+(function () {
   "use strict";
 
-  /* =======================================================
-     CONFIGURATION
-     ======================================================= */
+  /* ---------------------------------------------------------
+     Shortcuts
+  --------------------------------------------------------- */
 
-  const JG_CONFIG = {
-    version: "2.1.0",
-    themeKey: "jg-theme",
-    mobileBreakpoint: 1024
+  var CONFIG = window.JG_CONFIG || {};
+  var STORAGE = CONFIG.STORAGE_KEYS || {};
+
+  var $ = function (selector, parent) {
+    return (parent || document).querySelector(selector);
   };
 
-  /* =======================================================
-     DOM HELPERS
-     ======================================================= */
-
-  const $ = (selector, scope = document) => {
-    try {
-      return scope.querySelector(selector);
-    } catch {
-      return null;
-    }
+  var $$ = function (selector, parent) {
+    return Array.prototype.slice.call(
+      (parent || document).querySelectorAll(selector)
+    );
   };
 
-  const $$ = (selector, scope = document) => {
-    try {
-      return Array.from(scope.querySelectorAll(selector));
-    } catch {
-      return [];
-    }
-  };
+  /* ---------------------------------------------------------
+     Safe Storage
+  --------------------------------------------------------- */
 
-  /* =======================================================
-     SAFE STORAGE
-     ======================================================= */
-
-  const storage = {
-    get(key) {
+  var storage = {
+    get: function (key, fallback) {
       try {
-        return window.localStorage.getItem(key);
-      } catch {
-        return null;
+        var value = localStorage.getItem(key);
+
+        if (value === null) {
+          return fallback;
+        }
+
+        try {
+          return JSON.parse(value);
+        } catch (error) {
+          return value;
+        }
+      } catch (error) {
+        return fallback;
       }
     },
 
-    set(key, value) {
+    set: function (key, value) {
       try {
-        window.localStorage.setItem(key, value);
+        localStorage.setItem(
+          key,
+          typeof value === "string"
+            ? value
+            : JSON.stringify(value)
+        );
+
         return true;
-      } catch {
+      } catch (error) {
         return false;
       }
     },
 
-    remove(key) {
+    remove: function (key) {
       try {
-        window.localStorage.removeItem(key);
-        return true;
-      } catch {
-        return false;
+        localStorage.removeItem(key);
+      } catch (error) {
+        // Ignore storage errors.
       }
     }
   };
 
-  /* =======================================================
-     HTML ESCAPING
-     ======================================================= */
+  /* ---------------------------------------------------------
+     JG Application State
+  --------------------------------------------------------- */
 
-  function escapeHTML(value) {
-    return String(value ?? "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
+  var state = {
+    theme: storage.get(
+      STORAGE.THEME || "jg_theme",
+      "dark"
+    ),
 
-  /* =======================================================
-     THEME SYSTEM
-     ======================================================= */
+    language: storage.get(
+      STORAGE.LANGUAGE || "jg_language",
+      "en"
+    ),
 
-  function getSystemTheme() {
-    if (
-      window.matchMedia &&
-      window.matchMedia("(prefers-color-scheme: dark)").matches
-    ) {
-      return "dark";
-    }
+    user: storage.get(
+      STORAGE.USER || "jg_user",
+      null
+    ),
 
-    return "light";
-  }
+    authenticated: Boolean(
+      storage.get(
+        STORAGE.AUTH || "jg_auth",
+        false
+      )
+    )
+  };
 
-  function getSavedTheme() {
-    const saved = storage.get(JG_CONFIG.themeKey);
+  /* ---------------------------------------------------------
+     Theme
+  --------------------------------------------------------- */
 
-    if (saved === "dark" || saved === "light") {
-      return saved;
-    }
+  function applyTheme(theme) {
+    theme = theme === "light" ? "light" : "dark";
 
-    return getSystemTheme();
-  }
-
-  function applyTheme(theme, save = true) {
-    const safeTheme = theme === "dark" ? "dark" : "light";
+    state.theme = theme;
 
     document.documentElement.setAttribute(
       "data-theme",
-      safeTheme
+      theme
     );
 
-    if (save) {
-      storage.set(JG_CONFIG.themeKey, safeTheme);
-    }
+    document.body.classList.toggle(
+      "light-mode",
+      theme === "light"
+    );
 
-    updateThemeControls(safeTheme);
+    document.body.classList.toggle(
+      "dark-mode",
+      theme === "dark"
+    );
+
+    storage.set(
+      STORAGE.THEME || "jg_theme",
+      theme
+    );
+
+    updateThemeButtons();
   }
 
-  function updateThemeControls(theme) {
-    const isDark = theme === "dark";
+  function toggleTheme() {
+    applyTheme(
+      state.theme === "dark"
+        ? "light"
+        : "dark"
+    );
+  }
 
-    $$("[data-theme-toggle]").forEach(button => {
+  function updateThemeButtons() {
+    var buttons = $$(
+      "[data-theme-toggle], #themeButton, .theme-toggle"
+    );
+
+    buttons.forEach(function (button) {
+      var isDark = state.theme === "dark";
+
       button.setAttribute(
         "aria-label",
         isDark
@@ -140,361 +160,548 @@
           : "Switch to dark mode"
       );
 
-      const icon = $(
-        "[data-theme-icon]",
-        button
+      var icon = button.querySelector(
+        "[data-theme-icon]"
       );
 
       if (icon) {
-        icon.textContent = isDark ? "☀" : "☾";
+        icon.textContent = isDark
+          ? "☀️"
+          : "🌙";
       }
     });
   }
 
-  function toggleTheme() {
-    const current =
-      document.documentElement.getAttribute("data-theme") ||
-      getSavedTheme();
+  /* ---------------------------------------------------------
+     Mobile Navigation
+  --------------------------------------------------------- */
 
-    applyTheme(
-      current === "dark" ? "light" : "dark",
-      true
-    );
-  }
-
-  function initTheme() {
-    applyTheme(
-      getSavedTheme(),
-      false
+  function setupMobileNavigation() {
+    var menuButtons = $$(
+      "[data-menu-toggle], #menuButton, .menu-toggle"
     );
 
-    if (!window.matchMedia) {
-      return;
-    }
-
-    const media = window.matchMedia(
-      "(prefers-color-scheme: dark)"
+    var nav = $(
+      "[data-mobile-menu], .mobile-menu, .main-nav"
     );
 
-    const handleSystemThemeChange = event => {
-      const saved = storage.get(
-        JG_CONFIG.themeKey
-      );
-
-      if (!saved) {
-        applyTheme(
-          event.matches ? "dark" : "light",
-          false
-        );
-      }
-    };
-
-    if (
-      typeof media.addEventListener ===
-      "function"
-    ) {
-      media.addEventListener(
-        "change",
-        handleSystemThemeChange
-      );
-    } else if (
-      typeof media.addListener ===
-      "function"
-    ) {
-      media.addListener(
-        handleSystemThemeChange
-      );
-    }
-  }
-
-  function initThemeButtons() {
-    $$("[data-theme-toggle]").forEach(button => {
+    menuButtons.forEach(function (button) {
       button.addEventListener(
         "click",
-        event => {
-          event.preventDefault();
-          toggleTheme();
+        function () {
+          if (!nav) {
+            return;
+          }
+
+          var opened =
+            nav.classList.toggle("open");
+
+          button.setAttribute(
+            "aria-expanded",
+            opened ? "true" : "false"
+          );
         }
       );
     });
+
+    $$("nav a, .main-nav a").forEach(
+      function (link) {
+        link.addEventListener(
+          "click",
+          function () {
+            if (nav) {
+              nav.classList.remove("open");
+            }
+
+            menuButtons.forEach(
+              function (button) {
+                button.setAttribute(
+                  "aria-expanded",
+                  "false"
+                );
+              }
+            );
+          }
+        );
+      }
+    );
   }
 
-  /* =======================================================
-     MOBILE NAVIGATION
-     ======================================================= */
+  /* ---------------------------------------------------------
+     Bottom Navigation
+  --------------------------------------------------------- */
 
-  function initMobileNavigation() {
-    const menuButton =
-      $("[data-mobile-menu]") ||
-      $(".mobile-menu-btn") ||
-      $(".menu-toggle");
+  function setupBottomNavigation() {
+    $$("[data-nav]").forEach(
+      function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            var target =
+              button.getAttribute("data-nav");
 
-    const nav =
-      $("[data-main-nav]") ||
-      $(".nav") ||
-      $(".main-nav");
+            if (!target) {
+              return;
+            }
 
-    if (!menuButton || !nav) {
+            navigate(target);
+          }
+        );
+      }
+    );
+  }
+
+  /* ---------------------------------------------------------
+     Navigation
+  --------------------------------------------------------- */
+
+  function navigate(target) {
+    if (!target) {
       return;
     }
 
-    menuButton.setAttribute(
-      "aria-expanded",
+    var routes =
+      CONFIG.ROUTES || {};
+
+    var routeMap = {
+      home: routes.HOME || "index.html",
+      learn: routes.LEARN || "learn.html",
+      skills: routes.SKILLS || "skills.html",
+      course: routes.COURSE || "course.html",
+      lesson: routes.LESSON || "lesson.html",
+      exam: routes.EXAM || "exam.html",
+      certificate:
+        routes.CERTIFICATE || "certificate.html",
+      verify:
+        routes.VERIFY || "verify.html",
+      work: routes.WORK || "work.html",
+      ai: routes.AI || "ai.html",
+      premium:
+        routes.PREMIUM || "premium.html",
+      account:
+        routes.ACCOUNT || "account.html",
+      login:
+        routes.LOGIN || "login.html",
+      signup:
+        routes.SIGNUP || "signup.html"
+    };
+
+    var destination =
+      routeMap[target] || target;
+
+    window.location.href = destination;
+  }
+
+  /* ---------------------------------------------------------
+     Data Navigation
+  --------------------------------------------------------- */
+
+  function setupDataLinks() {
+    $$("[data-route]").forEach(
+      function (element) {
+        element.addEventListener(
+          "click",
+          function (event) {
+            var route =
+              element.getAttribute(
+                "data-route"
+              );
+
+            if (!route) {
+              return;
+            }
+
+            event.preventDefault();
+
+            navigate(route);
+          }
+        );
+      }
+    );
+  }
+
+  /* ---------------------------------------------------------
+     Modal System
+  --------------------------------------------------------- */
+
+  function openModal(modal) {
+    if (!modal) {
+      return;
+    }
+
+    modal.classList.add("active");
+    modal.classList.add("open");
+
+    modal.setAttribute(
+      "aria-hidden",
       "false"
     );
 
-    menuButton.setAttribute(
-      "aria-label",
-      "Open navigation menu"
-    );
-
-    const closeMenu = () => {
-      nav.classList.remove("open");
-      nav.classList.remove("active");
-
-      menuButton.setAttribute(
-        "aria-expanded",
-        "false"
-      );
-
-      menuButton.setAttribute(
-        "aria-label",
-        "Open navigation menu"
-      );
-    };
-
-    const openMenu = () => {
-      nav.classList.add("open");
-
-      menuButton.setAttribute(
-        "aria-expanded",
-        "true"
-      );
-
-      menuButton.setAttribute(
-        "aria-label",
-        "Close navigation menu"
-      );
-    };
-
-    menuButton.addEventListener(
-      "click",
-      event => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const isOpen =
-          nav.classList.contains("open");
-
-        if (isOpen) {
-          closeMenu();
-        } else {
-          openMenu();
-        }
-      }
-    );
-
-    $$("a", nav).forEach(link => {
-      link.addEventListener(
-        "click",
-        () => {
-          if (
-            window.innerWidth <=
-            JG_CONFIG.mobileBreakpoint
-          ) {
-            closeMenu();
-          }
-        }
-      );
-    });
-
-    document.addEventListener(
-      "click",
-      event => {
-        if (
-          window.innerWidth >
-          JG_CONFIG.mobileBreakpoint
-        ) {
-          return;
-        }
-
-        if (
-          !nav.contains(event.target) &&
-          !menuButton.contains(event.target)
-        ) {
-          closeMenu();
-        }
-      }
-    );
-
-    window.addEventListener(
-      "resize",
-      () => {
-        if (
-          window.innerWidth >
-          JG_CONFIG.mobileBreakpoint
-        ) {
-          closeMenu();
-        }
-      }
+    document.body.classList.add(
+      "modal-open"
     );
   }
 
-  /* =======================================================
-     ACTIVE NAVIGATION
-     ======================================================= */
-
-  function getCurrentPage() {
-    let path =
-      window.location.pathname
-        .split("/")
-        .pop()
-        .toLowerCase();
-
-    if (!path || path === "/") {
-      path = "index.html";
-    }
-
-    return path;
-  }
-
-  function normalizeHref(href) {
-    if (!href) {
-      return "";
-    }
-
-    try {
-      const url = new URL(
-        href,
-        window.location.href
-      );
-
-      return url.pathname
-        .split("/")
-        .pop()
-        .toLowerCase() || "index.html";
-    } catch {
-      return href
-        .split("#")[0]
-        .split("?")[0]
-        .split("/")
-        .pop()
-        .toLowerCase();
-    }
-  }
-
-  function initActiveNavigation() {
-    const currentPage =
-      getCurrentPage();
-
-    $$(
-      "[data-nav-link], .nav a, .main-nav a"
-    ).forEach(link => {
-      const href =
-        link.getAttribute("href") || "";
-
-      if (
-        !href ||
-        href === "#" ||
-        href.startsWith("mailto:") ||
-        href.startsWith("tel:") ||
-        href.startsWith("javascript:")
-      ) {
-        return;
-      }
-
-      if (
-        href.startsWith("http://") ||
-        href.startsWith("https://")
-      ) {
-        try {
-          const linkURL = new URL(href);
-
-          if (
-            linkURL.origin !==
-            window.location.origin
-          ) {
-            return;
-          }
-        } catch {
-          return;
-        }
-      }
-
-      const targetPage =
-        normalizeHref(href);
-
-      const isActive =
-        targetPage === currentPage;
-
-      link.classList.toggle(
-        "active",
-        isActive
-      );
-
-      if (isActive) {
-        link.setAttribute(
-          "aria-current",
-          "page"
-        );
-      } else {
-        link.removeAttribute(
-          "aria-current"
-        );
-      }
-    });
-  }
-
-  /* =======================================================
-     HEADER SCROLL STATE
-     ======================================================= */
-
-  function initHeaderScroll() {
-    const header =
-      $(".site-header") ||
-      $("header");
-
-    if (!header) {
+  function closeModal(modal) {
+    if (!modal) {
       return;
     }
 
-    const updateHeader = () => {
-      header.classList.toggle(
-        "scrolled",
-        window.scrollY > 12
-      );
-    };
+    modal.classList.remove("active");
+    modal.classList.remove("open");
 
-    updateHeader();
+    modal.setAttribute(
+      "aria-hidden",
+      "true"
+    );
 
-    window.addEventListener(
-      "scroll",
-      updateHeader,
-      { passive: true }
+    document.body.classList.remove(
+      "modal-open"
     );
   }
 
-  /* =======================================================
-     SMOOTH ANCHORS
-     ======================================================= */
+  function setupModals() {
+    $$("[data-modal-open]").forEach(
+      function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            var id =
+              button.getAttribute(
+                "data-modal-open"
+              );
 
-  function initSmoothAnchors() {
-    $$('a[href^="#"]').forEach(link => {
+            var modal = document.getElementById(
+              id
+            );
+
+            openModal(modal);
+          }
+        );
+      }
+    );
+
+    $$("[data-modal-close]").forEach(
+      function (button) {
+        button.addEventListener(
+          "click",
+          function () {
+            var modal =
+              button.closest(".modal") ||
+              button.closest(
+                "[role='dialog']"
+              );
+
+            closeModal(modal);
+          }
+        );
+      }
+    );
+
+    $$(".modal").forEach(
+      function (modal) {
+        modal.addEventListener(
+          "click",
+          function (event) {
+            if (
+              event.target === modal &&
+              modal.hasAttribute(
+                "data-close-outside"
+              )
+            ) {
+              closeModal(modal);
+            }
+          }
+        );
+      }
+    );
+
+    document.addEventListener(
+      "keydown",
+      function (event) {
+        if (event.key !== "Escape") {
+          return;
+        }
+
+        $$(".modal.active, .modal.open")
+          .forEach(function (modal) {
+            closeModal(modal);
+          });
+      }
+    );
+  }
+
+  /* ---------------------------------------------------------
+     Button Loading State
+  --------------------------------------------------------- */
+
+  function setButtonLoading(
+    button,
+    loading,
+    loadingText
+  ) {
+    if (!button) {
+      return;
+    }
+
+    if (loading) {
+      if (
+        !button.dataset.originalText
+      ) {
+        button.dataset.originalText =
+          button.innerHTML;
+      }
+
+      button.disabled = true;
+
+      button.innerHTML =
+        loadingText ||
+        "Please wait...";
+    } else {
+      button.disabled = false;
+
+      if (
+        button.dataset.originalText
+      ) {
+        button.innerHTML =
+          button.dataset.originalText;
+      }
+    }
+  }
+
+  /* ---------------------------------------------------------
+     Toast Notifications
+  --------------------------------------------------------- */
+
+  function toast(
+    message,
+    type,
+    duration
+  ) {
+    type = type || "info";
+    duration =
+      duration === undefined
+        ? 3500
+        : duration;
+
+    var container = $(
+      "#jgToastContainer"
+    );
+
+    if (!container) {
+      container =
+        document.createElement("div");
+
+      container.id =
+        "jgToastContainer";
+
+      container.className =
+        "toast-container";
+
+      document.body.appendChild(
+        container
+      );
+    }
+
+    var item =
+      document.createElement("div");
+
+    item.className =
+      "toast toast-" + type;
+
+    item.setAttribute(
+      "role",
+      "status"
+    );
+
+    item.textContent = message;
+
+    container.appendChild(item);
+
+    window.setTimeout(
+      function () {
+        item.classList.add(
+          "toast-hide"
+        );
+
+        window.setTimeout(
+          function () {
+            if (item.parentNode) {
+              item.parentNode.removeChild(
+                item
+              );
+            }
+          },
+          300
+        );
+      },
+      duration
+    );
+  }
+
+  /* ---------------------------------------------------------
+     Active Navigation
+  --------------------------------------------------------- */
+
+  function markActiveNavigation() {
+    var current =
+      window.location.pathname
+        .split("/")
+        .pop() || "index.html";
+
+    $$(
+      "nav a, .bottom-nav a, [data-page]"
+    ).forEach(function (element) {
+      var href =
+        element.getAttribute("href");
+
+      var page =
+        element.getAttribute(
+          "data-page"
+        );
+
+      var matches =
+        href === current ||
+        page === current;
+
+      element.classList.toggle(
+        "active",
+        matches
+      );
+
+      if (matches) {
+        element.setAttribute(
+          "aria-current",
+          "page"
+        );
+      }
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Authentication UI
+  --------------------------------------------------------- */
+
+  function updateAuthenticationUI() {
+    var loggedIn =
+      state.authenticated;
+
+    $$("[data-auth-only]").forEach(
+      function (element) {
+        element.hidden = !loggedIn;
+      }
+    );
+
+    $$("[data-guest-only]").forEach(
+      function (element) {
+        element.hidden = loggedIn;
+      }
+    );
+
+    $$("[data-user-name]").forEach(
+      function (element) {
+        var name =
+          state.user &&
+          (
+            state.user.firstName ||
+            state.user.name ||
+            state.user.email
+          );
+
+        element.textContent =
+          name || "JG User";
+      }
+    );
+  }
+
+  /* ---------------------------------------------------------
+     Logout
+  --------------------------------------------------------- */
+
+  function logout() {
+    state.authenticated = false;
+    state.user = null;
+
+    storage.remove(
+      STORAGE.AUTH || "jg_auth"
+    );
+
+    storage.remove(
+      STORAGE.USER || "jg_user"
+    );
+
+    storage.remove(
+      STORAGE.SESSION || "jg_session"
+    );
+
+    updateAuthenticationUI();
+
+    toast(
+      "You have been signed out.",
+      "success"
+    );
+
+    window.setTimeout(
+      function () {
+        navigate("login");
+      },
+      500
+    );
+  }
+
+  function setupLogout() {
+    $$(
+      "[data-logout], #logoutButton"
+    ).forEach(function (button) {
+      button.addEventListener(
+        "click",
+        function (event) {
+          event.preventDefault();
+          logout();
+        }
+      );
+    });
+  }
+
+  /* ---------------------------------------------------------
+     External / Work Links
+  --------------------------------------------------------- */
+
+  function setupExternalLinks() {
+    $$(
+      'a[target="_blank"]'
+    ).forEach(function (link) {
+      link.setAttribute(
+        "rel",
+        "noopener noreferrer"
+      );
+    });
+  }
+
+  /* ---------------------------------------------------------
+     Smooth Scroll
+  --------------------------------------------------------- */
+
+  function setupSmoothScroll() {
+    $$(
+      'a[href^="#"]'
+    ).forEach(function (link) {
       link.addEventListener(
         "click",
-        event => {
-          const href =
+        function (event) {
+          var id =
             link.getAttribute("href");
 
           if (
-            !href ||
-            href === "#"
+            !id ||
+            id === "#" ||
+            id.length < 2
           ) {
             return;
           }
 
-          const target =
-            document.querySelector(href);
+          var target =
+            document.querySelector(id);
 
           if (!target) {
             return;
@@ -506,416 +713,47 @@
             behavior: "smooth",
             block: "start"
           });
-
-          try {
-            history.pushState(
-              null,
-              "",
-              href
-            );
-          } catch {
-            // Ignore history errors.
-          }
         }
       );
     });
   }
 
-  /* =======================================================
-     PASSWORD VISIBILITY
-     ======================================================= */
+  /* ---------------------------------------------------------
+     Theme Button Events
+  --------------------------------------------------------- */
 
-  function initPasswordToggles() {
-    $$("[data-password-toggle]").forEach(button => {
+  function setupTheme() {
+    $$(
+      "[data-theme-toggle], #themeButton, .theme-toggle"
+    ).forEach(function (button) {
       button.addEventListener(
         "click",
-        event => {
+        function (event) {
           event.preventDefault();
-
-          const targetSelector =
-            button.getAttribute(
-              "data-password-toggle"
-            );
-
-          let input = null;
-
-          if (targetSelector) {
-            input = $(
-              targetSelector
-            );
-          }
-
-          if (!input) {
-            const wrapper =
-              button.closest(
-                ".password-field, .input-group, .form-group"
-              );
-
-            if (wrapper) {
-              input = $(
-                'input[type="password"], input[type="text"]',
-                wrapper
-              );
-            }
-          }
-
-          if (!input) {
-            return;
-          }
-
-          const isPassword =
-            input.type === "password";
-
-          input.type =
-            isPassword
-              ? "text"
-              : "password";
-
-          button.setAttribute(
-            "aria-label",
-            isPassword
-              ? "Hide password"
-              : "Show password"
-          );
+          toggleTheme();
         }
       );
     });
+
+    applyTheme(state.theme);
   }
 
-  /* =======================================================
-     FORM SAFETY
-     ======================================================= */
+  /* ---------------------------------------------------------
+     Page Reveal
+  --------------------------------------------------------- */
 
-  function initFormProtection() {
-    $$("form").forEach(form => {
-      form.addEventListener(
-        "submit",
-        event => {
-          if (
-            form.dataset.processing ===
-            "true"
-          ) {
-            event.preventDefault();
-            return;
-          }
-
-          form.dataset.processing = "true";
-
-          window.setTimeout(() => {
-            form.dataset.processing = "false";
-          }, 2500);
-        }
-      );
-    });
-  }
-
-  /* =======================================================
-     CURRENT YEAR
-     ======================================================= */
-
-  function initCurrentYear() {
-    const year =
-      new Date().getFullYear();
-
-    $$("[data-current-year]").forEach(
-      element => {
-        element.textContent = year;
-      }
+  function setupPageReveal() {
+    var elements = $$(
+      ".reveal, .fade-in, [data-reveal]"
     );
-
-    const currentYear =
-      $("#currentYear");
-
-    if (currentYear) {
-      currentYear.textContent = year;
-    }
-  }
-
-  /* =======================================================
-     IMAGE OPTIMIZATION
-     ======================================================= */
-
-  function initImages() {
-    $$("img").forEach(image => {
-      if (
-        !image.hasAttribute("loading")
-      ) {
-        image.setAttribute(
-          "loading",
-          "lazy"
-        );
-      }
-
-      if (
-        !image.hasAttribute("decoding")
-      ) {
-        image.setAttribute(
-          "decoding",
-          "async"
-        );
-      }
-
-      image.addEventListener(
-        "error",
-        () => {
-          image.classList.add(
-            "image-error"
-          );
-        },
-        { once: true }
-      );
-    });
-  }
-
-  /* =======================================================
-     ONLINE / OFFLINE STATUS
-     ======================================================= */
-
-  function updateConnectionStatus() {
-    document.documentElement.classList.toggle(
-      "is-offline",
-      !navigator.onLine
-    );
-  }
-
-  function initConnectionStatus() {
-    updateConnectionStatus();
-
-    window.addEventListener(
-      "online",
-      updateConnectionStatus
-    );
-
-    window.addEventListener(
-      "offline",
-      updateConnectionStatus
-    );
-  }
-
-  /* =======================================================
-     TOAST SYSTEM
-     ======================================================= */
-
-  function getToastContainer() {
-    let container =
-      $("#jgToastContainer");
-
-    if (container) {
-      return container;
-    }
-
-    container =
-      document.createElement("div");
-
-    container.id =
-      "jgToastContainer";
-
-    container.className =
-      "toast-container";
-
-    container.setAttribute(
-      "aria-live",
-      "polite"
-    );
-
-    container.setAttribute(
-      "aria-atomic",
-      "true"
-    );
-
-    document.body.appendChild(
-      container
-    );
-
-    return container;
-  }
-
-  function showToast(
-    message,
-    type = "info",
-    duration = 3500
-  ) {
-    if (!message) {
-      return;
-    }
-
-    const container =
-      getToastContainer();
-
-    const toast =
-      document.createElement("div");
-
-    toast.className =
-      `toast toast-${escapeHTML(type)}`;
-
-    toast.setAttribute(
-      "role",
-      "status"
-    );
-
-    const text =
-      document.createElement("span");
-
-    text.textContent =
-      message;
-
-    const close =
-      document.createElement("button");
-
-    close.type = "button";
-    close.className =
-      "toast-close";
-    close.setAttribute(
-      "aria-label",
-      "Close notification"
-    );
-    close.textContent = "×";
-
-    toast.appendChild(text);
-    toast.appendChild(close);
-
-    container.appendChild(
-      toast
-    );
-
-    requestAnimationFrame(() => {
-      toast.classList.add(
-        "show"
-      );
-    });
-
-    const removeToast = () => {
-      toast.classList.remove(
-        "show"
-      );
-
-      window.setTimeout(() => {
-        toast.remove();
-      }, 250);
-    };
-
-    close.addEventListener(
-      "click",
-      removeToast
-    );
-
-    window.setTimeout(
-      removeToast,
-      duration
-    );
-  }
-
-  /* =======================================================
-     COPY TO CLIPBOARD
-     ======================================================= */
-
-  async function copyText(text) {
-    if (!text) {
-      return false;
-    }
-
-    try {
-      if (
-        navigator.clipboard &&
-        window.isSecureContext
-      ) {
-        await navigator.clipboard.writeText(
-          text
-        );
-
-        return true;
-      }
-    } catch {
-      // Continue to fallback.
-    }
-
-    try {
-      const textarea =
-        document.createElement("textarea");
-
-      textarea.value = text;
-      textarea.setAttribute(
-        "readonly",
-        ""
-      );
-
-      textarea.style.position =
-        "fixed";
-      textarea.style.opacity =
-        "0";
-
-      document.body.appendChild(
-        textarea
-      );
-
-      textarea.select();
-
-      const successful =
-        document.execCommand(
-          "copy"
-        );
-
-      textarea.remove();
-
-      return successful;
-    } catch {
-      return false;
-    }
-  }
-
-  function initCopyButtons() {
-    $$("[data-copy]").forEach(button => {
-      button.addEventListener(
-        "click",
-        async event => {
-          event.preventDefault();
-
-          const value =
-            button.getAttribute(
-              "data-copy"
-            );
-
-          if (!value) {
-            return;
-          }
-
-          const success =
-            await copyText(value);
-
-          showToast(
-            success
-              ? "Copied successfully."
-              : "Unable to copy.",
-            success
-              ? "success"
-              : "error"
-          );
-        }
-      );
-    });
-  }
-
-  /* =======================================================
-     REVEAL ANIMATIONS
-     ======================================================= */
-
-  function initRevealAnimations() {
-    const elements =
-      $$("[data-reveal]");
-
-    if (
-      !elements.length
-    ) {
-      return;
-    }
 
     if (
       !("IntersectionObserver" in window)
     ) {
       elements.forEach(
-        element => {
+        function (element) {
           element.classList.add(
-            "is-visible"
+            "visible"
           );
         }
       );
@@ -923,16 +761,16 @@
       return;
     }
 
-    const observer =
+    var observer =
       new IntersectionObserver(
-        entries => {
+        function (entries) {
           entries.forEach(
-            entry => {
+            function (entry) {
               if (
                 entry.isIntersecting
               ) {
                 entry.target.classList.add(
-                  "is-visible"
+                  "visible"
                 );
 
                 observer.unobserve(
@@ -943,540 +781,247 @@
           );
         },
         {
-          threshold: 0.08,
-          rootMargin:
-            "0px 0px -40px 0px"
+          threshold: 0.08
         }
       );
 
     elements.forEach(
-      element => {
-        observer.observe(
-          element
+      function (element) {
+        observer.observe(element);
+      }
+    );
+  }
+
+  /* ---------------------------------------------------------
+     Prevent Accidental Double Submit
+  --------------------------------------------------------- */
+
+  function setupForms() {
+    $$("form").forEach(
+      function (form) {
+        form.addEventListener(
+          "submit",
+          function () {
+            form.classList.add(
+              "is-submitting"
+            );
+          }
         );
       }
     );
   }
 
-  /* =======================================================
-     SCROLL TO TOP
-     ======================================================= */
+  /* ---------------------------------------------------------
+     PWA / Service Worker
+  --------------------------------------------------------- */
 
-  function initScrollTop() {
-    const button =
-      $("[data-scroll-top]");
-
-    if (!button) {
-      return;
-    }
-
-    const update = () => {
-      button.classList.toggle(
-        "show",
-        window.scrollY > 500
-      );
-    };
-
-    button.addEventListener(
-      "click",
-      event => {
-        event.preventDefault();
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth"
-        });
-      }
-    );
-
-    update();
-
-    window.addEventListener(
-      "scroll",
-      update,
-      { passive: true }
-    );
-  }
-
-  /* =======================================================
-     EXTERNAL LINKS
-     ======================================================= */
-
-  function initExternalLinks() {
-    $$("a[href]").forEach(link => {
-      const href =
-        link.getAttribute("href");
-
-      if (!href) {
-        return;
-      }
-
-      if (
-        href.startsWith("http://") ||
-        href.startsWith("https://")
-      ) {
-        try {
-          const url =
-            new URL(
-              href,
-              window.location.href
-            );
-
-          if (
-            url.origin !==
-            window.location.origin
-          ) {
-            link.setAttribute(
-              "target",
-              "_blank"
-            );
-
-            link.setAttribute(
-              "rel",
-              "noopener noreferrer"
-            );
-          }
-        } catch {
-          // Ignore malformed external URLs.
-        }
-      }
-    });
-  }
-
-  /* =======================================================
-     BUTTON LOADING STATE
-     ======================================================= */
-
-  function setButtonLoading(
-    button,
-    loading = true
-  ) {
-    if (!button) {
-      return;
-    }
-
-    if (loading) {
-      if (
-        !button.dataset.originalText
-      ) {
-        button.dataset.originalText =
-          button.textContent;
-      }
-
-      button.disabled = true;
-      button.classList.add(
-        "is-loading"
-      );
-
-      button.setAttribute(
-        "aria-busy",
-        "true"
-      );
-    } else {
-      button.disabled = false;
-      button.classList.remove(
-        "is-loading"
-      );
-
-      button.removeAttribute(
-        "aria-busy"
-      );
-
-      if (
-        button.dataset.originalText
-      ) {
-        button.textContent =
-          button.dataset.originalText;
-
-        delete button.dataset
-          .originalText;
-      }
-    }
-  }
-
-  /* =======================================================
-     UI STATE HELPER
-     ======================================================= */
-
-  function setUIState(
-    element,
-    state
-  ) {
-    if (!element) {
-      return;
-    }
-
-    element.classList.remove(
-      "is-loading",
-      "is-success",
-      "is-error",
-      "is-empty"
-    );
-
-    if (state) {
-      element.classList.add(
-        `is-${state}`
-      );
-    }
-  }
-
-  /* =======================================================
-     ACCESSIBILITY
-     ======================================================= */
-
-  function initAccessibility() {
-    $$("button").forEach(button => {
-      if (
-        !button.getAttribute(
-          "type"
-        )
-      ) {
-        button.setAttribute(
-          "type",
-          "button"
-        );
-      }
-    });
-
-    $$("a[href]").forEach(link => {
-      const text =
-        link.textContent.trim();
-
-      if (
-        !text &&
-        !link.getAttribute(
-          "aria-label"
-        )
-      ) {
-        link.setAttribute(
-          "aria-label",
-          "Open link"
-        );
-      }
-    });
-  }
-
-  /* =======================================================
-     GLOBAL KEYBOARD HELP
-     ======================================================= */
-
-  function initKeyboardSupport() {
-    document.addEventListener(
-      "keydown",
-      event => {
-        if (
-          event.key === "Escape"
-        ) {
-          const nav =
-            $("[data-main-nav]") ||
-            $(".nav") ||
-            $(".main-nav");
-
-          const menuButton =
-            $("[data-mobile-menu]") ||
-            $(".mobile-menu-btn") ||
-            $(".menu-toggle");
-
-          if (nav) {
-            nav.classList.remove(
-              "open"
-            );
-
-            nav.classList.remove(
-              "active"
-            );
-          }
-
-          if (menuButton) {
-            menuButton.setAttribute(
-              "aria-expanded",
-              "false"
-            );
-
-            menuButton.setAttribute(
-              "aria-label",
-              "Open navigation menu"
-            );
-          }
-        }
-      }
-    );
-  }
-
-  /* =======================================================
-     RUNTIME CSS
-     ======================================================= */
-
-  function injectRuntimeCSS() {
+  function registerServiceWorker() {
     if (
-      document.getElementById(
-        "jg-runtime-css"
-      )
+      !CONFIG.FEATURES ||
+      !CONFIG.FEATURES.PWA
     ) {
       return;
     }
 
-    const style =
-      document.createElement("style");
+    if (
+      !("serviceWorker" in navigator)
+    ) {
+      return;
+    }
 
-    style.id =
-      "jg-runtime-css";
+    /*
+      Service worker registration is enabled
+      only when the file exists.
 
-    style.textContent = `
-      .toast-container {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 99999;
-        display: grid;
-        gap: 10px;
-        width: min(380px, calc(100vw - 36px));
-        pointer-events: none;
+      GitHub Pages / HTTPS can use this.
+    */
+    window.addEventListener(
+      "load",
+      function () {
+        navigator.serviceWorker
+          .register("sw.js")
+          .then(function () {
+            console.info(
+              "JG service worker registered."
+            );
+          })
+          .catch(function () {
+            /*
+              Silent failure during development.
+            */
+          });
       }
-
-      .toast {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        padding: 13px 14px;
-        border: 1px solid var(--border, #e5e7eb);
-        border-radius: 14px;
-        background: var(--surface, #ffffff);
-        color: var(--text, #111827);
-        box-shadow: 0 18px 45px rgba(15, 23, 42, 0.16);
-        transform: translateY(12px);
-        opacity: 0;
-        transition:
-          opacity .22s ease,
-          transform .22s ease;
-        pointer-events: auto;
-        font-size: .92rem;
-      }
-
-      .toast.show {
-        transform: translateY(0);
-        opacity: 1;
-      }
-
-      .toast-success {
-        border-color: rgba(16, 185, 129, .35);
-      }
-
-      .toast-error {
-        border-color: rgba(239, 68, 68, .35);
-      }
-
-      .toast-close {
-        width: 30px;
-        height: 30px;
-        border: 0;
-        border-radius: 9px;
-        background: transparent;
-        color: inherit;
-        cursor: pointer;
-        font-size: 20px;
-        line-height: 1;
-        flex: 0 0 auto;
-      }
-
-      .toast-close:hover {
-        background: rgba(127, 127, 127, .12);
-      }
-
-      .is-loading {
-        cursor: wait !important;
-      }
-
-      button.is-loading {
-        opacity: .7;
-      }
-
-      [data-reveal] {
-        opacity: 0;
-        transform: translateY(18px);
-        transition:
-          opacity .5s ease,
-          transform .5s ease;
-      }
-
-      [data-reveal].is-visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .image-error {
-        opacity: .6;
-      }
-
-      @media (prefers-reduced-motion: reduce) {
-        [data-reveal],
-        [data-reveal].is-visible,
-        .toast {
-          transition: none !important;
-          transform: none !important;
-        }
-      }
-
-      @media (max-width: 640px) {
-        .toast-container {
-          right: 12px;
-          bottom: 12px;
-          width: calc(100vw - 24px);
-        }
-      }
-    `;
-
-    document.head.appendChild(
-      style
     );
   }
 
-  /* =======================================================
-     SECURITY NOTES
-     ======================================================= */
+  /* ---------------------------------------------------------
+     Global Click Handler
+  --------------------------------------------------------- */
 
-  function securityGuard() {
-    /*
-      Frontend security rules:
+  function setupGlobalActions() {
+    document.addEventListener(
+      "click",
+      function (event) {
+        var button =
+          event.target.closest(
+            "[data-action]"
+          );
 
-      1. Never place API keys in this file.
-      2. Never store passwords in localStorage.
-      3. Never store NIN values in localStorage.
-      4. Never trust frontend premium status.
-      5. Never treat frontend payment confirmation as verified.
-      6. Authentication must eventually be handled by backend.
-      7. Payment verification must eventually be handled by backend.
-      8. AI API requests must eventually go through a secure backend.
-    */
-  }
+        if (!button) {
+          return;
+        }
 
-  /* =======================================================
-     GLOBAL JG API
-     ======================================================= */
+        var action =
+          button.getAttribute(
+            "data-action"
+          );
 
-  function createGlobalAPI() {
-    window.JG = {
-      version:
-        JG_CONFIG.version,
+        switch (action) {
+          case "theme":
+            event.preventDefault();
+            toggleTheme();
+            break;
 
-      config:
-        Object.freeze({
-          ...JG_CONFIG
-        }),
+          case "logout":
+            event.preventDefault();
+            logout();
+            break;
 
-      storage,
+          case "back":
+            event.preventDefault();
+            window.history.back();
+            break;
 
-      utils: {
-        $,
-        $$,
-        escapeHTML,
-        copyText
-      },
+          case "home":
+            event.preventDefault();
+            navigate("home");
+            break;
 
-      theme: {
-        get: () =>
-          document.documentElement
-            .getAttribute(
-              "data-theme"
-            ),
+          case "learn":
+            event.preventDefault();
+            navigate("learn");
+            break;
 
-        set: theme =>
-          applyTheme(
-            theme,
-            true
-          ),
+          case "skills":
+            event.preventDefault();
+            navigate("skills");
+            break;
 
-        toggle:
-          toggleTheme
-      },
+          case "work":
+            event.preventDefault();
+            navigate("work");
+            break;
 
-      ui: {
-        toast:
-          showToast,
+          case "ai":
+            event.preventDefault();
+            navigate("ai");
+            break;
 
-        setState:
-          setUIState,
+          case "premium":
+            event.preventDefault();
+            navigate("premium");
+            break;
 
-        setLoading:
-          setButtonLoading
+          case "account":
+            event.preventDefault();
+            navigate("account");
+            break;
+
+          default:
+            break;
+        }
       }
-    };
+    );
   }
 
-  /* =======================================================
-     INITIALIZATION
-     ======================================================= */
+  /* ---------------------------------------------------------
+     Public JG Application API
+  --------------------------------------------------------- */
 
-  function init() {
-    try {
-      createGlobalAPI();
+  window.JG_APP = {
+    state: state,
 
-      initTheme();
-      initThemeButtons();
+    navigate: navigate,
 
-      initMobileNavigation();
-      initActiveNavigation();
-      initHeaderScroll();
+    toast: toast,
 
-      initSmoothAnchors();
-      initPasswordToggles();
+    openModal: openModal,
 
-      initFormProtection();
-      initCurrentYear();
+    closeModal: closeModal,
 
-      initImages();
-      initConnectionStatus();
+    toggleTheme: toggleTheme,
 
-      initCopyButtons();
-      initRevealAnimations();
+    setTheme: applyTheme,
 
-      initScrollTop();
-      initExternalLinks();
+    logout: logout,
 
-      initAccessibility();
-      initKeyboardSupport();
+    setButtonLoading:
+      setButtonLoading,
 
-      injectRuntimeCSS();
-      securityGuard();
+    storage: storage,
 
-      document.documentElement.classList.add(
-        "jg-ready"
+    getUser: function () {
+      return state.user;
+    },
+
+    isAuthenticated:
+      function () {
+        return state.authenticated;
+      },
+
+    setUser: function (user) {
+      state.user = user || null;
+
+      storage.set(
+        STORAGE.USER || "jg_user",
+        state.user
       );
 
-      window.dispatchEvent(
-        new CustomEvent(
-          "jg:ready",
-          {
-            detail: {
-              version:
-                JG_CONFIG.version,
-              page:
-                getCurrentPage()
-            }
-          }
-        )
-      );
-    } catch (error) {
-      /*
-        Do not allow one optional UI feature
-        to break the entire application.
-      */
+      updateAuthenticationUI();
+    },
 
-      console.error(
-        "JG initialization error:",
-        error
-      );
+    setAuthenticated:
+      function (value) {
+        state.authenticated =
+          Boolean(value);
 
-      document.documentElement.classList.add(
-        "jg-ready"
-      );
-    }
+        storage.set(
+          STORAGE.AUTH || "jg_auth",
+          state.authenticated
+        );
+
+        updateAuthenticationUI();
+      }
+  };
+
+  /* ---------------------------------------------------------
+     Initialize JG
+  --------------------------------------------------------- */
+
+  function initialize() {
+    setupTheme();
+    setupMobileNavigation();
+    setupBottomNavigation();
+    setupDataLinks();
+    setupModals();
+    setupLogout();
+    setupExternalLinks();
+    setupSmoothScroll();
+    setupPageReveal();
+    setupForms();
+    setupGlobalActions();
+    markActiveNavigation();
+    updateAuthenticationUI();
+    registerServiceWorker();
+
+    document.documentElement.classList.add(
+      "jg-ready"
+    );
+
+    document.body.classList.add(
+      "jg-app-ready"
+    );
   }
-
-  /* =======================================================
-     START
-     ======================================================= */
 
   if (
     document.readyState ===
@@ -1484,11 +1029,9 @@
   ) {
     document.addEventListener(
       "DOMContentLoaded",
-      init,
-      { once: true }
+      initialize
     );
   } else {
-    init();
+    initialize();
   }
-
 })();
