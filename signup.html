@@ -2,242 +2,1579 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
-
-  <meta
-    name="description"
-    content="Enroll in a JG learning course and begin building practical skills."
-  >
-
-  <meta name="theme-color" content="#2563eb">
-
-  <title>Enrollment | JG — Find Skills. Find Work.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Create your JG account and start learning skills.">
+  <title>JG — Create Account</title>
 
   <link rel="stylesheet" href="css/style.css">
 
   <style>
-    /* =========================================================
-       JG ENROLLMENT — PAGE SPECIFIC STYLES
-       ========================================================= */
+    :root {
+      --signup-bg: #07111f;
+      --signup-card: rgba(15, 27, 48, .95);
+      --signup-border: rgba(148, 163, 184, .16);
+      --signup-text: #f8fafc;
+      --signup-muted: #94a3b8;
+      --signup-blue: #3b82f6;
+      --signup-purple: #7c3aed;
+      --signup-cyan: #22d3ee;
+      --signup-green: #22c55e;
+      --signup-red: #ef4444;
+    }
 
-    .enrollment-page {
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
       min-height: 100vh;
-      overflow-x: hidden;
+      color: var(--signup-text);
+      background:
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(59,130,246,.17),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 90% 15%,
+          rgba(124,58,237,.14),
+          transparent 30%
+        ),
+        var(--signup-bg);
     }
 
-    .enrollment-hero {
-      position: relative;
-      overflow: hidden;
-      padding: 34px 0 24px;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    .enrollment-hero::before {
-      content: "";
-      position: absolute;
-      width: 380px;
-      height: 380px;
-      top: -210px;
-      right: -150px;
-      border-radius: 50%;
-      background: rgba(37, 99, 235, 0.10);
-      pointer-events: none;
+    button,
+    input {
+      font: inherit;
     }
 
-    .enrollment-hero-inner {
-      position: relative;
-      z-index: 1;
+    button {
+      cursor: pointer;
     }
 
-    .enrollment-breadcrumb {
+    .signup-page {
+      min-height: calc(100vh - 70px);
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-bottom: 17px;
-      color: var(--muted);
-      font-size: 0.78rem;
+      justify-content: center;
+      padding: 35px 16px 110px;
     }
 
-    .enrollment-breadcrumb a {
-      color: var(--muted);
+    .signup-layout {
+      width: min(1000px, 100%);
+      display: grid;
+      grid-template-columns: 1fr 450px;
+      gap: 18px;
+      align-items: stretch;
     }
 
-    .enrollment-breadcrumb a:hover {
-      color: var(--primary);
+    /* INTRO */
+
+    .signup-intro {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 650px;
+      padding: 40px;
+      border: 1px solid var(--signup-border);
+      border-radius: 28px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(59,130,246,.17),
+          rgba(124,58,237,.10)
+        ),
+        var(--signup-card);
     }
 
-    .enrollment-breadcrumb-current {
-      color: var(--text);
-      font-weight: 750;
+    .signup-intro::before {
+      content: "";
+      position: absolute;
+      width: 290px;
+      height: 290px;
+      border-radius: 50%;
+      right: -120px;
+      top: -100px;
+      background: rgba(34,211,238,.08);
+      filter: blur(10px);
     }
 
-    .enrollment-hero h1 {
-      margin: 0;
-      max-width: 780px;
-      font-size: clamp(2rem, 6vw, 3.6rem);
+    .signup-logo {
+      position: relative;
+      z-index: 1;
+      width: 58px;
+      height: 58px;
+      display: grid;
+      place-items: center;
+      border-radius: 17px;
+      background:
+        linear-gradient(
+          135deg,
+          var(--signup-blue),
+          var(--signup-purple)
+        );
+      color: white;
+      font-size: 22px;
+      font-weight: 950;
+      box-shadow: 0 15px 35px rgba(59,130,246,.25);
+    }
+
+    .signup-intro h1 {
+      position: relative;
+      z-index: 1;
+      margin: 25px 0 0;
+      max-width: 550px;
+      font-size: clamp(35px, 5vw, 57px);
       line-height: 1;
-      letter-spacing: -0.055em;
+      letter-spacing: -2px;
     }
 
-    .enrollment-gradient {
-      background: linear-gradient(
-        120deg,
-        var(--primary),
-        var(--secondary),
-        var(--accent)
-      );
+    .signup-intro h1 span {
+      background:
+        linear-gradient(
+          90deg,
+          #60a5fa,
+          #22d3ee
+        );
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
     }
 
-    .enrollment-hero p {
-      max-width: 700px;
-      margin: 15px 0 0;
-      color: var(--muted);
+    .signup-intro > p {
+      position: relative;
+      z-index: 1;
+      max-width: 530px;
+      margin: 18px 0 0;
+      color: var(--signup-muted);
       line-height: 1.7;
-      font-size: 0.93rem;
+      font-size: 15px;
     }
 
-    /* =========================================================
-       PROGRESS
-       ========================================================= */
-
-    .enrollment-progress {
-      margin: 16px 0 25px;
-    }
-
-    .progress-track {
+    .benefits {
+      position: relative;
+      z-index: 1;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
+      gap: 12px;
+      margin: 28px 0 0;
+      padding: 0;
+      list-style: none;
     }
 
-    .progress-step {
+    .benefit {
       display: flex;
       align-items: center;
-      gap: 8px;
-      min-width: 0;
-      padding: 10px 11px;
-      border: 1px solid var(--border);
-      border-radius: 13px;
-      background: var(--surface);
+      gap: 11px;
+      color: #cbd5e1;
+      font-size: 13px;
     }
 
-    .progress-number {
+    .benefit-icon {
       width: 28px;
       height: 28px;
-      flex: 0 0 28px;
       display: grid;
       place-items: center;
+      flex: 0 0 28px;
       border-radius: 9px;
-      background: var(--surface-2);
-      color: var(--muted);
-      font-size: 0.72rem;
+      background: rgba(59,130,246,.10);
+      color: #93c5fd;
+      font-size: 12px;
       font-weight: 900;
     }
 
-    .progress-step.active {
-      border-color: rgba(37, 99, 235, 0.30);
-      background: rgba(37, 99, 235, 0.06);
+    /* CARD */
+
+    .signup-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 30px;
+      border: 1px solid var(--signup-border);
+      border-radius: 28px;
+      background: var(--signup-card);
+      box-shadow: 0 25px 70px rgba(0,0,0,.25);
     }
 
-    .progress-step.active .progress-number {
-      background: var(--primary);
-      color: #fff;
+    .signup-header {
+      margin-bottom: 22px;
     }
 
-    .progress-step.complete .progress-number {
-      background: #16a34a;
-      color: #fff;
-    }
-
-    .progress-text strong {
-      display: block;
-      font-size: 0.72rem;
-    }
-
-    .progress-text span {
-      display: block;
-      margin-top: 2px;
-      color: var(--muted);
-      font-size: 0.64rem;
-    }
-
-    /* =========================================================
-       MAIN GRID
-       ========================================================= */
-
-    .enrollment-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 350px;
-      gap: 23px;
-      align-items: start;
-      padding-bottom: 60px;
-    }
-
-    .enrollment-main {
-      min-width: 0;
-    }
-
-    .enrollment-sidebar {
-      position: sticky;
-      top: 80px;
-      display: grid;
-      gap: 13px;
-    }
-
-    .enrollment-card {
-      padding: 21px;
-      border: 1px solid var(--border);
-      border-radius: 21px;
-      background: var(--surface);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .enrollment-card + .enrollment-card {
-      margin-top: 14px;
-    }
-
-    .card-heading {
-      margin-bottom: 17px;
-    }
-
-    .card-heading h2 {
+    .signup-header h2 {
       margin: 0;
-      font-size: 1.08rem;
-      letter-spacing: -0.025em;
+      font-size: 28px;
+      letter-spacing: -.7px;
     }
 
-    .card-heading p {
-      margin: 6px 0 0;
-      color: var(--muted);
+    .signup-header p {
+      margin: 8px 0 0;
+      color: var(--signup-muted);
+      font-size: 13px;
       line-height: 1.5;
-      font-size: 0.76rem;
     }
 
-    /* =========================================================
-       FORM
-       ========================================================= */
-
-    .form-grid {
+    .form {
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 13px;
+      gap: 14px;
     }
 
-    .form-group {
-      min-width: 0;
+    .name-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 11px;
     }
 
-    .form-group.full {
-      grid-column: 1 / -1;
+    .field {
+      display: grid;
+      gap: 7px;
     }
 
-    .form-label {
+    .field label {
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .field input {
+      width: 100%;
+      height: 47px;
+      border: 1px solid var(--signup-border);
+      border-radius: 13px;
+      outline: none;
+      padding: 0 13px;
+      background: rgba(255,255,255,.035);
+      color: white;
+      transition: .2s ease;
+    }
+
+    .field input:focus {
+      border-color: rgba(59,130,246,.65);
+      box-shadow: 0 0 0 3px rgba(59,130,246,.08);
+    }
+
+    .field input.invalid {
+      border-color: rgba(239,68,68,.7);
+    }
+
+    .field-error {
+      display: none;
+      color: #fca5a5;
+      font-size: 10px;
+      line-height: 1.4;
+    }
+
+    .field-error.show {
       display: block;
-      margin
+    }
+
+    .password-toggle {
+      position: absolute;
+      right: 8px;
+      top: 50%;
+      transform: translateY(-50%);
+      border: 0;
+      padding: 7px;
+      background: transparent;
+      color: #94a3b8;
+    }
+
+    .password-toggle:hover {
+      color: white;
+    }
+
+    /* PASSWORD STRENGTH */
+
+    .password-strength {
+      display: none;
+      gap: 5px;
+      margin-top: 1px;
+    }
+
+    .password-strength.show {
+      display: flex;
+    }
+
+    .strength-bar {
+      height: 4px;
+      flex: 1;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      transition: .2s ease;
+    }
+
+    .strength-label {
+      margin-top: 3px;
+      color: var(--signup-muted);
+      font-size: 9px;
+    }
+
+    /* CHECKBOX */
+
+    .terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+      margin-top: 2px;
+      color: var(--signup-muted);
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .terms input {
+      width: 16px;
+      height: 16px;
+      margin-top: 1px;
+      flex: 0 0 16px;
+      accent-color: var(--signup-blue);
+    }
+
+    .terms a {
+      color: #93c5fd;
+      font-weight: 700;
+    }
+
+    .terms.invalid {
+      color: #fca5a5;
+    }
+
+    /* BUTTON */
+
+    .submit-button {
+      width: 100%;
+      height: 49px;
+      margin-top: 3px;
+      border: 0;
+      border-radius: 13px;
+      color: white;
+      background:
+        linear-gradient(
+          135deg,
+          var(--signup-blue),
+          var(--signup-purple)
+        );
+      font-weight: 850;
+      box-shadow: 0 12px 28px rgba(59,130,246,.20);
+      transition: .2s ease;
+    }
+
+    .submit-button:hover {
+      transform: translateY(-1px);
+    }
+
+    .submit-button:disabled {
+      opacity: .6;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .signin-prompt {
+      margin-top: 20px;
+      text-align: center;
+      color: var(--signup-muted);
+      font-size: 12px;
+    }
+
+    .signin-prompt a {
+      color: #93c5fd;
+      font-weight: 800;
+    }
+
+    /* MESSAGE */
+
+    .form-message {
+      display: none;
+      margin-bottom: 14px;
+      padding: 11px 12px;
+      border-radius: 11px;
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .form-message.show {
+      display: block;
+    }
+
+    .form-message.error {
+      border: 1px solid rgba(239,68,68,.2);
+      background: rgba(239,68,68,.07);
+      color: #fca5a5;
+    }
+
+    .form-message.success {
+      border: 1px solid rgba(34,197,94,.2);
+      background: rgba(34,197,94,.07);
+      color: #bbf7d0;
+    }
+
+    .security-note {
+      display: flex;
+      gap: 9px;
+      margin-top: 19px;
+      padding: 11px;
+      border: 1px solid rgba(34,197,94,.14);
+      border-radius: 12px;
+      background: rgba(34,197,94,.045);
+      color: #94a3b8;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .security-icon {
+      color: #4ade80;
+      font-size: 14px;
+    }
+
+    @media (max-width: 850px) {
+      .signup-layout {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+      }
+
+      .signup-intro {
+        min-height: auto;
+        padding: 30px;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .signup-page {
+        padding: 18px 12px 100px;
+        align-items: flex-start;
+      }
+
+      .signup-intro {
+        display: none;
+      }
+
+      .signup-card {
+        width: 100%;
+        padding: 23px 19px;
+        border-radius: 22px;
+      }
+
+      .signup-header h2 {
+        font-size: 25px;
+      }
+
+      .name-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+
+  <header class="site-header">
+    <div class="container nav-container">
+
+      <a href="index.html" class="brand">
+        JG
+      </a>
+
+      <nav class="desktop-nav">
+        <a href="index.html">Home</a>
+        <a href="learn.html">Learn</a>
+        <a href="skills.html">Skills</a>
+        <a href="work.html">Work</a>
+        <a href="ai.html">JG AI</a>
+      </nav>
+
+      <div class="nav-actions">
+
+        <button
+          type="button"
+          id="themeButton"
+          class="icon-btn"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <a
+          href="login.html"
+          class="account-link"
+        >
+          Sign In
+        </a>
+
+        <button
+          type="button"
+          id="mobileMenuButton"
+          class="mobile-menu-btn"
+          aria-label="Open menu"
+        >
+          ☰
+        </button>
+
+      </div>
+    </div>
+
+    <div id="mobileMenu" class="mobile-menu">
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="skills.html">Skills</a>
+      <a href="work.html">Work</a>
+      <a href="ai.html">JG AI</a>
+      <a href="premium.html">Premium</a>
+      <a href="login.html">Sign In</a>
+      <a href="signup.html">Create Account</a>
+    </div>
+  </header>
+
+  <main class="signup-page">
+
+    <div class="signup-layout">
+
+      <!-- INTRO -->
+
+      <section class="signup-intro">
+
+        <div class="signup-logo">
+          JG
+        </div>
+
+        <h1>
+          Start building your
+          <span>future.</span>
+        </h1>
+
+        <p>
+          Create your JG account and get one place to learn valuable skills,
+          track your progress, discover opportunities and grow with JG AI.
+        </p>
+
+        <ul class="benefits">
+
+          <li class="benefit">
+            <span class="benefit-icon">✓</span>
+            Learn practical, career-focused skills
+          </li>
+
+          <li class="benefit">
+            <span class="benefit-icon">✓</span>
+            Track your courses and learning progress
+          </li>
+
+          <li class="benefit">
+            <span class="benefit-icon">✓</span>
+            Work toward JG certificates
+          </li>
+
+          <li class="benefit">
+            <span class="benefit-icon">✦</span>
+            Get guidance from JG AI
+          </li>
+
+          <li class="benefit">
+            <span class="benefit-icon">→</span>
+            Discover external work opportunities
+          </li>
+
+        </ul>
+
+      </section>
+
+      <!-- SIGNUP -->
+
+      <section class="signup-card">
+
+        <div class="signup-header">
+
+          <h2>
+            Create your account
+          </h2>
+
+          <p>
+            Join JG and start your learning journey.
+          </p>
+
+        </div>
+
+        <div
+          id="formMessage"
+          class="form-message"
+          role="alert"
+        ></div>
+
+        <form
+          id="signupForm"
+          class="form"
+          novalidate
+        >
+
+          <!-- NAME -->
+
+          <div class="name-grid">
+
+            <div class="field">
+
+              <label for="firstName">
+                First name
+              </label>
+
+              <input
+                type="text"
+                id="firstName"
+                name="firstName"
+                placeholder="First name"
+                autocomplete="given-name"
+                maxlength="50"
+                required
+              >
+
+              <div
+                id="firstNameError"
+                class="field-error"
+              >
+                Enter your first name.
+              </div>
+
+            </div>
+
+            <div class="field">
+
+              <label for="lastName">
+                Last name
+              </label>
+
+              <input
+                type="text"
+                id="lastName"
+                name="lastName"
+                placeholder="Last name"
+                autocomplete="family-name"
+                maxlength="50"
+                required
+              >
+
+              <div
+                id="lastNameError"
+                class="field-error"
+              >
+                Enter your last name.
+              </div>
+
+            </div>
+
+          </div>
+
+          <!-- EMAIL -->
+
+          <div class="field">
+
+            <label for="email">
+              Email address
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="you@example.com"
+              autocomplete="email"
+              required
+            >
+
+            <div
+              id="emailError"
+              class="field-error"
+            >
+              Enter a valid email address.
+            </div>
+
+          </div>
+
+          <!-- PASSWORD -->
+
+          <div class="field">
+
+            <label for="password">
+              Password
+            </label>
+
+            <div class="input-wrap">
+
+              <input
+                type="password"
+                id="password"
+                name="password"
+                placeholder="Create a strong password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+                style="padding-right:48px;"
+              >
+
+              <button
+                type="button"
+                id="passwordToggle"
+                class="password-toggle"
+                aria-label="Show password"
+              >
+                👁
+              </button>
+
+            </div>
+
+            <div
+              id="passwordStrength"
+              class="password-strength"
+            >
+              <span class="strength-bar"></span>
+              <span class="strength-bar"></span>
+              <span class="strength-bar"></span>
+              <span class="strength-bar"></span>
+            </div>
+
+            <div
+              id="strengthLabel"
+              class="strength-label"
+            ></div>
+
+            <div
+              id="passwordError"
+              class="field-error"
+            >
+              Password must be at least 8 characters and should contain a
+              mixture of letters and numbers.
+            </div>
+
+          </div>
+
+          <!-- CONFIRM PASSWORD -->
+
+          <div class="field">
+
+            <label for="confirmPassword">
+              Confirm password
+            </label>
+
+            <div class="input-wrap">
+
+              <input
+                type="password"
+                id="confirmPassword"
+                name="confirmPassword"
+                placeholder="Repeat your password"
+                autocomplete="new-password"
+                minlength="8"
+                required
+                style="padding-right:48px;"
+              >
+
+              <button
+                type="button"
+                id="confirmToggle"
+                class="password-toggle"
+                aria-label="Show password"
+              >
+                👁
+              </button>
+
+            </div>
+
+            <div
+              id="confirmError"
+              class="field-error"
+            >
+              Your passwords do not match.
+            </div>
+
+          </div>
+
+          <!-- TERMS -->
+
+          <label
+            class="terms"
+            id="termsLabel"
+          >
+
+            <input
+              type="checkbox"
+              id="terms"
+              required
+            >
+
+            <span>
+              I agree to JG's
+              <a href="#" id="termsLink">
+                Terms
+              </a>
+              and
+              <a href="#" id="privacyLink">
+                Privacy Policy
+              </a>.
+            </span>
+
+          </label>
+
+          <!-- SUBMIT -->
+
+          <button
+            type="submit"
+            id="signupButton"
+            class="submit-button"
+          >
+            Create Account
+          </button>
+
+        </form>
+
+        <div class="signin-prompt">
+
+          Already have an account?
+
+          <a href="login.html">
+            Sign in
+          </a>
+
+        </div>
+
+        <div class="security-note">
+
+          <span class="security-icon">
+            🔒
+          </span>
+
+          <span>
+            Your password should only be submitted through the secure JG
+            authentication system. Never share your password or API keys.
+          </span>
+
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- BOTTOM NAV -->
+
+  <nav class="bottom-nav">
+
+    <a href="index.html">
+      <span>⌂</span>
+      <small>Home</small>
+    </a>
+
+    <a href="learn.html">
+      <span>▣</span>
+      <small>Learn</small>
+    </a>
+
+    <a href="work.html">
+      <span>⌁</span>
+      <small>Work</small>
+    </a>
+
+    <a href="ai.html">
+      <span>✦</span>
+      <small>JG AI</small>
+    </a>
+
+    <a href="account.html">
+      <span>◉</span>
+      <small>Account</small>
+    </a>
+
+  </nav>
+
+  <!-- SHARED JS -->
+
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+
+  <!-- SIGNUP PAGE JS -->
+
+  <script>
+    (() => {
+
+      const form =
+        document.getElementById("signupForm");
+
+      const firstName =
+        document.getElementById("firstName");
+
+      const lastName =
+        document.getElementById("lastName");
+
+      const email =
+        document.getElementById("email");
+
+      const password =
+        document.getElementById("password");
+
+      const confirmPassword =
+        document.getElementById("confirmPassword");
+
+      const terms =
+        document.getElementById("terms");
+
+      const termsLabel =
+        document.getElementById("termsLabel");
+
+      const signupButton =
+        document.getElementById("signupButton");
+
+      const passwordToggle =
+        document.getElementById("passwordToggle");
+
+      const confirmToggle =
+        document.getElementById("confirmToggle");
+
+      const formMessage =
+        document.getElementById("formMessage");
+
+      const passwordStrength =
+        document.getElementById("passwordStrength");
+
+      const strengthLabel =
+        document.getElementById("strengthLabel");
+
+
+      function showMessage(message, type) {
+
+        formMessage.textContent =
+          message;
+
+        formMessage.className =
+          "form-message show " + type;
+
+      }
+
+
+      function clearMessage() {
+
+        formMessage.textContent = "";
+
+        formMessage.className =
+          "form-message";
+
+      }
+
+
+      function validEmail(value) {
+
+        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+          .test(value);
+
+      }
+
+
+      function clearErrors() {
+
+        document
+          .querySelectorAll(".field-error")
+          .forEach(
+            element => {
+              element.classList.remove("show");
+            }
+          );
+
+        document
+          .querySelectorAll(".field input")
+          .forEach(
+            element => {
+              element.classList.remove("invalid");
+            }
+          );
+
+        termsLabel.classList.remove(
+          "invalid"
+        );
+
+      }
+
+
+      function showFieldError(
+        input,
+        error
+      ) {
+
+        input.classList.add(
+          "invalid"
+        );
+
+        error.classList.add(
+          "show"
+        );
+
+      }
+
+
+      function passwordScore(value) {
+
+        let score = 0;
+
+        if (value.length >= 8) {
+          score++;
+        }
+
+        if (value.length >= 12) {
+          score++;
+        }
+
+        if (/[A-Z]/.test(value)) {
+          score++;
+        }
+
+        if (/[0-9]/.test(value)) {
+          score++;
+        }
+
+        if (/[^A-Za-z0-9]/.test(value)) {
+          score++;
+        }
+
+        return Math.min(score, 4);
+
+      }
+
+
+      function updatePasswordStrength() {
+
+        const value =
+          password.value;
+
+        if (!value) {
+
+          passwordStrength.classList.remove(
+            "show"
+          );
+
+          strengthLabel.textContent = "";
+
+          return;
+
+        }
+
+        passwordStrength.classList.add(
+          "show"
+        );
+
+        const score =
+          passwordScore(value);
+
+        const bars =
+          passwordStrength
+            .querySelectorAll(".strength-bar");
+
+        bars.forEach(
+          (bar, index) => {
+
+            if (index < score) {
+
+              if (score <= 1) {
+                bar.style.background =
+                  "#ef4444";
+              } else if (score === 2) {
+                bar.style.background =
+                  "#f59e0b";
+              } else if (score === 3) {
+                bar.style.background =
+                  "#22c55e";
+              } else {
+                bar.style.background =
+                  "#22d3ee";
+              }
+
+            } else {
+
+              bar.style.background =
+                "rgba(255,255,255,.08)";
+
+            }
+
+          }
+        );
+
+        const labels = [
+          "",
+          "Weak password",
+          "Fair password",
+          "Good password",
+          "Strong password"
+        ];
+
+        strengthLabel.textContent =
+          labels[score];
+
+      }
+
+
+      function togglePassword(
+        input,
+        button
+      ) {
+
+        const visible =
+          input.type === "text";
+
+        input.type =
+          visible ? "password" : "text";
+
+        button.textContent =
+          visible ? "👁" : "🙈";
+
+        button.setAttribute(
+          "aria-label",
+          visible
+            ? "Show password"
+            : "Hide password"
+        );
+
+      }
+
+
+      passwordToggle.addEventListener(
+        "click",
+        () => {
+          togglePassword(
+            password,
+            passwordToggle
+          );
+        }
+      );
+
+
+      confirmToggle.addEventListener(
+        "click",
+        () => {
+          togglePassword(
+            confirmPassword,
+            confirmToggle
+          );
+        }
+      );
+
+
+      password.addEventListener(
+        "input",
+        () => {
+
+          updatePasswordStrength();
+
+          password.classList.remove(
+            "invalid"
+          );
+
+          document
+            .getElementById("passwordError")
+            .classList.remove("show");
+
+          clearMessage();
+
+        }
+      );
+
+
+      [
+        firstName,
+        lastName,
+        email,
+        confirmPassword
+      ].forEach(
+        input => {
+
+          input.addEventListener(
+            "input",
+            () => {
+
+              input.classList.remove(
+                "invalid"
+              );
+
+              const error =
+                document.getElementById(
+                  input.id + "Error"
+                );
+
+              if (error) {
+                error.classList.remove(
+                  "show"
+                );
+              }
+
+              clearMessage();
+
+            }
+          );
+
+        }
+      );
+
+
+      terms.addEventListener(
+        "change",
+        () => {
+
+          termsLabel.classList.remove(
+            "invalid"
+          );
+
+          clearMessage();
+
+        }
+      );
+
+
+      document
+        .getElementById("termsLink")
+        .addEventListener(
+          "click",
+          event => {
+
+            event.preventDefault();
+
+            showMessage(
+              "JG Terms of Service will be published with the production legal documents.",
+              "success"
+            );
+
+          }
+        );
+
+
+      document
+        .getElementById("privacyLink")
+        .addEventListener(
+          "click",
+          event => {
+
+            event.preventDefault();
+
+            showMessage(
+              "JG Privacy Policy will be published with the production privacy and data-protection documents.",
+              "success"
+            );
+
+          }
+        );
+
+
+      function validate() {
+
+        clearErrors();
+
+        let valid = true;
+
+        if (
+          firstName.value.trim().length < 2
+        ) {
+
+          showFieldError(
+            firstName,
+            document.getElementById(
+              "firstNameError"
+            )
+          );
+
+          valid = false;
+
+        }
+
+        if (
+          lastName.value.trim().length < 2
+        ) {
+
+          showFieldError(
+            lastName,
+            document.getElementById(
+              "lastNameError"
+            )
+          );
+
+          valid = false;
+
+        }
+
+        if (
+          !validEmail(
+            email.value.trim()
+          )
+        ) {
+
+          showFieldError(
+            email,
+            document.getElementById(
+              "emailError"
+            )
+          );
+
+          valid = false;
+
+        }
+
+        const score =
+          passwordScore(
+            password.value
+          );
+
+        if (
+          password.value.length < 8 ||
+          score < 2
+        ) {
+
+          showFieldError(
+            password,
+            document.getElementById(
+              "passwordError"
+            )
+          );
+
+          valid = false;
+
+        }
+
+        if (
+          confirmPassword.value !==
+          password.value ||
+          !confirmPassword.value
+        ) {
+
+          showFieldError(
+            confirmPassword,
+            document.getElementById(
+              "confirmError"
+            )
+          );
+
+          valid = false;
+
+        }
+
+        if (!terms.checked) {
+
+          termsLabel.classList.add(
+            "invalid"
+          );
+
+          valid = false;
+
+        }
+
+        return valid;
+
+      }
+
+
+      form.addEventListener(
+        "submit",
+        async event => {
+
+          event.preventDefault();
+
+          clearMessage();
+
+          if (!validate()) {
+
+            showMessage(
+              "Please correct the highlighted fields before creating your account.",
+              "error"
+            );
+
+            return;
+
+          }
+
+          const userData = {
+            firstName:
+              firstName.value.trim(),
+
+            lastName:
+              lastName.value.trim(),
+
+            email:
+              email.value.trim().toLowerCase(),
+
+            password:
+              password.value
+          };
+
+          signupButton.disabled =
+            true;
+
+          signupButton.textContent =
+            "Creating account...";
+
+          let created = false;
+
+          /*
+           * Use the real authentication service when it
+           * becomes connected.
+           */
+
+          try {
+
+            if (
+              window.JG_AUTH &&
+              typeof window.JG_AUTH.signup ===
+                "function"
+            ) {
+
+              const result =
+                await window.JG_AUTH.signup(
+                  userData
+                );
+
+              created =
+                result === true ||
+                (
+                  result &&
+                  (
+                    result.success === true ||
+                    result.user
+                  )
+                );
+
+            }
+
+          } catch (error) {
+
+            created = false;
+
+          }
+
+
+          /*
+           * Try the shared API layer if available.
+           */
+
+          if (!created) {
+
+            try {
+
+              if (
+                window.JG_API &&
+                typeof window.JG_API.signup ===
+                  "function"
+              ) {
+
+                const result =
+                  await window.JG_API.signup(
+                    userData
+                  );
+
+                created =
+                  result === true ||
+                  (
+                    result &&
+                    (
+                      result.success === true ||
+                      result.user
+                    )
+                  );
+
+              }
+
+            } catch (error) {
+
+              created = false;
+
+            }
+
+          }
+
+
+          /*
+           * Never pretend that a real account was created
+           * if the secure backend is not connected.
+           */
+
+          if (!created) {
+
+            signupButton.disabled =
+              false;
+
+            signupButton.textContent =
+              "Create Account";
+
+            showMessage(
+              "The secure JG account service is not connected to this frontend yet. Your password was not stored.",
+              "error"
+            );
+
+            return;
+
+          }
+
+
+          /*
+           * Store only safe frontend information.
+           * The password is NEVER stored here.
+           */
+
+          try {
+
+            localStorage.setItem(
+              "jg_profile",
+              JSON.stringify({
+                firstName:
+                  userData.firstName,
+
+                lastName:
+                  userData.lastName,
+
+                email:
+                  userData.email
+              })
+            );
+
+            localStorage.setItem(
+              "jg_user",
+              JSON.stringify({
+                email:
+                  userData.email,
+
+                signedIn: true
+              })
+            );
+
+          } catch (error) {
+            // Ignore local-storage errors.
+          }
+
+
+          showMessage(
+            "Your JG account has been created successfully.",
+            "success"
+          );
+
+          signupButton.textContent =
+            "Account Created";
+
+          setTimeout(
+            () => {
+              window.location.href =
+                "account.html";
+            },
+            800
+          );
+
+        }
+      );
+
+    })();
+  </script>
+
+</body>
+</html>
