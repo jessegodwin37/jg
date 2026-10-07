@@ -1,2136 +1,1105 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
+  <meta charset="UTF-8" />
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
+    content="width=device-width, initial-scale=1, viewport-fit=cover"
+  />
 
   <meta
     name="description"
-    content="JG Skills — discover practical skills, explore career paths and learn with JG AI."
-  >
+    content="JG Skills — Explore practical skills and choose what you want to learn."
+  />
 
-  <meta
-    name="theme-color"
-    content="#2563eb"
-  >
+  <meta name="theme-color" content="#07111f" />
 
   <title>Skills — JG</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* =========================================================
+       JG SKILLS PAGE
+       ========================================================= */
+
+    .skills-page {
+      min-height: 100vh;
+      padding-bottom: 110px;
+    }
+
+    .skills-hero {
+      padding: 30px 18px 22px;
+    }
+
+    .skills-hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .skills-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 11px;
+      border: 1px solid rgba(37, 99, 235, 0.22);
+      background: rgba(37, 99, 235, 0.08);
+      color: #60a5fa;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+
+    .skills-hero h1 {
+      margin: 0;
+      font-size: clamp(30px, 8vw, 52px);
+      line-height: 1.02;
+      letter-spacing: -1.8px;
+    }
+
+    .skills-hero p {
+      max-width: 650px;
+      margin: 14px 0 0;
+      color: var(--muted, #94a3b8);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .skills-search-wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px 18px;
+    }
+
+    .skills-search {
+      position: relative;
+    }
+
+    .skills-search input {
+      width: 100%;
+      min-height: 54px;
+      box-sizing: border-box;
+      padding: 0 18px 0 48px;
+      border-radius: 16px;
+      border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+      background: var(--card, rgba(15, 23, 42, 0.75));
+      color: var(--text, #f8fafc);
+      outline: none;
+      font-size: 15px;
+      transition: 0.2s ease;
+    }
+
+    .skills-search input:focus {
+      border-color: rgba(59, 130, 246, 0.65);
+      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    }
+
+    .skills-search-icon {
+      position: absolute;
+      left: 17px;
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0.65;
+      pointer-events: none;
+      font-size: 19px;
+    }
+
+    .skills-categories {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px 22px;
+      display: flex;
+      gap: 9px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .skills-categories::-webkit-scrollbar {
+      display: none;
+    }
+
+    .skill-filter {
+      flex: 0 0 auto;
+      border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
+      background: var(--card, rgba(15, 23, 42, 0.65));
+      color: var(--muted, #94a3b8);
+      border-radius: 999px;
+      padding: 10px 15px;
+      font-size: 13px;
+      font-weight: 750;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+
+    .skill-filter:hover {
+      transform: translateY(-1px);
+    }
+
+    .skill-filter.active {
+      color: #fff;
+      background: #2563eb;
+      border-color: #2563eb;
+    }
+
+    .skills-section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 18px;
+    }
+
+    .skills-section-heading {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 15px;
+    }
+
+    .skills-section-heading h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .skills-count {
+      color: var(--muted, #94a3b8);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .skill-card {
+      position: relative;
+      min-height: 205px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 17px;
+      box-sizing: border-box;
+      border: 1px solid var(--border, rgba(148, 163, 184, 0.14));
+      border-radius: 20px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(30, 41, 59, 0.82),
+          rgba(15, 23, 42, 0.72)
+        );
+      cursor: pointer;
+      transition:
+        transform 0.2s ease,
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+    }
+
+    .skill-card::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -55px;
+      top: -55px;
+      border-radius: 50%;
+      background: rgba(37, 99, 235, 0.14);
+      pointer-events: none;
+    }
+
+    .skill-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(59, 130, 246, 0.42);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+    }
+
+    .skill-icon {
+      width: 48px;
+      height: 48px;
+      display: grid;
+      place-items: center;
+      border-radius: 15px;
+      background: rgba(37, 99, 235, 0.12);
+      border: 1px solid rgba(59, 130, 246, 0.15);
+      font-size: 24px;
+    }
+
+    .skill-card h3 {
+      margin: 15px 0 7px;
+      font-size: 17px;
+      letter-spacing: -0.3px;
+    }
+
+    .skill-card p {
+      margin: 0;
+      color: var(--muted, #94a3b8);
+      font-size: 12.5px;
+      line-height: 1.5;
+    }
+
+    .skill-card-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .skill-level {
+      color: var(--muted, #94a3b8);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .skill-open {
+      color: #60a5fa;
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .skills-empty {
+      display: none;
+      padding: 40px 20px;
+      text-align: center;
+      border: 1px dashed var(--border, rgba(148, 163, 184, 0.2));
+      border-radius: 20px;
+      color: var(--muted, #94a3b8);
+    }
+
+    .skills-empty strong {
+      display: block;
+      color: var(--text, #f8fafc);
+      margin-bottom: 6px;
+    }
+
+    .skill-cta {
+      margin-top: 24px;
+      padding: 20px;
+      border-radius: 22px;
+      border: 1px solid rgba(124, 58, 237, 0.22);
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(124, 58, 237, 0.18),
+          transparent 42%
+        ),
+        rgba(15, 23, 42, 0.7);
+    }
+
+    .skill-cta h3 {
+      margin: 0 0 7px;
+      font-size: 18px;
+    }
+
+    .skill-cta p {
+      margin: 0 0 15px;
+      color: var(--muted, #94a3b8);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .skill-cta button {
+      min-height: 45px;
+      border: 0;
+      border-radius: 13px;
+      padding: 0 16px;
+      background: #2563eb;
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .bottom-space {
+      height: 20px;
+    }
+
+    @media (min-width: 700px) {
+      .skills-hero {
+        padding-top: 48px;
+      }
+
+      .skills-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 16px;
+      }
+
+      .skill-card {
+        min-height: 225px;
+      }
+    }
+
+    @media (min-width: 1050px) {
+      .skills-grid {
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <!-- =====================================================
-       HEADER
-  ====================================================== -->
+  <div class="skills-page">
 
-  <header class="site-header">
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+    <header class="site-header">
+      <div class="container header-inner">
 
-    <div class="container header-inner">
+        <a href="index.html" class="brand" aria-label="JG Home">
+          <span class="brand-mark">JG</span>
+          <span class="brand-copy">
+            <strong>JG</strong>
+            <small>Find Skills. Find Opportunities.</small>
+          </span>
+        </a>
 
-      <a
-        href="index.html"
-        class="brand"
-        aria-label="JG Home"
-      >
-        <span class="brand-mark">JG</span>
+        <nav class="desktop-nav" aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="learn.html">Learn</a>
+          <a href="skills.html" class="active">Skills</a>
+          <a href="work.html">Work</a>
+          <a href="ai.html">JG AI</a>
+        </nav>
 
-        <span class="brand-text">
-          <strong>JG</strong>
-          <small>Find Skills. Find Work.</small>
-        </span>
-      </a>
+        <div class="header-actions">
+          <button
+            id="themeButton"
+            class="icon-button"
+            type="button"
+            aria-label="Toggle theme"
+          >
+            ◐
+          </button>
+
+          <a
+            href="account.html"
+            class="header-account"
+            aria-label="Account"
+          >
+            <span>Account</span>
+          </a>
+
+          <button
+            id="menuButton"
+            class="icon-button mobile-menu-button"
+            type="button"
+            aria-label="Open menu"
+            aria-expanded="false"
+          >
+            ☰
+          </button>
+        </div>
+
+      </div>
+    </header>
+
+
+    <!-- =====================================================
+         MOBILE MENU
+         ===================================================== -->
+    <div
+      id="mobileMenu"
+      class="mobile-menu"
+      hidden
+    >
+      <a href="index.html">Home</a>
+      <a href="learn.html">Learn</a>
+      <a href="skills.html">Skills</a>
+      <a href="work.html">Find Work</a>
+      <a href="ai.html">JG AI</a>
+      <a href="premium.html">Premium</a>
+      <a href="account.html">Account</a>
+    </div>
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+    <section class="skills-hero">
+      <div class="skills-hero-inner">
+
+        <div class="skills-eyebrow">
+          <span>✦</span>
+          <span>Explore JG Skills</span>
+        </div>
+
+        <h1>
+          Choose a skill.<br />
+          Build your future.
+        </h1>
+
+        <p>
+          Discover practical skills you can learn, practice and use to
+          prepare yourself for real opportunities.
+        </p>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         SEARCH
+         ===================================================== -->
+    <section class="skills-search-wrap">
+
+      <div class="skills-search">
+        <span class="skills-search-icon">⌕</span>
+
+        <input
+          id="skillSearch"
+          type="search"
+          placeholder="Search skills..."
+          autocomplete="off"
+          aria-label="Search skills"
+        />
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTERS
+         ===================================================== -->
+    <div
+      class="skills-categories"
+      id="skillFilters"
+      aria-label="Skill categories"
+    >
 
       <button
+        class="skill-filter active"
         type="button"
-        class="mobile-menu-btn"
-        data-mobile-menu
-        aria-label="Open navigation menu"
-        aria-expanded="false"
+        data-category="all"
       >
-        <span></span>
-        <span></span>
-        <span></span>
+        All
       </button>
 
-      <nav
-        class="nav"
-        data-main-nav
-        aria-label="Main navigation"
+      <button
+        class="skill-filter"
+        type="button"
+        data-category="technology"
+      >
+        Technology
+      </button>
+
+      <button
+        class="skill-filter"
+        type="button"
+        data-category="creative"
+      >
+        Creative
+      </button>
+
+      <button
+        class="skill-filter"
+        type="button"
+        data-category="business"
+      >
+        Business
+      </button>
+
+      <button
+        class="skill-filter"
+        type="button"
+        data-category="digital"
+      >
+        Digital
+      </button>
+
+    </div>
+
+
+    <!-- =====================================================
+         SKILLS
+         ===================================================== -->
+    <main class="skills-section">
+
+      <div class="skills-section-heading">
+        <h2>Explore skills</h2>
+
+        <span
+          id="skillsCount"
+          class="skills-count"
+        >
+          8 skills
+        </span>
+      </div>
+
+
+      <div
+        id="skillsGrid"
+        class="skills-grid"
       >
 
-        <a
-          href="index.html"
-          data-nav-link
+        <!-- WEB DEVELOPMENT -->
+        <article
+          class="skill-card"
+          data-name="web development"
+          data-category="technology"
+          data-url="course.html?course=web-development"
+          tabindex="0"
         >
-          Home
-        </a>
+          <div>
+            <div class="skill-icon">💻</div>
 
-        <a
-          href="skills.html"
-          data-nav-link
-        >
-          Skills
-        </a>
+            <h3>Web Development</h3>
 
-        <a
-          href="work.html"
-          data-nav-link
-        >
-          Work
-        </a>
+            <p>
+              Learn how websites and web applications are designed,
+              developed and deployed.
+            </p>
+          </div>
 
-        <a
-          href="learn.html"
-          data-nav-link
-        >
-          Learn
-        </a>
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
 
-        <a
-          href="ai.html"
-          data-nav-link
-        >
-          JG AI
-        </a>
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
 
-        <a
-          href="premium.html"
-          data-nav-link
-        >
-          Premium
-        </a>
 
-        <a
-          href="account.html"
-          data-nav-link
+        <!-- PYTHON -->
+        <article
+          class="skill-card"
+          data-name="python programming"
+          data-category="technology"
+          data-url="course.html?course=python-programming"
+          tabindex="0"
         >
-          Account
-        </a>
+          <div>
+            <div class="skill-icon">🐍</div>
 
-        <a
-          href="enrollment.html"
-          class="btn btn-primary nav-cta"
+            <h3>Python Programming</h3>
+
+            <p>
+              Build your programming foundation and learn how to
+              create useful Python applications.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+
+        <!-- GRAPHIC DESIGN -->
+        <article
+          class="skill-card"
+          data-name="graphic design"
+          data-category="creative"
+          data-url="course.html?course=graphic-design"
+          tabindex="0"
         >
-          Get Started
-        </a>
+          <div>
+            <div class="skill-icon">🎨</div>
+
+            <h3>Graphic Design</h3>
+
+            <p>
+              Learn visual design, branding, layouts, typography
+              and digital graphics.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+
+        <!-- VIDEO EDITING -->
+        <article
+          class="skill-card"
+          data-name="video editing"
+          data-category="creative"
+          data-url="course.html?course=video-editing"
+          tabindex="0"
+        >
+          <div>
+            <div class="skill-icon">🎬</div>
+
+            <h3>Video Editing</h3>
+
+            <p>
+              Learn how to turn raw footage into engaging and
+              professional video content.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+
+        <!-- DIGITAL MARKETING -->
+        <article
+          class="skill-card"
+          data-name="digital marketing"
+          data-category="business"
+          data-url="course.html?course=digital-marketing"
+          tabindex="0"
+        >
+          <div>
+            <div class="skill-icon">📈</div>
+
+            <h3>Digital Marketing</h3>
+
+            <p>
+              Understand online marketing, content strategy,
+              audiences and digital growth.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+
+        <!-- BUSINESS -->
+        <article
+          class="skill-card"
+          data-name="entrepreneurship business"
+          data-category="business"
+          data-url="course.html?course=entrepreneurship"
+          tabindex="0"
+        >
+          <div>
+            <div class="skill-icon">🚀</div>
+
+            <h3>Entrepreneurship</h3>
+
+            <p>
+              Learn how ideas become businesses, including planning,
+              customers and growth.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+
+        <!-- DATA / DIGITAL -->
+        <article
+          class="skill-card"
+          data-name="data digital skills"
+          data-category="digital"
+          data-url="course.html?course=digital-skills"
+          tabindex="0"
+        >
+          <div>
+            <div class="skill-icon">📊</div>
+
+            <h3>Digital Skills</h3>
+
+            <p>
+              Build useful everyday digital skills for study, work
+              and modern business.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+
+        <!-- COMMUNICATION -->
+        <article
+          class="skill-card"
+          data-name="communication personal development"
+          data-category="business"
+          data-url="course.html?course=communication"
+          tabindex="0"
+        >
+          <div>
+            <div class="skill-icon">🗣️</div>
+
+            <h3>Communication</h3>
+
+            <p>
+              Improve communication, confidence, presentation and
+              professional interaction.
+            </p>
+          </div>
+
+          <div class="skill-card-bottom">
+            <span class="skill-level">
+              Beginner → Advanced
+            </span>
+
+            <span class="skill-open">
+              Explore →
+            </span>
+          </div>
+        </article>
+
+      </div>
+
+
+      <!-- EMPTY SEARCH STATE -->
+      <div
+        id="skillsEmpty"
+        class="skills-empty"
+      >
+        <strong>No skills found</strong>
+        <span>
+          Try another search term or choose a different category.
+        </span>
+      </div>
+
+
+      <!-- =====================================================
+           JG AI CTA
+           ===================================================== -->
+      <section class="skill-cta">
+
+        <h3>Not sure what to learn?</h3>
+
+        <p>
+          Ask JG AI to help you discover skills based on your
+          interests, goals and the direction you want to take.
+        </p>
 
         <button
           type="button"
-          class="theme-toggle"
-          data-theme-toggle
-          aria-label="Switch to dark mode"
-          title="Switch to dark mode"
+          id="openAiButton"
         >
-          <span data-theme-icon>☾</span>
+          Ask JG AI
         </button>
 
-      </nav>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================================
-       MAIN
-  ====================================================== -->
-
-  <main>
-
-    <!-- HERO -->
-
-    <section class="page-hero">
-
-      <div class="container">
-
-        <div
-          class="page-hero-content"
-          data-reveal
-        >
-
-          <span class="eyebrow">
-            Explore your potential
-          </span>
-
-          <h1>
-            Discover skills that
-            <span class="text-gradient">
-              move you forward.
-            </span>
-          </h1>
-
-          <p>
-            Explore practical skills across technology,
-            design, business, media and more. Choose a
-            direction, start learning and use JG AI to
-            build your next step.
-          </p>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================================
-         STATS
-    ================================================== -->
-
-    <section class="section section-tight">
-
-      <div class="container">
-
-        <div
-          class="stats-grid"
-          data-reveal
-        >
-
-          <div class="stat-card">
-
-            <strong>40+</strong>
-
-            <span>
-              Skill paths
-            </span>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <strong>8</strong>
-
-            <span>
-              Main categories
-            </span>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <strong>100+</strong>
-
-            <span>
-              Learning topics planned
-            </span>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <strong>24/7</strong>
-
-            <span>
-              JG AI guidance
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================================
-         SKILLS SECTION
-    ================================================== -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <div class="section-heading-row">
-
-          <div>
-
-            <span class="eyebrow">
-              Skill library
-            </span>
-
-            <h2>
-              Find a skill that fits your goals.
-            </h2>
-
-            <p class="section-description">
-              Search the library or browse by category.
-              Skill opportunity indicators are interface
-              guidance and are not live labour-market
-              statistics.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <!-- FILTER AREA -->
-
-        <div
-          class="dashboard-layout"
-          data-reveal
-        >
-
-          <!-- SIDEBAR -->
-
-          <aside class="dashboard-sidebar">
-
-            <div class="sidebar-heading">
-
-              <strong>
-                Categories
-              </strong>
-
-            </div>
-
-
-            <div
-              class="sidebar-links"
-              id="skillCategories"
-            >
-
-              <button
-                type="button"
-                class="sidebar-link active"
-                data-category="all"
-              >
-                <span>All Skills</span>
-                <span>12</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="technology"
-              >
-                <span>Technology</span>
-                <span>3</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="design"
-              >
-                <span>Design</span>
-                <span>2</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="business"
-              >
-                <span>Business</span>
-                <span>2</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="marketing"
-              >
-                <span>Marketing</span>
-                <span>1</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="media"
-              >
-                <span>Media</span>
-                <span>1</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="data"
-              >
-                <span>Data</span>
-                <span>1</span>
-              </button>
-
-
-              <button
-                type="button"
-                class="sidebar-link"
-                data-category="career"
-              >
-                <span>Career</span>
-                <span>2</span>
-              </button>
-
-            </div>
-
-          </aside>
-
-
-          <!-- CONTENT -->
-
-          <div class="dashboard-content">
-
-            <!-- SEARCH -->
-
-            <div class="filter-bar">
-
-              <div class="search-box">
-
-                <span
-                  class="search-icon"
-                  aria-hidden="true"
-                >
-                  ⌕
-                </span>
-
-                <input
-                  type="search"
-                  id="skillSearch"
-                  placeholder="Search skills..."
-                  autocomplete="off"
-                  aria-label="Search skills"
-                >
-
-                <button
-                  type="button"
-                  id="clearSkillSearch"
-                  class="search-clear"
-                  aria-label="Clear search"
-                >
-                  ×
-                </button>
-
-              </div>
-
-
-              <div class="filter-control">
-
-                <label for="skillSort">
-                  Sort
-                </label>
-
-                <select id="skillSort">
-
-                  <option value="recommended">
-                    Recommended
-                  </option>
-
-                  <option value="name">
-                    Name A–Z
-                  </option>
-
-                  <option value="demand">
-                    Opportunity
-                  </option>
-
-                </select>
-
-              </div>
-
-            </div>
-
-
-            <!-- RESULT COUNT -->
-
-            <div class="results-row">
-
-              <p id="skillResultCount">
-                Showing 12 skills
-              </p>
-
-              <button
-                type="button"
-                class="text-link"
-                id="resetSkillFilters"
-              >
-                Reset filters
-              </button>
-
-            </div>
-
-
-            <!-- SKILL GRID -->
-
-            <div
-              class="card-grid card-grid-3"
-              id="skillsGrid"
-            >
-
-
-              <!-- 1 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="technology"
-                data-name="Web Development"
-                data-demand="5"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-blue">
-                    &lt;/&gt;
-                  </div>
-
-                  <span class="badge badge-primary">
-                    Technology
-                  </span>
-
-                </div>
-
-                <h3>
-                  Web Development
-                </h3>
-
-                <p>
-                  Learn how websites and web
-                  applications are designed, built
-                  and deployed.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    HTML
-                  </span>
-
-                  <span class="tag">
-                    CSS
-                  </span>
-
-                  <span class="tag">
-                    JavaScript
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      Advanced
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 92%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=web-development"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=web-development"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 2 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="technology"
-                data-name="Python Programming"
-                data-demand="5"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-yellow">
-                    Py
-                  </div>
-
-                  <span class="badge badge-primary">
-                    Technology
-                  </span>
-
-                </div>
-
-                <h3>
-                  Python Programming
-                </h3>
-
-                <p>
-                  Build programming foundations with
-                  Python and progress toward useful
-                  applications.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Python
-                  </span>
-
-                  <span class="tag">
-                    Logic
-                  </span>
-
-                  <span class="tag">
-                    Automation
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      Advanced
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 90%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=python"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=python"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 3 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="technology"
-                data-name="Cybersecurity"
-                data-demand="5"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-red">
-                    🔐
-                  </div>
-
-                  <span class="badge badge-primary">
-                    Technology
-                  </span>
-
-                </div>
-
-                <h3>
-                  Cybersecurity
-                </h3>
-
-                <p>
-                  Understand digital security,
-                  online threats, protection and
-                  responsible security practices.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Security
-                  </span>
-
-                  <span class="tag">
-                    Networks
-                  </span>
-
-                  <span class="tag">
-                    Privacy
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      Advanced
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 88%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=cybersecurity"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=cybersecurity"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 4 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="design"
-                data-name="Graphic Design"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-purple">
-                    ✦
-                  </div>
-
-                  <span class="badge badge-purple">
-                    Design
-                  </span>
-
-                </div>
-
-                <h3>
-                  Graphic Design
-                </h3>
-
-                <p>
-                  Create visual designs for brands,
-                  social media, businesses and
-                  digital products.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Canva
-                  </span>
-
-                  <span class="tag">
-                    Branding
-                  </span>
-
-                  <span class="tag">
-                    Layout
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 82%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=graphic-design"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=graphic-design"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 5 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="design"
-                data-name="UI UX Design"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-pink">
-                    ◈
-                  </div>
-
-                  <span class="badge badge-purple">
-                    Design
-                  </span>
-
-                </div>
-
-                <h3>
-                  UI/UX Design
-                </h3>
-
-                <p>
-                  Learn how to create intuitive,
-                  attractive and useful digital
-                  experiences.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    UI
-                  </span>
-
-                  <span class="tag">
-                    UX
-                  </span>
-
-                  <span class="tag">
-                    Figma
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 80%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=ui-ux"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=ui-ux"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 6 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="marketing"
-                data-name="Digital Marketing"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-green">
-                    ↗
-                  </div>
-
-                  <span class="badge badge-success">
-                    Marketing
-                  </span>
-
-                </div>
-
-                <h3>
-                  Digital Marketing
-                </h3>
-
-                <p>
-                  Understand online marketing,
-                  content strategy, social media and
-                  customer growth.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Social
-                  </span>
-
-                  <span class="tag">
-                    Content
-                  </span>
-
-                  <span class="tag">
-                    Growth
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 79%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=digital-marketing"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=digital-marketing"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 7 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="media"
-                data-name="Video Editing"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-orange">
-                    ▶
-                  </div>
-
-                  <span class="badge badge-warning">
-                    Media
-                  </span>
-
-                </div>
-
-                <h3>
-                  Video Editing
-                </h3>
-
-                <p>
-                  Edit engaging videos for social
-                  media, brands, creators and
-                  businesses.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Editing
-                  </span>
-
-                  <span class="tag">
-                    Storytelling
-                  </span>
-
-                  <span class="tag">
-                    Reels
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 76%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=video-editing"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=video-editing"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 8 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="data"
-                data-name="Data Analysis"
-                data-demand="5"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-cyan">
-                    ▥
-                  </div>
-
-                  <span class="badge badge-info">
-                    Data
-                  </span>
-
-                </div>
-
-                <h3>
-                  Data Analysis
-                </h3>
-
-                <p>
-                  Learn how to organize, understand
-                  and communicate useful information
-                  from data.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Excel
-                  </span>
-
-                  <span class="tag">
-                    Data
-                  </span>
-
-                  <span class="tag">
-                    Charts
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      Advanced
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 86%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=data-analysis"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=data-analysis"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 9 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="business"
-                data-name="Microsoft Excel"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-green">
-                    X
-                  </div>
-
-                  <span class="badge badge-success">
-                    Business
-                  </span>
-
-                </div>
-
-                <h3>
-                  Microsoft Excel
-                </h3>
-
-                <p>
-                  Build practical spreadsheet skills
-                  for school, business, finance and
-                  everyday work.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Formulas
-                  </span>
-
-                  <span class="tag">
-                    Tables
-                  </span>
-
-                  <span class="tag">
-                    Reports
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 74%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=excel"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=excel"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 10 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="business"
-                data-name="Entrepreneurship"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-blue">
-                    ₦
-                  </div>
-
-                  <span class="badge badge-success">
-                    Business
-                  </span>
-
-                </div>
-
-                <h3>
-                  Entrepreneurship
-                </h3>
-
-                <p>
-                  Learn practical foundations for
-                  starting, managing and growing a
-                  business.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Business
-                  </span>
-
-                  <span class="tag">
-                    Strategy
-                  </span>
-
-                  <span class="tag">
-                    Sales
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 77%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=entrepreneurship"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=entrepreneurship"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 11 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="career"
-                data-name="Sales"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-orange">
-                    $
-                  </div>
-
-                  <span class="badge badge-warning">
-                    Career
-                  </span>
-
-                </div>
-
-                <h3>
-                  Sales
-                </h3>
-
-                <p>
-                  Build communication, customer
-                  discovery, negotiation and
-                  relationship skills.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Sales
-                  </span>
-
-                  <span class="tag">
-                    Negotiation
-                  </span>
-
-                  <span class="tag">
-                    CRM
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 73%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=sales"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=sales"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-
-              <!-- 12 -->
-
-              <article
-                class="skill-card card"
-                data-skill
-                data-category="career"
-                data-name="Professional Communication"
-                data-demand="4"
-              >
-
-                <div class="card-top">
-
-                  <div class="icon-box icon-purple">
-                    Aa
-                  </div>
-
-                  <span class="badge badge-purple">
-                    Career
-                  </span>
-
-                </div>
-
-                <h3>
-                  Professional Communication
-                </h3>
-
-                <p>
-                  Improve writing, speaking,
-                  presentation and workplace
-                  communication.
-                </p>
-
-                <div class="tag-row">
-
-                  <span class="tag">
-                    Speaking
-                  </span>
-
-                  <span class="tag">
-                    Writing
-                  </span>
-
-                  <span class="tag">
-                    Presentation
-                  </span>
-
-                </div>
-
-                <div class="opportunity">
-
-                  <div class="opportunity-label">
-                    <span>
-                      Opportunity path
-                    </span>
-
-                    <strong>
-                      High
-                    </strong>
-                  </div>
-
-                  <div class="progress">
-                    <span style="width: 71%"></span>
-                  </div>
-
-                </div>
-
-                <div class="card-actions">
-
-                  <a
-                    href="ai.html?skill=communication"
-                    class="btn btn-secondary btn-sm"
-                  >
-                    Ask AI
-                  </a>
-
-                  <a
-                    href="learn.html?course=communication"
-                    class="btn btn-primary btn-sm"
-                  >
-                    Learn
-                  </a>
-
-                </div>
-
-              </article>
-
-            </div>
-
-
-            <!-- EMPTY STATE -->
-
-            <div
-              class="empty-state"
-              id="skillEmptyState"
-              hidden
-            >
-
-              <div class="empty-icon">
-                🔎
-              </div>
-
-              <h3>
-                No skills found
-              </h3>
-
-              <p>
-                Try another search term or reset
-                your filters.
-              </p>
-
-              <button
-                type="button"
-                class="btn btn-primary"
-                id="emptyResetButton"
-              >
-                Reset filters
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =================================================
-         AI CTA
-    ================================================== -->
-
-    <section class="section">
-
-      <div class="container">
-
-        <div
-          class="ai-cta"
-          data-reveal
-        >
-
-          <div class="ai-cta-content">
-
-            <span class="eyebrow">
-              Meet JG AI
-            </span>
-
-            <h2>
-              Not sure what to learn?
-            </h2>
-
-            <p>
-              Tell JG AI what you want to achieve
-              and get help choosing skills, creating
-              a learning path and planning your next
-              move.
-            </p>
-
-          </div>
-
-          <a
-            href="ai.html"
-            class="btn btn-light"
-          >
-            Talk to JG AI
-          </a>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
-
-  <footer class="site-footer">
-
-    <div class="container">
-
-      <div class="footer-grid">
-
-        <div class="footer-brand">
-
-          <a
-            href="index.html"
-            class="brand"
-          >
-
-            <span class="brand-mark">
-              JG
-            </span>
-
-            <span class="brand-text">
-              <strong>JG</strong>
-              <small>
-                Find Skills. Find Work.
-              </small>
-            </span>
-
-          </a>
-
-          <p>
-            A digital platform for discovering
-            practical skills, learning and
-            connecting with opportunities.
-          </p>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Platform
-          </h3>
-
-          <a href="skills.html">
-            Skills
-          </a>
-
-          <a href="work.html">
-            Work
-          </a>
-
-          <a href="learn.html">
-            Learn
-          </a>
-
-          <a href="ai.html">
-            JG AI
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Account
-          </h3>
-
-          <a href="account.html">
-            Account
-          </a>
-
-          <a href="premium.html">
-            Premium
-          </a>
-
-          <a href="enrollment.html">
-            Enrollment
-          </a>
-
-          <a href="verify.html">
-            Verify Certificate
-          </a>
-
-        </div>
-
-
-        <div class="footer-column">
-
-          <h3>
-            Learning
-          </h3>
-
-          <a href="course.html">
-            Courses
-          </a>
-
-          <a href="exam.html">
-            Assessments
-          </a>
-
-          <a href="final%20project.html">
-            Final Project
-          </a>
-
-          <a href="certificate.html">
-            Certificate
-          </a>
-
-        </div>
-
-      </div>
-
-
-      <div class="footer-bottom">
-
-        <span>
-          © <span data-current-year></span> JG.
-          All rights reserved.
-        </span>
-
-        <span>
-          Built for skills, learning and opportunity.
-        </span>
-
-      </div>
-
-    </div>
-
-  </footer>
-
-
-  <!-- =====================================================
-       GLOBAL JS
-  ====================================================== -->
-
+      </section>
+
+      <div class="bottom-space"></div>
+
+    </main>
+
+
+    <!-- =====================================================
+         BOTTOM NAVIGATION
+         ===================================================== -->
+    <nav
+      class="bottom-nav"
+      aria-label="Mobile navigation"
+    >
+
+      <a
+        href="index.html"
+        class="bottom-nav-item"
+      >
+        <span>⌂</span>
+        <small>Home</small>
+      </a>
+
+      <a
+        href="learn.html"
+        class="bottom-nav-item"
+      >
+        <span>▣</span>
+        <small>Learn</small>
+      </a>
+
+      <a
+        href="skills.html"
+        class="bottom-nav-item active"
+      >
+        <span>✦</span>
+        <small>Skills</small>
+      </a>
+
+      <a
+        href="work.html"
+        class="bottom-nav-item"
+      >
+        <span>◫</span>
+        <small>Work</small>
+      </a>
+
+      <a
+        href="ai.html"
+        class="bottom-nav-item"
+      >
+        <span>✧</span>
+        <small>JG AI</small>
+      </a>
+
+    </nav>
+
+  </div>
+
+
+  <!-- =======================================================
+       JG SHARED JAVASCRIPT
+       ======================================================= -->
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 
 
-  <!-- =====================================================
-       PAGE JS
-  ====================================================== -->
-
+  <!-- =======================================================
+       SKILLS PAGE JAVASCRIPT
+       ======================================================= -->
   <script>
-
-    (() => {
-
-      "use strict";
-
+    document.addEventListener("DOMContentLoaded", function () {
 
       const searchInput =
-        document.getElementById(
-          "skillSearch"
-        );
+        document.getElementById("skillSearch");
 
-
-      const clearButton =
-        document.getElementById(
-          "clearSkillSearch"
-        );
-
-
-      const sortSelect =
-        document.getElementById(
-          "skillSort"
-        );
-
-
-      const resultCount =
-        document.getElementById(
-          "skillResultCount"
-        );
-
-
-      const resetButton =
-        document.getElementById(
-          "resetSkillFilters"
-        );
-
-
-      const emptyResetButton =
-        document.getElementById(
-          "emptyResetButton"
-        );
-
-
-      const emptyState =
-        document.getElementById(
-          "skillEmptyState"
-        );
-
-
-      const grid =
-        document.getElementById(
-          "skillsGrid"
-        );
-
-
-      const categoryButtons =
-        Array.from(
-          document.querySelectorAll(
-            "[data-category]"
-          )
-        );
-
+      const filterButtons =
+        document.querySelectorAll(".skill-filter");
 
       const cards =
-        Array.from(
-          document.querySelectorAll(
-            "[data-skill]"
-          )
-        );
+        Array.from(document.querySelectorAll(".skill-card"));
 
+      const emptyState =
+        document.getElementById("skillsEmpty");
+
+      const count =
+        document.getElementById("skillsCount");
+
+      const aiButton =
+        document.getElementById("openAiButton");
 
       let activeCategory = "all";
 
 
-      function getSearchValue() {
+      /* -------------------------------------------------------
+         FILTER SKILLS
+         ------------------------------------------------------- */
 
-        return (
-          searchInput
-            ? searchInput.value
-                .trim()
-                .toLowerCase()
-            : ""
-        );
-
-      }
-
-
-      function sortCards(items) {
-
-        const mode =
-          sortSelect
-            ? sortSelect.value
-            : "recommended";
-
-
-        const sorted =
-          [...items];
-
-
-        if (mode === "name") {
-
-          sorted.sort(
-            (a, b) => {
-
-              const aName =
-                (
-                  a.dataset.name ||
-                  ""
-                ).toLowerCase();
-
-              const bName =
-                (
-                  b.dataset.name ||
-                  ""
-                ).toLowerCase();
-
-              return aName.localeCompare(
-                bName
-              );
-
-            }
-          );
-
-        }
-
-
-        if (mode === "demand") {
-
-          sorted.sort(
-            (a, b) => {
-
-              return (
-                Number(
-                  b.dataset.demand || 0
-                ) -
-                Number(
-                  a.dataset.demand || 0
-                )
-              );
-
-            }
-          );
-
-        }
-
-
-        return sorted;
-
-      }
-
-
-      function updateCards() {
+      function filterSkills() {
 
         const query =
-          getSearchValue();
+          searchInput.value.trim().toLowerCase();
 
+        let visible = 0;
 
-        const matching =
-          cards.filter(card => {
+        cards.forEach(function (card) {
 
-            const category =
-              (
-                card.dataset.category ||
-                ""
-              ).toLowerCase();
+          const name =
+            (card.dataset.name || "").toLowerCase();
 
+          const category =
+            (card.dataset.category || "").toLowerCase();
 
-            const name =
-              (
-                card.dataset.name ||
-                ""
-              ).toLowerCase();
+          const matchesSearch =
+            !query || name.includes(query);
 
+          const matchesCategory =
+            activeCategory === "all" ||
+            category === activeCategory;
 
-            const content =
-              card.textContent
-                .toLowerCase();
-
-
-            const categoryMatch =
-              activeCategory === "all" ||
-              category === activeCategory;
-
-
-            const searchMatch =
-              !query ||
-              name.includes(query) ||
-              content.includes(query);
-
-
-            return (
-              categoryMatch &&
-              searchMatch
-            );
-
-          });
-
-
-        const sorted =
-          sortCards(matching);
-
-
-        cards.forEach(card => {
+          const shouldShow =
+            matchesSearch && matchesCategory;
 
           card.style.display =
-            "none";
+            shouldShow ? "" : "none";
 
+          if (shouldShow) {
+            visible++;
+          }
         });
 
 
-        sorted.forEach(card => {
-
-          card.style.display =
-            "";
-
-          if (grid) {
-
-            grid.appendChild(
-              card
-            );
-
-          }
-
-        });
+        count.textContent =
+          visible + (visible === 1 ? " skill" : " skills");
 
 
-        const count =
-          sorted.length;
-
-
-        if (resultCount) {
-
-          resultCount.textContent =
-            `Showing ${count} ${
-              count === 1
-                ? "skill"
-                : "skills"
-            }`;
-
-        }
-
-
-        if (emptyState) {
-
-          emptyState.hidden =
-            count !== 0;
-
-        }
-
+        emptyState.style.display =
+          visible === 0 ? "block" : "none";
       }
 
 
-      function setCategory(
-        category
-      ) {
+      /* -------------------------------------------------------
+         SEARCH
+         ------------------------------------------------------- */
 
-        activeCategory =
-          category;
-
-
-        categoryButtons.forEach(
-          button => {
-
-            const buttonCategory =
-              (
-                button.dataset.category ||
-                ""
-              ).toLowerCase();
-
-
-            button.classList.toggle(
-              "active",
-              buttonCategory ===
-                category
-            );
-
-          }
-        );
-
-
-        updateCards();
-
-      }
-
-
-      function resetFilters() {
-
-        activeCategory =
-          "all";
-
-
-        if (searchInput) {
-
-          searchInput.value =
-            "";
-
-        }
-
-
-        if (sortSelect) {
-
-          sortSelect.value =
-            "recommended";
-
-        }
-
-
-        categoryButtons.forEach(
-          button => {
-
-            const category =
-              (
-                button.dataset.category ||
-                ""
-              ).toLowerCase();
-
-
-            button.classList.toggle(
-              "active",
-              category === "all"
-            );
-
-          }
-        );
-
-
-        updateCards();
-
-      }
-
-
-      categoryButtons.forEach(
-        button => {
-
-          button.addEventListener(
-            "click",
-            () => {
-
-              setCategory(
-                (
-                  button.dataset.category ||
-                  "all"
-                ).toLowerCase()
-              );
-
-            }
-          );
-
-        }
+      searchInput.addEventListener(
+        "input",
+        filterSkills
       );
 
 
-      if (searchInput) {
+      /* -------------------------------------------------------
+         CATEGORY FILTERS
+         ------------------------------------------------------- */
 
-        searchInput.addEventListener(
-          "input",
-          updateCards
+      filterButtons.forEach(function (button) {
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            filterButtons.forEach(function (item) {
+              item.classList.remove("active");
+            });
+
+            button.classList.add("active");
+
+            activeCategory =
+              button.dataset.category || "all";
+
+            filterSkills();
+          }
+        );
+
+      });
+
+
+      /* -------------------------------------------------------
+         OPEN COURSE
+         ------------------------------------------------------- */
+
+      cards.forEach(function (card) {
+
+        function openCourse() {
+
+          const destination =
+            card.dataset.url;
+
+          if (destination) {
+            window.location.href = destination;
+          }
+        }
+
+
+        card.addEventListener(
+          "click",
+          openCourse
+        );
+
+
+        card.addEventListener(
+          "keydown",
+          function (event) {
+
+            if (
+              event.key === "Enter" ||
+              event.key === " "
+            ) {
+
+              event.preventDefault();
+
+              openCourse();
+            }
+
+          }
+        );
+
+      });
+
+
+      /* -------------------------------------------------------
+         JG AI BUTTON
+         ------------------------------------------------------- */
+
+      if (aiButton) {
+
+        aiButton.addEventListener(
+          "click",
+          function () {
+
+            window.location.href =
+              "ai.html";
+          }
         );
 
       }
 
 
-      if (clearButton) {
+      /* -------------------------------------------------------
+         MOBILE MENU
+         ------------------------------------------------------- */
 
-        clearButton.addEventListener(
+      const menuButton =
+        document.getElementById("menuButton");
+
+      const mobileMenu =
+        document.getElementById("mobileMenu");
+
+      if (menuButton && mobileMenu) {
+
+        menuButton.addEventListener(
           "click",
-          () => {
+          function () {
 
-            if (searchInput) {
+            const isOpen =
+              !mobileMenu.hasAttribute("hidden");
 
-              searchInput.value =
-                "";
+            if (isOpen) {
 
-              searchInput.focus();
+              mobileMenu.setAttribute(
+                "hidden",
+                ""
+              );
+
+              menuButton.setAttribute(
+                "aria-expanded",
+                "false"
+              );
+
+            } else {
+
+              mobileMenu.removeAttribute(
+                "hidden"
+              );
+
+              menuButton.setAttribute(
+                "aria-expanded",
+                "true"
+              );
 
             }
-
-            updateCards();
 
           }
         );
@@ -2138,40 +1107,13 @@
       }
 
 
-      if (sortSelect) {
+      /* -------------------------------------------------------
+         INITIAL RENDER
+         ------------------------------------------------------- */
 
-        sortSelect.addEventListener(
-          "change",
-          updateCards
-        );
+      filterSkills();
 
-      }
-
-
-      if (resetButton) {
-
-        resetButton.addEventListener(
-          "click",
-          resetFilters
-        );
-
-      }
-
-
-      if (emptyResetButton) {
-
-        emptyResetButton.addEventListener(
-          "click",
-          resetFilters
-        );
-
-      }
-
-
-      updateCards();
-
-    })();
-
+    });
   </script>
 
 </body>
