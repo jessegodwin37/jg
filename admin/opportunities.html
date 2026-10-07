@@ -1,1 +1,2637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
 
+  <meta
+    name="description"
+    content="JG Admin Opportunity Management."
+  >
+
+  <meta name="theme-color" content="#07111f">
+
+  <title>Opportunities — JG Admin</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-opportunities">
+
+  <!-- =========================================================
+       HEADER
+  ========================================================== -->
+
+  <header class="site-header">
+
+    <div class="container header-inner">
+
+      <a href="dashboard.html" class="brand">
+
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+
+      </a>
+
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <a
+          href="dashboard.html"
+          class="btn btn-secondary btn-sm"
+        >
+          ← Dashboard
+        </a>
+
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
+
+  <main class="container page-content">
+
+    <!-- HERO -->
+
+    <section class="hero-card">
+
+      <div class="hero-content">
+
+        <span class="badge badge-primary">
+          JG OPPORTUNITY NETWORK
+        </span>
+
+        <h1>Find Work Management</h1>
+
+        <p>
+          Create, manage, review and remove external work
+          opportunities that JG users can discover.
+        </p>
+
+      </div>
+
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="refreshButton"
+        >
+          ↻ Refresh
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="addOpportunityButton"
+        >
+          + Add Opportunity
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- IMPORTANT BUSINESS RULE -->
+
+    <section class="alert alert-info">
+
+      <div>
+
+        <strong>
+          JG does not pay users for opportunities.
+        </strong>
+
+        <p>
+          Opportunities listed here are external opportunities,
+          jobs, freelance work, internships, scholarships or other
+          legitimate opportunities. Users apply or interact with
+          the external provider directly.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         STATS
+    ======================================================== -->
+
+    <section class="grid grid-4">
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Total
+        </span>
+
+        <strong id="totalCount">
+          0
+        </strong>
+
+        <small>
+          Opportunities
+        </small>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Published
+        </span>
+
+        <strong id="publishedCount">
+          0
+        </strong>
+
+        <small>
+          Visible to users
+        </small>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Drafts
+        </span>
+
+        <strong id="draftCount">
+          0
+        </strong>
+
+        <small>
+          Not published
+        </small>
+
+      </article>
+
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Removed
+        </span>
+
+        <strong id="removedCount">
+          0
+        </strong>
+
+        <small>
+          Recoverable
+        </small>
+
+      </article>
+
+    </section>
+
+
+    <!-- =======================================================
+         FILTERS
+    ======================================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            OPPORTUNITY LIBRARY
+          </span>
+
+          <h2>Manage Opportunities</h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="tabs">
+
+        <button
+          type="button"
+          class="tab-btn active"
+          data-tab="all"
+        >
+          All
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-tab="published"
+        >
+          Published
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-tab="draft"
+        >
+          Drafts
+        </button>
+
+        <button
+          type="button"
+          class="tab-btn"
+          data-tab="removed"
+        >
+          Removed
+        </button>
+
+      </div>
+
+
+      <div class="form-grid">
+
+        <div class="form-group">
+
+          <label for="searchInput">
+            Search
+          </label>
+
+          <input
+            type="search"
+            id="searchInput"
+            class="form-control"
+            placeholder="Search opportunities..."
+            autocomplete="off"
+          >
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="categoryFilter">
+            Category
+          </label>
+
+          <select
+            id="categoryFilter"
+            class="form-control"
+          >
+
+            <option value="all">
+              All categories
+            </option>
+
+            <option value="job">
+              Jobs
+            </option>
+
+            <option value="freelance">
+              Freelance
+            </option>
+
+            <option value="internship">
+              Internships
+            </option>
+
+            <option value="scholarship">
+              Scholarships
+            </option>
+
+            <option value="volunteer">
+              Volunteer
+            </option>
+
+            <option value="other">
+              Other
+            </option>
+
+          </select>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         OPPORTUNITY TABLE
+    ======================================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            OPPORTUNITIES
+          </span>
+
+          <h2 id="tableHeading">
+            All Opportunities
+          </h2>
+
+        </div>
+
+
+        <span
+          class="badge badge-neutral"
+          id="resultCount"
+        >
+          0 items
+        </span>
+
+      </div>
+
+
+      <div class="table-wrap">
+
+        <table class="data-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Opportunity
+              </th>
+
+              <th>
+                Category
+              </th>
+
+              <th>
+                Provider
+              </th>
+
+              <th>
+                Status
+              </th>
+
+              <th>
+                Deadline
+              </th>
+
+              <th>
+                Actions
+              </th>
+
+            </tr>
+
+          </thead>
+
+
+          <tbody id="opportunityTableBody">
+
+            <tr>
+
+              <td colspan="6">
+
+                <div class="empty-state">
+
+                  <div class="empty-icon">
+                    ↻
+                  </div>
+
+                  <h3>
+                    Loading opportunities...
+                  </h3>
+
+                  <p>
+                    Please wait.
+                  </p>
+
+                </div>
+
+              </td>
+
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+
+    <!-- =======================================================
+         GUIDELINES
+    ======================================================== -->
+
+    <section class="card">
+
+      <div class="section-header">
+
+        <div>
+
+          <span class="eyebrow">
+            PUBLISHING GUIDELINES
+          </span>
+
+          <h2>
+            Before Publishing
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="grid grid-3">
+
+        <article class="card card-small">
+
+          <span class="badge badge-success">
+            VERIFY
+          </span>
+
+          <h3>
+            Verify the source
+          </h3>
+
+          <p>
+            Confirm that the opportunity comes from a legitimate
+            organization or source before publishing it.
+          </p>
+
+        </article>
+
+
+        <article class="card card-small">
+
+          <span class="badge badge-warning">
+            SAFETY
+          </span>
+
+          <h3>
+            Avoid misleading claims
+          </h3>
+
+          <p>
+            Do not guarantee employment, income, acceptance or
+            payment from an external provider.
+          </p>
+
+        </article>
+
+
+        <article class="card card-small">
+
+          <span class="badge badge-primary">
+            EXTERNAL
+          </span>
+
+          <h3>
+            External applications
+          </h3>
+
+          <p>
+            Users should understand when they are leaving JG to
+            apply on an external platform.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       CREATE / EDIT MODAL
+  ========================================================== -->
+
+  <div
+    class="modal"
+    id="opportunityModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-backdrop"
+      data-modal-close
+    ></div>
+
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="opportunityModalTitle"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            OPPORTUNITY
+          </span>
+
+          <h2 id="opportunityModalTitle">
+            Add Opportunity
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <form id="opportunityForm">
+
+        <input
+          type="hidden"
+          id="opportunityId"
+        >
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="opportunityTitle">
+              Title
+            </label>
+
+            <input
+              type="text"
+              id="opportunityTitle"
+              class="form-control"
+              placeholder="e.g. Junior Web Developer"
+              maxlength="180"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="opportunityCategory">
+              Category
+            </label>
+
+            <select
+              id="opportunityCategory"
+              class="form-control"
+              required
+            >
+
+              <option value="job">
+                Job
+              </option>
+
+              <option value="freelance">
+                Freelance
+              </option>
+
+              <option value="internship">
+                Internship
+              </option>
+
+              <option value="scholarship">
+                Scholarship
+              </option>
+
+              <option value="volunteer">
+                Volunteer
+              </option>
+
+              <option value="other">
+                Other
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="opportunityProvider">
+              Provider / Organization
+            </label>
+
+            <input
+              type="text"
+              id="opportunityProvider"
+              class="form-control"
+              placeholder="Organization name"
+              maxlength="160"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="opportunityLocation">
+              Location
+            </label>
+
+            <input
+              type="text"
+              id="opportunityLocation"
+              class="form-control"
+              placeholder="Remote, Nigeria, Worldwide..."
+              maxlength="160"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-group">
+
+          <label for="opportunityDescription">
+            Description
+          </label>
+
+          <textarea
+            id="opportunityDescription"
+            class="form-control"
+            rows="6"
+            maxlength="4000"
+            placeholder="Describe the opportunity..."
+            required
+          ></textarea>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="opportunityUrl">
+              External Application URL
+            </label>
+
+            <input
+              type="url"
+              id="opportunityUrl"
+              class="form-control"
+              placeholder="https://example.com/apply"
+              maxlength="1000"
+              required
+            >
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="opportunityDeadline">
+              Deadline
+            </label>
+
+            <input
+              type="date"
+              id="opportunityDeadline"
+              class="form-control"
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="form-grid">
+
+          <div class="form-group">
+
+            <label for="opportunityStatus">
+              Status
+            </label>
+
+            <select
+              id="opportunityStatus"
+              class="form-control"
+            >
+
+              <option value="draft">
+                Draft
+              </option>
+
+              <option value="published">
+                Published
+              </option>
+
+            </select>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label for="opportunityFeatured">
+              Featured
+            </label>
+
+            <select
+              id="opportunityFeatured"
+              class="form-control"
+            >
+
+              <option value="false">
+                No
+              </option>
+
+              <option value="true">
+                Yes
+              </option>
+
+            </select>
+
+          </div>
+
+        </div>
+
+
+        <div class="form-actions">
+
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-modal-close
+          >
+            Cancel
+          </button>
+
+          <button
+            type="submit"
+            class="btn btn-primary"
+            id="saveOpportunityButton"
+          >
+            Save Opportunity
+          </button>
+
+        </div>
+
+      </form>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       REMOVE MODAL
+  ========================================================== -->
+
+  <div
+    class="modal"
+    id="removeModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-backdrop"
+      data-modal-close
+    ></div>
+
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            CONTENT LIFECYCLE
+          </span>
+
+          <h2>
+            Remove Opportunity?
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="alert alert-warning">
+
+        <strong>
+          This removal is recoverable.
+        </strong>
+
+        <p>
+          The opportunity will no longer appear in the normal public
+          opportunity list. Authorized administrators can restore it.
+        </p>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-modal-close
+        >
+          Cancel
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="confirmRemoveButton"
+        >
+          Remove Opportunity
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       RESTORE / DELETE MODAL
+  ========================================================== -->
+
+  <div
+    class="modal"
+    id="removedModal"
+    aria-hidden="true"
+  >
+
+    <div
+      class="modal-backdrop"
+      data-modal-close
+    ></div>
+
+
+    <div
+      class="modal-dialog"
+      role="dialog"
+      aria-modal="true"
+    >
+
+      <div class="modal-header">
+
+        <div>
+
+          <span class="eyebrow">
+            REMOVED CONTENT
+          </span>
+
+          <h2>
+            Manage Removed Opportunity
+          </h2>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="icon-btn"
+          data-modal-close
+          aria-label="Close"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <p>
+        Choose whether to restore this opportunity or permanently
+        delete it.
+      </p>
+
+
+      <div class="alert alert-danger">
+
+        <strong>
+          Permanent deletion is Owner-only.
+        </strong>
+
+        <p>
+          The backend must verify Owner authorization. Frontend
+          controls cannot bypass server-side permission checks.
+        </p>
+
+      </div>
+
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-secondary"
+          id="restoreButton"
+        >
+          Restore
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="permanentDeleteButton"
+        >
+          Delete Forever
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       SCRIPTS
+  ========================================================== -->
+
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+
+  <script>
+    (() => {
+
+      "use strict";
+
+
+      /* ========================================================
+         STATE
+      ======================================================== */
+
+      const state = {
+
+        items: [],
+
+        activeTab: "all",
+
+        search: "",
+
+        category: "all",
+
+        selected: null,
+
+        editing: false
+
+      };
+
+
+      /* ========================================================
+         DEMO DATA
+      ======================================================== */
+
+      const demoOpportunities = [
+
+        {
+          id: "opp-001",
+          title: "Junior Web Developer",
+          category: "job",
+          provider: "Example Technology",
+          location: "Remote",
+          description:
+            "A junior web development opportunity for candidates with foundational HTML, CSS and JavaScript skills.",
+          url: "https://example.com",
+          deadline: "2026-12-15",
+          status: "published",
+          featured: true,
+          createdAt: "2026-10-01T10:00:00Z",
+          updatedAt: "2026-10-03T10:00:00Z"
+        },
+
+        {
+          id: "opp-002",
+          title: "Creative Design Internship",
+          category: "internship",
+          provider: "Example Creative Studio",
+          location: "Remote",
+          description:
+            "An internship opportunity for beginner and intermediate graphic designers.",
+          url: "https://example.com",
+          deadline: "2026-11-30",
+          status: "published",
+          featured: false,
+          createdAt: "2026-09-28T10:00:00Z",
+          updatedAt: "2026-10-02T10:00:00Z"
+        },
+
+        {
+          id: "opp-003",
+          title: "Freelance Video Editor",
+          category: "freelance",
+          provider: "Example Media",
+          location: "Worldwide",
+          description:
+            "External freelance opportunity for video editors.",
+          url: "https://example.com",
+          deadline: "",
+          status: "draft",
+          featured: false,
+          createdAt: "2026-10-04T10:00:00Z",
+          updatedAt: "2026-10-04T10:00:00Z"
+        }
+
+      ];
+
+
+      /* ========================================================
+         HELPERS
+      ======================================================== */
+
+      function escapeHtml(value) {
+
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+
+      }
+
+
+      function formatDate(value) {
+
+        if (!value) return "—";
+
+        const date = new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+          return "—";
+        }
+
+        return date.toLocaleDateString(
+          undefined,
+          {
+            year: "numeric",
+            month: "short",
+            day: "numeric"
+          }
+        );
+
+      }
+
+
+      function categoryLabel(category) {
+
+        const labels = {
+
+          job: "Job",
+
+          freelance: "Freelance",
+
+          internship: "Internship",
+
+          scholarship: "Scholarship",
+
+          volunteer: "Volunteer",
+
+          other: "Other"
+
+        };
+
+        return labels[category] || category || "Other";
+
+      }
+
+
+      function statusBadge(status) {
+
+        if (status === "published") {
+
+          return `
+            <span class="badge badge-success">
+              Published
+            </span>
+          `;
+
+        }
+
+        if (status === "removed") {
+
+          return `
+            <span class="badge badge-danger">
+              Removed
+            </span>
+          `;
+
+        }
+
+        return `
+          <span class="badge badge-warning">
+            Draft
+          </span>
+        `;
+
+      }
+
+
+      function notify(message, type = "info") {
+
+        if (
+          window.JG_UI &&
+          typeof window.JG_UI.toast === "function"
+        ) {
+
+          window.JG_UI.toast(message, type);
+
+          return;
+
+        }
+
+
+        if (
+          window.JG_APP &&
+          typeof window.JG_APP.toast === "function"
+        ) {
+
+          window.JG_APP.toast(message, type);
+
+          return;
+
+        }
+
+
+        alert(message);
+
+      }
+
+
+      function openModal(id) {
+
+        const modal =
+          document.getElementById(id);
+
+        if (!modal) return;
+
+        modal.classList.add("active");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "false"
+        );
+
+      }
+
+
+      function closeModal(id) {
+
+        const modal =
+          document.getElementById(id);
+
+        if (!modal) return;
+
+        modal.classList.remove("active");
+
+        modal.setAttribute(
+          "aria-hidden",
+          "true"
+        );
+
+      }
+
+
+      /* ========================================================
+         LOAD
+      ======================================================== */
+
+      async function loadOpportunities() {
+
+        const table =
+          document.getElementById(
+            "opportunityTableBody"
+          );
+
+
+        table.innerHTML = `
+          <tr>
+            <td colspan="6">
+              <div class="empty-state">
+                <div class="empty-icon">↻</div>
+                <h3>Loading opportunities...</h3>
+                <p>Please wait.</p>
+              </div>
+            </td>
+          </tr>
+        `;
+
+
+        let items = [];
+
+
+        try {
+
+          if (
+            window.JG_API &&
+            typeof window.JG_API.adminOpportunities ===
+              "function"
+          ) {
+
+            const response =
+              await window.JG_API.adminOpportunities();
+
+
+            if (Array.isArray(response)) {
+
+              items = response;
+
+            } else if (
+              response &&
+              Array.isArray(response.items)
+            ) {
+
+              items = response.items;
+
+            } else if (
+              response &&
+              Array.isArray(response.data)
+            ) {
+
+              items = response.data;
+
+            }
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Opportunity API unavailable:",
+            error
+          );
+
+        }
+
+
+        if (!items.length) {
+
+          items = [
+            ...demoOpportunities
+          ];
+
+        }
+
+
+        state.items = items;
+
+        render();
+
+        updateStats();
+
+      }
+
+
+      /* ========================================================
+         FILTER
+      ======================================================== */
+
+      function filteredItems() {
+
+        let items =
+          [...state.items];
+
+
+        if (state.activeTab === "published") {
+
+          items =
+            items.filter(
+              item =>
+                item.status === "published"
+            );
+
+        }
+
+
+        if (state.activeTab === "draft") {
+
+          items =
+            items.filter(
+              item =>
+                item.status === "draft"
+            );
+
+        }
+
+
+        if (state.activeTab === "removed") {
+
+          items =
+            items.filter(
+              item =>
+                item.status === "removed" ||
+                item.deletedAt
+            );
+
+        }
+
+
+        if (state.category !== "all") {
+
+          items =
+            items.filter(
+              item =>
+                item.category ===
+                state.category
+            );
+
+        }
+
+
+        if (state.search) {
+
+          const query =
+            state.search.toLowerCase();
+
+
+          items =
+            items.filter(item => {
+
+              const text = [
+
+                item.id,
+
+                item.title,
+
+                item.provider,
+
+                item.location,
+
+                item.description,
+
+                item.category
+
+              ]
+                .filter(Boolean)
+                .join(" ")
+                .toLowerCase();
+
+
+              return text.includes(query);
+
+            });
+
+        }
+
+
+        return items;
+
+      }
+
+
+      /* ========================================================
+         RENDER
+      ======================================================== */
+
+      function render() {
+
+        const table =
+          document.getElementById(
+            "opportunityTableBody"
+          );
+
+
+        const items =
+          filteredItems();
+
+
+        document.getElementById(
+          "resultCount"
+        ).textContent =
+          `${items.length} item${
+            items.length === 1 ? "" : "s"
+          }`;
+
+
+        const headings = {
+
+          all: "All Opportunities",
+
+          published: "Published Opportunities",
+
+          draft: "Draft Opportunities",
+
+          removed: "Removed Opportunities"
+
+        };
+
+
+        document.getElementById(
+          "tableHeading"
+        ).textContent =
+          headings[state.activeTab];
+
+
+        if (!items.length) {
+
+          table.innerHTML = `
+            <tr>
+              <td colspan="6">
+
+                <div class="empty-state">
+
+                  <div class="empty-icon">
+                    ◫
+                  </div>
+
+                  <h3>
+                    No opportunities found
+                  </h3>
+
+                  <p>
+                    Try changing your filters or create
+                    a new opportunity.
+                  </p>
+
+                </div>
+
+              </td>
+            </tr>
+          `;
+
+          return;
+
+        }
+
+
+        table.innerHTML =
+          items.map(item => {
+
+            const removed =
+              item.status === "removed" ||
+              Boolean(item.deletedAt);
+
+
+            let actions = "";
+
+
+            if (removed) {
+
+              actions = `
+                <div class="table-actions">
+
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-secondary"
+                    data-action="manage-removed"
+                    data-id="${escapeHtml(item.id)}"
+                  >
+                    Manage
+                  </button>
+
+                </div>
+              `;
+
+            } else {
+
+              actions = `
+                <div class="table-actions">
+
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-secondary"
+                    data-action="edit"
+                    data-id="${escapeHtml(item.id)}"
+                  >
+                    Edit
+                  </button>
+
+                  <button
+                    type="button"
+                    class="btn btn-sm btn-warning"
+                    data-action="remove"
+                    data-id="${escapeHtml(item.id)}"
+                  >
+                    Remove
+                  </button>
+
+                </div>
+              `;
+
+            }
+
+
+            return `
+              <tr>
+
+                <td>
+
+                  <div class="table-primary">
+
+                    ${escapeHtml(
+                      item.title ||
+                      "Untitled Opportunity"
+                    )}
+
+                    ${
+                      item.featured
+                        ? `
+                          <span class="badge badge-primary">
+                            Featured
+                          </span>
+                        `
+                        : ""
+                    }
+
+                  </div>
+
+                  <small>
+                    ${escapeHtml(
+                      item.id || "No ID"
+                    )}
+                  </small>
+
+                </td>
+
+
+                <td>
+                  ${escapeHtml(
+                    categoryLabel(
+                      item.category
+                    )
+                  )}
+                </td>
+
+
+                <td>
+                  ${escapeHtml(
+                    item.provider ||
+                    "External provider"
+                  )}
+                </td>
+
+
+                <td>
+                  ${statusBadge(
+                    removed
+                      ? "removed"
+                      : item.status
+                  )}
+                </td>
+
+
+                <td>
+                  ${formatDate(
+                    item.deadline
+                  )}
+                </td>
+
+
+                <td>
+                  ${actions}
+                </td>
+
+              </tr>
+            `;
+
+          }).join("");
+
+      }
+
+
+      /* ========================================================
+         STATS
+      ======================================================== */
+
+      function updateStats() {
+
+        const total =
+          state.items.length;
+
+
+        const published =
+          state.items.filter(
+            item =>
+              item.status === "published"
+          ).length;
+
+
+        const drafts =
+          state.items.filter(
+            item =>
+              item.status === "draft"
+          ).length;
+
+
+        const removed =
+          state.items.filter(
+            item =>
+              item.status === "removed" ||
+              item.deletedAt
+          ).length;
+
+
+        document.getElementById(
+          "totalCount"
+        ).textContent = total;
+
+
+        document.getElementById(
+          "publishedCount"
+        ).textContent = published;
+
+
+        document.getElementById(
+          "draftCount"
+        ).textContent = drafts;
+
+
+        document.getElementById(
+          "removedCount"
+        ).textContent = removed;
+
+      }
+
+
+      /* ========================================================
+         TABS
+      ======================================================== */
+
+      document
+        .querySelectorAll("[data-tab]")
+        .forEach(button => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              document
+                .querySelectorAll(
+                  "[data-tab]"
+                )
+                .forEach(tab =>
+                  tab.classList.remove(
+                    "active"
+                  )
+                );
+
+
+              button.classList.add(
+                "active"
+              );
+
+
+              state.activeTab =
+                button.dataset.tab;
+
+
+              render();
+
+            }
+          );
+
+        });
+
+
+      /* ========================================================
+         SEARCH
+      ======================================================== */
+
+      document
+        .getElementById("searchInput")
+        .addEventListener(
+          "input",
+          event => {
+
+            state.search =
+              event.target.value
+                .trim();
+
+
+            render();
+
+          }
+        );
+
+
+      /* ========================================================
+         CATEGORY
+      ======================================================== */
+
+      document
+        .getElementById("categoryFilter")
+        .addEventListener(
+          "change",
+          event => {
+
+            state.category =
+              event.target.value;
+
+
+            render();
+
+          }
+        );
+
+
+      /* ========================================================
+         MODAL CLOSE
+      ======================================================== */
+
+      document
+        .querySelectorAll(
+          "[data-modal-close]"
+        )
+        .forEach(element => {
+
+          element.addEventListener(
+            "click",
+            () => {
+
+              const modal =
+                element.closest(
+                  ".modal"
+                );
+
+
+              if (modal) {
+
+                closeModal(
+                  modal.id
+                );
+
+              }
+
+            }
+          );
+
+        });
+
+
+      /* ========================================================
+         ADD
+      ======================================================== */
+
+      document
+        .getElementById(
+          "addOpportunityButton"
+        )
+        .addEventListener(
+          "click",
+          () => {
+
+            state.editing = false;
+
+            state.selected = null;
+
+
+            document
+              .getElementById(
+                "opportunityForm"
+              )
+              .reset();
+
+
+            document
+              .getElementById(
+                "opportunityId"
+              )
+              .value = "";
+
+
+            document
+              .getElementById(
+                "opportunityModalTitle"
+              )
+              .textContent =
+                "Add Opportunity";
+
+
+            document
+              .getElementById(
+                "saveOpportunityButton"
+              )
+              .textContent =
+                "Create Opportunity";
+
+
+            openModal(
+              "opportunityModal"
+            );
+
+          }
+        );
+
+
+      /* ========================================================
+         EDIT
+      ======================================================== */
+
+      function editOpportunity(item) {
+
+        state.editing = true;
+
+        state.selected = item;
+
+
+        document
+          .getElementById(
+            "opportunityId"
+          )
+          .value =
+            item.id || "";
+
+
+        document
+          .getElementById(
+            "opportunityTitle"
+          )
+          .value =
+            item.title || "";
+
+
+        document
+          .getElementById(
+            "opportunityCategory"
+          )
+          .value =
+            item.category || "other";
+
+
+        document
+          .getElementById(
+            "opportunityProvider"
+          )
+          .value =
+            item.provider || "";
+
+
+        document
+          .getElementById(
+            "opportunityLocation"
+          )
+          .value =
+            item.location || "";
+
+
+        document
+          .getElementById(
+            "opportunityDescription"
+          )
+          .value =
+            item.description || "";
+
+
+        document
+          .getElementById(
+            "opportunityUrl"
+          )
+          .value =
+            item.url || "";
+
+
+        document
+          .getElementById(
+            "opportunityDeadline"
+          )
+          .value =
+            item.deadline || "";
+
+
+        document
+          .getElementById(
+            "opportunityStatus"
+          )
+          .value =
+            item.status === "published"
+              ? "published"
+              : "draft";
+
+
+        document
+          .getElementById(
+            "opportunityFeatured"
+          )
+          .value =
+            item.featured
+              ? "true"
+              : "false";
+
+
+        document
+          .getElementById(
+            "opportunityModalTitle"
+          )
+          .textContent =
+            "Edit Opportunity";
+
+
+        document
+          .getElementById(
+            "saveOpportunityButton"
+          )
+          .textContent =
+            "Save Changes";
+
+
+        openModal(
+          "opportunityModal"
+        );
+
+      }
+
+
+      /* ========================================================
+         TABLE ACTIONS
+      ======================================================== */
+
+      document
+        .getElementById(
+          "opportunityTableBody"
+        )
+        .addEventListener(
+          "click",
+          event => {
+
+            const button =
+              event.target.closest(
+                "[data-action]"
+              );
+
+
+            if (!button) return;
+
+
+            const id =
+              button.dataset.id;
+
+
+            const item =
+              state.items.find(
+                opportunity =>
+                  String(
+                    opportunity.id
+                  ) === String(id)
+              );
+
+
+            if (!item) return;
+
+
+            state.selected = item;
+
+
+            const action =
+              button.dataset.action;
+
+
+            if (
+              action === "edit"
+            ) {
+
+              editOpportunity(
+                item
+              );
+
+              return;
+
+            }
+
+
+            if (
+              action === "remove"
+            ) {
+
+              openModal(
+                "removeModal"
+              );
+
+              return;
+
+            }
+
+
+            if (
+              action === "manage-removed"
+            ) {
+
+              openModal(
+                "removedModal"
+              );
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         SAVE
+      ======================================================== */
+
+      document
+        .getElementById(
+          "opportunityForm"
+        )
+        .addEventListener(
+          "submit",
+          async event => {
+
+            event.preventDefault();
+
+
+            const button =
+              document.getElementById(
+                "saveOpportunityButton"
+              );
+
+
+            const payload = {
+
+              title:
+                document
+                  .getElementById(
+                    "opportunityTitle"
+                  )
+                  .value
+                  .trim(),
+
+              category:
+                document
+                  .getElementById(
+                    "opportunityCategory"
+                  )
+                  .value,
+
+              provider:
+                document
+                  .getElementById(
+                    "opportunityProvider"
+                  )
+                  .value
+                  .trim(),
+
+              location:
+                document
+                  .getElementById(
+                    "opportunityLocation"
+                  )
+                  .value
+                  .trim(),
+
+              description:
+                document
+                  .getElementById(
+                    "opportunityDescription"
+                  )
+                  .value
+                  .trim(),
+
+              url:
+                document
+                  .getElementById(
+                    "opportunityUrl"
+                  )
+                  .value
+                  .trim(),
+
+              deadline:
+                document
+                  .getElementById(
+                    "opportunityDeadline"
+                  )
+                  .value,
+
+              status:
+                document
+                  .getElementById(
+                    "opportunityStatus"
+                  )
+                  .value,
+
+              featured:
+                document
+                  .getElementById(
+                    "opportunityFeatured"
+                  )
+                  .value === "true"
+
+            };
+
+
+            if (
+              !payload.title ||
+              !payload.provider ||
+              !payload.description ||
+              !payload.url
+            ) {
+
+              notify(
+                "Please complete all required fields.",
+                "warning"
+              );
+
+              return;
+
+            }
+
+
+            button.disabled = true;
+
+            button.textContent =
+              state.editing
+                ? "Saving..."
+                : "Creating...";
+
+
+            try {
+
+              /*
+               * Use the backend when available.
+               */
+
+              if (
+                window.JG_API &&
+                state.editing &&
+                typeof window.JG_API.updateOpportunity ===
+                  "function"
+              ) {
+
+                await window.JG_API.updateOpportunity(
+                  state.selected.id,
+                  payload
+                );
+
+
+                notify(
+                  "Opportunity updated successfully.",
+                  "success"
+                );
+
+
+                closeModal(
+                  "opportunityModal"
+                );
+
+
+                await loadOpportunities();
+
+                return;
+
+              }
+
+
+              if (
+                window.JG_API &&
+                !state.editing &&
+                typeof window.JG_API.createOpportunity ===
+                  "function"
+              ) {
+
+                await window.JG_API.createOpportunity(
+                  payload
+                );
+
+
+                notify(
+                  "Opportunity created successfully.",
+                  "success"
+                );
+
+
+                closeModal(
+                  "opportunityModal"
+                );
+
+
+                await loadOpportunities();
+
+                return;
+
+              }
+
+
+              /*
+               * Frontend development fallback.
+               */
+
+              if (state.editing) {
+
+                Object.assign(
+                  state.selected,
+                  payload,
+                  {
+                    updatedAt:
+                      new Date().toISOString()
+                  }
+                );
+
+              } else {
+
+                state.items.unshift({
+
+                  id:
+                    `opp-${Date.now()}`,
+
+                  ...payload,
+
+                  createdAt:
+                    new Date().toISOString(),
+
+                  updatedAt:
+                    new Date().toISOString()
+
+                });
+
+              }
+
+
+              render();
+
+              updateStats();
+
+              closeModal(
+                "opportunityModal"
+              );
+
+
+              notify(
+                "Opportunity updated in the current frontend session. Connect the backend for permanent storage.",
+                "info"
+              );
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              notify(
+                error?.message ||
+                "Unable to save opportunity.",
+                "error"
+              );
+
+            } finally {
+
+              button.disabled = false;
+
+
+              button.textContent =
+                state.editing
+                  ? "Save Changes"
+                  : "Create Opportunity";
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         REMOVE
+      ======================================================== */
+
+      document
+        .getElementById(
+          "confirmRemoveButton"
+        )
+        .addEventListener(
+          "click",
+          async () => {
+
+            const item =
+              state.selected;
+
+
+            if (!item) return;
+
+
+            try {
+
+              if (
+                window.JG_API &&
+                typeof window.JG_API.removeOpportunity ===
+                  "function"
+              ) {
+
+                await window.JG_API.removeOpportunity(
+                  item.id
+                );
+
+              } else {
+
+                item.status =
+                  "removed";
+
+                item.deletedAt =
+                  new Date().toISOString();
+
+              }
+
+
+              closeModal(
+                "removeModal"
+              );
+
+
+              notify(
+                "Opportunity removed.",
+                "success"
+              );
+
+
+              render();
+
+              updateStats();
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              notify(
+                error?.message ||
+                "Unable to remove opportunity.",
+                "error"
+              );
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         RESTORE
+      ======================================================== */
+
+      document
+        .getElementById(
+          "restoreButton"
+        )
+        .addEventListener(
+          "click",
+          async () => {
+
+            const item =
+              state.selected;
+
+
+            if (!item) return;
+
+
+            try {
+
+              if (
+                window.JG_API &&
+                typeof window.JG_API.restoreOpportunity ===
+                  "function"
+              ) {
+
+                await window.JG_API.restoreOpportunity(
+                  item.id
+                );
+
+              } else {
+
+                item.status =
+                  "draft";
+
+                delete item.deletedAt;
+
+              }
+
+
+              closeModal(
+                "removedModal"
+              );
+
+
+              notify(
+                "Opportunity restored as a draft.",
+                "success"
+              );
+
+
+              render();
+
+              updateStats();
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              notify(
+                error?.message ||
+                "Unable to restore opportunity.",
+                "error"
+              );
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         PERMANENT DELETE
+      ======================================================== */
+
+      document
+        .getElementById(
+          "permanentDeleteButton"
+        )
+        .addEventListener(
+          "click",
+          async () => {
+
+            const item =
+              state.selected;
+
+
+            if (!item) return;
+
+
+            const confirmed =
+              window.confirm(
+                "Permanently delete this opportunity? This action cannot normally be undone."
+              );
+
+
+            if (!confirmed) return;
+
+
+            try {
+
+              if (
+                window.JG_API &&
+                typeof window.JG_API.permanentDeleteOpportunity ===
+                  "function"
+              ) {
+
+                await window.JG_API.permanentDeleteOpportunity(
+                  item.id
+                );
+
+              } else {
+
+                /*
+                 * Frontend fallback only.
+                 *
+                 * Production backend MUST enforce Owner-only
+                 * authorization.
+                 */
+
+                state.items =
+                  state.items.filter(
+                    opportunity =>
+                      opportunity.id !==
+                      item.id
+                  );
+
+              }
+
+
+              state.selected = null;
+
+
+              closeModal(
+                "removedModal"
+              );
+
+
+              notify(
+                "Opportunity permanently deleted.",
+                "success"
+              );
+
+
+              render();
+
+              updateStats();
+
+            } catch (error) {
+
+              console.error(error);
+
+
+              notify(
+                error?.message ||
+                "Permanent deletion was rejected.",
+                "error"
+              );
+
+            }
+
+          }
+        );
+
+
+      /* ========================================================
+         REFRESH
+      ======================================================== */
+
+      document
+        .getElementById(
+          "refreshButton"
+        )
+        .addEventListener(
+          "click",
+          loadOpportunities
+        );
+
+
+      /* ========================================================
+         INITIALIZE
+      ======================================================== */
+
+      async function initialize() {
+
+        try {
+
+          if (
+            window.JG_AUTH &&
+            typeof window.JG_AUTH.requireAdmin ===
+              "function"
+          ) {
+
+            await window.JG_AUTH.requireAdmin();
+
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Admin authorization check:",
+            error
+          );
+
+        }
+
+
+        await loadOpportunities();
+
+      }
+
+
+      initialize();
+
+    })();
+  </script>
+
+</body>
+</html>
