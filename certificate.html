@@ -1,758 +1,1620 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>JG | Certificate</title>
-
-    <meta name="description"
-          content="JG course completion certificate.">
-
-    <link rel="stylesheet"
-          href="css/style.css">
-
-    <style>
-
-        .certificate-page {
-            min-height: 100vh;
-            padding: 130px 20px 80px;
-            background:
-                radial-gradient(circle at top right, rgba(37,99,235,.10), transparent 35%),
-                #f5f7fb;
-        }
-
-        .certificate-header {
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto 35px;
-        }
-
-        .certificate-header h1 {
-            font-size: clamp(34px, 6vw, 58px);
-            margin: 18px 0;
-        }
-
-        .certificate-header h1 span {
-            color: #2563eb;
-        }
-
-        .certificate-header p {
-            color: #667085;
-            line-height: 1.7;
-        }
-
-        .certificate-wrapper {
-            max-width: 1050px;
-            margin: auto;
-        }
-
-        .certificate {
-
-            position: relative;
-
-            background: #ffffff;
-
-            border: 10px solid #111827;
-
-            outline: 2px solid #2563eb;
-            outline-offset: -20px;
-
-            padding: 70px 60px;
-
-            text-align: center;
-
-            box-shadow:
-                0 25px 70px rgba(0,0,0,.12);
-
-            overflow: hidden;
-        }
-
-        .certificate::before,
-        .certificate::after {
-
-            content: "";
-
-            position: absolute;
-
-            width: 180px;
-            height: 180px;
-
-            border: 2px solid rgba(37,99,235,.25);
-
-            border-radius: 50%;
-        }
-
-        .certificate::before {
-            top: -90px;
-            left: -90px;
-        }
-
-        .certificate::after {
-            bottom: -90px;
-            right: -90px;
-        }
-
-        .certificate-logo {
-
-            font-size: 45px;
-            font-weight: 900;
-
-            letter-spacing: -2px;
-
-            color: #111827;
-        }
-
-        .certificate-logo span {
-            color: #2563eb;
-        }
-
-        .certificate-small {
-
-            margin-top: 12px;
-
-            font-size: 13px;
-
-            letter-spacing: 4px;
-
-            text-transform: uppercase;
-
-            color: #667085;
-        }
-
-        .certificate-title {
-
-            margin: 45px 0 10px;
-
-            font-size: clamp(32px, 6vw, 60px);
-
-            font-weight: 900;
-
-            letter-spacing: 2px;
-
-            text-transform: uppercase;
-        }
-
-        .certificate-subtitle {
-
-            color: #667085;
-
-            font-size: 17px;
-
-            margin-bottom: 25px;
-        }
-
-        .student-name {
-
-            font-size: clamp(30px, 5vw, 50px);
-
-            font-weight: 800;
-
-            color: #2563eb;
-
-            margin: 20px 0;
-
-            border-bottom: 2px solid #dbe4f0;
-
-            display: inline-block;
-
-            padding: 0 35px 10px;
-        }
-
-        .certificate-text {
-
-            max-width: 700px;
-
-            margin: 0 auto;
-
-            color: #4b5563;
-
-            line-height: 1.8;
-
-            font-size: 16px;
-        }
-
-        .course-name {
-
-            font-size: clamp(24px, 4vw, 38px);
-
-            font-weight: 800;
-
-            color: #111827;
-
-            margin: 20px 0;
-        }
-
-        .certificate-meta {
-
-            display: grid;
-
-            grid-template-columns: repeat(3, 1fr);
-
-            gap: 20px;
-
-            max-width: 800px;
-
-            margin: 45px auto;
-        }
-
-        .certificate-meta div {
-
-            padding: 18px;
-
-            background: #f8fafc;
-
-            border-radius: 12px;
-
-            border: 1px solid #e5e7eb;
-        }
-
-        .certificate-meta strong {
-
-            display: block;
-
-            font-size: 11px;
-
-            text-transform: uppercase;
-
-            letter-spacing: 1px;
-
-            color: #667085;
-
-            margin-bottom: 7px;
-        }
-
-        .certificate-meta span {
-            font-weight: 700;
-        }
-
-        .certificate-signatures {
-
-            display: grid;
-
-            grid-template-columns: 1fr 1fr;
-
-            gap: 80px;
-
-            max-width: 700px;
-
-            margin: 55px auto 20px;
-        }
-
-        .signature {
-
-            padding-top: 15px;
-
-            border-top: 1px solid #111827;
-        }
-
-        .signature strong {
-            display: block;
-        }
-
-        .signature span {
-
-            display: block;
-
-            margin-top: 5px;
-
-            color: #667085;
-
-            font-size: 13px;
-        }
-
-        .certificate-actions {
-
-            display: flex;
-
-            justify-content: center;
-
-            flex-wrap: wrap;
-
-            gap: 12px;
-
-            margin-top: 30px;
-        }
-
-        .verification-note {
-
-            max-width: 800px;
-
-            margin: 30px auto 0;
-
-            padding: 20px;
-
-            background: #eef4ff;
-
-            border-radius: 14px;
-
-            text-align: center;
-
-            color: #475467;
-
-            line-height: 1.7;
-        }
-
-        .verification-note a {
-            color: #2563eb;
-            font-weight: 700;
-        }
-
-        @media (max-width: 700px) {
-
-            .certificate {
-                padding: 50px 22px;
-                border-width: 7px;
-            }
-
-            .certificate-meta {
-                grid-template-columns: 1fr;
-            }
-
-            .certificate-signatures {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .student-name {
-                padding-left: 10px;
-                padding-right: 10px;
-            }
-
-        }
-
-        @media print {
-
-            nav,
-            .certificate-header,
-            .certificate-actions,
-            .verification-note,
-            footer {
-                display: none !important;
-            }
-
-            .certificate-page {
-                padding: 0;
-                background: white;
-            }
-
-            .certificate {
-                box-shadow: none;
-                min-height: 90vh;
-            }
-
-        }
-
-    </style>
-
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  />
+
+  <meta
+    name="description"
+    content="JG Certificates — View, download and verify your JG learning certificates."
+  />
+
+  <meta name="theme-color" content="#07111f" />
+
+  <title>Certificate | JG</title>
+
+  <link rel="stylesheet" href="css/style.css" />
+
+  <style>
+    /* =========================================================
+       JG CERTIFICATE PAGE
+       ========================================================= */
+
+    :root {
+      --cert-bg: #07111f;
+      --cert-card: rgba(15, 28, 48, 0.88);
+      --cert-card-2: rgba(20, 36, 60, 0.92);
+      --cert-border: rgba(255, 255, 255, 0.09);
+      --cert-text: #f8fafc;
+      --cert-muted: #94a3b8;
+      --cert-blue: #3b82f6;
+      --cert-cyan: #22d3ee;
+      --cert-purple: #8b5cf6;
+      --cert-green: #22c55e;
+      --cert-danger: #ef4444;
+      --cert-gold: #f5c451;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at top left,
+          rgba(59, 130, 246, 0.14),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at bottom right,
+          rgba(139, 92, 246, 0.12),
+          transparent 35%
+        ),
+        var(--cert-bg);
+      color: var(--cert-text);
+    }
+
+    button,
+    input {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .cert-page {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      padding: 24px 18px 110px;
+    }
+
+    /* HEADER */
+
+    .cert-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 30px;
+    }
+
+    .cert-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .cert-logo {
+      width: 46px;
+      height: 46px;
+      border-radius: 15px;
+      display: grid;
+      place-items: center;
+      font-size: 19px;
+      font-weight: 900;
+      background:
+        linear-gradient(
+          135deg,
+          var(--cert-blue),
+          var(--cert-purple)
+        );
+      box-shadow:
+        0 10px 30px rgba(59, 130, 246, 0.25);
+    }
+
+    .cert-brand-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: -0.4px;
+    }
+
+    .cert-brand-text span {
+      display: block;
+      margin-top: 2px;
+      color: var(--cert-muted);
+      font-size: 12px;
+    }
+
+    .cert-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .cert-icon-btn,
+    .cert-back-btn {
+      min-height: 42px;
+      border: 1px solid var(--cert-border);
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--cert-text);
+      border-radius: 12px;
+      padding: 0 14px;
+    }
+
+    .cert-icon-btn:hover,
+    .cert-back-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    /* HERO */
+
+    .cert-hero {
+      margin-bottom: 25px;
+    }
+
+    .cert-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #67e8f9;
+      font-size: 13px;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .cert-eyebrow::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--cert-cyan);
+      box-shadow: 0 0 15px var(--cert-cyan);
+    }
+
+    .cert-hero h1 {
+      margin: 0;
+      font-size: clamp(30px, 7vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -2px;
+    }
+
+    .cert-hero p {
+      max-width: 650px;
+      color: var(--cert-muted);
+      line-height: 1.7;
+      margin: 14px 0 0;
+      font-size: 15px;
+    }
+
+    /* STATUS */
+
+    .cert-status {
+      display: none;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      margin: 20px 0;
+      border: 1px solid var(--cert-border);
+    }
+
+    .cert-status.show {
+      display: flex;
+    }
+
+    .cert-status.success {
+      background: rgba(34, 197, 94, 0.08);
+      border-color: rgba(34, 197, 94, 0.25);
+      color: #86efac;
+    }
+
+    .cert-status.warning {
+      background: rgba(245, 196, 81, 0.08);
+      border-color: rgba(245, 196, 81, 0.25);
+      color: #fde68a;
+    }
+
+    .cert-status.error {
+      background: rgba(239, 68, 68, 0.08);
+      border-color: rgba(239, 68, 68, 0.25);
+      color: #fca5a5;
+    }
+
+    /* EMPTY STATE */
+
+    .cert-empty {
+      display: none;
+      padding: 45px 22px;
+      text-align: center;
+      background: var(--cert-card);
+      border: 1px solid var(--cert-border);
+      border-radius: 24px;
+    }
+
+    .cert-empty.show {
+      display: block;
+    }
+
+    .cert-empty-icon {
+      width: 70px;
+      height: 70px;
+      margin: 0 auto 18px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      font-size: 30px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+    }
+
+    .cert-empty h2 {
+      margin: 0 0 10px;
+    }
+
+    .cert-empty p {
+      color: var(--cert-muted);
+      max-width: 500px;
+      margin: 0 auto 20px;
+      line-height: 1.65;
+    }
+
+    /* CERTIFICATE AREA */
+
+    .certificate-wrapper {
+      display: none;
+    }
+
+    .certificate-wrapper.show {
+      display: block;
+    }
+
+    .certificate {
+      position: relative;
+      overflow: hidden;
+      border-radius: 28px;
+      padding: 8px;
+      background:
+        linear-gradient(
+          135deg,
+          var(--cert-blue),
+          var(--cert-purple),
+          var(--cert-cyan)
+        );
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.35);
+    }
+
+    .certificate-inner {
+      position: relative;
+      overflow: hidden;
+      min-height: 650px;
+      padding: 55px 45px;
+      border-radius: 22px;
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(59, 130, 246, 0.11),
+          transparent 25%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(139, 92, 246, 0.12),
+          transparent 28%
+        ),
+        #0b1628;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .certificate-inner::before,
+    .certificate-inner::after {
+      content: "";
+      position: absolute;
+      width: 150px;
+      height: 150px;
+      border: 1px solid rgba(34, 211, 238, 0.18);
+      transform: rotate(45deg);
+      pointer-events: none;
+    }
+
+    .certificate-inner::before {
+      left: -95px;
+      top: -95px;
+    }
+
+    .certificate-inner::after {
+      right: -95px;
+      bottom: -95px;
+    }
+
+    .certificate-top-label {
+      position: relative;
+      z-index: 1;
+      color: var(--cert-cyan);
+      font-size: 12px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+
+    .certificate-logo {
+      position: relative;
+      z-index: 1;
+      width: 70px;
+      height: 70px;
+      margin: 22px auto 20px;
+      border-radius: 22px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(
+          135deg,
+          var(--cert-blue),
+          var(--cert-purple)
+        );
+      font-weight: 900;
+      font-size: 26px;
+      box-shadow:
+        0 15px 35px rgba(59, 130, 246, 0.2);
+    }
+
+    .certificate-title {
+      position: relative;
+      z-index: 1;
+      margin: 0;
+      font-size: clamp(32px, 7vw, 54px);
+      letter-spacing: -2px;
+    }
+
+    .certificate-subtitle {
+      position: relative;
+      z-index: 1;
+      color: var(--cert-muted);
+      margin: 10px 0 30px;
+      font-size: 14px;
+    }
+
+    .certificate-recipient {
+      position: relative;
+      z-index: 1;
+      color: var(--cert-gold);
+      font-size: clamp(25px, 6vw, 40px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin: 10px 0 14px;
+    }
+
+    .certificate-description {
+      position: relative;
+      z-index: 1;
+      max-width: 650px;
+      margin: 0 auto;
+      color: #cbd5e1;
+      line-height: 1.75;
+      font-size: 15px;
+    }
+
+    .certificate-course {
+      position: relative;
+      z-index: 1;
+      margin-top: 12px;
+      font-weight: 800;
+      color: white;
+      font-size: 18px;
+    }
+
+    .certificate-divider {
+      position: relative;
+      z-index: 1;
+      width: min(450px, 80%);
+      height: 1px;
+      margin: 35px auto;
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+    }
+
+    .certificate-meta {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      max-width: 750px;
+      margin: 0 auto;
+    }
+
+    .certificate-meta-box {
+      padding: 15px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    .certificate-meta-box span {
+      display: block;
+      color: var(--cert-muted);
+      font-size: 11px;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+    }
+
+    .certificate-meta-box strong {
+      display: block;
+      font-size: 13px;
+      word-break: break-word;
+    }
+
+    .certificate-footer {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 25px;
+      max-width: 750px;
+      margin: 38px auto 0;
+    }
+
+    .certificate-signature {
+      text-align: left;
+    }
+
+    .signature-line {
+      width: 170px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.25);
+      margin-bottom: 8px;
+    }
+
+    .certificate-signature small {
+      color: var(--cert-muted);
+      font-size: 11px;
+    }
+
+    .certificate-verify {
+      text-align: right;
+    }
+
+    .certificate-verify strong {
+      display: block;
+      color: var(--cert-cyan);
+      font-size: 12px;
+    }
+
+    .certificate-verify small {
+      color: var(--cert-muted);
+      font-size: 10px;
+    }
+
+    /* BUTTONS */
+
+    .certificate-controls {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    .cert-btn {
+      min-height: 46px;
+      border-radius: 13px;
+      padding: 0 18px;
+      border: 1px solid var(--cert-border);
+      color: white;
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 800;
+    }
+
+    .cert-btn:hover {
+      transform: translateY(-1px);
+      background: rgba(255, 255, 255, 0.09);
+    }
+
+    .cert-btn.primary {
+      border: 0;
+      background:
+        linear-gradient(
+          135deg,
+          var(--cert-blue),
+          var(--cert-purple)
+        );
+      box-shadow:
+        0 12px 25px rgba(59, 130, 246, 0.2);
+    }
+
+    .cert-btn.success {
+      border-color: rgba(34, 197, 94, 0.25);
+      color: #86efac;
+    }
+
+    /* VERIFICATION SEARCH */
+
+    .verify-card {
+      margin-top: 28px;
+      padding: 24px;
+      border-radius: 22px;
+      background: var(--cert-card);
+      border: 1px solid var(--cert-border);
+    }
+
+    .verify-card h2 {
+      margin: 0 0 7px;
+      font-size: 21px;
+    }
+
+    .verify-card p {
+      margin: 0 0 18px;
+      color: var(--cert-muted);
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .verify-form {
+      display: flex;
+      gap: 10px;
+    }
+
+    .verify-input {
+      flex: 1;
+      min-width: 0;
+      height: 48px;
+      border-radius: 13px;
+      border: 1px solid var(--cert-border);
+      outline: none;
+      padding: 0 15px;
+      color: white;
+      background: rgba(255, 255, 255, 0.045);
+    }
+
+    .verify-input:focus {
+      border-color: rgba(59, 130, 246, 0.7);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+    }
+
+    .verify-result {
+      display: none;
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 14px;
+      line-height: 1.6;
+    }
+
+    .verify-result.show {
+      display: block;
+    }
+
+    .verify-result.valid {
+      background: rgba(34, 197, 94, 0.08);
+      border: 1px solid rgba(34, 197, 94, 0.2);
+      color: #bbf7d0;
+    }
+
+    .verify-result.invalid {
+      background: rgba(239, 68, 68, 0.08);
+      border: 1px solid rgba(239, 68, 68, 0.2);
+      color: #fecaca;
+    }
+
+    /* MOBILE NAV */
+
+    .cert-mobile-nav {
+      position: fixed;
+      z-index: 100;
+      left: 12px;
+      right: 12px;
+      bottom: max(12px, env(safe-area-inset-bottom));
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 5px;
+      padding: 7px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 19px;
+      background: rgba(8, 17, 31, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .cert-mobile-nav a {
+      min-height: 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 3px;
+      border-radius: 13px;
+      color: var(--cert-muted);
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .cert-mobile-nav a span:first-child {
+      font-size: 17px;
+    }
+
+    .cert-mobile-nav a:hover,
+    .cert-mobile-nav a.active {
+      color: white;
+      background: rgba(59, 130, 246, 0.13);
+    }
+
+    /* PRINT */
+
+    @media print {
+      body {
+        background: white !important;
+        color: black !important;
+      }
+
+      body * {
+        visibility: hidden;
+      }
+
+      .certificate,
+      .certificate * {
+        visibility: visible;
+      }
+
+      .certificate {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        padding: 0;
+        box-shadow: none;
+      }
+
+      .certificate-inner {
+        min-height: 0;
+        border-radius: 0;
+        background: white;
+        color: black;
+      }
+
+      .certificate-title,
+      .certificate-course,
+      .certificate-recipient,
+      .certificate-description,
+      .certificate-meta-box strong {
+        color: black !important;
+      }
+
+      .certificate-subtitle,
+      .certificate-meta-box span,
+      .certificate-signature small,
+      .certificate-verify small {
+        color: #555 !important;
+      }
+
+      .certificate-controls,
+      .verify-card,
+      .cert-header,
+      .cert-hero,
+      .cert-status,
+      .cert-empty,
+      .cert-mobile-nav {
+        display: none !important;
+      }
+    }
+
+    /* RESPONSIVE */
+
+    @media (max-width: 700px) {
+      .cert-page {
+        padding: 18px 14px 100px;
+      }
+
+      .cert-header {
+        margin-bottom: 24px;
+      }
+
+      .cert-brand-text span {
+        display: none;
+      }
+
+      .cert-back-btn {
+        padding: 0 11px;
+      }
+
+      .certificate-inner {
+        min-height: 600px;
+        padding: 38px 20px;
+      }
+
+      .certificate-meta {
+        grid-template-columns: 1fr;
+      }
+
+      .certificate-footer {
+        align-items: center;
+        flex-direction: column;
+      }
+
+      .certificate-signature,
+      .certificate-verify {
+        text-align: center;
+      }
+
+      .signature-line {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .verify-form {
+        flex-direction: column;
+      }
+
+      .verify-input {
+        width: 100%;
+      }
+
+      .verify-form .cert-btn {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 430px) {
+      .certificate {
+        border-radius: 21px;
+      }
+
+      .certificate-inner {
+        border-radius: 15px;
+      }
+
+      .certificate-title {
+        font-size: 34px;
+      }
+
+      .certificate-recipient {
+        font-size: 27px;
+      }
+
+      .certificate-description {
+        font-size: 13px;
+      }
+
+      .certificate-divider {
+        margin: 27px auto;
+      }
+    }
+  </style>
 </head>
-
 
 <body>
 
+  <main class="cert-page">
 
-<!-- =========================
-     NAVIGATION
-========================= -->
+    <!-- HEADER -->
+    <header class="cert-header">
 
-<nav class="navbar">
+      <a href="index.html" class="cert-brand">
+        <div class="cert-logo">JG</div>
 
-    <div class="nav-inner">
+        <div class="cert-brand-text">
+          <strong>JG</strong>
+          <span>Find Skills. Find Opportunities.</span>
+        </div>
+      </a>
 
-        <a href="index.html"
-           class="logo">
+      <div class="cert-actions">
 
-            JG<span>.</span>
-
-        </a>
-
-        <button class="menu-toggle"
-                aria-label="Open navigation menu">
-
-            ☰
-
+        <button
+          type="button"
+          class="cert-icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+        >
+          ◐
         </button>
 
-        <ul class="nav-links">
+        <button
+          type="button"
+          class="cert-back-btn"
+          id="backButton"
+        >
+          ← Back
+        </button>
 
-            <li>
-                <a href="index.html">
-                    Home
-                </a>
-            </li>
-
-            <li>
-                <a href="skills.html">
-                    Skills
-                </a>
-            </li>
-
-            <li>
-                <a href="learn.html">
-                    Learn
-                </a>
-            </li>
-
-            <li>
-                <a href="work.html">
-                    Work
-                </a>
-            </li>
-
-            <li>
-                <a href="account.html">
-                    Account
-                </a>
-            </li>
-
-            <li>
-                <a href="enrollment.html"
-                   class="nav-cta">
-
-                    Enroll
-
-                </a>
-            </li>
-
-        </ul>
-
-    </div>
-
-</nav>
+      </div>
+    </header>
 
 
+    <!-- HERO -->
+    <section class="cert-hero">
 
-<!-- =========================
-     CERTIFICATE
-========================= -->
+      <div class="cert-eyebrow">
+        JG CERTIFICATION
+      </div>
 
-<main class="certificate-page">
+      <h1>Your Achievement.</h1>
 
+      <p>
+        Complete your JG learning journey, pass the required assessment,
+        and receive a certificate that can be verified using its unique
+        certificate ID.
+      </p>
 
-    <div class="certificate-header">
-
-        <span class="badge">
-            🎓 JG ACHIEVEMENT
-        </span>
-
-        <h1>
-            Your <span>Certificate.</span>
-        </h1>
-
-        <p>
-            Congratulations on completing your JG
-            learning journey.
-        </p>
-
-    </div>
+    </section>
 
 
+    <!-- STATUS -->
+    <div
+      id="statusMessage"
+      class="cert-status"
+      role="status"
+      aria-live="polite"
+    ></div>
 
-    <div class="certificate-wrapper">
+
+    <!-- EMPTY STATE -->
+    <section
+      id="emptyState"
+      class="cert-empty"
+    >
+
+      <div class="cert-empty-icon">
+        🎓
+      </div>
+
+      <h2>Certificate not available yet</h2>
+
+      <p id="emptyMessage">
+        Complete the required lessons and pass the course assessment
+        to become eligible for a JG certificate.
+      </p>
+
+      <button
+        type="button"
+        class="cert-btn primary"
+        id="goExamButton"
+      >
+        Take Assessment
+      </button>
+
+    </section>
 
 
-        <section class="certificate"
-                 id="certificate">
+    <!-- CERTIFICATE -->
+    <section
+      id="certificateWrapper"
+      class="certificate-wrapper"
+    >
 
+      <div class="certificate" id="certificate">
 
-            <div class="certificate-logo">
+        <div class="certificate-inner">
 
-                JG<span>.</span>
+          <div class="certificate-top-label">
+            JG • CERTIFICATE OF COMPLETION
+          </div>
+
+          <div class="certificate-logo">
+            JG
+          </div>
+
+          <h2 class="certificate-title">
+            Certificate
+          </h2>
+
+          <p class="certificate-subtitle">
+            This certificate is proudly presented to
+          </p>
+
+          <div
+            class="certificate-recipient"
+            id="certificateRecipient"
+          >
+            JG Learner
+          </div>
+
+          <p class="certificate-description">
+            In recognition of successfully completing the learning
+            requirements and assessment for
+          </p>
+
+          <div
+            class="certificate-course"
+            id="certificateCourse"
+          >
+            JG Course
+          </div>
+
+          <div class="certificate-divider"></div>
+
+          <div class="certificate-meta">
+
+            <div class="certificate-meta-box">
+              <span>Certificate ID</span>
+              <strong id="certificateId">
+                JG-CERT-PENDING
+              </strong>
+            </div>
+
+            <div class="certificate-meta-box">
+              <span>Issue Date</span>
+              <strong id="certificateDate">
+                —
+              </strong>
+            </div>
+
+            <div class="certificate-meta-box">
+              <span>Status</span>
+              <strong id="certificateStatus">
+                Verified
+              </strong>
+            </div>
+
+          </div>
+
+          <div class="certificate-footer">
+
+            <div class="certificate-signature">
+
+              <div class="signature-line"></div>
+
+              <small>
+                JG Learning Platform
+              </small>
 
             </div>
 
+            <div class="certificate-verify">
 
-            <div class="certificate-small">
+              <strong>
+                VERIFY ONLINE
+              </strong>
 
-                FIND SKILLS. FIND WORK.
-
-            </div>
-
-
-
-            <h2 class="certificate-title">
-
-                Certificate
-
-            </h2>
-
-
-            <p class="certificate-subtitle">
-
-                OF COURSE COMPLETION
-
-            </p>
-
-
-
-            <p>
-
-                This certificate is proudly presented to
-
-            </p>
-
-
-            <div class="student-name"
-                 id="studentName">
-
-                Student Name
+              <small>
+                Use the certificate ID on JG
+              </small>
 
             </div>
 
-
-
-            <p class="certificate-text">
-
-                For successfully completing the JG course
-
-            </p>
-
-
-            <div class="course-name"
-                 id="courseName">
-
-                Web Development
-
-            </div>
-
-
-            <p class="certificate-text">
-
-                demonstrating commitment to learning,
-                practical development and the completion
-                requirements of the selected course.
-
-            </p>
-
-
-
-            <!-- DETAILS -->
-
-            <div class="certificate-meta">
-
-
-                <div>
-
-                    <strong>
-                        Certificate ID
-                    </strong>
-
-                    <span id="certificateId">
-                        JG-2026-000001
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        Completion Date
-                    </strong>
-
-                    <span id="completionDate">
-                        August 24, 2026
-                    </span>
-
-                </div>
-
-
-                <div>
-
-                    <strong>
-                        Status
-                    </strong>
-
-                    <span>
-                        ✓ Verified
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-
-            <!-- SIGNATURES -->
-
-            <div class="certificate-signatures">
-
-
-                <div class="signature">
-
-                    <strong>
-                        JG Learning
-                    </strong>
-
-                    <span>
-                        Program Authority
-                    </span>
-
-                </div>
-
-
-                <div class="signature">
-
-                    <strong>
-                        Course Completion
-                    </strong>
-
-                    <span>
-                        Academic Record
-                    </span>
-
-                </div>
-
-
-            </div>
-
-
-        </section>
-
-
-
-        <!-- ACTIONS -->
-
-        <div class="certificate-actions">
-
-            <button
-                onclick="window.print()"
-                class="btn btn-primary">
-
-                🖨️ Print Certificate
-
-            </button>
-
-
-            <a href="verify.html"
-               class="btn btn-secondary">
-
-                🔐 Verify Certificate
-
-            </a>
-
-
-            <a href="account.html"
-               class="btn btn-secondary">
-
-                ← My Account
-
-            </a>
+          </div>
 
         </div>
 
+      </div>
 
 
-        <div class="verification-note">
+      <!-- CERTIFICATE CONTROLS -->
+      <div class="certificate-controls">
 
-            <strong>
-                🔐 Certificate Verification
-            </strong>
+        <button
+          type="button"
+          class="cert-btn primary"
+          id="printButton"
+        >
+          🖨 Print / Save
+        </button>
 
-            <br>
+        <button
+          type="button"
+          class="cert-btn success"
+          id="verifyButton"
+        >
+          ✓ Verify Certificate
+        </button>
 
-            Anyone can verify this certificate using
-            its unique Certificate ID.
+        <button
+          type="button"
+          class="cert-btn"
+          id="learnButton"
+        >
+          Continue Learning
+        </button>
 
-            <br>
+      </div>
 
-            <a href="verify.html">
-
-                Verify this certificate →
-
-            </a>
-
-        </div>
-
-
-    </div>
-
-</main>
-
-
-
-<!-- =========================
-     FOOTER
-========================= -->
-
-<footer>
-
-    <div class="container">
-
-        <div class="footer-logo">
-
-            JG<span>.</span>
-
-        </div>
-
-        <p>
-            Find Skills. Find Work.
-        </p>
-
-        <p>
-            © 2026 JG. All rights reserved.
-        </p>
-
-    </div>
-
-</footer>
+    </section>
 
 
+    <!-- PUBLIC VERIFICATION -->
+    <section class="verify-card">
 
-<!-- =========================
-     JAVASCRIPT
-========================= -->
+      <h2>Verify a JG Certificate</h2>
 
-<script src="js/config.js"></script>
+      <p>
+        Enter a JG certificate ID to check whether the certificate
+        exists in the JG verification system.
+      </p>
 
-<script src="js/app.js"></script>
+      <form
+        class="verify-form"
+        id="verifyForm"
+      >
 
-<script src="chatbot.js"></script>
+        <input
+          type="text"
+          class="verify-input"
+          id="verifyInput"
+          placeholder="Example: JG-CERT-XXXXXXXXXX"
+          autocomplete="off"
+          spellcheck="false"
+          maxlength="40"
+        />
 
+        <button
+          type="submit"
+          class="cert-btn primary"
+        >
+          Verify
+        </button>
 
-<script>
+      </form>
 
-    /*
-     * Certificate information can later
-     * be loaded from the JG database.
-     */
+      <div
+        id="verifyResult"
+        class="verify-result"
+        aria-live="polite"
+      ></div>
 
-    const certificateData = {
+    </section>
 
-        name: "Student Name",
-
-        course: "Web Development",
-
-        id: "JG-2026-000001",
-
-        date: "August 24, 2026"
-
-    };
-
-
-    document.getElementById("studentName")
-        .textContent = certificateData.name;
-
-
-    document.getElementById("courseName")
-        .textContent = certificateData.course;
-
-
-    document.getElementById("certificateId")
-        .textContent = certificateData.id;
+  </main>
 
 
-    document.getElementById("completionDate")
-        .textContent = certificateData.date;
+  <!-- MOBILE NAV -->
+  <nav class="cert-mobile-nav">
 
-</script>
+    <a href="index.html">
+      <span>⌂</span>
+      <span>Home</span>
+    </a>
 
+    <a href="learn.html">
+      <span>▣</span>
+      <span>Learn</span>
+    </a>
+
+    <a href="work.html">
+      <span>⌁</span>
+      <span>Work</span>
+    </a>
+
+    <a href="ai.html">
+      <span>✦</span>
+      <span>JG AI</span>
+    </a>
+
+    <a href="account.html">
+      <span>◎</span>
+      <span>Account</span>
+    </a>
+
+  </nav>
+
+
+  <!-- SHARED JG JAVASCRIPT -->
+  <script src="js/config.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+
+
+  <script>
+    /* =========================================================
+       JG CERTIFICATE PAGE LOGIC
+       ========================================================= */
+
+    (function () {
+
+      "use strict";
+
+      const params = new URLSearchParams(
+        window.location.search
+      );
+
+      const courseParam =
+        params.get("course") ||
+        localStorage.getItem("jg_last_course") ||
+        "web-development";
+
+      const courseNames = {
+        "web-development": "Web Development",
+        "python-programming": "Python Programming",
+        "graphic-design": "Graphic Design",
+        "video-editing": "Video Editing",
+        "digital-skills": "Digital Skills",
+        "digital-marketing": "Digital Marketing",
+        "entrepreneurship": "Entrepreneurship",
+        "communication": "Communication Skills"
+      };
+
+      const courseName =
+        courseNames[courseParam] ||
+        formatCourseName(courseParam);
+
+      const certificateWrapper =
+        document.getElementById("certificateWrapper");
+
+      const emptyState =
+        document.getElementById("emptyState");
+
+      const emptyMessage =
+        document.getElementById("emptyMessage");
+
+      const statusMessage =
+        document.getElementById("statusMessage");
+
+      const certificateRecipient =
+        document.getElementById("certificateRecipient");
+
+      const certificateCourse =
+        document.getElementById("certificateCourse");
+
+      const certificateId =
+        document.getElementById("certificateId");
+
+      const certificateDate =
+        document.getElementById("certificateDate");
+
+      const certificateStatus =
+        document.getElementById("certificateStatus");
+
+      const verifyInput =
+        document.getElementById("verifyInput");
+
+      const verifyResult =
+        document.getElementById("verifyResult");
+
+
+      function formatCourseName(value) {
+
+        return String(value || "")
+          .replace(/[-_]/g, " ")
+          .replace(/\b\w/g, function (letter) {
+            return letter.toUpperCase();
+          });
+
+      }
+
+
+      function getUserName() {
+
+        const possibleNames = [
+          localStorage.getItem("jg_user_name"),
+          localStorage.getItem("jg_name"),
+          localStorage.getItem("user_name")
+        ];
+
+        for (const name of possibleNames) {
+
+          if (name && name.trim()) {
+            return name.trim();
+          }
+
+        }
+
+        return "JG Learner";
+
+      }
+
+
+      function generateDemoCertificateId() {
+
+        const saved =
+          localStorage.getItem(
+            "jg_certificate_" + courseParam
+          );
+
+        if (saved) {
+          return saved;
+        }
+
+        const randomPart =
+          Math.random()
+            .toString(36)
+            .substring(2, 12)
+            .toUpperCase();
+
+        const id =
+          "JG-CERT-" + randomPart;
+
+        localStorage.setItem(
+          "jg_certificate_" + courseParam,
+          id
+        );
+
+        return id;
+
+      }
+
+
+      function getIssueDate() {
+
+        const saved =
+          localStorage.getItem(
+            "jg_certificate_date_" + courseParam
+          );
+
+        if (saved) {
+          return saved;
+        }
+
+        const date =
+          new Date().toLocaleDateString(
+            undefined,
+            {
+              year: "numeric",
+              month: "long",
+              day: "numeric"
+            }
+          );
+
+        localStorage.setItem(
+          "jg_certificate_date_" + courseParam,
+          date
+        );
+
+        return date;
+
+      }
+
+
+      function showStatus(
+        message,
+        type
+      ) {
+
+        statusMessage.textContent =
+          message;
+
+        statusMessage.className =
+          "cert-status show " +
+          (type || "success");
+
+      }
+
+
+      function showCertificate() {
+
+        certificateWrapper.classList.add("show");
+
+        emptyState.classList.remove("show");
+
+        certificateRecipient.textContent =
+          getUserName();
+
+        certificateCourse.textContent =
+          courseName;
+
+        const id =
+          generateDemoCertificateId();
+
+        certificateId.textContent =
+          id;
+
+        certificateDate.textContent =
+          getIssueDate();
+
+        certificateStatus.textContent =
+          "Verified";
+
+        verifyInput.value = id;
+
+        localStorage.setItem(
+          "jg_last_certificate_id",
+          id
+        );
+
+      }
+
+
+      function showEmpty() {
+
+        certificateWrapper.classList.remove("show");
+
+        emptyState.classList.add("show");
+
+        emptyMessage.textContent =
+          "Complete the required lessons and pass the " +
+          courseName +
+          " assessment to become eligible for a JG certificate.";
+
+      }
+
+
+      /*
+       * Frontend demonstration eligibility.
+       *
+       * In the production JG application, certificate
+       * eligibility MUST be checked by the backend.
+       */
+
+      function checkEligibility() {
+
+        const passed =
+          localStorage.getItem(
+            "jg_exam_passed_" + courseParam
+          );
+
+        const completed =
+          localStorage.getItem(
+            "jg_course_completed_" + courseParam
+          );
+
+        if (
+          passed === "true" ||
+          completed === "true"
+        ) {
+
+          showCertificate();
+
+          showStatus(
+            "Congratulations! Your JG certificate is available.",
+            "success"
+          );
+
+          return;
+
+        }
+
+
+        /*
+         * If the user arrived here directly after
+         * completing an exam, show the certificate
+         * when an exam score exists.
+         */
+
+        const lastExamCourse =
+          localStorage.getItem(
+            "jg_last_exam_course"
+          );
+
+        const lastExamPassed =
+          localStorage.getItem(
+            "jg_last_exam_passed"
+          );
+
+        if (
+          lastExamCourse === courseParam &&
+          lastExamPassed === "true"
+        ) {
+
+          localStorage.setItem(
+            "jg_exam_passed_" + courseParam,
+            "true"
+          );
+
+          showCertificate();
+
+          showStatus(
+            "Assessment passed. Your certificate is ready.",
+            "success"
+          );
+
+          return;
+
+        }
+
+
+        showEmpty();
+
+      }
+
+
+      /* PRINT / SAVE */
+
+      document
+        .getElementById("printButton")
+        .addEventListener(
+          "click",
+          function () {
+
+            window.print();
+
+          }
+        );
+
+
+      /* VERIFY BUTTON */
+
+      document
+        .getElementById("verifyButton")
+        .addEventListener(
+          "click",
+          function () {
+
+            const id =
+              certificateId.textContent.trim();
+
+            verifyCertificate(id);
+
+          }
+        );
+
+
+      /* CONTINUE LEARNING */
+
+      document
+        .getElementById("learnButton")
+        .addEventListener(
+          "click",
+          function () {
+
+            window.location.href =
+              "course.html?course=" +
+              encodeURIComponent(courseParam);
+
+          }
+        );
+
+
+      /* TAKE ASSESSMENT */
+
+      document
+        .getElementById("goExamButton")
+        .addEventListener(
+          "click",
+          function () {
+
+            window.location.href =
+              "exam.html?course=" +
+              encodeURIComponent(courseParam);
+
+          }
+        );
+
+
+      /* BACK */
+
+      document
+        .getElementById("backButton")
+        .addEventListener(
+          "click",
+          function () {
+
+            if (
+              window.history.length > 1
+            ) {
+
+              window.history.back();
+
+            } else {
+
+              window.location.href =
+                "learn.html";
+
+            }
+
+          }
+        );
+
+
+      /* VERIFY FORM */
+
+      document
+        .getElementById("verifyForm")
+        .addEventListener(
+          "submit",
+          function (event) {
+
+            event.preventDefault();
+
+            const id =
+              verifyInput.value.trim();
+
+            verifyCertificate(id);
+
+          }
+        );
+
+
+      function verifyCertificate(id) {
+
+        verifyResult.className =
+          "verify-result";
+
+        verifyResult.textContent = "";
+
+        if (!id) {
+
+          verifyResult.className =
+            "verify-result show invalid";
+
+          verifyResult.textContent =
+            "Please enter a certificate ID.";
+
+          return;
+
+        }
+
+
+        /*
+         * Frontend demo verification.
+         *
+         * Production verification will call:
+         *
+         * GET /api/certificates/verify/:certificateId
+         *
+         * through the JG backend.
+         */
+
+        const currentId =
+          certificateId.textContent.trim();
+
+        const savedId =
+          localStorage.getItem(
+            "jg_last_certificate_id"
+          );
+
+        const isKnown =
+          id.toUpperCase() ===
+          String(currentId).toUpperCase() ||
+          id.toUpperCase() ===
+          String(savedId || "").toUpperCase();
+
+
+        if (isKnown) {
+
+          verifyResult.className =
+            "verify-result show valid";
+
+          verifyResult.innerHTML =
+            "<strong>✓ Certificate verified</strong><br>" +
+            "Certificate ID: " +
+            escapeHtml(id.toUpperCase()) +
+            "<br>" +
+            "Course: " +
+            escapeHtml(courseName) +
+            "<br>" +
+            "Status: Active";
+
+          return;
+
+        }
+
+
+        verifyResult.className =
+          "verify-result show invalid";
+
+        verifyResult.innerHTML =
+          "<strong>✕ Certificate not found</strong><br>" +
+          "We could not find a matching certificate in this browser's demo verification data.";
+
+      }
+
+
+      function escapeHtml(value) {
+
+        return String(value)
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+
+      }
+
+
+      /*
+       * Save the course currently being viewed.
+       */
+
+      localStorage.setItem(
+        "jg_last_course",
+        courseParam
+      );
+
+
+      /*
+       * Start page.
+       */
+
+      checkEligibility();
+
+    })();
+  </script>
 
 </body>
-
 </html>
