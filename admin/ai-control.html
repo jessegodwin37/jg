@@ -1,1 +1,1274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+  <meta
+    name="description"
+    content="JG Owner AI Control Center — manage JG AI configuration, safety, usage and testing."
+  >
+  <meta name="theme-color" content="#07111f">
 
+  <title>JG AI Control Center</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-ai-control">
+
+  <!-- PAGE LOADER -->
+  <div id="pageLoader" class="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <span>Loading JG AI Control Center...</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-inner">
+
+      <a href="dashboard.html" class="brand" aria-label="JG Admin Dashboard">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline btn-sm"
+          data-action="back"
+        >
+          ← Back
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="app-main">
+
+    <!-- PAGE HERO -->
+    <section class="page-hero">
+
+      <div>
+        <span class="eyebrow">OWNER CONTROL CENTER</span>
+
+        <h1>JG AI Control</h1>
+
+        <p>
+          Manage the intelligence layer powering JG. Configure AI behavior,
+          safety rules, model settings and testing without exposing private
+          API credentials to the frontend.
+        </p>
+      </div>
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="saveSettingsButton"
+        >
+          Save AI Settings
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="resetSettingsButton"
+        >
+          Reset
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- SECURITY NOTICE -->
+    <section class="alert alert-info">
+      <strong>Security:</strong>
+      OpenAI API keys and other private credentials must remain on the JG
+      backend. Never place an API key inside this HTML file, JavaScript,
+      GitHub frontend code or browser localStorage.
+    </section>
+
+    <!-- STATUS CARDS -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+        <span class="stat-label">JG AI Status</span>
+        <strong id="aiStatusValue">Checking...</strong>
+        <small id="aiStatusText">
+          Checking backend connection
+        </small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">AI Provider</span>
+        <strong id="providerValue">OpenAI</strong>
+        <small>Configured server-side</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">AI Requests</span>
+        <strong id="requestCountValue">—</strong>
+        <small>Usage reporting requires backend analytics</small>
+      </article>
+
+      <article class="stat-card">
+        <span class="stat-label">Safety Mode</span>
+        <strong id="safetyStatusValue">Enabled</strong>
+        <small>Platform safety controls</small>
+      </article>
+
+    </section>
+
+    <!-- ACCESS -->
+    <section class="card">
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">ACCESS CONTROL</span>
+          <h2>AI Administration</h2>
+        </div>
+
+        <span class="badge badge-success">Protected</span>
+      </div>
+
+      <p class="muted">
+        Critical AI configuration should be restricted to the Owner.
+        Delegated administrators should only receive permissions explicitly
+        assigned to them.
+      </p>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+          <label for="aiEnabled">
+            AI availability
+          </label>
+
+          <label class="switch-row">
+            <input
+              type="checkbox"
+              id="aiEnabled"
+              checked
+            >
+
+            <span>
+              <strong>Enable JG AI</strong>
+              <small>
+                Allow users to access the JG AI service.
+              </small>
+            </span>
+          </label>
+        </div>
+
+        <div class="form-group">
+          <label for="safetyEnabled">
+            Safety protection
+          </label>
+
+          <label class="switch-row">
+            <input
+              type="checkbox"
+              id="safetyEnabled"
+              checked
+            >
+
+            <span>
+              <strong>Safety mode</strong>
+              <small>
+                Apply JG's AI safety and usage rules.
+              </small>
+            </span>
+          </label>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- MODEL CONFIGURATION -->
+    <section class="card">
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">MODEL</span>
+          <h2>AI Model Configuration</h2>
+        </div>
+      </div>
+
+      <div class="alert alert-warning">
+        Model names are backend configuration values. Do not enter API
+        credentials here.
+      </div>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+
+          <label for="modelName">
+            Model
+          </label>
+
+          <input
+            type="text"
+            id="modelName"
+            class="form-input"
+            placeholder="Backend-configured model"
+            autocomplete="off"
+          >
+
+          <small class="form-help">
+            The backend should validate the selected model before using it.
+          </small>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="maxOutput">
+            Maximum output tokens
+          </label>
+
+          <input
+            type="number"
+            id="maxOutput"
+            class="form-input"
+            min="100"
+            max="20000"
+            value="2000"
+          >
+
+          <small class="form-help">
+            Keep this within the limits supported by your backend/model.
+          </small>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SYSTEM INSTRUCTIONS -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">BEHAVIOR</span>
+          <h2>JG AI System Instructions</h2>
+        </div>
+
+        <span class="badge badge-info">
+          Owner controlled
+        </span>
+
+      </div>
+
+      <p class="muted">
+        These instructions define how JG AI should behave throughout the
+        platform. Keep them professional, safe and aligned with JG's actual
+        services.
+      </p>
+
+      <div class="form-group">
+
+        <label for="systemInstruction">
+          System instruction
+        </label>
+
+        <textarea
+          id="systemInstruction"
+          class="form-input"
+          rows="12"
+          maxlength="12000"
+          placeholder="Enter the JG AI system instructions..."
+        ></textarea>
+
+        <div class="form-meta">
+          <span>
+            Never place passwords, API keys or private credentials here.
+          </span>
+
+          <span id="instructionCount">
+            0 / 12000
+          </span>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- AI FEATURES -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">FEATURES</span>
+          <h2>JG AI Capabilities</h2>
+        </div>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Learning assistance</strong>
+            <small>
+              Help users understand lessons, concepts and practical examples.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="featureLearning"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Career guidance</strong>
+            <small>
+              Help users understand skills and external opportunities.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="featureCareer"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Course assistance</strong>
+            <small>
+              Explain course topics and guide learners through lessons.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="featureCourses"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Account assistance</strong>
+            <small>
+              Help users navigate supported JG account features.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="featureAccount"
+            checked
+          >
+
+        </label>
+
+      </div>
+
+    </section>
+
+    <!-- TEST JG AI -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">AI TEST LAB</span>
+          <h2>Test JG AI</h2>
+        </div>
+
+        <span
+          class="badge"
+          id="testStatus"
+        >
+          Ready
+        </span>
+
+      </div>
+
+      <p class="muted">
+        Send a test request through the secure JG AI API. The frontend must
+        never communicate with the AI provider using a private API key.
+      </p>
+
+      <div class="form-group">
+
+        <label for="testPrompt">
+          Test prompt
+        </label>
+
+        <textarea
+          id="testPrompt"
+          class="form-input"
+          rows="5"
+          maxlength="5000"
+          placeholder="Example: Explain what web development means to a complete beginner."
+        ></textarea>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="testAiButton"
+        >
+          Run AI Test
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="clearTestButton"
+        >
+          Clear
+        </button>
+
+      </div>
+
+      <div
+        id="testResult"
+        class="ai-test-result hidden"
+        aria-live="polite"
+      >
+
+        <div class="result-header">
+          <strong>JG AI Response</strong>
+
+          <button
+            type="button"
+            class="btn btn-ghost btn-sm"
+            id="copyResultButton"
+          >
+            Copy
+          </button>
+        </div>
+
+        <div
+          id="testResultText"
+          class="result-content"
+        ></div>
+
+      </div>
+
+    </section>
+
+    <!-- USAGE -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">MONITORING</span>
+          <h2>AI Usage</h2>
+        </div>
+
+      </div>
+
+      <div class="table-wrapper">
+
+        <table class="data-table">
+
+          <thead>
+            <tr>
+              <th>Metric</th>
+              <th>Current</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+
+          <tbody>
+
+            <tr>
+              <td>Requests</td>
+              <td id="usageRequests">—</td>
+              <td>
+                <span class="badge badge-info">
+                  Backend required
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Errors</td>
+              <td id="usageErrors">—</td>
+              <td>
+                <span class="badge badge-info">
+                  Backend required
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Average response time</td>
+              <td id="usageLatency">—</td>
+              <td>
+                <span class="badge badge-info">
+                  Backend required
+                </span>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Token usage</td>
+              <td id="usageTokens">—</td>
+              <td>
+                <span class="badge badge-info">
+                  Backend required
+                </span>
+              </td>
+            </tr>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </section>
+
+    <!-- AUDIT -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">SECURITY</span>
+          <h2>Configuration Audit</h2>
+        </div>
+
+        <a
+          href="audit.html"
+          class="btn btn-outline btn-sm"
+        >
+          View Audit Logs
+        </a>
+
+      </div>
+
+      <p class="muted">
+        Changes to important AI settings should be recorded in the JG audit
+        system with the administrator, timestamp, action and affected
+        setting.
+      </p>
+
+      <div class="alert alert-warning">
+        Permanent changes should be protected by backend authorization.
+        Frontend controls alone are not a security boundary.
+      </div>
+
+    </section>
+
+    <!-- SAVE BAR -->
+    <section class="sticky-action-bar">
+
+      <div>
+
+        <strong>JG AI Configuration</strong>
+
+        <small id="saveStatus">
+          No unsaved changes
+        </small>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="discardButton"
+        >
+          Discard
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="saveBottomButton"
+        >
+          Save Changes
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ADMIN BOTTOM NAV -->
+  <nav class="bottom-nav" aria-label="Admin navigation">
+
+    <a
+      href="dashboard.html"
+      class="bottom-nav-item"
+      data-nav="dashboard"
+    >
+      <span>⌂</span>
+      <small>Dashboard</small>
+    </a>
+
+    <a
+      href="users.html"
+      class="bottom-nav-item"
+      data-nav="users"
+    >
+      <span>♙</span>
+      <small>Users</small>
+    </a>
+
+    <a
+      href="content.html"
+      class="bottom-nav-item"
+      data-nav="content"
+    >
+      <span>▣</span>
+      <small>Content</small>
+    </a>
+
+    <a
+      href="premium-ads.html"
+      class="bottom-nav-item"
+      data-nav="premium"
+    >
+      <span>★</span>
+      <small>Premium</small>
+    </a>
+
+    <a
+      href="settings.html"
+      class="bottom-nav-item"
+      data-nav="settings"
+    >
+      <span>⚙</span>
+      <small>Settings</small>
+    </a>
+
+  </nav>
+
+  <!-- TOAST CONTAINER -->
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const DEFAULT_SETTINGS = {
+        enabled: true,
+        safetyEnabled: true,
+        model: "",
+        maxOutput: 2000,
+
+        systemInstruction:
+          "You are JG AI, the intelligent learning and opportunity assistant for JG. Help users learn skills, understand lessons, improve their knowledge, navigate JG features, and make informed decisions. Be accurate, clear, practical, respectful and safe. Do not claim that JG provides jobs, salaries, financial payouts or guaranteed employment. Do not invent JG partnerships, government approvals, accreditations or certifications. When information is uncertain, clearly say so. Protect user privacy and never request unnecessary sensitive information.",
+
+        features: {
+          learning: true,
+          career: true,
+          courses: true,
+          account: true
+        }
+      };
+
+      let originalSettings =
+        JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+
+      let currentSettings =
+        JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+
+      const $ = (id) => document.getElementById(id);
+
+      function showToast(message, type = "info") {
+        if (window.JG_UI && typeof JG_UI.toast === "function") {
+          JG_UI.toast(message, type);
+          return;
+        }
+
+        if (window.JG_APP && typeof JG_APP.toast === "function") {
+          JG_APP.toast(message, type);
+          return;
+        }
+
+        alert(message);
+      }
+
+      function markChanged() {
+        $("saveStatus").textContent = "Unsaved changes";
+      }
+
+      function updateInstructionCounter() {
+        const value = $("systemInstruction").value || "";
+
+        $("instructionCount").textContent =
+          `${value.length} / 12000`;
+      }
+
+      function collectSettings() {
+        return {
+          enabled: $("aiEnabled").checked,
+
+          safetyEnabled:
+            $("safetyEnabled").checked,
+
+          model:
+            $("modelName").value.trim(),
+
+          maxOutput:
+            Number($("maxOutput").value) || 2000,
+
+          systemInstruction:
+            $("systemInstruction").value.trim(),
+
+          features: {
+            learning:
+              $("featureLearning").checked,
+
+            career:
+              $("featureCareer").checked,
+
+            courses:
+              $("featureCourses").checked,
+
+            account:
+              $("featureAccount").checked
+          }
+        };
+      }
+
+      function applySettings(settings) {
+        const safe =
+          settings || DEFAULT_SETTINGS;
+
+        $("aiEnabled").checked =
+          safe.enabled !== false;
+
+        $("safetyEnabled").checked =
+          safe.safetyEnabled !== false;
+
+        $("modelName").value =
+          safe.model || "";
+
+        $("maxOutput").value =
+          safe.maxOutput || 2000;
+
+        $("systemInstruction").value =
+          safe.systemInstruction ||
+          DEFAULT_SETTINGS.systemInstruction;
+
+        const features =
+          safe.features ||
+          DEFAULT_SETTINGS.features;
+
+        $("featureLearning").checked =
+          features.learning !== false;
+
+        $("featureCareer").checked =
+          features.career !== false;
+
+        $("featureCourses").checked =
+          features.courses !== false;
+
+        $("featureAccount").checked =
+          features.account !== false;
+
+        updateInstructionCounter();
+      }
+
+      function saveLocalSettings() {
+        currentSettings =
+          collectSettings();
+
+        localStorage.setItem(
+          "jg_ai_admin_settings",
+          JSON.stringify(currentSettings)
+        );
+
+        originalSettings =
+          JSON.parse(JSON.stringify(currentSettings));
+
+        $("saveStatus").textContent =
+          "Saved locally";
+
+        showToast(
+          "AI settings saved locally. Production settings must be saved through the secure backend.",
+          "success"
+        );
+      }
+
+      async function saveSettings() {
+        const settings =
+          collectSettings();
+
+        /*
+         * The frontend intentionally does NOT send API keys.
+         *
+         * When the secure JG backend route for AI configuration exists,
+         * this section can call the protected Owner endpoint.
+         */
+
+        try {
+          if (
+            window.JG_API &&
+            typeof JG_API.updateAiSettings === "function"
+          ) {
+            await JG_API.updateAiSettings(settings);
+
+            originalSettings =
+              JSON.parse(JSON.stringify(settings));
+
+            currentSettings =
+              JSON.parse(JSON.stringify(settings));
+
+            $("saveStatus").textContent =
+              "Saved to backend";
+
+            showToast(
+              "JG AI settings saved.",
+              "success"
+            );
+
+            return;
+          }
+        } catch (error) {
+          console.error(
+            "AI settings save failed:",
+            error
+          );
+
+          showToast(
+            "Backend save failed. Settings were not sent to the AI provider.",
+            "error"
+          );
+
+          return;
+        }
+
+        saveLocalSettings();
+      }
+
+      function resetSettings() {
+        currentSettings =
+          JSON.parse(
+            JSON.stringify(originalSettings)
+          );
+
+        applySettings(currentSettings);
+
+        $("saveStatus").textContent =
+          "Changes discarded";
+
+        showToast(
+          "Unsaved changes discarded.",
+          "info"
+        );
+      }
+
+      function clearTest() {
+        $("testPrompt").value = "";
+
+        $("testResult").classList.add("hidden");
+
+        $("testResultText").textContent = "";
+
+        $("testStatus").textContent = "Ready";
+      }
+
+      async function testAI() {
+        const prompt =
+          $("testPrompt").value.trim();
+
+        if (!prompt) {
+          showToast(
+            "Enter a test prompt first.",
+            "warning"
+          );
+          return;
+        }
+
+        const button =
+          $("testAiButton");
+
+        button.disabled = true;
+
+        button.textContent =
+          "Testing...";
+
+        $("testStatus").textContent =
+          "Running";
+
+        $("testResult").classList.remove(
+          "hidden"
+        );
+
+        $("testResultText").textContent =
+          "Sending request through the secure JG AI backend...";
+
+        try {
+
+          if (
+            !window.JG_API ||
+            typeof JG_API.jgAiChat !== "function"
+          ) {
+            throw new Error(
+              "JG AI backend endpoint is not connected yet."
+            );
+          }
+
+          const response =
+            await JG_API.jgAiChat({
+              message: prompt,
+              context: {
+                source: "admin-ai-control"
+              }
+            });
+
+          const answer =
+            response?.answer ||
+            response?.message ||
+            response?.output ||
+            "JG AI returned no response.";
+
+          $("testResultText").textContent =
+            answer;
+
+          $("testStatus").textContent =
+            "Success";
+
+          showToast(
+            "JG AI test completed.",
+            "success"
+          );
+
+        } catch (error) {
+
+          console.error(
+            "JG AI test error:",
+            error
+          );
+
+          $("testResultText").textContent =
+            "JG AI backend is not connected yet. This page is ready for the secure backend integration.";
+
+          $("testStatus").textContent =
+            "Backend required";
+
+          showToast(
+            "JG AI backend is not connected yet.",
+            "warning"
+          );
+
+        } finally {
+
+          button.disabled = false;
+
+          button.textContent =
+            "Run AI Test";
+        }
+      }
+
+      async function copyResult() {
+        const text =
+          $("testResultText").textContent.trim();
+
+        if (!text) return;
+
+        try {
+
+          await navigator.clipboard.writeText(text);
+
+          showToast(
+            "AI response copied.",
+            "success"
+          );
+
+        } catch {
+
+          showToast(
+            "Could not copy the response.",
+            "error"
+          );
+        }
+      }
+
+      async function checkAIStatus() {
+        try {
+
+          if (
+            window.JG_API &&
+            typeof JG_API.health === "function"
+          ) {
+
+            const response =
+              await JG_API.health();
+
+            if (response) {
+
+              $("aiStatusValue").textContent =
+                "Backend Online";
+
+              $("aiStatusText").textContent =
+                "JG backend responded successfully.";
+
+              return;
+            }
+          }
+
+        } catch (error) {
+          console.warn(
+            "Health check failed:",
+            error
+          );
+        }
+
+        $("aiStatusValue").textContent =
+          "Not Connected";
+
+        $("aiStatusText").textContent =
+          "Connect the secure JG backend to enable live AI.";
+      }
+
+      function loadSettings() {
+        try {
+
+          const saved =
+            localStorage.getItem(
+              "jg_ai_admin_settings"
+            );
+
+          if (saved) {
+
+            const parsed =
+              JSON.parse(saved);
+
+            currentSettings =
+              Object.assign(
+                {},
+                DEFAULT_SETTINGS,
+                parsed,
+                {
+                  features: Object.assign(
+                    {},
+                    DEFAULT_SETTINGS.features,
+                    parsed.features || {}
+                  )
+                }
+              );
+
+            originalSettings =
+              JSON.parse(
+                JSON.stringify(currentSettings)
+              );
+          }
+
+        } catch (error) {
+
+          console.warn(
+            "Could not load local AI settings:",
+            error
+          );
+
+          currentSettings =
+            JSON.parse(
+              JSON.stringify(DEFAULT_SETTINGS)
+            );
+
+          originalSettings =
+            JSON.parse(
+              JSON.stringify(DEFAULT_SETTINGS)
+            );
+        }
+
+        applySettings(currentSettings);
+      }
+
+      function bindEvents() {
+
+        [
+          "aiEnabled",
+          "safetyEnabled",
+          "modelName",
+          "maxOutput",
+          "featureLearning",
+          "featureCareer",
+          "featureCourses",
+          "featureAccount"
+        ].forEach((id) => {
+
+          const element = $(id);
+
+          if (!element) return;
+
+          element.addEventListener(
+            "change",
+            markChanged
+          );
+
+          element.addEventListener(
+            "input",
+            markChanged
+          );
+        });
+
+        $("systemInstruction")
+          .addEventListener(
+            "input",
+            () => {
+              updateInstructionCounter();
+              markChanged();
+            }
+          );
+
+        $("saveSettingsButton")
+          .addEventListener(
+            "click",
+            saveSettings
+          );
+
+        $("saveBottomButton")
+          .addEventListener(
+            "click",
+            saveSettings
+          );
+
+        $("resetSettingsButton")
+          .addEventListener(
+            "click",
+            resetSettings
+          );
+
+        $("discardButton")
+          .addEventListener(
+            "click",
+            resetSettings
+          );
+
+        $("testAiButton")
+          .addEventListener(
+            "click",
+            testAI
+          );
+
+        $("clearTestButton")
+          .addEventListener(
+            "click",
+            clearTest
+          );
+
+        $("copyResultButton")
+          .addEventListener(
+            "click",
+            copyResult
+          );
+      }
+
+      function initialize() {
+
+        loadSettings();
+
+        bindEvents();
+
+        checkAIStatus();
+
+        if (
+          window.JG_AUTH &&
+          typeof JG_AUTH.requireAdmin === "function"
+        ) {
+          try {
+            JG_AUTH.requireAdmin();
+          } catch (error) {
+            console.warn(
+              "Admin protection handled by auth module.",
+              error
+            );
+          }
+        }
+
+        if (
+          window.JG_APP &&
+          typeof JG_APP.setActiveNav === "function"
+        ) {
+          JG_APP.setActiveNav("settings");
+        }
+
+        setTimeout(() => {
+
+          const loader =
+            $("pageLoader");
+
+          if (loader) {
+            loader.classList.add(
+              "hidden"
+            );
+          }
+
+        }, 300);
+      }
+
+      if (
+        document.readyState ===
+        "loading"
+      ) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          initialize
+        );
+      } else {
+        initialize();
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
