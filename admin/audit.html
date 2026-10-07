@@ -1,1 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta
+    name="description"
+    content="JG Admin Audit Logs — security and administrative activity."
+  >
 
+  <title>JG Admin — Audit Logs</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-audit">
+
+  <!-- PAGE LOADER -->
+  <div id="pageLoader" class="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <span>Loading audit logs...</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-inner">
+
+      <a href="dashboard.html" class="brand" aria-label="JG Admin Dashboard">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline btn-sm"
+          data-action="back"
+        >
+          ← Back
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="app-main">
+
+    <!-- HERO -->
+    <section class="page-hero">
+
+      <div>
+
+        <span class="eyebrow">SECURITY & GOVERNANCE</span>
+
+        <h1>Audit Logs</h1>
+
+        <p>
+          Review important administrative and security events across JG.
+          Audit records help the Owner understand who changed what, when it
+          happened and which resource was affected.
+        </p>
+
+      </div>
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="refreshButton"
+        >
+          ↻ Refresh
+        </button>
+
+        <a
+          href="export.html"
+          class="btn btn-primary"
+        >
+          Export Data
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- SECURITY NOTICE -->
+    <section class="alert alert-info">
+      <strong>Security:</strong>
+      Audit logs should be written and protected by the JG backend.
+      Frontend users must never be able to modify or erase audit records
+      directly.
+    </section>
+
+    <!-- SUMMARY -->
+    <section class="stats-grid">
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Total Events
+        </span>
+
+        <strong id="totalEvents">
+          —
+        </strong>
+
+        <small>
+          Records returned by the backend
+        </small>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Admin Actions
+        </span>
+
+        <strong id="adminActions">
+          —
+        </strong>
+
+        <small>
+          Administrative activity
+        </small>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Security Events
+        </span>
+
+        <strong id="securityEvents">
+          —
+        </strong>
+
+        <small>
+          Authentication/security events
+        </small>
+
+      </article>
+
+      <article class="stat-card">
+
+        <span class="stat-label">
+          Current Status
+        </span>
+
+        <strong id="logStatus">
+          Checking...
+        </strong>
+
+        <small id="logStatusText">
+          Connecting to JG backend
+        </small>
+
+      </article>
+
+    </section>
+
+    <!-- FILTERS -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            SEARCH
+          </span>
+
+          <h2>Filter Activity</h2>
+
+        </div>
+
+        <button
+          type="button"
+          class="btn btn-ghost btn-sm"
+          id="clearFiltersButton"
+        >
+          Clear Filters
+        </button>
+
+      </div>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+
+          <label for="searchInput">
+            Search
+          </label>
+
+          <input
+            type="search"
+            id="searchInput"
+            class="form-input"
+            placeholder="Search action, user, resource or ID..."
+            autocomplete="off"
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="eventType">
+            Event type
+          </label>
+
+          <select
+            id="eventType"
+            class="form-input"
+          >
+
+            <option value="">
+              All events
+            </option>
+
+            <option value="auth">
+              Authentication
+            </option>
+
+            <option value="admin">
+              Administration
+            </option>
+
+            <option value="content">
+              Content
+            </option>
+
+            <option value="users">
+              Users
+            </option>
+
+            <option value="courses">
+              Courses
+            </option>
+
+            <option value="opportunities">
+              Opportunities
+            </option>
+
+            <option value="premium">
+              Premium
+            </option>
+
+            <option value="ads">
+              Advertising
+            </option>
+
+            <option value="ai">
+              JG AI
+            </option>
+
+            <option value="security">
+              Security
+            </option>
+
+            <option value="system">
+              System
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="severity">
+            Severity
+          </label>
+
+          <select
+            id="severity"
+            class="form-input"
+          >
+
+            <option value="">
+              All severities
+            </option>
+
+            <option value="info">
+              Information
+            </option>
+
+            <option value="warning">
+              Warning
+            </option>
+
+            <option value="critical">
+              Critical
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="actorRole">
+            Actor role
+          </label>
+
+          <select
+            id="actorRole"
+            class="form-input"
+          >
+
+            <option value="">
+              All roles
+            </option>
+
+            <option value="owner">
+              Owner
+            </option>
+
+            <option value="admin">
+              Admin
+            </option>
+
+            <option value="editor">
+              Editor
+            </option>
+
+            <option value="support">
+              Support
+            </option>
+
+            <option value="analyst">
+              Analyst
+            </option>
+
+            <option value="user">
+              User
+            </option>
+
+            <option value="system">
+              System
+            </option>
+
+          </select>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="dateFrom">
+            From
+          </label>
+
+          <input
+            type="date"
+            id="dateFrom"
+            class="form-input"
+          >
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="dateTo">
+            To
+          </label>
+
+          <input
+            type="date"
+            id="dateTo"
+            class="form-input"
+          >
+
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="applyFiltersButton"
+        >
+          Apply Filters
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- AUDIT TABLE -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="eyebrow">
+            ACTIVITY
+          </span>
+
+          <h2>Recent Events</h2>
+
+        </div>
+
+        <span
+          class="badge"
+          id="resultBadge"
+        >
+          0 results
+        </span>
+
+      </div>
+
+      <!-- DESKTOP TABLE -->
+      <div class="table-wrapper">
+
+        <table class="data-table">
+
+          <thead>
+
+            <tr>
+
+              <th>
+                Time
+              </th>
+
+              <th>
+                Actor
