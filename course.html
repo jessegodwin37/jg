@@ -1,209 +1,1434 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
+  <meta charset="UTF-8" />
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1, viewport-fit=cover"
-  >
+  />
 
   <meta
     name="description"
-    content="JG Courses — learn practical skills, follow structured lessons and build projects."
-  >
+    content="JG Course — Learn practical skills through structured lessons, projects and assessments."
+  />
 
-  <meta name="theme-color" content="#2563eb">
+  <meta name="theme-color" content="#07111f" />
 
-  <title>Courses | JG — Find Skills. Find Work.</title>
+  <title>Course — JG</title>
 
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/style.css" />
 
   <style>
     /* =========================================================
-       JG COURSE — PAGE SPECIFIC STYLES
+       JG COURSE PAGE
        ========================================================= */
 
     .course-page {
       min-height: 100vh;
-      overflow-x: hidden;
+      padding-bottom: 110px;
     }
-
-    /* HERO */
 
     .course-hero {
       position: relative;
       overflow: hidden;
-      padding: clamp(30px, 6vw, 70px) 0 35px;
-    }
-
-    .course-hero::before {
-      content: "";
-      position: absolute;
-      width: 420px;
-      height: 420px;
-      top: -210px;
-      right: -150px;
-      border-radius: 50%;
-      background: rgba(37, 99, 235, 0.11);
-      pointer-events: none;
-    }
-
-    .course-hero::after {
-      content: "";
-      position: absolute;
-      width: 300px;
-      height: 300px;
-      left: -170px;
-      bottom: -200px;
-      border-radius: 50%;
-      background: rgba(124, 58, 237, 0.09);
-      pointer-events: none;
+      padding: 28px 18px 30px;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.14));
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(37,99,235,.22),
+          transparent 35%
+        ),
+        linear-gradient(
+          145deg,
+          rgba(15,23,42,.95),
+          rgba(7,17,31,.98)
+        );
     }
 
     .course-hero-inner {
       position: relative;
       z-index: 1;
+      max-width: 1100px;
+      margin: 0 auto;
     }
 
-    .course-breadcrumb {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 7px;
-      margin-bottom: 20px;
-      color: var(--muted);
-      font-size: 0.8rem;
-    }
-
-    .course-breadcrumb a {
-      color: var(--muted);
-    }
-
-    .course-breadcrumb a:hover {
-      color: var(--primary);
-    }
-
-    .course-breadcrumb-current {
-      color: var(--text);
-      font-weight: 700;
-    }
-
-    .course-hero-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
-      gap: 30px;
-      align-items: center;
-    }
-
-    .course-label {
+    .course-back {
       display: inline-flex;
       align-items: center;
       gap: 7px;
-      padding: 7px 11px;
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      background: var(--surface);
-      color: var(--primary);
-      font-size: 0.77rem;
-      font-weight: 800;
-      margin-bottom: 15px;
+      color: var(--muted, #94a3b8);
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 22px;
     }
 
-    .course-label span {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #16a34a;
+    .course-back:hover {
+      color: #fff;
+    }
+
+    .course-icon {
+      width: 68px;
+      height: 68px;
+      display: grid;
+      place-items: center;
+      border-radius: 20px;
+      background: rgba(37,99,235,.14);
+      border: 1px solid rgba(59,130,246,.22);
+      font-size: 32px;
+      margin-bottom: 18px;
+    }
+
+    .course-category {
+      display: inline-flex;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(37,99,235,.1);
+      border: 1px solid rgba(37,99,235,.2);
+      color: #60a5fa;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 12px;
     }
 
     .course-hero h1 {
-      max-width: 780px;
       margin: 0;
-      font-size: clamp(2rem, 6vw, 4rem);
-      line-height: 1;
-      letter-spacing: -0.055em;
+      max-width: 760px;
+      font-size: clamp(30px, 8vw, 54px);
+      line-height: 1.02;
+      letter-spacing: -1.8px;
     }
 
-    .course-gradient {
-      background: linear-gradient(
-        120deg,
-        var(--primary),
-        var(--secondary),
-        var(--accent)
-      );
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+    .course-description {
+      max-width: 700px;
+      margin: 14px 0 0;
+      color: var(--muted, #94a3b8);
+      font-size: 15px;
+      line-height: 1.65;
     }
 
-    .course-hero-description {
-      max-width: 720px;
-      margin: 19px 0 0;
-      color: var(--muted);
-      line-height: 1.75;
-      font-size: 1rem;
-    }
-
-    .course-hero-actions {
+    .course-meta {
       display: flex;
       flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 24px;
+      gap: 9px;
+      margin-top: 20px;
     }
 
-    /* HERO COURSE PREVIEW */
+    .course-meta span {
+      padding: 9px 11px;
+      border-radius: 11px;
+      background: rgba(255,255,255,.045);
+      border: 1px solid rgba(148,163,184,.12);
+      color: #cbd5e1;
+      font-size: 12px;
+      font-weight: 700;
+    }
 
-    .course-preview {
-      position: relative;
+    .course-main {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 22px 18px;
+    }
+
+    .course-layout {
+      display: grid;
+      gap: 18px;
+    }
+
+    .course-card {
+      border: 1px solid var(--border, rgba(148,163,184,.14));
+      border-radius: 20px;
+      background: var(--card, rgba(15,23,42,.7));
       overflow: hidden;
-      padding: 19px;
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background: var(--surface);
-      box-shadow: var(--shadow-md);
     }
 
-    .course-preview-top {
+    .course-card-header {
+      padding: 18px;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.12));
+    }
+
+    .course-card-header h2 {
+      margin: 0;
+      font-size: 19px;
+      letter-spacing: -.4px;
+    }
+
+    .course-card-header p {
+      margin: 7px 0 0;
+      color: var(--muted, #94a3b8);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .progress-box {
+      padding: 18px;
+    }
+
+    .progress-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 9px;
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .progress-top span:last-child {
+      color: #60a5fa;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 8px;
+      overflow: hidden;
+      border-radius: 999px;
+      background: rgba(148,163,184,.13);
+    }
+
+    .progress-bar {
+      width: 0%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(
+        90deg,
+        #2563eb,
+        #06b6d4
+      );
+      transition: width .3s ease;
+    }
+
+    .lesson-list {
+      display: grid;
+    }
+
+    .lesson-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      width: 100%;
+      padding: 15px 17px;
+      box-sizing: border-box;
+      border: 0;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.09));
+      background: transparent;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      transition: background .2s ease;
+    }
+
+    .lesson-item:last-child {
+      border-bottom: 0;
+    }
+
+    .lesson-item:hover {
+      background: rgba(59,130,246,.06);
+    }
+
+    .lesson-number {
+      flex: 0 0 auto;
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
+      border-radius: 11px;
+      background: rgba(37,99,235,.1);
+      color: #60a5fa;
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .lesson-item.completed .lesson-number {
+      background: rgba(34,197,94,.12);
+      color: #4ade80;
+    }
+
+    .lesson-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .lesson-info strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    .lesson-info span {
+      display: block;
+      color: var(--muted, #94a3b8);
+      font-size: 11px;
+    }
+
+    .lesson-arrow {
+      color: var(--muted, #94a3b8);
+      font-size: 17px;
+    }
+
+    .course-side {
+      display: grid;
+      gap: 15px;
+    }
+
+    .start-card {
+      padding: 20px;
+      border-radius: 20px;
+      border: 1px solid rgba(37,99,235,.22);
+      background:
+        radial-gradient(
+          circle at top right,
+          rgba(37,99,235,.18),
+          transparent 45%
+        ),
+        rgba(15,23,42,.78);
+    }
+
+    .start-card h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .start-card p {
+      margin: 0 0 17px;
+      color: var(--muted, #94a3b8);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .primary-button,
+    .secondary-button {
+      width: 100%;
+      min-height: 47px;
+      border-radius: 13px;
+      padding: 0 15px;
+      font-weight: 800;
+      font-size: 13px;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .primary-button {
+      border: 0;
+      background: #2563eb;
+      color: #fff;
+    }
+
+    .primary-button:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+
+    .secondary-button {
+      border: 1px solid var(--border, rgba(148,163,184,.15));
+      background: transparent;
+      color: inherit;
+    }
+
+    .secondary-button:hover {
+      background: rgba(255,255,255,.04);
+    }
+
+    .info-list {
+      padding: 18px;
+    }
+
+    .info-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 17px;
+      gap: 15px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border, rgba(148,163,184,.09));
+      font-size: 12px;
     }
 
-    .course-preview-logo {
-      width: 52px;
-      height: 52px;
+    .info-row:last-child {
+      border-bottom: 0;
+    }
+
+    .info-row span:first-child {
+      color: var(--muted, #94a3b8);
+    }
+
+    .info-row span:last-child {
+      font-weight: 750;
+    }
+
+    .course-message {
+      display: none;
+      padding: 14px 16px;
+      margin-bottom: 18px;
+      border-radius: 14px;
+      background: rgba(37,99,235,.09);
+      border: 1px solid rgba(37,99,235,.18);
+      color: #bfdbfe;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .ad-slot {
+      min-height: 90px;
       display: grid;
       place-items: center;
-      border-radius: 16px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(37, 99, 235, 0.14),
-          rgba(124, 58, 237, 0.14)
+      border: 1px dashed rgba(148,163,184,.18);
+      border-radius: 18px;
+      color: var(--muted, #64748b);
+      font-size: 11px;
+      letter-spacing: .2px;
+    }
+
+    @media (min-width: 800px) {
+      .course-hero {
+        padding-top: 45px;
+        padding-bottom: 45px;
+      }
+
+      .course-layout {
+        grid-template-columns: minmax(0, 1.5fr) minmax(280px, .7fr);
+        align-items: start;
+      }
+
+      .course-side {
+        position: sticky;
+        top: 20px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="course-page">
+
+  <!-- =======================================================
+       HEADER
+       ======================================================= -->
+
+  <header class="site-header">
+    <div class="container header-inner">
+
+      <a href="index.html" class="brand" aria-label="JG Home">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-copy">
+          <strong>JG</strong>
+          <small>Find Skills. Find Opportunities.</small>
+        </span>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="learn.html" class="active">Learn</a>
+        <a href="skills.html">Skills</a>
+        <a href="work.html">Work</a>
+        <a href="ai.html">JG AI</a>
+      </nav>
+
+      <div class="header-actions">
+
+        <button
+          id="themeButton"
+          class="icon-button"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <a
+          href="account.html"
+          class="header-account"
+          aria-label="Account"
+        >
+          <span>Account</span>
+        </a>
+
+        <button
+          id="menuButton"
+          class="icon-button mobile-menu-button"
+          type="button"
+          aria-label="Open menu"
+          aria-expanded="false"
+        >
+          ☰
+        </button>
+
+      </div>
+
+    </div>
+  </header>
+
+
+  <!-- =======================================================
+       MOBILE MENU
+       ======================================================= -->
+
+  <div
+    id="mobileMenu"
+    class="mobile-menu"
+    hidden
+  >
+    <a href="index.html">Home</a>
+    <a href="learn.html">Learn</a>
+    <a href="skills.html">Skills</a>
+    <a href="work.html">Find Work</a>
+    <a href="ai.html">JG AI</a>
+    <a href="premium.html">Premium</a>
+    <a href="account.html">Account</a>
+  </div>
+
+
+  <!-- =======================================================
+       COURSE HERO
+       ======================================================= -->
+
+  <section class="course-hero">
+
+    <div class="course-hero-inner">
+
+      <a
+        href="skills.html"
+        class="course-back"
+      >
+        ← Back to Skills
+      </a>
+
+      <div
+        id="courseIcon"
+        class="course-icon"
+      >
+        💻
+      </div>
+
+      <div
+        id="courseCategory"
+        class="course-category"
+      >
+        Technology
+      </div>
+
+      <h1 id="courseTitle">
+        Web Development
+      </h1>
+
+      <p
+        id="courseDescription"
+        class="course-description"
+      >
+        Learn how modern websites and web applications are designed,
+        developed and deployed.
+      </p>
+
+      <div class="course-meta">
+
+        <span id="courseLessons">
+          24 Lessons
+        </span>
+
+        <span>
+          Beginner → Advanced
+        </span>
+
+        <span>
+          Practical Projects
+        </span>
+
+        <span>
+          Certificate
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
+
+  <main class="course-main">
+
+    <div
+      id="courseMessage"
+      class="course-message"
+    ></div>
+
+    <div class="course-layout">
+
+      <!-- ===================================================
+           LEFT
+           =================================================== -->
+
+      <section>
+
+        <div class="course-card">
+
+          <div class="course-card-header">
+
+            <h2>
+              Your learning path
+            </h2>
+
+            <p>
+              Complete the lessons in order and build your skills
+              through practical learning.
+            </p>
+
+          </div>
+
+
+          <div class="progress-box">
+
+            <div class="progress-top">
+
+              <span>
+                Course progress
+              </span>
+
+              <span id="progressText">
+                0%
+              </span>
+
+            </div>
+
+            <div class="progress-track">
+              <div
+                id="progressBar"
+                class="progress-bar"
+              ></div>
+            </div>
+
+          </div>
+
+
+          <div
+            id="lessonList"
+            class="lesson-list"
+          >
+
+            <!-- Lessons generated by JavaScript -->
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           RIGHT
+           =================================================== -->
+
+      <aside class="course-side">
+
+        <div class="start-card">
+
+          <h3>
+            Ready to start?
+          </h3>
+
+          <p>
+            Begin with the first lesson and continue through the
+            course at your own pace.
+          </p>
+
+          <button
+            id="startButton"
+            class="primary-button"
+            type="button"
+          >
+            Start Course
+          </button>
+
+        </div>
+
+
+        <div class="course-card">
+
+          <div class="info-list">
+
+            <div class="info-row">
+              <span>Lessons</span>
+              <span id="infoLessons">24</span>
+            </div>
+
+            <div class="info-row">
+              <span>Level</span>
+              <span>All Levels</span>
+            </div>
+
+            <div class="info-row">
+              <span>Projects</span>
+              <span>Included</span>
+            </div>
+
+            <div class="info-row">
+              <span>Assessment</span>
+              <span>Yes</span>
+            </div>
+
+            <div class="info-row">
+              <span>Certificate</span>
+              <span>Eligible</span>
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="ad-slot">
+          JG Ad Space
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <!-- =======================================================
+       BOTTOM NAVIGATION
+       ======================================================= -->
+
+  <nav
+    class="bottom-nav"
+    aria-label="Mobile navigation"
+  >
+
+    <a
+      href="index.html"
+      class="bottom-nav-item"
+    >
+      <span>⌂</span>
+      <small>Home</small>
+    </a>
+
+    <a
+      href="learn.html"
+      class="bottom-nav-item active"
+    >
+      <span>▣</span>
+      <small>Learn</small>
+    </a>
+
+    <a
+      href="skills.html"
+      class="bottom-nav-item"
+    >
+      <span>✦</span>
+      <small>Skills</small>
+    </a>
+
+    <a
+      href="work.html"
+      class="bottom-nav-item"
+    >
+      <span>◫</span>
+      <small>Work</small>
+    </a>
+
+    <a
+      href="ai.html"
+      class="bottom-nav-item"
+    >
+      <span>✧</span>
+      <small>JG AI</small>
+    </a>
+
+  </nav>
+
+</div>
+
+
+<!-- =========================================================
+     SHARED JG JAVASCRIPT
+     ========================================================= -->
+
+<script src="js/config.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/auth.js"></script>
+<script src="js/api.js"></script>
+<script src="js/app.js"></script>
+
+
+<!-- =========================================================
+     COURSE PAGE JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+document.addEventListener("DOMContentLoaded", function () {
+
+  /* =========================================================
+     COURSE DATABASE
+     ========================================================= */
+
+  const courses = {
+
+    "web-development": {
+      title: "Web Development",
+      icon: "💻",
+      category: "Technology",
+      description:
+        "Learn how modern websites and web applications are designed, developed and deployed.",
+      lessons: [
+        "Introduction to Web Development",
+        "How the Web Works",
+        "HTML Fundamentals",
+        "HTML Structure and Semantics",
+        "Links, Images and Media",
+        "Forms and User Input",
+        "CSS Fundamentals",
+        "Layouts and Responsive Design",
+        "Flexbox",
+        "CSS Grid",
+        "Responsive Websites",
+        "JavaScript Fundamentals",
+        "Variables and Data Types",
+        "Functions and Logic",
+        "DOM Manipulation",
+        "Events and Interaction",
+        "Working With APIs",
+        "Building Interactive Interfaces",
+        "Git and Version Control",
+        "Introduction to GitHub",
+        "Website Deployment",
+        "Web Security Basics",
+        "Final Practical Project",
+        "Course Assessment"
+      ]
+    },
+
+    "graphic-design": {
+      title: "Graphic Design",
+      icon: "🎨",
+      category: "Creative",
+      description:
+        "Learn visual communication, design principles, typography, branding and practical digital design.",
+      lessons: [
+        "Introduction to Graphic Design",
+        "Design Principles",
+        "Colour Theory",
+        "Typography",
+        "Layout and Composition",
+        "Shapes and Visual Elements",
+        "Brand Identity",
+        "Logo Design",
+        "Social Media Design",
+        "Poster Design",
+        "Flyer Design",
+        "Designing With Canva",
+        "Image Editing",
+        "Visual Hierarchy",
+        "Design Consistency",
+        "Creating Professional Presentations",
+        "Digital Branding",
+        "Client Design Briefs",
+        "Design Workflow",
+        "Building a Design Portfolio",
+        "Working With Clients",
+        "Common Design Mistakes",
+        "Final Design Project",
+        "Course Assessment"
+      ]
+    },
+
+    "video-editing": {
+      title: "Video Editing",
+      icon: "🎬",
+      category: "Creative",
+      description:
+        "Learn how to transform raw footage into engaging videos using professional editing principles.",
+      lessons: [
+        "Introduction to Video Editing",
+        "Understanding Video Formats",
+        "Importing Media",
+        "Timeline Fundamentals",
+        "Cutting and Trimming",
+        "Transitions",
+        "Text and Titles",
+        "Audio Editing",
+        "Sound Effects",
+        "Music and Timing",
+        "Colour Correction",
+        "Colour Grading",
+        "Speed Effects",
+        "Captions and Subtitles",
+        "Visual Effects",
+        "Storytelling Through Editing",
+        "Short-Form Video",
+        "Social Media Video",
+        "YouTube Video Editing",
+        "Mobile Video Editing",
+        "Professional Editing Workflow",
+        "Export Settings",
+        "Final Video Project",
+        "Course Assessment"
+      ]
+    },
+
+    "python-programming": {
+      title: "Python Programming",
+      icon: "🐍",
+      category: "Technology",
+      description:
+        "Build a strong programming foundation with Python and learn how to create useful applications.",
+      lessons: [
+        "Introduction to Programming",
+        "Installing and Using Python",
+        "Variables",
+        "Data Types",
+        "Operators",
+        "Strings",
+        "Lists",
+        "Tuples and Sets",
+        "Dictionaries",
+        "Conditional Statements",
+        "Loops",
+        "Functions",
+        "Modules",
+        "Error Handling",
+        "Working With Files",
+        "Object-Oriented Programming",
+        "APIs and Requests",
+        "Working With Data",
+        "Automation",
+        "Introduction to Databases",
+        "Building Python Applications",
+        "Debugging",
+        "Final Python Project",
+        "Course Assessment"
+      ]
+    },
+
+    "digital-skills": {
+      title: "Digital Skills",
+      icon: "📊",
+      category: "Digital",
+      description:
+        "Build useful digital skills for modern study, work, communication and business.",
+      lessons: [
+        "Introduction to Digital Skills",
+        "Computer and Mobile Fundamentals",
+        "Internet Fundamentals",
+        "Search and Research",
+        "Email Communication",
+        "Cloud Storage",
+        "Documents and Word Processing",
+        "Spreadsheets",
+        "Presentations",
+        "Digital Collaboration",
+        "Online Communication",
+        "Digital Productivity",
+        "File Management",
+        "Online Safety",
+        "Password Security",
+        "Privacy Basics",
+        "Social Media Skills",
+        "Digital Branding",
+        "Remote Work Tools",
+        "AI Productivity Tools",
+        "Online Learning",
+        "Digital Problem Solving",
+        "Final Practical Project",
+        "Course Assessment"
+      ]
+    },
+
+    "digital-marketing": {
+      title: "Digital Marketing",
+      icon: "📈",
+      category: "Business",
+      description:
+        "Understand online marketing, audiences, content strategy, social media and digital growth.",
+      lessons: [
+        "Introduction to Digital Marketing",
+        "Understanding Customers",
+        "Market Research",
+        "Brand Positioning",
+        "Content Strategy",
+        "Social Media Marketing",
+        "Instagram Marketing",
+        "TikTok Marketing",
+        "Facebook Marketing",
+        "Email Marketing",
+        "Search Engine Basics",
+        "SEO Fundamentals",
+        "Paid Advertising",
+        "Marketing Analytics",
+        "Conversion Fundamentals",
+        "Landing Pages",
+        "Copywriting",
+        "Video Marketing",
+        "Influencer Marketing",
+        "Building Campaigns",
+        "Measuring Results",
+        "Marketing Mistakes",
+        "Final Marketing Project",
+        "Course Assessment"
+      ]
+    },
+
+    "entrepreneurship": {
+      title: "Entrepreneurship",
+      icon: "🚀",
+      category: "Business",
+      description:
+        "Learn how ideas become businesses through planning, customer discovery, execution and growth.",
+      lessons: [
+        "Introduction to Entrepreneurship",
+        "Finding Problems Worth Solving",
+        "Generating Business Ideas",
+        "Understanding Customers",
+        "Market Research",
+        "Competitor Research",
+        "Value Propositions",
+        "Business Models",
+        "Business Planning",
+        "Branding",
+        "Marketing",
+        "Sales Fundamentals",
+        "Customer Service",
+        "Pricing",
+        "Basic Financial Management",
+        "Building a Product",
+        "Testing an Idea",
+        "Getting Customer Feedback",
+        "Digital Business",
+        "Growing a Business",
+        "Managing Risk",
+        "Common Entrepreneurial Mistakes",
+        "Final Business Project",
+        "Course Assessment"
+      ]
+    },
+
+    "communication": {
+      title: "Communication",
+      icon: "🗣️",
+      category: "Business",
+      description:
+        "Improve communication, confidence, presentation, listening and professional interaction.",
+      lessons: [
+        "Introduction to Communication",
+        "Communication Fundamentals",
+        "Active Listening",
+        "Speaking Clearly",
+        "Body Language",
+        "Building Confidence",
+        "Professional Conversations",
+        "Writing Clearly",
+        "Email Communication",
+        "Presentation Skills",
+        "Public Speaking",
+        "Storytelling",
+        "Persuasion",
+        "Negotiation Basics",
+        "Giving Feedback",
+        "Receiving Feedback",
+        "Communication at Work",
+        "Handling Difficult Conversations",
+        "Digital Communication",
+        "Interview Communication",
+        "Professional Networking",
+        "Common Communication Mistakes",
+        "Final Practical Project",
+        "Course Assessment"
+      ]
+    }
+
+  };
+
+
+  /* =========================================================
+     GET COURSE FROM URL
+     ========================================================= */
+
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const courseKey =
+    params.get("course") || "web-development";
+
+  const course =
+    courses[courseKey] || courses["web-development"];
+
+
+  /* =========================================================
+     ELEMENTS
+     ========================================================= */
+
+  const title =
+    document.getElementById("courseTitle");
+
+  const icon =
+    document.getElementById("courseIcon");
+
+  const category =
+    document.getElementById("courseCategory");
+
+  const description =
+    document.getElementById("courseDescription");
+
+  const lessonsCount =
+    document.getElementById("courseLessons");
+
+  const infoLessons =
+    document.getElementById("infoLessons");
+
+  const lessonList =
+    document.getElementById("lessonList");
+
+  const startButton =
+    document.getElementById("startButton");
+
+  const progressBar =
+    document.getElementById("progressBar");
+
+  const progressText =
+    document.getElementById("progressText");
+
+  const message =
+    document.getElementById("courseMessage");
+
+
+  /* =========================================================
+     UPDATE COURSE INFORMATION
+     ========================================================= */
+
+  title.textContent =
+    course.title;
+
+  icon.textContent =
+    course.icon;
+
+  category.textContent =
+    course.category;
+
+  description.textContent =
+    course.description;
+
+  lessonsCount.textContent =
+    course.lessons.length + " Lessons";
+
+  infoLessons.textContent =
+    course.lessons.length;
+
+
+  /* =========================================================
+     STORAGE KEY
+     ========================================================= */
+
+  const storageKey =
+    "jg_course_progress_" + courseKey;
+
+
+  let completedLessons =
+    JSON.parse(
+      localStorage.getItem(storageKey) || "[]"
+    );
+
+
+  if (!Array.isArray(completedLessons)) {
+    completedLessons = [];
+  }
+
+
+  /* =========================================================
+     PROGRESS
+     ========================================================= */
+
+  function updateProgress() {
+
+    const total =
+      course.lessons.length;
+
+    const completed =
+      completedLessons.length;
+
+    const percent =
+      total === 0
+        ? 0
+        : Math.round(
+            (completed / total) * 100
+          );
+
+    progressBar.style.width =
+      percent + "%";
+
+    progressText.textContent =
+      percent + "%";
+
+    if (percent >= 100) {
+
+      startButton.textContent =
+        "Course Completed";
+
+    } else if (completed > 0) {
+
+      startButton.textContent =
+        "Continue Course";
+
+    } else {
+
+      startButton.textContent =
+        "Start Course";
+
+    }
+
+  }
+
+
+  /* =========================================================
+     RENDER LESSONS
+     ========================================================= */
+
+  function renderLessons() {
+
+    lessonList.innerHTML = "";
+
+    course.lessons.forEach(
+      function (lesson, index) {
+
+        const number =
+          index + 1;
+
+        const completed =
+          completedLessons.includes(number);
+
+        const button =
+          document.createElement("button");
+
+        button.type = "button";
+
+        button.className =
+          "lesson-item" +
+          (completed ? " completed" : "");
+
+        button.innerHTML = `
+
+          <span class="lesson-number">
+            ${completed ? "✓" : number}
+          </span>
+
+          <span class="lesson-info">
+
+            <strong>
+              ${escapeHtml(lesson)}
+            </strong>
+
+            <span>
+              Lesson ${number} · Practical learning
+            </span>
+
+          </span>
+
+          <span class="lesson-arrow">
+            →
+          </span>
+
+        `;
+
+
+        button.addEventListener(
+          "click",
+          function () {
+
+            localStorage.setItem(
+              "jg_current_course",
+              courseKey
+            );
+
+            localStorage.setItem(
+              "jg_current_lesson",
+              String(number)
+            );
+
+            /*
+              lesson.html will eventually load
+              the real lesson from the backend.
+            */
+
+            window.location.href =
+              "lesson.html?course=" +
+              encodeURIComponent(courseKey) +
+              "&lesson=" +
+              number;
+
+          }
         );
-      border: 1px solid var(--border);
-      font-size: 1.2rem;
-      font-weight: 900;
-    }
 
-    .course-preview-badge {
-      padding: 7px 9px;
-      border-radius: 999px;
-      background: rgba(22, 163, 74, 0.10);
-      color: #15803d;
-      font-size: 0.72rem;
-      font-weight: 800;
-    }
 
-    .course-preview h2 {
-      margin: 0;
-      font-size: 1.2rem;
-    }
+        lessonList.appendChild(button);
 
-    .course-preview p {
-      margin: 8px 0 0;
-      color: var(--muted);
-     
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     START / CONTINUE COURSE
+     ========================================================= */
+
+  startButton.addEventListener(
+    "click",
+    function () {
+
+      let nextLesson = 1;
+
+      for (
+        let i = 1;
+        i <= course.lessons.length;
+        i++
+      ) {
+
+        if (!completedLessons.includes(i)) {
+          nextLesson = i;
+          break;
+        }
+
+      }
+
+      localStorage.setItem(
+        "jg_current_course",
+        courseKey
+      );
+
+      localStorage.setItem(
+        "jg_current_lesson",
+        String(nextLesson)
+      );
+
+      window.location.href =
+        "lesson.html?course=" +
+        encodeURIComponent(courseKey) +
+        "&lesson=" +
+        nextLesson;
+
+    }
+  );
+
+
+  /* =========================================================
+     MESSAGE HELPER
+     ========================================================= */
+
+  function showMessage(text) {
+
+    message.textContent =
+      text;
+
+    message.style.display =
+      "block";
+
+    setTimeout(
+      function () {
+        message.style.display =
+          "none";
+      },
+      4000
+    );
+
+  }
+
+
+  /* =========================================================
+     ESCAPE HTML
+     ========================================================= */
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;")
+      .replaceAll('"', "&quot;")
+      .replaceAll("'", "&#039;");
+
+  }
+
+
+  /* =========================================================
+     MOBILE MENU
+     ========================================================= */
+
+  const menuButton =
+    document.getElementById("menuButton");
+
+  const mobileMenu =
+    document.getElementById("mobileMenu");
+
+
+  if (
+    menuButton &&
+    mobileMenu
+  ) {
+
+    menuButton.addEventListener(
+      "click",
+      function () {
+
+        const isOpen =
+          !mobileMenu.hasAttribute("hidden");
+
+        if (isOpen) {
+
+          mobileMenu.setAttribute(
+            "hidden",
+            ""
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "false"
+          );
+
+        } else {
+
+          mobileMenu.removeAttribute(
+            "hidden"
+          );
+
+          menuButton.setAttribute(
+            "aria-expanded",
+            "true"
+          );
+
+        }
+
+      }
+    );
+
+  }
+
+
+  /* =========================================================
+     INITIALIZE
+     ========================================================= */
+
+  renderLessons();
+
+  updateProgress();
+
+
+  /*
+     This message is intentionally not shown on first load.
+     It can later be used by the backend/API layer for:
+     authentication, enrollment, saved progress, etc.
+  */
+
+  window.JG_CURRENT_COURSE = courseKey;
+  window.JG_CURRENT_COURSE_DATA = course;
+
+});
+
+</script>
+
+</body>
+</html>
