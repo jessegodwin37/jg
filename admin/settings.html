@@ -1,1 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="JG Admin Settings — platform configuration and owner controls.">
 
+  <title>JG Admin — Settings</title>
+
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+
+<body data-page="admin-settings">
+
+  <!-- PAGE LOADER -->
+  <div id="pageLoader" class="page-loader" aria-hidden="true">
+    <div class="loader-spinner"></div>
+    <span>Loading settings...</span>
+  </div>
+
+  <!-- HEADER -->
+  <header class="app-header">
+    <div class="header-inner">
+
+      <a href="dashboard.html" class="brand" aria-label="JG Admin Dashboard">
+        <span class="brand-mark">JG</span>
+
+        <span class="brand-text">
+          <strong>JG</strong>
+          <small>Admin Control</small>
+        </span>
+      </a>
+
+      <div class="header-actions">
+
+        <button
+          type="button"
+          class="icon-btn"
+          id="themeButton"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-outline btn-sm"
+          data-action="back"
+        >
+          ← Back
+        </button>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN -->
+  <main class="app-main">
+
+    <!-- HERO -->
+    <section class="page-hero">
+
+      <div>
+        <span class="eyebrow">OWNER CONTROL CENTER</span>
+
+        <h1>Platform Settings</h1>
+
+        <p>
+          Configure JG's general platform behavior, user experience,
+          security preferences, notifications and operational settings.
+        </p>
+      </div>
+
+      <div class="hero-actions">
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="saveSettingsButton"
+        >
+          Save Changes
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- OWNER NOTICE -->
+    <section class="alert alert-info">
+      <strong>Owner authority:</strong>
+      Critical platform settings must be protected by backend permissions.
+      Frontend controls are only the interface and are not a security
+      boundary.
+    </section>
+
+    <!-- GENERAL SETTINGS -->
+    <section class="card">
+
+      <div class="section-heading">
+        <div>
+          <span class="eyebrow">GENERAL</span>
+          <h2>Platform Identity</h2>
+        </div>
+
+        <span class="badge badge-success">
+          JG
+        </span>
+      </div>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+          <label for="appName">
+            App name
+          </label>
+
+          <input
+            type="text"
+            id="appName"
+            class="form-input"
+            value="JG"
+            maxlength="80"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="appTagline">
+            Tagline
+          </label>
+
+          <input
+            type="text"
+            id="appTagline"
+            class="form-input"
+            value="Find Skills. Find Opportunities."
+            maxlength="160"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="supportEmail">
+            Support email
+          </label>
+
+          <input
+            type="email"
+            id="supportEmail"
+            class="form-input"
+            placeholder="support@example.com"
+            autocomplete="email"
+          >
+        </div>
+
+        <div class="form-group">
+          <label for="defaultLanguage">
+            Default language
+          </label>
+
+          <select
+            id="defaultLanguage"
+            class="form-input"
+          >
+            <option value="en">English</option>
+            <option value="fr">French</option>
+            <option value="es">Spanish</option>
+            <option value="pt">Portuguese</option>
+          </select>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- USER EXPERIENCE -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">USER EXPERIENCE</span>
+          <h2>Platform Experience</h2>
+        </div>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Maintenance mode</strong>
+            <small>
+              Temporarily restrict normal user access while maintenance is
+              being performed.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="maintenanceMode"
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>New user registration</strong>
+            <small>
+              Allow new users to create JG accounts.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="registrationEnabled"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Guest browsing</strong>
+            <small>
+              Allow visitors to explore public JG content without an account.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="guestBrowsing"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Public work opportunities</strong>
+            <small>
+              Allow visitors to browse publicly available external
+              opportunities.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="publicWork"
+            checked
+          >
+
+        </label>
+
+      </div>
+
+    </section>
+
+    <!-- LEARNING -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">LEARNING</span>
+          <h2>Learning Settings</h2>
+        </div>
+
+      </div>
+
+      <div class="grid-2">
+
+        <div class="form-group">
+
+          <label for="defaultPassMark">
+            Default exam pass mark
+          </label>
+
+          <input
+            type="number"
+            id="defaultPassMark"
+            class="form-input"
+            value="70"
+            min="1"
+            max="100"
+          >
+
+          <small class="form-help">
+            Individual exams may use their own configured pass mark.
+          </small>
+
+        </div>
+
+        <div class="form-group">
+
+          <label for="certificateEnabled">
+            Certificate system
+          </label>
+
+          <select
+            id="certificateEnabled"
+            class="form-input"
+          >
+            <option value="enabled">Enabled</option>
+            <option value="disabled">Disabled</option>
+          </select>
+
+        </div>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Require lesson completion</strong>
+            <small>
+              Require learners to complete required lessons before
+              certification.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="requireLessonCompletion"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Allow learning progress tracking</strong>
+            <small>
+              Save lesson and course progress for authenticated users.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="progressTracking"
+            checked
+          >
+
+        </label>
+
+      </div>
+
+    </section>
+
+    <!-- ADS -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">MONETIZATION</span>
+          <h2>Advertising</h2>
+        </div>
+
+        <a
+          href="premium-ads.html"
+          class="btn btn-outline btn-sm"
+        >
+          Manage Ads
+        </a>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Advertising system</strong>
+            <small>
+              Enable advertising placements for eligible free users.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="adsEnabled"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Premium ad-free experience</strong>
+            <small>
+              Premium users should not receive standard JG advertisements.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="premiumAdFree"
+            checked
+          >
+
+        </label>
+
+      </div>
+
+      <div class="alert alert-warning">
+        JG users do not receive wallets, balances, withdrawals or payouts.
+        JG's monetization is based on advertising and Premium subscriptions.
+      </div>
+
+    </section>
+
+    <!-- NOTIFICATIONS -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">COMMUNICATION</span>
+          <h2>Notifications</h2>
+        </div>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+            <strong>System notifications</strong>
+            <small>
+              Allow JG to send important platform notifications.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="systemNotifications"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Learning reminders</strong>
+            <small>
+              Allow learning-related reminders for users who enable them.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="learningNotifications"
+            checked
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Opportunity notifications</strong>
+            <small>
+              Notify users about relevant external opportunities when
+              supported.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="opportunityNotifications"
+            checked
+          >
+
+        </label>
+
+      </div>
+
+    </section>
+
+    <!-- SECURITY -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">SECURITY</span>
+          <h2>Security Preferences</h2>
+        </div>
+
+        <span class="badge badge-warning">
+          Backend enforced
+        </span>
+
+      </div>
+
+      <div class="settings-list">
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Audit logging</strong>
+            <small>
+              Record important administrative actions.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="auditLogging"
+            checked
+            disabled
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Owner permanent deletion protection</strong>
+            <small>
+              Require explicit Owner confirmation before permanent deletion.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="deleteProtection"
+            checked
+            disabled
+          >
+
+        </label>
+
+        <label class="setting-row">
+
+          <span>
+            <strong>Admin permission enforcement</strong>
+            <small>
+              Backend must verify delegated administrator permissions.
+            </small>
+          </span>
+
+          <input
+            type="checkbox"
+            id="permissionEnforcement"
+            checked
+            disabled
+          >
+
+        </label>
+
+      </div>
+
+      <div class="alert alert-info">
+        Security controls marked as protected cannot be disabled from the
+        frontend. They must remain enforced by the JG backend.
+      </div>
+
+      <div class="form-actions">
+
+        <a
+          href="admins.html"
+          class="btn btn-outline"
+        >
+          Manage Admins
+        </a>
+
+        <a
+          href="audit.html"
+          class="btn btn-outline"
+        >
+          View Audit Logs
+        </a>
+
+      </div>
+
+    </section>
+
+    <!-- AI -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">ARTIFICIAL INTELLIGENCE</span>
+          <h2>JG AI</h2>
+        </div>
+
+        <a
+          href="ai-control.html"
+          class="btn btn-outline btn-sm"
+        >
+          AI Control
+        </a>
+
+      </div>
+
+      <p class="muted">
+        JG AI is configured separately so that AI-specific controls can be
+        managed without exposing provider credentials.
+      </p>
+
+      <div class="alert alert-info">
+        API keys belong on the secure backend only. Never store an OpenAI
+        secret key in GitHub frontend files.
+      </div>
+
+    </section>
+
+    <!-- DATA / EXPORT -->
+    <section class="card">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">DATA CONTROL</span>
+          <h2>Data & Export</h2>
+        </div>
+
+        <a
+          href="export.html"
+          class="btn btn-outline btn-sm"
+        >
+          Open Export Center
+        </a>
+
+      </div>
+
+      <p class="muted">
+        Owner-level data export and operational tools should be protected
+        with strong authentication and recorded in the audit system.
+      </p>
+
+      <div class="grid-2">
+
+        <div class="info-card">
+
+          <strong>Recoverable deletion</strong>
+
+          <p>
+            Removed content should enter a recoverable state before permanent
+            deletion.
+          </p>
+
+        </div>
+
+        <div class="info-card">
+
+          <strong>Permanent deletion</strong>
+
+          <p>
+            Permanent deletion should be restricted to the Owner and require
+            explicit confirmation.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- DANGER ZONE -->
+    <section class="card danger-zone">
+
+      <div class="section-heading">
+
+        <div>
+          <span class="eyebrow">DANGER ZONE</span>
+          <h2>High-Risk Actions</h2>
+        </div>
+
+        <span class="badge badge-danger">
+          Owner only
+        </span>
+
+      </div>
+
+      <p class="muted">
+        These actions can affect the entire platform. The backend must verify
+        that the requester is the Owner before performing them.
+      </p>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="clearLocalSettingsButton"
+        >
+          Clear Local Settings
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-danger"
+          id="resetPlatformButton"
+        >
+          Reset Local Configuration
+        </button>
+
+      </div>
+
+    </section>
+
+    <!-- SAVE BAR -->
+    <section class="sticky-action-bar">
+
+      <div>
+        <strong>Platform Settings</strong>
+
+        <small id="saveStatus">
+          No unsaved changes
+        </small>
+      </div>
+
+      <div class="form-actions">
+
+        <button
+          type="button"
+          class="btn btn-outline"
+          id="discardButton"
+        >
+          Discard
+        </button>
+
+        <button
+          type="button"
+          class="btn btn-primary"
+          id="saveBottomButton"
+        >
+          Save Changes
+        </button>
+
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- ADMIN NAV -->
+  <nav class="bottom-nav" aria-label="Admin navigation">
+
+    <a
+      href="dashboard.html"
+      class="bottom-nav-item"
+      data-nav="dashboard"
+    >
+      <span>⌂</span>
+      <small>Dashboard</small>
+    </a>
+
+    <a
+      href="users.html"
+      class="bottom-nav-item"
+      data-nav="users"
+    >
+      <span>♙</span>
+      <small>Users</small>
+    </a>
+
+    <a
+      href="content.html"
+      class="bottom-nav-item"
+      data-nav="content"
+    >
+      <span>▣</span>
+      <small>Content</small>
+    </a>
+
+    <a
+      href="premium-ads.html"
+      class="bottom-nav-item"
+      data-nav="premium"
+    >
+      <span>★</span>
+      <small>Premium</small>
+    </a>
+
+    <a
+      href="settings.html"
+      class="bottom-nav-item active"
+      data-nav="settings"
+    >
+      <span>⚙</span>
+      <small>Settings</small>
+    </a>
+
+  </nav>
+
+  <!-- TOAST -->
+  <div
+    id="toastContainer"
+    class="toast-container"
+    aria-live="polite"
+    aria-atomic="true"
+  ></div>
+
+  <!-- SCRIPTS -->
+  <script src="../js/config.js"></script>
+  <script src="../js/ui.js"></script>
+  <script src="../js/api.js"></script>
+  <script src="../js/auth.js"></script>
+  <script src="../js/app.js"></script>
+
+  <script>
+    (() => {
+      "use strict";
+
+      const STORAGE_KEY = "jg_admin_platform_settings";
+
+      const DEFAULT_SETTINGS = {
+        appName: "JG",
+        appTagline: "Find Skills. Find Opportunities.",
+        supportEmail: "",
+        defaultLanguage: "en",
+
+        maintenanceMode: false,
+        registrationEnabled: true,
+        guestBrowsing: true,
+        publicWork: true,
+
+        defaultPassMark: 70,
+        certificateEnabled: "enabled",
+        requireLessonCompletion: true,
+        progressTracking: true,
+
+        adsEnabled: true,
+        premiumAdFree: true,
+
+        systemNotifications: true,
+        learningNotifications: true,
+        opportunityNotifications: true
+      };
+
+      let originalSettings =
+        JSON.parse(JSON.stringify(DEFAULT_SETTINGS));
+
+      function $(id) {
+        return document.getElementById(id);
+      }
+
+      function toast(message, type = "info") {
+        if (
+          window.JG_UI &&
+          typeof JG_UI.toast === "function"
+        ) {
+          JG_UI.toast(message, type);
+          return;
+        }
+
+        if (
+          window.JG_APP &&
+          typeof JG_APP.toast === "function"
+        ) {
+          JG_APP.toast(message, type);
+          return;
+        }
+
+        alert(message);
+      }
+
+      function collectSettings() {
+        return {
+          appName:
+            $("appName").value.trim(),
+
+          appTagline:
+            $("appTagline").value.trim(),
+
+          supportEmail:
+            $("supportEmail").value.trim(),
+
+          defaultLanguage:
+            $("defaultLanguage").value,
+
+          maintenanceMode:
+            $("maintenanceMode").checked,
+
+          registrationEnabled:
+            $("registrationEnabled").checked,
+
+          guestBrowsing:
+            $("guestBrowsing").checked,
+
+          publicWork:
+            $("publicWork").checked,
+
+          defaultPassMark:
+            Number($("defaultPassMark").value) || 70,
+
+          certificateEnabled:
+            $("certificateEnabled").value,
+
+          requireLessonCompletion:
+            $("requireLessonCompletion").checked,
+
+          progressTracking:
+            $("progressTracking").checked,
+
+          adsEnabled:
+            $("adsEnabled").checked,
+
+          premiumAdFree:
+            $("premiumAdFree").checked,
+
+          systemNotifications:
+            $("systemNotifications").checked,
+
+          learningNotifications:
+            $("learningNotifications").checked,
+
+          opportunityNotifications:
+            $("opportunityNotifications").checked
+        };
+      }
+
+      function applySettings(settings) {
+        $("appName").value =
+          settings.appName;
+
+        $("appTagline").value =
+          settings.appTagline;
+
+        $("supportEmail").value =
+          settings.supportEmail;
+
+        $("defaultLanguage").value =
+          settings.defaultLanguage;
+
+        $("maintenanceMode").checked =
+          settings.maintenanceMode;
+
+        $("registrationEnabled").checked =
+          settings.registrationEnabled;
+
+        $("guestBrowsing").checked =
+          settings.guestBrowsing;
+
+        $("publicWork").checked =
+          settings.publicWork;
+
+        $("defaultPassMark").value =
+          settings.defaultPassMark;
+
+        $("certificateEnabled").value =
+          settings.certificateEnabled;
+
+        $("requireLessonCompletion").checked =
+          settings.requireLessonCompletion;
+
+        $("progressTracking").checked =
+          settings.progressTracking;
+
+        $("adsEnabled").checked =
+          settings.adsEnabled;
+
+        $("premiumAdFree").checked =
+          settings.premiumAdFree;
+
+        $("systemNotifications").checked =
+          settings.systemNotifications;
+
+        $("learningNotifications").checked =
+          settings.learningNotifications;
+
+        $("opportunityNotifications").checked =
+          settings.opportunityNotifications;
+      }
+
+      function markChanged() {
+        $("saveStatus").textContent =
+          "Unsaved changes";
+      }
+
+      function loadSettings() {
+        try {
+          const saved =
+            localStorage.getItem(STORAGE_KEY);
+
+          if (saved) {
+            const parsed =
+              JSON.parse(saved);
+
+            originalSettings =
+              Object.assign(
+                {},
+                DEFAULT_SETTINGS,
+                parsed
+              );
+          }
+        } catch (error) {
+          console.warn(
+            "Could not load settings:",
+            error
+          );
+
+          originalSettings =
+            JSON.parse(
+              JSON.stringify(DEFAULT_SETTINGS)
+            );
+        }
+
+        applySettings(originalSettings);
+      }
+
+      async function saveSettings() {
+        const settings =
+          collectSettings();
+
+        if (
+          settings.defaultPassMark < 1 ||
+          settings.defaultPassMark > 100
+        ) {
+          toast(
+            "Exam pass mark must be between 1 and 100.",
+            "warning"
+          );
+          return;
+        }
+
+        if (
+          settings.supportEmail &&
+          !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(
+            settings.supportEmail
+          )
+        ) {
+          toast(
+            "Enter a valid support email.",
+            "warning"
+          );
+          return;
+        }
+
+        /*
+         * When the production settings endpoint exists,
+         * this should call a protected Owner API.
+         *
+         * We do not fake that endpoint here.
+         */
+
+        try {
+          if (
+            window.JG_API &&
+            typeof JG_API.updateSettings === "function"
+          ) {
+            await JG_API.updateSettings(settings);
+
+            originalSettings =
+              JSON.parse(
+                JSON.stringify(settings)
+              );
+
+            $("saveStatus").textContent =
+              "Saved to backend";
+
+            toast(
+              "Platform settings saved.",
+              "success"
+            );
+
+            return;
+          }
+        } catch (error) {
+          console.error(
+            "Backend settings save failed:",
+            error
+          );
+
+          toast(
+            "Backend save failed. Your settings were not sent.",
+            "error"
+          );
+
+          return;
+        }
+
+        localStorage.setItem(
+          STORAGE_KEY,
+          JSON.stringify(settings)
+        );
+
+        originalSettings =
+          JSON.parse(
+            JSON.stringify(settings)
+          );
+
+        $("saveStatus").textContent =
+          "Saved locally";
+
+        toast(
+          "Settings saved locally for development.",
+          "success"
+        );
+      }
+
+      function discardChanges() {
+        applySettings(originalSettings);
+
+        $("saveStatus").textContent =
+          "Changes discarded";
+
+        toast(
+          "Unsaved changes discarded.",
+          "info"
+        );
+      }
+
+      function clearLocalSettings() {
+        const confirmed =
+          confirm(
+            "Clear JG platform settings stored in this browser?"
+          );
+
+        if (!confirmed) return;
+
+        localStorage.removeItem(
+          STORAGE_KEY
+        );
+
+        applySettings(DEFAULT_SETTINGS);
+
+        originalSettings =
+          JSON.parse(
+            JSON.stringify(DEFAULT_SETTINGS)
+          );
+
+        $("saveStatus").textContent =
+          "Local settings cleared";
+
+        toast(
+          "Local settings cleared.",
+          "success"
+        );
+      }
+
+      function resetLocalConfiguration() {
+        const confirmed =
+          confirm(
+            "Reset all locally stored JG admin configuration in this browser? This does not delete production database data."
+          );
+
+        if (!confirmed) return;
+
+        localStorage.removeItem(
+          STORAGE_KEY
+        );
+
+        applySettings(
+          DEFAULT_SETTINGS
+        );
+
+        originalSettings =
+          JSON.parse(
+            JSON.stringify(DEFAULT_SETTINGS)
+          );
+
+        $("saveStatus").textContent =
+          "Reset to defaults";
+
+        toast(
+          "Local configuration reset.",
+          "success"
+        );
+      }
+
+      function bindEvents() {
+
+        const inputs =
+          document.querySelectorAll(
+            "input:not([disabled]), select"
+          );
+
+        inputs.forEach((input) => {
+
+          input.addEventListener(
+            "input",
+            markChanged
+          );
+
+          input.addEventListener(
+            "change",
+            markChanged
+          );
+
+        });
+
+        $("saveSettingsButton")
+          .addEventListener(
+            "click",
+            saveSettings
+          );
+
+        $("saveBottomButton")
+          .addEventListener(
+            "click",
+            saveSettings
+          );
+
+        $("discardButton")
+          .addEventListener(
+            "click",
+            discardChanges
+          );
+
+        $("clearLocalSettingsButton")
+          .addEventListener(
+            "click",
+            clearLocalSettings
+          );
+
+        $("resetPlatformButton")
+          .addEventListener(
+            "click",
+            resetLocalConfiguration
+          );
+      }
+
+      function initialize() {
+
+        loadSettings();
+
+        bindEvents();
+
+        if (
+          window.JG_AUTH &&
+          typeof JG_AUTH.requireAdmin === "function"
+        ) {
+          try {
+            JG_AUTH.requireAdmin();
+          } catch (error) {
+            console.warn(
+              "Admin authentication handled by auth module.",
+              error
+            );
+          }
+        }
+
+        setTimeout(() => {
+
+          const loader =
+            $("pageLoader");
+
+          if (loader) {
+            loader.classList.add(
+              "hidden"
+            );
+          }
+
+        }, 300);
+      }
+
+      if (
+        document.readyState === "loading"
+      ) {
+        document.addEventListener(
+          "DOMContentLoaded",
+          initialize
+        );
+      } else {
+        initialize();
+      }
+
+    })();
+  </script>
+
+</body>
+</html>
