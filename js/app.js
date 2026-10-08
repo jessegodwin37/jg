@@ -1,1037 +1,442 @@
 /* =========================================================
-   JG — Global Application Controller
-   File: frontend/js/app.js
+   JG APPLICATION BOOTSTRAP
    ========================================================= */
 
 (function () {
+
   "use strict";
 
-  /* ---------------------------------------------------------
-     Shortcuts
-  --------------------------------------------------------- */
 
-  var CONFIG = window.JG_CONFIG || {};
-  var STORAGE = CONFIG.STORAGE_KEYS || {};
+  const UI =
+    window.JG_UI;
 
-  var $ = function (selector, parent) {
-    return (parent || document).querySelector(selector);
-  };
+  const AUTH =
+    window.JG_AUTH;
 
-  var $$ = function (selector, parent) {
-    return Array.prototype.slice.call(
-      (parent || document).querySelectorAll(selector)
-    );
-  };
 
-  /* ---------------------------------------------------------
-     Safe Storage
-  --------------------------------------------------------- */
+  const APP = {
 
-  var storage = {
-    get: function (key, fallback) {
-      try {
-        var value = localStorage.getItem(key);
 
-        if (value === null) {
-          return fallback;
-        }
+    /* -----------------------------------------------------
+       INITIALIZE
+       ----------------------------------------------------- */
 
-        try {
-          return JSON.parse(value);
-        } catch (error) {
-          return value;
-        }
-      } catch (error) {
-        return fallback;
-      }
+    async init() {
+
+      UI?.initTheme();
+
+      APP.initThemeButtons();
+
+      APP.initActiveNavigation();
+
+      APP.initLinks();
+
+      APP.initGlobalButtons();
+
+      APP.initAuthState();
+
+      APP.markAppReady();
+
     },
 
-    set: function (key, value) {
-      try {
-        localStorage.setItem(
-          key,
-          typeof value === "string"
-            ? value
-            : JSON.stringify(value)
+
+    /* -----------------------------------------------------
+       THEME
+       ----------------------------------------------------- */
+
+    initThemeButtons() {
+
+      const buttons =
+        document.querySelectorAll(
+          "#themeButton"
         );
 
-        return true;
-      } catch (error) {
-        return false;
-      }
-    },
 
-    remove: function (key) {
-      try {
-        localStorage.removeItem(key);
-      } catch (error) {
-        // Ignore storage errors.
-      }
-    }
-  };
+      buttons.forEach(button => {
 
-  /* ---------------------------------------------------------
-     JG Application State
-  --------------------------------------------------------- */
-
-  var state = {
-    theme: storage.get(
-      STORAGE.THEME || "jg_theme",
-      "dark"
-    ),
-
-    language: storage.get(
-      STORAGE.LANGUAGE || "jg_language",
-      "en"
-    ),
-
-    user: storage.get(
-      STORAGE.USER || "jg_user",
-      null
-    ),
-
-    authenticated: Boolean(
-      storage.get(
-        STORAGE.AUTH || "jg_auth",
-        false
-      )
-    )
-  };
-
-  /* ---------------------------------------------------------
-     Theme
-  --------------------------------------------------------- */
-
-  function applyTheme(theme) {
-    theme = theme === "light" ? "light" : "dark";
-
-    state.theme = theme;
-
-    document.documentElement.setAttribute(
-      "data-theme",
-      theme
-    );
-
-    document.body.classList.toggle(
-      "light-mode",
-      theme === "light"
-    );
-
-    document.body.classList.toggle(
-      "dark-mode",
-      theme === "dark"
-    );
-
-    storage.set(
-      STORAGE.THEME || "jg_theme",
-      theme
-    );
-
-    updateThemeButtons();
-  }
-
-  function toggleTheme() {
-    applyTheme(
-      state.theme === "dark"
-        ? "light"
-        : "dark"
-    );
-  }
-
-  function updateThemeButtons() {
-    var buttons = $$(
-      "[data-theme-toggle], #themeButton, .theme-toggle"
-    );
-
-    buttons.forEach(function (button) {
-      var isDark = state.theme === "dark";
-
-      button.setAttribute(
-        "aria-label",
-        isDark
-          ? "Switch to light mode"
-          : "Switch to dark mode"
-      );
-
-      button.setAttribute(
-        "title",
-        isDark
-          ? "Switch to light mode"
-          : "Switch to dark mode"
-      );
-
-      var icon = button.querySelector(
-        "[data-theme-icon]"
-      );
-
-      if (icon) {
-        icon.textContent = isDark
-          ? "☀️"
-          : "🌙";
-      }
-    });
-  }
-
-  /* ---------------------------------------------------------
-     Mobile Navigation
-  --------------------------------------------------------- */
-
-  function setupMobileNavigation() {
-    var menuButtons = $$(
-      "[data-menu-toggle], #menuButton, .menu-toggle"
-    );
-
-    var nav = $(
-      "[data-mobile-menu], .mobile-menu, .main-nav"
-    );
-
-    menuButtons.forEach(function (button) {
-      button.addEventListener(
-        "click",
-        function () {
-          if (!nav) {
-            return;
-          }
-
-          var opened =
-            nav.classList.toggle("open");
-
-          button.setAttribute(
-            "aria-expanded",
-            opened ? "true" : "false"
-          );
-        }
-      );
-    });
-
-    $$("nav a, .main-nav a").forEach(
-      function (link) {
-        link.addEventListener(
-          "click",
-          function () {
-            if (nav) {
-              nav.classList.remove("open");
-            }
-
-            menuButtons.forEach(
-              function (button) {
-                button.setAttribute(
-                  "aria-expanded",
-                  "false"
-                );
-              }
-            );
-          }
-        );
-      }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     Bottom Navigation
-  --------------------------------------------------------- */
-
-  function setupBottomNavigation() {
-    $$("[data-nav]").forEach(
-      function (button) {
         button.addEventListener(
           "click",
-          function () {
-            var target =
-              button.getAttribute("data-nav");
-
-            if (!target) {
-              return;
-            }
-
-            navigate(target);
-          }
-        );
-      }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     Navigation
-  --------------------------------------------------------- */
-
-  function navigate(target) {
-    if (!target) {
-      return;
-    }
-
-    var routes =
-      CONFIG.ROUTES || {};
-
-    var routeMap = {
-      home: routes.HOME || "index.html",
-      learn: routes.LEARN || "learn.html",
-      skills: routes.SKILLS || "skills.html",
-      course: routes.COURSE || "course.html",
-      lesson: routes.LESSON || "lesson.html",
-      exam: routes.EXAM || "exam.html",
-      certificate:
-        routes.CERTIFICATE || "certificate.html",
-      verify:
-        routes.VERIFY || "verify.html",
-      work: routes.WORK || "work.html",
-      ai: routes.AI || "ai.html",
-      premium:
-        routes.PREMIUM || "premium.html",
-      account:
-        routes.ACCOUNT || "account.html",
-      login:
-        routes.LOGIN || "login.html",
-      signup:
-        routes.SIGNUP || "signup.html"
-    };
-
-    var destination =
-      routeMap[target] || target;
-
-    window.location.href = destination;
-  }
-
-  /* ---------------------------------------------------------
-     Data Navigation
-  --------------------------------------------------------- */
-
-  function setupDataLinks() {
-    $$("[data-route]").forEach(
-      function (element) {
-        element.addEventListener(
-          "click",
-          function (event) {
-            var route =
-              element.getAttribute(
-                "data-route"
-              );
-
-            if (!route) {
-              return;
-            }
+          event => {
 
             event.preventDefault();
 
-            navigate(route);
+            UI?.toggleTheme();
+
           }
         );
-      }
-    );
-  }
 
-  /* ---------------------------------------------------------
-     Modal System
-  --------------------------------------------------------- */
+      });
 
-  function openModal(modal) {
-    if (!modal) {
-      return;
-    }
+    },
 
-    modal.classList.add("active");
-    modal.classList.add("open");
 
-    modal.setAttribute(
-      "aria-hidden",
-      "false"
-    );
+    /* -----------------------------------------------------
+       ACTIVE NAVIGATION
+       ----------------------------------------------------- */
 
-    document.body.classList.add(
-      "modal-open"
-    );
-  }
+    initActiveNavigation() {
 
-  function closeModal(modal) {
-    if (!modal) {
-      return;
-    }
+      const current =
+        window.location.pathname
+          .split("/")
+          .pop()
+          .toLowerCase();
 
-    modal.classList.remove("active");
-    modal.classList.remove("open");
 
-    modal.setAttribute(
-      "aria-hidden",
-      "true"
-    );
+      const currentPage =
+        current || "index.html";
 
-    document.body.classList.remove(
-      "modal-open"
-    );
-  }
 
-  function setupModals() {
-    $$("[data-modal-open]").forEach(
-      function (button) {
-        button.addEventListener(
-          "click",
-          function () {
-            var id =
-              button.getAttribute(
-                "data-modal-open"
-              );
+      document
+        .querySelectorAll(
+          ".nav-item"
+        )
+        .forEach(item => {
 
-            var modal = document.getElementById(
-              id
-            );
+          const href =
+            item.getAttribute("href");
 
-            openModal(modal);
+
+          if (!href) {
+            return;
           }
-        );
-      }
-    );
 
-    $$("[data-modal-close]").forEach(
-      function (button) {
-        button.addEventListener(
-          "click",
-          function () {
-            var modal =
-              button.closest(".modal") ||
-              button.closest(
-                "[role='dialog']"
-              );
 
-            closeModal(modal);
-          }
-        );
-      }
-    );
+          const target =
+            href
+              .split("?")[0]
+              .split("#")[0]
+              .toLowerCase();
 
-    $$(".modal").forEach(
-      function (modal) {
-        modal.addEventListener(
-          "click",
-          function (event) {
-            if (
-              event.target === modal &&
-              modal.hasAttribute(
-                "data-close-outside"
-              )
-            ) {
-              closeModal(modal);
-            }
-          }
-        );
-      }
-    );
 
-    document.addEventListener(
-      "keydown",
-      function (event) {
-        if (event.key !== "Escape") {
-          return;
-        }
-
-        $$(".modal.active, .modal.open")
-          .forEach(function (modal) {
-            closeModal(modal);
-          });
-      }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     Button Loading State
-  --------------------------------------------------------- */
-
-  function setButtonLoading(
-    button,
-    loading,
-    loadingText
-  ) {
-    if (!button) {
-      return;
-    }
-
-    if (loading) {
-      if (
-        !button.dataset.originalText
-      ) {
-        button.dataset.originalText =
-          button.innerHTML;
-      }
-
-      button.disabled = true;
-
-      button.innerHTML =
-        loadingText ||
-        "Please wait...";
-    } else {
-      button.disabled = false;
-
-      if (
-        button.dataset.originalText
-      ) {
-        button.innerHTML =
-          button.dataset.originalText;
-      }
-    }
-  }
-
-  /* ---------------------------------------------------------
-     Toast Notifications
-  --------------------------------------------------------- */
-
-  function toast(
-    message,
-    type,
-    duration
-  ) {
-    type = type || "info";
-    duration =
-      duration === undefined
-        ? 3500
-        : duration;
-
-    var container = $(
-      "#jgToastContainer"
-    );
-
-    if (!container) {
-      container =
-        document.createElement("div");
-
-      container.id =
-        "jgToastContainer";
-
-      container.className =
-        "toast-container";
-
-      document.body.appendChild(
-        container
-      );
-    }
-
-    var item =
-      document.createElement("div");
-
-    item.className =
-      "toast toast-" + type;
-
-    item.setAttribute(
-      "role",
-      "status"
-    );
-
-    item.textContent = message;
-
-    container.appendChild(item);
-
-    window.setTimeout(
-      function () {
-        item.classList.add(
-          "toast-hide"
-        );
-
-        window.setTimeout(
-          function () {
-            if (item.parentNode) {
-              item.parentNode.removeChild(
-                item
-              );
-            }
-          },
-          300
-        );
-      },
-      duration
-    );
-  }
-
-  /* ---------------------------------------------------------
-     Active Navigation
-  --------------------------------------------------------- */
-
-  function markActiveNavigation() {
-    var current =
-      window.location.pathname
-        .split("/")
-        .pop() || "index.html";
-
-    $$(
-      "nav a, .bottom-nav a, [data-page]"
-    ).forEach(function (element) {
-      var href =
-        element.getAttribute("href");
-
-      var page =
-        element.getAttribute(
-          "data-page"
-        );
-
-      var matches =
-        href === current ||
-        page === current;
-
-      element.classList.toggle(
-        "active",
-        matches
-      );
-
-      if (matches) {
-        element.setAttribute(
-          "aria-current",
-          "page"
-        );
-      }
-    });
-  }
-
-  /* ---------------------------------------------------------
-     Authentication UI
-  --------------------------------------------------------- */
-
-  function updateAuthenticationUI() {
-    var loggedIn =
-      state.authenticated;
-
-    $$("[data-auth-only]").forEach(
-      function (element) {
-        element.hidden = !loggedIn;
-      }
-    );
-
-    $$("[data-guest-only]").forEach(
-      function (element) {
-        element.hidden = loggedIn;
-      }
-    );
-
-    $$("[data-user-name]").forEach(
-      function (element) {
-        var name =
-          state.user &&
-          (
-            state.user.firstName ||
-            state.user.name ||
-            state.user.email
+          item.classList.toggle(
+            "active",
+            target === currentPage ||
+            (
+              currentPage === "" &&
+              target === "index.html"
+            )
           );
 
-        element.textContent =
-          name || "JG User";
-      }
-    );
-  }
+        });
 
-  /* ---------------------------------------------------------
-     Logout
-  --------------------------------------------------------- */
+    },
 
-  function logout() {
-    state.authenticated = false;
-    state.user = null;
 
-    storage.remove(
-      STORAGE.AUTH || "jg_auth"
-    );
+    /* -----------------------------------------------------
+       INTERNAL LINKS
+       ----------------------------------------------------- */
 
-    storage.remove(
-      STORAGE.USER || "jg_user"
-    );
+    initLinks() {
 
-    storage.remove(
-      STORAGE.SESSION || "jg_session"
-    );
-
-    updateAuthenticationUI();
-
-    toast(
-      "You have been signed out.",
-      "success"
-    );
-
-    window.setTimeout(
-      function () {
-        navigate("login");
-      },
-      500
-    );
-  }
-
-  function setupLogout() {
-    $$(
-      "[data-logout], #logoutButton"
-    ).forEach(function (button) {
-      button.addEventListener(
+      document.addEventListener(
         "click",
-        function (event) {
-          event.preventDefault();
-          logout();
-        }
-      );
-    });
-  }
+        event => {
 
-  /* ---------------------------------------------------------
-     External / Work Links
-  --------------------------------------------------------- */
+          const link =
+            event.target.closest(
+              "a"
+            );
 
-  function setupExternalLinks() {
-    $$(
-      'a[target="_blank"]'
-    ).forEach(function (link) {
-      link.setAttribute(
-        "rel",
-        "noopener noreferrer"
-      );
-    });
-  }
 
-  /* ---------------------------------------------------------
-     Smooth Scroll
-  --------------------------------------------------------- */
+          if (!link) {
+            return;
+          }
 
-  function setupSmoothScroll() {
-    $$(
-      'a[href^="#"]'
-    ).forEach(function (link) {
-      link.addEventListener(
-        "click",
-        function (event) {
-          var id =
-            link.getAttribute("href");
+
+          const href =
+            link.getAttribute(
+              "href"
+            );
+
 
           if (
-            !id ||
-            id === "#" ||
-            id.length < 2
+            !href ||
+            href.startsWith("#") ||
+            href.startsWith("http://") ||
+            href.startsWith("https://") ||
+            href.startsWith("mailto:") ||
+            href.startsWith("tel:")
           ) {
+
             return;
+
           }
 
-          var target =
-            document.querySelector(id);
 
-          if (!target) {
+          /*
+           * Let normal browser navigation
+           * handle ordinary HTML pages.
+           *
+           * This handler only prevents accidental
+           * double clicks.
+           */
+
+          if (
+            link.dataset.jgNavigating ===
+            "true"
+          ) {
+
+            event.preventDefault();
+
             return;
+
           }
 
-          event.preventDefault();
 
-          target.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-          });
+          link.dataset.jgNavigating =
+            "true";
+
+          window.setTimeout(
+            () => {
+
+              delete link.dataset
+                .jgNavigating;
+
+            },
+            800
+          );
+
         }
       );
-    });
-  }
 
-  /* ---------------------------------------------------------
-     Theme Button Events
-  --------------------------------------------------------- */
+    },
 
-  function setupTheme() {
-    $$(
-      "[data-theme-toggle], #themeButton, .theme-toggle"
-    ).forEach(function (button) {
-      button.addEventListener(
+
+    /* -----------------------------------------------------
+       GLOBAL BUTTONS
+       ----------------------------------------------------- */
+
+    initGlobalButtons() {
+
+      document.addEventListener(
         "click",
-        function (event) {
-          event.preventDefault();
-          toggleTheme();
-        }
-      );
-    });
+        event => {
 
-    applyTheme(state.theme);
-  }
-
-  /* ---------------------------------------------------------
-     Page Reveal
-  --------------------------------------------------------- */
-
-  function setupPageReveal() {
-    var elements = $$(
-      ".reveal, .fade-in, [data-reveal]"
-    );
-
-    if (
-      !("IntersectionObserver" in window)
-    ) {
-      elements.forEach(
-        function (element) {
-          element.classList.add(
-            "visible"
-          );
-        }
-      );
-
-      return;
-    }
-
-    var observer =
-      new IntersectionObserver(
-        function (entries) {
-          entries.forEach(
-            function (entry) {
-              if (
-                entry.isIntersecting
-              ) {
-                entry.target.classList.add(
-                  "visible"
-                );
-
-                observer.unobserve(
-                  entry.target
-                );
-              }
-            }
-          );
-        },
-        {
-          threshold: 0.08
-        }
-      );
-
-    elements.forEach(
-      function (element) {
-        observer.observe(element);
-      }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     Prevent Accidental Double Submit
-  --------------------------------------------------------- */
-
-  function setupForms() {
-    $$("form").forEach(
-      function (form) {
-        form.addEventListener(
-          "submit",
-          function () {
-            form.classList.add(
-              "is-submitting"
+          const actionElement =
+            event.target.closest(
+              "[data-jg-action]"
             );
+
+
+          if (!actionElement) {
+            return;
           }
-        );
-      }
-    );
-  }
 
-  /* ---------------------------------------------------------
-     PWA / Service Worker
-  --------------------------------------------------------- */
 
-  function registerServiceWorker() {
-    if (
-      !CONFIG.FEATURES ||
-      !CONFIG.FEATURES.PWA
-    ) {
-      return;
-    }
+          const action =
+            actionElement.dataset
+              .jgAction;
 
-    if (
-      !("serviceWorker" in navigator)
-    ) {
-      return;
-    }
 
-    /*
-      Service worker registration is enabled
-      only when the file exists.
+          switch (action) {
 
-      GitHub Pages / HTTPS can use this.
-    */
-    window.addEventListener(
-      "load",
-      function () {
-        navigator.serviceWorker
-          .register("sw.js")
-          .then(function () {
-            console.info(
-              "JG service worker registered."
-            );
-          })
-          .catch(function () {
-            /*
-              Silent failure during development.
-            */
-          });
-      }
-    );
-  }
+            case "back":
 
-  /* ---------------------------------------------------------
-     Global Click Handler
-  --------------------------------------------------------- */
+              event.preventDefault();
 
-  function setupGlobalActions() {
-    document.addEventListener(
-      "click",
-      function (event) {
-        var button =
-          event.target.closest(
-            "[data-action]"
-          );
+              window.history.back();
 
-        if (!button) {
-          return;
+              break;
+
+
+            case "login":
+
+              event.preventDefault();
+
+              window.location.href =
+                "login.html";
+
+              break;
+
+
+            case "signup":
+
+              event.preventDefault();
+
+              window.location.href =
+                "signup.html";
+
+              break;
+
+
+            case "account":
+
+              event.preventDefault();
+
+              window.location.href =
+                "account.html";
+
+              break;
+
+
+            case "premium":
+
+              event.preventDefault();
+
+              window.location.href =
+                "premium.html";
+
+              break;
+
+
+            case "learn":
+
+              event.preventDefault();
+
+              window.location.href =
+                "learn.html";
+
+              break;
+
+
+            case "work":
+
+              event.preventDefault();
+
+              window.location.href =
+                "work.html";
+
+              break;
+
+
+            case "ai":
+
+              event.preventDefault();
+
+              window.location.href =
+                "ai.html";
+
+              break;
+
+          }
+
         }
-
-        var action =
-          button.getAttribute(
-            "data-action"
-          );
-
-        switch (action) {
-          case "theme":
-            event.preventDefault();
-            toggleTheme();
-            break;
-
-          case "logout":
-            event.preventDefault();
-            logout();
-            break;
-
-          case "back":
-            event.preventDefault();
-            window.history.back();
-            break;
-
-          case "home":
-            event.preventDefault();
-            navigate("home");
-            break;
-
-          case "learn":
-            event.preventDefault();
-            navigate("learn");
-            break;
-
-          case "skills":
-            event.preventDefault();
-            navigate("skills");
-            break;
-
-          case "work":
-            event.preventDefault();
-            navigate("work");
-            break;
-
-          case "ai":
-            event.preventDefault();
-            navigate("ai");
-            break;
-
-          case "premium":
-            event.preventDefault();
-            navigate("premium");
-            break;
-
-          case "account":
-            event.preventDefault();
-            navigate("account");
-            break;
-
-          default:
-            break;
-        }
-      }
-    );
-  }
-
-  /* ---------------------------------------------------------
-     Public JG Application API
-  --------------------------------------------------------- */
-
-  window.JG_APP = {
-    state: state,
-
-    navigate: navigate,
-
-    toast: toast,
-
-    openModal: openModal,
-
-    closeModal: closeModal,
-
-    toggleTheme: toggleTheme,
-
-    setTheme: applyTheme,
-
-    logout: logout,
-
-    setButtonLoading:
-      setButtonLoading,
-
-    storage: storage,
-
-    getUser: function () {
-      return state.user;
-    },
-
-    isAuthenticated:
-      function () {
-        return state.authenticated;
-      },
-
-    setUser: function (user) {
-      state.user = user || null;
-
-      storage.set(
-        STORAGE.USER || "jg_user",
-        state.user
       );
 
-      updateAuthenticationUI();
     },
 
-    setAuthenticated:
-      function (value) {
-        state.authenticated =
-          Boolean(value);
 
-        storage.set(
-          STORAGE.AUTH || "jg_auth",
-          state.authenticated
+    /* -----------------------------------------------------
+       AUTH STATE
+       ----------------------------------------------------- */
+
+    initAuthState() {
+
+      if (!AUTH) {
+        return;
+      }
+
+
+      AUTH.onAuthStateChange(
+        (event, session) => {
+
+          document.body.dataset
+            .authState =
+            session
+              ? "authenticated"
+              : "guest";
+
+
+          document
+            .querySelectorAll(
+              "[data-auth-only]"
+            )
+            .forEach(element => {
+
+              element.hidden =
+                !session;
+
+            });
+
+
+          document
+            .querySelectorAll(
+              "[data-guest-only]"
+            )
+            .forEach(element => {
+
+              element.hidden =
+                Boolean(session);
+
+            });
+
+
+          document
+            .querySelectorAll(
+              "[data-user-email]"
+            )
+            .forEach(element => {
+
+              element.textContent =
+                session?.user?.email ||
+                "";
+
+            });
+
+
+          document
+            .querySelectorAll(
+              "[data-user-name]"
+            )
+            .forEach(element => {
+
+              element.textContent =
+                AUTH.getDisplayName(
+                  session?.user
+                );
+
+            });
+
+        }
+      );
+
+    },
+
+
+    /* -----------------------------------------------------
+       READY STATE
+       ----------------------------------------------------- */
+
+    markAppReady() {
+
+      document.documentElement
+        .classList.add(
+          "jg-ready"
         );
 
-        updateAuthenticationUI();
-      }
+      document.body.dataset
+        .jgReady =
+        "true";
+
+    }
+
   };
 
-  /* ---------------------------------------------------------
-     Initialize JG
-  --------------------------------------------------------- */
 
-  function initialize() {
-    setupTheme();
-    setupMobileNavigation();
-    setupBottomNavigation();
-    setupDataLinks();
-    setupModals();
-    setupLogout();
-    setupExternalLinks();
-    setupSmoothScroll();
-    setupPageReveal();
-    setupForms();
-    setupGlobalActions();
-    markActiveNavigation();
-    updateAuthenticationUI();
-    registerServiceWorker();
+  window.JG_APP =
+    APP;
 
-    document.documentElement.classList.add(
-      "jg-ready"
-    );
 
-    document.body.classList.add(
-      "jg-app-ready"
-    );
-  }
+  /*
+   * Start after DOM is available.
+   */
 
   if (
     document.readyState ===
     "loading"
   ) {
+
     document.addEventListener(
       "DOMContentLoaded",
-      initialize
+      () => APP.init()
     );
+
   } else {
-    initialize();
+
+    APP.init();
+
   }
+
+
 })();
