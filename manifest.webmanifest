@@ -2,25 +2,32 @@
   "name": "JG — Find Skills. Find Opportunities.",
   "short_name": "JG",
   "description": "JG helps people learn valuable skills, discover opportunities, build their capabilities and prepare for the future.",
-  "id": "/",
+
+  "id": "./",
   "start_url": "./index.html",
   "scope": "./",
+
   "display": "standalone",
   "display_override": [
     "window-controls-overlay",
     "standalone",
     "minimal-ui"
   ],
+
   "orientation": "portrait-primary",
+
   "background_color": "#07111f",
   "theme_color": "#07111f",
+
   "lang": "en",
   "dir": "ltr",
+
   "categories": [
     "education",
     "career",
     "productivity"
   ],
+
   "prefer_related_applications": false,
 
   "icons": [
