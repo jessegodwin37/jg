@@ -2,1497 +2,339 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  >
-
-  <meta
-    name="description"
-    content="JG Learn — Build practical skills through structured courses."
-  >
-
-  <meta name="theme-color" content="#070b14">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#07111f">
+  <meta name="description" content="Learn practical skills with JG.">
 
   <title>Learn — JG</title>
 
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png">
   <link rel="stylesheet" href="css/style.css">
-
-  <style>
-    .learn-page {
-      min-height: 100vh;
-      padding-bottom: 110px;
-    }
-
-    .learn-hero {
-      padding: 18px;
-      max-width: 1180px;
-      margin: auto;
-    }
-
-    .learn-hero-box {
-      position: relative;
-      overflow: hidden;
-
-      padding: 25px 20px;
-
-      border-radius: 26px;
-
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(37, 99, 235, .28),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 10% 90%,
-          rgba(124, 58, 237, .20),
-          transparent 35%
-        ),
-        rgba(255,255,255,.035);
-
-      border: 1px solid rgba(255,255,255,.09);
-    }
-
-    .learn-hero-box h1 {
-      margin: 16px 0 9px;
-
-      font-size: clamp(32px, 8vw, 58px);
-      line-height: 1;
-      letter-spacing: -2px;
-    }
-
-    .learn-hero-box h1 span {
-      background:
-        linear-gradient(
-          100deg,
-          #60a5fa,
-          #a78bfa,
-          #22d3ee
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    .learn-hero-box p {
-      max-width: 650px;
-
-      margin: 0;
-
-      font-size: 13px;
-      line-height: 1.7;
-
-      opacity: .62;
-    }
-
-    .learn-search {
-      margin-top: 20px;
-
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      padding: 5px 7px 5px 14px;
-
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 15px;
-
-      background: rgba(255,255,255,.055);
-    }
-
-    .learn-search span {
-      opacity: .5;
-      font-size: 16px;
-    }
-
-    .learn-search input {
-      flex: 1;
-
-      min-width: 0;
-
-      height: 42px;
-
-      border: 0;
-      outline: 0;
-
-      background: transparent;
-      color: inherit;
-
-      font: inherit;
-      font-size: 13px;
-    }
-
-    .learn-search input::placeholder {
-      color: currentColor;
-      opacity: .4;
-    }
-
-    .search-button {
-      height: 42px;
-
-      padding: 0 15px;
-
-      border: 0;
-      border-radius: 11px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #7c3aed
-        );
-
-      color: white;
-
-      font-size: 12px;
-      font-weight: 850;
-
-      cursor: pointer;
-    }
-
-    .learn-section {
-      max-width: 1180px;
-      margin: auto;
-
-      padding: 22px 18px 0;
-    }
-
-    .learn-section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      margin-bottom: 14px;
-    }
-
-    .learn-section-header h2 {
-      margin: 0;
-
-      font-size: 21px;
-      font-weight: 900;
-    }
-
-    .learn-section-header p {
-      margin: 4px 0 0;
-
-      font-size: 11px;
-
-      opacity: .5;
-    }
-
-    .learn-section-header a {
-      color: #60a5fa;
-
-      font-size: 11px;
-      font-weight: 800;
-
-      text-decoration: none;
-    }
-
-    .category-scroll {
-      display: flex;
-      gap: 8px;
-
-      overflow-x: auto;
-
-      padding-bottom: 4px;
-
-      scrollbar-width: none;
-    }
-
-    .category-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .category-button {
-      flex: 0 0 auto;
-
-      padding: 9px 13px;
-
-      border: 1px solid rgba(255,255,255,.11);
-      border-radius: 999px;
-
-      background: rgba(255,255,255,.04);
-      color: inherit;
-
-      font-size: 10px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      transition: .2s;
-    }
-
-    .category-button:hover {
-      border-color: rgba(37,99,235,.4);
-    }
-
-    .category-button.active {
-      border-color: transparent;
-
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #7c3aed
-        );
-
-      color: white;
-    }
-
-    .course-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(1, minmax(0, 1fr));
-
-      gap: 13px;
-    }
-
-    .course-card {
-      position: relative;
-
-      display: flex;
-      flex-direction: column;
-
-      min-height: 245px;
-
-      overflow: hidden;
-
-      border:
-        1px solid rgba(255,255,255,.10);
-
-      border-radius: 21px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.065),
-          rgba(255,255,255,.025)
-        );
-
-      text-decoration: none;
-      color: inherit;
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-    }
-
-    .course-card:hover {
-      transform: translateY(-3px);
-
-      border-color:
-        rgba(37,99,235,.38);
-
-      box-shadow:
-        0 16px 40px rgba(0,0,0,.16);
-    }
-
-    .course-cover {
-      height: 105px;
-
-      display: flex;
-      align-items: flex-end;
-
-      padding: 15px;
-
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(34,211,238,.25),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          rgba(37,99,235,.45),
-          rgba(124,58,237,.35)
-        );
-    }
-
-    .course-cover-icon {
-      width: 45px;
-      height: 45px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 14px;
-
-      background:
-        rgba(255,255,255,.12);
-
-      border:
-        1px solid rgba(255,255,255,.16);
-
-      font-size: 21px;
-    }
-
-    .course-content {
-      padding: 15px;
-
-      flex: 1;
-
-      display: flex;
-      flex-direction: column;
-    }
-
-    .course-label {
-      font-size: 9px;
-
-      font-weight: 850;
-
-      letter-spacing: .5px;
-
-      color: #60a5fa;
-    }
-
-    .course-card h3 {
-      margin: 5px 0 6px;
-
-      font-size: 16px;
-      font-weight: 900;
-    }
-
-    .course-card p {
-      margin: 0;
-
-      font-size: 11px;
-
-      line-height: 1.55;
-
-      opacity: .55;
-    }
-
-    .course-meta {
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 10px;
-
-      margin-top: auto;
-      padding-top: 14px;
-
-      font-size: 10px;
-
-      opacity: .5;
-    }
-
-    .course-meta strong {
-      color: #60a5fa;
-
-      opacity: 1;
-    }
-
-    .continue-card {
-      display: block;
-
-      padding: 18px;
-
-      border-radius: 21px;
-
-      border:
-        1px solid rgba(37,99,235,.20);
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(37,99,235,.13),
-          rgba(124,58,237,.09)
-        );
-
-      text-decoration: none;
-      color: inherit;
-    }
-
-    .continue-card small {
-      font-size: 9px;
-
-      font-weight: 850;
-
-      letter-spacing: .5px;
-
-      color: #60a5fa;
-    }
-
-    .continue-card h3 {
-      margin: 6px 0;
-
-      font-size: 17px;
-      font-weight: 900;
-    }
-
-    .continue-card p {
-      margin: 0;
-
-      font-size: 11px;
-
-      opacity: .56;
-    }
-
-    .continue-progress {
-      height: 7px;
-
-      margin-top: 15px;
-
-      overflow: hidden;
-
-      border-radius: 999px;
-
-      background: rgba(255,255,255,.08);
-    }
-
-    .continue-progress i {
-      display: block;
-
-      width: 32%;
-      height: 100%;
-
-      border-radius: inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          #2563eb,
-          #7c3aed,
-          #06b6d4
-        );
-    }
-
-    .continue-bottom {
-      display: flex;
-      justify-content: space-between;
-
-      margin-top: 8px;
-
-      font-size: 9px;
-
-      opacity: .5;
-    }
-
-    .learn-ad {
-      min-height: 75px;
-
-      display: grid;
-      place-items: center;
-
-      border:
-        1px dashed rgba(255,255,255,.17);
-
-      border-radius: 18px;
-
-      font-size: 9px;
-
-      text-transform: uppercase;
-
-      letter-spacing: .5px;
-
-      opacity: .4;
-    }
-
-    .no-results {
-      display: none;
-
-      padding: 35px 20px;
-
-      border:
-        1px dashed rgba(255,255,255,.15);
-
-      border-radius: 20px;
-
-      text-align: center;
-
-      font-size: 12px;
-
-      opacity: .5;
-    }
-
-    @media (min-width: 650px) {
-
-      .course-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
-
-    }
-
-    @media (min-width: 950px) {
-
-      .course-grid {
-        grid-template-columns:
-          repeat(3, minmax(0, 1fr));
-      }
-
-    }
-  </style>
 </head>
 
 <body>
 
-<div class="learn-page">
+<header class="site-header">
+  <div class="header-inner">
 
-  <!-- =====================================
-       HEADER
-  ====================================== -->
-
-  <header class="topbar">
-
-    <a
-      class="brand"
-      href="index.html"
-      aria-label="JG Home"
-    >
-
-      <span class="logo">
-        JG
+    <a href="index.html" class="brand">
+      <span class="brand-mark">JG</span>
+      <span class="brand-text">
+        <strong>JG</strong>
+        <small>Learn. Build. Grow.</small>
       </span>
-
-      <span>
-        <b>JG</b>
-
-        <small>
-          Find Skills. Find Opportunities.
-        </small>
-      </span>
-
     </a>
 
-
-    <div class="actions">
-
-      <button
-        id="themeButton"
-        class="icon-btn"
-        type="button"
-        aria-label="Toggle theme"
-      >
-        ☀
+    <div class="header-actions">
+      <button class="icon-button" id="themeButton" type="button" aria-label="Toggle theme">
+        ◐
       </button>
 
-
-      <a
-        class="icon-btn"
-        href="account.html"
-        aria-label="Account"
-      >
-        ♙
+      <a href="account.html" class="avatar-button">
+        <span>U</span>
       </a>
-
     </div>
 
-  </header>
+  </div>
+</header>
 
+<main class="page">
 
-  <!-- =====================================
-       HERO
-  ====================================== -->
+  <section class="hero-section">
+    <div class="hero-content">
 
-  <section class="learn-hero">
-
-    <div class="learn-hero-box">
-
-      <span class="eyebrow">
-        <i></i>
-        LEARNING HUB
-      </span>
-
+      <span class="eyebrow">JG LEARNING</span>
 
       <h1>
-        Learn.
-        <br>
-        <span>Build your future.</span>
+        Build skills that
+        <span class="gradient-text">move you forward.</span>
       </h1>
 
-
       <p>
-        Learn practical skills through structured courses,
-        lessons, examples and projects designed to help you
-        grow from beginner to confident learner.
+        Learn practical digital skills through structured courses,
+        lessons, projects and assessments.
       </p>
 
+      <div class="hero-actions">
+        <a href="#courses" class="btn btn-primary">
+          Explore courses
+        </a>
 
-      <!-- Search -->
-
-      <div class="learn-search">
-
-        <span>
-          ⌕
-        </span>
-
-
-        <input
-          id="courseSearch"
-          type="search"
-          placeholder="Search courses..."
-          autocomplete="off"
-          aria-label="Search courses"
-        >
-
-
-        <button
-          id="searchButton"
-          class="search-button"
-          type="button"
-        >
-          Search
-        </button>
-
+        <a href="skills.html" class="btn btn-secondary">
+          Find a skill
+        </a>
       </div>
+
+    </div>
+  </section>
+
+  <section class="section" id="continue">
+
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">YOUR PROGRESS</span>
+        <h2>Continue learning</h2>
+      </div>
+    </div>
+
+    <article class="learning-card">
+
+      <div class="learning-card-top">
+        <span class="course-icon">💻</span>
+
+        <div>
+          <span class="badge">IN PROGRESS</span>
+          <h3 id="continueCourse">Web Development</h3>
+          <p id="continueLesson">Continue your current lesson</p>
+        </div>
+      </div>
+
+      <div class="progress-area">
+        <div class="progress-label">
+          <span>Progress</span>
+          <strong id="progressText">0%</strong>
+        </div>
+
+        <div class="progress-bar">
+          <span id="progressBar"></span>
+        </div>
+      </div>
+
+      <a href="course.html?course=web-development" class="btn btn-primary btn-block">
+        Continue learning
+      </a>
+
+    </article>
+
+  </section>
+
+  <section class="section" id="courses">
+
+    <div class="section-heading">
+      <div>
+        <span class="eyebrow">COURSES</span>
+        <h2>Learn something valuable</h2>
+      </div>
+
+      <a href="skills.html" class="text-link">View all</a>
+    </div>
+
+    <div class="course-grid">
+
+      <article class="course-card">
+        <div class="course-cover web">
+          <span>01</span>
+          <strong>WEB</strong>
+        </div>
+
+        <div class="course-body">
+          <span class="badge">POPULAR</span>
+
+          <h3>Web Development</h3>
+
+          <p>
+            Learn HTML, CSS, JavaScript and how modern websites are built.
+          </p>
+
+          <div class="course-meta">
+            <span>24 lessons</span>
+            <span>Beginner</span>
+          </div>
+
+          <a href="course.html?course=web-development" class="btn btn-primary btn-block">
+            Start course
+          </a>
+        </div>
+      </article>
+
+
+      <article class="course-card">
+
+        <div class="course-cover design">
+          <span>02</span>
+          <strong>DESIGN</strong>
+        </div>
+
+        <div class="course-body">
+          <span class="badge">CREATIVE</span>
+
+          <h3>Graphic Design</h3>
+
+          <p>
+            Learn design principles, layouts, branding and digital graphics.
+          </p>
+
+          <div class="course-meta">
+            <span>20 lessons</span>
+            <span>Beginner</span>
+          </div>
+
+          <a href="course.html?course=graphic-design" class="btn btn-primary btn-block">
+            Start course
+          </a>
+        </div>
+
+      </article>
+
+
+      <article class="course-card">
+
+        <div class="course-cover video">
+          <span>03</span>
+          <strong>VIDEO</strong>
+        </div>
+
+        <div class="course-body">
+
+          <span class="badge">CREATIVE</span>
+
+          <h3>Video Editing</h3>
+
+          <p>
+            Understand editing, storytelling, transitions, audio and effects.
+          </p>
+
+          <div class="course-meta">
+            <span>18 lessons</span>
+            <span>Beginner</span>
+          </div>
+
+          <a href="course.html?course=video-editing" class="btn btn-primary btn-block">
+            Start course
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <article class="course-card">
+
+        <div class="course-cover python">
+          <span>04</span>
+          <strong>PYTHON</strong>
+        </div>
+
+        <div class="course-body">
+
+          <span class="badge">TECH</span>
+
+          <h3>Python Programming</h3>
+
+          <p>
+            Start programming with Python and develop problem-solving skills.
+          </p>
+
+          <div class="course-meta">
+            <span>22 lessons</span>
+            <span>Beginner</span>
+          </div>
+
+          <a href="course.html?course=python" class="btn btn-primary btn-block">
+            Start course
+          </a>
+
+        </div>
+
+      </article>
 
     </div>
 
   </section>
 
 
-  <!-- =====================================
-       CONTINUE LEARNING
-  ====================================== -->
+  <section class="section">
 
-  <section class="learn-section">
-
-    <div class="learn-section-header">
+    <div class="premium-banner">
 
       <div>
+        <span class="eyebrow">JG PREMIUM</span>
 
-        <h2>
-          Continue learning
-        </h2>
-
-        <p>
-          Pick up where you stopped.
-        </p>
-
-      </div>
-
-      <a href="course.html">
-        Open course
-      </a>
-
-    </div>
-
-
-    <a
-      class="continue-card"
-      href="course.html"
-    >
-
-      <small>
-        WEB DEVELOPMENT
-      </small>
-
-
-      <h3>
-        Build your first modern website
-      </h3>
-
-
-      <p>
-        Lesson 7 — Building responsive layouts
-      </p>
-
-
-      <div class="continue-progress">
-
-        <i></i>
-
-      </div>
-
-
-      <div class="continue-bottom">
-
-        <span>
-          Lesson 7 of 24
-        </span>
-
-        <span>
-          32% complete
-        </span>
-
-      </div>
-
-    </a>
-
-  </section>
-
-
-  <!-- =====================================
-       CATEGORIES
-  ====================================== -->
-
-  <section class="learn-section">
-
-    <div class="learn-section-header">
-
-      <div>
-
-        <h2>
-          Browse by skill
-        </h2>
+        <h2>Learn without distractions.</h2>
 
         <p>
-          Find something you want to learn.
+          Premium removes advertisements and gives you a cleaner learning experience.
         </p>
-
       </div>
 
-    </div>
-
-
-    <div
-      class="category-scroll"
-      id="categoryButtons"
-    >
-
-      <button
-        class="category-button active"
-        type="button"
-        data-category="all"
-      >
-        All
-      </button>
-
-
-      <button
-        class="category-button"
-        type="button"
-        data-category="web"
-      >
-        Web Development
-      </button>
-
-
-      <button
-        class="category-button"
-        type="button"
-        data-category="design"
-      >
-        Graphic Design
-      </button>
-
-
-      <button
-        class="category-button"
-        type="button"
-        data-category="video"
-      >
-        Video Editing
-      </button>
-
-
-      <button
-        class="category-button"
-        type="button"
-        data-category="python"
-      >
-        Python
-      </button>
-
-
-      <button
-        class="category-button"
-        type="button"
-        data-category="digital"
-      >
-        Digital Skills
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       COURSE LIST
-  ====================================== -->
-
-  <section class="learn-section">
-
-    <div class="learn-section-header">
-
-      <div>
-
-        <h2>
-          Popular courses
-        </h2>
-
-        <p>
-          Start with a skill and keep building.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div
-      class="course-grid"
-      id="courseGrid"
-    >
-
-
-      <!-- Web Development -->
-
-      <a
-        class="course-card"
-        href="course.html"
-        data-category="web"
-        data-title="web development"
-      >
-
-        <div class="course-cover">
-
-          <span class="course-cover-icon">
-            💻
-          </span>
-
-        </div>
-
-
-        <div class="course-content">
-
-          <span class="course-label">
-            WEB DEVELOPMENT
-          </span>
-
-
-          <h3>
-            Web Development
-          </h3>
-
-
-          <p>
-            Learn how websites work and build responsive,
-            modern web pages from the ground up.
-          </p>
-
-
-          <div class="course-meta">
-
-            <span>
-              24 lessons
-            </span>
-
-            <strong>
-              Beginner
-            </strong>
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-      <!-- Graphic Design -->
-
-      <a
-        class="course-card"
-        href="course.html"
-        data-category="design"
-        data-title="graphic design"
-      >
-
-        <div
-          class="course-cover"
-          style="
-            background:
-            radial-gradient(
-              circle at 80% 20%,
-              rgba(244,114,182,.28),
-              transparent 30%
-            ),
-            linear-gradient(
-              135deg,
-              rgba(124,58,237,.5),
-              rgba(236,72,153,.32)
-            );
-          "
-        >
-
-          <span class="course-cover-icon">
-            🎨
-          </span>
-
-        </div>
-
-
-        <div class="course-content">
-
-          <span class="course-label">
-            DESIGN
-          </span>
-
-
-          <h3>
-            Graphic Design
-          </h3>
-
-
-          <p>
-            Understand design principles, layouts, typography,
-            branding and visual communication.
-          </p>
-
-
-          <div class="course-meta">
-
-            <span>
-              20 lessons
-            </span>
-
-            <strong>
-              Beginner
-            </strong>
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-      <!-- Video Editing -->
-
-      <a
-        class="course-card"
-        href="course.html"
-        data-category="video"
-        data-title="video editing"
-      >
-
-        <div
-          class="course-cover"
-          style="
-            background:
-            radial-gradient(
-              circle at 80% 20%,
-              rgba(34,211,238,.28),
-              transparent 30%
-            ),
-            linear-gradient(
-              135deg,
-              rgba(6,182,212,.42),
-              rgba(37,99,235,.35)
-            );
-          "
-        >
-
-          <span class="course-cover-icon">
-            🎬
-          </span>
-
-        </div>
-
-
-        <div class="course-content">
-
-          <span class="course-label">
-            CREATIVE
-          </span>
-
-
-          <h3>
-            Video Editing
-          </h3>
-
-
-          <p>
-            Learn editing fundamentals, storytelling,
-            transitions, sound and professional workflow.
-          </p>
-
-
-          <div class="course-meta">
-
-            <span>
-              18 lessons
-            </span>
-
-            <strong>
-              Beginner
-            </strong>
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-      <!-- Python -->
-
-      <a
-        class="course-card"
-        href="course.html"
-        data-category="python"
-        data-title="python programming"
-      >
-
-        <div
-          class="course-cover"
-          style="
-            background:
-            radial-gradient(
-              circle at 80% 20%,
-              rgba(250,204,21,.22),
-              transparent 30%
-            ),
-            linear-gradient(
-              135deg,
-              rgba(37,99,235,.45),
-              rgba(14,116,144,.32)
-            );
-          "
-        >
-
-          <span class="course-cover-icon">
-            🐍
-          </span>
-
-        </div>
-
-
-        <div class="course-content">
-
-          <span class="course-label">
-            PROGRAMMING
-          </span>
-
-
-          <h3>
-            Python Programming
-          </h3>
-
-
-          <p>
-            Start programming with Python and learn
-            variables, logic, functions and practical projects.
-          </p>
-
-
-          <div class="course-meta">
-
-            <span>
-              26 lessons
-            </span>
-
-            <strong>
-              Beginner
-            </strong>
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-      <!-- Digital Skills -->
-
-      <a
-        class="course-card"
-        href="course.html"
-        data-category="digital"
-        data-title="digital skills"
-      >
-
-        <div
-          class="course-cover"
-          style="
-            background:
-            radial-gradient(
-              circle at 80% 20%,
-              rgba(34,197,94,.22),
-              transparent 30%
-            ),
-            linear-gradient(
-              135deg,
-              rgba(16,185,129,.4),
-              rgba(37,99,235,.35)
-            );
-          "
-        >
-
-          <span class="course-cover-icon">
-            🌐
-          </span>
-
-        </div>
-
-
-        <div class="course-content">
-
-          <span class="course-label">
-            DIGITAL
-          </span>
-
-
-          <h3>
-            Digital Skills
-          </h3>
-
-
-          <p>
-            Build essential digital skills for school,
-            work, business and everyday technology.
-          </p>
-
-
-          <div class="course-meta">
-
-            <span>
-              16 lessons
-            </span>
-
-            <strong>
-              Beginner
-            </strong>
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-      <!-- Entrepreneurship -->
-
-      <a
-        class="course-card"
-        href="course.html"
-        data-category="digital"
-        data-title="entrepreneurship business"
-      >
-
-        <div
-          class="course-cover"
-          style="
-            background:
-            radial-gradient(
-              circle at 80% 20%,
-              rgba(251,146,60,.24),
-              transparent 30%
-            ),
-            linear-gradient(
-              135deg,
-              rgba(245,158,11,.40),
-              rgba(124,58,237,.35)
-            );
-          "
-        >
-
-          <span class="course-cover-icon">
-            🚀
-          </span>
-
-        </div>
-
-
-        <div class="course-content">
-
-          <span class="course-label">
-            BUSINESS
-          </span>
-
-
-          <h3>
-            Entrepreneurship
-          </h3>
-
-
-          <p>
-            Learn how to identify problems, develop ideas,
-            understand customers and build useful products.
-          </p>
-
-
-          <div class="course-meta">
-
-            <span>
-              Coming soon
-            </span>
-
-            <strong>
-              Beginner
-            </strong>
-
-          </div>
-
-        </div>
-
-      </a>
-
-
-    </div>
-
-
-    <div
-      id="noResults"
-      class="no-results"
-    >
-      No courses matched your search.
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       ADVERTISEMENT
-  ====================================== -->
-
-  <section class="learn-section">
-
-    <div class="learn-ad">
-      Sponsored
-    </div>
-
-  </section>
-
-
-  <!-- =====================================
-       JG AI
-  ====================================== -->
-
-  <section class="learn-section">
-
-    <div class="ai-card">
-
-      <span class="ai-icon">
-        ✦
-      </span>
-
-
-      <h2>
-        Need help learning?
-      </h2>
-
-
-      <p>
-        Ask JG AI to explain difficult concepts,
-        create practice questions, help you understand
-        lessons or guide your learning journey.
-      </p>
-
-
-      <a
-        class="btn primary"
-        href="ai.html"
-      >
-        Ask JG AI →
+      <a href="premium.html" class="btn btn-light">
+        Explore Premium
       </a>
 
     </div>
 
   </section>
 
+</main>
 
-</div>
 
-
-<!-- =====================================
-     BOTTOM NAVIGATION
-====================================== -->
-
-<nav
-  class="bottom-nav"
-  aria-label="Main navigation"
->
+<nav class="bottom-nav">
 
   <a href="index.html">
-    ⌂
+    <span>⌂</span>
     <small>Home</small>
   </a>
 
-
-  <a
-    class="active"
-    href="learn.html"
-  >
-    ▣
+  <a href="learn.html" class="active">
+    <span>▣</span>
     <small>Learn</small>
   </a>
 
-
   <a href="work.html">
-    ◆
+    <span>⌁</span>
     <small>Work</small>
   </a>
 
-
   <a href="ai.html">
-    ✦
+    <span>✦</span>
     <small>JG AI</small>
   </a>
 
-
   <a href="account.html">
-    ♙
+    <span>◯</span>
     <small>Account</small>
   </a>
 
 </nav>
 
 
-<!-- =====================================
-     SHARED JAVASCRIPT
-====================================== -->
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="js/config.js"></script>
+<script src="js/supabase.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/api.js"></script>
 <script src="js/app.js"></script>
 
-
-<!-- =====================================
-     LEARN PAGE FUNCTIONALITY
-====================================== -->
-
 <script>
+document.addEventListener("DOMContentLoaded", async () => {
 
-(function () {
+  const progressBar = document.getElementById("progressBar");
+  const progressText = document.getElementById("progressText");
 
-  const searchInput =
-    document.getElementById("courseSearch");
+  let progress = 0;
 
-  const searchButton =
-    document.getElementById("searchButton");
+  try {
+    const user = await window.JG_AUTH?.getUser?.();
 
-  const courseCards =
-    document.querySelectorAll(".course-card");
+    if (user && window.JG_API?.getUserProgress) {
+      const result = await window.JG_API.getUserProgress(user.id);
 
-  const categoryButtons =
-    document.querySelectorAll(".category-button");
-
-  const noResults =
-    document.getElementById("noResults");
-
-
-  let selectedCategory = "all";
-
-
-  function filterCourses() {
-
-    const query =
-      searchInput.value
-        .trim()
-        .toLowerCase();
-
-
-    let visibleCount = 0;
-
-
-    courseCards.forEach(function (card) {
-
-      const title =
-        (card.dataset.title || "")
-          .toLowerCase();
-
-      const category =
-        (card.dataset.category || "")
-          .toLowerCase();
-
-
-      const matchesSearch =
-        !query ||
-        title.includes(query);
-
-
-      const matchesCategory =
-        selectedCategory === "all" ||
-        category === selectedCategory;
-
-
-      const visible =
-        matchesSearch &&
-        matchesCategory;
-
-
-      card.style.display =
-        visible ? "" : "none";
-
-
-      if (visible) {
-        visibleCount++;
+      if (result?.progress) {
+        progress = Number(result.progress) || 0;
       }
-
-    });
-
-
-    noResults.style.display =
-      visibleCount === 0
-        ? "block"
-        : "none";
-
+    }
+  } catch (error) {
+    console.log("Progress unavailable:", error);
   }
 
+  progress = Math.max(0, Math.min(100, progress));
 
-  categoryButtons.forEach(function (button) {
+  progressBar.style.width = progress + "%";
+  progressText.textContent = progress + "%";
 
-    button.addEventListener(
-      "click",
-      function () {
-
-        categoryButtons.forEach(function (item) {
-
-          item.classList.remove("active");
-
-        });
-
-
-        button.classList.add("active");
-
-
-        selectedCategory =
-          button.dataset.category;
-
-
-        filterCourses();
-
-      }
-    );
-
-  });
-
-
-  searchInput.addEventListener(
-    "input",
-    filterCourses
-  );
-
-
-  searchButton.addEventListener(
-    "click",
-    filterCourses
-  );
-
-
-  searchInput.addEventListener(
-    "keydown",
-    function (event) {
-
-      if (event.key === "Enter") {
-
-        event.preventDefault();
-
-        filterCourses();
-
-      }
-
-    }
-  );
-
-
-})();
-
+});
 </script>
 
 </body>
