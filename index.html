@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
   <meta charset="UTF-8">
 
   <meta
@@ -10,10 +11,18 @@
 
   <meta
     name="description"
-    content="JG — Find Skills. Find Opportunities. Learn practical skills, discover opportunities and build your future."
+    content="JG — Find Skills. Find Opportunities. Learn valuable skills, discover opportunities and build your future."
   >
 
-  <meta name="theme-color" content="#070b14">
+  <meta
+    name="theme-color"
+    content="#07111f"
+  >
+
+  <meta
+    name="mobile-web-app-capable"
+    content="yes"
+  >
 
   <meta
     name="apple-mobile-web-app-capable"
@@ -32,1654 +41,635 @@
 
   <title>JG — Find Skills. Find Opportunities.</title>
 
-  <!-- =========================================
-       PWA
-  ========================================== -->
-
+  <!-- PWA -->
   <link
     rel="manifest"
     href="manifest.webmanifest"
   >
 
+  <!-- Correct icon folder -->
   <link
     rel="apple-touch-icon"
-    href="assets/icon/icon-192.png"
+    href="assets/icons/icon-192.png"
   >
 
-  <!-- =========================================
-       SHARED JG CSS
-  ========================================== -->
-
+  <!-- Main stylesheet -->
   <link
     rel="stylesheet"
     href="css/style.css"
   >
 
-  <!-- =========================================
-       JG HOME PAGE CSS
-  ========================================== -->
+  <!-- Supabase -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    defer
+  ></script>
 
   <style>
 
-    * {
-      box-sizing: border-box;
-    }
+    /*
+     * JG emergency loading protection
+     *
+     * Prevents the page from looking broken
+     * while JavaScript loads.
+     */
 
     html {
-      scroll-behavior: smooth;
+      min-height: 100%;
+      background: #07111f;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
+      min-height: 100dvh;
+      background: #07111f;
+      color: #ffffff;
       overflow-x: hidden;
     }
 
+    /*
+     * Make interactive elements feel clickable.
+     */
+
     button,
-    a {
+    a,
+    [role="button"] {
       -webkit-tap-highlight-color: transparent;
+      touch-action: manipulation;
     }
 
-    .jg-home {
+    /*
+     * Respect iPhone safe areas.
+     */
+
+    .jg-app {
       min-height: 100vh;
-      padding-bottom: 110px;
-    }
-
-    /* =========================================
-       HERO
-    ========================================== */
-
-    .jg-hero {
-      position: relative;
-      overflow: hidden;
-
-      padding:
-        max(28px, env(safe-area-inset-top))
-        18px
-        38px;
-
-      border-radius: 0 0 32px 32px;
-
-      background:
-        radial-gradient(
-          circle at 85% 10%,
-          rgba(37, 99, 235, .28),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 10% 80%,
-          rgba(124, 58, 237, .18),
-          transparent 32%
-        );
-    }
-
-    .jg-hero::before {
-      content: "";
-
-      position: absolute;
-
-      width: 220px;
-      height: 220px;
-
-      right: -110px;
-      top: 80px;
-
-      border-radius: 50%;
-
-      background: rgba(6, 182, 212, .08);
-
-      filter: blur(5px);
-
-      pointer-events: none;
-    }
-
-    .jg-topbar {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 14px;
-
-      margin-bottom: 42px;
-    }
-
-    .jg-brand {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 10px;
-
-      text-decoration: none;
-
-      color: inherit;
-    }
-
-    .jg-logo {
-      width: 46px;
-      height: 46px;
-
-      display: grid;
-      place-items: center;
-
-      flex-shrink: 0;
-
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #7c3aed
-        );
-
-      color: #fff;
-
-      font-size: 17px;
-      font-weight: 950;
-
-      box-shadow:
-        0 12px 30px rgba(37, 99, 235, .28);
-    }
-
-    .jg-brand-text {
-      display: flex;
-      flex-direction: column;
-
-      gap: 2px;
-    }
-
-    .jg-brand-name {
-      font-size: 17px;
-      font-weight: 950;
-      letter-spacing: -.4px;
-    }
-
-    .jg-brand-tagline {
-      font-size: 10px;
-      opacity: .58;
-    }
-
-    .jg-top-actions {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .jg-icon-button {
-      width: 42px;
-      height: 42px;
-
-      display: grid;
-      place-items: center;
-
-      border: 1px solid rgba(127, 127, 127, .17);
-
-      border-radius: 13px;
-
-      background: rgba(255, 255, 255, .055);
-
-      color: inherit;
-
-      cursor: pointer;
-
-      text-decoration: none;
-
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease;
-    }
-
-    .jg-icon-button:hover {
-      transform: translateY(-2px);
-
-      background: rgba(255, 255, 255, .09);
-
-      border-color: rgba(37, 99, 235, .45);
-    }
-
-    .jg-icon-button:active {
-      transform: scale(.94);
-    }
-
-    .jg-hero-content {
-      position: relative;
-      z-index: 1;
-
-      max-width: 760px;
-    }
-
-    .jg-eyebrow {
-      display: inline-flex;
-      align-items: center;
-
-      gap: 7px;
-
-      padding: 7px 11px;
-
-      border: 1px solid rgba(37, 99, 235, .25);
-
-      border-radius: 999px;
-
-      background: rgba(37, 99, 235, .08);
-
-      color: #60a5fa;
-
-      font-size: 11px;
-      font-weight: 850;
-
-      letter-spacing: .4px;
-
-      text-transform: uppercase;
-    }
-
-    .jg-eyebrow-dot {
-      width: 7px;
-      height: 7px;
-
-      flex-shrink: 0;
-
-      border-radius: 50%;
-
-      background: #22c55e;
-
-      box-shadow:
-        0 0 0 4px rgba(34, 197, 94, .10);
-    }
-
-    .jg-hero h1 {
-      margin: 18px 0 14px;
-
-      font-size: clamp(38px, 10vw, 68px);
-
-      line-height: .98;
-
-      letter-spacing: -2.7px;
-
-      font-weight: 950;
-    }
-
-    .jg-gradient-text {
-      background:
-        linear-gradient(
-          100deg,
-          #60a5fa,
-          #a78bfa,
-          #22d3ee
-        );
-
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      color: transparent;
-    }
-
-    .jg-hero-description {
-      max-width: 620px;
-
-      margin: 0;
-
-      font-size: 16px;
-
-      line-height: 1.7;
-
-      opacity: .68;
-    }
-
-    .jg-hero-actions {
-      display: flex;
-
-      flex-wrap: wrap;
-
-      gap: 11px;
-
-      margin-top: 25px;
-    }
-
-    .jg-primary-button,
-    .jg-secondary-button {
-      min-height: 49px;
-
-      display: inline-flex;
-
-      align-items: center;
-      justify-content: center;
-
-      gap: 8px;
-
-      padding: 0 18px;
-
-      border-radius: 14px;
-
-      text-decoration: none;
-
-      font-size: 14px;
-      font-weight: 850;
-
-      cursor: pointer;
-
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        background .2s ease;
-    }
-
-    .jg-primary-button {
-      border: 1px solid rgba(255, 255, 255, .08);
-
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #7c3aed
-        );
-
-      color: #fff;
-
-      box-shadow:
-        0 12px 30px rgba(37, 99, 235, .25);
-    }
-
-    .jg-secondary-button {
-      border: 1px solid rgba(127, 127, 127, .18);
-
-      background: rgba(255, 255, 255, .055);
-
-      color: inherit;
-    }
-
-    .jg-primary-button:hover,
-    .jg-secondary-button:hover {
-      transform: translateY(-2px);
-    }
-
-    .jg-primary-button:active,
-    .jg-secondary-button:active {
-      transform: scale(.97);
-    }
-
-    /* =========================================
-       SECTIONS
-    ========================================== */
-
-    .jg-section {
-      padding: 25px 18px 0;
-    }
-
-    .jg-section-header {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-
-      gap: 16px;
-
-      margin-bottom: 15px;
-    }
-
-    .jg-section-title {
-      margin: 0;
-
-      font-size: 21px;
-
-      font-weight: 900;
-
-      letter-spacing: -.5px;
-    }
-
-    .jg-section-subtitle {
-      margin: 5px 0 0;
-
-      font-size: 12px;
-
-      line-height: 1.5;
-
-      opacity: .56;
-    }
-
-    .jg-see-all {
-      border: 0;
-
-      background: transparent;
-
-      color: #60a5fa;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      white-space: nowrap;
-
-      text-decoration: none;
-    }
-
-    /* =========================================
-       FEATURE CARDS
-    ========================================== */
-
-    .jg-feature-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-      gap: 12px;
-    }
-
-    .jg-feature-card {
-      position: relative;
-
-      overflow: hidden;
-
-      min-height: 150px;
-
-      display: flex;
-
-      flex-direction: column;
-
-      justify-content: space-between;
-
-      padding: 17px;
-
-      border: 1px solid rgba(127, 127, 127, .13);
-
-      border-radius: 20px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.075),
-          rgba(255,255,255,.025)
-        );
-
-      text-decoration: none;
-
-      color: inherit;
-
-      cursor: pointer;
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease,
-        box-shadow .2s ease;
-    }
-
-    .jg-feature-card:hover {
-      transform: translateY(-3px);
-
-      border-color: rgba(37, 99, 235, .32);
-
-      box-shadow:
-        0 15px 35px rgba(0,0,0,.12);
-    }
-
-    .jg-feature-card:active {
-      transform: scale(.98);
-    }
-
-    .jg-feature-icon {
-      width: 43px;
-      height: 43px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 13px;
-
-      background: rgba(37, 99, 235, .12);
-
-      font-size: 20px;
-    }
-
-    .jg-feature-card h3 {
-      margin: 14px 0 4px;
-
-      font-size: 14px;
-
-      font-weight: 850;
-    }
-
-    .jg-feature-card p {
-      margin: 0;
-
-      font-size: 11px;
-
-      line-height: 1.5;
-
-      opacity: .56;
-    }
-
-    /* =========================================
-       PROGRESS
-    ========================================== */
-
-    .jg-progress-card {
-      display: block;
-
-      padding: 18px;
-
-      border:
-        1px solid rgba(37, 99, 235, .18);
-
-      border-radius: 22px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(37, 99, 235, .12),
-          rgba(124, 58, 237, .08)
-        );
-
-      text-decoration: none;
-
-      color: inherit;
-    }
-
-    .jg-progress-top {
-      display: flex;
-
-      align-items: flex-start;
-
-      justify-content: space-between;
-
-      gap: 15px;
-    }
-
-    .jg-progress-label {
-      margin: 0 0 5px;
-
-      font-size: 10px;
-
-      font-weight: 800;
-
-      text-transform: uppercase;
-
-      letter-spacing: .5px;
-
-      opacity: .58;
-    }
-
-    .jg-progress-title {
-      margin: 0;
-
-      font-size: 17px;
-
-      font-weight: 900;
-    }
-
-    .jg-progress-percent {
-      font-size: 22px;
-
-      font-weight: 950;
-
-      color: #60a5fa;
-    }
-
-    .jg-progress-bar {
-      height: 8px;
-
-      margin-top: 17px;
-
-      overflow: hidden;
-
-      border-radius: 999px;
-
-      background: rgba(255,255,255,.08);
-    }
-
-    .jg-progress-fill {
-      width: 32%;
-
-      height: 100%;
-
-      border-radius: inherit;
-
-      background:
-        linear-gradient(
-          90deg,
-          #2563eb,
-          #7c3aed,
-          #06b6d4
-        );
-    }
-
-    .jg-progress-footer {
-      display: flex;
-
-      justify-content: space-between;
-
-      margin-top: 9px;
-
-      font-size: 10px;
-
-      opacity: .55;
-    }
-
-    /* =========================================
-       ADVERTISEMENT
-    ========================================== */
-
-    .jg-ad-slot {
-      min-height: 75px;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      border: 1px dashed rgba(127,127,127,.18);
-
-      border-radius: 18px;
-
-      background: rgba(255,255,255,.018);
-
-      color: rgba(255,255,255,.34);
-
-      font-size: 10px;
-
-      letter-spacing: .4px;
-
-      text-transform: uppercase;
-    }
-
-    /* =========================================
-       JG AI
-    ========================================== */
-
-    .jg-ai-card {
-      position: relative;
-
-      overflow: hidden;
-
-      padding: 22px;
-
-      border:
-        1px solid rgba(124,58,237,.22);
-
-      border-radius: 24px;
-
-      background:
-        radial-gradient(
-          circle at 90% 20%,
-          rgba(124,58,237,.22),
-          transparent 38%
-        ),
-        linear-gradient(
-          135deg,
-          rgba(37,99,235,.10),
-          rgba(124,58,237,.09)
-        );
-    }
-
-    .jg-ai-card::after {
-      content: "AI";
-
-      position: absolute;
-
-      right: -5px;
-      bottom: -28px;
-
-      font-size: 120px;
-
-      font-weight: 950;
-
-      opacity: .025;
-
-      pointer-events: none;
-    }
-
-    .jg-ai-icon {
-      width: 46px;
-      height: 46px;
-
-      display: grid;
-      place-items: center;
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(37,99,235,.28),
-          rgba(124,58,237,.28)
-        );
-
-      font-size: 21px;
-    }
-
-    .jg-ai-card h2 {
-      margin: 14px 0 7px;
-
-      font-size: 20px;
-
-      font-weight: 950;
-    }
-
-    .jg-ai-card p {
-      max-width: 520px;
-
-      margin: 0;
-
-      font-size: 12px;
-
-      line-height: 1.65;
-
-      opacity: .62;
-    }
-
-    .jg-ai-button {
-      margin-top: 17px;
-    }
-
-    /* =========================================
-       OPPORTUNITY
-    ========================================== */
-
-    .jg-opportunity-card {
-      display: block;
-
-      padding: 18px;
-
-      border:
-        1px solid rgba(127,127,127,.13);
-
-      border-radius: 20px;
-
-      background: rgba(255,255,255,.04);
-
-      text-decoration: none;
-
-      color: inherit;
-
-      transition:
-        transform .2s ease,
-        border-color .2s ease;
-    }
-
-    .jg-opportunity-card:hover {
-      transform: translateY(-2px);
-
-      border-color: rgba(37,99,235,.3);
-    }
-
-    .jg-opportunity-badge {
-      display: inline-flex;
-
-      padding: 5px 8px;
-
-      border-radius: 999px;
-
-      background: rgba(34,197,94,.09);
-
-      color: #4ade80;
-
-      font-size: 9px;
-
-      font-weight: 850;
-
-      text-transform: uppercase;
-    }
-
-    .jg-opportunity-card h3 {
-      margin: 11px 0 6px;
-
-      font-size: 16px;
-
-      font-weight: 900;
-    }
-
-    .jg-opportunity-card p {
-      margin: 0;
-
-      font-size: 12px;
-
-      line-height: 1.6;
-
-      opacity: .58;
-    }
-
-    /* =========================================
-       FOOTER
-    ========================================== */
-
-    .jg-footer {
-      padding:
-        35px
-        18px
-        130px;
-
-      text-align: center;
-
-      font-size: 11px;
-
-      line-height: 1.7;
-
-      opacity: .46;
-    }
-
-    .jg-footer strong {
-      opacity: .9;
-    }
-
-    /* =========================================
-       BOTTOM NAV
-    ========================================== */
-
-    .jg-bottom-nav {
-      position: fixed;
-
-      z-index: 1000;
-
-      left: 10px;
-      right: 10px;
-
-      bottom:
-        max(
-          10px,
-          env(safe-area-inset-bottom)
-        );
-
-      display: grid;
-
-      grid-template-columns:
-        repeat(5, 1fr);
-
-      min-height: 64px;
-
-      padding: 7px;
-
-      border:
-        1px solid rgba(127,127,127,.18);
-
-      border-radius: 22px;
-
-      background:
-        rgba(12,17,29,.88);
-
-      backdrop-filter: blur(22px);
-
-      -webkit-backdrop-filter: blur(22px);
-
-      box-shadow:
-        0 18px 50px rgba(0,0,0,.28);
-    }
-
-    .jg-nav-item {
-      min-width: 0;
-
-      display: flex;
-
-      flex-direction: column;
-
-      align-items: center;
-
-      justify-content: center;
-
-      gap: 3px;
-
-      border: 0;
-
-      border-radius: 16px;
-
-      background: transparent;
-
-      color: inherit;
-
-      text-decoration: none;
-
-      cursor: pointer;
-
-      opacity: .52;
-
-      transition:
-        background .2s ease,
-        opacity .2s ease,
-        transform .2s ease;
-    }
-
-    .jg-nav-item:hover {
-      opacity: .85;
-    }
-
-    .jg-nav-item:active {
-      transform: scale(.92);
-    }
-
-    .jg-nav-item.active {
-      opacity: 1;
-
-      background:
-        rgba(37,99,235,.14);
-
-      color: #60a5fa;
-    }
-
-    .jg-nav-icon {
-      font-size: 17px;
-
-      line-height: 1;
-    }
-
-    .jg-nav-label {
-      font-size: 9px;
-
-      font-weight: 800;
-    }
-
-    /* =========================================
-       LIGHT MODE
-    ========================================== */
-
-    body.jg-light .jg-bottom-nav {
-      background:
-        rgba(255,255,255,.90);
-
-      box-shadow:
-        0 18px 50px rgba(0,0,0,.12);
-    }
-
-    body.jg-light .jg-feature-card,
-    body.jg-light .jg-opportunity-card {
-      background:
-        rgba(0,0,0,.025);
-    }
-
-    body.jg-light .jg-ad-slot {
-      background:
-        rgba(0,0,0,.015);
-
-      color: rgba(0,0,0,.40);
-    }
-
-    /* =========================================
-       DESKTOP
-    ========================================== */
-
-    @media (min-width: 760px) {
-
-      .jg-hero {
-        padding:
-          34px
-          max(
-            34px,
-            calc(
-              (100vw - 1180px) / 2 + 18px
-            )
-          )
-          55px;
-      }
-
-      .jg-topbar {
-        margin-bottom: 65px;
-      }
-
-      .jg-section {
-        max-width: 1180px;
-
-        margin: 0 auto;
-
-        padding-left: 24px;
-        padding-right: 24px;
-      }
-
-      .jg-feature-grid {
-        grid-template-columns:
-          repeat(4, minmax(0, 1fr));
-      }
-
-      .jg-feature-card {
-        min-height: 180px;
-      }
-
-      .jg-bottom-nav {
-        left: 50%;
-        right: auto;
-
-        width:
-          min(
-            620px,
-            calc(100% - 30px)
-          );
-
-        transform:
-          translateX(-50%);
-      }
+      min-height: 100dvh;
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    /*
+     * Prevent accidental text selection on navigation controls.
+     */
+
+    .bottom-nav,
+    .nav-item,
+    button {
+      user-select: none;
+      -webkit-user-select: none;
     }
 
   </style>
+
 </head>
 
 <body>
 
-  <!-- =========================================
-       JG HOME
-  ========================================== -->
+  <div
+    id="jg-app"
+    class="jg-app"
+  >
 
-  <main class="jg-home">
+    <!-- ================================
+         HEADER
+    ================================= -->
 
-    <!-- =======================================
-         HERO
-    ======================================== -->
+    <header class="app-header">
 
-    <section class="jg-hero">
-
-      <header class="jg-topbar">
+      <div class="header-inner">
 
         <a
-          class="jg-brand"
           href="index.html"
+          class="brand"
           aria-label="JG Home"
         >
+          <span class="brand-mark">JG</span>
 
-          <span class="jg-logo">
-            JG
+          <span class="brand-text">
+            <strong>JG</strong>
+            <small>Find Skills. Find Opportunities.</small>
           </span>
-
-          <span class="jg-brand-text">
-
-            <span class="jg-brand-name">
-              JG
-            </span>
-
-            <span class="jg-brand-tagline">
-              Find Skills. Find Opportunities.
-            </span>
-
-          </span>
-
         </a>
 
-        <div class="jg-top-actions">
-
-          <button
-            id="themeButton"
-            class="jg-icon-button"
-            type="button"
-            aria-label="Toggle theme"
-            title="Toggle theme"
-          >
-            ◐
-          </button>
-
-          <a
-            class="jg-icon-button"
-            href="account.html"
-            aria-label="Account"
-            title="Account"
-          >
-            ♙
-          </a>
-
-        </div>
-
-      </header>
-
-      <div class="jg-hero-content">
-
-        <span class="jg-eyebrow">
-
-          <span class="jg-eyebrow-dot"></span>
-
-          Build your future
-
-        </span>
-
-        <h1>
-
-          Learn skills.
-
-          <br>
-
-          <span class="jg-gradient-text">
-            Find opportunities.
-          </span>
-
-        </h1>
-
-        <p class="jg-hero-description">
-
-          JG helps you learn practical skills,
-          improve your knowledge, discover
-          opportunities and build a stronger
-          future from one powerful platform.
-
-        </p>
-
-        <div class="jg-hero-actions">
-
-          <a
-            class="jg-primary-button"
-            href="learn.html"
-          >
-            Start Learning
-            <span>→</span>
-          </a>
-
-          <a
-            class="jg-secondary-button"
-            href="skills.html"
-          >
-            Explore Skills
-          </a>
-
-        </div>
+        <button
+          type="button"
+          id="themeButton"
+          class="theme-button"
+          aria-label="Toggle theme"
+          title="Toggle theme"
+        >
+          ◐
+        </button>
 
       </div>
 
-    </section>
+    </header>
 
-    <!-- =======================================
-         QUICK FEATURES
-    ======================================== -->
 
-    <section class="jg-section">
+    <!-- ================================
+         MAIN
+    ================================= -->
 
-      <div class="jg-section-header">
+    <main>
 
-        <div>
+      <!-- HERO -->
 
-          <h2 class="jg-section-title">
-            What do you want to do?
-          </h2>
+      <section class="hero-section">
 
-          <p class="jg-section-subtitle">
-            Choose where you want to start.
+        <div class="hero-content">
+
+          <span class="eyebrow">
+            LEARN • BUILD • DISCOVER
+          </span>
+
+          <h1>
+            Find Skills.
+            <span>Find Opportunities.</span>
+          </h1>
+
+          <p>
+            Learn valuable skills, build your abilities,
+            discover opportunities and prepare yourself
+            for the future with JG.
           </p>
 
+          <div class="hero-actions">
+
+            <a
+              href="learn.html"
+              class="btn btn-primary"
+            >
+              Start Learning
+            </a>
+
+            <a
+              href="work.html"
+              class="btn btn-secondary"
+            >
+              Find Opportunities
+            </a>
+
+          </div>
+
         </div>
 
-      </div>
+      </section>
 
-      <div class="jg-feature-grid">
 
-        <a
-          class="jg-feature-card"
-          href="learn.html"
-        >
+      <!-- QUICK ACTIONS -->
 
-          <div class="jg-feature-icon">
-            📚
-          </div>
+      <section class="quick-section">
 
-          <div>
+        <div class="section-heading">
+
+          <span>EXPLORE JG</span>
+
+          <h2>
+            Everything you need to grow.
+          </h2>
+
+        </div>
+
+
+        <div class="quick-grid">
+
+          <a
+            href="learn.html"
+            class="feature-card"
+          >
+
+            <div class="feature-icon">
+              📚
+            </div>
 
             <h3>
-              Learn Skills
+              Learn
             </h3>
 
             <p>
-              Learn practical skills through
-              structured courses.
+              Learn practical and valuable skills
+              through structured courses.
             </p>
 
-          </div>
+          </a>
 
-        </a>
 
-        <a
-          class="jg-feature-card"
-          href="skills.html"
-        >
+          <a
+            href="skills.html"
+            class="feature-card"
+          >
 
-          <div class="jg-feature-icon">
-            🧠
-          </div>
-
-          <div>
+            <div class="feature-icon">
+              🧠
+            </div>
 
             <h3>
-              Explore Skills
+              Skills
             </h3>
 
             <p>
-              Discover skills that can help
-              you grow.
+              Explore skills and discover what
+              you can learn next.
             </p>
 
-          </div>
+          </a>
 
-        </a>
 
-        <a
-          class="jg-feature-card"
-          href="work.html"
-        >
+          <a
+            href="work.html"
+            class="feature-card"
+          >
 
-          <div class="jg-feature-icon">
-            💼
-          </div>
-
-          <div>
+            <div class="feature-icon">
+              💼
+            </div>
 
             <h3>
-              Find Work
+              Opportunities
             </h3>
 
             <p>
-              Discover external opportunities
-              and useful resources.
+              Discover opportunities and useful
+              external resources.
             </p>
 
-          </div>
+          </a>
 
-        </a>
 
-        <a
-          class="jg-feature-card"
-          href="ai.html"
-        >
+          <a
+            href="ai.html"
+            class="feature-card"
+          >
 
-          <div class="jg-feature-icon">
-            ✦
-          </div>
-
-          <div>
+            <div class="feature-icon">
+              ✦
+            </div>
 
             <h3>
               JG AI
             </h3>
 
             <p>
-              Get intelligent learning and
-              career assistance.
+              Get intelligent guidance while
+              learning and building your future.
             </p>
+
+          </a>
+
+        </div>
+
+      </section>
+
+
+      <!-- LEARNING -->
+
+      <section class="learning-section">
+
+        <div class="section-heading">
+
+          <span>YOUR JOURNEY</span>
+
+          <h2>
+            Continue learning.
+          </h2>
+
+        </div>
+
+
+        <article class="learning-card">
+
+          <div class="learning-card-top">
+
+            <div>
+
+              <small>
+                CONTINUE LEARNING
+              </small>
+
+              <h3>
+                Web Development
+              </h3>
+
+              <p>
+                Build websites and learn the
+                foundations of modern web development.
+              </p>
+
+            </div>
+
+            <div class="progress-circle">
+              68%
+            </div>
 
           </div>
 
-        </a>
 
-      </div>
+          <div class="progress-bar">
 
-    </section>
+            <span
+              style="width: 68%;"
+            ></span>
 
-    <!-- =======================================
-         CONTINUE LEARNING
-    ======================================== -->
+          </div>
 
-    <section class="jg-section">
 
-      <div class="jg-section-header">
+          <div class="learning-bottom">
 
-        <div>
+            <span>
+              Lesson 7 of 24
+            </span>
 
-          <h2 class="jg-section-title">
-            Continue learning
+            <a
+              href="lesson.html"
+              class="btn btn-primary"
+            >
+              Continue
+            </a>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+      <!-- AD SLOT -->
+
+      <section class="ad-section">
+
+        <div class="ad-slot">
+
+          <small>
+            ADVERTISEMENT
+          </small>
+
+          <p>
+            Sponsored content
+          </p>
+
+        </div>
+
+      </section>
+
+
+      <!-- JG AI -->
+
+      <section class="ai-section">
+
+        <div class="ai-card">
+
+          <div class="ai-icon">
+            ✦
+          </div>
+
+          <div class="ai-content">
+
+            <span>
+              JG AI
+            </span>
+
+            <h2>
+              Your intelligent learning companion.
+            </h2>
+
+            <p>
+              Ask questions, understand difficult
+              topics and get guidance as you learn.
+            </p>
+
+            <a
+              href="ai.html"
+              class="btn btn-primary"
+            >
+              Open JG AI
+            </a>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- OPPORTUNITIES -->
+
+      <section class="opportunities-section">
+
+        <div class="section-heading">
+
+          <span>DISCOVER</span>
+
+          <h2>
+            Opportunities are waiting.
           </h2>
 
-          <p class="jg-section-subtitle">
-            Pick up where you left off.
+          <p>
+            Explore useful opportunities and
+            resources available through JG.
           </p>
 
         </div>
 
         <a
-          class="jg-see-all"
-          href="learn.html"
-        >
-          View all
-        </a>
-
-      </div>
-
-      <a
-        class="jg-progress-card"
-        href="course.html"
-      >
-
-        <div class="jg-progress-top">
-
-          <div>
-
-            <p class="jg-progress-label">
-              Web Development
-            </p>
-
-            <h3 class="jg-progress-title">
-              Build your first modern website
-            </h3>
-
-          </div>
-
-          <span class="jg-progress-percent">
-            32%
-          </span>
-
-        </div>
-
-        <div
-          class="jg-progress-bar"
-          role="progressbar"
-          aria-valuemin="0"
-          aria-valuemax="100"
-          aria-valuenow="32"
-          aria-label="Course progress"
-        >
-
-          <div class="jg-progress-fill"></div>
-
-        </div>
-
-        <div class="jg-progress-footer">
-
-          <span>
-            Lesson 7 of 24
-          </span>
-
-          <span>
-            Continue →
-          </span>
-
-        </div>
-
-      </a>
-
-    </section>
-
-    <!-- =======================================
-         ADVERTISEMENT
-    ======================================== -->
-
-    <section class="jg-section">
-
-      <div class="jg-ad-slot">
-        Sponsored
-      </div>
-
-    </section>
-
-    <!-- =======================================
-         JG AI
-    ======================================== -->
-
-    <section class="jg-section">
-
-      <div class="jg-ai-card">
-
-        <div class="jg-ai-icon">
-          ✦
-        </div>
-
-        <h2>
-          Meet JG AI
-        </h2>
-
-        <p>
-
-          Your intelligent JG learning companion.
-          Ask questions, understand difficult
-          concepts, plan what to learn next,
-          explore skills and get useful guidance.
-
-        </p>
-
-        <a
-          href="ai.html"
-          class="jg-primary-button jg-ai-button"
-        >
-          Open JG AI
-          <span>→</span>
-        </a>
-
-      </div>
-
-    </section>
-
-    <!-- =======================================
-         OPPORTUNITIES
-    ======================================== -->
-
-    <section class="jg-section">
-
-      <div class="jg-section-header">
-
-        <div>
-
-          <h2 class="jg-section-title">
-            Discover opportunities
-          </h2>
-
-          <p class="jg-section-subtitle">
-            Explore opportunities from outside JG.
-          </p>
-
-        </div>
-
-        <a
-          class="jg-see-all"
           href="work.html"
+          class="btn btn-primary"
         >
-          Explore
+          Explore Opportunities
         </a>
 
-      </div>
+      </section>
 
-      <a
-        href="work.html"
-        class="jg-opportunity-card"
-      >
 
-        <span class="jg-opportunity-badge">
-          Opportunities
+      <!-- PREMIUM -->
+
+      <section class="premium-section">
+
+        <div class="premium-card">
+
+          <span class="premium-label">
+            JG PREMIUM
+          </span>
+
+          <h2>
+            Learn without ads.
+          </h2>
+
+          <p>
+            Upgrade to JG Premium for an
+            uninterrupted learning experience.
+          </p>
+
+          <a
+            href="premium.html"
+            class="btn btn-primary"
+          >
+            Explore Premium
+          </a>
+
+        </div>
+
+      </section>
+
+    </main>
+
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
+
+    <footer class="app-footer">
+
+      <div class="footer-brand">
+
+        <span class="brand-mark">
+          JG
         </span>
 
-        <h3>
-          Find your next opportunity
-        </h3>
+        <strong>
+          JG
+        </strong>
 
-        <p>
-
-          Explore internships, freelance
-          opportunities, programs, competitions
-          and other external opportunities.
-
-        </p>
-
-      </a>
-
-    </section>
-
-    <!-- =======================================
-         PREMIUM
-    ======================================== -->
-
-    <section class="jg-section">
-
-      <a
-        href="premium.html"
-        class="jg-progress-card"
-      >
-
-        <div class="jg-progress-top">
-
-          <div>
-
-            <p class="jg-progress-label">
-              JG Premium
-            </p>
-
-            <h3 class="jg-progress-title">
-              Learn without advertising
-            </h3>
-
-          </div>
-
-          <span
-            style="
-              font-size:20px;
-              font-weight:900;
-            "
-          >
-            ✦
-          </span>
-
-        </div>
-
-        <p
-          style="
-            margin:12px 0 0;
-            font-size:12px;
-            line-height:1.6;
-            opacity:.62;
-          "
-        >
-
-          Upgrade to Premium for an ad-free
-          JG experience and other premium
-          features.
-
-        </p>
-
-      </a>
-
-    </section>
-
-    <!-- =======================================
-         SECOND AD
-    ======================================== -->
-
-    <section class="jg-section">
-
-      <div class="jg-ad-slot">
-        Sponsored
       </div>
 
-    </section>
+      <p>
+        Find Skills. Find Opportunities.
+      </p>
 
-    <!-- =======================================
-         FOOTER
-    ======================================== -->
+      <div class="footer-links">
 
-    <footer class="jg-footer">
+        <a href="learn.html">
+          Learn
+        </a>
 
-      <strong>JG</strong>
-      — Find Skills. Find Opportunities.
+        <a href="skills.html">
+          Skills
+        </a>
 
-      <br>
+        <a href="work.html">
+          Work
+        </a>
 
-      Learn. Build. Grow.
+        <a href="premium.html">
+          Premium
+        </a>
+
+      </div>
+
+      <small>
+        © 2026 JG. All rights reserved.
+      </small>
 
     </footer>
 
-  </main>
 
-  <!-- =========================================
-       BOTTOM NAVIGATION
-  ========================================== -->
+    <!-- ================================
+         BOTTOM NAVIGATION
+    ================================= -->
 
-  <nav
-    class="jg-bottom-nav"
-    aria-label="Main navigation"
-  >
-
-    <a
-      class="jg-nav-item active"
-      href="index.html"
-      aria-label="Home"
+    <nav
+      class="bottom-nav"
+      aria-label="Main navigation"
     >
 
-      <span class="jg-nav-icon">
-        ⌂
-      </span>
+      <a
+        href="index.html"
+        class="nav-item active"
+      >
 
-      <span class="jg-nav-label">
-        Home
-      </span>
+        <span>
+          ⌂
+        </span>
 
-    </a>
+        <small>
+          Home
+        </small>
 
-    <a
-      class="jg-nav-item"
-      href="learn.html"
-      aria-label="Learn"
-    >
+      </a>
 
-      <span class="jg-nav-icon">
-        ▣
-      </span>
 
-      <span class="jg-nav-label">
-        Learn
-      </span>
+      <a
+        href="learn.html"
+        class="nav-item"
+      >
 
-    </a>
+        <span>
+          ▣
+        </span>
 
-    <a
-      class="jg-nav-item"
-      href="work.html"
-      aria-label="Work"
-    >
+        <small>
+          Learn
+        </small>
 
-      <span class="jg-nav-icon">
-        ◆
-      </span>
+      </a>
 
-      <span class="jg-nav-label">
-        Work
-      </span>
 
-    </a>
+      <a
+        href="work.html"
+        class="nav-item"
+      >
 
-    <a
-      class="jg-nav-item"
-      href="ai.html"
-      aria-label="JG AI"
-    >
+        <span>
+          ◈
+        </span>
 
-      <span class="jg-nav-icon">
-        ✦
-      </span>
+        <small>
+          Work
+        </small>
 
-      <span class="jg-nav-label">
-        JG AI
-      </span>
+      </a>
 
-    </a>
 
-    <a
-      class="jg-nav-item"
-      href="account.html"
-      aria-label="Account"
-    >
+      <a
+        href="ai.html"
+        class="nav-item"
+      >
 
-      <span class="jg-nav-icon">
-        ♙
-      </span>
+        <span>
+          ✦
+        </span>
 
-      <span class="jg-nav-label">
-        Account
-      </span>
+        <small>
+          JG AI
+        </small>
 
-    </a>
+      </a>
 
-  </nav>
 
-  <!-- =========================================
-       SUPABASE
-  ========================================== -->
+      <a
+        href="account.html"
+        class="nav-item"
+      >
 
-  <script
-    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-  ></script>
+        <span>
+          ○
+        </span>
 
-  <!-- =========================================
+        <small>
+          Account
+        </small>
+
+      </a>
+
+    </nav>
+
+  </div>
+
+
+  <!-- ==========================================
        JG JAVASCRIPT
-  ========================================== -->
+  =========================================== -->
 
   <script src="js/config.js"></script>
-  <script src="js/supabase.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 
-  <!-- =========================================
-       HOME PAGE FUNCTIONALITY
-  ========================================== -->
+
+  <!-- ==========================================
+       JG DEPLOYMENT / PWA CONTROL
+  =========================================== -->
 
   <script>
 
@@ -1687,49 +677,42 @@
 
       "use strict";
 
-      /* -----------------------------------------
-         THEME
-      ------------------------------------------ */
 
-      const themeButton =
-        document.getElementById("themeButton");
+      /*
+       * THEME
+       */
 
-      function applyTheme(theme) {
+      try {
 
-        if (theme === "light") {
+        const savedTheme =
+          localStorage.getItem("jg-theme");
 
-          document.body.classList.add(
-            "jg-light"
-          );
+        if (
+          savedTheme === "light" ||
+          savedTheme === "dark"
+        ) {
 
-          if (themeButton) {
-            themeButton.textContent = "☾";
-          }
-
-        } else {
-
-          document.body.classList.remove(
-            "jg-light"
-          );
-
-          if (themeButton) {
-            themeButton.textContent = "☀";
-          }
+          document.documentElement.dataset.theme =
+            savedTheme;
 
         }
 
-      }
+      } catch (error) {
 
-      let savedTheme =
-        localStorage.getItem("jg-theme");
-
-      if (!savedTheme) {
-
-        savedTheme = "dark";
+        console.warn(
+          "JG theme could not be loaded.",
+          error
+        );
 
       }
 
-      applyTheme(savedTheme);
+
+      /*
+       * THEME BUTTON FALLBACK
+       */
+
+      const themeButton =
+        document.getElementById("themeButton");
 
       if (themeButton) {
 
@@ -1737,138 +720,168 @@
           "click",
           function () {
 
-            const isLight =
-              document.body.classList.contains(
-                "jg-light"
+            const current =
+              document.documentElement.dataset.theme;
+
+            const next =
+              current === "light"
+                ? "dark"
+                : "light";
+
+            document.documentElement.dataset.theme =
+              next;
+
+            try {
+
+              localStorage.setItem(
+                "jg-theme",
+                next
               );
 
-            const nextTheme =
-              isLight ? "dark" : "light";
+            } catch (error) {
 
-            localStorage.setItem(
-              "jg-theme",
-              nextTheme
-            );
+              console.warn(
+                "JG theme could not be saved.",
+                error
+              );
 
-            applyTheme(nextTheme);
+            }
 
           }
         );
 
       }
 
-      /* -----------------------------------------
-         ACTIVE NAV
-      ------------------------------------------ */
 
-      const currentPage =
-        window.location.pathname
-          .split("/")
-          .pop() || "index.html";
+      /*
+       * SERVICE WORKER
+       */
 
-      document
-        .querySelectorAll(".jg-nav-item")
-        .forEach(function (item) {
+      if ("serviceWorker" in navigator) {
 
-          const href =
-            item.getAttribute("href");
+        window.addEventListener(
+          "load",
+          async function () {
 
-          if (
-            href === currentPage ||
-            (
-              currentPage === "" &&
-              href === "index.html"
-            )
-          ) {
+            try {
 
-            item.classList.add("active");
+              const registration =
+                await navigator.serviceWorker.register(
+                  "./service-worker.js",
+                  {
+                    scope: "./"
+                  }
+                );
 
-          } else {
 
-            item.classList.remove("active");
+              console.log(
+                "JG service worker registered."
+              );
 
-          }
 
-        });
+              /*
+               * Force GitHub Pages to check
+               * for the newest worker.
+               */
 
-      /* -----------------------------------------
-         SIMPLE PRESS FEEDBACK
-      ------------------------------------------ */
+              await registration.update();
 
-      document
-        .querySelectorAll(
-          ".jg-primary-button, " +
-          ".jg-secondary-button, " +
-          ".jg-feature-card, " +
-          ".jg-opportunity-card, " +
-          ".jg-progress-card, " +
-          ".jg-nav-item"
-        )
-        .forEach(function (element) {
 
-          element.addEventListener(
-            "click",
-            function () {
+              /*
+               * If an updated worker is waiting,
+               * activate it immediately.
+               */
 
-              element.style.transform =
-                "scale(.98)";
+              if (registration.waiting) {
 
-              setTimeout(
+                registration.waiting.postMessage({
+                  type: "SKIP_WAITING"
+                });
+
+              }
+
+
+              /*
+               * Detect a new worker.
+               */
+
+              registration.addEventListener(
+                "updatefound",
                 function () {
 
-                  element.style.transform =
-                    "";
+                  const newWorker =
+                    registration.installing;
 
-                },
-                120
+                  if (!newWorker) {
+                    return;
+                  }
+
+
+                  newWorker.addEventListener(
+                    "statechange",
+                    function () {
+
+                      if (
+                        newWorker.state ===
+                          "installed" &&
+                        navigator.serviceWorker.controller
+                      ) {
+
+                        newWorker.postMessage({
+                          type: "SKIP_WAITING"
+                        });
+
+                      }
+
+                    }
+                  );
+
+                }
+              );
+
+
+            } catch (error) {
+
+              console.error(
+                "JG service worker registration failed:",
+                error
               );
 
             }
-          );
 
-        });
+          }
+        );
+
+      }
+
+
+      /*
+       * When a new service worker takes control,
+       * reload once so the newest JG files appear.
+       */
+
+      let refreshing = false;
+
+      if ("serviceWorker" in navigator) {
+
+        navigator.serviceWorker.addEventListener(
+          "controllerchange",
+          function () {
+
+            if (refreshing) {
+              return;
+            }
+
+            refreshing = true;
+
+            window.location.reload();
+
+          }
+        );
+
+      }
 
     })();
-
-    /* =========================================
-       SERVICE WORKER
-    ========================================== */
-
-    if ("serviceWorker" in navigator) {
-
-      window.addEventListener(
-        "load",
-        function () {
-
-          navigator.serviceWorker
-            .register(
-              "service-worker.js"
-            )
-            .then(
-              function (registration) {
-
-                console.log(
-                  "JG Service Worker registered:",
-                  registration.scope
-                );
-
-              }
-            )
-            .catch(
-              function (error) {
-
-                console.error(
-                  "JG Service Worker registration failed:",
-                  error
-                );
-
-              }
-            );
-
-        }
-      );
-
-    }
 
   </script>
 
