@@ -1,1120 +1,1102 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+
   <meta
     name="viewport"
-    content="width=device-width, initial-scale=1, viewport-fit=cover"
-  />
+    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+  >
+
+  <meta name="theme-color" content="#07111f">
 
   <meta
     name="description"
-    content="JG Skills — Explore practical skills and choose what you want to learn."
-  />
-
-  <meta name="theme-color" content="#07111f" />
+    content="Explore practical skills you can learn with JG."
+  >
 
   <title>Skills — JG</title>
 
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="manifest" href="manifest.webmanifest">
 
-  <style>
-    /* =========================================================
-       JG SKILLS PAGE
-       ========================================================= */
+  <link
+    rel="apple-touch-icon"
+    href="assets/icons/icon-192.png"
+  >
 
-    .skills-page {
-      min-height: 100vh;
-      padding-bottom: 110px;
-    }
-
-    .skills-hero {
-      padding: 30px 18px 22px;
-    }
-
-    .skills-hero-inner {
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    .skills-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      padding: 7px 11px;
-      border: 1px solid rgba(37, 99, 235, 0.22);
-      background: rgba(37, 99, 235, 0.08);
-      color: #60a5fa;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 800;
-      margin-bottom: 14px;
-    }
-
-    .skills-hero h1 {
-      margin: 0;
-      font-size: clamp(30px, 8vw, 52px);
-      line-height: 1.02;
-      letter-spacing: -1.8px;
-    }
-
-    .skills-hero p {
-      max-width: 650px;
-      margin: 14px 0 0;
-      color: var(--muted, #94a3b8);
-      font-size: 15px;
-      line-height: 1.65;
-    }
-
-    .skills-search-wrap {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 18px 18px;
-    }
-
-    .skills-search {
-      position: relative;
-    }
-
-    .skills-search input {
-      width: 100%;
-      min-height: 54px;
-      box-sizing: border-box;
-      padding: 0 18px 0 48px;
-      border-radius: 16px;
-      border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
-      background: var(--card, rgba(15, 23, 42, 0.75));
-      color: var(--text, #f8fafc);
-      outline: none;
-      font-size: 15px;
-      transition: 0.2s ease;
-    }
-
-    .skills-search input:focus {
-      border-color: rgba(59, 130, 246, 0.65);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-    }
-
-    .skills-search-icon {
-      position: absolute;
-      left: 17px;
-      top: 50%;
-      transform: translateY(-50%);
-      opacity: 0.65;
-      pointer-events: none;
-      font-size: 19px;
-    }
-
-    .skills-categories {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 18px 22px;
-      display: flex;
-      gap: 9px;
-      overflow-x: auto;
-      scrollbar-width: none;
-    }
-
-    .skills-categories::-webkit-scrollbar {
-      display: none;
-    }
-
-    .skill-filter {
-      flex: 0 0 auto;
-      border: 1px solid var(--border, rgba(148, 163, 184, 0.15));
-      background: var(--card, rgba(15, 23, 42, 0.65));
-      color: var(--muted, #94a3b8);
-      border-radius: 999px;
-      padding: 10px 15px;
-      font-size: 13px;
-      font-weight: 750;
-      cursor: pointer;
-      transition: 0.2s ease;
-    }
-
-    .skill-filter:hover {
-      transform: translateY(-1px);
-    }
-
-    .skill-filter.active {
-      color: #fff;
-      background: #2563eb;
-      border-color: #2563eb;
-    }
-
-    .skills-section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 18px;
-    }
-
-    .skills-section-heading {
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 15px;
-    }
-
-    .skills-section-heading h2 {
-      margin: 0;
-      font-size: 20px;
-      letter-spacing: -0.5px;
-    }
-
-    .skills-count {
-      color: var(--muted, #94a3b8);
-      font-size: 12px;
-      white-space: nowrap;
-    }
-
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
-    .skill-card {
-      position: relative;
-      min-height: 205px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 17px;
-      box-sizing: border-box;
-      border: 1px solid var(--border, rgba(148, 163, 184, 0.14));
-      border-radius: 20px;
-      background:
-        linear-gradient(
-          145deg,
-          rgba(30, 41, 59, 0.82),
-          rgba(15, 23, 42, 0.72)
-        );
-      cursor: pointer;
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease;
-    }
-
-    .skill-card::after {
-      content: "";
-      position: absolute;
-      width: 110px;
-      height: 110px;
-      right: -55px;
-      top: -55px;
-      border-radius: 50%;
-      background: rgba(37, 99, 235, 0.14);
-      pointer-events: none;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(59, 130, 246, 0.42);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
-    }
-
-    .skill-icon {
-      width: 48px;
-      height: 48px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      background: rgba(37, 99, 235, 0.12);
-      border: 1px solid rgba(59, 130, 246, 0.15);
-      font-size: 24px;
-    }
-
-    .skill-card h3 {
-      margin: 15px 0 7px;
-      font-size: 17px;
-      letter-spacing: -0.3px;
-    }
-
-    .skill-card p {
-      margin: 0;
-      color: var(--muted, #94a3b8);
-      font-size: 12.5px;
-      line-height: 1.5;
-    }
-
-    .skill-card-bottom {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .skill-level {
-      color: var(--muted, #94a3b8);
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .skill-open {
-      color: #60a5fa;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .skills-empty {
-      display: none;
-      padding: 40px 20px;
-      text-align: center;
-      border: 1px dashed var(--border, rgba(148, 163, 184, 0.2));
-      border-radius: 20px;
-      color: var(--muted, #94a3b8);
-    }
-
-    .skills-empty strong {
-      display: block;
-      color: var(--text, #f8fafc);
-      margin-bottom: 6px;
-    }
-
-    .skill-cta {
-      margin-top: 24px;
-      padding: 20px;
-      border-radius: 22px;
-      border: 1px solid rgba(124, 58, 237, 0.22);
-      background:
-        radial-gradient(
-          circle at top right,
-          rgba(124, 58, 237, 0.18),
-          transparent 42%
-        ),
-        rgba(15, 23, 42, 0.7);
-    }
-
-    .skill-cta h3 {
-      margin: 0 0 7px;
-      font-size: 18px;
-    }
-
-    .skill-cta p {
-      margin: 0 0 15px;
-      color: var(--muted, #94a3b8);
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .skill-cta button {
-      min-height: 45px;
-      border: 0;
-      border-radius: 13px;
-      padding: 0 16px;
-      background: #2563eb;
-      color: #fff;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .bottom-space {
-      height: 20px;
-    }
-
-    @media (min-width: 700px) {
-      .skills-hero {
-        padding-top: 48px;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 16px;
-      }
-
-      .skill-card {
-        min-height: 225px;
-      }
-    }
-
-    @media (min-width: 1050px) {
-      .skills-grid {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
-    }
-  </style>
+  <link
+    rel="stylesheet"
+    href="css/style.css"
+  >
 </head>
+
 
 <body>
 
-  <div class="skills-page">
 
-    <!-- =====================================================
-         HEADER
-         ===================================================== -->
-    <header class="site-header">
-      <div class="container header-inner">
+  <!-- =================================
+       HEADER
+  ================================== -->
 
-        <a href="index.html" class="brand" aria-label="JG Home">
-          <span class="brand-mark">JG</span>
-          <span class="brand-copy">
-            <strong>JG</strong>
-            <small>Find Skills. Find Opportunities.</small>
+  <header class="site-header">
+
+    <div class="header-inner">
+
+
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <span class="brand-mark">
+          JG
+        </span>
+
+
+        <span class="brand-text">
+
+          <strong>
+            JG
+          </strong>
+
+          <small>
+            Find Skills. Find Opportunities.
+          </small>
+
+        </span>
+
+      </a>
+
+
+      <div class="header-actions">
+
+
+        <button
+          class="icon-button"
+          id="themeButton"
+          type="button"
+          aria-label="Toggle theme"
+        >
+          ◐
+        </button>
+
+
+        <a
+          href="account.html"
+          class="avatar-button"
+          aria-label="Account"
+        >
+          <span id="headerAvatar">
+            U
           </span>
         </a>
 
-        <nav class="desktop-nav" aria-label="Main navigation">
-          <a href="index.html">Home</a>
-          <a href="learn.html">Learn</a>
-          <a href="skills.html" class="active">Skills</a>
-          <a href="work.html">Work</a>
-          <a href="ai.html">JG AI</a>
-        </nav>
-
-        <div class="header-actions">
-          <button
-            id="themeButton"
-            class="icon-button"
-            type="button"
-            aria-label="Toggle theme"
-          >
-            ◐
-          </button>
-
-          <a
-            href="account.html"
-            class="header-account"
-            aria-label="Account"
-          >
-            <span>Account</span>
-          </a>
-
-          <button
-            id="menuButton"
-            class="icon-button mobile-menu-button"
-            type="button"
-            aria-label="Open menu"
-            aria-expanded="false"
-          >
-            ☰
-          </button>
-        </div>
 
       </div>
-    </header>
 
-
-    <!-- =====================================================
-         MOBILE MENU
-         ===================================================== -->
-    <div
-      id="mobileMenu"
-      class="mobile-menu"
-      hidden
-    >
-      <a href="index.html">Home</a>
-      <a href="learn.html">Learn</a>
-      <a href="skills.html">Skills</a>
-      <a href="work.html">Find Work</a>
-      <a href="ai.html">JG AI</a>
-      <a href="premium.html">Premium</a>
-      <a href="account.html">Account</a>
     </div>
 
+  </header>
 
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
-    <section class="skills-hero">
-      <div class="skills-hero-inner">
 
-        <div class="skills-eyebrow">
-          <span>✦</span>
-          <span>Explore JG Skills</span>
-        </div>
+
+  <!-- =================================
+       MAIN
+  ================================== -->
+
+  <main class="page">
+
+
+    <!-- HERO -->
+
+    <section class="hero-section compact">
+
+      <div class="hero-content">
+
+
+        <span class="eyebrow">
+          SKILL DISCOVERY
+        </span>
+
 
         <h1>
-          Choose a skill.<br />
-          Build your future.
+
+          Discover your next
+
+          <span class="gradient-text">
+            valuable skill.
+          </span>
+
         </h1>
 
+
         <p>
-          Discover practical skills you can learn, practice and use to
-          prepare yourself for real opportunities.
+
+          Explore practical skills designed to
+          help you learn, build projects and
+          prepare for real opportunities.
+
         </p>
 
+
       </div>
+
     </section>
 
 
-    <!-- =====================================================
-         SEARCH
-         ===================================================== -->
-    <section class="skills-search-wrap">
 
-      <div class="skills-search">
-        <span class="skills-search-icon">⌕</span>
+    <!-- SEARCH -->
+
+    <section class="section">
+
+
+      <div class="search-box">
+
+        <span>
+          ⌕
+        </span>
+
 
         <input
-          id="skillSearch"
           type="search"
+          id="skillSearch"
           placeholder="Search skills..."
           autocomplete="off"
-          aria-label="Search skills"
-        />
+          maxlength="100"
+        >
+
       </div>
+
 
     </section>
 
 
-    <!-- =====================================================
-         FILTERS
-         ===================================================== -->
-    <div
-      class="skills-categories"
-      id="skillFilters"
-      aria-label="Skill categories"
-    >
 
-      <button
-        class="skill-filter active"
-        type="button"
-        data-category="all"
-      >
-        All
-      </button>
+    <!-- CATEGORIES -->
 
-      <button
-        class="skill-filter"
-        type="button"
-        data-category="technology"
-      >
-        Technology
-      </button>
-
-      <button
-        class="skill-filter"
-        type="button"
-        data-category="creative"
-      >
-        Creative
-      </button>
-
-      <button
-        class="skill-filter"
-        type="button"
-        data-category="business"
-      >
-        Business
-      </button>
-
-      <button
-        class="skill-filter"
-        type="button"
-        data-category="digital"
-      >
-        Digital
-      </button>
-
-    </div>
+    <section class="section">
 
 
-    <!-- =====================================================
-         SKILLS
-         ===================================================== -->
-    <main class="skills-section">
+      <div class="section-heading">
 
-      <div class="skills-section-heading">
-        <h2>Explore skills</h2>
 
-        <span
-          id="skillsCount"
-          class="skills-count"
-        >
-          8 skills
-        </span>
+        <div>
+
+          <span class="eyebrow">
+            CATEGORIES
+          </span>
+
+          <h2>
+            Explore skills
+          </h2>
+
+        </div>
+
+
       </div>
+
+
+
+      <div class="chip-row">
+
+
+        <button
+          class="chip active"
+          type="button"
+          data-category="all"
+        >
+          All
+        </button>
+
+
+        <button
+          class="chip"
+          type="button"
+          data-category="technology"
+        >
+          Technology
+        </button>
+
+
+        <button
+          class="chip"
+          type="button"
+          data-category="creative"
+        >
+          Creative
+        </button>
+
+
+        <button
+          class="chip"
+          type="button"
+          data-category="business"
+        >
+          Business
+        </button>
+
+
+        <button
+          class="chip"
+          type="button"
+          data-category="career"
+        >
+          Career
+        </button>
+
+
+      </div>
+
+
+    </section>
+
+
+
+    <!-- SKILLS -->
+
+    <section class="section">
 
 
       <div
-        id="skillsGrid"
-        class="skills-grid"
+        class="skill-grid"
+        id="skillGrid"
       >
 
+
         <!-- WEB DEVELOPMENT -->
+
         <article
           class="skill-card"
-          data-name="web development"
+          data-name="web development html css javascript website"
           data-category="technology"
-          data-url="course.html?course=web-development"
-          tabindex="0"
         >
-          <div>
-            <div class="skill-icon">💻</div>
 
-            <h3>Web Development</h3>
-
-            <p>
-              Learn how websites and web applications are designed,
-              developed and deployed.
-            </p>
+          <div class="skill-icon">
+            &lt;/&gt;
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Web Development
+          </h3>
+
+
+          <p>
+
+            Learn how websites and modern web
+            applications are created.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              HTML
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              CSS
             </span>
+
+            <span>
+              JavaScript
+            </span>
+
           </div>
+
+
+          <a
+            href="course.html?course=web-development"
+            class="text-link"
+          >
+            Learn this skill →
+          </a>
+
+
         </article>
+
 
 
         <!-- PYTHON -->
+
         <article
           class="skill-card"
-          data-name="python programming"
+          data-name="python programming coding software"
           data-category="technology"
-          data-url="course.html?course=python-programming"
-          tabindex="0"
         >
-          <div>
-            <div class="skill-icon">🐍</div>
 
-            <h3>Python Programming</h3>
-
-            <p>
-              Build your programming foundation and learn how to
-              create useful Python applications.
-            </p>
+          <div class="skill-icon">
+            🐍
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Python Programming
+          </h3>
+
+
+          <p>
+
+            Learn programming fundamentals,
+            logic and problem solving.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              Python
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              Coding
             </span>
+
           </div>
+
+
+          <a
+            href="course.html?course=python"
+            class="text-link"
+          >
+            Learn this skill →
+          </a>
+
+
         </article>
+
 
 
         <!-- GRAPHIC DESIGN -->
+
         <article
           class="skill-card"
-          data-name="graphic design"
+          data-name="graphic design graphics branding canva"
           data-category="creative"
-          data-url="course.html?course=graphic-design"
-          tabindex="0"
         >
-          <div>
-            <div class="skill-icon">🎨</div>
 
-            <h3>Graphic Design</h3>
-
-            <p>
-              Learn visual design, branding, layouts, typography
-              and digital graphics.
-            </p>
+          <div class="skill-icon">
+            ✦
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Graphic Design
+          </h3>
+
+
+          <p>
+
+            Learn visual design, layouts,
+            branding and digital graphics.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              Design
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              Branding
             </span>
+
           </div>
+
+
+          <a
+            href="course.html?course=graphic-design"
+            class="text-link"
+          >
+            Learn this skill →
+          </a>
+
+
         </article>
+
 
 
         <!-- VIDEO EDITING -->
+
         <article
           class="skill-card"
-          data-name="video editing"
+          data-name="video editing content creation film"
           data-category="creative"
-          data-url="course.html?course=video-editing"
-          tabindex="0"
         >
-          <div>
-            <div class="skill-icon">🎬</div>
 
-            <h3>Video Editing</h3>
-
-            <p>
-              Learn how to turn raw footage into engaging and
-              professional video content.
-            </p>
+          <div class="skill-icon">
+            ▶
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Video Editing
+          </h3>
+
+
+          <p>
+
+            Learn editing, storytelling,
+            audio, transitions and effects.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              Editing
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              Content
             </span>
+
           </div>
+
+
+          <a
+            href="course.html?course=video-editing"
+            class="text-link"
+          >
+            Learn this skill →
+          </a>
+
+
         </article>
+
 
 
         <!-- DIGITAL MARKETING -->
+
         <article
           class="skill-card"
-          data-name="digital marketing"
+          data-name="digital marketing social media marketing business"
           data-category="business"
-          data-url="course.html?course=digital-marketing"
-          tabindex="0"
         >
-          <div>
-            <div class="skill-icon">📈</div>
 
-            <h3>Digital Marketing</h3>
-
-            <p>
-              Understand online marketing, content strategy,
-              audiences and digital growth.
-            </p>
+          <div class="skill-icon">
+            ↗
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Digital Marketing
+          </h3>
+
+
+          <p>
+
+            Understand digital audiences,
+            content and online growth.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              Marketing
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              Social
             </span>
+
           </div>
+
+
+          <button
+            type="button"
+            class="text-link skill-coming-soon"
+          >
+            Coming soon →
+          </button>
+
+
         </article>
 
 
-        <!-- BUSINESS -->
+
+        <!-- ENTREPRENEURSHIP -->
+
         <article
           class="skill-card"
-          data-name="entrepreneurship business"
+          data-name="entrepreneurship business startup company"
           data-category="business"
-          data-url="course.html?course=entrepreneurship"
-          tabindex="0"
         >
-          <div>
-            <div class="skill-icon">🚀</div>
 
-            <h3>Entrepreneurship</h3>
-
-            <p>
-              Learn how ideas become businesses, including planning,
-              customers and growth.
-            </p>
+          <div class="skill-icon">
+            ◈
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Entrepreneurship
+          </h3>
+
+
+          <p>
+
+            Learn how ideas become products,
+            businesses and sustainable projects.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              Business
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              Startup
             </span>
+
           </div>
+
+
+          <button
+            type="button"
+            class="text-link skill-coming-soon"
+          >
+            Coming soon →
+          </button>
+
+
         </article>
 
-
-        <!-- DATA / DIGITAL -->
-        <article
-          class="skill-card"
-          data-name="data digital skills"
-          data-category="digital"
-          data-url="course.html?course=digital-skills"
-          tabindex="0"
-        >
-          <div>
-            <div class="skill-icon">📊</div>
-
-            <h3>Digital Skills</h3>
-
-            <p>
-              Build useful everyday digital skills for study, work
-              and modern business.
-            </p>
-          </div>
-
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
-            </span>
-
-            <span class="skill-open">
-              Explore →
-            </span>
-          </div>
-        </article>
 
 
         <!-- COMMUNICATION -->
+
         <article
           class="skill-card"
-          data-name="communication personal development"
-          data-category="business"
-          data-url="course.html?course=communication"
-          tabindex="0"
+          data-name="communication speaking confidence presentation"
+          data-category="career"
         >
-          <div>
-            <div class="skill-icon">🗣️</div>
 
-            <h3>Communication</h3>
-
-            <p>
-              Improve communication, confidence, presentation and
-              professional interaction.
-            </p>
+          <div class="skill-icon">
+            ◉
           </div>
 
-          <div class="skill-card-bottom">
-            <span class="skill-level">
-              Beginner → Advanced
+
+          <h3>
+            Communication
+          </h3>
+
+
+          <p>
+
+            Improve your communication,
+            presentation and confidence.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              Speaking
             </span>
 
-            <span class="skill-open">
-              Explore →
+            <span>
+              Confidence
             </span>
+
           </div>
+
+
+          <button
+            type="button"
+            class="text-link skill-coming-soon"
+          >
+            Coming soon →
+          </button>
+
+
         </article>
+
+
+
+        <!-- CAREER DEVELOPMENT -->
+
+        <article
+          class="skill-card"
+          data-name="career development cv resume interview jobs"
+          data-category="career"
+        >
+
+          <div class="skill-icon">
+            ★
+          </div>
+
+
+          <h3>
+            Career Development
+          </h3>
+
+
+          <p>
+
+            Prepare your CV, interviews,
+            portfolio and professional profile.
+
+          </p>
+
+
+          <div class="skill-tags">
+
+            <span>
+              CV
+            </span>
+
+            <span>
+              Interview
+            </span>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="text-link skill-coming-soon"
+          >
+            Coming soon →
+          </button>
+
+
+        </article>
+
 
       </div>
 
 
       <!-- EMPTY SEARCH STATE -->
+
       <div
-        id="skillsEmpty"
-        class="skills-empty"
+        id="emptySkills"
+        class="empty-state"
+        hidden
       >
-        <strong>No skills found</strong>
-        <span>
-          Try another search term or choose a different category.
-        </span>
+
+        <div class="empty-icon">
+          ⌕
+        </div>
+
+
+        <h3>
+          No skills found
+        </h3>
+
+
+        <p>
+          Try another search or category.
+        </p>
+
+
       </div>
 
 
-      <!-- =====================================================
-           JG AI CTA
-           ===================================================== -->
-      <section class="skill-cta">
+    </section>
 
-        <h3>Not sure what to learn?</h3>
+
+
+    <!-- JG AI -->
+
+    <section class="section">
+
+
+      <div class="info-card">
+
+
+        <span class="eyebrow">
+          NOT SURE?
+        </span>
+
+
+        <h2>
+          Let JG AI help you choose.
+        </h2>
+
 
         <p>
-          Ask JG AI to help you discover skills based on your
-          interests, goals and the direction you want to take.
+
+          Tell JG AI about your interests,
+          experience and goals. It can help
+          you decide where to start.
+
         </p>
 
-        <button
-          type="button"
-          id="openAiButton"
+
+        <a
+          href="ai.html"
+          class="btn btn-primary"
         >
           Ask JG AI
-        </button>
-
-      </section>
-
-      <div class="bottom-space"></div>
-
-    </main>
+        </a>
 
 
-    <!-- =====================================================
-         BOTTOM NAVIGATION
-         ===================================================== -->
-    <nav
-      class="bottom-nav"
-      aria-label="Mobile navigation"
+      </div>
+
+
+    </section>
+
+
+
+    <!-- PREMIUM -->
+
+    <section class="section">
+
+
+      <div class="premium-banner">
+
+
+        <div>
+
+          <span class="eyebrow">
+            JG PREMIUM
+          </span>
+
+
+          <h2>
+            Focus on your growth.
+          </h2>
+
+
+          <p>
+
+            Upgrade to Premium for an
+            ad-free JG experience.
+
+          </p>
+
+        </div>
+
+
+        <a
+          href="premium.html"
+          class="btn btn-light"
+        >
+          View Premium
+        </a>
+
+
+      </div>
+
+
+    </section>
+
+
+  </main>
+
+
+
+  <!-- =================================
+       BOTTOM NAV
+  ================================== -->
+
+  <nav class="bottom-nav">
+
+
+    <a href="index.html">
+
+      <span>
+        ⌂
+      </span>
+
+      <small>
+        Home
+      </small>
+
+    </a>
+
+
+    <a
+      href="learn.html"
+      class="active"
     >
 
-      <a
-        href="index.html"
-        class="bottom-nav-item"
-      >
-        <span>⌂</span>
-        <small>Home</small>
-      </a>
+      <span>
+        ▣
+      </span>
 
-      <a
-        href="learn.html"
-        class="bottom-nav-item"
-      >
-        <span>▣</span>
-        <small>Learn</small>
-      </a>
+      <small>
+        Learn
+      </small>
 
-      <a
-        href="skills.html"
-        class="bottom-nav-item active"
-      >
-        <span>✦</span>
-        <small>Skills</small>
-      </a>
-
-      <a
-        href="work.html"
-        class="bottom-nav-item"
-      >
-        <span>◫</span>
-        <small>Work</small>
-      </a>
-
-      <a
-        href="ai.html"
-        class="bottom-nav-item"
-      >
-        <span>✧</span>
-        <small>JG AI</small>
-      </a>
-
-    </nav>
-
-  </div>
+    </a>
 
 
-  <!-- =======================================================
-       JG SHARED JAVASCRIPT
-       ======================================================= -->
+    <a href="work.html">
+
+      <span>
+        ⌁
+      </span>
+
+      <small>
+        Work
+      </small>
+
+    </a>
+
+
+    <a href="ai.html">
+
+      <span>
+        ✦
+      </span>
+
+      <small>
+        JG AI
+      </small>
+
+    </a>
+
+
+    <a href="account.html">
+
+      <span>
+        ◯
+      </span>
+
+      <small>
+        Account
+      </small>
+
+    </a>
+
+
+  </nav>
+
+
+
+  <!-- =================================
+       SCRIPTS
+  ================================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
   <script src="js/config.js"></script>
+
+  <script src="js/supabase.js"></script>
+
   <script src="js/ui.js"></script>
+
   <script src="js/auth.js"></script>
+
   <script src="js/api.js"></script>
+
   <script src="js/app.js"></script>
 
 
-  <!-- =======================================================
-       SKILLS PAGE JAVASCRIPT
-       ======================================================= -->
+
+  <!-- =================================
+       PAGE SCRIPT
+  ================================== -->
+
   <script>
-    document.addEventListener("DOMContentLoaded", function () {
 
-      const searchInput =
-        document.getElementById("skillSearch");
-
-      const filterButtons =
-        document.querySelectorAll(".skill-filter");
-
-      const cards =
-        Array.from(document.querySelectorAll(".skill-card"));
-
-      const emptyState =
-        document.getElementById("skillsEmpty");
-
-      const count =
-        document.getElementById("skillsCount");
-
-      const aiButton =
-        document.getElementById("openAiButton");
-
-      let activeCategory = "all";
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
 
 
-      /* -------------------------------------------------------
-         FILTER SKILLS
-         ------------------------------------------------------- */
-
-      function filterSkills() {
-
-        const query =
-          searchInput.value.trim().toLowerCase();
-
-        let visible = 0;
-
-        cards.forEach(function (card) {
-
-          const name =
-            (card.dataset.name || "").toLowerCase();
-
-          const category =
-            (card.dataset.category || "").toLowerCase();
-
-          const matchesSearch =
-            !query || name.includes(query);
-
-          const matchesCategory =
-            activeCategory === "all" ||
-            category === activeCategory;
-
-          const shouldShow =
-            matchesSearch && matchesCategory;
-
-          card.style.display =
-            shouldShow ? "" : "none";
-
-          if (shouldShow) {
-            visible++;
-          }
-        });
+        const searchInput =
+          document.getElementById(
+            "skillSearch"
+          );
 
 
-        count.textContent =
-          visible + (visible === 1 ? " skill" : " skills");
+        const skillCards =
+          Array.from(
+            document.querySelectorAll(
+              ".skill-card"
+            )
+          );
 
 
-        emptyState.style.display =
-          visible === 0 ? "block" : "none";
-      }
+        const categoryButtons =
+          Array.from(
+            document.querySelectorAll(
+              ".chip"
+            )
+          );
 
 
-      /* -------------------------------------------------------
-         SEARCH
-         ------------------------------------------------------- */
-
-      searchInput.addEventListener(
-        "input",
-        filterSkills
-      );
+        const emptyState =
+          document.getElementById(
+            "emptySkills"
+          );
 
 
-      /* -------------------------------------------------------
-         CATEGORY FILTERS
-         ------------------------------------------------------- */
-
-      filterButtons.forEach(function (button) {
-
-        button.addEventListener(
-          "click",
-          function () {
-
-            filterButtons.forEach(function (item) {
-              item.classList.remove("active");
-            });
-
-            button.classList.add("active");
-
-            activeCategory =
-              button.dataset.category || "all";
-
-            filterSkills();
-          }
-        );
-
-      });
+        let activeCategory =
+          "all";
 
 
-      /* -------------------------------------------------------
-         OPEN COURSE
-         ------------------------------------------------------- */
 
-      cards.forEach(function (card) {
+        function filterSkills() {
 
-        function openCourse() {
 
-          const destination =
-            card.dataset.url;
+          const query =
+            searchInput.value
+              .toLowerCase()
+              .trim();
 
-          if (destination) {
-            window.location.href = destination;
-          }
+
+          let visibleCount =
+            0;
+
+
+          skillCards.forEach(
+            function (card) {
+
+
+              const name =
+                (
+                  card.dataset.name ||
+                  ""
+                ).toLowerCase();
+
+
+              const category =
+                card.dataset.category ||
+                "";
+
+
+              const matchesSearch =
+                !query ||
+                name.includes(query);
+
+
+              const matchesCategory =
+                activeCategory === "all" ||
+                category === activeCategory;
+
+
+              const visible =
+                matchesSearch &&
+                matchesCategory;
+
+
+              card.hidden =
+                !visible;
+
+
+              if (visible) {
+                visibleCount++;
+              }
+
+
+            }
+          );
+
+
+          emptyState.hidden =
+            visibleCount !== 0;
+
+
         }
 
 
-        card.addEventListener(
-          "click",
-          openCourse
+
+        searchInput.addEventListener(
+          "input",
+          filterSkills
         );
 
 
-        card.addEventListener(
-          "keydown",
-          function (event) {
 
-            if (
-              event.key === "Enter" ||
-              event.key === " "
-            ) {
+        categoryButtons.forEach(
+          function (button) {
 
-              event.preventDefault();
 
-              openCourse();
-            }
+            button.addEventListener(
+              "click",
+              function () {
+
+
+                categoryButtons.forEach(
+                  function (item) {
+
+                    item.classList.remove(
+                      "active"
+                    );
+
+                  }
+                );
+
+
+                button.classList.add(
+                  "active"
+                );
+
+
+                activeCategory =
+                  button.dataset.category;
+
+
+                filterSkills();
+
+
+              }
+            );
+
 
           }
         );
 
-      });
 
 
-      /* -------------------------------------------------------
-         JG AI BUTTON
-         ------------------------------------------------------- */
-
-      if (aiButton) {
-
-        aiButton.addEventListener(
-          "click",
-          function () {
-
-            window.location.href =
-              "ai.html";
-          }
-        );
-
-      }
+        document
+          .querySelectorAll(
+            ".skill-coming-soon"
+          )
+          .forEach(
+            function (button) {
 
 
-      /* -------------------------------------------------------
-         MOBILE MENU
-         ------------------------------------------------------- */
+              button.addEventListener(
+                "click",
+                function () {
 
-      const menuButton =
-        document.getElementById("menuButton");
 
-      const mobileMenu =
-        document.getElementById("mobileMenu");
+                  if (
+                    window.JG_UI &&
+                    window.JG_UI.toast
+                  ) {
 
-      if (menuButton && mobileMenu) {
+                    window.JG_UI.toast(
+                      "This skill is coming soon to JG."
+                    );
 
-        menuButton.addEventListener(
-          "click",
-          function () {
+                  } else {
 
-            const isOpen =
-              !mobileMenu.hasAttribute("hidden");
+                    alert(
+                      "This skill is coming soon to JG."
+                    );
 
-            if (isOpen) {
+                  }
 
-              mobileMenu.setAttribute(
-                "hidden",
-                ""
+
+                }
               );
 
-              menuButton.setAttribute(
-                "aria-expanded",
-                "false"
-              );
-
-            } else {
-
-              mobileMenu.removeAttribute(
-                "hidden"
-              );
-
-              menuButton.setAttribute(
-                "aria-expanded",
-                "true"
-              );
 
             }
+          );
 
-          }
-        );
 
       }
+    );
 
-
-      /* -------------------------------------------------------
-         INITIAL RENDER
-         ------------------------------------------------------- */
-
-      filterSkills();
-
-    });
   </script>
+
 
 </body>
 </html>
