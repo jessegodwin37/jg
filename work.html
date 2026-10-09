@@ -2,22 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-  />
-
-  <meta
-    name="description"
-    content="JG Work — Discover skills-based opportunities, freelance projects, internships and career opportunities."
-  />
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="theme-color" content="#07111f" />
-
+  <meta name="description" content="JG Work — Discover skills-based opportunities, freelance projects, internships and career opportunities." />
   <title>Find Work | JG</title>
-
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="apple-touch-icon" href="assets/icons/icon-192.png" />
   <link rel="stylesheet" href="css/style.css" />
-
   <style>
     :root {
       --work-bg: #07111f;
@@ -33,157 +24,69 @@
       --work-yellow: #f59e0b;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
       min-height: 100vh;
       color: var(--work-text);
       background:
-        radial-gradient(
-          circle at 0% 0%,
-          rgba(59, 130, 246, 0.15),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 100% 40%,
-          rgba(139, 92, 246, 0.12),
-          transparent 32%
-        ),
+        radial-gradient(circle at 0% 0%, rgba(59, 130, 246, 0.15), transparent 30%),
+        radial-gradient(circle at 100% 35%, rgba(139, 92, 246, 0.12), transparent 32%),
         var(--work-bg);
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
-    }
+    button, input, select { font: inherit; }
+    button { cursor: pointer; }
+    a { color: inherit; text-decoration: none; }
 
-    button {
-      cursor: pointer;
-    }
-
-    .work-page {
-      width: min(1200px, 100%);
+    .page {
+      width: min(1180px, calc(100% - 24px));
       margin: 0 auto;
-      padding: 20px 16px 115px;
+      padding: 20px 0 120px;
     }
 
-    /* HEADER */
-
-    .work-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 32px;
-    }
-
-    .work-brand {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .work-logo {
-      width: 46px;
-      height: 46px;
-      display: grid;
-      place-items: center;
-      border-radius: 15px;
-      font-weight: 900;
-      background:
-        linear-gradient(
-          135deg,
-          var(--work-blue),
-          var(--work-purple)
-        );
-      box-shadow:
-        0 12px 30px rgba(59, 130, 246, 0.25);
-    }
-
-    .work-brand strong {
-      display: block;
-      font-size: 18px;
-    }
-
-    .work-brand span {
-      display: block;
-      margin-top: 2px;
-      color: var(--work-muted);
-      font-size: 11px;
-    }
-
-    .work-header-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .header-button {
-      min-height: 42px;
-      border: 1px solid var(--work-border);
-      border-radius: 12px;
-      padding: 0 13px;
-      color: white;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .header-button:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    /* HERO */
-
-    .work-hero {
+    .hero-section {
       position: relative;
       overflow: hidden;
-      padding: 30px;
+      padding: 32px 28px 26px;
+      margin-bottom: 22px;
       border: 1px solid var(--work-border);
       border-radius: 28px;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(59, 130, 246, 0.13),
-          rgba(139, 92, 246, 0.08)
-        ),
-        var(--work-card);
-      margin-bottom: 25px;
+      background: linear-gradient(135deg, rgba(59, 130, 246, 0.14), rgba(139, 92, 246, 0.08)), var(--work-card);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.2);
     }
 
-    .work-hero::after {
+    .hero-section::after {
       content: "";
       position: absolute;
-      width: 230px;
-      height: 230px;
-      right: -100px;
-      top: -100px;
+      width: 260px;
+      height: 260px;
+      right: -80px;
+      top: -110px;
       border-radius: 50%;
       background: rgba(34, 211, 238, 0.08);
-      filter: blur(5px);
+      filter: blur(8px);
     }
 
-    .hero-badge {
+    .eyebrow {
       position: relative;
       z-index: 1;
       display: inline-flex;
       align-items: center;
-      gap: 7px;
+      gap: 8px;
       padding: 7px 12px;
       border-radius: 999px;
       color: #67e8f9;
       background: rgba(34, 211, 238, 0.08);
       border: 1px solid rgba(34, 211, 238, 0.18);
       font-size: 11px;
-      font-weight: 900;
+      font-weight: 800;
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: 0.7px;
     }
 
-    .hero-badge::before {
+    .eyebrow::before {
       content: "";
       width: 7px;
       height: 7px;
@@ -192,2009 +95,616 @@
       box-shadow: 0 0 12px var(--work-cyan);
     }
 
-    .work-hero h1 {
+    .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 700px;
-      margin: 16px 0 10px;
-      font-size: clamp(32px, 7vw, 58px);
-      line-height: 1.02;
-      letter-spacing: -2.5px;
+      max-width: 760px;
     }
 
-    .work-hero p {
-      position: relative;
-      z-index: 1;
-      max-width: 670px;
+    .hero-content h1 {
+      margin: 16px 0 12px;
+      font-size: clamp(2.4rem, 6vw, 4rem);
+      line-height: 1.02;
+      letter-spacing: -0.06em;
+    }
+
+    .hero-content h1 span {
+      display: inline-block;
+      background: linear-gradient(90deg, #60a5fa, #a78bfa, #22d3ee);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-content p {
+      max-width: 640px;
       margin: 0;
       color: var(--work-muted);
       line-height: 1.7;
-      font-size: 15px;
+      font-size: 1rem;
     }
 
-    /* SEARCH */
-
-    .search-panel {
+    .hero-actions {
       display: flex;
-      gap: 10px;
-      margin-top: 25px;
-      position: relative;
-      z-index: 2;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 18px;
+      border-radius: 14px;
+      font-weight: 800;
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover { transform: translateY(-1px); }
+
+    .btn-primary {
+      color: white;
+      background: linear-gradient(135deg, var(--work-blue), var(--work-purple));
+      box-shadow: 0 12px 26px rgba(59,130,246,0.22);
+    }
+
+    .btn-secondary {
+      color: var(--work-text);
+      background: rgba(255,255,255,0.04);
+      border: 1px solid var(--work-border);
+    }
+
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 18px 0 20px;
     }
 
     .search-box {
       position: relative;
-      flex: 1;
+      flex: 1 1 280px;
+      min-width: 220px;
     }
 
     .search-box span {
       position: absolute;
-      left: 15px;
+      left: 14px;
       top: 50%;
       transform: translateY(-50%);
       color: #64748b;
-      font-size: 17px;
+      font-size: 1.1rem;
       pointer-events: none;
     }
 
     .search-input {
       width: 100%;
-      height: 52px;
-      padding: 0 16px 0 43px;
+      min-height: 52px;
+      padding: 0 16px 0 42px;
+      border-radius: 14px;
       border: 1px solid var(--work-border);
-      border-radius: 14px;
+      background: rgba(255,255,255,0.04);
+      color: var(--work-text);
       outline: none;
-      color: white;
-      background: rgba(255, 255, 255, 0.045);
     }
 
-    .search-input::placeholder {
-      color: #64748b;
-    }
-
+    .search-input::placeholder { color: #64748b; }
     .search-input:focus {
-      border-color: rgba(59, 130, 246, 0.75);
-      box-shadow:
-        0 0 0 4px rgba(59, 130, 246, 0.1);
+      border-color: rgba(59,130,246,0.7);
+      box-shadow: 0 0 0 4px rgba(59,130,246,0.08);
     }
 
-    .search-button {
-      height: 52px;
-      min-width: 110px;
-      border: 0;
-      border-radius: 14px;
-      color: white;
-      font-weight: 900;
-      background:
-        linear-gradient(
-          135deg,
-          var(--work-blue),
-          var(--work-purple)
-        );
-    }
-
-    /* FILTERS */
-
-    .filters {
+    .filter-row {
       display: flex;
-      align-items: center;
-      gap: 8px;
-      overflow-x: auto;
-      padding: 3px 0 7px;
-      margin-bottom: 23px;
-      scrollbar-width: none;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin: 0 0 20px;
+      padding: 3px 0 2px;
     }
 
-    .filters::-webkit-scrollbar {
-      display: none;
-    }
-
-    .filter-button {
-      flex: 0 0 auto;
-      min-height: 39px;
+    .filter-chip {
+      min-height: 38px;
       padding: 0 14px;
       border: 1px solid var(--work-border);
       border-radius: 999px;
       color: var(--work-muted);
-      background: rgba(255, 255, 255, 0.035);
+      background: rgba(255,255,255,0.03);
       font-size: 12px;
       font-weight: 800;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
-    .filter-button:hover,
-    .filter-button.active {
+    .filter-chip:hover,
+    .filter-chip.active {
       color: white;
-      border-color: rgba(59, 130, 246, 0.35);
-      background: rgba(59, 130, 246, 0.13);
+      background: rgba(59,130,246,0.12);
+      border-color: rgba(59,130,246,0.3);
     }
 
-    /* TOOLBAR */
-
-    .work-toolbar {
+    .section-header {
       display: flex;
+      align-items: flex-end;
       justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 15px;
+      gap: 12px;
+      margin: 18px 0 16px;
     }
 
-    .work-toolbar h2 {
-      margin: 0;
-      font-size: 20px;
+    .section-header h2 {
+      margin: 8px 0 0;
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      letter-spacing: -0.05em;
     }
 
-    .work-toolbar p {
-      margin: 4px 0 0;
+    .section-header small {
+      display: block;
       color: var(--work-muted);
-      font-size: 12px;
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
     }
 
-    .sort-select {
-      height: 40px;
-      padding: 0 10px;
-      border: 1px solid var(--work-border);
-      border-radius: 11px;
-      outline: none;
-      color: white;
-      background: #101d31;
-    }
-
-    /* WORK GRID */
-
-    .work-grid {
+    .opportunities-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 16px;
     }
 
     .job-card {
       display: flex;
       flex-direction: column;
       min-width: 0;
-      padding: 19px;
+      padding: 18px;
       border: 1px solid var(--work-border);
-      border-radius: 21px;
+      border-radius: 22px;
       background: var(--work-card);
-      transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
     .job-card:hover {
-      transform: translateY(-3px);
-      border-color: rgba(59, 130, 246, 0.3);
+      transform: translateY(-2px);
+      border-color: rgba(59,130,246,0.28);
       background: var(--work-card-2);
     }
 
-    .job-card.hidden {
-      display: none;
-    }
+    .job-card.hidden { display: none; }
 
     .job-top {
       display: flex;
       justify-content: space-between;
-      gap: 10px;
+      gap: 12px;
       align-items: flex-start;
     }
 
-    .company-logo {
-      width: 47px;
-      height: 47px;
-      flex: 0 0 auto;
+    .company-badge {
+      width: 46px;
+      height: 46px;
       display: grid;
       place-items: center;
       border-radius: 15px;
+      background: linear-gradient(135deg, rgba(59,130,246,0.28), rgba(139,92,246,0.22));
+      border: 1px solid rgba(255,255,255,0.08);
       color: white;
       font-weight: 900;
-      background:
-        linear-gradient(
-          135deg,
-          rgba(59, 130, 246, 0.3),
-          rgba(139, 92, 246, 0.28)
-        );
-      border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
-    .save-job {
-      width: 37px;
-      height: 37px;
+    .save-btn {
+      width: 36px;
+      height: 36px;
+      display: grid;
+      place-items: center;
       border: 1px solid var(--work-border);
       border-radius: 11px;
       color: var(--work-muted);
-      background: rgba(255, 255, 255, 0.035);
+      background: rgba(255,255,255,0.03);
     }
 
-    .save-job.saved {
+    .save-btn.saved {
       color: #fbbf24;
-      border-color: rgba(245, 158, 11, 0.25);
-      background: rgba(245, 158, 11, 0.08);
+      border-color: rgba(245,158,11,0.25);
+      background: rgba(245,158,11,0.08);
     }
 
     .job-card h3 {
       margin: 16px 0 6px;
-      font-size: 17px;
-      line-height: 1.3;
+      font-size: 1.15rem;
+      line-height: 1.35;
     }
 
     .company-name {
       margin: 0;
       color: var(--work-muted);
-      font-size: 12px;
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
     }
 
     .job-tags {
       display: flex;
       flex-wrap: wrap;
       gap: 6px;
-      margin: 15px 0;
+      margin: 14px 0;
     }
 
     .job-tag {
-      padding: 6px 9px;
-      border-radius: 8px;
-      color: #cbd5e1;
-      background: rgba(255, 255, 255, 0.045);
-      font-size: 10px;
+      padding: 6px 8px;
+      border-radius: 9px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.05);
+      color: #dfe9f5;
+      font-size: 0.68rem;
       font-weight: 700;
+      letter-spacing: 0.02em;
     }
 
-    .job-description {
+    .job-summary {
       margin: 0;
       color: var(--work-muted);
-      font-size: 12px;
       line-height: 1.65;
+      font-size: 0.82rem;
     }
 
     .job-footer {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
       margin-top: auto;
       padding-top: 18px;
     }
 
     .job-type {
       color: #86efac;
-      font-size: 11px;
+      font-size: 0.7rem;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
 
-    .view-job {
-      min-height: 38px;
+    .job-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 36px;
       padding: 0 12px;
-      border: 1px solid rgba(59, 130, 246, 0.25);
       border-radius: 10px;
+      border: 1px solid rgba(59,130,246,0.25);
+      background: rgba(59,130,246,0.08);
       color: #bfdbfe;
-      background: rgba(59, 130, 246, 0.08);
-      font-size: 11px;
-      font-weight: 900;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
     }
 
-    .view-job:hover {
-      background: rgba(59, 130, 246, 0.16);
-    }
-
-    /* EMPTY */
-
-    .empty-work {
+    .empty-state {
       display: none;
-      padding: 45px 20px;
-      text-align: center;
+      padding: 38px 18px;
       border: 1px solid var(--work-border);
       border-radius: 22px;
       background: var(--work-card);
+      text-align: center;
     }
 
-    .empty-work.show {
-      display: block;
-    }
+    .empty-state.show { display: block; }
 
-    .empty-work-icon {
+    .empty-state .icon {
       width: 62px;
       height: 62px;
       display: grid;
       place-items: center;
       margin: 0 auto 14px;
-      border-radius: 20px;
-      background: rgba(59, 130, 246, 0.1);
-      font-size: 27px;
+      border-radius: 18px;
+      background: rgba(59,130,246,0.1);
+      font-size: 1.7rem;
     }
 
-    .empty-work h3 {
-      margin: 0 0 7px;
+    .empty-state h3 {
+      margin: 0 0 8px;
+      font-size: 1.5rem;
     }
 
-    .empty-work p {
+    .empty-state p {
       margin: 0;
       color: var(--work-muted);
-      font-size: 13px;
+      line-height: 1.6;
     }
 
-    /* AI CTA */
-
-    .work-ai {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      margin-top: 28px;
-      padding: 23px;
-      border-radius: 22px;
-      border: 1px solid rgba(139, 92, 246, 0.2);
-      background:
-        linear-gradient(
-          135deg,
-          rgba(139, 92, 246, 0.11),
-          rgba(59, 130, 246, 0.08)
-        );
-    }
-
-    .work-ai-content {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .ai-icon {
-      width: 49px;
-      height: 49px;
-      flex: 0 0 auto;
-      display: grid;
-      place-items: center;
-      border-radius: 16px;
-      background:
-        linear-gradient(
-          135deg,
-          var(--work-purple),
-          var(--work-blue)
-        );
-      font-size: 21px;
-    }
-
-    .work-ai h3 {
-      margin: 0 0 5px;
-      font-size: 16px;
-    }
-
-    .work-ai p {
-      margin: 0;
-      color: var(--work-muted);
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .ai-button {
-      flex: 0 0 auto;
-      min-height: 43px;
-      padding: 0 15px;
-      border: 0;
-      border-radius: 12px;
-      color: white;
-      font-weight: 900;
-      background:
-        linear-gradient(
-          135deg,
-          var(--work-purple),
-          var(--work-blue)
-        );
-    }
-
-    /* MODAL */
-
-    .job-modal {
-      position: fixed;
-      z-index: 200;
-      inset: 0;
-      display: none;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 15px;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-    }
-
-    .job-modal.show {
-      display: flex;
-    }
-
-    .job-modal-card {
-      width: min(600px, 100%);
-      max-height: 88vh;
-      overflow-y: auto;
-      padding: 24px;
-      border-radius: 25px 25px 18px 18px;
-      border: 1px solid var(--work-border);
-      background: #0d1a2d;
-      box-shadow:
-        0 -20px 80px rgba(0, 0, 0, 0.35);
-    }
-
-    .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-    }
-
-    .modal-close {
-      width: 39px;
-      height: 39px;
-      border: 1px solid var(--work-border);
-      border-radius: 11px;
-      color: white;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .modal-company {
-      color: var(--work-muted);
-      font-size: 12px;
-    }
-
-    .modal-header h2 {
-      margin: 5px 0;
-      font-size: 23px;
-    }
-
-    .modal-body {
-      margin-top: 20px;
-      color: #cbd5e1;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .modal-details {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 9px;
-      margin-top: 18px;
-    }
-
-    .modal-detail {
-      padding: 13px;
-      border-radius: 13px;
-      background: rgba(255, 255, 255, 0.04);
-    }
-
-    .modal-detail span {
-      display: block;
-      color: #64748b;
-      font-size: 10px;
-      margin-bottom: 5px;
-    }
-
-    .modal-detail strong {
-      font-size: 12px;
-    }
-
-    .modal-actions {
-      display: flex;
-      gap: 9px;
-      margin-top: 22px;
-    }
-
-    .modal-button {
-      flex: 1;
-      min-height: 46px;
-      border: 1px solid var(--work-border);
-      border-radius: 12px;
-      color: white;
-      background: rgba(255, 255, 255, 0.045);
-      font-weight: 900;
-    }
-
-    .modal-button.primary {
-      border: 0;
-      background:
-        linear-gradient(
-          135deg,
-          var(--work-blue),
-          var(--work-purple)
-        );
-    }
-
-    /* MOBILE NAV */
-
-    .work-mobile-nav {
-      position: fixed;
-      z-index: 100;
-      left: 12px;
-      right: 12px;
-      bottom: max(12px, env(safe-area-inset-bottom));
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 5px;
-      padding: 7px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 19px;
-      background: rgba(8, 17, 31, 0.88);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.35);
-    }
-
-    .work-mobile-nav a {
-      min-height: 48px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      border-radius: 13px;
-      color: var(--work-muted);
-      text-decoration: none;
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .work-mobile-nav a span:first-child {
-      font-size: 17px;
-    }
-
-    .work-mobile-nav a:hover,
-    .work-mobile-nav a.active {
-      color: white;
-      background: rgba(59, 130, 246, 0.13);
-    }
-
-    /* RESPONSIVE */
-
-    @media (max-width: 900px) {
-      .work-grid {
-        grid-template-columns: repeat(2, 1fr);
+    @media (max-width: 980px) {
+      .opportunities-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media (max-width: 650px) {
-      .work-page {
-        padding: 16px 14px 105px;
+    @media (max-width: 640px) {
+      .page {
+        width: min(100%, calc(100% - 18px));
+        padding-bottom: 98px;
       }
 
-      .work-brand span {
-        display: none;
-      }
-
-      .work-hero {
-        padding: 23px 19px;
+      .hero-section {
+        padding: 26px 18px 22px;
         border-radius: 22px;
       }
 
-      .search-panel {
+      .hero-actions {
         flex-direction: column;
       }
 
-      .search-button {
+      .btn {
         width: 100%;
       }
 
-      .work-toolbar {
-        align-items: flex-start;
-      }
-
-      .work-grid {
+      .opportunities-grid {
         grid-template-columns: 1fr;
       }
 
-      .work-ai {
+      .section-header {
         align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .ai-button {
-        width: 100%;
-      }
-
-      .work-ai-content {
-        align-items: flex-start;
-      }
-    }
-
-    @media (max-width: 430px) {
-      .work-toolbar {
-        flex-direction: column;
-      }
-
-      .sort-select {
-        width: 100%;
-      }
-
-      .modal-details {
-        grid-template-columns: 1fr;
-      }
-
-      .modal-actions {
         flex-direction: column;
       }
     }
   </style>
 </head>
-
 <body>
 
-  <main class="work-page">
+  <div id="jg-app" class="jg-app">
 
-    <!-- HEADER -->
-    <header class="work-header">
-
-      <a href="index.html" class="work-brand">
-
-        <div class="work-logo">
-          JG
-        </div>
-
-        <div>
-          <strong>JG</strong>
-          <span>
-            Find Skills. Find Opportunities.
+    <header class="app-header">
+      <div class="header-inner">
+        <a href="index.html" class="brand" aria-label="JG Home">
+          <span class="brand-mark">JG</span>
+          <span class="brand-text">
+            <strong>JG</strong>
+            <small>Find Skills. Find Opportunities.</small>
           </span>
-        </div>
-
-      </a>
-
-      <div class="work-header-actions">
-
-        <button
-          type="button"
-          class="header-button"
-          id="themeButton"
-          aria-label="Toggle theme"
-        >
-          ◐
-        </button>
-
-        <button
-          type="button"
-          class="header-button"
-          id="accountButton"
-        >
-          Account
-        </button>
-
+        </a>
+        <button type="button" id="themeButton" class="theme-button" aria-label="Toggle theme" title="Toggle theme">◐</button>
       </div>
-
     </header>
 
-
-    <!-- HERO -->
-    <section class="work-hero">
-
-      <div class="hero-badge">
-        Opportunity Network
-      </div>
-
-      <h1>
-        Find opportunities that match your skills.
-      </h1>
-
-      <p>
-        Discover freelance projects, internships, remote opportunities,
-        entry-level roles and other external opportunities that can
-        help you put your skills into practice.
-      </p>
-
-      <div class="search-panel">
-
-        <div class="search-box">
-
-          <span>⌕</span>
-
-          <input
-            id="searchInput"
-            class="search-input"
-            type="search"
-            placeholder="Search jobs, skills, companies..."
-            autocomplete="off"
-          />
-
-        </div>
-
-        <button
-          type="button"
-          class="search-button"
-          id="searchButton"
-        >
-          Search
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- FILTERS -->
-    <div class="filters" id="filters">
-
-      <button
-        class="filter-button active"
-        data-filter="all"
-        type="button"
-      >
-        All
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="remote"
-        type="button"
-      >
-        Remote
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="freelance"
-        type="button"
-      >
-        Freelance
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="internship"
-        type="button"
-      >
-        Internship
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="entry"
-        type="button"
-      >
-        Entry Level
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="design"
-        type="button"
-      >
-        Design
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="development"
-        type="button"
-      >
-        Development
-      </button>
-
-      <button
-        class="filter-button"
-        data-filter="marketing"
-        type="button"
-      >
-        Marketing
-      </button>
-
-    </div>
-
-
-    <!-- TOOLBAR -->
-    <section class="work-toolbar">
-
-      <div>
-
-        <h2>
-          Opportunities
-        </h2>
-
-        <p id="resultCount">
-          Showing opportunities
-        </p>
-
-      </div>
-
-      <select
-        id="sortSelect"
-        class="sort-select"
-        aria-label="Sort opportunities"
-      >
-        <option value="latest">
-          Latest
-        </option>
-
-        <option value="title">
-          Title A-Z
-        </option>
-
-        <option value="company">
-          Company A-Z
-        </option>
-
-      </select>
-
-    </section>
-
-
-    <!-- JOBS -->
-    <section
-      class="work-grid"
-      id="workGrid"
-    >
-
-      <!-- JOB 1 -->
-      <article
-        class="job-card"
-        data-category="development remote entry"
-        data-search="frontend developer javascript html css remote web development"
-        data-title="Frontend Developer"
-        data-company="Digital Studio"
-      >
-
-        <div class="job-top">
-
-          <div class="company-logo">
-            DS
-          </div>
-
-          <button
-            type="button"
-            class="save-job"
-            data-job="frontend-developer"
-            aria-label="Save Frontend Developer"
-          >
-            ☆
-          </button>
-
-        </div>
-
-        <h3>
-          Frontend Developer
-        </h3>
-
-        <p class="company-name">
-          Digital Studio
-        </p>
-
-        <div class="job-tags">
-          <span class="job-tag">JavaScript</span>
-          <span class="job-tag">HTML/CSS</span>
-          <span class="job-tag">Remote</span>
-        </div>
-
-        <p class="job-description">
-          Build responsive interfaces and work with a product team
-          to improve modern web experiences.
-        </p>
-
-        <div class="job-footer">
-
-          <span class="job-type">
-            Remote · Entry Level
-          </span>
-
-          <button
-            type="button"
-            class="view-job"
-            data-title="Frontend Developer"
-            data-company="Digital Studio"
-            data-type="Remote · Entry Level"
-            data-location="Remote"
-            data-skills="JavaScript, HTML, CSS"
-            data-description="Build responsive interfaces and work with a product team to improve modern web experiences."
-          >
-            View
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- JOB 2 -->
-      <article
-        class="job-card"
-        data-category="design freelance"
-        data-search="graphic designer branding logo photoshop canva freelance design"
-        data-title="Graphic Designer"
-        data-company="Creative House"
-      >
-
-        <div class="job-top">
-
-          <div class="company-logo">
-            CH
-          </div>
-
-          <button
-            type="button"
-            class="save-job"
-            data-job="graphic-designer"
-            aria-label="Save Graphic Designer"
-          >
-            ☆
-          </button>
-
-        </div>
-
-        <h3>
-          Graphic Designer
-        </h3>
-
-        <p class="company-name">
-          Creative House
-        </p>
-
-        <div class="job-tags">
-          <span class="job-tag">Canva</span>
-          <span class="job-tag">Branding</span>
-          <span class="job-tag">Freelance</span>
-        </div>
-
-        <p class="job-description">
-          Create social media graphics, marketing visuals and
-          brand assets for growing businesses.
-        </p>
-
-        <div class="job-footer">
-
-          <span class="job-type">
-            Freelance
-          </span>
-
-          <button
-            type="button"
-            class="view-job"
-            data-title="Graphic Designer"
-            data-company="Creative House"
-            data-type="Freelance"
-            data-location="Remote"
-            data-skills="Canva, Branding, Graphic Design"
-            data-description="Create social media graphics, marketing visuals and brand assets for growing businesses."
-          >
-            View
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- JOB 3 -->
-      <article
-        class="job-card"
-        data-category="development internship"
-        data-search="python developer software internship backend python programming"
-        data-title="Python Developer Intern"
-        data-company="Tech Labs"
-      >
-
-        <div class="job-top">
-
-          <div class="company-logo">
-            TL
-          </div>
-
-          <button
-            type="button"
-            class="save-job"
-            data-job="python-intern"
-            aria-label="Save Python Developer Intern"
-          >
-            ☆
-          </button>
-
-        </div>
-
-        <h3>
-          Python Developer Intern
-        </h3>
-
-        <p class="company-name">
-          Tech Labs
-        </p>
-
-        <div class="job-tags">
-          <span class="job-tag">Python</span>
-          <span class="job-tag">Backend</span>
-          <span class="job-tag">Internship</span>
-        </div>
-
-        <p class="job-description">
-          Learn through practical software projects while supporting
-          the development team.
-        </p>
-
-        <div class="job-footer">
-
-          <span class="job-type">
-            Internship
-          </span>
-
-          <button
-            type="button"
-            class="view-job"
-            data-title="Python Developer Intern"
-            data-company="Tech Labs"
-            data-type="Internship"
-            data-location="Hybrid"
-            data-skills="Python, APIs, Programming"
-            data-description="Learn through practical software projects while supporting the development team."
-          >
-            View
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- JOB 4 -->
-      <article
-        class="job-card"
-        data-category="marketing remote"
-        data-search="digital marketing social media content marketing remote"
-        data-title="Digital Marketing Assistant"
-        data-company="Growth Network"
-      >
-
-        <div class="job-top">
-
-          <div class="company-logo">
-            GN
-          </div>
-
-          <button
-            type="button"
-            class="save-job"
-            data-job="digital-marketing"
-            aria-label="Save Digital Marketing Assistant"
-          >
-            ☆
-          </button>
-
-        </div>
-
-        <h3>
-          Digital Marketing Assistant
-        </h3>
-
-        <p class="company-name">
-          Growth Network
-        </p>
-
-        <div class="job-tags">
-          <span class="job-tag">Marketing</span>
-          <span class="job-tag">Social Media</span>
-          <span class="job-tag">Remote</span>
-        </div>
-
-        <p class="job-description">
-          Support campaigns, content planning and social media
-          activities for digital brands.
-        </p>
-
-        <div class="job-footer">
-
-          <span class="job-type">
-            Remote
-          </span>
-
-          <button
-            type="button"
-            class="view-job"
-            data-title="Digital Marketing Assistant"
-            data-company="Growth Network"
-            data-type="Remote"
-            data-location="Remote"
-            data-skills="Digital Marketing, Social Media, Content"
-            data-description="Support campaigns, content planning and social media activities for digital brands."
-          >
-            View
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- JOB 5 -->
-      <article
-        class="job-card"
-        data-category="design entry freelance"
-        data-search="video editor content creator premiere capcut editing freelance"
-        data-title="Video Editor"
-        data-company="Media Works"
-      >
-
-        <div class="job-top">
-
-          <div class="company-logo">
-            MW
-          </div>
-
-          <button
-            type="button"
-            class="save-job"
-            data-job="video-editor"
-            aria-label="Save Video Editor"
-          >
-            ☆
-          </button>
-
-        </div>
-
-        <h3>
-          Video Editor
-        </h3>
-
-        <p class="company-name">
-          Media Works
-        </p>
-
-        <div class="job-tags">
-          <span class="job-tag">Video Editing</span>
-          <span class="job-tag">CapCut</span>
-          <span class="job-tag">Freelance</span>
-        </div>
-
-        <p class="job-description">
-          Edit short-form videos and promotional content for
-          social media campaigns.
-        </p>
-
-        <div class="job-footer">
-
-          <span class="job-type">
-            Freelance
-          </span>
-
-          <button
-            type="button"
-            class="view-job"
-            data-title="Video Editor"
-            data-company="Media Works"
-            data-type="Freelance"
-            data-location="Remote"
-            data-skills="Video Editing, CapCut, Content Creation"
-            data-description="Edit short-form videos and promotional content for social media campaigns."
-          >
-            View
-          </button>
-
-        </div>
-
-      </article>
-
-
-      <!-- JOB 6 -->
-      <article
-        class="job-card"
-        data-category="development remote"
-        data-search="web developer junior react javascript frontend remote"
-        data-title="Junior Web Developer"
-        data-company="Build Digital"
-      >
-
-        <div class="job-top">
-
-          <div class="company-logo">
-            BD
-          </div>
-
-          <button
-            type="button"
-            class="save-job"
-            data-job="junior-web-developer"
-            aria-label="Save Junior Web Developer"
-          >
-            ☆
-          </button>
-
-        </div>
-
-        <h3>
-          Junior Web Developer
-        </h3>
-
-        <p class="company-name">
-          Build Digital
-        </p>
-
-        <div class="job-tags">
-          <span class="job-tag">Web Development</span>
-          <span class="job-tag">JavaScript</span>
-          <span class="job-tag">Remote</span>
-        </div>
-
-        <p class="job-description">
-          Work on websites and digital products while developing
-          practical professional experience.
-        </p>
-
-        <div class="job-footer">
-
-          <span class="job-type">
-            Remote
-          </span>
-
-          <button
-            type="button"
-            class="view-job"
-            data-title="Junior Web Developer"
-            data-company="Build Digital"
-            data-type="Remote"
-            data-location="Remote"
-            data-skills="JavaScript, Web Development, Git"
-            data-description="Work on websites and digital products while developing practical professional experience."
-          >
-            View
-          </button>
-
-        </div>
-
-      </article>
-
-    </section>
-
-
-    <!-- EMPTY -->
-    <section
-      id="emptyWork"
-      class="empty-work"
-    >
-
-      <div class="empty-work-icon">
-        🔎
-      </div>
-
-      <h3>
-        No opportunities found
-      </h3>
-
-      <p>
-        Try another search term or choose a different category.
-      </p>
-
-    </section>
-
-
-    <!-- AI CTA -->
-    <section class="work-ai">
-
-      <div class="work-ai-content">
-
-        <div class="ai-icon">
-          ✦
-        </div>
-
-        <div>
-
-          <h3>
-            Let JG AI help you find your direction
-          </h3>
-
+    <main class="page">
+      <section class="hero-section">
+        <div class="hero-content">
+          <span class="eyebrow">Work</span>
+          <h1>Find work that matches <span>your strengths.</span></h1>
           <p>
-            Ask JG AI which skills, opportunities and learning path
-            could fit your goals.
+            Browse opportunities suited to your skills, interests, and level of experience.
+            Use the filters to narrow by type, skill area, and working style before you apply.
           </p>
-
-        </div>
-
-      </div>
-
-      <button
-        type="button"
-        class="ai-button"
-        id="aiButton"
-      >
-        Ask JG AI
-      </button>
-
-    </section>
-
-  </main>
-
-
-  <!-- JOB MODAL -->
-  <div
-    id="jobModal"
-    class="job-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-hidden="true"
-  >
-
-    <div class="job-modal-card">
-
-      <div class="modal-header">
-
-        <div>
-
-          <div
-            id="modalCompany"
-            class="modal-company"
-          >
-            Company
+          <div class="hero-actions">
+            <a href="#opportunities" class="btn btn-primary">Explore Opportunities</a>
+            <a href="skills.html" class="btn btn-secondary">Browse Skills</a>
           </div>
-
-          <h2 id="modalTitle">
-            Opportunity
-          </h2>
-
         </div>
+      </section>
 
-        <button
-          type="button"
-          class="modal-close"
-          id="modalClose"
-          aria-label="Close"
-        >
-          ×
-        </button>
-
+      <div class="toolbar">
+        <div class="search-box">
+          <span>⌕</span>
+          <input id="workSearch" class="search-input" type="search" placeholder="Search opportunities..." autocomplete="off" maxlength="100" />
+        </div>
       </div>
 
-
-      <div
-        id="modalDescription"
-        class="modal-body"
-      >
-        Opportunity description.
+      <div class="filter-row" aria-label="Opportunity filters">
+        <button type="button" class="filter-chip active" data-filter="all">All</button>
+        <button type="button" class="filter-chip" data-filter="remote">Remote</button>
+        <button type="button" class="filter-chip" data-filter="freelance">Freelance</button>
+        <button type="button" class="filter-chip" data-filter="internship">Internship</button>
+        <button type="button" class="filter-chip" data-filter="design">Design</button>
+        <button type="button" class="filter-chip" data-filter="development">Development</button>
       </div>
 
-
-      <div class="modal-details">
-
-        <div class="modal-detail">
-          <span>Type</span>
-          <strong id="modalType">—</strong>
+      <div class="section-header" id="opportunities">
+        <div>
+          <small>Discover</small>
+          <h2>Featured opportunities</h2>
         </div>
-
-        <div class="modal-detail">
-          <span>Location</span>
-          <strong id="modalLocation">—</strong>
-        </div>
-
-        <div class="modal-detail">
-          <span>Skills</span>
-          <strong id="modalSkills">—</strong>
-        </div>
-
-        <div class="modal-detail">
-          <span>Platform</span>
-          <strong>External opportunity</strong>
-        </div>
-
       </div>
 
+      <div class="opportunities-grid" id="opportunitiesGrid">
 
-      <div class="modal-actions">
+        <article class="job-card" data-category="remote development" data-title="frontend developer internship remote work">
+          <div class="job-top">
+            <div class="company-badge">JG</div>
+            <button type="button" class="save-btn" aria-label="Save opportunity">☆</button>
+          </div>
+          <h3>Frontend Developer</h3>
+          <p class="company-name">JG Skills Network</p>
+          <div class="job-tags">
+            <span class="job-tag">HTML</span>
+            <span class="job-tag">CSS</span>
+            <span class="job-tag">JavaScript</span>
+          </div>
+          <p class="job-summary">Build responsive interface components and improve accessibility across learning experiences and user dashboards.</p>
+          <div class="job-footer">
+            <span class="job-type">Remote</span>
+            <a href="https://example.com" class="job-link" target="_blank" rel="noreferrer noopener">View</a>
+          </div>
+        </article>
 
-        <button
-          type="button"
-          class="modal-button"
-          id="modalSave"
-        >
-          ☆ Save
-        </button>
+        <article class="job-card" data-category="freelance design" data-title="ui ux designer freelance digital product">
+          <div class="job-top">
+            <div class="company-badge">UX</div>
+            <button type="button" class="save-btn" aria-label="Save opportunity">☆</button>
+          </div>
+          <h3>UI/UX Design Support</h3>
+          <p class="company-name">Northstar Studio</p>
+          <div class="job-tags">
+            <span class="job-tag">Figma</span>
+            <span class="job-tag">Wireframes</span>
+            <span class="job-tag">UX</span>
+          </div>
+          <p class="job-summary">Create user journeys, prototype flows, and polished design updates for a growing digital product team.</p>
+          <div class="job-footer">
+            <span class="job-type">Freelance</span>
+            <a href="https://example.com" class="job-link" target="_blank" rel="noreferrer noopener">View</a>
+          </div>
+        </article>
 
-        <button
-          type="button"
-          class="modal-button primary"
-          id="modalApply"
-        >
-          View External Opportunity
-        </button>
+        <article class="job-card" data-category="internship development" data-title="python developer internship automation workbook">
+          <div class="job-top">
+            <div class="company-badge">PY</div>
+            <button type="button" class="save-btn" aria-label="Save opportunity">☆</button>
+          </div>
+          <h3>Python Automation Intern</h3>
+          <p class="company-name">Atlas Labs</p>
+          <div class="job-tags">
+            <span class="job-tag">Python</span>
+            <span class="job-tag">APIs</span>
+            <span class="job-tag">Data</span>
+          </div>
+          <p class="job-summary">Support internal automation workflows, data processing, and scripting tasks while learning modern tooling.</p>
+          <div class="job-footer">
+            <span class="job-type">Internship</span>
+            <a href="https://example.com" class="job-link" target="_blank" rel="noreferrer noopener">View</a>
+          </div>
+        </article>
 
+        <article class="job-card" data-category="remote design" data-title="brand designer remote marketing campaigns">
+          <div class="job-top">
+            <div class="company-badge">BR</div>
+            <button type="button" class="save-btn" aria-label="Save opportunity">☆</button>
+          </div>
+          <h3>Brand Designer</h3>
+          <p class="company-name">Brightline Collective</p>
+          <div class="job-tags">
+            <span class="job-tag">Branding</span>
+            <span class="job-tag">Social</span>
+            <span class="job-tag">Strategy</span>
+          </div>
+          <p class="job-summary">Design asset systems, campaign concepts, and visual identity work for a positive-impact business.</p>
+          <div class="job-footer">
+            <span class="job-type">Remote</span>
+            <a href="https://example.com" class="job-link" target="_blank" rel="noreferrer noopener">View</a>
+          </div>
+        </article>
+
+        <article class="job-card" data-category="freelance development" data-title="wordpress developer freelance website maintenance">
+          <div class="job-top">
+            <div class="company-badge">WP</div>
+            <button type="button" class="save-btn" aria-label="Save opportunity">☆</button>
+          </div>
+          <h3>WordPress Developer</h3>
+          <p class="company-name">Harbor Digital</p>
+          <div class="job-tags">
+            <span class="job-tag">WordPress</span>
+            <span class="job-tag">CMS</span>
+            <span class="job-tag">Content</span>
+          </div>
+          <p class="job-summary">Maintain client websites, improve performance, and ship content updates and design tweaks.</p>
+          <div class="job-footer">
+            <span class="job-type">Freelance</span>
+            <a href="https://example.com" class="job-link" target="_blank" rel="noreferrer noopener">View</a>
+          </div>
+        </article>
+
+        <article class="job-card" data-category="remote development" data-title="product designer remote software company">
+          <div class="job-top">
+            <div class="company-badge">PD</div>
+            <button type="button" class="save-btn" aria-label="Save opportunity">☆</button>
+          </div>
+          <h3>Product Designer</h3>
+          <p class="company-name">Cobalt Works</p>
+          <div class="job-tags">
+            <span class="job-tag">Research</span>
+            <span class="job-tag">Prototyping</span>
+            <span class="job-tag">UX</span>
+          </div>
+          <p class="job-summary">Collaborate with product and engineering teams to refine user experiences and improve product usability.</p>
+          <div class="job-footer">
+            <span class="job-type">Remote</span>
+            <a href="https://example.com" class="job-link" target="_blank" rel="noreferrer noopener">View</a>
+          </div>
+        </article>
       </div>
 
-    </div>
+      <div id="emptyState" class="empty-state" aria-live="polite">
+        <div class="icon">⌕</div>
+        <h3>No opportunities match your search.</h3>
+        <p>Try a different keyword or switch to a different opportunity type.</p>
+      </div>
+    </main>
 
+    <footer class="app-footer">
+      <div class="footer-brand">
+        <span class="brand-mark">JG</span>
+        <strong>JG</strong>
+      </div>
+      <p>Find Skills. Find Opportunities.</p>
+      <div class="footer-links">
+        <a href="learn.html">Learn</a>
+        <a href="skills.html">Skills</a>
+        <a href="work.html">Work</a>
+        <a href="premium.html">Premium</a>
+      </div>
+      <small>© 2026 JG. All rights reserved.</small>
+    </footer>
+
+    <nav class="bottom-nav" aria-label="Main navigation">
+      <a href="index.html" class="nav-item"><span>⌂</span><small>Home</small></a>
+      <a href="learn.html" class="nav-item"><span>▣</span><small>Learn</small></a>
+      <a href="work.html" class="nav-item active"><span>◈</span><small>Work</small></a>
+      <a href="ai.html" class="nav-item"><span>✦</span><small>JG AI</small></a>
+      <a href="account.html" class="nav-item"><span>○</span><small>Account</small></a>
+    </nav>
   </div>
 
-
-  <!-- MOBILE NAV -->
-  <nav class="work-mobile-nav">
-
-    <a href="index.html">
-      <span>⌂</span>
-      <span>Home</span>
-    </a>
-
-    <a href="learn.html">
-      <span>▣</span>
-      <span>Learn</span>
-    </a>
-
-    <a
-      href="work.html"
-      class="active"
-    >
-      <span>⌁</span>
-      <span>Work</span>
-    </a>
-
-    <a href="ai.html">
-      <span>✦</span>
-      <span>JG AI</span>
-    </a>
-
-    <a href="account.html">
-      <span>◎</span>
-      <span>Account</span>
-    </a>
-
-  </nav>
-
-
-  <!-- SHARED JG FILES -->
   <script src="js/config.js"></script>
   <script src="js/ui.js"></script>
   <script src="js/auth.js"></script>
   <script src="js/api.js"></script>
   <script src="js/app.js"></script>
 
-
   <script>
-    /* =========================================================
-       JG WORK PAGE
-       ========================================================= */
-
-    (function () {
-
-      "use strict";
-
-      const searchInput =
-        document.getElementById("searchInput");
-
-      const searchButton =
-        document.getElementById("searchButton");
-
-      const filterButtons =
-        document.querySelectorAll(
-          ".filter-button"
-        );
-
-      const jobCards =
-        Array.from(
-          document.querySelectorAll(
-            ".job-card"
-          )
-        );
-
-      const resultCount =
-        document.getElementById(
-          "resultCount"
-        );
-
-      const emptyWork =
-        document.getElementById(
-          "emptyWork"
-        );
-
-      const sortSelect =
-        document.getElementById(
-          "sortSelect"
-        );
-
-      const jobModal =
-        document.getElementById(
-          "jobModal"
-        );
-
-      const modalClose =
-        document.getElementById(
-          "modalClose"
-        );
-
-      const modalTitle =
-        document.getElementById(
-          "modalTitle"
-        );
-
-      const modalCompany =
-        document.getElementById(
-          "modalCompany"
-        );
-
-      const modalDescription =
-        document.getElementById(
-          "modalDescription"
-        );
-
-      const modalType =
-        document.getElementById(
-          "modalType"
-        );
-
-      const modalLocation =
-        document.getElementById(
-          "modalLocation"
-        );
-
-      const modalSkills =
-        document.getElementById(
-          "modalSkills"
-        );
-
-      const modalSave =
-        document.getElementById(
-          "modalSave"
-        );
-
-      let activeFilter = "all";
-      let activeJob = null;
-
-
-      /* SAVED JOBS */
-
-      function getSavedJobs() {
-
-        try {
-
-          return JSON.parse(
-            localStorage.getItem(
-              "jg_saved_jobs"
-            ) || "[]"
-          );
-
-        } catch (error) {
-
-          return [];
-
-        }
-
-      }
-
-
-      function saveJobs(jobs) {
-
-        localStorage.setItem(
-          "jg_saved_jobs",
-          JSON.stringify(jobs)
-        );
-
-      }
-
-
-      function updateSaveButtons() {
-
-        const savedJobs =
-          getSavedJobs();
-
-        document
-          .querySelectorAll(".save-job")
-          .forEach(function (button) {
-
-            const jobId =
-              button.dataset.job;
-
-            const saved =
-              savedJobs.includes(jobId);
-
-            button.classList.toggle(
-              "saved",
-              saved
-            );
-
-            button.textContent =
-              saved ? "★" : "☆";
-
-          });
-
-        if (activeJob) {
-
-          const saved =
-            savedJobs.includes(
-              activeJob.dataset.job
-            );
-
-          modalSave.textContent =
-            saved
-              ? "★ Saved"
-              : "☆ Save";
-
-        }
-
-      }
-
-
-      function toggleSaved(jobId) {
-
-        const jobs =
-          getSavedJobs();
-
-        const index =
-          jobs.indexOf(jobId);
-
-        if (index >= 0) {
-
-          jobs.splice(index, 1);
-
-        } else {
-
-          jobs.push(jobId);
-
-        }
-
-        saveJobs(jobs);
-
-        updateSaveButtons();
-
-      }
-
-
-      /* FILTERING */
+    document.addEventListener('DOMContentLoaded', () => {
+      const searchInput = document.getElementById('workSearch');
+      const filterChips = [...document.querySelectorAll('.filter-chip')];
+      const cards = [...document.querySelectorAll('.job-card')];
+      const emptyState = document.getElementById('emptyState');
+      let currentFilter = 'all';
 
       function applyFilters() {
+        const query = (searchInput.value || '').trim().toLowerCase();
+        let visibleCount = 0;
 
-        const query =
-          searchInput.value
-            .trim()
-            .toLowerCase();
-
-        let visible = 0;
-
-        jobCards.forEach(function (card) {
-
-          const categories =
-            card.dataset.category
-              .toLowerCase();
-
-          const searchData =
-            (
-              card.dataset.search +
-              " " +
-              card.dataset.title +
-              " " +
-              card.dataset.company
-            )
-              .toLowerCase();
-
-          const matchesFilter =
-            activeFilter === "all" ||
-            categories.includes(
-              activeFilter
-            );
-
-          const matchesSearch =
-            !query ||
-            searchData.includes(query);
-
-          const show =
-            matchesFilter &&
-            matchesSearch;
-
-          card.classList.toggle(
-            "hidden",
-            !show
-          );
-
-          if (show) {
-            visible++;
-          }
-
+        cards.forEach((card) => {
+          const text = (card.dataset.title || '').toLowerCase();
+          const category = (card.dataset.category || '').toLowerCase();
+          const matchesText = !query || text.includes(query) || category.includes(query);
+          const matchesFilter = currentFilter === 'all' || category.includes(currentFilter);
+          const visible = matchesText && matchesFilter;
+          card.classList.toggle('hidden', !visible);
+          if (visible) visibleCount += 1;
         });
 
-        resultCount.textContent =
-          visible +
-          " opportunit" +
-          (visible === 1
-            ? "y"
-            : "ies") +
-          " found";
-
-        emptyWork.classList.toggle(
-          "show",
-          visible === 0
-        );
-
+        emptyState.classList.toggle('show', visibleCount === 0);
       }
 
+      searchInput.addEventListener('input', applyFilters);
 
-      filterButtons.forEach(
-        function (button) {
-
-          button.addEventListener(
-            "click",
-            function () {
-
-              filterButtons.forEach(
-                function (item) {
-                  item.classList.remove(
-                    "active"
-                  );
-                }
-              );
-
-              button.classList.add(
-                "active"
-              );
-
-              activeFilter =
-                button.dataset.filter;
-
-              applyFilters();
-
-            }
-          );
-
-        }
-      );
-
-
-      searchButton.addEventListener(
-        "click",
-        applyFilters
-      );
-
-
-      searchInput.addEventListener(
-        "input",
-        applyFilters
-      );
-
-
-      /* SORT */
-
-      sortSelect.addEventListener(
-        "change",
-        function () {
-
-          const value =
-            sortSelect.value;
-
-          const grid =
-            document.getElementById(
-              "workGrid"
-            );
-
-          const sorted =
-            [...jobCards].sort(
-              function (a, b) {
-
-                if (value === "title") {
-
-                  return a.dataset.title
-                    .localeCompare(
-                      b.dataset.title
-                    );
-
-                }
-
-                if (value === "company") {
-
-                  return a.dataset.company
-                    .localeCompare(
-                      b.dataset.company
-                    );
-
-                }
-
-                return 0;
-
-              }
-            );
-
-          sorted.forEach(
-            function (card) {
-              grid.appendChild(card);
-            }
-          );
-
+      filterChips.forEach((chip) => {
+        chip.addEventListener('click', () => {
+          currentFilter = chip.dataset.filter || 'all';
+          filterChips.forEach((button) => button.classList.toggle('active', button === chip));
           applyFilters();
-
-        }
-      );
-
-
-      /* VIEW JOB */
-
-      document
-        .querySelectorAll(".view-job")
-        .forEach(function (button) {
-
-          button.addEventListener(
-            "click",
-            function () {
-
-              const card =
-                button.closest(
-                  ".job-card"
-                );
-
-              activeJob = card;
-
-              modalTitle.textContent =
-                button.dataset.title;
-
-              modalCompany.textContent =
-                button.dataset.company;
-
-              modalDescription.textContent =
-                button.dataset.description;
-
-              modalType.textContent =
-                button.dataset.type;
-
-              modalLocation.textContent =
-                button.dataset.location;
-
-              modalSkills.textContent =
-                button.dataset.skills;
-
-              jobModal.classList.add(
-                "show"
-              );
-
-              jobModal.setAttribute(
-                "aria-hidden",
-                "false"
-              );
-
-              updateSaveButtons();
-
-            }
-          );
-
         });
+      });
 
-
-      /* SAVE BUTTONS */
-
-      document
-        .querySelectorAll(".save-job")
-        .forEach(function (button) {
-
-          button.addEventListener(
-            "click",
-            function () {
-
-              toggleSaved(
-                button.dataset.job
-              );
-
-            }
-          );
-
+      document.querySelectorAll('.save-btn').forEach((button) => {
+        button.addEventListener('click', () => {
+          const saved = button.classList.toggle('saved');
+          button.textContent = saved ? '★' : '☆';
         });
-
-
-      /* MODAL SAVE */
-
-      modalSave.addEventListener(
-        "click",
-        function () {
-
-          if (!activeJob) {
-            return;
-          }
-
-          toggleSaved(
-            activeJob.dataset.job
-          );
-
-        }
-      );
-
-
-      /* CLOSE MODAL */
-
-      function closeModal() {
-
-        jobModal.classList.remove(
-          "show"
-        );
-
-        jobModal.setAttribute(
-          "aria-hidden",
-          "true"
-        );
-
-        activeJob = null;
-
-      }
-
-
-      modalClose.addEventListener(
-        "click",
-        closeModal
-      );
-
-
-      jobModal.addEventListener(
-        "click",
-        function (event) {
-
-          if (
-            event.target === jobModal
-          ) {
-            closeModal();
-          }
-
-        }
-      );
-
-
-      document.addEventListener(
-        "keydown",
-        function (event) {
-
-          if (
-            event.key === "Escape"
-          ) {
-            closeModal();
-          }
-
-        }
-      );
-
-
-      /*
-       * JG does NOT pay users for opportunities.
-       * This button is intentionally a safe placeholder
-       * until a real external opportunity URL is stored
-       * by the backend/admin system.
-       */
-
-      document
-        .getElementById(
-          "modalApply"
-        )
-        .addEventListener(
-          "click",
-          function () {
-
-            if (!activeJob) {
-              return;
-            }
-
-            alert(
-              "This opportunity is external to JG. The official application link will be provided when the opportunity is connected to JG."
-            );
-
-          }
-        );
-
-
-      /* ACCOUNT */
-
-      document
-        .getElementById(
-          "accountButton"
-        )
-        .addEventListener(
-          "click",
-          function () {
-
-            window.location.href =
-              "account.html";
-
-          }
-        );
-
-
-      /* AI */
-
-      document
-        .getElementById(
-          "aiButton"
-        )
-        .addEventListener(
-          "click",
-          function () {
-
-            window.location.href =
-              "ai.html";
-
-          }
-        );
-
-
-      /* INITIALIZE */
-
-      updateSaveButtons();
+      });
 
       applyFilters();
-
-    })();
+    });
   </script>
-
 </body>
 </html>

@@ -120,6 +120,132 @@
       -webkit-user-select: none;
     }
 
+    .jg-showcase {
+      width: min(calc(100% - 32px), 1180px);
+      margin: 0 auto 16px;
+      display: grid;
+      grid-template-columns: 1.15fr 1.35fr;
+      gap: 18px;
+      padding: 0 0 12px;
+    }
+
+    .jg-showcase-panel,
+    .jg-pathway-card {
+      border: 1px solid rgba(148, 163, 184, 0.16);
+      background: rgba(16, 29, 48, 0.88);
+      border-radius: 26px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.24);
+    }
+
+    .jg-showcase-panel {
+      padding: 26px 22px 20px;
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.18), rgba(124, 58, 237, 0.12));
+    }
+
+    .section-heading.compact {
+      margin-bottom: 18px;
+    }
+
+    .jg-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .jg-metric {
+      padding: 18px 14px;
+      border-radius: 18px;
+      background: rgba(15, 23, 42, 0.62);
+      border: 1px solid rgba(148, 163, 184, 0.1);
+      text-align: center;
+    }
+
+    .jg-metric strong {
+      display: block;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      color: #f8fafc;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .jg-metric span {
+      display: block;
+      color: var(--jg-text-2, #cbd5e1);
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .jg-pathways {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .jg-pathway-card {
+      padding: 20px 18px;
+      min-height: 186px;
+      transition: transform 180ms ease, border-color 180ms ease;
+    }
+
+    .jg-pathway-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(37, 99, 235, 0.38);
+    }
+
+    .jg-pathway-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 14px;
+    }
+
+    .jg-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(37, 99, 235, 0.14);
+      border: 1px solid rgba(96, 165, 250, 0.2);
+      color: #93c5fd;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .jg-pathway-top strong {
+      color: rgba(148, 163, 184, 0.85);
+      font-size: 14px;
+    }
+
+    .jg-pathway-card h3 {
+      margin: 0 0 10px;
+      font-size: 23px;
+      letter-spacing: -0.04em;
+    }
+
+    .jg-pathway-card p {
+      margin: 0;
+      color: var(--jg-text-2, #cbd5e1);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 760px) {
+      .jg-showcase {
+        grid-template-columns: 1fr;
+      }
+
+      .jg-pathways {
+        grid-template-columns: 1fr;
+      }
+
+      .jg-metrics {
+        grid-template-columns: 1fr;
+      }
+    }
+
   </style>
 
 </head>
@@ -189,9 +315,8 @@
           </h1>
 
           <p>
-            Learn valuable skills, build your abilities,
-            discover opportunities and prepare yourself
-            for the future with JG.
+            Learn practical, in-demand skills, build your future-ready experience,
+            and discover work opportunities designed for a modern global economy.
           </p>
 
           <div class="hero-actions">
@@ -248,8 +373,7 @@
             </h3>
 
             <p>
-              Learn practical and valuable skills
-              through structured courses.
+              Build structured knowledge across design, code, editing, and career-ready skills.
             </p>
 
           </a>
@@ -269,8 +393,7 @@
             </h3>
 
             <p>
-              Explore skills and discover what
-              you can learn next.
+              Explore pathways that help you learn faster and apply confidently in the real world.
             </p>
 
           </a>
@@ -290,8 +413,7 @@
             </h3>
 
             <p>
-              Discover opportunities and useful
-              external resources.
+              Review relevant career paths, freelance openings, and remote-work opportunities.
             </p>
 
           </a>
@@ -311,11 +433,78 @@
             </h3>
 
             <p>
-              Get intelligent guidance while
-              learning and building your future.
+              Ask for explanations, project help, and guided practice while you learn and work.
             </p>
 
           </a>
+
+        </div>
+
+      </section>
+
+      <section class="jg-showcase">
+
+        <div class="jg-showcase-panel">
+
+          <div class="section-heading compact">
+            <span>WHY JG</span>
+            <h2>Skills that lead to real momentum.</h2>
+          </div>
+
+          <div class="jg-metrics">
+            <div class="jg-metric">
+              <strong>4</strong>
+              <span>Focused learning tracks</span>
+            </div>
+            <div class="jg-metric">
+              <strong>24</strong>
+              <span>Lesson pathways</span>
+            </div>
+            <div class="jg-metric">
+              <strong>1</strong>
+              <span>Professional growth platform</span>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="jg-pathways">
+
+          <article class="jg-pathway-card">
+            <div class="jg-pathway-top">
+              <span class="jg-badge">Web</span>
+              <strong>01</strong>
+            </div>
+            <h3>Web Development</h3>
+            <p>Learn HTML, CSS, JavaScript, structure, UX, and production-ready frontend habits.</p>
+          </article>
+
+          <article class="jg-pathway-card">
+            <div class="jg-pathway-top">
+              <span class="jg-badge">Design</span>
+              <strong>02</strong>
+            </div>
+            <h3>Graphic Design</h3>
+            <p>Develop visual literacy, layouts, branding, and communication systems for digital work.</p>
+          </article>
+
+          <article class="jg-pathway-card">
+            <div class="jg-pathway-top">
+              <span class="jg-badge">Media</span>
+              <strong>03</strong>
+            </div>
+            <h3>Video Editing</h3>
+            <p>Build editing workflows for social media, storytelling, and client delivery.</p>
+          </article>
+
+          <article class="jg-pathway-card">
+            <div class="jg-pathway-top">
+              <span class="jg-badge">Code</span>
+              <strong>04</strong>
+            </div>
+            <h3>Python Programming</h3>
+            <p>Master core concepts, problem solving, and automation with a practical learning path.</p>
+          </article>
 
         </div>
 
@@ -352,8 +541,7 @@
               </h3>
 
               <p>
-                Build websites and learn the
-                foundations of modern web development.
+                Build websites and learn the foundations of modern web development.
               </p>
 
             </div>
@@ -434,8 +622,7 @@
             </h2>
 
             <p>
-              Ask questions, understand difficult
-              topics and get guidance as you learn.
+              Ask questions, understand difficult topics and get guidance as you learn.
             </p>
 
             <a
@@ -465,8 +652,7 @@
           </h2>
 
           <p>
-            Explore useful opportunities and
-            resources available through JG.
+            Explore useful opportunities and resources available through JG.
           </p>
 
         </div>
@@ -496,8 +682,7 @@
           </h2>
 
           <p>
-            Upgrade to JG Premium for an
-            uninterrupted learning experience.
+            Upgrade to JG Premium for an uninterrupted learning experience.
           </p>
 
           <a
